@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using MOM.Application.DTOs.Account.Requests;
 using MOM.Application.DTOs.Account.Responses;
+using MOM.Application.Features.Personnel.Commands.AddPerson;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.UserInterfaces;
 using MOM.Application.Wrappers;
@@ -15,8 +18,9 @@ using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Identity.Services
 {
-    public class AccountServices(UserManager<ApplicationUser> userManager, IAuthenticatedUserService authenticatedUser, SignInManager<ApplicationUser> signInManager, JwtSettings jwtSettings, ITranslator translator) : IAccountServices
+    public class AccountServices(UserManager<ApplicationUser> userManager, IAuthenticatedUserService authenticatedUser, SignInManager<ApplicationUser> signInManager, JwtSettings jwtSettings, ITranslator translator, IMediator _mediator) : IAccountServices
     {
+        protected IMediator Mediator => _mediator;
         public async Task<BaseResult> ChangePassword(ChangePasswordRequest model)
         {
             var user = await userManager.FindByIdAsync(authenticatedUser.UserId);
@@ -82,7 +86,10 @@ namespace MOM.Infrastructure.Identity.Services
             var identityResult = await userManager.CreateAsync(user);
 
             if (identityResult.Succeeded)
+            {
+                Mediator.Send(new AddPersonCommand() { Id = user.UserName, Name = user.NormalizedUserName == null ? user.Name : user.NormalizedUserName });
                 return user.UserName;
+            }
 
             return identityResult.Errors.Select(p => new Error(ErrorCode.ErrorInIdentity, p.Description)).ToList();
 

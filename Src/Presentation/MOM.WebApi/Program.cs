@@ -1,4 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,13 +25,14 @@ using MOM.Infrastructure.Resources;
 using Scalar.AspNetCore;
 using Serilog;
 using System;
+using System.Linq;
 using System.Net.Http;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddHttpContextAccessor();
 bool useInMemoryDatabase = builder.Configuration.GetValue<bool>("UseInMemoryDatabase");
 builder.Services.AddPersistenceInfrastructure(builder.Configuration, useInMemoryDatabase);
 builder.Services.AddFileManagerInfrastructure(builder.Configuration, useInMemoryDatabase);
@@ -46,7 +48,24 @@ builder.Services.AddAnyCors();
 builder.Services.AddCustomLocalization(builder.Configuration);
 builder.Services.AddHealthChecks();
 builder.Services.AddOrchardCore().AddMvc();
-builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+builder.Services.AddMediatR(cfg =>
+{
+    var moduleAssemblies = AppDomain.CurrentDomain.GetAssemblies()
+        .Where(assembly =>
+            assembly.FullName!.StartsWith("MOM.Application.Features.") && // 模块命名前缀
+            !assembly.IsDynamic &&
+            !assembly.FullName.Contains("Tests") // 排除测试程序集
+        ).ToList();
+
+    cfg.RegisterServicesFromAssemblies(moduleAssemblies.ToArray());
+});
+// 注册管道（Program.cs）
+builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(CommandExceptionPipeline<,>));
+
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+builder.Host.UseSerilog(Log.Logger);
 
 
 var app = builder.Build();

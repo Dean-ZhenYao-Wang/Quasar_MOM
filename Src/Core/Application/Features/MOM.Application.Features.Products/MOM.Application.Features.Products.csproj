@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MOM.Application.Wrappers\MOM.Application.Wrappers.csproj" />
     <ProjectReference Include="..\..\MOM.Application\MOM.Application.csproj" />
   </ItemGroup>
 

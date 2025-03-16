@@ -38,6 +38,10 @@ namespace MOM.Application.Infrastructure.Middlewares
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         responseModel.AddError(new Error(ErrorCode.NotFound, e.Message));
                         break;
+                    case CommandExecutionException e:
+                        response.StatusCode = 999;
+                        responseModel.AddError(new Error(ErrorCode.Exception,e.ErrorCode, e.Message));
+                        break;
                     default:
                         // unhandled error
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;

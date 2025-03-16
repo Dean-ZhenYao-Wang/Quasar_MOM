@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Application\Features\MOM.Application.Features.Personnel\MOM.Application.Features.Personnel.csproj" />
     <ProjectReference Include="..\MOM.Apps.Prodcut\MOM.Apps.Prodcut.csproj" />
   </ItemGroup>
 </Project>
