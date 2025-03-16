@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using MOM.Application.Interfaces;
 
-namespace MOM.WebApi.Infrastructure.Services
+namespace MOM.Application.Infrastructure.Services
 {
     public class AuthenticatedUserService(IHttpContextAccessor httpContextAccessor) : IAuthenticatedUserService
     {

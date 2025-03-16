@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
 
 namespace MOM.Application.DTOs.Account.Requests

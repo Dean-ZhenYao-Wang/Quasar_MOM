@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MOM.Application.Interfaces;
+using MOM.Application.Wrappers;
 using MOM.Infrastructure.Resources.Services;
 
 namespace MOM.Infrastructure.Resources

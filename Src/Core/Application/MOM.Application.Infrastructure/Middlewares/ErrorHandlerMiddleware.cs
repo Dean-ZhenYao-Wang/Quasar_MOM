@@ -7,7 +7,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using MOM.Application.Wrappers;
 
-namespace MOM.WebApi.Infrastructure.Middlewares
+namespace MOM.Application.Infrastructure.Middlewares
 {
     public class ErrorHandlerMiddleware(RequestDelegate next)
     {

@@ -7,3 +7,5 @@
 	--> 将此项目添加到1步骤项目的引用
 3、仓储接口写在/Src/Core/Application/MOM.Application.Interfaces/Repositories中
 4、仓储的实现写在/Src/Infrastructure/MOM.Infrastructure.Persistence/Repositories中
+# 注意
+1、如果需要本地化，可使用MOM.Application.Wrappers的ITranslator

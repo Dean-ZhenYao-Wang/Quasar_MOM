@@ -2,7 +2,7 @@
 
 namespace MOM.Domain.Products.Entities
 {
-    public class Product : AuditableBaseEntity
+    public class Product : BaseEntity
     {
 #pragma warning disable
         private Product()

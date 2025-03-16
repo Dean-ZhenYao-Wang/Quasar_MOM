@@ -26,9 +26,9 @@ namespace MOM.Infrastructure.Persistence.Extensions
             {
                 var entityType = entry.Entity.GetType();
 
-                if (typeof(AuditableBaseEntity).IsAssignableFrom(entityType) ||
+                if (typeof(BaseEntity).IsAssignableFrom(entityType) ||
                     (entityType.BaseType?.IsGenericType ?? false) &&
-                    entityType.BaseType.GetGenericTypeDefinition() == typeof(AuditableBaseEntity))
+                    entityType.BaseType.GetGenericTypeDefinition() == typeof(BaseEntity))
                 {
                     dynamic auditableEntity = entry.Entity;
 

@@ -11,7 +11,7 @@ using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
 using MOM.Domain.Products.DTOs;
 
-namespace MOM.WebApi.Controllers.v1
+namespace MOM.Apps.Prodcut.Controllers
 {
     [ApiVersion("1")]
     public class ProductController : BaseApiController

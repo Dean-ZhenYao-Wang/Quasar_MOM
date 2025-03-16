@@ -1,6 +1,4 @@
-﻿using MOM.Application.Wrappers;
-
-namespace MOM.Application.Interfaces
+﻿namespace MOM.Application.Wrappers
 {
     public interface ITranslator
     {

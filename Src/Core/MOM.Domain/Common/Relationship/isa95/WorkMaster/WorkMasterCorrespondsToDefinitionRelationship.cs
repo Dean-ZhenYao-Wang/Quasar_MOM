@@ -1,0 +1,50 @@
+namespace MOM.Domain.Common.Relationship.isa95.WorkMaster
+{
+    public class WorkMasterCorrespondsToDefinitionRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.OperationsDefinition>, IEquatable<WorkMasterCorrespondsToDefinitionRelationship>
+    {
+        public WorkMasterCorrespondsToDefinitionRelationship()
+        {
+            Name = "correspondsToDefinition";
+        }
+
+        public WorkMasterCorrespondsToDefinitionRelationship(Domain.isa95.CommonObjectModels.Part4.WorkDefinition.WorkMaster source, Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.OperationsDefinition target) : this()
+        {
+            InitializeFromTwins(source, target);
+        }
+
+        public WorkMasterCorrespondsToDefinitionRelationship(string sourceId, string targetId) : this()
+        {
+            InitializeFromTwins(sourceId, targetId);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return Equals(obj as WorkMasterCorrespondsToDefinitionRelationship);
+        }
+
+        public bool Equals(WorkMasterCorrespondsToDefinitionRelationship? other)
+        {
+            return other is not null && DtId == other.DtId && SourceId == other.SourceId && TargetId == other.TargetId && Target == other.Target && Name == other.Name;
+        }
+
+        public static bool operator ==(WorkMasterCorrespondsToDefinitionRelationship? left, WorkMasterCorrespondsToDefinitionRelationship? right)
+        {
+            return EqualityComparer<WorkMasterCorrespondsToDefinitionRelationship?>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(WorkMasterCorrespondsToDefinitionRelationship? left, WorkMasterCorrespondsToDefinitionRelationship? right)
+        {
+            return !(left == right);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.CustomHash(DtId?.GetHashCode(), SourceId?.GetHashCode(), TargetId?.GetHashCode(), Target?.GetHashCode());
+        }
+
+        public override bool Equals(BasicRelationship? other)
+        {
+            return Equals(other as WorkMasterCorrespondsToDefinitionRelationship) || new RelationshipEqualityComparer().Equals(this, other);
+        }
+    }
+}

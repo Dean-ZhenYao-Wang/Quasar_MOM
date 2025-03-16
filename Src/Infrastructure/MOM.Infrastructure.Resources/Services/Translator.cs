@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.Resources;
 using MOM.Application.DTOs;
-using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
 using MOM.Infrastructure.Resources.ProjectResources;
 

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using MOM.WebApi.Infrastructure.Filters;
+using MOM.Application.Infrastructure.Filters;
 
 namespace MOM.Application.Infrastructure
 {

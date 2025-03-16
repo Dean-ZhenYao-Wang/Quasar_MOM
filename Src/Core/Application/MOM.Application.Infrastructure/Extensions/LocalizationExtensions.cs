@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace MOM.WebApi.Infrastructure.Extensions
+namespace MOM.Application.Infrastructure.Extensions
 {
     public static class LocalizationExtensions
     {

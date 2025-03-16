@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MOM.Application.Interfaces;
+using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Products.Commands.UpdateProduct
 {

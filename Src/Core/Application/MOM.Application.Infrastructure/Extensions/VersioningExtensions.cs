@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MOM.WebApi.Infrastructure.Extensions
+namespace MOM.Application.Infrastructure.Extensions
 {
     public static class VersioningExtensions
     {

@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MOM.WebApi.Infrastructure.Extensions
+namespace MOM.Application.Infrastructure.Extensions
 {
     public static class ScalarExtensions
     {
