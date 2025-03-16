@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\MOM.Domain\MOM.Domain.csproj" />
+    <ProjectReference Include="..\MOM.Application.DTOs\MOM.Application.DTOs.csproj" />
+    <ProjectReference Include="..\MOM.Application.Wrappers\MOM.Application.Wrappers.csproj" />
+  </ItemGroup>
+
+</Project>

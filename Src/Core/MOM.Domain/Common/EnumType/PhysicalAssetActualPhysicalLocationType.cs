@@ -1,0 +1,16 @@
+namespace MOM.Domain.Common.EnumType
+{
+    using System.ComponentModel.DataAnnotations;
+    using System.Runtime.Serialization;
+    using System.Text.Json.Serialization;
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum PhysicalAssetActualPhysicalLocationType
+    {
+        [EnumMember(Value = "operationalLocation"), Display(Name = "Operational Location", Description = "physical location attribute references an operational location")]
+        operationalLocation,
+
+        [EnumMember(Value = "description"), Display(Name = "Description", Description = " physical location attribute contains a description of the physical location, such as a street address.")]
+        description
+    }
+}
