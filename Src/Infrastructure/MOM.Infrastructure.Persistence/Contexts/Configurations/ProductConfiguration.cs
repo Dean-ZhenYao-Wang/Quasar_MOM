@@ -9,7 +9,7 @@ namespace MOM.Infrastructure.Persistence.Contexts.Configurations
 
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.DtId);
 
             builder.Property(p => p.Name).HasMaxLength(100);
             builder.Property(p => p.BarCode).HasMaxLength(50);

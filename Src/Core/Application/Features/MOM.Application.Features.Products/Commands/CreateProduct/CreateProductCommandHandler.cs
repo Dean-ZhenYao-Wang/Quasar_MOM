@@ -8,16 +8,16 @@ using MOM.Domain.Products.Entities;
 
 namespace MOM.Application.Features.Products.Commands.CreateProduct
 {
-    public class CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateProductCommand, BaseResult<long>>
+    public class CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateProductCommand, BaseResult<string>>
     {
-        public async Task<BaseResult<long>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResult<string>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             var product = new Product(request.Name, request.Price, request.BarCode);
 
             await productRepository.AddAsync(product);
             await unitOfWork.SaveChangesAsync();
 
-            return product.Id;
+            return product.DtId;
         }
     }
 }

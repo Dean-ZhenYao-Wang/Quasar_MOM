@@ -26,7 +26,7 @@ namespace MOM.WebApi.Controllers.v1
             => await Mediator.Send(model);
 
         [HttpPost, Authorize]
-        public async Task<BaseResult<long>> CreateProduct(CreateProductCommand model)
+        public async Task<BaseResult<string>> CreateProduct(CreateProductCommand model)
             => await Mediator.Send(model);
 
         [HttpPut, Authorize]
