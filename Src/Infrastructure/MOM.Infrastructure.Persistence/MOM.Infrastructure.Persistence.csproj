@@ -15,7 +15,4 @@
     <ProjectReference Include="..\..\Core\Application\MOM.Application\MOM.Application.csproj" />
     <ProjectReference Include="..\..\Core\MOM.Domain\MOM.Domain.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
 </Project>

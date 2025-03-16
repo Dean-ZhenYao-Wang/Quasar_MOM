@@ -13,7 +13,7 @@ namespace MOM.Domain.Products.DTOs
 #pragma warning restore 
         public ProductDto(Product product)
         {
-            Id = product.DtId;
+            Id = product.Id;
             Name = product.Name;
             Price = product.Price;
             BarCode = product.BarCode;

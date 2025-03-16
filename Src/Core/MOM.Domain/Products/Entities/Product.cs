@@ -14,6 +14,7 @@ namespace MOM.Domain.Products.Entities
             Name = name;
             Price = price;
             BarCode = barCode;
+            Id = this.DtId;
         }
         public string Name { get; private set; }
         public double Price { get; private set; }
