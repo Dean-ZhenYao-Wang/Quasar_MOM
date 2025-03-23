@@ -14,9 +14,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         {
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:PersonnelClass;1";
-
         [JsonPropertyName("hierarchyScope")]
         public string? HierarchyScope { get; set; }
 
@@ -54,12 +51,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             return this.CustomHash(base.GetHashCode(), HierarchyScope?.GetHashCode());
         }
 
-        public List<string> GetHaveChildClassDtIdList()
+        public List<Guid> GetHaveChildClassDtIdList()
         {
             return this.IncludesPropertiesOf.Targets.Where(m => m.IsDelete == false).Select(m => m.DtId).ToList();
         }
 
-        public void IncludesPropertiesOfAddTarget(string targetDtId)
+        public void IncludesPropertiesOfAddTarget(Guid targetDtId)
         {
             this.IncludesPropertiesOf.Add(new PersonnelClassIncludesPropertiesOfRelationship(this.DtId, targetDtId));
         }

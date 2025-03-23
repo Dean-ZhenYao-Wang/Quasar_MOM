@@ -61,19 +61,19 @@ namespace MOM.Domain.Common
         /// </summary>
         [JsonPropertyName("dtId")]
         [Key]
-        public string DtId { get; set; }
+        public Guid DtId { get; set; }
 
         /// <summary>
         /// 目标数字孪生的唯一标识符。该属性存在于所有关系中。
         /// </summary>
         [JsonPropertyName("targetId")]
-        public string TargetId { get; set; }
+        public Guid TargetId { get; set; }
 
         /// <summary>
         /// 源数字孪生的唯一标识符。该属性存在于所有关系中。
         /// </summary>
         [JsonPropertyName("sourceId")]
-        public string? SourceId { get; set; }
+        public Guid? SourceId { get; set; }
 
         /// <summary>
         /// 关系名称，定义链接类型（例如"contains"）。该属性存在于所有关系中。

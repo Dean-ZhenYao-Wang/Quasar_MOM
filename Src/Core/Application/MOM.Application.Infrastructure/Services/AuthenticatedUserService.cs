@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using MOM.Application.Interfaces;
 
 namespace MOM.Application.Infrastructure.Services
 {

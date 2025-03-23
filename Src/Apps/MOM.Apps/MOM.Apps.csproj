@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Core\Application\Features\MOM.Application.Features.Personnel\MOM.Application.Features.Personnel.csproj" />
     <ProjectReference Include="..\MOM.Apps.Prodcut\MOM.Apps.Prodcut.csproj" />
   </ItemGroup>

@@ -34,7 +34,7 @@
             this.ResponsibleDtId = responsibleDtId;
         }
 
-        public void DeleteArea(string areaDtId)
+        public void DeleteArea(Guid areaDtId)
         {
             this.Area.Remove(areaDtId);
             this.Contains.Remove(areaDtId);

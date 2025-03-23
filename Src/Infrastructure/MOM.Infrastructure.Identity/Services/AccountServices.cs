@@ -5,12 +5,13 @@ using Microsoft.IdentityModel.Tokens;
 using MOM.Application.DTOs.Account.Requests;
 using MOM.Application.DTOs.Account.Responses;
 using MOM.Application.Features.Personnel.Commands.AddPerson;
-using MOM.Application.Interfaces;
+using MOM.Application.Infrastructure.Services;
 using MOM.Application.Interfaces.UserInterfaces;
 using MOM.Application.Wrappers;
 using MOM.Infrastructure.Identity.Models;
 using MOM.Infrastructure.Identity.Settings;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
@@ -87,7 +88,7 @@ namespace MOM.Infrastructure.Identity.Services
 
             if (identityResult.Succeeded)
             {
-                Mediator.Send(new AddPersonCommand() { Id = user.UserName, Name = user.NormalizedUserName == null ? user.Name : user.NormalizedUserName });
+                Mediator.Send(new AddPersonCommand() { DtId = user.Id, Id = user.UserName, Name = user.NormalizedUserName == null ? user.Name : user.NormalizedUserName });
                 return user.UserName;
             }
 
@@ -132,6 +133,28 @@ namespace MOM.Infrastructure.Identity.Services
                     expires: DateTime.UtcNow.AddMinutes(jwtSettings.DurationInMinutes),
                     signingCredentials: signingCredentials);
             }
+        }
+        public async Task<BaseResult> AddAccountAsync(Guid userId, string UserName, string NormalizedUserName, string? Email, string? PhoneNumber, IEnumerable<Guid>? PositionDtId_List)
+        {
+            var user = new ApplicationUser
+            {
+                Id = userId,
+                UserName = UserName,
+                NormalizedUserName = NormalizedUserName,
+                Email = Email,
+                PhoneNumber = PhoneNumber,
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true
+            };
+            await userManager.CreateAsync(user, "Sam@12345");
+            if (PositionDtId_List != null && PositionDtId_List.Count() > 0)
+            {
+                foreach (var role in PositionDtId_List)
+                {
+                    await userManager.AddToRoleAsync(user, role.ToString());
+                }
+            }
+            return BaseResult.Ok();
         }
     }
 }

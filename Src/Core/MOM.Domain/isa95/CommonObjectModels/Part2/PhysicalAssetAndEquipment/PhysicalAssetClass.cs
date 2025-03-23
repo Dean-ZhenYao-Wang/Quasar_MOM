@@ -20,7 +20,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         public string? Manufacturer { get; set; }
 
         [JsonPropertyName("hierarchyScope")]
-        public string? HierarchyScope { get; set; }
+        public Guid? HierarchyScope { get; set; }
 
         [JsonIgnore]
         public virtual PhysicalAssetClassIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new PhysicalAssetClassIncludesPropertiesOfRelationshipCollection();

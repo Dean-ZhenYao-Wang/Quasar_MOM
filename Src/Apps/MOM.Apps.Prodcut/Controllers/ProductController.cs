@@ -26,7 +26,7 @@ namespace MOM.Apps.Prodcut.Controllers
             => await Mediator.Send(model);
 
         [HttpPost, Authorize]
-        public async Task<BaseResult<string>> CreateProduct(CreateProductCommand model)
+        public async Task<BaseResult<Guid>> CreateProduct(CreateProductCommand model)
             => await Mediator.Send(model);
 
         [HttpPut, Authorize]

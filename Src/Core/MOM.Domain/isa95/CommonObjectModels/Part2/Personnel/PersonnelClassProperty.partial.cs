@@ -17,7 +17,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.IsDelete = true;
         }
 
-        public void ContainsAddTarget(string targetDtId)
+        public void ContainsAddTarget(Guid targetDtId)
         {
             this.Contains.Add(new PersonnelClassPropertyContainsRelationship(this.DtId, targetDtId));
         }

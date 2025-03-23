@@ -36,7 +36,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest
 
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId?.GetHashCode(), ModelId?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), ModelId?.GetHashCode());
         }
 
         public bool Equals(BaseEntity? other)

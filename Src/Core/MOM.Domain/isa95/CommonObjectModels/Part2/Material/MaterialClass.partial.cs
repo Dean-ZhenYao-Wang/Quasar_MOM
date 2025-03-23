@@ -37,7 +37,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             this.IsAssembledFrom.Add(new MaterialClassIsAssembledFromRelationship(this, target));
         }
 
-        public void IsAssembledFromAddTarget(string targetId)
+        public void IsAssembledFromAddTarget(Guid targetId)
         {
             this.IsAssembledFrom.Add(new MaterialClassIsAssembledFromRelationship(this.DtId, targetId));
         }
@@ -47,7 +47,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             this.IncludesPropertiesOf.Add(new MaterialClassIncludesPropertiesOfRelationship(this, target));
         }
 
-        public void IncludesPropertiesOfAddTarget(string targetId)
+        public void IncludesPropertiesOfAddTarget(Guid targetId)
         {
             this.IncludesPropertiesOf.Add(new MaterialClassIncludesPropertiesOfRelationship(this.DtId, targetId));
         }
@@ -81,7 +81,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             this.HierarchyScopeRelAddTarget(hierarchyScope);
         }
 
-        public List<string> GetHaveChildClassDtIdList()
+        public List<Guid> GetHaveChildClassDtIdList()
         {
             return this.IncludesPropertiesOf.Targets.Where(m => m.IsDelete == false).Select(m => m.DtId).ToList();
         }

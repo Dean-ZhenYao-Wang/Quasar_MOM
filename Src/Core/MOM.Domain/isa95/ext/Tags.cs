@@ -42,7 +42,7 @@ namespace MOM.Domain.isa95.ext
 
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId?.GetHashCode(), ModelId?.GetHashCode(), Markers?.GetHashCode(), Values?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), ModelId?.GetHashCode(), Markers?.GetHashCode(), Values?.GetHashCode());
         }
 
         public bool Equals(BaseEntity? other)

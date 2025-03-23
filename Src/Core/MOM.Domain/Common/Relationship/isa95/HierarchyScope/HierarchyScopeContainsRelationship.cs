@@ -19,7 +19,7 @@ namespace MOM.Domain.Common.Relationship.isa95.HierarchyScope
             InitializeFromTwins(source, target);
         }
 
-        public HierarchyScopeContainsRelationship(string sourceId, string targetId) : this()
+        public HierarchyScopeContainsRelationship(Guid sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }
@@ -46,7 +46,7 @@ namespace MOM.Domain.Common.Relationship.isa95.HierarchyScope
 
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId?.GetHashCode(), SourceId?.GetHashCode(), TargetId?.GetHashCode(), Target?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), SourceId?.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
         }
 
         public override bool Equals(BasicRelationship? other)

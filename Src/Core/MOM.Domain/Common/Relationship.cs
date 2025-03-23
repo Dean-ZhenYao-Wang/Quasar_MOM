@@ -32,7 +32,6 @@ public abstract class Relationship<TTarget> : BasicRelationship, IEquatable<Basi
     /// <param name="target">作为关系目标的数字孪生</param>
     protected void InitializeFromTwins(BaseEntity source, TTarget target)
     {
-        DtId = $"{source.DtId}-{Name}->{target.DtId}";
         SourceId = source.DtId;
         TargetId = target.DtId;
         Target = target;
@@ -43,9 +42,8 @@ public abstract class Relationship<TTarget> : BasicRelationship, IEquatable<Basi
     /// </summary>
     /// <param name="sourceDtId">源数字孪生唯一标识符</param>
     /// <param name="targetDtId">目标数字孪生唯一标识符</param>
-    protected void InitializeFromTwins(string sourceDtId, string targetDtId)
+    protected void InitializeFromTwins(Guid sourceDtId, Guid targetDtId)
     {
-        DtId = $"{sourceDtId}-{Name}->{targetDtId}";
         SourceId = sourceDtId;
         TargetId = targetDtId;
     }

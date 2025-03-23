@@ -20,7 +20,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             this.IsAssembledFromLot.Add(new MaterialSublotIsAssembledFromLotRelationship(this, target));
         }
 
-        public void IsAssembledFromLotAddTarget(string materialLotDtId)
+        public void IsAssembledFromLotAddTarget(Guid materialLotDtId)
         {
             this.IsAssembledFromLot.Add(new MaterialSublotIsAssembledFromLotRelationship(this.DtId, materialLotDtId));
         }

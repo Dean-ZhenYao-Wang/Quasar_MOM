@@ -12,11 +12,11 @@
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
+    <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.0.36" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MOM.Application.Interfaces\MOM.Application.Interfaces.csproj" />
     <ProjectReference Include="..\MOM.Application.Wrappers\MOM.Application.Wrappers.csproj" />
   </ItemGroup>
 

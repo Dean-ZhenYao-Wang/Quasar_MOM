@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentSpecification
             InitializeFromTwins(source, target);
         }
 
-        public EquipmentSpecificationSpecifiesRelationship(string sourceId, string targetId) : this()
+        public EquipmentSpecificationSpecifiesRelationship(Guid sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }
@@ -39,7 +39,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentSpecification
 
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId?.GetHashCode(), SourceId?.GetHashCode(), TargetId?.GetHashCode(), Target?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), SourceId?.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
         }
 
         public override bool Equals(BasicRelationship? other)

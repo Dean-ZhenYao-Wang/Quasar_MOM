@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsPerformance
             InitializeFromTwins(source, target);
         }
 
-        public OperationsPerformanceIsMadeUpOfRelationship(string sourceId, string targetId) : this()
+        public OperationsPerformanceIsMadeUpOfRelationship(Guid sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }
@@ -39,7 +39,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsPerformance
 
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId?.GetHashCode(), SourceId?.GetHashCode(), TargetId?.GetHashCode(), Target?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), SourceId?.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
         }
 
         public override bool Equals(BasicRelationship? other)

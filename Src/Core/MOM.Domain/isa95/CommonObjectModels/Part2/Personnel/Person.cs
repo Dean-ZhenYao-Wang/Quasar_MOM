@@ -15,9 +15,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         {
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:Person;1";
-
         [JsonPropertyName("hierarchyScope")]
         public string? HierarchyScope { get; set; }
 

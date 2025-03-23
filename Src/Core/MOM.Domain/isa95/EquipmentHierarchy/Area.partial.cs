@@ -34,13 +34,13 @@
             this.ResponsibleDtId = responsibleDtId;
         }
 
-        public void AddWorkCenter(string workCenterdtId)
+        public void AddWorkCenter(Guid workCenterdtId)
         {
             this.Contains.Add(new Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship(this.DtId, workCenterdtId));
             this.WorkCenter.Add(new Common.Relationship.isa95.Area.AreaWorkCenterRelationship(this.DtId, workCenterdtId));
         }
 
-        public void DeleteWorkCenter(string workCenterdtId)
+        public void DeleteWorkCenter(Guid workCenterdtId)
         {
             this.Contains.Remove(workCenterdtId);
             this.WorkCenter.Remove(workCenterdtId);

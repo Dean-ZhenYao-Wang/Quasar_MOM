@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsEventRecordEntry
             InitializeFromTwins(source, target);
         }
 
-        public OperationsEventRecordEntryCorrespondsToAnEntryInRelationship(string sourceId, string targetId) : this()
+        public OperationsEventRecordEntryCorrespondsToAnEntryInRelationship(Guid sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }
@@ -39,7 +39,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsEventRecordEntry
 
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId?.GetHashCode(), SourceId?.GetHashCode(), TargetId?.GetHashCode(), Target?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), SourceId?.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
         }
 
         public override bool Equals(BasicRelationship? other)

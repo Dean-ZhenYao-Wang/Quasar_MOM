@@ -47,7 +47,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             this.DefinedBy.Add(new MaterialLotDefinedByRelationship(this, target));
         }
 
-        public void DefinedByAddTarget(string materialDefinitionDtId)
+        public void DefinedByAddTarget(Guid materialDefinitionDtId)
         {
             this.DefinedBy.Add(new MaterialLotDefinedByRelationship(this.DtId, materialDefinitionDtId));
         }
@@ -57,7 +57,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             this.IsAssembledFromSublot.Add(new MaterialLotIsAssembledFromSublotRelationship(this, target));
         }
 
-        public void IsAssembledFromSubLotAddTarget(string targetDtId)
+        public void IsAssembledFromSubLotAddTarget(Guid targetDtId)
         {
             this.IsAssembledFromSublot.Add(new MaterialLotIsAssembledFromSublotRelationship(this.DtId, targetDtId));
         }

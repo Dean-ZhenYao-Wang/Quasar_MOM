@@ -78,7 +78,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             this.HasPropertiesOf.Add(new MaterialDefinitionHasPropertiesOfRelationship(this, target));
         }
 
-        public void HasPropertiesOfAddTarget(string targetDtId)
+        public void HasPropertiesOfAddTarget(Guid targetDtId)
         {
             this.HasPropertiesOf.Add(new MaterialDefinitionHasPropertiesOfRelationship(this.DtId, targetDtId));
         }
@@ -88,7 +88,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             this.IsMemberOfClass.Add(new MaterialDefinitionIsMemberOfClassRelationship(this, target));
         }
 
-        public void IsMemberOfClassAddTarget(string materialClassDtId)
+        public void IsMemberOfClassAddTarget(Guid materialClassDtId)
         {
             this.IsMemberOfClass.Add(new MaterialDefinitionIsMemberOfClassRelationship(this.DtId, materialClassDtId));
         }
@@ -106,12 +106,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             this.IsAssembledFrom.Add(new MaterialDefinitionIsAssembledFromRelationship(this, target));
         }
 
-        public void IsAssembledFromAddTarget(string targetDtId)
+        public void IsAssembledFromAddTarget(Guid targetDtId)
         {
             this.IsAssembledFrom.Add(new MaterialDefinitionIsAssembledFromRelationship(this.DtId, targetDtId));
         }
 
-        public void IsAssembledFromAddTarget(IEnumerable<string> targetDtIds)
+        public void IsAssembledFromAddTarget(IEnumerable<Guid> targetDtIds)
         {
             foreach (var targetDtId in targetDtIds)
             {

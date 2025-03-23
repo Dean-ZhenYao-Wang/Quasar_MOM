@@ -8,9 +8,9 @@ using MOM.Domain.Products.Entities;
 
 namespace MOM.Application.Features.Products.Commands.CreateProduct
 {
-    public class CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateProductCommand, BaseResult<string>>
+    public class CreateProductCommandHandler(IProductRepository productRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateProductCommand, BaseResult<Guid>>
     {
-        public async Task<BaseResult<string>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResult<Guid>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             var product = new Product(request.Name, request.Price, request.BarCode);
 

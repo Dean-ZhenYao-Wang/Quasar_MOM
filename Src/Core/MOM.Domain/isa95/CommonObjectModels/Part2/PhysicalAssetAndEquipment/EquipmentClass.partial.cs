@@ -12,7 +12,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.Description = description;
         }
 
-        public async void PutIncludesPropertiesOf(List<string> childClassDtId)
+        public async void PutIncludesPropertiesOf(List<Guid> childClassDtId)
         {
             var haveDtIds = this.IncludesPropertiesOf.Select(m => m.TargetId).ToList();
             var notHaveDtIds = childClassDtId.Except(haveDtIds);
@@ -26,7 +26,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
                 this.IncludesPropertiesOf.Add(new Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship(this.DtId, item));
             }
         }
-        public async void PutIsMadeUpOf(List<string> childClassDtId)
+        public async void PutIsMadeUpOf(List<Guid> childClassDtId)
         {
             var haveDtIds = this.IsMadeUpOf.Select(m => m.TargetId).ToList();
             var notHaveDtIds = childClassDtId.Except(haveDtIds);

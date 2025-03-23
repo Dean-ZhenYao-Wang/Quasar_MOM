@@ -34,13 +34,13 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
             this.ResponsibleDtId = responsibleDtId;
         }
 
-        public void AddWorkUnit(string workUnitDtId)
+        public void AddWorkUnit(Guid workUnitDtId)
         {
             this.WorkUnit.Add(this.DtId, workUnitDtId);
             this.Contains.Add(this.DtId, workUnitDtId);
         }
 
-        public void DeleteWorkUnit(string workUnitDtId)
+        public void DeleteWorkUnit(Guid workUnitDtId)
         {
             this.WorkUnit.Remove(workUnitDtId);
             this.Contains.Remove(workUnitDtId);

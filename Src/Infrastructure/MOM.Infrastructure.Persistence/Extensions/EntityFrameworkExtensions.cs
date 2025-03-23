@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using MOM.Application.Interfaces;
+using MOM.Application.Infrastructure.Services;
 using MOM.Domain.Common;
 
 namespace MOM.Infrastructure.Persistence.Extensions

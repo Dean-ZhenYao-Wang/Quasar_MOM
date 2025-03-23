@@ -12,7 +12,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
 
-        public Person(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, string? teamOfGroupDtId = null, string? departmentDtId = null, IEnumerable<string>? positionDtId_List = null, string? description = null) : this()
+        public Person(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? departmentDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null) : this()
         {
             this.Id = Id;
             this.WorkStatus = workStatus;
@@ -20,13 +20,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.Name = name;
             this.Email = email;
             this.PhoneNumber = phoneNumber;
-            if (!string.IsNullOrWhiteSpace(teamOfGroupDtId))
+            if (teamOfGroupDtId != null)
             {
-                this.DefinedByAddTarget(teamOfGroupDtId);
+                this.DefinedByAddTarget(teamOfGroupDtId.Value);
             }
-            if (!string.IsNullOrWhiteSpace(departmentDtId))
+            if (departmentDtId != null)
             {
-                this.DefinedByAddTarget(departmentDtId);
+                this.DefinedByAddTarget(departmentDtId.Value);
             }
             if (positionDtId_List != null)
             {
@@ -37,7 +37,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             }
         }
 
-        public void Update(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, string? teamOfGroupDtId = null, string? departmentDtId = null, IEnumerable<string>? positionDtId_List = null, string? description = null)
+        public void Update(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? departmentDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null)
         {
             this.Id = Id;
             this.WorkStatus = workStatus;
@@ -49,13 +49,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             {
                 DefinedBy.Remove(item);
             }
-            if (!string.IsNullOrWhiteSpace(teamOfGroupDtId))
+            if (teamOfGroupDtId != null)
             {
-                this.DefinedByAddTarget(teamOfGroupDtId);
+                this.DefinedByAddTarget(teamOfGroupDtId.Value);
             }
-            if (!string.IsNullOrWhiteSpace(departmentDtId))
+            if (departmentDtId != null)
             {
-                this.DefinedByAddTarget(departmentDtId);
+                this.DefinedByAddTarget(departmentDtId.Value);
             }
             if (positionDtId_List != null)
             {
@@ -67,7 +67,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 
         }
 
-        private void DefinedByAddTarget(string teamOfGroupDtId)
+        private void DefinedByAddTarget(Guid teamOfGroupDtId)
         {
             this.DefinedBy.Add(new Common.Relationship.isa95.Person.PersonDefinedByRelationship(this.DtId, teamOfGroupDtId));
         }

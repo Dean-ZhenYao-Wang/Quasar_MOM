@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOM.Apps", "Src\Apps\MOM.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOM.Application.Features.Personnel", "Src\Core\Application\Features\MOM.Application.Features.Personnel\MOM.Application.Features.Personnel.csproj", "{B0EF48DF-BCA0-4EE6-B86C-25AF983E8556}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "人员认证管理", "Src\Apps\系统管理\人员认证管理\人员认证管理.csproj", "{F1386CA1-ED83-4B79-8D13-8E4908903F03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +157,10 @@ Global
 		{B0EF48DF-BCA0-4EE6-B86C-25AF983E8556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0EF48DF-BCA0-4EE6-B86C-25AF983E8556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0EF48DF-BCA0-4EE6-B86C-25AF983E8556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1386CA1-ED83-4B79-8D13-8E4908903F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1386CA1-ED83-4B79-8D13-8E4908903F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1386CA1-ED83-4B79-8D13-8E4908903F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1386CA1-ED83-4B79-8D13-8E4908903F03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -199,6 +205,7 @@ Global
 		{325355CF-9EE3-4240-ADC3-0CA9D420664B} = {89BADB37-27E5-4C3B-BF23-BB06558FF39C}
 		{14BC06F6-AA58-4405-8F46-03E4F23D2A6B} = {89BADB37-27E5-4C3B-BF23-BB06558FF39C}
 		{B0EF48DF-BCA0-4EE6-B86C-25AF983E8556} = {94E4D025-F5DB-4D32-B0AD-BD98EEAF0534}
+		{F1386CA1-ED83-4B79-8D13-8E4908903F03} = {F2EE8A63-1D0E-4377-B3B4-28EFA4C5AF28}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1BF80400-1050-4291-9001-0A0B0DE23CDE}

@@ -161,7 +161,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.IsDelete = true;
         }
 
-        public void PutIsMadeUpOf(List<string> childDtId)
+        public void PutIsMadeUpOf(List<Guid> childDtId)
         {
             var haveDtIds = this.IsMadeUpOf.Select(m => m.TargetId).ToList();
             var notHaveDtIds = childDtId.Except(haveDtIds);

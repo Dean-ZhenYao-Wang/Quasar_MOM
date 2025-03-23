@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelSegmentSpecification
             InitializeFromTwins(source, target);
         }
 
-        public PersonnelSegmentSpecificationHasPropertiesOfRelationship(string sourceId, string targetId) : this()
+        public PersonnelSegmentSpecificationHasPropertiesOfRelationship(Guid sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }
@@ -39,7 +39,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelSegmentSpecification
 
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId?.GetHashCode(), SourceId?.GetHashCode(), TargetId?.GetHashCode(), Target?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), SourceId?.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
         }
 
         public override bool Equals(BasicRelationship? other)

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MOM.Application.Interfaces;
+using MOM.Application.Infrastructure.Services;
 using MOM.Domain.Products.Entities;
 using MOM.Infrastructure.Persistence.Extensions;
 

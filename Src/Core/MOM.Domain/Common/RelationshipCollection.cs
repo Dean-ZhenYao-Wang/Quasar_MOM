@@ -73,13 +73,12 @@ public abstract class RelationshipCollection<TRelationship, TTarget> : BasicRela
     /// </summary>
     /// <param name="sourceDtId">源数字孪生唯一标识符</param>
     /// <param name="targetDtId">目标数字孪生唯一标识符</param>
-    public void Add(string sourceDtId, string targetDtId)
+    public void Add(Guid sourceDtId, Guid targetDtId)
     {
         var item = new TRelationship();
         item.Name = Name;
         item.SourceId = sourceDtId;
         item.TargetId = targetDtId;
-        item.DtId = $"{sourceDtId}-{Name}->{targetDtId}";
         relationships.Add(item);
     }
 
@@ -114,7 +113,7 @@ public abstract class RelationshipCollection<TRelationship, TTarget> : BasicRela
     /// 根据目标数字孪生ID移除关系
     /// </summary>
     /// <param name="dtId">目标数字孪生唯一标识符</param>
-    public bool Remove(string dtId)
+    public bool Remove(Guid dtId)
     {
         return relationships.Remove(relationships.First(m => m.TargetId.Equals(dtId)));
     }

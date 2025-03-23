@@ -16,12 +16,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             this.PropertyType = propertyPropertyType;
         }
 
-        public void ContainsAddTarget(string targetDtId)
+        public void ContainsAddTarget(Guid targetDtId)
         {
             this.Contains.Add(new MaterialDefinitionPropertyContainsRelationship(this.DtId, targetDtId));
         }
 
-        public void MapsToAddTarget(string targetDtId)
+        public void MapsToAddTarget(Guid targetDtId)
         {
             this.MapsTo.Add(new MaterialDefinitionPropertyMapsToRelationship(this.DtId, targetDtId));
         }

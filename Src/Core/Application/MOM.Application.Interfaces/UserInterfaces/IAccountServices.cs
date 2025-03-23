@@ -12,6 +12,7 @@ namespace MOM.Application.Interfaces.UserInterfaces
         Task<BaseResult> ChangeUserName(ChangeUserNameRequest model);
         Task<BaseResult<AuthenticationResponse>> Authenticate(AuthenticationRequest request);
         Task<BaseResult<AuthenticationResponse>> AuthenticateByUserName(string username);
+        Task<BaseResult> AddAccountAsync(Guid userId, string UserName,string NormalizedUserName,string? Email,string? PhoneNumber, IEnumerable<Guid>? PositionDtId_List);
 
     }
 }

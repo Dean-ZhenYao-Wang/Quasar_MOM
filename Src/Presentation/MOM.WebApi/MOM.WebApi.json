@@ -555,17 +555,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfstring"
+                  "$ref": "#/components/schemas/BaseResultOfGuid"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfstring"
+                  "$ref": "#/components/schemas/BaseResultOfGuid"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfstring"
+                  "$ref": "#/components/schemas/BaseResultOfGuid"
                 }
               }
             }
@@ -754,6 +754,24 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/AuthenticationResponse"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "BaseResultOfGuid": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "format": "uuid"
           },
           "success": {
             "type": "boolean"

@@ -15,7 +15,7 @@ namespace MOM.Application.Features.Personnel.Commands.AddPerson
     {
         public async Task<BaseResult> Handle(AddPersonCommand request, CancellationToken cancellationToken)
         {
-            await personRepository.AddAsync(new MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person(request.Id, request.Name, MOM.Domain.Common.EnumType.PersonWorkStatus.在职, description: request.Description));
+            await personRepository.AddAsync(request.ToPerson());
             await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }

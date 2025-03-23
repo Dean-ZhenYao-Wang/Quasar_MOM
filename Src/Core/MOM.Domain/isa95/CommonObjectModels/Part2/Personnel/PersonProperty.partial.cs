@@ -2,15 +2,15 @@
 {
     public partial class PersonProperty
     {
-        public PersonProperty(string ID, string description, string value, string valueUnitOfMeasure, string? mapToDtId) : this()
+        public PersonProperty(Guid ID, string description, string value, string valueUnitOfMeasure, Guid? mapToDtId) : this()
         {
             this.Id = Id;
             this.Description = description;
             this.Value = value;
             this.ValueUnitOfMeasure = valueUnitOfMeasure;
-            if (!string.IsNullOrWhiteSpace(mapToDtId))
+            if (mapToDtId != null)
             {
-                this.MapsTo.Add(new Common.Relationship.isa95.PersonProperty.PersonPropertyMapsToRelationship(this.DtId, mapToDtId));
+                this.MapsTo.Add(new Common.Relationship.isa95.PersonProperty.PersonPropertyMapsToRelationship(this.DtId, mapToDtId.Value));
             }
         }
 

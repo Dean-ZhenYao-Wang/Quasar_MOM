@@ -37,7 +37,7 @@
             this.ResponsibleDtId = responsibleDtId;
         }
 
-        public void DeleteSite(string siteDtId)
+        public void DeleteSite(Guid siteDtId)
         {
             this.Site.Remove(siteDtId);
             this.Contains.Remove(siteDtId);
