@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MOM.Domain.CoreComponents
+namespace MOM.Domain.B2MML.CoreComponents
 {
     /// <summary>
     /// 用于任何需要货币单位的元素

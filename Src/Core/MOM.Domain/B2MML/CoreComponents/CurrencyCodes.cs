@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MOM.Domain.CoreComponents
+namespace MOM.Domain.B2MML.CoreComponents
 {
     /// <summary>
     /// 国家货币代码<br>see:https://www.iban.hk/currency-codes</br>

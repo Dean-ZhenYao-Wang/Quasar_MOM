@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MOM.Domain.CoreComponents
+namespace MOM.Domain.B2MML.CoreComponents
 {
     /// <summary>
     /// 用于定义表示图形、图片、声音、视频或其他形式的数据的数据类型，这些数据可以表示为二进制八位字节的有限长度序列
