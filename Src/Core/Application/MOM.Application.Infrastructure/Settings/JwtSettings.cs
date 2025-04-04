@@ -1,4 +1,4 @@
-namespace MOM.Infrastructure.Identity.Settings
+namespace MOM.Application.Features.Personnel.Settings
 {
 #pragma warning disable
     public class JwtSettings

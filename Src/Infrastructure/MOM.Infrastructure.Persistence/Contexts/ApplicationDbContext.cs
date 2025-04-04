@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Infrastructure.Services;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using MOM.Domain.Products;
 using MOM.Infrastructure.Persistence.Extensions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,10 +9,9 @@ namespace MOM.Infrastructure.Persistence.Contexts
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IAuthenticatedUserService authenticatedUser) : DbContext(options)
     {
-        public DbSet<Product> Products { get; set; }
         #region Personnel
         public DbSet<PersonnelClass> PersonnelClasses { get; set; }
-        public DbSet<Person> People { get; set; }
+        public DbSet<Person> Person { get; set; }
         #endregion Personnel
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {

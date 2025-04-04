@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\MOM.Domain\MOM.Domain.csproj" />
+    <ProjectReference Include="..\MOM.Application.Infrastructure\MOM.Application.Infrastructure.csproj" />
     <ProjectReference Include="..\MOM.Application.Wrappers\MOM.Application.Wrappers.csproj" />
   </ItemGroup>
 

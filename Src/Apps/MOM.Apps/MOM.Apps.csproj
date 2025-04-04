@@ -9,7 +9,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Application\Features\MOM.Application.Features.Personnel\MOM.Application.Features.Personnel.csproj" />
-    <ProjectReference Include="..\MOM.Apps.Prodcut\MOM.Apps.Prodcut.csproj" />
     <ProjectReference Include="..\系统管理\人员认证管理\人员认证管理.csproj" />
   </ItemGroup>
 </Project>

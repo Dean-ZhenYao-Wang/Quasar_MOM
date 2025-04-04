@@ -1,4 +1,5 @@
 ﻿using MOM.Application.DTOs.Resource.Responses;
+using MOM.Application.Infrastructure.Extensions;
 using MOM.Domain.Common.EnumType;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using System;

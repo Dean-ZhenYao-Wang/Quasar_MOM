@@ -1,4 +1,6 @@
-﻿namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
+﻿using MOM.Domain.Permission;
+
+namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 {
     public partial class PersonnelClass
     {
@@ -26,5 +28,6 @@
             this.HasPropertiesOf.Clear();
             this.IsDelete = true;
         }
+        public List<Permission.Permission> Permissions { get; set; }
     }
 }

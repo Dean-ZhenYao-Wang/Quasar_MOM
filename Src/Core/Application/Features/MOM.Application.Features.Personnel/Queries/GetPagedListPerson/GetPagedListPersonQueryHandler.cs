@@ -1,8 +1,5 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using MOM.Application.DTOs.Personnel.Responses;
-using MOM.Application.DTOs.Products;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 

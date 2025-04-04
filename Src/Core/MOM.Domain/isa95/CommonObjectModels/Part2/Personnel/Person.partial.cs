@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MOM.Domain.Common.EnumType;
+using MOM.Domain.Permission;
 using System.Text.Json.Serialization;
 
 namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
@@ -13,6 +14,27 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         public PersonWorkStatus WorkStatus { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
+        /// <summary>
+        /// 是否已锁定账号
+        /// </summary>
+        public bool LockoutOnFailure { get; set; }
+        /// <summary>
+        /// 账号锁定时间
+        /// </summary>
+        public DateTime? LockoutDateTime { get; set; }
+        public string PassWord { get; set; } = string.Empty;
+        /// <summary>
+        /// 密码错误次数
+        /// </summary>
+        public int FailedCount { get; set; } = 0;
+        /// <summary>
+        /// 其变更会立即使所有已颁发的Toekn失效
+        /// </summary>
+        public string SecurityStamp { get; set; } = Guid.NewGuid().ToString(); // 示例初始化
+        /// <summary>
+        /// 扩展权限,对人员类权限的扩展或限制,此条件仅针对个人有效
+        /// </summary>
+        public List<AvailablePermission> AvailablePermissions { get; set; } = new();
 
         public Person(string Id, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? departmentDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null) : this()
         {
@@ -76,14 +98,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 
         public void Delete()
         {
-            this.DefinedBy.Clear();
-            foreach (var item in HasValuesOf)
-            {
-                item.Target.Delete();
-            }
-            this.HasValuesOf.Clear();
-            this.HierarchyScopeRel.Clear();
-            this.OperationalLocationRel.Clear();
             this.IsDelete = true;
         }
 

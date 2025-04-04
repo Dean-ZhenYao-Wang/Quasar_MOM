@@ -11,6 +11,7 @@ namespace MOM.Application.Interfaces.Repositories
 {
     public interface IPersonRepository : IGenericRepository<Person>
     {
+        Task<Person> FindByNameAsync(string userName);
         Task<PaginationResponseDto<PersonResponse>> GetPagedListAsync(int pageNumber, int pageSize);
 
         /// <summary>

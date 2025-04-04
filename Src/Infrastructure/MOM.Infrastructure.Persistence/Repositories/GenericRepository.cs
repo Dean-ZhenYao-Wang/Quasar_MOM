@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using MOM.Application.DTOs;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
@@ -52,6 +53,11 @@ namespace MOM.Infrastructure.Persistence.Repositories
             return await dbContext.Set<T>()
                 .Where(lambda)
                 .ToListAsync();
+        }
+
+        public async Task<int> ExecuteUpdateAsync(Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> func)
+        {
+            return await dbContext.Set<T>().ExecuteUpdateAsync(func);
         }
 
         public async Task<T> AddAsync(T entity)

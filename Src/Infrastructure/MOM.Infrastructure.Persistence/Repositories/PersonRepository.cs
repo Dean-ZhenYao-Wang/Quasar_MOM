@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.CodeAnalysis.Text;
+using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs.Personnel.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
@@ -6,7 +7,10 @@ using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
+using System.Configuration.Assemblies;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Persistence.Repositories
@@ -19,11 +23,11 @@ namespace MOM.Infrastructure.Persistence.Repositories
         /// 获取负责人下拉列表数据，此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Person>> GetResponsiblesAsync()
+        public Task<List<Person>> GetResponsiblesAsync()
         {
-            return await person.Where(m => m.IsDelete == false).AsNoTracking().ToListAsync();
+            return person.Where(m => m.IsDelete == false).AsNoTracking().ToListAsync();
         }
-        public async Task<PaginationResponseDto<PersonResponse>> GetPagedListAsync(int pageNumber,int pageSize)
+        public Task<PaginationResponseDto<PersonResponse>> GetPagedListAsync(int pageNumber,int pageSize)
         {
             var query = person.Where(m => m.IsDelete == false)
                 .OrderBy(m => m.Created)
@@ -47,7 +51,14 @@ namespace MOM.Infrastructure.Persistence.Repositories
                     .FirstOrDefault(),
                     //Properties = m.HasValuesOf.Select(v => new MOM.Application.DTOs.Resource.ResourcePropertyViewModel(v.Target))  前端要单独通过调用接口获取
                 });
-            return await PagedAsync(query, pageNumber, pageSize);
+            return PagedAsync(query, pageNumber, pageSize);
+        }
+
+        public Task<Person> FindByNameAsync(string userName)
+        {
+            return person.Where(m => m.Id.Equals(userName))
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
         }
     }
 }

@@ -5,242 +5,6 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/v{version}/Account/Authenticate": {
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "parameters": [
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AuthenticationRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AuthenticationRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AuthenticationRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfAuthenticationResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfAuthenticationResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfAuthenticationResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
-    "/api/v{version}/Account/ChangeUserName": {
-      "put": {
-        "tags": [
-          "Account"
-        ],
-        "parameters": [
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangeUserNameRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangeUserNameRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangeUserNameRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
-    "/api/v{version}/Account/ChangePassword": {
-      "put": {
-        "tags": [
-          "Account"
-        ],
-        "parameters": [
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangePasswordRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangePasswordRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangePasswordRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
-    "/api/v{version}/Account/Start": {
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "parameters": [
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfAuthenticationResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfAuthenticationResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfAuthenticationResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
     "/api/v{version}/Doc/GetErrorCodes": {
       "get": {
         "tags": [
@@ -395,129 +159,10 @@
         ]
       }
     },
-    "/api/v{version}/Product/GetPagedListProduct": {
-      "get": {
-        "tags": [
-          "Product"
-        ],
-        "parameters": [
-          {
-            "name": "Name",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "PageNumber",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "PageSize",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedResponseOfProductDto"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedResponseOfProductDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedResponseOfProductDto"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
-    "/api/v{version}/Product/GetProductById": {
-      "get": {
-        "tags": [
-          "Product"
-        ],
-        "parameters": [
-          {
-            "name": "Id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfProductDto"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfProductDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfProductDto"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
-    "/api/v{version}/Product/CreateProduct": {
+    "/api/v{version}/Account/Authenticate": {
       "post": {
         "tags": [
-          "Product"
+          "Account"
         ],
         "parameters": [
           {
@@ -533,17 +178,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProductCommand"
+                "$ref": "#/components/schemas/AuthenticationCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProductCommand"
+                "$ref": "#/components/schemas/AuthenticationCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProductCommand"
+                "$ref": "#/components/schemas/AuthenticationCommand"
               }
             }
           },
@@ -555,17 +200,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfGuid"
+                  "$ref": "#/components/schemas/BaseResultOfAuthenticationResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfGuid"
+                  "$ref": "#/components/schemas/BaseResultOfAuthenticationResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfGuid"
+                  "$ref": "#/components/schemas/BaseResultOfAuthenticationResponse"
                 }
               }
             }
@@ -578,10 +223,10 @@
         ]
       }
     },
-    "/api/v{version}/Product/UpdateProduct": {
+    "/api/v{version}/Account/ChangeUserName": {
       "put": {
         "tags": [
-          "Product"
+          "Account"
         ],
         "parameters": [
           {
@@ -597,17 +242,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateProductCommand"
+                "$ref": "#/components/schemas/ChangeUserNameRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateProductCommand"
+                "$ref": "#/components/schemas/ChangeUserNameRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateProductCommand"
+                "$ref": "#/components/schemas/ChangeUserNameRequest"
               }
             }
           },
@@ -642,20 +287,12 @@
         ]
       }
     },
-    "/api/v{version}/Product/DeleteProduct": {
-      "delete": {
+    "/api/v{version}/Account/ChangePassword": {
+      "put": {
         "tags": [
-          "Product"
+          "Account"
         ],
         "parameters": [
-          {
-            "name": "Id",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
           {
             "name": "version",
             "in": "path",
@@ -665,6 +302,26 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -1115,7 +772,7 @@
           }
         }
       },
-      "AuthenticationRequest": {
+      "AuthenticationCommand": {
         "type": "object",
         "properties": {
           "userName": {
@@ -1129,8 +786,9 @@
       "AuthenticationResponse": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
+          "dtId": {
+            "type": "string",
+            "format": "uuid"
           },
           "userName": {
             "type": "string"
@@ -1144,14 +802,33 @@
               "type": "string"
             }
           },
-          "isVerified": {
-            "type": "boolean"
-          },
           "jwToken": {
             "type": "string"
           }
         },
         "nullable": true
+      },
+      "AvailablePermission": {
+        "type": "object",
+        "properties": {
+          "dtId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "menuButtonId": {
+            "type": "string"
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "personDtId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "person": {
+            "$ref": "#/components/schemas/Person"
+          }
+        }
       },
       "BaseResult": {
         "type": "object",
@@ -1172,24 +849,6 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/AuthenticationResponse"
-          },
-          "success": {
-            "type": "boolean"
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
-      "BaseResultOfGuid": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "string",
-            "format": "uuid"
           },
           "success": {
             "type": "boolean"
@@ -1244,23 +903,6 @@
           }
         }
       },
-      "BaseResultOfProductDto": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/ProductDto2"
-          },
-          "success": {
-            "type": "boolean"
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
       "BaseResultOfstring": {
         "type": "object",
         "properties": {
@@ -1294,21 +936,6 @@
         "type": "object",
         "properties": {
           "userName": {
-            "type": "string"
-          }
-        }
-      },
-      "CreateProductCommand": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "barCode": {
             "type": "string"
           }
         }
@@ -1401,43 +1028,6 @@
           }
         }
       },
-      "PagedResponseOfProductDto": {
-        "type": "object",
-        "properties": {
-          "pageNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalPages": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ProductDto"
-            },
-            "nullable": true
-          },
-          "success": {
-            "type": "boolean"
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
       "Person": {
         "type": "object",
         "properties": {
@@ -1469,6 +1059,27 @@
           "phoneNumber": {
             "type": "string",
             "nullable": true
+          },
+          "lockoutOnFailure": {
+            "type": "boolean"
+          },
+          "lockoutDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "passWord": {
+            "type": "string"
+          },
+          "failedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "availablePermissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvailablePermission"
+            }
           },
           "dtId": {
             "type": "string",
@@ -1564,51 +1175,6 @@
           "休假",
           "离职"
         ]
-      },
-      "ProductDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "barCode": {
-            "type": "string"
-          },
-          "createdDateTime": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "ProductDto2": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "barCode": {
-            "type": "string"
-          },
-          "createdDateTime": {
-            "type": "string",
-            "format": "date-time"
-          }
-        },
-        "nullable": true
       },
       "ResourcePropertyResponse": {
         "type": "object",
@@ -1784,25 +1350,6 @@
             }
           }
         }
-      },
-      "UpdateProductCommand": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "barCode": {
-            "type": "string"
-          }
-        }
       }
     },
     "securitySchemes": {
@@ -1815,16 +1362,13 @@
   },
   "tags": [
     {
-      "name": "Account"
-    },
-    {
       "name": "Doc"
     },
     {
       "name": "File"
     },
     {
-      "name": "Product"
+      "name": "Account"
     },
     {
       "name": "Person"

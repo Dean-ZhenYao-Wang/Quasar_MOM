@@ -1,31 +1,31 @@
 ﻿using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using MOM.Application;
+using Microsoft.IdentityModel.Tokens;
+using MOM.Application.Features.Personnel.Settings;
 using MOM.Application.Infrastructure.Extensions;
 using MOM.Application.Infrastructure.Middlewares;
 using MOM.Application.Infrastructure.Services;
+using MOM.Application.Wrappers;
+using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Infrastructure.FileManager;
 using MOM.Infrastructure.FileManager.Contexts;
 using MOM.Infrastructure.Hangfire;
-using MOM.Infrastructure.Identity;
-using MOM.Infrastructure.Identity.Contexts;
-using MOM.Infrastructure.Identity.Models;
-using MOM.Infrastructure.Identity.Seeds;
 using MOM.Infrastructure.Persistence;
 using MOM.Infrastructure.Persistence.Contexts;
 using MOM.Infrastructure.Persistence.Seeds;
 using MOM.Infrastructure.Resources;
-using Scalar.AspNetCore;
 using Serilog;
 using System;
 using System.Linq;
-using System.Net.Http;
+using System.Security.Claims;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,7 +35,91 @@ builder.Services.AddHttpContextAccessor();
 bool useInMemoryDatabase = builder.Configuration.GetValue<bool>("UseInMemoryDatabase");
 builder.Services.AddPersistenceInfrastructure(builder.Configuration, useInMemoryDatabase);
 builder.Services.AddFileManagerInfrastructure(builder.Configuration, useInMemoryDatabase);
-builder.Services.AddIdentityInfrastructure(builder.Configuration, useInMemoryDatabase);
+
+var jwtSettings = builder.Configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
+builder.Services.AddSingleton(jwtSettings);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(o =>
+{
+    o.RequireHttpsMetadata = false;
+    o.SaveToken = false;
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero,
+        ValidIssuer = jwtSettings.Issuer,
+        ValidAudience = jwtSettings.Audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+    };
+
+    o.Events = new JwtBearerEvents()
+    {
+        OnChallenge = async context =>
+        {
+            context.HandleResponse();
+            context.Response.StatusCode = 401;
+            await context.Response.WriteAsJsonAsync(BaseResult.Failure(new Error(ErrorCode.AccessDenied, "You are not Authorized")));
+        },
+        OnForbidden = async context =>
+        {
+            context.Response.StatusCode = 403;
+            await context.Response.WriteAsJsonAsync(BaseResult.Failure(new Error(ErrorCode.AccessDenied, "You are not authorized to access this resource")));
+        },
+        OnTokenValidated = async context =>
+        {
+            // 1. 基础声明验证
+            var claimsIdentity = context.Principal?.Identity as ClaimsIdentity;
+            if (claimsIdentity?.Claims.Any() != true)
+            {
+                context.Fail("This token has no claims.");
+                return;
+            }
+
+            // 2. 获取用户ID声明
+            var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+            {
+                context.Fail("Invalid user identifier");
+                return;
+            }
+
+            // 3. 从数据库验证用户状态
+            var dbContext = context.HttpContext.RequestServices.GetRequiredService<ApplicationDbContext>();
+            var user = await dbContext.Person.FindAsync(userId);
+
+            if (user == null)
+            {
+                context.Fail("User not found");
+                return;
+            }
+
+            // 4. 验证安全戳（替代SignInManager的验证）
+            var tokenSecurityStamp = claimsIdentity.FindFirst("SecurityStamp")?.Value;
+            if (string.IsNullOrEmpty(tokenSecurityStamp) || tokenSecurityStamp != user.SecurityStamp)
+            {
+                context.Fail("Token security stamp is not valid");
+                return;
+            }
+
+            // 5. 可选：检查用户是否被锁定
+            if (user.LockoutOnFailure)
+            {
+                context.Fail("User account is locked");
+                return;
+            }
+        }
+    };
+});
+
+
 builder.Services.AddResourcesInfrastructure();
 builder.Services.AddHangfireInfrastructure(builder.Configuration);
 builder.Services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
@@ -69,22 +153,19 @@ builder.Host.UseSerilog(Log.Logger);
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
 
-    if (!useInMemoryDatabase)
-    {
-        await services.GetRequiredService<IdentityContext>().Database.MigrateAsync();
-        await services.GetRequiredService<ApplicationDbContext>().Database.MigrateAsync();
-        await services.GetRequiredService<FileManagerDbContext>().Database.MigrateAsync();
-    }
+//    if (!useInMemoryDatabase)
+//    {
+//        await services.GetRequiredService<ApplicationDbContext>().Database.MigrateAsync();
+//        await services.GetRequiredService<FileManagerDbContext>().Database.MigrateAsync();
+//    }
 
-    //Seed Data
-    await DefaultRoles.SeedAsync(services.GetRequiredService<RoleManager<ApplicationRole>>());
-    await DefaultBasicUser.SeedAsync(services.GetRequiredService<UserManager<ApplicationUser>>());
-    await DefaultData.SeedAsync(services.GetRequiredService<ApplicationDbContext>());
-}
+//    //Seed Data
+//    await DefaultData.SeedAsync(services.GetRequiredService<ApplicationDbContext>());
+//}
 
 app.UseCustomLocalization();
 app.UseAnyCors();

@@ -16,7 +16,4 @@
 		<Using Include="System.Collections.Generic" />
 		<Using Include="System.Linq" />
 	</ItemGroup>
-	<ItemGroup>
-		<Folder Include="Products\Entities\" />
-	</ItemGroup>
 </Project>

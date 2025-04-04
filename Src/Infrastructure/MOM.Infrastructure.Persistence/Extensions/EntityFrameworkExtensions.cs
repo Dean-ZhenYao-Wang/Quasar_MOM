@@ -1,9 +1,12 @@
-﻿using System;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Query;
 using MOM.Application.Infrastructure.Services;
 using MOM.Domain.Common;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection.Emit;
 
 namespace MOM.Infrastructure.Persistence.Extensions
 {
@@ -16,9 +19,9 @@ namespace MOM.Infrastructure.Persistence.Extensions
         /// <param name="authenticatedUser">The authenticated user service to get user information.</param>
         public static void ApplyAuditing(this ChangeTracker changeTracker, IAuthenticatedUserService authenticatedUser)
         {
-            var userId = string.IsNullOrEmpty(authenticatedUser.UserId)
+            var userId = string.IsNullOrEmpty(authenticatedUser.DtId)
                 ? Guid.Empty
-                : Guid.Parse(authenticatedUser.UserId);
+                : Guid.Parse(authenticatedUser.DtId);
 
             var currentTime = DateTime.UtcNow;
 
@@ -59,8 +62,29 @@ namespace MOM.Infrastructure.Persistence.Extensions
             {
                 property.SetColumnType("decimal(18,6)");
             }
+            // 应用全局过滤条件
+
+            foreach (var entityType in builder.Model.GetEntityTypes())
+            {
+                // 如果实体有IsDeleted属性，则添加过滤条件
+                if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    var isDeletedProperty = entityType.FindProperty("IsDelete");
+                    if (isDeletedProperty != null)
+                    {
+                        builder.Entity(entityType.ClrType)
+                            .HasQueryFilter(ConvertExpression<BaseEntity>(e => e.IsDelete == false, entityType.ClrType));
+                    }
+                }
+            }
 
             builder.ApplyConfigurationsFromAssembly(context.GetType().Assembly);
+        }
+        private static LambdaExpression ConvertExpression<TInterface>(Expression<Func<TInterface, bool>> expression, Type entityType)
+        {
+            var parameter = Expression.Parameter(entityType);
+            var body = ReplacingExpressionVisitor.Replace(expression.Parameters.Single(), parameter, expression.Body);
+            return Expression.Lambda(body, parameter);
         }
     }
 }

@@ -12,5 +12,6 @@ namespace MOM.Application.Interfaces.Repositories
         void Delete(T entity);
         Task<IEnumerable<T>> GetByIdsAsync<TKey>(IEnumerable<TKey> ids) where TKey : notnull;
         void DeleteRange(IEnumerable<T> entities);
+        Task<int> ExecuteUpdateAsync(System.Linq.Expressions.Expression<Func<Microsoft.EntityFrameworkCore.Query.SetPropertyCalls<T>, Microsoft.EntityFrameworkCore.Query.SetPropertyCalls<T>>> func);
     }
 }
