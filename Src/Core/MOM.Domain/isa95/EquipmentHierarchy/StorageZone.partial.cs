@@ -2,7 +2,7 @@
 {
     public partial class StorageZone
     {
-        public StorageZone(string name, string description = "", bool active = false, string? responsibleDtId = null)
+        public StorageZone(string name, string description = "", bool active = false, Guid? responsibleDtId = null)
             : base(Common.EnumType.HierarchyScopeEquipmentLevel.Storage_Zone, name, description, active, responsibleDtId)
         {
         }

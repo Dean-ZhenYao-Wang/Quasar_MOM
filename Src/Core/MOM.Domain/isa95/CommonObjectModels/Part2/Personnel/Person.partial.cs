@@ -1,4 +1,6 @@
-﻿using MOM.Domain.Common.EnumType;
+﻿using Microsoft.AspNetCore.Identity;
+using MOM.Domain.Common.EnumType;
+using System.Text.Json.Serialization;
 
 namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 {
@@ -12,7 +14,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
 
-        public Person(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? departmentDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null) : this()
+        public Person(string Id, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? departmentDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null) : this()
         {
             this.Id = Id;
             this.WorkStatus = workStatus;

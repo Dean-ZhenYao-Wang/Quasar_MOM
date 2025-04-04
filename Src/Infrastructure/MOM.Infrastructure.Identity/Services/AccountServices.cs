@@ -1,13 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MOM.Application.DTOs.Account.Requests;
 using MOM.Application.DTOs.Account.Responses;
+using MOM.Application.DTOs.Personnel.Requests;
 using MOM.Application.Features.Personnel.Commands.AddPerson;
 using MOM.Application.Infrastructure.Services;
-using MOM.Application.Interfaces.UserInterfaces;
+using MOM.Application.Interfaces.Interfaces.UserInterfaces;
 using MOM.Application.Wrappers;
+using MOM.Infrastructure.Identity.Contexts;
 using MOM.Infrastructure.Identity.Models;
 using MOM.Infrastructure.Identity.Settings;
 using System;
@@ -19,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Identity.Services
 {
-    public class AccountServices(UserManager<ApplicationUser> userManager, IAuthenticatedUserService authenticatedUser, SignInManager<ApplicationUser> signInManager, JwtSettings jwtSettings, ITranslator translator, IMediator _mediator) : IAccountServices
+    public class AccountServices(UserManager<ApplicationUser> userManager, IAuthenticatedUserService authenticatedUser, SignInManager<ApplicationUser> signInManager, JwtSettings jwtSettings, ITranslator translator, IMediator _mediator, IdentityContext identityContext) : IAccountServices
     {
         protected IMediator Mediator => _mediator;
         public async Task<BaseResult> ChangePassword(ChangePasswordRequest model)
@@ -88,7 +91,7 @@ namespace MOM.Infrastructure.Identity.Services
 
             if (identityResult.Succeeded)
             {
-                Mediator.Send(new AddPersonCommand() { DtId = user.Id, Id = user.UserName, Name = user.NormalizedUserName == null ? user.Name : user.NormalizedUserName });
+                await Mediator.Send(new AddPersonCommand() { DtId = user.Id, Id = user.UserName, Name = user.NormalizedUserName == null ? user.Name : user.NormalizedUserName });
                 return user.UserName;
             }
 
@@ -155,6 +158,30 @@ namespace MOM.Infrastructure.Identity.Services
                 }
             }
             return BaseResult.Ok();
+        }
+
+        public async Task DeleteAccountAsync(IEnumerable<Guid> enumerable)
+        {
+            await identityContext.Users.Where(m => enumerable.Contains(m.Id)).ExecuteDeleteAsync();
+        }
+
+        public async Task UpdateAccountAsync(UpdatePersonRequest request)
+        {
+            Guid userId = request.DtId;
+            await userManager.Users.Where(m => m.Id.Equals(userId))
+                .ExecuteUpdateAsync(m => m.SetProperty(p => p.UserName, request.Id)
+                .SetProperty(p => p.NormalizedUserName, request.Name)
+                .SetProperty(p => p.Email, request.Email)
+                .SetProperty(p => p.PhoneNumber, request.PhoneNumber));
+
+            var oldHaveRoleIds = await identityContext.UserRoles.Where(m => m.UserId.Equals(userId)).Select(m => m.RoleId).ToListAsync();
+            var requestRoleIds = request.PositionDtId_List;
+            var notHaveRoleIds = requestRoleIds.Except(oldHaveRoleIds);
+            var deleteRoleIds = oldHaveRoleIds.Except(requestRoleIds);
+            await identityContext.UserRoles.Where(m => m.UserId.Equals(userId) && deleteRoleIds.Contains(m.RoleId)).ExecuteDeleteAsync();
+            List<IdentityUserRole<Guid>> addList = notHaveRoleIds.Select(m => new IdentityUserRole<Guid>() { UserId = userId, RoleId = m }).ToList();
+            await identityContext.UserRoles.AddRangeAsync(addList);
+            await identityContext.SaveChangesAsync();
         }
     }
 }

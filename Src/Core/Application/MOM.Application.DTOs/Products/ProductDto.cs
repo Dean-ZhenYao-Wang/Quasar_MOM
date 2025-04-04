@@ -1,7 +1,7 @@
-﻿using System;
-using MOM.Domain.Products.Entities;
+﻿using MOM.Domain.Products;
+using System;
 
-namespace MOM.Domain.Products.DTOs
+namespace MOM.Application.DTOs.Products
 {
     public class ProductDto
     {

@@ -4,7 +4,7 @@
     {
         public string? Address { get; set; }
 
-        public Area(string name, string description = "", bool active = false, string address = "", string responsibleDtId = "")
+        public Area(string name, string description = "", bool active = false, string address = "", Guid? responsibleDtId = null)
             : base(Common.EnumType.HierarchyScopeEquipmentLevel.Area, name, description, active)
         {
             this.Address = address;
@@ -25,7 +25,7 @@
             this.WorkCenter.Clear();
         }
 
-        public void Update(string name, string description, bool active, string address, string responsibleDtId)
+        public void Update(string name, string description, bool active, string address, Guid? responsibleDtId = null)
         {
             this.Id = name;
             this.Description = description;

@@ -38,7 +38,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 使用部门的DtId
         /// </summary>
         [JsonPropertyName("useDepartmentDtId")]
-        public string? UseDepartmentDtId { get; set; }
+        public Guid? UseDepartmentDtId { get; set; }
         /// <summary>
         /// 使用部门
         /// </summary>
@@ -66,7 +66,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 责任人DtId
         /// </summary>
         [JsonPropertyName("responsibleDtId")]
-        public string? ResponsibleDtId { get; set; }
+        public Guid? ResponsibleDtId { get; set; }
 
         /// <summary>
         /// 责任人
@@ -130,7 +130,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.Description = description;
             this.EquipmentLevel = EquipmentLevel;
         }
-        public Equipment(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, string? useDepartmentDtId, EquipmentStatusType status, DateTime enabledTime, string? responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, description, equipmentLevel)
+        public Equipment(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, Guid? useDepartmentDtId, EquipmentStatusType status, DateTime enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, description, equipmentLevel)
         {
             Number = number;
             Specification = specification;
@@ -182,7 +182,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.Description = description ?? string.Empty;
             this.EquipmentLevel = equipmentLevel;
         }
-        public void Update(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, string useDepartmentDtId, EquipmentStatusType status, DateTime enabledTime, string responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
+        public void Update(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, Guid useDepartmentDtId, EquipmentStatusType status, DateTime enabledTime, Guid responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
         {
             this.Id = Id;
             this.Description = description ?? string.Empty;

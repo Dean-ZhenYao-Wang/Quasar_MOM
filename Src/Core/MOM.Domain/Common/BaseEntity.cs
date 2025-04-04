@@ -6,6 +6,9 @@ namespace MOM.Domain.Common
 {
     public abstract class BaseEntity
     {
+        /// <summary>
+        /// 数据库唯一主键
+        /// </summary>
         [Key]
         public Guid DtId { get; set; } = Guid.NewGuid();
         /// <summary>

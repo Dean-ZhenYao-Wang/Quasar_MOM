@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Account.Requests;
 using MOM.Application.DTOs.Account.Responses;
 using MOM.Application.Infrastructure;
-using MOM.Application.Interfaces.UserInterfaces;
+using MOM.Application.Interfaces;
+using MOM.Application.Interfaces.Interfaces.UserInterfaces;
 using MOM.Application.Wrappers;
 
 namespace MOM.WebApi.Controllers.v1
 {
     [ApiVersion("1")]
-    public class AccountController(IAccountServices accountServices) : BaseApiController
+    public class AccountController(IAccountServices accountServices,IUnitOfWork unitOfWork) : BaseApiController
     {
         [HttpPost]
         public async Task<BaseResult<AuthenticationResponse>> Authenticate(AuthenticationRequest request)
@@ -28,6 +29,7 @@ namespace MOM.WebApi.Controllers.v1
         public async Task<BaseResult<AuthenticationResponse>> Start()
         {
             var ghostUsername = await accountServices.RegisterGhostAccount();
+            await unitOfWork.SaveChangesAsync();
             return await accountServices.AuthenticateByUserName(ghostUsername.Data);
         }
     }

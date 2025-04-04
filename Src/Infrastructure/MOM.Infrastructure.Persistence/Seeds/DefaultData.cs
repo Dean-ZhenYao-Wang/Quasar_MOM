@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MOM.Domain.Products.Entities;
+using MOM.Domain.Products;
 using MOM.Infrastructure.Persistence.Contexts;
 
 namespace MOM.Infrastructure.Persistence.Seeds

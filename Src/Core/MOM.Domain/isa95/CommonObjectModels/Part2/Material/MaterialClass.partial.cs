@@ -86,12 +86,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
             return this.IncludesPropertiesOf.Targets.Where(m => m.IsDelete == false).Select(m => m.DtId).ToList();
         }
 
-        public void IncludesPropertiesOfRemoveTargets(IEnumerable<string> childDtIds)
+        public void IncludesPropertiesOfRemoveTargets(IEnumerable<Guid> childDtIds)
         {
             this.IncludesPropertiesOf.Remove(childDtIds);
         }
 
-        public void IsAssembledFromRemoveTargets(IEnumerable<string> deleteDtIds)
+        public void IsAssembledFromRemoveTargets(IEnumerable<Guid> deleteDtIds)
         {
             this.IsAssembledFrom.Remove(deleteDtIds);
         }

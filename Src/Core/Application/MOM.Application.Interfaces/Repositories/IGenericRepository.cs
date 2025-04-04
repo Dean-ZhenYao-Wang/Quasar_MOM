@@ -10,5 +10,7 @@ namespace MOM.Application.Interfaces.Repositories
         Task<T> AddAsync(T entity);
         void Update(T entity);
         void Delete(T entity);
+        Task<IEnumerable<T>> GetByIdsAsync<TKey>(IEnumerable<TKey> ids) where TKey : notnull;
+        void DeleteRange(IEnumerable<T> entities);
     }
 }

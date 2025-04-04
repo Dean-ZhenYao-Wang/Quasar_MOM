@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MOM.Domain.Products.Entities;
+using MOM.Domain.Products;
 
 namespace MOM.Infrastructure.Persistence.Contexts.Configurations
 {

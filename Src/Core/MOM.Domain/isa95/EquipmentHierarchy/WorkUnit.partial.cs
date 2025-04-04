@@ -7,12 +7,12 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 {
     public partial class WorkUnit
     {
-        public WorkUnit(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string? description = null, bool active = false, string? responsibleDtId = null) : base(equipmentLevel, ID, description, active)
+        public WorkUnit(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string? description = null, bool active = false, Guid? responsibleDtId = null) : base(equipmentLevel, ID, description, active)
         {
             ResponsibleDtId = responsibleDtId;
         }
 
-        public void Update(string name, string? description, bool active, string? responsibleDtId)
+        public void Update(string name, string? description, bool active, Guid? responsibleDtId = null)
         {
             this.Id = name;
             this.Description = description;

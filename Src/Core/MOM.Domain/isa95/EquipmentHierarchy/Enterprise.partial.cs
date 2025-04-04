@@ -7,7 +7,7 @@
         /// </summary>
         public string? Address { get; set; }
 
-        public Enterprise(string name, string? description = null, bool active = false, string? address = null, string? responsibleDtId = null)
+        public Enterprise(string name, string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null)
             : base(Common.EnumType.HierarchyScopeEquipmentLevel.Enterprise, name, description, active)
         {
             this.Address = address;
@@ -28,7 +28,7 @@
             this.Site.Clear();
         }
 
-        public void Update(string name, string description, bool active, string address, string responsibleDtId)
+        public void Update(string name, string description, bool active, string address, Guid? responsibleDtId = null)
         {
             this.Id = name;
             this.Description = description;

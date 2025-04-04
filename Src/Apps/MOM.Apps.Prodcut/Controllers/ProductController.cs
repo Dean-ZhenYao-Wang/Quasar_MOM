@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MOM.Application.DTOs.Products;
 using MOM.Application.Features.Products.Commands.CreateProduct;
 using MOM.Application.Features.Products.Commands.DeleteProduct;
 using MOM.Application.Features.Products.Commands.UpdateProduct;
@@ -9,7 +9,6 @@ using MOM.Application.Features.Products.Queries.GetPagedListProduct;
 using MOM.Application.Features.Products.Queries.GetProductById;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
-using MOM.Domain.Products.DTOs;
 
 namespace MOM.Apps.Prodcut.Controllers
 {

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using MOM.Application.Interfaces.UserInterfaces;
+using MOM.Application.Interfaces.Interfaces.UserInterfaces;
 using MOM.Application.Wrappers;
 using MOM.Infrastructure.Identity.Contexts;
 using MOM.Infrastructure.Identity.Models;

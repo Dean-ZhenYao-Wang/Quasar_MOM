@@ -122,9 +122,9 @@ public abstract class RelationshipCollection<TRelationship, TTarget> : BasicRela
     /// 批量根据目标数字孪生ID集合移除关系
     /// </summary>
     /// <param name="dtIds">目标数字孪生唯一标识符集合</param>
-    public bool Remove(IEnumerable<string> dtIds)
+    public bool Remove(IEnumerable<Guid> dtIds)
     {
-        foreach (string dtId in dtIds)
+        foreach (Guid dtId in dtIds)
         {
             relationships.Remove(relationships.First(m => m.TargetId.Equals(dtId)));
         }

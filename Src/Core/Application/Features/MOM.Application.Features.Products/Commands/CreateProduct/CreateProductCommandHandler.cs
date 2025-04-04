@@ -1,10 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.Domain.Products.Entities;
+using MOM.Domain.Products;
 
 namespace MOM.Application.Features.Products.Commands.CreateProduct
 {

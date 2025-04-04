@@ -16,7 +16,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// <summary>
         /// 负责人DtId
         /// </summary>
-        public string? ResponsibleDtId { get; set; }
+        public Guid? ResponsibleDtId { get; set; }
 
         /// <summary>
         /// 负责人

@@ -2,6 +2,7 @@
 {
     public static class TranslatorMessages
     {
+        public static string NotFound() => nameof(NotFound);
         public static class AccountMessages
         {
             public static TranslatorMessageDto Account_NotFound_with_UserName(string userName) => new(nameof(Account_NotFound_with_UserName), [userName]);

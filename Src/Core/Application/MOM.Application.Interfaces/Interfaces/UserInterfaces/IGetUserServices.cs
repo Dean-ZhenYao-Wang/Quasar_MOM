@@ -3,7 +3,7 @@ using MOM.Application.DTOs.Account.Requests;
 using MOM.Application.DTOs.Account.Responses;
 using MOM.Application.Wrappers;
 
-namespace MOM.Application.Interfaces.UserInterfaces
+namespace MOM.Application.Interfaces.Interfaces.UserInterfaces
 {
     public interface IGetUserServices
     {

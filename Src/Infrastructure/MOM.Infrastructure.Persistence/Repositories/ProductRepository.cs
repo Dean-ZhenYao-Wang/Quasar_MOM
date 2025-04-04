@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using MOM.Application.DTOs;
+using MOM.Application.DTOs.Products;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.Domain.Products.DTOs;
-using MOM.Domain.Products.Entities;
+using MOM.Domain.Products;
 using MOM.Infrastructure.Persistence.Contexts;
 
 namespace MOM.Infrastructure.Persistence.Repositories
@@ -20,7 +20,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 query = query.Where(p => p.Name.Contains(name));
             }
 
-            return await Paged(
+            return await PagedAsync(
                 query.Select(p => new ProductDto(p)),
                 pageNumber,
                 pageSize);

@@ -1,6 +1,6 @@
 ﻿using MediatR;
+using MOM.Application.DTOs.Products;
 using MOM.Application.Wrappers;
-using MOM.Domain.Products.DTOs;
 
 namespace MOM.Application.Features.Products.Queries.GetPagedListProduct
 {

@@ -29,7 +29,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 
         [JsonIgnore]
         public virtual PersonDefinedByRelationshipCollection DefinedBy { get; set; } = new PersonDefinedByRelationshipCollection();
-
+        /// <summary>
+        /// 扩展属性、不参与业务规则
+        /// </summary>
         [JsonIgnore]
         public virtual PersonHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new PersonHasValuesOfRelationshipCollection();
 

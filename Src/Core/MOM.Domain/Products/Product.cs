@@ -1,6 +1,6 @@
 ﻿using MOM.Domain.Common;
 
-namespace MOM.Domain.Products.Entities
+namespace MOM.Domain.Products
 {
     public class Product : BaseEntity
     {
@@ -14,7 +14,7 @@ namespace MOM.Domain.Products.Entities
             Name = name;
             Price = price;
             BarCode = barCode;
-            Id = this.DtId.ToString();
+            Id = DtId.ToString();
         }
         public string Name { get; private set; }
         public double Price { get; private set; }

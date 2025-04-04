@@ -61,7 +61,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.IncludesPropertiesOf.Add(new PersonnelClassIncludesPropertiesOfRelationship(this.DtId, targetDtId));
         }
 
-        public void IncludesPropertiesOfRemoveTargets(IEnumerable<string> deleteDtIds)
+        public void IncludesPropertiesOfRemoveTargets(IEnumerable<Guid> deleteDtIds)
         {
             this.IncludesPropertiesOf.Remove(deleteDtIds);
         }

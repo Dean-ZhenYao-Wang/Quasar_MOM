@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Persistence.Repositories
 {
@@ -13,6 +15,43 @@ namespace MOM.Infrastructure.Persistence.Repositories
         public virtual async Task<T> GetByIdAsync(object id)
         {
             return await dbContext.Set<T>().FindAsync(id);
+        }
+        public virtual async Task<IEnumerable<T>> GetByIdsAsync<TKey>(IEnumerable<TKey> ids)
+     where TKey : notnull // 约束 TKey 为非空类型
+        {
+            if (ids == null || !ids.Any())
+                return Enumerable.Empty<T>();
+
+            // 获取主键元数据
+            var entityType = dbContext.Model.FindEntityType(typeof(T));
+            var primaryKey = entityType.FindPrimaryKey();
+            if (primaryKey == null || primaryKey.Properties.Count != 1)
+                throw new InvalidOperationException("仅支持单一主键实体");
+
+            var primaryKeyProperty = primaryKey.Properties[0];
+            var primaryKeyType = primaryKeyProperty.ClrType;
+
+            // 验证主键类型是否匹配
+            if (primaryKeyType != typeof(TKey))
+                throw new ArgumentException($"主键类型不匹配。预期类型: {primaryKeyType}, 实际类型: {typeof(TKey)}");
+
+            // 直接构建表达式树 e => ids.Contains(e.Id)
+            var parameter = Expression.Parameter(typeof(T), "e");
+            var property = Expression.Property(parameter, primaryKeyProperty.Name);
+            var containsMethod = typeof(Enumerable).GetMethods()
+                .First(m => m.Name == "Contains" && m.GetParameters().Length == 2)
+                .MakeGenericMethod(primaryKeyType);
+            var containsCall = Expression.Call(
+                null,
+                containsMethod,
+                Expression.Constant(ids),
+                property
+            );
+            var lambda = Expression.Lambda<Func<T, bool>>(containsCall, parameter);
+
+            return await dbContext.Set<T>()
+                .Where(lambda)
+                .ToListAsync();
         }
 
         public async Task<T> AddAsync(T entity)
@@ -30,6 +69,10 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             dbContext.Set<T>().Remove(entity);
         }
+        public void DeleteRange(IEnumerable<T> entities)
+        {
+            dbContext.Set<T>().RemoveRange(entities);
+        }
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
@@ -39,7 +82,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                  .ToListAsync();
         }
 
-        protected async Task<PaginationResponseDto<TEntity>> Paged<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class
+        protected async Task<PaginationResponseDto<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class
         {
             var count = await query.CountAsync();
 

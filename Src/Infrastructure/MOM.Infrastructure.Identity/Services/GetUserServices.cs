@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs;
 using MOM.Application.DTOs.Account.Requests;
 using MOM.Application.DTOs.Account.Responses;
-using MOM.Application.Interfaces.UserInterfaces;
+using MOM.Application.Interfaces.Interfaces.UserInterfaces;
 using MOM.Application.Wrappers;
 using MOM.Infrastructure.Identity.Contexts;
 

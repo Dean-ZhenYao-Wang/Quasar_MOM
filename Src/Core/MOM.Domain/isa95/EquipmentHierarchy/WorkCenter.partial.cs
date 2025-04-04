@@ -7,7 +7,7 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 {
     public partial class WorkCenter
     {
-        public WorkCenter(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string description = "", bool active = false, string? responsibleDtId = null) : base(equipmentLevel, ID, description, active)
+        public WorkCenter(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string description = "", bool active = false, Guid? responsibleDtId = null) : base(equipmentLevel, ID, description, active)
         {
             ResponsibleDtId = responsibleDtId;
         }
@@ -26,7 +26,7 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
             this.WorkUnit.Clear();
         }
 
-        public void Update(string name, string description, bool active, string? responsibleDtId)
+        public void Update(string name, string description, bool active, Guid? responsibleDtId = null)
         {
             this.Id = name;
             this.Description = description;

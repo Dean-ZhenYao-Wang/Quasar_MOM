@@ -1,16 +1,18 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.HttpSys;
+using MOM.Application.DTOs.Personnel.Responses;
+using MOM.Application.DTOs.Resource.Responses;
 using MOM.Application.Features.Personnel.Commands.AddPerson;
+using MOM.Application.Features.Personnel.Commands.DeletePerson;
+using MOM.Application.Features.Personnel.Commands.UpdatePerson;
+using MOM.Application.Features.Personnel.Queries.GetPagedListPerson;
+using MOM.Application.Features.Personnel.Queries.GetProperties;
+using MOM.Application.Features.Personnel.Queries.GetResponsibles;
 using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces;
-using MOM.Application.Interfaces.UserInterfaces;
+using MOM.Application.Interfaces.Interfaces.UserInterfaces;
 using MOM.Application.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 
 namespace 人员认证管理.Controllers
 {
@@ -18,8 +20,27 @@ namespace 人员认证管理.Controllers
     /// 人员管理
     /// </summary>
     [ApiVersion("1")]
-    public sealed class PersonController(IAccountServices accountServices) : BaseApiController
+    public sealed class PersonController(IAccountServices accountServices, IUnitOfWork unitOfWork) : BaseApiController
     {
+        /// <summary>
+        /// 获取负责人下拉列表数据，此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<BaseResult<List<Person>>> GetResponsibles()
+        {
+            return await Mediator.Send(new GetResponsiblesQuery());
+        }
+        /// <summary>
+        /// 获取指定人员的自定义属性清单
+        /// </summary>
+        /// <param name="dtId">指定人员的DtId</param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<BaseResult<List<ResourcePropertyResponse>>> GetProperties(GetPropertiesQuery command)
+        {
+            return await Mediator.Send(command);
+        }
         /// <summary>
         /// 添加人员/创建账号
         /// </summary>
@@ -33,12 +54,59 @@ namespace 人员认证管理.Controllers
             if (addCountResult.Success)
             {
                 request.DtId = userId;
-                return await Mediator.Send(request);
+                var model = await Mediator.Send(request);
+                if (model.Success)
+                {
+                    await unitOfWork.SaveChangesAsync();
+                }
+                return model;
             }
             else
             {
                 return addCountResult;
             }
+        }
+        /// <summary>
+        /// 分页获取人员
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedResponse<PersonResponse>> GetPageListPerson([FromQuery] GetPagedListPersonQuery request)
+        {
+            return await Mediator.Send(request);
+        }
+        /// <summary>
+        /// 删除人员
+        /// </summary>
+        /// <param name="dtIds"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<BaseResult> DeletePerson(DeletePersonCommand command)
+        {
+            var deleteResoult = await Mediator.Send(command);
+            if (deleteResoult.Success)
+            {
+                await unitOfWork.SaveChangesAsync();
+                await accountServices.DeleteAccountAsync(command.DtIds);
+            }
+            return deleteResoult;
+        }
+        /// <summary>
+        /// 修改人员
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<BaseResult> UpdatePerson(UpdatePersonCommand command)//属性尤其是从人员类继承的属性（mapsTo）
+        {
+            var updateResoult = await Mediator.Send(command);
+            if (updateResoult.Success)
+            {
+                await unitOfWork.SaveChangesAsync();
+                await accountServices.UpdateAccountAsync(command);
+            }
+            return updateResoult;
         }
     }
 }
