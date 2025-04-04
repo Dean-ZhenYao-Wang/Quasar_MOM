@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Infrastructure.Services;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
+using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Extensions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,12 @@ namespace MOM.Infrastructure.Persistence.Contexts
         public DbSet<PersonnelClass> PersonnelClasses { get; set; }
         public DbSet<Person> Person { get; set; }
         #endregion Personnel
+        #region Permission
+        public DbSet<AvailablePermission> AvailablePermissions { get; set; }
+        public DbSet<Button> Buttons { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        #endregion
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
             ChangeTracker.ApplyAuditing(authenticatedUser);

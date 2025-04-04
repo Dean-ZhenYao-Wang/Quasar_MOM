@@ -223,70 +223,6 @@
         ]
       }
     },
-    "/api/v{version}/Account/ChangeUserName": {
-      "put": {
-        "tags": [
-          "Account"
-        ],
-        "parameters": [
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangeUserNameRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangeUserNameRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChangeUserNameRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
     "/api/v{version}/Account/ChangePassword": {
       "put": {
         "tags": [
@@ -306,17 +242,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangePasswordRequest"
+                "$ref": "#/components/schemas/ChangePasswordCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangePasswordRequest"
+                "$ref": "#/components/schemas/ChangePasswordCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangePasswordRequest"
+                "$ref": "#/components/schemas/ChangePasswordCommand"
               }
             }
           },
@@ -786,10 +722,6 @@
       "AuthenticationResponse": {
         "type": "object",
         "properties": {
-          "dtId": {
-            "type": "string",
-            "format": "uuid"
-          },
           "userName": {
             "type": "string"
           },
@@ -921,21 +853,13 @@
           }
         }
       },
-      "ChangePasswordRequest": {
+      "ChangePasswordCommand": {
         "type": "object",
         "properties": {
           "password": {
             "type": "string"
           },
           "confirmPassword": {
-            "type": "string"
-          }
-        }
-      },
-      "ChangeUserNameRequest": {
-        "type": "object",
-        "properties": {
-          "userName": {
             "type": "string"
           }
         }
@@ -1074,6 +998,9 @@
           "failedCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "securityStamp": {
+            "type": "string"
           },
           "availablePermissions": {
             "type": "array",

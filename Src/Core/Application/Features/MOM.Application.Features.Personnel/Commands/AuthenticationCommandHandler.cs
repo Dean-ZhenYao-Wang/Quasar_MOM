@@ -36,7 +36,7 @@ namespace MOM.Application.Features.Personnel.Commands
             return BaseResult.Ok();
         }
     }
-    public class AuthenticationCommandHandler(IPersonRepository personRepository, ITranslator translator, JwtSettings jwtSettings, SignInManager<Person> signInManager) : IRequestHandler<AuthenticationCommand, BaseResult<AuthenticationResponse>>
+    public class AuthenticationCommandHandler(IPersonRepository personRepository, ITranslator translator, JwtSettings jwtSettings) : IRequestHandler<AuthenticationCommand, BaseResult<AuthenticationResponse>>
     {
         public async Task<BaseResult<AuthenticationResponse>> Handle(AuthenticationCommand request, CancellationToken cancellationToken)
         {
@@ -105,7 +105,7 @@ namespace MOM.Application.Features.Personnel.Commands
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(claims),
-                    Expires = DateTime.UtcNow.AddMinutes(jwtSettings.DurationInMinutes)),
+                    Expires = DateTime.UtcNow.AddMinutes(jwtSettings.DurationInMinutes),
                     Issuer = jwtSettings.Issuer,
                     Audience = jwtSettings.Audience,
                     SigningCredentials = signingCredentials
