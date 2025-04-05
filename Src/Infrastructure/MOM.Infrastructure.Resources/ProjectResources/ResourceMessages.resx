@@ -126,6 +126,9 @@
   <data name="Product_NotFound_with_id" xml:space="preserve">
     <value>Product with ID {0} not found</value>
   </data>
+  <data name="TheUserNameOrPasswordIsIncorrect" xml:space="preserve">
+    <value>用户名或密码错误</value>
+  </data>
   <data name="Username_is_already_taken" xml:space="preserve">
     <value>Username {0} is registered in the system</value>
   </data>

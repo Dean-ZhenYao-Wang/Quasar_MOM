@@ -1,0 +1,8 @@
+// src/css/_login.scss
+@use 'src/css/_mixins.scss' as mixins; // 显式导入
+
+.login-page {
+  &__card {
+    @include mixins.card-shadow; // 使用命名空间
+  }
+}

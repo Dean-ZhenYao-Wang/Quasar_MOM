@@ -71,6 +71,7 @@ namespace MOM.Application.Features.Personnel.Commands
                     user.LockoutDateTime = null;
                 }
             }
+            user.SecurityStamp = Guid.NewGuid().ToString();
             return await GetAuthenticationResponse(user);
         }
         private async Task<AuthenticationResponse> GetAuthenticationResponse(Person user)

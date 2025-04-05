@@ -1,1 +1,17 @@
-// app global css in SCSS form
+@use 'sass:color';
+@use 'src/css/_mixins.scss' as mixins;
+// 主样式文件
+@import 'login'; // 导入登录页样式
+
+// 全局覆盖
+body {
+  &.body--dark {
+    .login-page {
+      background: linear-gradient(
+        145deg,
+        color.adjust($primary, $lightness: -20%) 0%,
+        color.adjust($primary, $lightness: -30%) 100%
+      );
+    }
+  }
+}

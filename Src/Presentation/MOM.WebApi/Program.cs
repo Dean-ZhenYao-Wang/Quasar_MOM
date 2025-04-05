@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -12,9 +13,11 @@ using MOM.Application.Infrastructure.Middlewares;
 using MOM.Application.Infrastructure.Services;
 using MOM.Application.Wrappers;
 using MOM.Infrastructure.FileManager;
+using MOM.Infrastructure.FileManager.Contexts;
 using MOM.Infrastructure.Hangfire;
 using MOM.Infrastructure.Persistence;
 using MOM.Infrastructure.Persistence.Contexts;
+using MOM.Infrastructure.Persistence.Seeds;
 using MOM.Infrastructure.Resources;
 using Serilog;
 using System;
@@ -148,19 +151,19 @@ builder.Host.UseSerilog(Log.Logger);
 
 var app = builder.Build();
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    var services = scope.ServiceProvider;
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
 
-//    if (!useInMemoryDatabase)
-//    {
-//        await services.GetRequiredService<ApplicationDbContext>().Database.MigrateAsync();
-//        await services.GetRequiredService<FileManagerDbContext>().Database.MigrateAsync();
-//    }
+    if (!useInMemoryDatabase)
+    {
+        await services.GetRequiredService<ApplicationDbContext>().Database.MigrateAsync();
+        await services.GetRequiredService<FileManagerDbContext>().Database.MigrateAsync();
+    }
 
-//    //Seed Data
-//    await DefaultData.SeedAsync(services.GetRequiredService<ApplicationDbContext>());
-//}
+    //Seed Data
+    await DefaultData.SeedAsync(services.GetRequiredService<ApplicationDbContext>());
+}
 
 app.UseCustomLocalization();
 app.UseAnyCors();
