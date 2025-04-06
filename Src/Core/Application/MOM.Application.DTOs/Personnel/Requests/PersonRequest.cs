@@ -49,7 +49,7 @@ namespace MOM.Application.DTOs.Personnel.Requests
         /// <summary>
         /// 职位/角色
         /// </summary>
-        public IEnumerable<Guid>? PositionDtId_List { get; set; }
+        public IEnumerable<Guid> PositionDtId_List { get; set; } = new List<Guid>();
         /// <summary>
         /// 自定义属性清单
         /// </summary>

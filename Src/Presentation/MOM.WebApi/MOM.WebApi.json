@@ -697,8 +697,7 @@
             "items": {
               "type": "string",
               "format": "uuid"
-            },
-            "nullable": true
+            }
           },
           "properties": {
             "type": "array",
@@ -1085,8 +1084,7 @@
             "items": {
               "type": "string",
               "format": "uuid"
-            },
-            "nullable": true
+            }
           },
           "properties": {
             "type": "array",
@@ -1267,8 +1265,7 @@
             "items": {
               "type": "string",
               "format": "uuid"
-            },
-            "nullable": true
+            }
           },
           "properties": {
             "type": "array",
