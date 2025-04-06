@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Query;
 using MOM.Application.DTOs;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
+using MOM.Domain.isa95.CommonObjectModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace MOM.Infrastructure.Persistence.Repositories
 {
     public class GenericRepository<T>(DbContext dbContext) : IGenericRepository<T> where T : class
     {
+        public DbSet<T> DbSet { get => dbContext.Set<T>(); }
+        public virtual IQueryable<T> Where(Func<T, bool> predicate)
+        {
+            return dbContext.Set<T>().Where(predicate).AsQueryable();
+        }
         public virtual async Task<T> GetByIdAsync(object id)
         {
             return await dbContext.Set<T>().FindAsync(id);
@@ -55,9 +61,9 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<int> ExecuteUpdateAsync(Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> func)
+        public async Task<int> ExecuteUpdateAsync(Expression<Func<T, bool>> predicate, Expression<Func<SetPropertyCalls<T>, SetPropertyCalls<T>>> func)
         {
-            return await dbContext.Set<T>().ExecuteUpdateAsync(func);
+            return await dbContext.Set<T>().Where(predicate).ExecuteUpdateAsync(func);
         }
 
         public async Task<T> AddAsync(T entity)
@@ -79,13 +85,32 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             dbContext.Set<T>().RemoveRange(entities);
         }
-
-        public async Task<IReadOnlyList<T>> GetAllAsync()
+        public async Task<List<TResult>> GetAllAsync<TResult>(
+            Expression<Func<T, bool>> predicate = null,
+            Expression<Func<T, TResult>> selector = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            Func<IQueryable<TResult>, IOrderedQueryable<TResult>> orderByAfterMapping = null)
         {
-            return await dbContext
-                 .Set<T>()
-                 .AsNoTracking()
-                 .ToListAsync();
+            IQueryable<T> query = dbContext.Set<T>().AsNoTracking();
+
+            // 1. 应用查询条件（如果有）
+            if (predicate != null)
+                query = query.Where(predicate);
+
+            // 2. 映射前排序（作用于 T 类型）
+            if (orderBy != null)
+                query = orderBy(query);
+
+            // 3. 应用结果映射（如果有）
+            IQueryable<TResult> resultQuery = selector != null
+                ? query.Select(selector)
+                : (IQueryable<TResult>)(object)query;
+
+            // 4. 映射后排序（作用于 TResult 类型）
+            if (orderByAfterMapping != null)
+                resultQuery = orderByAfterMapping(resultQuery);
+
+            return await resultQuery.ToListAsync();
         }
 
         protected async Task<PaginationResponseDto<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class

@@ -11,9 +11,6 @@ namespace MOM.Domain.isa95.CommonObjectModels
         {
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:ResourceClass;1";
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as ResourceClass);

@@ -81,6 +81,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOM.Application.Features.Pe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "人员认证管理", "Src\Apps\系统管理\人员认证管理\人员认证管理.csproj", "{F1386CA1-ED83-4B79-8D13-8E4908903F03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "系统基础数据", "Src\Apps\系统管理\系统基础数据\系统基础数据.csproj", "{80F3D88F-764E-4545-874D-3726F501D3EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOM.ApplicationFeatures.Permission", "Src\Core\Application\Features\MOM.ApplicationFeatures.Permission\MOM.ApplicationFeatures.Permission.csproj", "{98E63395-838F-4E55-8BE6-5DD59E696418}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +147,14 @@ Global
 		{F1386CA1-ED83-4B79-8D13-8E4908903F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1386CA1-ED83-4B79-8D13-8E4908903F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1386CA1-ED83-4B79-8D13-8E4908903F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80F3D88F-764E-4545-874D-3726F501D3EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80F3D88F-764E-4545-874D-3726F501D3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80F3D88F-764E-4545-874D-3726F501D3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80F3D88F-764E-4545-874D-3726F501D3EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E63395-838F-4E55-8BE6-5DD59E696418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E63395-838F-4E55-8BE6-5DD59E696418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E63395-838F-4E55-8BE6-5DD59E696418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E63395-838F-4E55-8BE6-5DD59E696418}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -185,6 +197,8 @@ Global
 		{14BC06F6-AA58-4405-8F46-03E4F23D2A6B} = {89BADB37-27E5-4C3B-BF23-BB06558FF39C}
 		{B0EF48DF-BCA0-4EE6-B86C-25AF983E8556} = {94E4D025-F5DB-4D32-B0AD-BD98EEAF0534}
 		{F1386CA1-ED83-4B79-8D13-8E4908903F03} = {F2EE8A63-1D0E-4377-B3B4-28EFA4C5AF28}
+		{80F3D88F-764E-4545-874D-3726F501D3EB} = {F2EE8A63-1D0E-4377-B3B4-28EFA4C5AF28}
+		{98E63395-838F-4E55-8BE6-5DD59E696418} = {94E4D025-F5DB-4D32-B0AD-BD98EEAF0534}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1BF80400-1050-4291-9001-0A0B0DE23CDE}

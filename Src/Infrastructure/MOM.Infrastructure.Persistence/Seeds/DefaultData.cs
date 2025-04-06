@@ -14,11 +14,16 @@ namespace MOM.Infrastructure.Persistence.Seeds
         {
             if (!await applicationDbContext.Person.AnyAsync())
             {
+                PersonnelClass personnelClass = new PersonnelClass("超级管理员","角色");
+                applicationDbContext.PersonnelClasses.Add(personnelClass);
+                //await applicationDbContext.SaveChangesAsync();
+
                 Person admin = new Person("admin", "管理员", PersonWorkStatus.在职);
-                //38ef3ecba8046b6d1efca6bf2fac25d8659d4540
                 admin.PassWord="Sam@123456".Sha1Signature().Sha1Signature(admin.DtId.ToString());
                 admin.SecurityStamp = Guid.NewGuid().ToString();
+                admin.DefinedByAddTarget(personnelClass.DtId);
                 applicationDbContext.Person.Add(admin);
+
                 await applicationDbContext.SaveChangesAsync();
             }
         }

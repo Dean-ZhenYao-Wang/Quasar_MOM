@@ -6,7 +6,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
     {
         public string? Description { get; set; }
 
-        public PersonnelClass(string ID, string? description = null, HierarchyScope? hierarchyScope = null) : this()
+        public PersonnelClass(string Id, string? description = null, HierarchyScope? hierarchyScope = null) : this()
         {
             this.Id = Id;
             this.Description = description;

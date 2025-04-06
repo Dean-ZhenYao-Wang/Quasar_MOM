@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Account.Responses;
-using MOM.Application.Features.Personnel.Commands;
+using MOM.Application.Features.Personnel.Commands.Authentication;
+using MOM.Application.Features.Personnel.Commands.ChangePassword;
 using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;

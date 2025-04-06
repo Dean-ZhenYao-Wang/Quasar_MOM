@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis.Text;
 using Microsoft.EntityFrameworkCore;
+using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.DTOs.Personnel.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
@@ -27,7 +28,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             return person.Where(m => m.IsDelete == false).AsNoTracking().ToListAsync();
         }
-        public Task<PaginationResponseDto<PersonResponse>> GetPagedListAsync(int pageNumber,int pageSize)
+        public Task<PaginationResponseDto<PersonResponse>> GetPagedListAsync(int pageNumber, int pageSize)
         {
             var query = person.Where(m => m.IsDelete == false)
                 .OrderBy(m => m.Created)
@@ -57,7 +58,8 @@ namespace MOM.Infrastructure.Persistence.Repositories
         public Task<Person> FindByNameAsync(string userName)
         {
             return person.Where(m => m.Id.Equals(userName))
-                .AsNoTracking()
+                .Include(m => m.DefinedBy)
+                .ThenInclude(d => d.Target)
                 .FirstOrDefaultAsync();
         }
     }

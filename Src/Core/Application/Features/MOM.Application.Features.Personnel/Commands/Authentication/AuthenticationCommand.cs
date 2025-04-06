@@ -9,12 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MOM.Application.Features.Personnel.Commands
+namespace MOM.Application.Features.Personnel.Commands.Authentication
 {
     public class AuthenticationCommand : AuthenticationRequest, IRequest<BaseResult<AuthenticationResponse>>
-    {
-    }
-    public class ChangePasswordCommand : ChangePasswordRequest, IRequest<BaseResult>
     {
     }
 }

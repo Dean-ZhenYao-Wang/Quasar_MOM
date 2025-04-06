@@ -85,7 +85,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Icon")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Id")
@@ -101,7 +100,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<Guid?>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("MenuDtId")
+                    b.Property<Guid>("MenuDtId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -124,10 +123,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<bool>("AlwaysShow")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Component")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
@@ -137,11 +132,13 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<int>("Depth")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Hidden")
                         .HasColumnType("bit");
 
                     b.Property<string>("Icon")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Id")
@@ -157,12 +154,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<Guid?>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("MenuDtId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ParentMenuDtId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Path")
                         .IsRequired()
@@ -170,7 +167,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.HasKey("DtId");
 
-                    b.HasIndex("MenuDtId");
+                    b.HasIndex("ParentMenuDtId");
 
                     b.ToTable("Menus");
                 });
@@ -4183,16 +4180,22 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("MOM.Domain.Permission.Button", b =>
                 {
-                    b.HasOne("MOM.Domain.Permission.Menu", null)
+                    b.HasOne("MOM.Domain.Permission.Menu", "Menu")
                         .WithMany("Buttons")
-                        .HasForeignKey("MenuDtId");
+                        .HasForeignKey("MenuDtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Menu");
                 });
 
             modelBuilder.Entity("MOM.Domain.Permission.Menu", b =>
                 {
-                    b.HasOne("MOM.Domain.Permission.Menu", null)
+                    b.HasOne("MOM.Domain.Permission.Menu", "ParentMenu")
                         .WithMany("Children")
-                        .HasForeignKey("MenuDtId");
+                        .HasForeignKey("ParentMenuDtId");
+
+                    b.Navigation("ParentMenu");
                 });
 
             modelBuilder.Entity("MOM.Domain.Permission.Permission", b =>

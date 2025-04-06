@@ -90,8 +90,11 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             }
 
         }
-
-        private void DefinedByAddTarget(Guid teamOfGroupDtId)
+        /// <summary>
+        /// 所属人员类绑定
+        /// </summary>
+        /// <param name="teamOfGroupDtId"></param>
+        public void DefinedByAddTarget(Guid teamOfGroupDtId)
         {
             this.DefinedBy.Add(new Common.Relationship.isa95.Person.PersonDefinedByRelationship(this.DtId, teamOfGroupDtId));
         }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using OrchardCore.Modules;
 
-namespace MOM.Apps.Prodcut
+namespace 系统基础数据
 {
     public sealed class Startup : StartupBase
     {

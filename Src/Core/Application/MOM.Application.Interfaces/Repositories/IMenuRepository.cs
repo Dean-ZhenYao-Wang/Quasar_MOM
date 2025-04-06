@@ -1,0 +1,10 @@
+﻿using MOM.Application.DTOs.Menu.Responses;
+using MOM.Domain.Permission;
+
+namespace MOM.Application.Interfaces.Repositories
+{
+    public interface IMenuRepository : IGenericRepository<Menu>
+    {
+        Task<List<MenuTreeNodeResponse>> GetMenuTreeAsync();
+    }
+}

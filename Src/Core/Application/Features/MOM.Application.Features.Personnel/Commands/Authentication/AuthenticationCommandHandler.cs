@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using MOM.Application.DTOs.Account.Responses;
 using MOM.Application.Features.Personnel.Commands.UpdatePerson;
 using MOM.Application.Features.Personnel.Settings;
 using MOM.Application.Infrastructure.Extensions;
-using MOM.Application.Infrastructure.Services;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
@@ -19,23 +19,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static OrchardCore.OrchardCoreConstants;
 
-namespace MOM.Application.Features.Personnel.Commands
+namespace MOM.Application.Features.Personnel.Commands.Authentication
 {
-    public class ChangePasswordCommandHandler(ITranslator translator, IPersonRepository personRepository, IAuthenticatedUserService authenticated) : IRequestHandler<ChangePasswordCommand, BaseResult>
-    {
-        public async Task<BaseResult> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
-        {
-            Guid dtId = Guid.Parse(authenticated.DtId);
-            var user = await personRepository.GetByIdAsync(dtId);
-            string newPassWord = request.Password.Sha1Signature(authenticated.DtId);
-            if (user.PassWord.Equals(newPassWord))
-            {
-                user.PassWord = newPassWord;
-                user.SecurityStamp = Guid.NewGuid().ToString();
-            }
-            return BaseResult.Ok();
-        }
-    }
     public class AuthenticationCommandHandler(IPersonRepository personRepository, ITranslator translator, JwtSettings jwtSettings) : IRequestHandler<AuthenticationCommand, BaseResult<AuthenticationResponse>>
     {
         public async Task<BaseResult<AuthenticationResponse>> Handle(AuthenticationCommand request, CancellationToken cancellationToken)
@@ -76,7 +61,7 @@ namespace MOM.Application.Features.Personnel.Commands
         }
         private async Task<AuthenticationResponse> GetAuthenticationResponse(Person user)
         {
-            var jwToken = await GenerateJwtToken();
+            var jwToken = GenerateJwtToken();
 
             var rolesList = new List<string>();
             //await userManager.GetRolesAsync(user);
@@ -89,32 +74,34 @@ namespace MOM.Application.Features.Personnel.Commands
                 Roles = rolesList
             };
 
-            async Task<string> GenerateJwtToken()
+            string GenerateJwtToken()
             {
-                //秘钥，就是标头，这里用Hmacsha256算法，需要256bit的密钥
-                var securityKey = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Key)), SecurityAlgorithms.HmacSha256);
-                var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key));
-                var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+                string? iss = jwtSettings.Issuer;
+                string? aud = jwtSettings.Audience;
 
-                var claims = new Claim[] {
-                    new(JwtRegisteredClaimNames.Iss,jwtSettings.Issuer),
-                    new(JwtRegisteredClaimNames.Aud,jwtSettings.Audience),
+                var claims = new List<Claim> {
+                    new(JwtRegisteredClaimNames.Iss,iss),
+                    new(JwtRegisteredClaimNames.Aud,aud),
                     new(ClaimTypes.NameIdentifier,user.DtId.ToString()),
-                    new Claim("SecurityStamp", user.SecurityStamp)
+                    new Claim("SecurityStamp", user.SecurityStamp),
                 };
-
-                var tokenDescriptor = new SecurityTokenDescriptor
+                user.GetDefinedBy().ForEach(m =>
                 {
-                    Subject = new ClaimsIdentity(claims),
-                    Expires = DateTime.UtcNow.AddMinutes(jwtSettings.DurationInMinutes),
-                    Issuer = jwtSettings.Issuer,
-                    Audience = jwtSettings.Audience,
-                    SigningCredentials = signingCredentials
-                };
+                    claims.Add(new Claim(ClaimTypes.Role, m));
+                });
 
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                return tokenHandler.WriteToken(token);
+                var credentials = new SigningCredentials(
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
+                    SecurityAlgorithms.HmacSha256
+                );
+
+                SecurityToken securityToken = new JwtSecurityToken(
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(jwtSettings.DurationInMinutes),//过期时间
+                    signingCredentials: credentials
+                );
+                //生成jwt令牌
+                return new JwtSecurityTokenHandler().WriteToken(securityToken);
             }
         }
     }

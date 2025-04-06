@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -44,19 +45,21 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(o =>
 {
-    o.RequireHttpsMetadata = false;
-    o.SaveToken = false;
     o.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuerSigningKey = true,
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ClockSkew = TimeSpan.Zero,
-        ValidIssuer = jwtSettings.Issuer,
-        ValidAudience = jwtSettings.Audience,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key))
+        ValidateIssuerSigningKey = true,//是否验证签名,不验证的话可以篡改数据，不安全
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),//解密的密钥      
+        ValidateIssuer = true,//是否验证发行人，就是验证载荷中的Iss是否对应ValidIssuer参数
+        ValidIssuer = jwtSettings.Issuer,//发行人
+        ValidateAudience = true,//是否验证订阅人，就是验证载荷中的Aud是否对应ValidAudience参数
+        ValidAudience = jwtSettings.Audience,//订阅人  
+        ValidateLifetime = true,//是否验证过期时间，过期了就拒绝访问
+        ClockSkew = TimeSpan.Zero,//这个是缓冲过期时间，也就是说，即使我们配置了过期时间，这里也要考虑进去，过期时间+缓冲，默认好像是7分钟，你可以直接设置为0
     };
+
+    o.RequireHttpsMetadata = false;
+    o.SaveToken = false;
+
 
     o.Events = new JwtBearerEvents()
     {
@@ -150,7 +153,6 @@ builder.Host.UseSerilog(Log.Logger);
 
 
 var app = builder.Build();
-
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -164,7 +166,6 @@ using (var scope = app.Services.CreateScope())
     //Seed Data
     await DefaultData.SeedAsync(services.GetRequiredService<ApplicationDbContext>());
 }
-
 app.UseCustomLocalization();
 app.UseAnyCors();
 app.UseRouting();
@@ -183,4 +184,12 @@ app.Run();
 
 public partial class Program
 {
+
+    // 检测是否在编译过程中
+    static bool IsCompileTime()
+    {
+        // 通过环境变量或进程名判断
+        return Environment.GetEnvironmentVariable("MSBUILD") != null
+               || Environment.GetEnvironmentVariable("DOTNET_BUILD") != null;
+    }
 }

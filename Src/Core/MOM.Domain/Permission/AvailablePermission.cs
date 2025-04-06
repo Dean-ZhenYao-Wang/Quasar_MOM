@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MOM.Domain.Permission
 {
+    /// <summary>
+    /// 针对个人的权限,可以是对菜单的限制,也可以是对按钮的限制
+    /// </summary>
     public class AvailablePermission
     {
         [Key]

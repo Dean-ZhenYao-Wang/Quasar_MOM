@@ -67,5 +67,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         {
             return this.CustomHash(base.GetHashCode(), HierarchyScope?.GetHashCode(), Name?.GetHashCode(), OperationalLocation?.GetHashCode(), OperationalLocationType?.GetHashCode());
         }
+
+        public List<string> GetDefinedBy()
+        {
+            return this.DefinedBy.Select(m => m.Target.Id).ToList();
+        }
     }
 }

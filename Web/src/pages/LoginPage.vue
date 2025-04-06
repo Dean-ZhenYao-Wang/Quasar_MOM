@@ -99,7 +99,7 @@ export default {
               })
               // 安全存储token
               localStorage.setItem('authToken', response.data.jwToken)
-              this.$router.push('/dashboard')
+              this.$router.push('/')
             })
             .catch((err) =>
               this.$q.notify({

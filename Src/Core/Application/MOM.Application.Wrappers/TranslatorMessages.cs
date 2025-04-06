@@ -5,6 +5,10 @@ namespace MOM.Application.Wrappers
     public static class TranslatorMessages
     {
         public static string NotFound() => nameof(NotFound);
+        public static class MenuMessages
+        {
+            public static string AccessDenied() => nameof(AccessDenied);
+        }
         public static class AccountMessages
         {
             /// <summary>
