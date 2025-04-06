@@ -64,7 +64,6 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
             var jwToken = GenerateJwtToken();
 
             var rolesList = new List<string>();
-            //await userManager.GetRolesAsync(user);
 
             return new AuthenticationResponse()
             {
