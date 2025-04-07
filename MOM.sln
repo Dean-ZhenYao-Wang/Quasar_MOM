@@ -83,7 +83,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "人员认证管理", "Src\A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "系统基础数据", "Src\Apps\系统管理\系统基础数据\系统基础数据.csproj", "{80F3D88F-764E-4545-874D-3726F501D3EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOM.ApplicationFeatures.Permission", "Src\Core\Application\Features\MOM.ApplicationFeatures.Permission\MOM.ApplicationFeatures.Permission.csproj", "{98E63395-838F-4E55-8BE6-5DD59E696418}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOM.Application.Features.Permission", "Src\Core\Application\Features\MOM.ApplicationFeatures.Permission\MOM.Application.Features.Permission.csproj", "{98E63395-838F-4E55-8BE6-5DD59E696418}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

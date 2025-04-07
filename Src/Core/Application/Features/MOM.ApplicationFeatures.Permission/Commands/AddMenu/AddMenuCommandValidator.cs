@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace MOM.ApplicationFeatures.Permission.Commands.AddMenu
+namespace MOM.Application.Features.Permission.Commands.AddMenu
 {
     public class AddMenuCommandValidator : AbstractValidator<AddMenuCommand>
     {

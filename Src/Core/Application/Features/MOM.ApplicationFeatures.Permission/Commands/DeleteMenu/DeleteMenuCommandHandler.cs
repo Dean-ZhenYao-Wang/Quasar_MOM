@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MOM.ApplicationFeatures.Permission.Commands.DeleteMenu
+namespace MOM.Application.Features.Permission.Commands.DeleteMenu
 {
     public class DeleteMenuCommandHandler(IMenuRepository menuRepository,IButtonRepository buttonRepository) : IRequestHandler<DeleteMenuCommand, BaseResult>
     {

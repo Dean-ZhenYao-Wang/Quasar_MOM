@@ -12,7 +12,7 @@
     <PackageReference Include="OrchardCore.Module.Targets" Version="2.1.6" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Core\Application\Features\MOM.ApplicationFeatures.Permission\MOM.ApplicationFeatures.Permission.csproj" />
+    <ProjectReference Include="..\..\..\Core\Application\Features\MOM.ApplicationFeatures.Permission\MOM.Application.Features.Permission.csproj" />
     <ProjectReference Include="..\..\..\Core\Application\MOM.Application.Interfaces\MOM.Application.Interfaces.csproj" />
   </ItemGroup>
 </Project>

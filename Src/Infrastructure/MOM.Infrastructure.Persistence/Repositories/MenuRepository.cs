@@ -3,6 +3,7 @@ using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,20 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
         public async Task<List<MenuTreeNodeResponse>> GetMenuTreeAsync()
         {
-            return await GetAllAsync(m => m.Children.Count == 0, m => m.ToMenuTreeNodeResponse(null), o => o.OrderBy(m => m.Id));
+            var menuList = await menus.Select(m => m.ToMenuTreeNodeResponse(m.ParentMenuDtId)).ToListAsync();
+            return BuildMenuTree(menuList);
+        }
+        // 递归构建菜单树
+        List<MenuTreeNodeResponse> BuildMenuTree(IEnumerable<MenuTreeNodeResponse> menus, Guid? parentId = null)
+        {
+            return menus
+                .Where(m => m.ParentMenuDtId == parentId)
+                .Select(m =>
+                {
+                    m.Children = BuildMenuTree(menus, m.DtId);
+                    return m;
+                })
+                .ToList();
         }
     }
 }

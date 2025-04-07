@@ -8,7 +8,7 @@
     <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Application\Features\MOM.Application.Features.Personnel\MOM.Application.Features.Personnel.csproj" />
     <ProjectReference Include="..\系统管理\人员认证管理\人员认证管理.csproj" />
+    <ProjectReference Include="..\系统管理\系统基础数据\系统基础数据.csproj" />
   </ItemGroup>
 </Project>

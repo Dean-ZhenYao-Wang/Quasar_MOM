@@ -15,9 +15,9 @@ namespace MOM.Infrastructure.Persistence.Repositories
     public class GenericRepository<T>(DbContext dbContext) : IGenericRepository<T> where T : class
     {
         public DbSet<T> DbSet { get => dbContext.Set<T>(); }
-        public virtual IQueryable<T> Where(Func<T, bool> predicate)
+        public virtual IEnumerable<T> Where(Func<T, bool> predicate)
         {
-            return dbContext.Set<T>().Where(predicate).AsQueryable();
+            return dbContext.Set<T>().Where(predicate);
         }
         public virtual async Task<T> GetByIdAsync(object id)
         {
@@ -84,33 +84,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
         public void DeleteRange(IEnumerable<T> entities)
         {
             dbContext.Set<T>().RemoveRange(entities);
-        }
-        public async Task<List<TResult>> GetAllAsync<TResult>(
-            Expression<Func<T, bool>> predicate = null,
-            Expression<Func<T, TResult>> selector = null,
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-            Func<IQueryable<TResult>, IOrderedQueryable<TResult>> orderByAfterMapping = null)
-        {
-            IQueryable<T> query = dbContext.Set<T>().AsNoTracking();
-
-            // 1. 应用查询条件（如果有）
-            if (predicate != null)
-                query = query.Where(predicate);
-
-            // 2. 映射前排序（作用于 T 类型）
-            if (orderBy != null)
-                query = orderBy(query);
-
-            // 3. 应用结果映射（如果有）
-            IQueryable<TResult> resultQuery = selector != null
-                ? query.Select(selector)
-                : (IQueryable<TResult>)(object)query;
-
-            // 4. 映射后排序（作用于 TResult 类型）
-            if (orderByAfterMapping != null)
-                resultQuery = orderByAfterMapping(resultQuery);
-
-            return await resultQuery.ToListAsync();
         }
 
         protected async Task<PaginationResponseDto<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class

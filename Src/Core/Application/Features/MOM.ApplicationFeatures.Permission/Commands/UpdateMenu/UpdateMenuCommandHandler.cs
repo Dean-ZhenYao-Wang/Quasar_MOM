@@ -2,7 +2,7 @@
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
-namespace MOM.ApplicationFeatures.Permission.Commands.UpdateMenu
+namespace MOM.Application.Features.Permission.Commands.UpdateMenu
 {
     public class UpdateMenuCommandHandler(IMenuRepository menuRepository, ITranslator translator) : IRequestHandler<UpdateMenuCommand, BaseResult>
     {

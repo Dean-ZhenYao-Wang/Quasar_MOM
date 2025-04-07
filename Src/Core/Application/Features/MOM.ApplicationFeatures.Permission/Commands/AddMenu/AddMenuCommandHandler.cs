@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MOM.ApplicationFeatures.Permission.Commands.AddMenu
+namespace MOM.Application.Features.Permission.Commands.AddMenu
 {
     public class AddMenuCommandHandler(IMenuRepository menuRepository) : IRequestHandler<AddMenuCommand, BaseResult>
     {

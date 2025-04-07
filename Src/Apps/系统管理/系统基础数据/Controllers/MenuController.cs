@@ -1,24 +1,16 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MOM.Application.DTOs.Account.Responses;
 using MOM.Application.DTOs.Menu.Responses;
+using MOM.Application.Features.Permission.Commands.AddMenu;
+using MOM.Application.Features.Permission.Commands.DeleteMenu;
+using MOM.Application.Features.Permission.Commands.UpdateMenu;
+using MOM.Application.Features.Permission.Queries.GetMenuList;
+using MOM.Application.Features.Permission.Queries.GetMenuTree;
 using MOM.Application.Infrastructure;
 using MOM.Application.Infrastructure.Services;
 using MOM.Application.Interfaces;
-using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.ApplicationFeatures.Permission.Commands.AddMenu;
-using MOM.ApplicationFeatures.Permission.Commands.DeleteMenu;
-using MOM.ApplicationFeatures.Permission.Commands.UpdateMenu;
-using MOM.ApplicationFeatures.Permission.Queries;
-using MOM.ApplicationFeatures.Permission.Queries.GetMenuList;
-using MOM.ApplicationFeatures.Permission.Queries.GetMenuTree;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace 系统基础数据.Controllers
 {
@@ -30,7 +22,7 @@ namespace 系统基础数据.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Policy = "管理员,超级管理员")]
+        [Authorize(Roles = "管理员,超级管理员")]
         public async Task<BaseResult<List<MenuTreeNodeResponse>>> GetMenuTree()
         {
             return await Mediator.Send(new GetMenuTreeQuery());
@@ -66,13 +58,10 @@ namespace 系统基础数据.Controllers
             return model;
         }
         [HttpGet]
-        public async Task<BaseResult<List<MenuResponse>>> GetMenuList(GetMenuListQuery command)
+        [AllowAnonymous]
+        public async Task<BaseResult<List<MenuResponse>>> GetMenuList([FromQuery] GetMenuListQuery command)
         {
             var model = await Mediator.Send(command);
-            if (model.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return model;
         }
     }

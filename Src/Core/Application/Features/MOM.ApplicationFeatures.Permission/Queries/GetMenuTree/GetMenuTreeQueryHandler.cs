@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MOM.ApplicationFeatures.Permission.Queries.GetMenuTree
+namespace MOM.Application.Features.Permission.Queries.GetMenuTree
 {
     public class GetMenuTreeQueryHandler(IMenuRepository menuRepository) : IRequestHandler<GetMenuTreeQuery, List<MenuTreeNodeResponse>>
     {

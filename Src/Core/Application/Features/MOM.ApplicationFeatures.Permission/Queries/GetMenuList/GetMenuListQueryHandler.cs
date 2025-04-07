@@ -4,13 +4,13 @@ using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
-namespace MOM.ApplicationFeatures.Permission.Queries.GetMenuList
+namespace MOM.Application.Features.Permission.Queries.GetMenuList
 {
     public class GetMenuListQueryHandler(IMenuRepository menuRepository) : IRequestHandler<GetMenuListQuery, BaseResult<List<MenuResponse>>>
     {
         public async Task<BaseResult<List<MenuResponse>>> Handle(GetMenuListQuery request, CancellationToken cancellationToken)
         {
-            return await menuRepository.Where(m => m.ParentMenuDtId == request.ParentMenuDtId)
+            return await menuRepository.DbSet.Where(m => m.ParentMenuDtId == request.ParentMenuDtId)
                 .Select(m => new MenuResponse
                 {
                     Id = m.Id,
@@ -23,7 +23,7 @@ namespace MOM.ApplicationFeatures.Permission.Queries.GetMenuList
                     Hidden = m.Hidden,
                     AlwaysShow = m.AlwaysShow,
                     Depth = m.Depth
-                }).ToListAsync();
+                }).AsNoTracking().ToListAsync();
         }
     }
 }

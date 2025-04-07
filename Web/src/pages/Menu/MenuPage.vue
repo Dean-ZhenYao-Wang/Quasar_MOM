@@ -1,9 +1,427 @@
 <template>
-  <q-page padding>
-    <!-- content -->
+  <q-page class="row q-pa-md">
+    <!-- 左侧树形菜单 -->
+    <div class="col-3 q-pr-md">
+      <q-card class="full-height">
+        <q-card-section class="bg-primary text-white">
+          <div class="text-h6">菜单树</div>
+        </q-card-section>
+        <q-card-section>
+          <q-tree
+            :nodes="menuTree"
+            node-key="id"
+            label-key="name"
+            selected-color="primary"
+            v-model:selected="selectedMenu"
+            @update:selected="onMenuSelected"
+          />
+        </q-card-section>
+      </q-card>
+    </div>
+
+    <!-- 右侧上下布局 -->
+    <div class="col-9">
+      <!-- 右上：子菜单列表 -->
+      <div class="q-mb-md">
+        <q-card>
+          <q-card-section class="bg-primary text-white">
+            <div class="row items-center">
+              <div class="col text-h6">子菜单列表</div>
+              <div class="col-auto">
+                <q-btn
+                  icon="add"
+                  label="添加子菜单"
+                  color="positive"
+                  @click="addSubMenu"
+                  v-if="selectedMenu"
+                />
+              </div>
+            </div>
+          </q-card-section>
+          <q-card-section>
+            <q-table
+              :rows="subMenus"
+              :columns="subMenuColumns"
+              row-key="id"
+              :loading="subMenuLoading"
+              v-model:selected="selectedSubMenu"
+              @update:selected="onSubMenuSelected"
+              selection="single"
+            >
+              <template v-slot:body-cell-actions="props">
+                <q-td :props="props">
+                  <q-btn icon="edit" color="primary" flat dense @click="editSubMenu(props.row)" />
+                  <q-btn
+                    icon="delete"
+                    color="negative"
+                    flat
+                    dense
+                    @click="confirmDeleteSubMenu(props.row)"
+                  />
+                </q-td>
+              </template>
+            </q-table>
+          </q-card-section>
+        </q-card>
+      </div>
+
+      <!-- 右下：按钮列表 -->
+      <div>
+        <q-card>
+          <q-card-section class="bg-primary text-white">
+            <div class="row items-center">
+              <div class="col text-h6">按钮权限</div>
+              <div class="col-auto">
+                <q-btn
+                  icon="add"
+                  label="添加按钮"
+                  color="positive"
+                  @click="addButton"
+                  v-if="selectedSubMenu"
+                />
+              </div>
+            </div>
+          </q-card-section>
+          <q-card-section>
+            <q-table
+              :rows="buttons"
+              :columns="buttonColumns"
+              row-key="id"
+              :loading="buttonsLoading"
+            >
+              <template v-slot:body-cell-actions="props">
+                <q-td :props="props">
+                  <q-btn icon="edit" color="primary" flat dense @click="editButton(props.row)" />
+                  <q-btn
+                    icon="delete"
+                    color="negative"
+                    flat
+                    dense
+                    @click="confirmDeleteButton(props.row)"
+                  />
+                </q-td>
+              </template>
+            </q-table>
+          </q-card-section>
+        </q-card>
+      </div>
+    </div>
+
+    <!-- 添加/编辑子菜单对话框 -->
+    <q-dialog v-model="subMenuDialog" persistent>
+      <q-card style="min-width: 400px">
+        <q-card-section>
+          <div class="text-h6">{{ editingSubMenu ? '编辑子菜单' : '添加子菜单' }}</div>
+        </q-card-section>
+        <q-card-section>
+          <q-form @submit="saveSubMenu">
+            <q-input
+              v-model="subMenuForm.name"
+              label="菜单名称"
+              :rules="[(val) => !!val || '请输入菜单名称']"
+            />
+            <q-input
+              v-model="subMenuForm.path"
+              label="路由路径"
+              :rules="[(val) => !!val || '请输入路由路径']"
+            />
+            <q-input v-model="subMenuForm.icon" label="图标" />
+            <q-toggle v-model="subMenuForm.visible" label="是否可见" />
+            <div class="q-mt-md">
+              <q-btn label="取消" color="negative" flat @click="subMenuDialog = false" />
+              <q-btn label="保存" type="submit" color="primary" class="q-ml-sm" />
+            </div>
+          </q-form>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+
+    <!-- 添加/编辑按钮对话框 -->
+    <q-dialog v-model="buttonDialog" persistent>
+      <q-card style="min-width: 400px">
+        <q-card-section>
+          <div class="text-h6">{{ editingButton ? '编辑按钮' : '添加按钮' }}</div>
+        </q-card-section>
+        <q-card-section>
+          <q-form @submit="saveButton">
+            <q-input
+              v-model="buttonForm.name"
+              label="按钮名称"
+              :rules="[(val) => !!val || '请输入按钮名称']"
+            />
+            <q-input
+              v-model="buttonForm.code"
+              label="权限编码"
+              :rules="[(val) => !!val || '请输入权限编码']"
+            />
+            <q-input v-model="buttonForm.icon" label="图标" />
+            <div class="q-mt-md">
+              <q-btn label="取消" color="negative" flat @click="buttonDialog = false" />
+              <q-btn label="保存" type="submit" color="primary" class="q-ml-sm" />
+            </div>
+          </q-form>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
-<script setup>
-//
+<script>
+import { ref, onMounted } from 'vue'
+import { useQuasar } from 'quasar'
+
+export default {
+  setup() {
+    const $q = useQuasar()
+
+    // 菜单树数据
+    const menuTree = ref([
+      {
+        id: 1,
+        name: '系统管理',
+        children: [
+          { id: 2, name: '用户管理' },
+          { id: 3, name: '角色管理' },
+          { id: 4, name: '菜单管理' },
+        ],
+      },
+      {
+        id: 5,
+        name: '业务管理',
+        children: [
+          { id: 6, name: '订单管理' },
+          { id: 7, name: '客户管理' },
+        ],
+      },
+    ])
+
+    const selectedMenu = ref(null)
+    const subMenus = ref([])
+    const subMenuLoading = ref(false)
+    const selectedSubMenu = ref(null)
+    const buttons = ref([])
+    const buttonsLoading = ref(false)
+
+    // 子菜单表格列定义
+    const subMenuColumns = [
+      { name: 'name', label: '菜单名称', field: 'name', align: 'left' },
+      { name: 'path', label: '路由路径', field: 'path', align: 'left' },
+      { name: 'icon', label: '图标', field: 'icon', align: 'left' },
+      { name: 'visible', label: '是否可见', field: 'visible', align: 'center' },
+      { name: 'actions', label: '操作', align: 'center' },
+    ]
+
+    // 按钮表格列定义
+    const buttonColumns = [
+      { name: 'name', label: '按钮名称', field: 'name', align: 'left' },
+      { name: 'code', label: '权限编码', field: 'code', align: 'left' },
+      { name: 'icon', label: '图标', field: 'icon', align: 'left' },
+      { name: 'actions', label: '操作', align: 'center' },
+    ]
+
+    // 子菜单对话框相关
+    const subMenuDialog = ref(false)
+    const editingSubMenu = ref(false)
+    const subMenuForm = ref({
+      name: '',
+      path: '',
+      icon: '',
+      visible: true,
+    })
+
+    // 按钮对话框相关
+    const buttonDialog = ref(false)
+    const editingButton = ref(false)
+    const buttonForm = ref({
+      name: '',
+      code: '',
+      icon: '',
+    })
+
+    // 选择菜单时加载子菜单
+    const onMenuSelected = (id) => {
+      if (!id) return
+      subMenuLoading.value = true
+      // 模拟API调用
+      setTimeout(() => {
+        subMenus.value = [
+          { id: 1, name: '列表', path: '/list', icon: 'list', visible: true },
+          { id: 2, name: '添加', path: '/add', icon: 'add', visible: true },
+          { id: 3, name: '编辑', path: '/edit', icon: 'edit', visible: true },
+        ]
+        subMenuLoading.value = false
+        selectedSubMenu.value = null
+        buttons.value = []
+      }, 500)
+    }
+
+    // 选择子菜单时加载按钮
+    const onSubMenuSelected = (rows) => {
+      if (rows.length === 0) {
+        buttons.value = []
+        return
+      }
+      // const selected = rows[0]
+      buttonsLoading.value = true
+      // 模拟API调用
+      setTimeout(() => {
+        buttons.value = [
+          { id: 1, name: '查询', code: 'query', icon: 'search' },
+          { id: 2, name: '新增', code: 'add', icon: 'add' },
+          { id: 3, name: '删除', code: 'delete', icon: 'delete' },
+        ]
+        buttonsLoading.value = false
+      }, 500)
+    }
+
+    // 添加子菜单
+    const addSubMenu = () => {
+      subMenuForm.value = {
+        name: '',
+        path: '',
+        icon: '',
+        visible: true,
+      }
+      editingSubMenu.value = false
+      subMenuDialog.value = true
+    }
+
+    // 编辑子菜单
+    const editSubMenu = (row) => {
+      subMenuForm.value = { ...row }
+      editingSubMenu.value = true
+      subMenuDialog.value = true
+    }
+
+    // 保存子菜单
+    const saveSubMenu = () => {
+      // 这里应该是调用API保存数据
+      if (editingSubMenu.value) {
+        $q.notify({
+          message: '子菜单更新成功',
+          color: 'positive',
+        })
+      } else {
+        $q.notify({
+          message: '子菜单添加成功',
+          color: 'positive',
+        })
+      }
+      subMenuDialog.value = false
+      onMenuSelected(selectedMenu.value) // 刷新数据
+    }
+
+    // 确认删除子菜单
+    const confirmDeleteSubMenu = (row) => {
+      $q.dialog({
+        title: '确认删除',
+        message: `确定要删除子菜单 "${row.name}" 吗？`,
+        cancel: true,
+        persistent: true,
+      }).onOk(() => {
+        // 这里应该是调用API删除数据
+        $q.notify({
+          message: '子菜单删除成功',
+          color: 'positive',
+        })
+        onMenuSelected(selectedMenu.value) // 刷新数据
+      })
+    }
+
+    // 添加按钮
+    const addButton = () => {
+      buttonForm.value = {
+        name: '',
+        code: '',
+        icon: '',
+      }
+      editingButton.value = false
+      buttonDialog.value = true
+    }
+
+    // 编辑按钮
+    const editButton = (row) => {
+      buttonForm.value = { ...row }
+      editingButton.value = true
+      buttonDialog.value = true
+    }
+
+    // 保存按钮
+    const saveButton = () => {
+      // 这里应该是调用API保存数据
+      if (editingButton.value) {
+        $q.notify({
+          message: '按钮更新成功',
+          color: 'positive',
+        })
+      } else {
+        $q.notify({
+          message: '按钮添加成功',
+          color: 'positive',
+        })
+      }
+      buttonDialog.value = false
+      onSubMenuSelected([selectedSubMenu.value]) // 刷新数据
+    }
+
+    // 确认删除按钮
+    const confirmDeleteButton = (row) => {
+      $q.dialog({
+        title: '确认删除',
+        message: `确定要删除按钮 "${row.name}" 吗？`,
+        cancel: true,
+        persistent: true,
+      }).onOk(() => {
+        // 这里应该是调用API删除数据
+        $q.notify({
+          message: '按钮删除成功',
+          color: 'positive',
+        })
+        onSubMenuSelected([selectedSubMenu.value]) // 刷新数据
+      })
+    }
+
+    onMounted(() => {
+      // 初始化时选中第一个菜单
+      if (menuTree.value.length > 0) {
+        selectedMenu.value = menuTree.value[0].id
+        onMenuSelected(selectedMenu.value)
+      }
+    })
+
+    return {
+      menuTree,
+      selectedMenu,
+      subMenus,
+      subMenuLoading,
+      subMenuColumns,
+      selectedSubMenu,
+      buttons,
+      buttonsLoading,
+      buttonColumns,
+      subMenuDialog,
+      editingSubMenu,
+      subMenuForm,
+      buttonDialog,
+      editingButton,
+      buttonForm,
+      onMenuSelected,
+      onSubMenuSelected,
+      addSubMenu,
+      editSubMenu,
+      saveSubMenu,
+      confirmDeleteSubMenu,
+      addButton,
+      editButton,
+      saveButton,
+      confirmDeleteButton,
+    }
+  },
+}
 </script>
+
+<style scoped>
+.full-height {
+  height: calc(100vh - 100px);
+}
+</style>
