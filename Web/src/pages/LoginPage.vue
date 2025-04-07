@@ -91,7 +91,6 @@ export default {
               // 将ArrayBuffer转换为十六进制字符串
               const hashArray = Array.from(new Uint8Array(hashBuffer))
               hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
-              console.log(hashHex) // 输出SHA-1哈希值
 
               const response = await this.$api.post('/api/v{version}/Account/Authenticate', {
                 username: this.username,
@@ -99,7 +98,8 @@ export default {
               })
               // 安全存储token
               localStorage.setItem('authToken', response.data.jwToken)
-              this.$router.push('/')
+              const redirect = this.$route.query.redirect || '/'
+              this.$router.push(redirect)
             })
             .catch((err) =>
               this.$q.notify({
