@@ -4,7 +4,21 @@
     <div class="col-3 q-pr-md">
       <q-card class="full-height">
         <q-card-section class="bg-primary text-white">
-          <div class="text-h6">菜单树</div>
+          <!-- <div class="text-h6">菜单树</div> -->
+          <div class="row items-center">
+            <div class="col text-h6">菜单树</div>
+            <div class="col-auto">
+              <q-btn icon="add" label="添加菜单" color="positive" @click="addMenu" />
+              <q-btn icon="edit" color="red" flat dense @click="editSubMenu(selectedMenu)" />
+              <q-btn
+                icon="delete"
+                color="negative"
+                flat
+                dense
+                @click="confirmDeleteSubMenu(selectedMenu)"
+              />
+            </div>
+          </div>
         </q-card-section>
         <q-card-section>
           <q-tree
@@ -284,6 +298,20 @@ export default {
       }, 500)
     }
 
+    //添加菜单
+    const addMenu = () => {
+      subMenuForm.value = {
+        id: '',
+        name: '',
+        path: '',
+        icon: '',
+        parentMenuDtId: null,
+        depth: 0,
+        hidden: false,
+      }
+      editingSubMenu.value = false
+      subMenuDialog.value = true
+    }
     // 添加子菜单
     const addSubMenu = () => {
       subMenuForm.value = {
@@ -301,7 +329,8 @@ export default {
 
     // 编辑子菜单
     const editSubMenu = (row) => {
-      subMenuForm.value = { ...row }
+      if (row.name) subMenuForm.value = { ...row }
+      else subMenuForm.value = { ...menuTreeComponent.value.getNodeByKey(selectedMenu.value) }
       editingSubMenu.value = true
       subMenuDialog.value = true
     }
@@ -314,11 +343,12 @@ export default {
           .put('/api/v{version}/Menu/UpdateMenu', subMenuForm.value)
           .then(() => {
             $q.notify({
-              message: '子菜单更新成功',
+              message: '菜单更新成功',
               color: 'positive',
             })
             subMenuDialog.value = false
-            onMenuSelected(selectedMenu.value) // 刷新数据
+            if (subMenuForm.value.parentMenuDtId != null) onMenuSelected(selectedMenu.value) // 刷新数据
+            getMenuTree()
           })
           .catch(() => {
             $q.notify({
@@ -331,15 +361,17 @@ export default {
           .post('/api/v{version}/Menu/AddMenu', subMenuForm.value)
           .then(() => {
             $q.notify({
-              message: '子菜单添加成功',
+              message: '菜单添加成功',
               color: 'positive',
             })
             subMenuDialog.value = false
-            onMenuSelected(selectedMenu.value) // 刷新数据
+            if (subMenuForm.value.parentMenuDtId != null)
+              onMenuSelected(selectedMenu.value) // 刷新数据
+            else getMenuTree()
           })
           .catch(() => {
             $q.notify({
-              message: '子菜单添加失败',
+              message: '菜单添加失败',
               color: 'positive',
             })
           })
@@ -350,18 +382,20 @@ export default {
     const confirmDeleteSubMenu = (row) => {
       $q.dialog({
         title: '确认删除',
-        message: `确定要删除子菜单 "${row.name}" 吗？`,
+        message: `确定要删除菜单 "${row.name || menuTreeComponent.value.getNodeByKey(selectedMenu.value).name}" 吗？`,
         cancel: true,
         persistent: true,
       }).onOk(() => {
         api
-          .delete('/api/v{version}/Menu/DeleteMenu', { data: { dtIds: [row.dtId] } })
+          .delete('/api/v{version}/Menu/DeleteMenu', { data: { dtIds: [row.dtId || row] } })
           .then(() => {
             $q.notify({
               message: '菜单删除成功',
               color: 'positive',
             })
-            onMenuSelected(selectedMenu.value) // 刷新数据
+            if (row.name)
+              onMenuSelected(selectedMenu.value) // 刷新数据
+            else getMenuTree()
           })
           .catch(() => {
             $q.notify({
@@ -425,9 +459,12 @@ export default {
       })
     }
 
-    onMounted(async () => {
+    const getMenuTree = async () => {
       const response = await api.get('/api/v{version}/Menu/GetMenuTree')
       menuTree.value = response.data
+    }
+    onMounted(async () => {
+      await getMenuTree()
       // 初始化时选中第一个菜单
       if (menuTree.value.length > 0) {
         selectedMenu.value = menuTree.value[0].dtId
@@ -452,9 +489,11 @@ export default {
       editingButton,
       buttonForm,
       menuTreeComponent,
+      getMenuTree,
       onMenuSelected,
       onSubMenuSelected,
       addSubMenu,
+      addMenu,
       editSubMenu,
       saveSubMenu,
       confirmDeleteSubMenu,
