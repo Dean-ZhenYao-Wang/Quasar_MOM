@@ -22,7 +22,8 @@ namespace MOM.Application.Features.Permission.Queries.GetMenuList
                     Icon = m.Icon,
                     Hidden = m.Hidden,
                     AlwaysShow = m.AlwaysShow,
-                    Depth = m.Depth
+                    Depth = m.Depth,
+                    IsChild = m.Children.Any()
                 }).AsNoTracking().ToListAsync();
         }
     }

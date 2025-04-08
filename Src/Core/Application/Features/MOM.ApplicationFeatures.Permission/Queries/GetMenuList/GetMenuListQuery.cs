@@ -6,6 +6,6 @@ namespace MOM.Application.Features.Permission.Queries.GetMenuList
 {
     public class GetMenuListQuery : IRequest<BaseResult<List<MenuResponse>>>
     {
-        public Guid ParentMenuDtId { get; set; }
+        public Guid? ParentMenuDtId { get; set; }
     }
 }

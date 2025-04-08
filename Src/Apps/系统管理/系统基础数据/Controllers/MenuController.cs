@@ -58,7 +58,6 @@ namespace 系统基础数据.Controllers
             return model;
         }
         [HttpGet]
-        [AllowAnonymous]
         public async Task<BaseResult<List<MenuResponse>>> GetMenuList([FromQuery] GetMenuListQuery command)
         {
             var model = await Mediator.Send(command);
