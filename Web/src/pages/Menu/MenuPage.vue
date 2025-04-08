@@ -4,7 +4,6 @@
     <div class="col-3 q-pr-md">
       <q-card class="full-height">
         <q-card-section class="bg-primary text-white">
-          <!-- <div class="text-h6">菜单树</div> -->
           <div class="row items-center">
             <div class="col text-h6">菜单树</div>
             <div class="col-auto">
@@ -201,25 +200,7 @@ export default {
     const $q = useQuasar()
     const menuTreeComponent = ref(null)
     // 菜单树数据
-    const menuTree = ref([
-      {
-        id: 1,
-        name: '系统管理',
-        children: [
-          { id: 2, name: '用户管理' },
-          { id: 3, name: '角色管理' },
-          { id: 4, name: '菜单管理' },
-        ],
-      },
-      {
-        id: 5,
-        name: '业务管理',
-        children: [
-          { id: 6, name: '订单管理' },
-          { id: 7, name: '客户管理' },
-        ],
-      },
-    ])
+    const menuTree = ref([])
 
     const selectedMenu = ref([])
     const subMenus = ref([])
@@ -246,10 +227,10 @@ export default {
       { name: 'actions', label: '操作', align: 'center' },
     ]
 
-    // 子菜单对话框相关
-    const subMenuDialog = ref(false)
-    const editingSubMenu = ref(false)
-    const subMenuForm = ref({
+    // 菜单对话框相关
+    const menuDialog = ref(false)
+    const editingMenu = ref(false)
+    const menuForm = ref({
       id: '',
       name: '',
       path: '',
@@ -285,7 +266,7 @@ export default {
         buttons.value = []
         return
       }
-      // const selected = rows[0]
+
       buttonsLoading.value = true
       // 模拟API调用
       setTimeout(() => {
@@ -300,7 +281,7 @@ export default {
 
     //添加菜单
     const addMenu = () => {
-      subMenuForm.value = {
+      menuForm.value = {
         id: '',
         name: '',
         path: '',
@@ -309,12 +290,12 @@ export default {
         depth: 0,
         hidden: false,
       }
-      editingSubMenu.value = false
-      subMenuDialog.value = true
+      editingMenu.value = false
+      menuDialog.value = true
     }
     // 添加子菜单
     const addSubMenu = () => {
-      subMenuForm.value = {
+      menuForm.value = {
         id: '',
         name: '',
         path: '',
@@ -323,31 +304,31 @@ export default {
         depth: menuTreeComponent.value.getNodeByKey(selectedMenu.value).depth + 1,
         hidden: false,
       }
-      editingSubMenu.value = false
-      subMenuDialog.value = true
+      editingMenu.value = false
+      menuDialog.value = true
     }
 
-    // 编辑子菜单
-    const editSubMenu = (row) => {
-      if (row.name) subMenuForm.value = { ...row }
-      else subMenuForm.value = { ...menuTreeComponent.value.getNodeByKey(selectedMenu.value) }
-      editingSubMenu.value = true
-      subMenuDialog.value = true
+    // 编辑菜单
+    const editMenu = (row) => {
+      if (row.name) menuForm.value = { ...row }
+      else menuForm.value = { ...menuTreeComponent.value.getNodeByKey(selectedMenu.value) }
+      editingMenu.value = true
+      menuDialog.value = true
     }
 
-    // 保存子菜单
-    const saveSubMenu = () => {
-      if (subMenuForm.value.dtId) {
+    // 保存菜单
+    const saveMenu = () => {
+      if (menuForm.value.dtId) {
         // 这里应该是调用API保存数据
         api
-          .put('/api/v{version}/Menu/UpdateMenu', subMenuForm.value)
+          .put('/api/v{version}/Menu/UpdateMenu', menuForm.value)
           .then(() => {
             $q.notify({
               message: '菜单更新成功',
               color: 'positive',
             })
-            subMenuDialog.value = false
-            if (subMenuForm.value.parentMenuDtId != null) onMenuSelected(selectedMenu.value) // 刷新数据
+            menuDialog.value = false
+            if (menuForm.value.parentMenuDtId != null) onMenuSelected(selectedMenu.value) // 刷新数据
             getMenuTree()
           })
           .catch(() => {
@@ -358,14 +339,14 @@ export default {
           })
       } else {
         api
-          .post('/api/v{version}/Menu/AddMenu', subMenuForm.value)
+          .post('/api/v{version}/Menu/AddMenu', menuForm.value)
           .then(() => {
             $q.notify({
               message: '菜单添加成功',
               color: 'positive',
             })
-            subMenuDialog.value = false
-            if (subMenuForm.value.parentMenuDtId != null)
+            menuDialog.value = false
+            if (menuForm.value.parentMenuDtId != null)
               onMenuSelected(selectedMenu.value) // 刷新数据
             else getMenuTree()
           })
@@ -378,8 +359,8 @@ export default {
       }
     }
 
-    // 确认删除子菜单
-    const confirmDeleteSubMenu = (row) => {
+    // 确认删除菜单
+    const confirmDeleteMenu = (row) => {
       $q.dialog({
         title: '确认删除',
         message: `确定要删除菜单 "${row.name || menuTreeComponent.value.getNodeByKey(selectedMenu.value).name}" 吗？`,
@@ -482,9 +463,9 @@ export default {
       buttons,
       buttonsLoading,
       buttonColumns,
-      subMenuDialog,
-      editingSubMenu,
-      subMenuForm,
+      subMenuDialog: menuDialog,
+      editingSubMenu: editingMenu,
+      subMenuForm: menuForm,
       buttonDialog,
       editingButton,
       buttonForm,
@@ -494,9 +475,9 @@ export default {
       onSubMenuSelected,
       addSubMenu,
       addMenu,
-      editSubMenu,
-      saveSubMenu,
-      confirmDeleteSubMenu,
+      editSubMenu: editMenu,
+      saveSubMenu: saveMenu,
+      confirmDeleteSubMenu: confirmDeleteMenu,
       addButton,
       editButton,
       saveButton,
