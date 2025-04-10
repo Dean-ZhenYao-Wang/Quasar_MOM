@@ -268,15 +268,11 @@ export default {
       }
 
       buttonsLoading.value = true
-      // 模拟API调用
-      setTimeout(() => {
-        buttons.value = [
-          { id: 1, name: '查询', code: 'query', icon: 'search' },
-          { id: 2, name: '新增', code: 'add', icon: 'add' },
-          { id: 3, name: '删除', code: 'delete', icon: 'delete' },
-        ]
+
+      api.get(`/api/v{version}/Menu/GetButtonList?menuDtId=${rows[0].dtId}`).then((res) => {
+        buttons.value = res.data
         buttonsLoading.value = false
-      }, 500)
+      })
     }
 
     //添加菜单

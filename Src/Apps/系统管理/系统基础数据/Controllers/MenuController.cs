@@ -5,12 +5,15 @@ using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.Features.Permission.Commands.AddMenu;
 using MOM.Application.Features.Permission.Commands.DeleteMenu;
 using MOM.Application.Features.Permission.Commands.UpdateMenu;
+using MOM.Application.Features.Permission.Queries.GetButtonList;
 using MOM.Application.Features.Permission.Queries.GetMenuList;
 using MOM.Application.Features.Permission.Queries.GetMenuTree;
 using MOM.Application.Infrastructure;
 using MOM.Application.Infrastructure.Services;
 using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
+using MOM.Domain.Permission;
+using Newtonsoft.Json;
 
 namespace 系统基础数据.Controllers
 {
@@ -61,6 +64,12 @@ namespace 系统基础数据.Controllers
         public async Task<BaseResult<List<MenuResponse>>> GetMenuList([FromQuery] GetMenuListQuery command)
         {
             var model = await Mediator.Send(command);
+            return model;
+        }
+        [HttpGet]
+        public async Task<BaseResult<List<ButtonResponse>>> GetButtonList([FromQuery]Guid menuDtId)
+        {
+            var model = await Mediator.Send(new GetButtonListQuery() { ParentMenuDtId = menuDtId });
             return model;
         }
     }

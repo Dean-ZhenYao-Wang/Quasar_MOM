@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.Wrappers;
+using MOM.Domain.Permission;
 
 namespace MOM.Application.Features.Permission.Queries.GetMenuList
 {

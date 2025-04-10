@@ -934,6 +934,58 @@
           }
         ]
       }
+    },
+    "/api/v{version}/Menu/GetButtonList": {
+      "get": {
+        "tags": [
+          "Menu"
+        ],
+        "parameters": [
+          {
+            "name": "menuDtId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResultOfListOfButtonResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResultOfListOfButtonResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResultOfListOfButtonResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -1126,6 +1178,27 @@
           }
         }
       },
+      "BaseResultOfListOfButtonResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ButtonResponse"
+            },
+            "nullable": true
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
       "BaseResultOfListOfMenuResponse": {
         "type": "object",
         "properties": {
@@ -1225,6 +1298,34 @@
             "items": {
               "$ref": "#/components/schemas/Error"
             }
+          }
+        }
+      },
+      "ButtonResponse": {
+        "required": [
+          "menuDtId",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "dtId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "menuDtId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
