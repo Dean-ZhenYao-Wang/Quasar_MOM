@@ -404,22 +404,21 @@ export default {
 
     // 保存按钮
     const saveButton = () => {
-      if (menuForm.value.dtId) {
+      if (buttonForm.value.dtId) {
         // 这里应该是调用API保存数据
         api
-          .put('/api/v{version}/Menu/UpdateMenu', menuForm.value)
+          .put('/api/v{version}/Menu/UpdateButton', buttonForm.value)
           .then(() => {
             $q.notify({
-              message: '菜单更新成功',
+              message: '按钮更新成功',
               color: 'positive',
             })
-            menuDialog.value = false
-            if (menuForm.value.parentMenuDtId != null) onMenuSelected(selectedMenu.value) // 刷新数据
-            getMenuTree()
+            buttonDialog.value = false
+            onSubMenuSelected(selectedSubMenu.value) // 刷新数据
           })
           .catch(() => {
             $q.notify({
-              message: '子菜单更新失败',
+              message: '按钮更新失败',
               color: 'positive',
             })
           })

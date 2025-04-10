@@ -4,6 +4,6 @@ namespace MOM.Application.DTOs.Menu.Responses
 {
     public class ButtonResponse : ButtonRequest
     {
-
+        public Guid MenuDtId { get; set; }
     }
 }

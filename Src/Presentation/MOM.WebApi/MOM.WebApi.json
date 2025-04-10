@@ -883,6 +883,70 @@
         ]
       }
     },
+    "/api/v{version}/Menu/UpdateButton": {
+      "put": {
+        "tags": [
+          "Menu"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateButtonCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateButtonCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateButtonCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/v{version}/Menu/DeleteMenu": {
       "delete": {
         "tags": [
@@ -1062,11 +1126,11 @@
         ],
         "type": "object",
         "properties": {
-          "dtId": {
+          "menuDtId": {
             "type": "string",
             "format": "uuid"
           },
-          "menuDtId": {
+          "dtId": {
             "type": "string",
             "format": "uuid"
           },
@@ -1395,17 +1459,16 @@
       },
       "ButtonResponse": {
         "required": [
-          "menuDtId",
           "id",
           "name"
         ],
         "type": "object",
         "properties": {
-          "dtId": {
+          "menuDtId": {
             "type": "string",
             "format": "uuid"
           },
-          "menuDtId": {
+          "dtId": {
             "type": "string",
             "format": "uuid"
           },
@@ -1896,6 +1959,29 @@
           "mapToDtId": {
             "type": "string",
             "format": "uuid",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateButtonCommand": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "dtId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
             "nullable": true
           }
         }

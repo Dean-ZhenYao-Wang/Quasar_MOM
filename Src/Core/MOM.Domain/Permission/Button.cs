@@ -10,5 +10,12 @@ namespace MOM.Domain.Permission
         [ForeignKey(nameof(MenuDtId))]
         public required Guid MenuDtId { get; set; }
         public virtual Menu Menu { get; set; }
+
+        public void Update(string id, string name, string? icon)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.Icon = icon;
+        }
     }
 }
