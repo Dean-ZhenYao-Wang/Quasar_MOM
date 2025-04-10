@@ -450,12 +450,21 @@ export default {
         cancel: true,
         persistent: true,
       }).onOk(() => {
-        // 这里应该是调用API删除数据
-        $q.notify({
-          message: '按钮删除成功',
-          color: 'positive',
-        })
-        onSubMenuSelected([selectedSubMenu.value]) // 刷新数据
+        api
+          .delete('/api/v{version}/Menu/DeleteButton', { data: { dtIds: [row.dtId || row] } })
+          .then(() => {
+            $q.notify({
+              message: '按钮删除成功',
+              color: 'positive',
+            })
+            onSubMenuSelected(selectedSubMenu.value) // 刷新数据
+          })
+          .catch(() => {
+            $q.notify({
+              message: '按钮删除失败',
+              color: 'positive',
+            })
+          })
       })
     }
 

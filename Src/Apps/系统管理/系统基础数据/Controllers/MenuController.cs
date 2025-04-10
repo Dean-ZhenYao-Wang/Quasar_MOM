@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.Features.Permission.Commands.AddButton;
 using MOM.Application.Features.Permission.Commands.AddMenu;
+using MOM.Application.Features.Permission.Commands.DeleteButton;
 using MOM.Application.Features.Permission.Commands.DeleteMenu;
 using MOM.Application.Features.Permission.Commands.UpdateButton;
 using MOM.Application.Features.Permission.Commands.UpdateMenu;
@@ -74,6 +75,16 @@ namespace 系统基础数据.Controllers
         }
         [HttpDelete]
         public async Task<BaseResult> DeleteMenu(DeleteMenuCommand command)
+        {
+            var model = await Mediator.Send(command);
+            if (model.Success)
+            {
+                await unitOfWork.SaveChangesAsync();
+            }
+            return model;
+        }
+        [HttpDelete]
+        public async Task<BaseResult> DeleteButton(DeleteButtonCommand command)
         {
             var model = await Mediator.Send(command);
             if (model.Success)
