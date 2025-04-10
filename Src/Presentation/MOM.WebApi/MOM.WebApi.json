@@ -755,6 +755,70 @@
         ]
       }
     },
+    "/api/v{version}/Menu/AddButton": {
+      "post": {
+        "tags": [
+          "Menu"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddButtonCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddButtonCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddButtonCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/v{version}/Menu/UpdateMenu": {
       "put": {
         "tags": [
@@ -990,6 +1054,34 @@
   },
   "components": {
     "schemas": {
+      "AddButtonCommand": {
+        "required": [
+          "menuDtId",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "dtId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "menuDtId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "AddMenuCommand": {
         "required": [
           "id",

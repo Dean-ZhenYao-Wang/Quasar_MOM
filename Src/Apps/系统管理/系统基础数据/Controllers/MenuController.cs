@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Menu.Responses;
+using MOM.Application.Features.Permission.Commands.AddButton;
 using MOM.Application.Features.Permission.Commands.AddMenu;
 using MOM.Application.Features.Permission.Commands.DeleteMenu;
 using MOM.Application.Features.Permission.Commands.UpdateMenu;
@@ -32,6 +33,16 @@ namespace 系统基础数据.Controllers
         }
         [HttpPost]
         public async Task<BaseResult> AddMenu(AddMenuCommand command)
+        {
+            var model = await Mediator.Send(command);
+            if (model.Success)
+            {
+                await unitOfWork.SaveChangesAsync();
+            }
+            return model;
+        }
+        [HttpPost]
+        public async Task<BaseResult> AddButton(AddButtonCommand command)
         {
             var model = await Mediator.Send(command);
             if (model.Success)

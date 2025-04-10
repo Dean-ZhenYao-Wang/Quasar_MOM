@@ -1,4 +1,6 @@
-﻿namespace MOM.Application.DTOs.Menu.Requests
+﻿using MOM.Domain.Permission;
+
+namespace MOM.Application.DTOs.Menu.Requests
 {
     public class ButtonRequest
     {
@@ -10,5 +12,17 @@
         public required string Id { get; set; }
         public required string Name { get; set; }
         public string? Icon { get; set; }
+
+        public Button ToButton()
+        {
+            Button model = new Button()
+            {
+                MenuDtId = MenuDtId,
+                Id = Id,
+                Name = Name,
+                Icon = Icon,
+            };
+            return model;
+        }
     }
 }

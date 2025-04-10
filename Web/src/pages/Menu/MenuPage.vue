@@ -174,7 +174,7 @@
               :rules="[(val) => !!val || '请输入按钮名称']"
             />
             <q-input
-              v-model="buttonForm.code"
+              v-model="buttonForm.id"
               label="权限编码"
               :rules="[(val) => !!val || '请输入权限编码']"
             />
@@ -387,8 +387,9 @@ export default {
     const addButton = () => {
       buttonForm.value = {
         name: '',
-        code: '',
+        id: '',
         icon: '',
+        menuDtId: selectedSubMenu.value[0].dtId,
       }
       editingButton.value = false
       buttonDialog.value = true
@@ -403,20 +404,43 @@ export default {
 
     // 保存按钮
     const saveButton = () => {
-      // 这里应该是调用API保存数据
-      if (editingButton.value) {
-        $q.notify({
-          message: '按钮更新成功',
-          color: 'positive',
-        })
+      if (menuForm.value.dtId) {
+        // 这里应该是调用API保存数据
+        api
+          .put('/api/v{version}/Menu/UpdateMenu', menuForm.value)
+          .then(() => {
+            $q.notify({
+              message: '菜单更新成功',
+              color: 'positive',
+            })
+            menuDialog.value = false
+            if (menuForm.value.parentMenuDtId != null) onMenuSelected(selectedMenu.value) // 刷新数据
+            getMenuTree()
+          })
+          .catch(() => {
+            $q.notify({
+              message: '子菜单更新失败',
+              color: 'positive',
+            })
+          })
       } else {
-        $q.notify({
-          message: '按钮添加成功',
-          color: 'positive',
-        })
+        api
+          .post('/api/v{version}/Menu/AddButton', buttonForm.value)
+          .then(() => {
+            $q.notify({
+              message: '按钮添加成功',
+              color: 'positive',
+            })
+            buttonDialog.value = false
+            onSubMenuSelected(selectedSubMenu.value) // 刷新数据
+          })
+          .catch(() => {
+            $q.notify({
+              message: '按钮添加失败',
+              color: 'positive',
+            })
+          })
       }
-      buttonDialog.value = false
-      onSubMenuSelected([selectedSubMenu.value]) // 刷新数据
     }
 
     // 确认删除按钮
