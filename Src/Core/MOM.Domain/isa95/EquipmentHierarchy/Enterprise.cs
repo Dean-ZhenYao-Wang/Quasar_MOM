@@ -13,8 +13,6 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
             this.EquipmentLevel = Common.EnumType.HierarchyScopeEquipmentLevel.Enterprise;
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:Enterprise;1";
 
         [JsonIgnore]
         public virtual EnterpriseSiteRelationshipCollection Site { get; set; } = new EnterpriseSiteRelationshipCollection();

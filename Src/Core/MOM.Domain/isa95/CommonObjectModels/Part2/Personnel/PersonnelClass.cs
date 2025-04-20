@@ -76,10 +76,11 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.IncludesPropertiesOf.Add(new PersonnelClassIncludesPropertiesOfRelationship(this, target));
         }
 
-        public void Update(string ID, string? description)
+        public void Update(string ID, string? description, Guid? responsibleDtId)
         {
             this.Id = Id;
             this.Description = description;
+            this.ResponsibleDtId = responsibleDtId;
         }
     }
 }

@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MOM.Domain.Common;
 using MOM.Domain.isa95.CommonObjectModels.Part4.WorkDefinition;
+using System;
+using System.Reflection.Emit;
 
 namespace MOM.Infrastructure.Persistence.Contexts.Configurations
 {
@@ -13,13 +15,13 @@ namespace MOM.Infrastructure.Persistence.Contexts.Configurations
         }
     }
 
-    //public class BaseModelConfiguration : IEntityTypeConfiguration<BaseModel>
-    //{
-    //    public void Configure(EntityTypeBuilder<BaseModel> builder)
-    //    {
-    //        builder.UseTpcMappingStrategy();
-    //    }
-    //}
+    public class BaseModelConfiguration : IEntityTypeConfiguration<BaseEntity>
+    {
+        public void Configure(EntityTypeBuilder<BaseEntity> builder)
+        {
+            builder.UseTpcMappingStrategy();
+        }
+    }
     public class BasicRelationshipConfiguration : IEntityTypeConfiguration<BasicRelationship>
     {
         public void Configure(EntityTypeBuilder<BasicRelationship> builder)

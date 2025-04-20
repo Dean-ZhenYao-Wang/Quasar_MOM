@@ -647,6 +647,198 @@
         ]
       }
     },
+    "/api/v{version}/Department/AddDepartment": {
+      "post": {
+        "tags": [
+          "Department"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDepartmentCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDepartmentCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDepartmentCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v{version}/Department/DeleteDepartment": {
+      "delete": {
+        "tags": [
+          "Department"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDepartmentCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDepartmentCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDepartmentCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v{version}/Department/UpdateDepartment": {
+      "delete": {
+        "tags": [
+          "Department"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepartmentCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepartmentCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepartmentCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/v{version}/Menu/GetMenuTree": {
       "get": {
         "tags": [
@@ -1127,7 +1319,7 @@
         ]
       }
     },
-    "/api/v{version}/Menu/GetButtonList": {
+    "/api/v{version}/Menu/GetButtonList/{menuDtId}": {
       "get": {
         "tags": [
           "Menu"
@@ -1135,7 +1327,8 @@
         "parameters": [
           {
             "name": "menuDtId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -1205,6 +1398,32 @@
             "type": "string"
           },
           "icon": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AddDepartmentCommand": {
+        "required": [
+          "responsibleDtId",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "responsibleDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "id": {
+            "type": "string"
+          },
+          "description": {
             "type": "string",
             "nullable": true
           }
@@ -1560,6 +1779,18 @@
         }
       },
       "DeleteButtonCommand": {
+        "type": "object",
+        "properties": {
+          "dtIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "DeleteDepartmentCommand": {
         "type": "object",
         "properties": {
           "dtIds": {
@@ -2062,6 +2293,32 @@
           }
         }
       },
+      "UpdateDepartmentCommand": {
+        "required": [
+          "responsibleDtId",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "dtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "responsibleDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "UpdateMenuCommand": {
         "required": [
           "id",
@@ -2186,6 +2443,9 @@
     },
     {
       "name": "Person"
+    },
+    {
+      "name": "Department"
     },
     {
       "name": "Menu"

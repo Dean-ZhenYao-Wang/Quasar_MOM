@@ -31,6 +31,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddHttpContextAccessor();
+
+var enterpriseSettings = builder.Configuration.GetSection(nameof(EnterpriseSettings)).Get<EnterpriseSettings>();
+builder.Services.AddSingleton(enterpriseSettings);
+
+
 bool useInMemoryDatabase = builder.Configuration.GetValue<bool>("UseInMemoryDatabase");
 builder.Services.AddPersistenceInfrastructure(builder.Configuration, useInMemoryDatabase);
 builder.Services.AddFileManagerInfrastructure(builder.Configuration, useInMemoryDatabase);
@@ -159,12 +164,12 @@ using (var scope = app.Services.CreateScope())
 
     if (!useInMemoryDatabase)
     {
-        await services.GetRequiredService<ApplicationDbContext>().Database.MigrateAsync();
-        await services.GetRequiredService<FileManagerDbContext>().Database.MigrateAsync();
+        //await services.GetRequiredService<ApplicationDbContext>().Database.MigrateAsync();
+        //await services.GetRequiredService<FileManagerDbContext>().Database.MigrateAsync();
     }
 
     //Seed Data
-    await DefaultData.SeedAsync(services.GetRequiredService<ApplicationDbContext>());
+    await DefaultData.SeedAsync(services.GetRequiredService<ApplicationDbContext>(), enterpriseSettings);
 }
 app.UseCustomLocalization();
 app.UseAnyCors();
@@ -182,14 +187,3 @@ app.UseSerilogRequestLogging();
 
 app.Run();
 
-public partial class Program
-{
-
-    // 检测是否在编译过程中
-    static bool IsCompileTime()
-    {
-        // 通过环境变量或进程名判断
-        return Environment.GetEnvironmentVariable("MSBUILD") != null
-               || Environment.GetEnvironmentVariable("DOTNET_BUILD") != null;
-    }
-}

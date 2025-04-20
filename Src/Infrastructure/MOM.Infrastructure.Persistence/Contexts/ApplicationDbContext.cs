@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Infrastructure.Services;
+using MOM.Domain.Common.Relationship.isa95.Person;
+using MOM.Domain.Common.Relationship.isa95.PersonnelClass;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
+using MOM.Domain.isa95.EquipmentHierarchy;
 using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Extensions;
 using System.Threading;
@@ -12,7 +15,9 @@ namespace MOM.Infrastructure.Persistence.Contexts
     {
         #region Personnel
         public DbSet<PersonnelClass> PersonnelClasses { get; set; }
+        public DbSet<PersonnelClassIncludesPropertiesOfRelationship> PersonnelClassIncludesPropertiesOfRelationships { get; set; }
         public DbSet<Person> Person { get; set; }
+        public DbSet<PersonDefinedByRelationship> PersonDefinedByRelationships { get; set; }
         #endregion Personnel
         #region Permission
         public DbSet<AvailablePermission> AvailablePermissions { get; set; }
@@ -20,6 +25,7 @@ namespace MOM.Infrastructure.Persistence.Contexts
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         #endregion
+        public DbSet<Enterprise> Enterprises { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {
             ChangeTracker.ApplyAuditing(authenticatedUser);

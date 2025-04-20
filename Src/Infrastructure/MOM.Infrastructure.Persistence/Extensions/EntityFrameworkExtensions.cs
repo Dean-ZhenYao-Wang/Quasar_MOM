@@ -63,20 +63,7 @@ namespace MOM.Infrastructure.Persistence.Extensions
                 property.SetColumnType("decimal(18,6)");
             }
             // 应用全局过滤条件
-
-            foreach (var entityType in builder.Model.GetEntityTypes())
-            {
-                // 如果实体有IsDeleted属性，则添加过滤条件
-                if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
-                {
-                    var isDeletedProperty = entityType.FindProperty("IsDelete");
-                    if (isDeletedProperty != null)
-                    {
-                        builder.Entity(entityType.ClrType)
-                            .HasQueryFilter(ConvertExpression<BaseEntity>(e => e.IsDelete == false, entityType.ClrType));
-                    }
-                }
-            }
+            builder.Entity<BaseEntity>().HasQueryFilter(e => !e.IsDelete);
 
             builder.ApplyConfigurationsFromAssembly(context.GetType().Assembly);
         }

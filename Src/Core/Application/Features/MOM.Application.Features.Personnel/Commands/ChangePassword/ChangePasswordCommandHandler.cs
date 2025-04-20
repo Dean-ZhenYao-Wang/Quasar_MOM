@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using MOM.Application.Infrastructure.Extensions;
 using MOM.Application.Infrastructure.Services;
+using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Personnel.Commands.ChangePassword
 {
-    public class ChangePasswordCommandHandler(ITranslator translator, IPersonRepository personRepository, IAuthenticatedUserService authenticated) : IRequestHandler<ChangePasswordCommand, BaseResult>
+    public class ChangePasswordCommandHandler(ITranslator translator, IPersonRepository personRepository, IAuthenticatedUserService authenticated,IUnitOfWork unitOfWork) : IRequestHandler<ChangePasswordCommand, BaseResult>
     {
         public async Task<BaseResult> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
         {
@@ -18,6 +19,7 @@ namespace MOM.Application.Features.Personnel.Commands.ChangePassword
                 user.PassWord = newPassWord;
                 user.SecurityStamp = Guid.NewGuid().ToString();
             }
+            await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }
     }

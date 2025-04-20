@@ -9,7 +9,7 @@ namespace MOM.Application.Features.Personnel.Commands.DeletePerson
     {
         public async Task<BaseResult> Handle(DeletePersonCommand request, CancellationToken cancellationToken)
         {
-            await personRepository.ExecuteUpdateAsync(m => request.DtIds.Contains(m.DtId), m => m.SetProperty(m => m.IsDelete, true));
+            await personRepository.DeleteAsync(request.DtIds);
             return BaseResult.Ok();
         }
     }

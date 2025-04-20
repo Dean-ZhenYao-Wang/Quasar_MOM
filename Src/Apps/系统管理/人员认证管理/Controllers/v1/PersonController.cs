@@ -13,13 +13,13 @@ using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 
-namespace 人员认证管理.Controllers
+namespace 人员认证管理.Controllers.v1
 {
     /// <summary>
     /// 人员管理
     /// </summary>
     [ApiVersion("1")]
-    public sealed class PersonController(IUnitOfWork unitOfWork) : BaseApiController
+    public sealed class PersonController : BaseApiController
     {
         /// <summary>
         /// 获取负责人下拉列表数据，此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
@@ -49,10 +49,6 @@ namespace 人员认证管理.Controllers
         public async Task<BaseResult> AddPerson(AddPersonCommand request)//属性尤其是从人员类继承的属性（mapsTo）
         {
             var model = await Mediator.Send(request);
-            if (model.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return model;
         }
         /// <summary>
@@ -74,10 +70,6 @@ namespace 人员认证管理.Controllers
         public async Task<BaseResult> DeletePerson(DeletePersonCommand command)
         {
             var deleteResoult = await Mediator.Send(command);
-            if (deleteResoult.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return deleteResoult;
         }
         /// <summary>
@@ -89,10 +81,6 @@ namespace 人员认证管理.Controllers
         public async Task<BaseResult> UpdatePerson(UpdatePersonCommand command)//属性尤其是从人员类继承的属性（mapsTo）
         {
             var updateResoult = await Mediator.Send(command);
-            if (updateResoult.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return updateResoult;
         }
     }

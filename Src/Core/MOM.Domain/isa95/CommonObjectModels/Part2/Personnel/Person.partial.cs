@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MOM.Domain.Common.EnumType;
 using MOM.Domain.Permission;
+using System;
 using System.Text.Json.Serialization;
 
 namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
@@ -61,7 +62,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             }
         }
 
-        public void Update(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? departmentDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null)
+        public void Update(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? departmentDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null, IEnumerable<PersonProperty> properties = null)
         {
             this.Id = Id;
             this.WorkStatus = workStatus;
@@ -89,6 +90,50 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
                 }
             }
 
+            var haveDtIds = this.HasValuesOf.Select(m => m.TargetId).ToList();
+            人员特征列表在修改时的增删改处理(properties, haveDtIds);
+        }
+
+        private void 人员特征列表在修改时的增删改处理(IEnumerable<PersonProperty> properties,  List<Guid> haveDtIds)
+        {
+            var requestDtIds = properties.Select(m => m.DtId).ToList();
+            var notHaveDtIds = requestDtIds.Except(haveDtIds);
+            var deleteDtIds = haveDtIds.Except(requestDtIds);
+            //已有的修改
+            foreach (var m in properties.Where(m => haveDtIds.Contains(m.DtId)))
+            {
+                var property = this.HasValuesOf.Where(m => m.TargetId.Equals(m.DtId)).FirstOrDefault().Target;
+                property.Update(m.Id, m.Description, m.Value, m.ValueUnitOfMeasure);
+                PropertyContiansUpdate(m, property);
+            }
+            //没有的添加
+            foreach (var m in properties.Where(m => notHaveDtIds.Contains(m.DtId)))
+            {
+                this.HasValuesOfAddTarget(m);
+            }
+            //删除的删除
+            this.HasValuesOf.Remove(deleteDtIds);
+        }
+        private void PropertyContiansUpdate(PersonProperty propertyViewModel, PersonProperty property)
+        {
+            var havePropertyDtIds = property.Contains.Select(m => m.TargetId).ToList();
+            var requestPropertyDtIds = propertyViewModel.Contains.Select(m => m.TargetId).ToList();
+            var notPropertyHaveDtIds = requestPropertyDtIds.Except(havePropertyDtIds);
+            var deletePropertyDtIds = havePropertyDtIds.Except(requestPropertyDtIds);
+            //已有的修改
+            foreach (var pm in propertyViewModel.Contains.Where(c => havePropertyDtIds.Contains(c.TargetId)))
+            {
+                var childProperty = property.Contains.Where(pc => pc.TargetId.Equals(pm.TargetId)).FirstOrDefault().Target;
+                childProperty.Update(pm.Target.Id, pm.Target.Description, pm.Target.Value, pm.Target.ValueUnitOfMeasure);
+                PropertyContiansUpdate(pm.Target, childProperty);
+            }
+            //没有的添加
+            foreach (var p in propertyViewModel.Contains.Where(c => notPropertyHaveDtIds.Contains(c.TargetId)))
+            {
+                property.ContainsAddTarget(p.Target);
+            }
+            //删除的删除
+            property.Contains.Remove(deletePropertyDtIds);
         }
         /// <summary>
         /// 所属人员类绑定

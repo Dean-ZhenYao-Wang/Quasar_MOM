@@ -1,5 +1,6 @@
 ﻿using MOM.Domain.Common;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MOM.Domain.Permission
 {
@@ -17,8 +18,8 @@ namespace MOM.Domain.Permission
         /// 是否总是显示
         /// </summary>
         public bool AlwaysShow { get; set; }
-        public List<Menu> Children { get; set; } = new();
-        public List<Button> Buttons { get; set; } = new();
+        public virtual List<Menu> Children { get; set; } = new();
+        public virtual List<Button> Buttons { get; set; } = new();
         /// <summary>
         /// 第几层的菜单
         /// </summary>

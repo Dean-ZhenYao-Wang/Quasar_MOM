@@ -18,4 +18,8 @@
     <ProjectReference Include="..\MOM.Application.Wrappers\MOM.Application.Wrappers.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Department\Responses\" />
+  </ItemGroup>
+
 </Project>

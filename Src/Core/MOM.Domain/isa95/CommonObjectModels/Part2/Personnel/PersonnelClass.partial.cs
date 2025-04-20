@@ -5,6 +5,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
     public partial class PersonnelClass
     {
         public string? Description { get; set; }
+        /// <summary>
+        /// 负责人DtId
+        /// </summary>
+        public Guid? ResponsibleDtId { get; set; }
 
         public PersonnelClass(string Id, string? description = null, HierarchyScope? hierarchyScope = null) : this()
         {
@@ -28,6 +32,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.HasPropertiesOf.Clear();
             this.IsDelete = true;
         }
-        public List<Permission.Permission> Permissions { get; set; }
+        public virtual List<Permission.Permission> Permissions { get; set; }
     }
 }

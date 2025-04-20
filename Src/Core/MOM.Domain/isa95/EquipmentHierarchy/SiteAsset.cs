@@ -12,9 +12,6 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
         {
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:SiteAsset;1";
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as SiteAsset);

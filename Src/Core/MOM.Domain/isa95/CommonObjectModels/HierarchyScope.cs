@@ -13,9 +13,6 @@ namespace MOM.Domain.isa95.CommonObjectModels
         {
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:HierarchyScope;1";
-
         [JsonPropertyName("equipmentID")]
         public string? EquipmentID { get; set; }
 

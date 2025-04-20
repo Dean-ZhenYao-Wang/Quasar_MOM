@@ -22,25 +22,30 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MOM.Domain.Common.BasicRelationship", b =>
+            modelBuilder.Entity("MOM.Domain.Common.BaseEntity", b =>
                 {
                     b.Property<Guid>("DtId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasAnnotation("Relational:JsonPropertyName", "dtId");
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Id")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasAnnotation("Relational:JsonPropertyName", "name");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("SourceId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasAnnotation("Relational:JsonPropertyName", "sourceId");
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
-                    b.Property<Guid>("TargetId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasAnnotation("Relational:JsonPropertyName", "targetId");
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("DtId");
 
@@ -72,106 +77,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("AvailablePermissions");
                 });
 
-            modelBuilder.Entity("MOM.Domain.Permission.Button", b =>
-                {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MenuDtId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DtId");
-
-                    b.HasIndex("MenuDtId");
-
-                    b.ToTable("Buttons");
-                });
-
-            modelBuilder.Entity("MOM.Domain.Permission.Menu", b =>
-                {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("AlwaysShow")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Depth")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Hidden")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ParentMenuDtId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DtId");
-
-                    b.HasIndex("ParentMenuDtId");
-
-                    b.ToTable("Menus");
-                });
-
             modelBuilder.Entity("MOM.Domain.Permission.Permission", b =>
                 {
                     b.Property<Guid>("DtId")
@@ -192,20 +97,86 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("Permissions");
                 });
 
+            modelBuilder.Entity("MOM.Domain.Common.BasicRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
+
+                    b.Property<Guid?>("SourceId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasAnnotation("Relational:JsonPropertyName", "sourceId");
+
+                    b.Property<Guid>("TargetId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasAnnotation("Relational:JsonPropertyName", "targetId");
+
+                    b.ToTable((string)null);
+                });
+
+            modelBuilder.Entity("MOM.Domain.Permission.Button", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("MenuDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("MenuDtId");
+
+                    b.ToTable("Buttons");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Permission.Menu", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
+
+                    b.Property<bool>("AlwaysShow")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Depth")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Hidden")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ParentMenuDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("ParentMenuDtId");
+
+                    b.ToTable("Menus");
+                });
+
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -218,36 +189,17 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "equipmentLevel");
 
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("ResponsibleDtId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
 
                     b.HasIndex("ResponsibleDtId");
 
                     b.ToTable("HierarchyScope", (string)null);
-
-                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<int?>("AssemblyRelationship")
                         .HasColumnType("int")
@@ -257,12 +209,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "assemblyType");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -271,52 +217,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
 
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
-
                     b.ToTable("MaterialClass");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClassProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("PropertyType")
                         .HasColumnType("int")
@@ -330,16 +240,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("MaterialClassProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<int?>("AssemblyRelationship")
                         .HasColumnType("int")
@@ -349,12 +255,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "assemblyType");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -362,19 +262,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ModelNumber")
                         .IsRequired()
@@ -408,39 +295,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("float")
                         .HasAnnotation("Relational:JsonPropertyName", "weight");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("MaterialDefinition");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("PropertyType")
                         .HasColumnType("int")
@@ -453,17 +317,13 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<string>("ValueUnitOfMeasure")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
-
-                    b.HasKey("DtId");
 
                     b.ToTable("MaterialDefinitionProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<int?>("AssemblyRelationship")
                         .HasColumnType("int")
@@ -472,12 +332,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<int?>("AssemblyType")
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "assemblyType");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -490,19 +344,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double?>("Quantity")
                         .HasColumnType("float")
@@ -524,39 +365,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "storageLocationType");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("MaterialLot");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLotProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)")
@@ -566,16 +384,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("MaterialLotProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<int?>("AssemblyRelationship")
                         .HasColumnType("int")
@@ -584,12 +398,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<int?>("AssemblyType")
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "assemblyType");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -602,19 +410,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double?>("Quantity")
                         .HasColumnType("float")
@@ -636,103 +431,34 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "storageLocationType");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("MaterialSublot");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
 
                     b.ToTable("OperationalLocation");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
 
                     b.ToTable("OperationalLocationClass");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClassProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<int?>("PropertyType")
                         .HasColumnType("int")
@@ -746,39 +472,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("OperationalLocationClassProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)")
@@ -788,22 +491,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("OperationalLocationProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.EquipmentSpecification", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("EquipmentUse")
                         .HasColumnType("nvarchar(max)")
@@ -812,19 +505,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("OperationalLocation")
                         .HasColumnType("nvarchar(max)")
@@ -842,35 +522,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "quantityUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("EquipmentSpecification");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.EquipmentSpecificationProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<double?>("Quantity")
                         .HasColumnType("float")
@@ -888,16 +545,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("EquipmentSpecificationProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.MaterialSpecification", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<int?>("AssemblyRelationship")
                         .HasColumnType("int")
@@ -907,28 +560,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "assemblyType");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("MaterialUse")
                         .HasColumnType("int")
@@ -950,35 +584,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "storageLocationType");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("MaterialSpecification");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.MaterialSpecificationProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<double?>("Quantity")
                         .HasColumnType("float")
@@ -996,22 +607,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("MaterialSpecificationProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.ParameterSpecification", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -1021,19 +622,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
 
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "value");
@@ -1042,39 +630,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("ParameterSpecification");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.PersonnelSpecification", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("OperationalLocation")
                         .HasColumnType("nvarchar(max)")
@@ -1096,35 +661,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "quantityUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("PersonnelSpecification");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.PersonnelSpecificationProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<double?>("Quantity")
                         .HasColumnType("float")
@@ -1142,39 +684,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("PersonnelSpecificationProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.PhysicalAssetSpecification", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PhysicalAssetUse")
                         .HasColumnType("nvarchar(max)")
@@ -1196,35 +715,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "quantityUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("PhysicalAssetSpecification");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.PhysicalAssetSpecificationProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<double?>("Quantity")
                         .HasColumnType("float")
@@ -1242,82 +738,26 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("PhysicalAssetSpecificationProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest.EvaluatedProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.ToTable("EvaluatedProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest.OperationsTestRequirement", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.ToTable("OperationsTestRequirement");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestSpecification", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<DateTime?>("EffectiveEndDate")
                         .HasColumnType("datetime2")
@@ -1330,19 +770,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("PhysicalSample")
                         .HasColumnType("int")
@@ -1368,39 +795,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "version");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("TestSpecification");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestSpecificationCriteria", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Expression")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "expression");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("OtherResult")
                         .HasColumnType("nvarchar(max)")
@@ -1414,39 +818,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "sequence");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("TestSpecificationCriteria");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestSpecificationProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)")
@@ -1456,82 +837,26 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("TestSpecificationProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestableObject", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.ToTable("TestableObject");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestableObjectProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.ToTable("TestableObjectProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -1545,19 +870,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("LockoutDateTime")
                         .HasColumnType("datetime2");
@@ -1592,39 +904,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<int>("WorkStatus")
                         .HasColumnType("int");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("Person");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)")
@@ -1634,22 +923,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("PersonProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -1658,51 +937,18 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
 
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
+                    b.Property<Guid?>("ResponsibleDtId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
 
                     b.ToTable("PersonnelClasses");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("PropertyType")
                         .HasColumnType("int")
@@ -1716,22 +962,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("PersonnelClassProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<DateTime?>("DateOfPurchase")
                         .HasColumnType("datetime2")
@@ -1763,22 +999,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "factoryNumber");
 
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal?>("InitialPrice")
                         .HasColumnType("decimal(18,2)")
                         .HasAnnotation("Relational:JsonPropertyName", "initialPrice");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ModelNumber")
                         .IsRequired()
@@ -1816,8 +1039,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasAnnotation("Relational:JsonPropertyName", "warrantyPeriod");
 
-                    b.HasKey("DtId");
-
                     b.HasIndex("ResponsibleDtId");
 
                     b.HasIndex("UseDepartmentDtId");
@@ -1827,15 +1048,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -1845,52 +1058,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "equipmentLevel");
 
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
-
                     b.ToTable("EquipmentClass");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClassProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("PropertyType")
                         .HasColumnType("int")
@@ -1904,39 +1081,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("EquipmentClassProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)")
@@ -1946,22 +1100,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("EquipmentProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("FixedAssetID")
                         .HasColumnType("nvarchar(max)")
@@ -1970,19 +1114,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<string>("HierarchyScope")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PhysicalLocation")
                         .HasColumnType("nvarchar(max)")
@@ -1996,22 +1127,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "vendorID");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("PhysicalAsset");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -2021,55 +1142,19 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
 
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Manufacturer")
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "manufacturer");
-
-                    b.HasKey("DtId");
 
                     b.ToTable("PhysicalAssetClass");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClassProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("PropertyType")
                         .HasColumnType("int")
@@ -2083,39 +1168,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("PhysicalAssetClassProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)")
@@ -2125,35 +1187,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("PhysicalAssetProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.ProcessSegment.MaterialSegmentSpecificationProperty", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<double?>("Quantity")
                         .HasColumnType("float")
@@ -2171,22 +1210,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "valueUnitOfMeasure");
 
-                    b.HasKey("DtId");
-
                     b.ToTable("MaterialSegmentSpecificationProperty");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part4.WorkDefinition.WorkDefinition", b =>
                 {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Duration")
                         .HasColumnType("nvarchar(max)")
@@ -2200,19 +1229,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
 
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("PublishedDate")
                         .HasColumnType("datetime2")
                         .HasAnnotation("Relational:JsonPropertyName", "publishedDate");
@@ -2224,8 +1240,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<int?>("WorkType")
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "workType");
-
-                    b.HasKey("DtId");
 
                     b.ToTable("WorkDefinition");
                 });
@@ -3313,7 +2327,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TargetId");
 
-                    b.ToTable("PersonDefinedByRelationship");
+                    b.ToTable("PersonDefinedByRelationships");
                 });
 
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Person.PersonHasValuesOfRelationship", b =>
@@ -3407,7 +2421,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TargetId");
 
-                    b.ToTable("PersonnelClassIncludesPropertiesOfRelationship");
+                    b.ToTable("PersonnelClassIncludesPropertiesOfRelationships");
                 });
 
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PersonnelClassProperty.PersonnelClassPropertyContainsRelationship", b =>
@@ -4178,6 +3192,17 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("Person");
                 });
 
+            modelBuilder.Entity("MOM.Domain.Permission.Permission", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "PersonnelClass")
+                        .WithMany("Permissions")
+                        .HasForeignKey("PersonnelClassDtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonnelClass");
+                });
+
             modelBuilder.Entity("MOM.Domain.Permission.Button", b =>
                 {
                     b.HasOne("MOM.Domain.Permission.Menu", "Menu")
@@ -4196,17 +3221,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasForeignKey("ParentMenuDtId");
 
                     b.Navigation("ParentMenu");
-                });
-
-            modelBuilder.Entity("MOM.Domain.Permission.Permission", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "PersonnelClass")
-                        .WithMany("Permissions")
-                        .HasForeignKey("PersonnelClassDtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PersonnelClass");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", b =>
@@ -6366,114 +5380,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasForeignKey("WorkDefinitionDtId");
 
                     b.Navigation("Target");
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Area", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.Area", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Enterprise", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.Enterprise", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Site", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.Site", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.WorkUnit", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.WorkUnit", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.ProcessCell", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.ProcessCell", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.ProductionLine", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.ProductionLine", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.ProductionUnit", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.ProductionUnit", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.StorageZone", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.StorageZone", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.StorageUnit", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.WorkUnit", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.StorageUnit", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Unit", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.WorkUnit", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.Unit", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.WorkCell", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.WorkUnit", null)
-                        .WithOne()
-                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.WorkCell", "DtId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MOM.Domain.Permission.Menu", b =>

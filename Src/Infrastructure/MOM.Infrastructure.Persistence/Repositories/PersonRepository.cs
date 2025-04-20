@@ -1,9 +1,11 @@
-﻿using Microsoft.CodeAnalysis.Text;
+﻿using Azure.Core;
+using Microsoft.CodeAnalysis.Text;
 using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.DTOs.Personnel.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
+using MOM.Domain.Common.Relationship.isa95.Person;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
@@ -61,6 +63,21 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .Include(m => m.DefinedBy)
                 .ThenInclude(d => d.Target)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task DeleteAsync(Guid[] dtIds)
+        {
+            using var tran = dbContext.Database.BeginTransaction();
+            try
+            {
+                await this.ExecuteUpdateAsync(m => dtIds.Contains(m.DtId), m => m.SetProperty(m => m.IsDelete, true));
+                await dbContext.Set<PersonDefinedByRelationship>().Where(m => dtIds.Contains(m.TargetId)).ExecuteUpdateAsync(m => m.SetProperty(p => p.IsDelete, true));
+                await tran.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await tran.RollbackAsync();
+            }
         }
     }
 }

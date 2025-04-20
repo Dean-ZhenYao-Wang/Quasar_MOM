@@ -7,6 +7,7 @@ using MOM.Application.DTOs.Account.Responses;
 using MOM.Application.Features.Personnel.Commands.UpdatePerson;
 using MOM.Application.Features.Personnel.Settings;
 using MOM.Application.Infrastructure.Extensions;
+using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
@@ -21,7 +22,7 @@ using static OrchardCore.OrchardCoreConstants;
 
 namespace MOM.Application.Features.Personnel.Commands.Authentication
 {
-    public class AuthenticationCommandHandler(IPersonRepository personRepository, ITranslator translator, JwtSettings jwtSettings) : IRequestHandler<AuthenticationCommand, BaseResult<AuthenticationResponse>>
+    public class AuthenticationCommandHandler(IPersonRepository personRepository, ITranslator translator, JwtSettings jwtSettings, IUnitOfWork unitOfWork) : IRequestHandler<AuthenticationCommand, BaseResult<AuthenticationResponse>>
     {
         public async Task<BaseResult<AuthenticationResponse>> Handle(AuthenticationCommand request, CancellationToken cancellationToken)
         {
@@ -57,9 +58,12 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
                 }
             }
             user.SecurityStamp = Guid.NewGuid().ToString();
-            return await GetAuthenticationResponse(user);
+
+            var returnModel = GetAuthenticationResponse(user);
+            await unitOfWork.SaveChangesAsync();
+            return returnModel;
         }
-        private async Task<AuthenticationResponse> GetAuthenticationResponse(Person user)
+        private AuthenticationResponse GetAuthenticationResponse(Person user)
         {
             var jwToken = GenerateJwtToken();
 

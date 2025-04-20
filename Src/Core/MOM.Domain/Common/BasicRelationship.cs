@@ -54,15 +54,8 @@ namespace MOM.Domain.Common
     /// }
     /// </code>
     /// </example>
-    public abstract class BasicRelationship
+    public abstract class BasicRelationship : BaseEntity
     {
-        /// <summary>
-        /// 关系的唯一标识符。该属性存在于所有关系中。
-        /// </summary>
-        [JsonPropertyName("dtId")]
-        [Key]
-        public Guid DtId { get; set; }
-
         /// <summary>
         /// 目标数字孪生的唯一标识符。该属性存在于所有关系中。
         /// </summary>

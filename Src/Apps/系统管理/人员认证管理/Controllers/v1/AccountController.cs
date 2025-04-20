@@ -8,20 +8,16 @@ using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
 
-namespace 人员认证管理.Controllers
+namespace 人员认证管理.Controllers.v1
 {
     [ApiVersion("1")]
-    public class AccountController(IUnitOfWork unitOfWork) : BaseApiController
+    public class AccountController : BaseApiController
     {
         [HttpPost]
         [AllowAnonymous]
         public async Task<BaseResult<AuthenticationResponse>> Authenticate(AuthenticationCommand command)
         {
             var model = await Mediator.Send(command);
-            if (model.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return model;
         }
         /// <summary>
@@ -33,10 +29,6 @@ namespace 人员认证管理.Controllers
         public async Task<BaseResult> ChangePassword(ChangePasswordCommand command)
         {
             var result = await Mediator.Send(command);
-            if (result.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return result;
         }
     }

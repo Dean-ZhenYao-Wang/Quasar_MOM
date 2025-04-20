@@ -18,10 +18,10 @@ using MOM.Application.Wrappers;
 using MOM.Domain.Permission;
 using Newtonsoft.Json;
 
-namespace 系统基础数据.Controllers
+namespace 系统基础数据.Controllers.v1
 {
     [ApiVersion("1")]
-    public sealed class MenuController(IUnitOfWork unitOfWork, IAuthenticatedUserService authenticatedUser, ITranslator translator) : BaseApiController
+    public sealed class MenuController : BaseApiController
     {
         /// <summary>
         /// 菜单管理页面获得所有菜单树
@@ -37,70 +37,48 @@ namespace 系统基础数据.Controllers
         public async Task<BaseResult> AddMenu(AddMenuCommand command)
         {
             var model = await Mediator.Send(command);
-            if (model.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return model;
         }
         [HttpPost]
         public async Task<BaseResult> AddButton(AddButtonCommand command)
         {
             var model = await Mediator.Send(command);
-            if (model.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return model;
         }
         [HttpPut]
         public async Task<BaseResult> UpdateMenu(UpdateMenuCommand command)
         {
             var model = await Mediator.Send(command);
-            if (model.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return model;
         }
         [HttpPut]
         public async Task<BaseResult> UpdateButton(UpdateButtonCommand command)
         {
             var model = await Mediator.Send(command);
-            if (model.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return model;
         }
         [HttpDelete]
         public async Task<BaseResult> DeleteMenu(DeleteMenuCommand command)
         {
             var model = await Mediator.Send(command);
-            if (model.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return model;
         }
         [HttpDelete]
         public async Task<BaseResult> DeleteButton(DeleteButtonCommand command)
         {
             var model = await Mediator.Send(command);
-            if (model.Success)
-            {
-                await unitOfWork.SaveChangesAsync();
-            }
             return model;
         }
         [HttpGet]
         public async Task<BaseResult<List<MenuResponse>>> GetMenuList([FromQuery] GetMenuListQuery command)
         {
+
             var model = await Mediator.Send(command);
             return model;
         }
         [HttpGet]
-        public async Task<BaseResult<List<ButtonResponse>>> GetButtonList([FromQuery]Guid menuDtId)
+        [Route("{menuDtId}")]
+        public async Task<BaseResult<List<ButtonResponse>>> GetButtonList(Guid menuDtId)
         {
             var model = await Mediator.Send(new GetButtonListQuery() { ParentMenuDtId = menuDtId });
             return model;
