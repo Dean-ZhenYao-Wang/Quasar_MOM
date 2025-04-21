@@ -11,12 +11,12 @@ namespace MOM.Domain.Permission
 {
     public static class MenuException
     {
-        public static MenuTreeNodeResponse ToMenuTreeNodeResponse(this Menu menu, Guid? parentMenuDtId)
+        public static MenuTreeNodeResponse ToMenuTreeNodeResponse(this Menu menu)
         {
             return new MenuTreeNodeResponse
             {
                 DtId = menu.DtId,
-                ParentMenuDtId = parentMenuDtId,
+                ParentMenuDtId = menu.ParentMenuDtId,
                 Id = menu.Id,
                 Name = menu.Name,
                 Path = menu.Path,
@@ -25,7 +25,7 @@ namespace MOM.Domain.Permission
                 Hidden = menu.Hidden,
                 AlwaysShow = menu.AlwaysShow,
                 Depth = menu.Depth,
-                Children = menu.Children.Select(c => c.ToMenuTreeNodeResponse(menu.DtId)).OrderBy(c => c.Id).ToList(),
+                Children = menu.Children.Select(c => c.ToMenuTreeNodeResponse()).OrderBy(c => c.Id).ToList(),
             };
         }
     }

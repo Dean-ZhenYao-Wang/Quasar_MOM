@@ -11,12 +11,12 @@ namespace MOM.Application.DTOs.Department.Requests
         /// 负责人的DtId
         /// </summary>
         [Required]
-        public Guid? responsibleDtId { get; set; }
+        public Guid? ResponsibleDtId { get; set; }
 
         public virtual PersonnelClass ToPersonnelClass()
         {
-            PersonnelClass personClass = new PersonnelClass(this.ID,this.description);
-            personClass.ResponsibleDtId = this.responsibleDtId;
+            PersonnelClass personClass = new PersonnelClass(this.Id,"部门");
+            personClass.ResponsibleDtId = this.ResponsibleDtId;
             return personClass;
         }
     }

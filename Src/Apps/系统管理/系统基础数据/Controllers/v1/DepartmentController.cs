@@ -1,8 +1,10 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
+using MOM.Application.DTOs.Department.Responses;
 using MOM.Application.Features.PersonnelClass.Commands.AddDepartment;
 using MOM.Application.Features.PersonnelClass.Commands.DeleteDepartment;
 using MOM.Application.Features.PersonnelClass.Commands.UpdateDepartment;
+using MOM.Application.Features.PersonnelClass.Queries.GetDepartmentTree;
 using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
@@ -45,6 +47,11 @@ namespace 系统基础数据.Controllers.v1
         {
             var model = await Mediator.Send(command);
             return model;
+        }
+        [HttpGet]
+        public async Task<BaseResult<List<DepartmentResponse>>> GetDepartTree(GetDepartmentTreeQuery command)
+        {
+            return await Mediator.Send(command);
         }
     }
 }

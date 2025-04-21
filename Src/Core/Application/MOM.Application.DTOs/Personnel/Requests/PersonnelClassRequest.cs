@@ -13,10 +13,6 @@ namespace MOM.Application.DTOs.Personnel.Requests
         /// 名称
         /// </summary>
         [Required]
-        public string ID { get; set; }
-        /// <summary>
-        /// 备注
-        /// </summary>
-        public string? description { get; set; }
+        public string Id { get; set; }
     }
 }

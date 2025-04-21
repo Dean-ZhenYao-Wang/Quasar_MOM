@@ -1422,10 +1422,6 @@
           },
           "id": {
             "type": "string"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
@@ -2312,10 +2308,6 @@
           },
           "id": {
             "type": "string"
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
           }
         }
       },

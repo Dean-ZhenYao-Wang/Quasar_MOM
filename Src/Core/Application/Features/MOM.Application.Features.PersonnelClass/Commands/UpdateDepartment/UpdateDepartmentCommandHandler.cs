@@ -17,7 +17,7 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdateDepartment
                 return new Error(ErrorCode.NotFound, translator.GetString(TranslatorMessages.NotFound()));
             }
 
-            department.Update(request.ID, request.description, request.responsibleDtId);
+            department.Update(request.Id,request.ResponsibleDtId);
             await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }
