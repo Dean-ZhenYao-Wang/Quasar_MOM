@@ -56,7 +56,9 @@ namespace MOM.Infrastructure.Persistence.Repositories
             }
             else
             {
-                returnModel = await this.DbSet.Where(m => m.Description.Equals("部门"))
+                returnModel = await this.DbSet.Where(m => m.Description.Equals("部门")
+                &&
+                    !personnelClassHierarchyScopeRelRelationships.Where(r=>r.TargetId==m.DtId).Any())
                      .Select(m => m.ToDepartmentResponse())
                      .ToListAsync();
             }
