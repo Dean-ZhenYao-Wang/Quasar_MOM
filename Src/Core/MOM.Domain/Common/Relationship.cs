@@ -3,6 +3,7 @@
 
 namespace MOM.Domain.Common;
 
+using MOM.Domain.isa95.CommonObjectModels;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -35,6 +36,7 @@ public abstract class Relationship<TTarget> : BasicRelationship, IEquatable<Basi
         SourceId = source.DtId;
         TargetId = target.DtId;
         Target = target;
+        Id= $"{source.Id}-{target.Id}";
     }
 
     /// <summary>
@@ -46,5 +48,6 @@ public abstract class Relationship<TTarget> : BasicRelationship, IEquatable<Basi
     {
         SourceId = sourceDtId;
         TargetId = targetDtId;
+        Id = $"{sourceDtId}-{targetDtId}";
     }
 }

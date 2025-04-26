@@ -3,6 +3,8 @@
 
 import { defineConfig } from '#q-app/wrappers'
 import { fileURLToPath } from 'node:url'
+import Components from 'unplugin-vue-components/vite'
+import { PrimeVueResolver } from '@primevue/auto-import-resolver'
 
 export default defineConfig((ctx) => {
   return {
@@ -12,7 +14,7 @@ export default defineConfig((ctx) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['i18n', 'axios'],
+    boot: ['i18n', 'axios', 'primevue'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
     css: ['app.scss'],
@@ -45,7 +47,6 @@ export default defineConfig((ctx) => {
         browser: ['es2022', 'firefox115', 'chrome115', 'safari14'],
         node: 'node20',
       },
-
       vueRouterMode: 'hash', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
@@ -103,6 +104,10 @@ export default defineConfig((ctx) => {
           },
           { server: false },
         ],
+
+        Components({
+          resolvers: [PrimeVueResolver()],
+        }),
       ],
     },
 
@@ -114,7 +119,13 @@ export default defineConfig((ctx) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {
-      config: {},
+      config: {
+        // 关闭 Quasar 默认组件自动导入
+        autoImport: {
+          components: false,
+          directives: false,
+        },
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       lang: 'zh-CN', // Quasar language pack

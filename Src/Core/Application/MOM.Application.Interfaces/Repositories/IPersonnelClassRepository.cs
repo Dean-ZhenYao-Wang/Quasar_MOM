@@ -6,6 +6,7 @@ namespace MOM.Application.Interfaces.Repositories
 {
     public interface IPersonnelClassRepository : IGenericRepository<PersonnelClass>
     {
+        Task AddAsync(PersonnelClass model, Guid? sourceDtId);
         Task DeleteAsync(Guid[] dtIds);
         Task<List<DepartmentResponse>> GetDepartmentTreeAsync(Guid? sourceDtId);
     }

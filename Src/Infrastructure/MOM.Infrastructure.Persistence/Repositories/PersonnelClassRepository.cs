@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs.Department;
 using MOM.Application.DTOs.Department.Responses;
 using MOM.Application.DTOs.Menu.Responses;
@@ -7,6 +8,7 @@ using MOM.Application.Interfaces.Repositories;
 using MOM.Domain.Common;
 using MOM.Domain.Common.Relationship.isa95.PersonnelClass;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
+using MOM.Domain.isa95.EquipmentHierarchy;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,21 @@ namespace MOM.Infrastructure.Persistence.Repositories
         private readonly DbSet<PersonnelClassIncludesPropertiesOfRelationship> personnelClassIncludesPropertiesOfRelationships = dbContext.Set<PersonnelClassIncludesPropertiesOfRelationship>();
         private readonly DbSet<PersonnelClassHasPropertiesOfRelationship> personnelClassHasPropertiesOfRelationships = dbContext.Set<PersonnelClassHasPropertiesOfRelationship>();
         private readonly DbSet<PersonnelClassHierarchyScopeRelRelationship> personnelClassHierarchyScopeRelRelationships = dbContext.Set<PersonnelClassHierarchyScopeRelRelationship>();
+
+        public async Task AddAsync(PersonnelClass model, Guid? sourceDtId)
+        {
+            await AddAsync(model);
+            if (sourceDtId == null || sourceDtId == Guid.Empty)
+            {
+                var enterprise = new Enterprise(model.Id, string.Empty, true);
+                model.HierarchyScopeRel.Add(new PersonnelClassHierarchyScopeRelRelationship(model, enterprise));
+            }
+            else
+            {
+                await personnelClassIncludesPropertiesOfRelationships.AddAsync(new PersonnelClassIncludesPropertiesOfRelationship(sourceDtId.Value, model.DtId));
+            }
+        }
+
         public async Task DeleteAsync(Guid[] dtIds)
         {
             using var transaction = await dbContext.Database.BeginTransactionAsync();
@@ -58,7 +75,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
             {
                 returnModel = await this.DbSet.Where(m => m.Description.Equals("部门")
                 &&
-                    !personnelClassHierarchyScopeRelRelationships.Where(r=>r.TargetId==m.DtId).Any())
+                    !personnelClassIncludesPropertiesOfRelationships.Where(r=>r.TargetId==m.DtId).Any())
                      .Select(m => m.ToDepartmentResponse())
                      .ToListAsync();
             }

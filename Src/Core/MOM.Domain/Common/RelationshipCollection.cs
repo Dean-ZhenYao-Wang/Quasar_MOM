@@ -77,8 +77,9 @@ public abstract class RelationshipCollection<TRelationship, TTarget> : BasicRela
     {
         var item = new TRelationship();
         item.Name = Name;
-        item.SourceId = sourceDtId;
         item.TargetId = targetDtId;
+        item.SourceId = sourceDtId;
+        item.Id = $"{sourceDtId}-{targetDtId}";
         relationships.Add(item);
     }
 

@@ -39,15 +39,40 @@ namespace MOM.Infrastructure.Persistence.Seeds
                 var menu = new Menu()
                 {
                     Id = "0000",
-                    Name = "系统管理",
+                    Name = "系统配置",
                     Path = string.Empty,
                     Depth = 0,
                     Children = new List<Menu>()
                     {
                         new Menu
                         {
-                            Id = "0001",
+                            Id = "0000-0001",
                             Name = "菜单管理",
+                            Path = "/system/menu",
+                            Depth = 1,
+                        }
+                    }
+                };
+                applicationDbContext.Menus.Add(menu);
+                var menu2 = new Menu()
+                {
+                    Id = "0001",
+                    Name = "基础数据",
+                    Path = string.Empty,
+                    Depth = 0,
+                    Children = new List<Menu>()
+                    {
+                        new Menu
+                        {
+                            Id = "0001-0001",
+                            Name = "组织架构",
+                            Path = "/org/org",
+                            Depth = 1,
+                        },
+                        new Menu
+                        {
+                            Id = "0001-0002",
+                            Name = "岗位",
                             Path = "/system/menu",
                             Depth = 1,
                         }

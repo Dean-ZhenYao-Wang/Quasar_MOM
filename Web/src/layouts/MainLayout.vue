@@ -21,7 +21,7 @@
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" side="left" overlay elevated>
-      <!-- drawer content -->
+      <Menu :model="menuItems" />
     </q-drawer>
 
     <q-drawer v-model="rightDrawerOpen" side="right" overlay elevated>
@@ -36,11 +36,41 @@
 
 <script>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 export default {
   setup() {
     const leftDrawerOpen = ref(false)
     const rightDrawerOpen = ref(false)
-
+    const router = useRouter()
+    // 菜单配置
+    const menuItems = ref([
+      {
+        label: '系统配置',
+        items: [
+          {
+            label: '菜单',
+            icon: 'pi pi-folder-open',
+            command: () => {
+              router.push('/system/menu')
+            },
+          },
+        ],
+      },
+      {
+        label: '基础数据',
+        items: [
+          {
+            label: '组织架构',
+            command: () => {
+              router.push('/org/org')
+            },
+          },
+          { label: '岗位', items: [{ label: '3rd Level 3' }, { label: '3rd Level 4' }] },
+        ],
+      },
+      { separator: true },
+      { label: 'Quit', icon: 'pi pi-sign-out' },
+    ])
     return {
       leftDrawerOpen,
       toggleLeftDrawer() {
@@ -51,6 +81,7 @@ export default {
       toggleRightDrawer() {
         rightDrawerOpen.value = !rightDrawerOpen.value
       },
+      menuItems,
     }
   },
 }

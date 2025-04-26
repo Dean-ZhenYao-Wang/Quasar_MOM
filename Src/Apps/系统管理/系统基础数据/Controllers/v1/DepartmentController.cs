@@ -49,9 +49,9 @@ namespace 系统基础数据.Controllers.v1
             return model;
         }
         [HttpGet]
-        public async Task<BaseResult<List<DepartmentResponse>>> GetDepartTree(GetDepartmentTreeQuery command)
+        public async Task<BaseResult<List<DepartmentResponse>>> GetDepartTree([FromQuery]Guid? sourceDtId)
         {
-            return await Mediator.Send(command);
+            return await Mediator.Send(new GetDepartmentTreeQuery { SourceDtId= sourceDtId });
         }
     }
 }

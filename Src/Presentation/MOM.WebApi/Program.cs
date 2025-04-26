@@ -164,8 +164,8 @@ using (var scope = app.Services.CreateScope())
 
     if (!useInMemoryDatabase)
     {
-        //await services.GetRequiredService<ApplicationDbContext>().Database.MigrateAsync();
-        //await services.GetRequiredService<FileManagerDbContext>().Database.MigrateAsync();
+        await services.GetRequiredService<ApplicationDbContext>().Database.MigrateAsync();
+        await services.GetRequiredService<FileManagerDbContext>().Database.MigrateAsync();
     }
 
     //Seed Data

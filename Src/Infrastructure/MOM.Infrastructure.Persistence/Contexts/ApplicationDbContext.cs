@@ -6,6 +6,7 @@ using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Domain.isa95.EquipmentHierarchy;
 using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Extensions;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -31,6 +32,14 @@ namespace MOM.Infrastructure.Persistence.Contexts
             ChangeTracker.ApplyAuditing(authenticatedUser);
 
             return base.SaveChangesAsync(cancellationToken);
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+#if DEBUG
+            optionsBuilder.EnableSensitiveDataLogging();
+#endif
+
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

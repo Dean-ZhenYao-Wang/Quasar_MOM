@@ -39,7 +39,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// </summary>
         public bool Active { get; set; }
 
-        public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string? description = null, bool active = false) : this()
+        public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string Id, string? description = null, bool active = false) : this()
         {
             EquipmentLevel = equipmentLevel;
             this.Id = Id;

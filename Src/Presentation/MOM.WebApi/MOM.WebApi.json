@@ -839,6 +839,58 @@
         ]
       }
     },
+    "/api/v{version}/Department/GetDepartTree": {
+      "get": {
+        "tags": [
+          "Department"
+        ],
+        "parameters": [
+          {
+            "name": "sourceDtId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResultOfListOfDepartmentResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResultOfListOfDepartmentResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResultOfListOfDepartmentResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
     "/api/v{version}/Menu/GetMenuTree": {
       "get": {
         "tags": [
@@ -1634,6 +1686,27 @@
           }
         }
       },
+      "BaseResultOfListOfDepartmentResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DepartmentResponse"
+            },
+            "nullable": true
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
       "BaseResultOfListOfMenuResponse": {
         "type": "object",
         "properties": {
@@ -1819,6 +1892,39 @@
               "type": "string",
               "format": "uuid"
             }
+          }
+        }
+      },
+      "DepartmentResponse": {
+        "required": [
+          "responsibleDtId",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/#/properties/data/items"
+            }
+          },
+          "dtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "responsibleDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "id": {
+            "type": "string"
           }
         }
       },
