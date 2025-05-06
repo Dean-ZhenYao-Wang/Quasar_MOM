@@ -1,6 +1,7 @@
 import { defineBoot } from '#q-app/wrappers'
 import axios from 'axios'
 import { useCurrentUserStore } from 'src/stores/currentUser'
+import { Notify } from 'quasar'
 
 const api = axios.create({ baseURL: process.env.API_BASE_URL })
 
@@ -23,8 +24,7 @@ export default defineBoot(({ app, router }) => {
       return config
     },
     (error) => {
-      const $q = app.config.globalProperties.$q
-      $q.notify({
+      Notify.create({
         type: 'negative',
         message: error,
         position: 'top',
@@ -38,9 +38,8 @@ export default defineBoot(({ app, router }) => {
   api.interceptors.response.use(
     (response) => {
       if (!response.data.success) {
-        const $q = app.config.globalProperties.$q
         response.data.errors.forEach((element) => {
-          $q.notify({
+          Notify.create({
             type: 'negative',
             message: element.description,
             caption: process.env.DEV ? `状态码: ${element.errorCode}` : '',
@@ -53,14 +52,12 @@ export default defineBoot(({ app, router }) => {
       return response.data
     },
     (error) => {
-      const $q = app.config.globalProperties.$q
-
       if (error.response?.status === 401) {
         // 清除本地存储的认证信息
         userStore.jwtToken = ''
 
         // 显示通知
-        $q.notify({
+        Notify.create({
           type: 'negative',
           message: '登录已过期，请重新登录',
           position: 'top',
@@ -77,7 +74,7 @@ export default defineBoot(({ app, router }) => {
       }
 
       // 其他错误处理
-      $q.notify({
+      Notify.create({
         color: 'negative',
         message: error.response?.data?.message || '请求失败',
         icon: 'report_problem',

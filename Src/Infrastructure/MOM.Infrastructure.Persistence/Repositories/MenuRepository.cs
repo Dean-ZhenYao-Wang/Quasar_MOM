@@ -16,6 +16,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
     public class MenuRepository(ApplicationDbContext dbContext) : GenericRepository<Menu>(dbContext), IMenuRepository
     {
         private readonly DbSet<Button> buttons = dbContext.Set<Button>();
+        
 
         public async Task DeleteAsync(Guid[] dtIds)
         {
@@ -39,8 +40,28 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
         public async Task<List<MenuTreeNodeResponse>> GetMenuTreeAsync()
         {
-            var menuList = await this.DbSet.Select(m => m.ToMenuTreeNodeResponse()).ToListAsync();
+            var allMenus = await DbSet.AsNoTracking().OrderBy(m=>m.Id).ToListAsync();
+            var menuList = BuildTree(allMenus);
             return menuList;
+        }
+        private List<MenuTreeNodeResponse> BuildTree(List<Menu> menus)
+        {
+            var rootMenus = menus.Where(m => m.ParentMenuDtId == null).Select(m => m.ToMenuTreeNodeResponse()).ToList();
+            foreach (var menu in rootMenus)
+            {
+                menu.Children = GetChildren(menu, menus);
+            }
+            return rootMenus;
+        }
+
+        private List<MenuTreeNodeResponse> GetChildren(MenuTreeNodeResponse parent, List<Menu> allMenus)
+        {
+            var children = allMenus.Where(m => m.ParentMenuDtId == parent.DtId).Select(m => m.ToMenuTreeNodeResponse()).ToList();
+            foreach (var child in children)
+            {
+                child.Children = GetChildren(child, allMenus);
+            }
+            return children;
         }
     }
 }

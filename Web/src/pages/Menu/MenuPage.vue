@@ -7,7 +7,7 @@
           <div class="row items-center">
             <div class="col text-h6">菜单树</div>
             <div class="col-auto">
-              <q-btn icon="add" label="添加菜单" color="positive" @click="addMenu" />
+              <q-btn icon="add" color="positive" @click="addSubMenu" v-if="!selectedMenu" />
               <q-btn icon="edit" color="red" flat dense @click="editSubMenu(selectedMenu)" />
               <q-btn
                 icon="delete"
@@ -144,11 +144,7 @@
               label="菜单名称"
               :rules="[(val) => !!val || '请输入菜单名称']"
             />
-            <q-input
-              v-model="subMenuForm.path"
-              label="路由路径"
-              :rules="[(val) => !!val || '请输入路由路径']"
-            />
+            <q-input v-model="subMenuForm.path" label="路由路径" />
             <q-input v-model="subMenuForm.icon" label="图标"></q-input>
             <q-toggle v-model="subMenuForm.hidden" label="是否不可见" />
             <div class="q-mt-md">
@@ -193,11 +189,12 @@
 <script>
 import { ref, onMounted } from 'vue'
 import { useQuasar } from 'quasar'
-import { api } from 'boot/axios'
+import { useMenuStore } from 'src/stores/menu'
 
 export default {
   setup() {
     const $q = useQuasar()
+    const menuStore = useMenuStore()
     const menuTreeComponent = ref(null)
     // 菜单树数据
     const menuTree = ref([])
@@ -253,26 +250,24 @@ export default {
     const onMenuSelected = async (dtId) => {
       if (!dtId) return
       subMenuLoading.value = true
-      const childMenus = await api.get(`/api/v{version}/Menu/GetMenuList?ParentMenuDtId=${dtId}`)
-      subMenus.value = childMenus.data
+      await menuStore.getChildMenus(dtId)
+      subMenus.value = menuStore.childMenus
       subMenuLoading.value = false
       selectedSubMenu.value = []
       buttons.value = []
     }
 
     // 选择子菜单时加载按钮
-    const onSubMenuSelected = (rows) => {
+    const onSubMenuSelected = async (rows) => {
       if (rows.length === 0) {
         buttons.value = []
         return
       }
 
       buttonsLoading.value = true
-
-      api.get(`/api/v{version}/Menu/GetButtonList?menuDtId=${rows[0].dtId}`).then((res) => {
-        buttons.value = res.data
-        buttonsLoading.value = false
-      })
+      await menuStore.getButtons(rows[0].dtId)
+      buttons.value = menuStore.buttons
+      buttonsLoading.value = false
     }
 
     //添加菜单
@@ -297,7 +292,10 @@ export default {
         path: '',
         icon: '',
         parentMenuDtId: selectedMenu.value,
-        depth: menuTreeComponent.value.getNodeByKey(selectedMenu.value).depth + 1,
+        depth:
+          selectedMenu.value == null
+            ? 0
+            : menuTreeComponent.value.getNodeByKey(selectedMenu.value).depth + 1,
         hidden: false,
       }
       editingMenu.value = false
@@ -313,73 +311,33 @@ export default {
     }
 
     // 保存菜单
-    const saveMenu = () => {
+    const saveMenu = async () => {
       if (menuForm.value.dtId) {
-        // 这里应该是调用API保存数据
-        api
-          .put('/api/v{version}/Menu/UpdateMenu', menuForm.value)
-          .then(() => {
-            $q.notify({
-              message: '菜单更新成功',
-              color: 'positive',
-            })
-            menuDialog.value = false
-            if (menuForm.value.parentMenuDtId != null) onMenuSelected(selectedMenu.value) // 刷新数据
-            getMenuTree()
-          })
-          .catch(() => {
-            $q.notify({
-              message: '子菜单更新失败',
-              color: 'positive',
-            })
-          })
+        await menuStore.updateMenu(menuForm.value)
+        menuDialog.value = false
+        if (menuForm.value.parentMenuDtId != null) await onMenuSelected(selectedMenu.value) // 刷新数据
+        await getMenuTree()
       } else {
-        api
-          .post('/api/v{version}/Menu/AddMenu', menuForm.value)
-          .then(() => {
-            $q.notify({
-              message: '菜单添加成功',
-              color: 'positive',
-            })
-            menuDialog.value = false
-            if (menuForm.value.parentMenuDtId != null)
-              onMenuSelected(selectedMenu.value) // 刷新数据
-            else getMenuTree()
-          })
-          .catch(() => {
-            $q.notify({
-              message: '菜单添加失败',
-              color: 'positive',
-            })
-          })
+        await menuStore.addMenu(menuForm.value)
+        menuDialog.value = false
+        if (menuForm.value.parentMenuDtId != null) await onMenuSelected(selectedMenu.value) // 刷新数据
+        await getMenuTree()
       }
     }
 
     // 确认删除菜单
     const confirmDeleteMenu = (row) => {
+      console.log(row)
       $q.dialog({
         title: '确认删除',
         message: `确定要删除菜单 "${row.name || menuTreeComponent.value.getNodeByKey(selectedMenu.value).name}" 吗？`,
         cancel: true,
         persistent: true,
-      }).onOk(() => {
-        api
-          .delete('/api/v{version}/Menu/DeleteMenu', { data: { dtIds: [row.dtId || row] } })
-          .then(() => {
-            $q.notify({
-              message: '菜单删除成功',
-              color: 'positive',
-            })
-            if (row.name)
-              onMenuSelected(selectedMenu.value) // 刷新数据
-            else getMenuTree()
-          })
-          .catch(() => {
-            $q.notify({
-              message: '菜单删除失败',
-              color: 'positive',
-            })
-          })
+      }).onOk(async () => {
+        await menuStore.deleteMenu(row)
+        if (row.name)
+          await onMenuSelected(selectedMenu.value) // 刷新数据
+        else await getMenuTree()
       })
     }
 
@@ -403,42 +361,15 @@ export default {
     }
 
     // 保存按钮
-    const saveButton = () => {
+    const saveButton = async () => {
       if (buttonForm.value.dtId) {
-        // 这里应该是调用API保存数据
-        api
-          .put('/api/v{version}/Menu/UpdateButton', buttonForm.value)
-          .then(() => {
-            $q.notify({
-              message: '按钮更新成功',
-              color: 'positive',
-            })
-            buttonDialog.value = false
-            onSubMenuSelected(selectedSubMenu.value) // 刷新数据
-          })
-          .catch(() => {
-            $q.notify({
-              message: '按钮更新失败',
-              color: 'positive',
-            })
-          })
+        await menuStore.updateButton(buttonForm.value)
+        buttonDialog.value = false
+        onSubMenuSelected(selectedSubMenu.value) // 刷新数据
       } else {
-        api
-          .post('/api/v{version}/Menu/AddButton', buttonForm.value)
-          .then(() => {
-            $q.notify({
-              message: '按钮添加成功',
-              color: 'positive',
-            })
-            buttonDialog.value = false
-            onSubMenuSelected(selectedSubMenu.value) // 刷新数据
-          })
-          .catch(() => {
-            $q.notify({
-              message: '按钮添加失败',
-              color: 'positive',
-            })
-          })
+        await menuStore.addButton(buttonForm.value)
+        buttonDialog.value = false
+        onSubMenuSelected(selectedSubMenu.value) // 刷新数据
       }
     }
 
@@ -449,28 +380,15 @@ export default {
         message: `确定要删除按钮 "${row.name}" 吗？`,
         cancel: true,
         persistent: true,
-      }).onOk(() => {
-        api
-          .delete('/api/v{version}/Menu/DeleteButton', { data: { dtIds: [row.dtId || row] } })
-          .then(() => {
-            $q.notify({
-              message: '按钮删除成功',
-              color: 'positive',
-            })
-            onSubMenuSelected(selectedSubMenu.value) // 刷新数据
-          })
-          .catch(() => {
-            $q.notify({
-              message: '按钮删除失败',
-              color: 'positive',
-            })
-          })
+      }).onOk(async () => {
+        await menuStore.deleteButton(row)
+        onSubMenuSelected(selectedSubMenu.value) // 刷新数据
       })
     }
 
     const getMenuTree = async () => {
-      const response = await api.get('/api/v{version}/Menu/GetMenuTree')
-      menuTree.value = response.data
+      await menuStore.getMenuTree()
+      menuTree.value = menuStore.menuTree
     }
     onMounted(async () => {
       await getMenuTree()

@@ -13,9 +13,9 @@
         <q-tabs align="left" inline-label shrink stretch>
           <q-route-tab
             v-for="tab in openMenus"
-            :key="tab.key"
-            :to="tab.url"
-            :label="tab.label"
+            :key="tab.dtId"
+            :to="tab.path"
+            :label="tab.name"
             exact
           />
         </q-tabs>
@@ -61,11 +61,11 @@
       </q-toolbar>
     </q-header>
     <q-drawer v-model="leftDrawerOpen" side="left" overlay elevated>
-      <q-tree :nodes="menuItems" node-key="key" selected-color="primary">
+      <q-tree :nodes="menuItems" node-key="dtId" selected-color="primary">
         <template v-slot:default-header="prop">
           <div class="row items-center" @click="selectedMenu(prop.node)">
             <q-icon :name="prop.node.icon || 'share'" color="orange" size="28px" class="q-mr-sm" />
-            <div class="text-weight-bold text-primary">{{ prop.node.label }}</div>
+            <div class="text-weight-bold text-primary">{{ prop.node.name }}</div>
           </div>
         </template>
       </q-tree>
@@ -85,6 +85,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCurrentUserStore } from 'src/stores/currentUser'
+import { useMenuStore } from 'src/stores/menu'
 import { debounce, useQuasar } from 'quasar'
 export default {
   setup() {
@@ -103,71 +104,29 @@ export default {
     }
     const router = useRouter()
     const selectedMenu = (menu) => {
-      if (menu.url) {
-        if (isHttpUrl(menu.url)) {
-          window.open(menu.url, '_blank')
+      if (menu.path) {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+        if (isHttpUrl(menu.path)) {
+          window.open(menu.path, '_blank')
         } else {
           if (openMenus.value.length > 0) {
             // 防止重复添加标签页
-            if (!openMenus.value.some((t) => t.key === menu.key)) {
+            if (!openMenus.value.some((t) => t.dtId === menu.dtId)) {
               openMenus.value.push(menu)
             }
           } else {
             openMenus.value.push(menu)
           }
-          router.push(menu.url)
+          router.push(menu.path)
         }
       }
     }
     const menuItems = ref([])
-    const initMenu = () => {
+    const initMenu = async () => {
+      const menuStore = useMenuStore()
       if (menuItems.value.length > 0) return
-      let menus = [
-        {
-          key: '0',
-          label: '系统配置',
-          children: [
-            {
-              key: '0-1',
-              label: '菜单',
-              icon: 'pi pi-folder-open',
-              url: '/system/menu',
-            },
-          ],
-        },
-        {
-          key: '1',
-          label: '基础数据',
-          children: [
-            {
-              key: '1-1',
-              label: '组织架构',
-              url: '/org/org',
-            },
-            {
-              key: '1-2',
-              label: '岗位',
-              children: [
-                {
-                  key: '1-2-1',
-                  label: '3rd Level 3',
-                },
-                {
-                  key: '1-2-2',
-                  label: '3rd Level 4',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          key: '2',
-          label: 'Quit',
-          icon: 'pi pi-sign-out',
-        },
-      ]
-      // enhanceMenuWithCommands(menus)
-      menuItems.value = menus
+      await menuStore.getMenuTree()
+      menuItems.value = menuStore.menuTree
     }
     initMenu()
     const editPassWord = () => {
