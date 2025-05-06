@@ -37,7 +37,6 @@ export default defineRouter(function (/* { store, ssrContext } */) {
   const userStore = useCurrentUserStore()
   // 添加路由守卫
   Router.beforeEach((to, from, next) => {
-    console.log(userStore)
     const isAuthenticated =
       userStore.jwtToken !== null && userStore.jwtToken != undefined && userStore.jwtToken != '' // 替换为你的认证检查方法
     // 访问登录页时如果已登录则重定向

@@ -1,7 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { api } from 'boot/axios'
 
-export const useCurrentUserStore = defineStore('myStore', {
+export const useCurrentUserStore = defineStore('currentUserStore', {
   state: () => ({
     name: '',
     email: '',

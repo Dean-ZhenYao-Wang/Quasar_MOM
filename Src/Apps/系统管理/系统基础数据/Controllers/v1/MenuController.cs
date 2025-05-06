@@ -28,7 +28,6 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = "管理员,超级管理员")]
         public async Task<BaseResult<List<MenuTreeNodeResponse>>> GetMenuTree()
         {
             return await Mediator.Send(new GetMenuTreeQuery());

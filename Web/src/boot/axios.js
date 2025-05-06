@@ -57,8 +57,7 @@ export default defineBoot(({ app, router }) => {
 
       if (error.response?.status === 401) {
         // 清除本地存储的认证信息
-        localStorage.removeItem('authToken')
-        sessionStorage.removeItem('authToken')
+        userStore.jwtToken = ''
 
         // 显示通知
         $q.notify({
@@ -73,16 +72,6 @@ export default defineBoot(({ app, router }) => {
           path: '/login',
           query: { redirect: router.currentRoute.value.fullPath },
         })
-        // console.log('Router instance available:', !!router)
-        // console.log('Current route:', router.currentRoute.value)
-        // router
-        //   .push('/login')
-        //   .then(() => {
-        //     console.log('Navigation succeeded')
-        //   })
-        //   .catch((err) => {
-        //     console.error('Navigation failed:', err)
-        //   })
 
         return Promise.reject(error)
       }

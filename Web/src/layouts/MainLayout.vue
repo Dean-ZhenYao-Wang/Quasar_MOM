@@ -25,6 +25,7 @@
         </OverlayBadge>
         <div style="width: 30px"></div>
         <Avatar icon="pi pi-user" size="large" />
+        {{ currentUser.name }}
       </q-toolbar>
     </q-header>
 
@@ -50,12 +51,12 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCurrentUserStore } from 'src/stores/currentUser'
 export default {
   setup() {
-    onMounted(() => console.log('MainLayout Mounted'))
-    onUnmounted(() => console.warn('MainLayout UNMOUNTED!'))
+    const currentUser = useCurrentUserStore()
     const leftDrawerOpen = ref(false)
     const rightDrawerOpen = ref(false)
     const openMenus = ref([])
@@ -69,7 +70,6 @@ export default {
         if (isHttpUrl(menu.url)) {
           window.open(menu.url, '_blank')
         } else {
-          console.log('111111')
           if (openMenus.value.length > 0) {
             // 防止重复添加标签页
             if (!openMenus.value.some((t) => t.key === menu.key)) {
@@ -78,7 +78,6 @@ export default {
           } else {
             openMenus.value.push(menu)
           }
-          console.log(openMenus)
           router.push(menu.url)
         }
       }
@@ -149,6 +148,7 @@ export default {
       // enhanceMenuWithCommands,
       tabActive,
       selectedMenu,
+      currentUser,
     }
   },
 }
