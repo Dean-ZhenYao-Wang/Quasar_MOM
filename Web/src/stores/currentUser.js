@@ -27,6 +27,12 @@ export const useCurrentUserStore = defineStore('currentUserStore', {
       this.roles = response.data.roles
       return true
     },
+    async ChangePassword(current_hashHex, confirm_hashHex) {
+      await api.put('/api/v{version}/Account/ChangePassword', {
+        password: current_hashHex,
+        confirmPassword: confirm_hashHex,
+      })
+    },
   },
 })
 

@@ -24,11 +24,42 @@
           <i class="pi pi-bell" style="font-size: 2rem" />
         </OverlayBadge>
         <div style="width: 30px"></div>
-        <Avatar icon="pi pi-user" size="large" />
-        {{ currentUser.name }}
+        <Avatar icon="pi pi-user" size="large" :image="currentUser.photo" />
+        <q-btn color="primary" :label="currentUser.name">
+          <i class="pi pi-angle-down"></i>
+          <q-menu>
+            <q-list dense style="min-width: 100px">
+              <q-item clickable v-close-popup>
+                <q-item-section @click="editPassWord">修改密码</q-item-section>
+              </q-item>
+              <q-item clickable v-close-popup>
+                <q-item-section @click="logOut">退出</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
+        <q-dialog v-model="editPassWordDialog">
+          <q-card>
+            <q-card-section class="row items-center q-pb-none">
+              <div class="text-h6">修改密码</div>
+              <q-space />
+              <q-btn icon="close" flat round dense v-close-popup />
+            </q-card-section>
+
+            <q-card-section>
+              <!-- 密码输入框 -->
+              <q-input label="当前密码" v-model="currentPassword" type="password" required />
+              <q-input label="新密码" v-model="newPasswords" type="password" required />
+              <q-input label="确认新密码" v-model="confirmPassword" type="password" required />
+            </q-card-section>
+            <q-card-actions>
+              <q-btn label="取消" color="negative" @click="closePasswordDialog" />
+              <q-btn label="保存" color="positive" @click="updatePassword" />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
       </q-toolbar>
     </q-header>
-
     <q-drawer v-model="leftDrawerOpen" side="left" overlay elevated>
       <q-tree :nodes="menuItems" node-key="key" selected-color="primary">
         <template v-slot:default-header="prop">
@@ -54,9 +85,15 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCurrentUserStore } from 'src/stores/currentUser'
+import { debounce, useQuasar } from 'quasar'
 export default {
   setup() {
     const currentUser = useCurrentUserStore()
+    const editPassWordDialog = ref(false)
+    const currentPassword = ref('')
+    const confirmPassword = ref('')
+    const newPasswords = ref('')
+    const submitting = ref(false)
     const leftDrawerOpen = ref(false)
     const rightDrawerOpen = ref(false)
     const openMenus = ref([])
@@ -133,6 +170,87 @@ export default {
       menuItems.value = menus
     }
     initMenu()
+    const editPassWord = () => {
+      editPassWordDialog.value = !editPassWordDialog.value
+    }
+    const logOut = () => {
+      currentUser.jwt = ''
+      router.push('/login')
+    }
+    const closePasswordDialog = () => {
+      editPassWordDialog.value = !editPassWordDialog.value
+      // 重置表单数据
+      currentPassword.value = ''
+      newPasswords.value = ''
+      confirmPassword.value = ''
+    }
+
+    const $q = useQuasar()
+    const updatePassword = debounce(
+      async function () {
+        if (newPasswords.value !== confirmPassword.value) {
+          $q.notify({
+            message: '两次输入的密码不一致，请重新输入。',
+            color: 'negative',
+            multiLine: true,
+          })
+          return
+        }
+
+        // 将字符串转换为ArrayBuffer
+        const msgBuffer = new TextEncoder().encode(currentPassword.value)
+        console.log(msgBuffer)
+
+        window.crypto.subtle
+          .digest('SHA-1', msgBuffer)
+          .then(async (hashBuffer) => {
+            // 将ArrayBuffer转换为十六进制字符串
+            const hashArray = Array.from(new Uint8Array(hashBuffer))
+            const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+            const current_hashHex = hashHex.toUpperCase()
+
+            const confirm_msgBuffer = new TextEncoder().encode(confirmPassword.value)
+            console.log(confirm_msgBuffer)
+
+            window.crypto.subtle
+              .digest('SHA-1', confirm_msgBuffer)
+              .then(async (confirm_hashBuffer) => {
+                // 将ArrayBuffer转换为十六进制字符串
+                const confirm_hashArray = Array.from(new Uint8Array(confirm_hashBuffer))
+                const confirm_hashHex_s = confirm_hashArray
+                  .map((b) => b.toString(16).padStart(2, '0'))
+                  .join('')
+                const confirm_hashHex = confirm_hashHex_s.toUpperCase()
+                $q.notify({
+                  type: 'success',
+                  message: '密码修改成功',
+                  position: 'top',
+                  timeout: 2000,
+                }),
+                  await currentUser.ChangePassword(current_hashHex, confirm_hashHex)
+                logOut()
+              })
+              .catch((err) =>
+                $q.notify({
+                  type: 'negative',
+                  message: err,
+                  position: 'top',
+                  timeout: 2000,
+                }),
+              )
+          })
+          .catch((err) =>
+            $q.notify({
+              type: 'negative',
+              message: err,
+              position: 'top',
+              timeout: 2000,
+            }),
+          )
+      },
+      500,
+      true,
+    )
     return {
       leftDrawerOpen,
       toggleLeftDrawer() {
@@ -145,10 +263,18 @@ export default {
       },
       openMenus,
       menuItems,
-      // enhanceMenuWithCommands,
       tabActive,
       selectedMenu,
       currentUser,
+      editPassWord,
+      logOut,
+      editPassWordDialog,
+      submitting,
+      updatePassword,
+      currentPassword,
+      confirmPassword,
+      newPasswords,
+      closePasswordDialog,
     }
   },
 }

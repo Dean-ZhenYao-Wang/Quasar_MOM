@@ -19,7 +19,11 @@ namespace MOM.Application.Features.Personnel.Commands.ChangePassword
                 user.PassWord = newPassWord;
                 user.SecurityStamp = Guid.NewGuid().ToString();
             }
-            await unitOfWork.SaveChangesAsync();
+            else
+            {
+                return BaseResult.Failure(new Error(ErrorCode.FieldDataInvalid,"密码错误"));
+            }
+                await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }
     }
