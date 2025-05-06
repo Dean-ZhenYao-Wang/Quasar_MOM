@@ -2,6 +2,7 @@
 using MOM.Application.Infrastructure.Services;
 using MOM.Domain.Common.Relationship.isa95.Person;
 using MOM.Domain.Common.Relationship.isa95.PersonnelClass;
+using MOM.Domain.isa95.CommonObjectModels;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Domain.isa95.EquipmentHierarchy;
 using MOM.Domain.Permission;
@@ -26,6 +27,7 @@ namespace MOM.Infrastructure.Persistence.Contexts
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         #endregion
+        public DbSet<HierarchyScope> HierarchyScopes { get; set; }
         public DbSet<Enterprise> Enterprises { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {

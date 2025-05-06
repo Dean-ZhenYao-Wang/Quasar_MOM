@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Infrastructure.Extensions;
 using MOM.Domain.Common.EnumType;
+using MOM.Domain.isa95.CommonObjectModels;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Domain.isa95.EquipmentHierarchy;
 using MOM.Domain.Permission;
@@ -17,8 +18,11 @@ namespace MOM.Infrastructure.Persistence.Seeds
         {
             if (!await applicationDbContext.Person.AnyAsync())
             {
-                var enterprise = new Enterprise(enterpriseSettings.Name, enterpriseSettings.Description, true, enterpriseSettings.Address);
-                applicationDbContext.Enterprises.Add(enterprise);
+                var enterprise = new HierarchyScope(HierarchyScopeEquipmentLevel.Enterprise, "0000", "企业",true);
+                applicationDbContext.HierarchyScopes.Add(enterprise);
+
+                //var enterprise = new Enterprise(enterpriseSettings.Name, enterpriseSettings.Description, true, enterpriseSettings.Address);
+                //applicationDbContext.Enterprises.Add(enterprise);
 
                 PersonnelClass qiye= new PersonnelClass(enterpriseSettings.Name, "部门", enterprise);
                 applicationDbContext.PersonnelClasses.Add(qiye);

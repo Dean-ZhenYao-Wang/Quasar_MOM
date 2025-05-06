@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using MOM.Domain.Common;
 using MOM.Domain.Common.EnumType;
 using MOM.Domain.Permission;
 using System;
@@ -6,15 +7,26 @@ using System.Text.Json.Serialization;
 
 namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 {
+    
     public partial class Person
     {
         public string? Description { get; set; }
         /// <summary>
+        /// 性别
+        /// </summary>
+        public GenderType Gender { get; set; } = 0;
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public ContactInformation ContactInformation { get; set; } = new ContactInformation();
+        /// <summary>
+        /// 照片
+        /// </summary>
+        public string Photo { get; set; } = string.Empty;
+        /// <summary>
         /// 在职\休假\离职
         /// </summary>
         public PersonWorkStatus WorkStatus { get; set; }
-        public string? Email { get; set; }
-        public string? PhoneNumber { get; set; }
         /// <summary>
         /// 是否已锁定账号
         /// </summary>
@@ -43,8 +55,8 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.WorkStatus = workStatus;
             this.Description = description;
             this.Name = name;
-            this.Email = email;
-            this.PhoneNumber = phoneNumber;
+            this.ContactInformation.Email = email;
+            this.ContactInformation.PhoneNumber = phoneNumber;
             if (teamOfGroupDtId != null)
             {
                 this.DefinedByAddTarget(teamOfGroupDtId.Value);
@@ -68,8 +80,8 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.WorkStatus = workStatus;
             this.Description = description;
             this.Name = name;
-            this.Email = email;
-            this.PhoneNumber = phoneNumber;
+            this.ContactInformation.Email = email;
+            this.ContactInformation.PhoneNumber = phoneNumber;
             foreach (var item in DefinedBy)
             {
                 DefinedBy.Remove(item);

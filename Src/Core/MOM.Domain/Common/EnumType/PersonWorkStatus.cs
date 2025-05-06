@@ -19,4 +19,15 @@ namespace MOM.Domain.Common.EnumType
         [EnumMember(Value = "离职"), Display(Name = "离职")]
         离职
     }
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public enum GenderType
+    {
+        [EnumMember(Value = "男"), Display(Name = "男")]
+        男,
+        [EnumMember(Value = "女"), Display(Name = "女")]
+        女,
+        [EnumMember(Value = "未知"), Display(Name = "未知")]
+        未知
+    }
 }
