@@ -55,6 +55,7 @@
 
 <script>
 import { debounce } from 'quasar'
+import { useCurrentUserStore } from 'src/stores/currentUser'
 
 export default {
   data() {
@@ -80,6 +81,7 @@ export default {
 
         try {
           this.submitting = true
+          const userStore = useCurrentUserStore()
 
           // 将字符串转换为ArrayBuffer
           const msgBuffer = new TextEncoder().encode(this.password)
@@ -91,13 +93,7 @@ export default {
               // 将ArrayBuffer转换为十六进制字符串
               const hashArray = Array.from(new Uint8Array(hashBuffer))
               hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
-
-              const response = await this.$api.post('/api/v{version}/Account/Authenticate', {
-                username: this.username,
-                password: hashHex.toUpperCase(),
-              })
-              // 安全存储token
-              localStorage.setItem('authToken', response.data.jwToken)
+              await userStore.Login(this.username, hashHex.toUpperCase())
               const redirect = this.$route.query.redirect || '/'
               this.$router.push(redirect)
             })

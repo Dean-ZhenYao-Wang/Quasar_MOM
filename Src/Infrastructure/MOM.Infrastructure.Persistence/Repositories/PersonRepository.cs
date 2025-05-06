@@ -41,8 +41,8 @@ namespace MOM.Infrastructure.Persistence.Repositories
                     Name = m.Name,
                     WorkStatus = m.WorkStatus,
                     Description = m.Description,
-                    Email = m.Email,
-                    PhoneNumber = m.PhoneNumber,
+                    Email = m.ContactInformation.Email,
+                    PhoneNumber = m.ContactInformation.PhoneNumber,
                     TeamOfGroupDtId = personnelClass.Where(c => c.Id.Equals("TeamOfGroup"))
                     .Select(c => c.IncludesPropertiesOf.Where(i => m.DefinedBy.Select(d => d.TargetId).Contains(i.DtId)).Select(i => i.Target).FirstOrDefault())
                     .FirstOrDefault().DtId,

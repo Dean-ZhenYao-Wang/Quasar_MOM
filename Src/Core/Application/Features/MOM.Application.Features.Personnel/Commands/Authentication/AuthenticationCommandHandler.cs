@@ -72,8 +72,10 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
             return new AuthenticationResponse()
             {
                 JwToken = jwToken,
-                Email = user.Email,
-                UserName = user.Id,
+                Email = user.ContactInformation.Email,
+                EmployeeNumber = user.Id,
+                Name=user.Name,
+                Photo=user.Photo,
                 Roles = rolesList
             };
 
@@ -88,10 +90,6 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
                     new(ClaimTypes.NameIdentifier,user.DtId.ToString()),
                     new Claim("SecurityStamp", user.SecurityStamp),
                 };
-                user.GetDefinedBy().ForEach(m =>
-                {
-                    claims.Add(new Claim(ClaimTypes.Role, m));
-                });
 
                 var credentials = new SigningCredentials(
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),

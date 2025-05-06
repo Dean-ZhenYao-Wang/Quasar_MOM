@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace MOM.Domain.Common
     /// <summary>
     /// 联系方式
     /// </summary>
+    [Owned]
     public record ContactInformation
     {
         /// <summary>

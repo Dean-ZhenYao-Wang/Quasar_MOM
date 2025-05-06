@@ -1,9 +1,11 @@
 import { defineBoot } from '#q-app/wrappers'
 import axios from 'axios'
+import { useCurrentUserStore } from 'src/stores/currentUser'
 
 const api = axios.create({ baseURL: process.env.API_BASE_URL })
 
 export default defineBoot(({ app, router }) => {
+  const userStore = useCurrentUserStore()
   // 添加 router 参数
   // 请求拦截器
   api.interceptors.request.use(
@@ -13,7 +15,7 @@ export default defineBoot(({ app, router }) => {
         .replace(/\/v\{version\}/, `/v${process.env.API_VERSION}`)
 
       // 添加 token 到请求头
-      const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken')
+      const token = userStore.jwtToken
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }

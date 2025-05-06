@@ -1594,7 +1594,13 @@
       "AuthenticationResponse": {
         "type": "object",
         "properties": {
-          "userName": {
+          "employeeNumber": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "photo": {
             "type": "string"
           },
           "email": {
@@ -1847,6 +1853,19 @@
           }
         }
       },
+      "ContactInformation": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
       "DeleteButtonCommand": {
         "type": "object",
         "properties": {
@@ -1949,6 +1968,13 @@
       },
       "ErrorCode": {
         "type": "integer"
+      },
+      "GenderType": {
+        "enum": [
+          "男",
+          "女",
+          "未知"
+        ]
       },
       "GetPropertiesQuery": {
         "type": "object",
@@ -2126,16 +2152,17 @@
             "type": "string",
             "nullable": true
           },
+          "gender": {
+            "$ref": "#/components/schemas/GenderType"
+          },
+          "contactInformation": {
+            "$ref": "#/components/schemas/ContactInformation"
+          },
+          "photo": {
+            "type": "string"
+          },
           "workStatus": {
             "$ref": "#/components/schemas/PersonWorkStatus"
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
           },
           "lockoutOnFailure": {
             "type": "boolean"

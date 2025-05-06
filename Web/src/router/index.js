@@ -6,6 +6,7 @@ import {
   createWebHashHistory,
 } from 'vue-router'
 import routes from './routes'
+import { useCurrentUserStore } from 'src/stores/currentUser'
 
 /*
  * If not building with SSR mode, you can
@@ -33,9 +34,12 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   })
 
+  const userStore = useCurrentUserStore()
   // 添加路由守卫
   Router.beforeEach((to, from, next) => {
-    const isAuthenticated = checkAuthStatus() // 替换为你的认证检查方法
+    console.log(userStore)
+    const isAuthenticated =
+      userStore.jwtToken !== null && userStore.jwtToken != undefined && userStore.jwtToken != '' // 替换为你的认证检查方法
     // 访问登录页时如果已登录则重定向
     if (to.path === '/login' && isAuthenticated) {
       next('/')
@@ -52,15 +56,8 @@ export default defineRouter(function (/* { store, ssrContext } */) {
         return
       }
     }
-
     next()
   })
 
   return Router
 })
-
-// 示例认证检查方法（根据你的实际实现调整）
-function checkAuthStatus() {
-  return localStorage.getItem('authToken') !== null
-  // 或者使用 Vuex/Pinia 的状态检查
-}
