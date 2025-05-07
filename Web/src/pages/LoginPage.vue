@@ -1,5 +1,12 @@
 <template>
-  <div class="login-container flex flex-center">
+  <div
+    class="login-container flex flex-center"
+    style="
+      background-image: url('src/assets/background-image.png');
+      height: 100vh;
+      background-repeat: repeat;
+    "
+  >
     <q-card class="login-card">
       <q-card-section>
         <h5 class="text-h5 q-my-md">系统登录</h5>
