@@ -47,9 +47,7 @@ export const useMenuStore = defineStore('menuStore', {
             color: 'positive',
           })
         })
-        .catch((err) => {
-          console.log('err')
-          console.log(err)
+        .catch(() => {
           Notify.create({
             message: '菜单添加失败',
             color: 'positive',

@@ -89,6 +89,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "用户权限配置", "Src\A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOM.Application.Features.PersonnelClass", "Src\Core\Application\Features\MOM.Application.Features.PersonnelClass\MOM.Application.Features.PersonnelClass.csproj", "{3BEB9D42-88C4-4510-8AD3-70DEC16B4581}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOM.Application.Features.HierarchyScope", "Src\Core\Application\Features\MOM.Application.Features.HierarchyScope\MOM.Application.Features.HierarchyScope.csproj", "{2A606E07-8701-4E2B-BA34-62EFC5909BD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +169,10 @@ Global
 		{3BEB9D42-88C4-4510-8AD3-70DEC16B4581}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BEB9D42-88C4-4510-8AD3-70DEC16B4581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BEB9D42-88C4-4510-8AD3-70DEC16B4581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A606E07-8701-4E2B-BA34-62EFC5909BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A606E07-8701-4E2B-BA34-62EFC5909BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A606E07-8701-4E2B-BA34-62EFC5909BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A606E07-8701-4E2B-BA34-62EFC5909BD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -213,6 +219,7 @@ Global
 		{98E63395-838F-4E55-8BE6-5DD59E696418} = {94E4D025-F5DB-4D32-B0AD-BD98EEAF0534}
 		{9BBA33AF-A249-4451-87A3-C74E11E137EA} = {F2EE8A63-1D0E-4377-B3B4-28EFA4C5AF28}
 		{3BEB9D42-88C4-4510-8AD3-70DEC16B4581} = {94E4D025-F5DB-4D32-B0AD-BD98EEAF0534}
+		{2A606E07-8701-4E2B-BA34-62EFC5909BD3} = {94E4D025-F5DB-4D32-B0AD-BD98EEAF0534}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1BF80400-1050-4291-9001-0A0B0DE23CDE}

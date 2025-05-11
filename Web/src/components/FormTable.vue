@@ -23,20 +23,22 @@
     <q-table
       :rows="tableData"
       :columns="columns"
-      row-key="id"
       selection="multiple"
       v-model:selected="selectedRows"
       v-model:pagination="pagination"
       @request="onTableChange"
     >
-      <slot></slot>
       <!-- 操作列插槽 -->
       <template #body-cell-actions="props">
         <q-td :props="props">
           <q-btn-group flat>
             <q-btn icon="visibility" dense @click="handleView(props.row)" />
             <q-btn icon="edit" dense @click="showEditDialog(props.row)" />
-            <q-btn icon="delete" dense @click="handleDelete(props.row.id)" />
+            <q-btn
+              icon="delete"
+              dense
+              @click="handleDelete(props.row[config.tableConfig.rowKey])"
+            />
             <slot name="action-buttons" :row="props.row"></slot>
           </q-btn-group>
         </q-td>
@@ -47,7 +49,7 @@
     <q-dialog v-model="formDialogVisible" persistent>
       <q-card style="min-width: 500px">
         <q-card-section>
-          <div class="text-h6">{{ dialogTitle }}表单</div>
+          <div class="text-h6">{{ dialogTitle }}</div>
         </q-card-section>
 
         <q-card-section>
@@ -62,6 +64,7 @@
                   v-bind="field.props"
                   :label="field.label"
                   :rules="field.rules"
+                  :readonly="viewDialogVisible"
                 />
               </template>
             </div>
@@ -69,8 +72,8 @@
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn flat label="取消" v-close-popup />
-          <q-btn color="primary" label="提交" @click="submitForm" />
+          <q-btn label="取消" type="reset" color="primary" flat class="q-ml-sm" @click="onReset" />
+          <q-btn label="提交" type="submit" color="primary" @click="submitForm" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -78,14 +81,21 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, watchEffect } from 'vue'
-import { useQuasar, QInput, QSelect } from 'quasar'
+import { ref, reactive, computed } from 'vue'
+import { useQuasar, QInput, QSelect, QBtnToggle } from 'quasar'
 import * as PrimeVue from 'primevue'
+import ResponsibleSelect from './ResponsibleSelect.vue'
+import HierarchyScopeEquipmentLevel from './HierarchyScopeEquipmentLevel.vue'
+import OrgSelect from './OrgSelect.vue'
 
 const getComponentType = (type) => {
   const componentMap = {
     'q-input': QInput,
     'q-select': QSelect,
+    'q-btn-toggle': QBtnToggle,
+    ResponsibleSelect: ResponsibleSelect,
+    HierarchyScopeEquipmentLevel: HierarchyScopeEquipmentLevel,
+    OrgSelect: OrgSelect,
   }
   return componentMap[type] || PrimeVue[type] || type
 }
@@ -97,44 +107,59 @@ const props = defineProps({
       return ['queryFields', 'formFields', 'tableColumns'].every((key) => key in value)
     },
   },
+  search: Function,
+  create: Function,
+  update: Function,
+  delete: Function,
+  batchDelete: Function,
 })
-
-const emit = defineEmits(['search', 'create', 'update', 'delete', 'batch-delete'])
 
 // 移除原有的axios相关代码
 // 保持表格数据相关状态
-const tableData = ref([])
 const selectedRows = ref([])
-const pagination = reactive({
-  page: 1,
-  rowsPerPage: 10,
-  rowsNumber: 0,
+const tableData = defineModel('tableData', { default: [] })
+const pagination = defineModel('pagination', {
+  default: {
+    page: 1,
+    rowsPerPage: 10,
+    rowsNumber: 0,
+  },
 })
+// 表单数据
+const formData = reactive({})
+const formDialogVisible = ref(false)
+const viewDialogVisible = ref(false)
+const currentEditId = ref(null)
+const dialogTitle = computed(() =>
+  currentEditId.value ? (viewDialogVisible.value ? '查看' : '编辑') : '新增',
+)
 
 const showAddDialog = () => {
-  console.log(formData)
   formDialogVisible.value = true
+}
+const showEditDialog = (row) => {
+  Object.assign(formData, row)
+  showAddDialog()
+}
+const handleView = (row) => {
+  Object.assign(formData, row)
+  formDialogVisible.value = true
+  viewDialogVisible.value = true
+}
+const handleSearch = async () => {
+  await fetchData()
 }
 // 修改后的获取数据方法
 const fetchData = async () => {
   try {
     const params = {
       ...queryParams,
-      page: pagination.page,
-      pageSize: pagination.rowsPerPage,
+      page: pagination.value.page,
+      pageSize: pagination.value.rowsPerPage,
     }
 
     // 触发搜索事件并等待父组件处理
-    const result = await emit('search', {
-      queryParams: params,
-      pagination,
-    })
-
-    // 父组件需要返回处理后的数据
-    if (result) {
-      tableData.value = result.items
-      pagination.rowsNumber = result.total
-    }
+    await props.search(params)
   } catch (error) {
     handleError(error)
   }
@@ -143,40 +168,38 @@ const fetchData = async () => {
 // 修改后的表单提交方法
 const submitForm = async () => {
   try {
-    const payload = {
-      data: { ...formData },
-      id: currentEditId.value,
-    }
+    const payload = { ...formData }
 
     // 根据编辑/新增状态触发不同事件
-    const result = currentEditId.value
-      ? await emit('update', payload)
-      : await emit('create', payload)
-
-    if (result) {
-      formDialogVisible.value = false
-      await fetchData()
-      showNotify('success', '操作成功')
-    }
+    currentEditId.value ? await props.update(payload) : await props.create(payload)
+    onReset()
+    await fetchData()
   } catch (error) {
     handleError(error)
   }
 }
 
-// 修改后的删除处理
+const onReset = () => {
+  // 清空表单数据（保留响应式）
+  Object.keys(formData).forEach((key) => delete formData[key])
+  // 重置编辑状态
+  currentEditId.value = null
+  // 关闭对话框
+  formDialogVisible.value = false
+  viewDialogVisible.value = false
+}
+
+// 删除处理
 const handleDelete = async (id) => {
   try {
-    const success = await emit('delete', { id })
-    if (success) {
-      await fetchData()
-      showNotify('success', '删除成功')
-    }
+    await props.delete(id)
+    await fetchData()
   } catch (error) {
     handleError(error)
   }
 }
 
-// 新增批量删除处理
+// 批量删除处理
 const handleBatchDelete = async () => {
   if (selectedRows.value.length === 0) {
     showNotify('warning', '请选择要删除的记录')
@@ -184,12 +207,10 @@ const handleBatchDelete = async () => {
   }
 
   try {
-    const ids = selectedRows.value.map((item) => item.id)
-    const success = await emit('batch-delete', { ids })
-    if (success) {
-      await fetchData()
-      showNotify('success', '批量删除成功')
-    }
+    const ids = selectedRows.value.map((item) => item[props.config.tableConfig.rowKey])
+    await props.batchDelete(ids)
+    selectedRows.value = []
+    await fetchData()
   } catch (error) {
     handleError(error)
   }
@@ -204,15 +225,9 @@ const initQueryParams = () => {
 }
 initQueryParams()
 
-// 表单数据
-const formData = reactive({})
-const formDialogVisible = ref(false)
-const currentEditId = ref(null)
-const dialogTitle = computed(() => (currentEditId.value ? '编辑' : '新增'))
-
 // 处理分页变化
 const onTableChange = async (newPagination) => {
-  Object.assign(pagination, newPagination)
+  Object.assign(pagination.value, newPagination.pagination)
   await fetchData()
 }
 
@@ -227,14 +242,9 @@ const showNotify = (type, message) => {
   $q.notify({ type, message })
 }
 
-// 暴露方法给父组件
-defineExpose({
-  refresh: fetchData,
-})
-
 // 初始化列配置
 const columns = computed(() => [
-  ...props.config.tableColumns,
+  ...props.config.tableConfig.columns,
   {
     name: 'actions',
     label: '操作',
@@ -245,9 +255,7 @@ const columns = computed(() => [
 ])
 
 // 自动获取初始数据
-watchEffect(() => {
-  fetchData()
-})
+fetchData()
 </script>
 
 <style scoped>
