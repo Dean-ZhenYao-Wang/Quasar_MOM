@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkAlertDefinitionProperty
             InitializeFromTwins(source, target);
         }
 
-        public WorkAlertDefinitionPropertyContainsRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkAlertDefinitionPropertyContainsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

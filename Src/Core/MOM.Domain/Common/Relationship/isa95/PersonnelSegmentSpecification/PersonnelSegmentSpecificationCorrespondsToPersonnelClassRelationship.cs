@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelSegmentSpecification
             InitializeFromTwins(source, target);
         }
 
-        public PersonnelSegmentSpecificationCorrespondsToPersonnelClassRelationship(Guid sourceId, Guid targetId) : this()
+        public PersonnelSegmentSpecificationCorrespondsToPersonnelClassRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

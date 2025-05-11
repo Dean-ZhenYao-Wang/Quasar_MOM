@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.Site
             InitializeFromTwins(source, target);
         }
 
-        public SiteAreaRelationship(Guid sourceId, Guid targetId) : this()
+        public SiteAreaRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

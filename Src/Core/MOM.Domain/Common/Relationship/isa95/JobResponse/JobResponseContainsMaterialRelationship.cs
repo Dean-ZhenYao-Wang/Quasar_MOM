@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.JobResponse
             InitializeFromTwins(source, target);
         }
 
-        public JobResponseContainsMaterialRelationship(Guid sourceId, Guid targetId) : this()
+        public JobResponseContainsMaterialRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

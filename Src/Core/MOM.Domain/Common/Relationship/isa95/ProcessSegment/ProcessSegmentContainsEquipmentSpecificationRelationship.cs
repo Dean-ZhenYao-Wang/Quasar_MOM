@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.ProcessSegment
             InitializeFromTwins(source, target);
         }
 
-        public ProcessSegmentContainsEquipmentSpecificationRelationship(Guid sourceId, Guid targetId) : this()
+        public ProcessSegmentContainsEquipmentSpecificationRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

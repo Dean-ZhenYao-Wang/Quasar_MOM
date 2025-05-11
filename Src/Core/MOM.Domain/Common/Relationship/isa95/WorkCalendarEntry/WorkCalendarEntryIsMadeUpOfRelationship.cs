@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkCalendarEntry
             InitializeFromTwins(source, target);
         }
 
-        public WorkCalendarEntryIsMadeUpOfRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkCalendarEntryIsMadeUpOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialActual
             InitializeFromTwins(source, target);
         }
 
-        public MaterialActualCorrespondsToSublotRelationship(Guid sourceId, Guid targetId) : this()
+        public MaterialActualCorrespondsToSublotRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

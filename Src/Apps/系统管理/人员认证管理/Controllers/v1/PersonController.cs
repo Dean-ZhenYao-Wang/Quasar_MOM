@@ -9,7 +9,6 @@ using MOM.Application.Features.Personnel.Queries.GetPagedListPerson;
 using MOM.Application.Features.Personnel.Queries.GetProperties;
 using MOM.Application.Features.Personnel.Queries.GetResponsibles;
 using MOM.Application.Infrastructure;
-using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 
@@ -30,6 +29,7 @@ namespace 人员认证管理.Controllers.v1
         {
             return await Mediator.Send(new GetResponsiblesQuery());
         }
+
         /// <summary>
         /// 获取指定人员的自定义属性清单
         /// </summary>
@@ -40,6 +40,7 @@ namespace 人员认证管理.Controllers.v1
         {
             return await Mediator.Send(command);
         }
+
         /// <summary>
         /// 添加人员/创建账号
         /// </summary>
@@ -51,6 +52,7 @@ namespace 人员认证管理.Controllers.v1
             var model = await Mediator.Send(request);
             return model;
         }
+
         /// <summary>
         /// 分页获取人员
         /// </summary>
@@ -61,6 +63,7 @@ namespace 人员认证管理.Controllers.v1
         {
             return await Mediator.Send(request);
         }
+
         /// <summary>
         /// 删除人员
         /// </summary>
@@ -72,6 +75,7 @@ namespace 人员认证管理.Controllers.v1
             var deleteResoult = await Mediator.Send(command);
             return deleteResoult;
         }
+
         /// <summary>
         /// 修改人员
         /// </summary>

@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.TestableObject
             InitializeFromTwins(source, target);
         }
 
-        public TestableObjectHasTestableObjectPropertyValuesOfRelationship(Guid sourceId, Guid targetId) : this()
+        public TestableObjectHasTestableObjectPropertyValuesOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

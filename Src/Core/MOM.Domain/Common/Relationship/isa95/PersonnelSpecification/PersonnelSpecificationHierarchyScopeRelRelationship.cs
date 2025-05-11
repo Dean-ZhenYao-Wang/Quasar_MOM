@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelSpecification
             InitializeFromTwins(source, target);
         }
 
-        public PersonnelSpecificationHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : this()
+        public PersonnelSpecificationHierarchyScopeRelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

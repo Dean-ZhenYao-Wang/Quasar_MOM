@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.Equipment
             InitializeFromTwins(source, target);
         }
 
-        public EquipmentHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : this()
+        public EquipmentHierarchyScopeRelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

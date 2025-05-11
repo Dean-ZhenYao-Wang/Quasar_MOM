@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.ProcessSegment
             InitializeFromTwins(source, target);
         }
 
-        public ProcessSegmentHasAnExecutionDependencyOnRelationship(Guid sourceId, Guid targetId) : this()
+        public ProcessSegmentHasAnExecutionDependencyOnRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

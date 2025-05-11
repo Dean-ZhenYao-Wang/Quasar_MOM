@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkSchedule
             InitializeFromTwins(source, target);
         }
 
-        public WorkScheduleIsMadeUpOfScheduleRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkScheduleIsMadeUpOfScheduleRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

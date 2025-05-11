@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.ProcessSegmentCapability
             InitializeFromTwins(source, target);
         }
 
-        public ProcessSegmentCapabilityIsACollectionOfMaterialRelationship(Guid sourceId, Guid targetId) : this()
+        public ProcessSegmentCapabilityIsACollectionOfMaterialRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

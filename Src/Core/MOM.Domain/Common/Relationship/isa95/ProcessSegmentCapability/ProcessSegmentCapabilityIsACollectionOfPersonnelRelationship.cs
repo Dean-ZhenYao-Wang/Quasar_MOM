@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.ProcessSegmentCapability
             InitializeFromTwins(source, target);
         }
 
-        public ProcessSegmentCapabilityIsACollectionOfPersonnelRelationship(Guid sourceId, Guid targetId) : this()
+        public ProcessSegmentCapabilityIsACollectionOfPersonnelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

@@ -8,7 +8,7 @@
         public string? Address { get; set; }
 
         public Enterprise(string name, string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null)
-            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Enterprise, name, description, active)
+            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Enterprise, name, address, description, active)
         {
             this.Address = address;
             this.ResponsibleDtId = responsibleDtId;

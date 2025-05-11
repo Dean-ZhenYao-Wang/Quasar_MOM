@@ -16,5 +16,6 @@ namespace MOM.Application.Interfaces.Repositories
         void DeleteRange(IEnumerable<T> entities);
         IEnumerable<T> Where(Func<T, bool> predicate);
         Task<int> ExecuteUpdateAsync(Expression<Func<T, bool>> predicate, Expression<Func<Microsoft.EntityFrameworkCore.Query.SetPropertyCalls<T>, Microsoft.EntityFrameworkCore.Query.SetPropertyCalls<T>>> func);
+        Task<Wrappers.PagedResponse<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class;
     }
 }

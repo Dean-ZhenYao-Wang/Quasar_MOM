@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
+namespace MOM.Application.DTOs.Personnel
 {
     public static class PersonException
     {
-        public static List<Application.DTOs.Resource.Responses.ResourcePropertyResponse> GetProperties(this Person person)
+        public static List<ResourcePropertyResponse> GetProperties(this Person person)
         {
             return person.HasValuesOf.Select(m => new ResourcePropertyResponse(m.Target)).ToList();
         }

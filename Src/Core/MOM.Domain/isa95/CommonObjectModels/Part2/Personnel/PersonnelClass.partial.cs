@@ -21,6 +21,11 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             }
         }
 
+        public void Update(string ID, Guid? responsibleDtId)
+        {
+            this.Id = Id;
+            this.ResponsibleDtId = responsibleDtId;
+        }
         public void Delete()
         {
             foreach (var item in HasPropertiesOf)

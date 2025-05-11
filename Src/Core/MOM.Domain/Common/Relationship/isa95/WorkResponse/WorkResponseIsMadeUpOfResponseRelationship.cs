@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkResponse
             InitializeFromTwins(source, target);
         }
 
-        public WorkResponseIsMadeUpOfResponseRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkResponseIsMadeUpOfResponseRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

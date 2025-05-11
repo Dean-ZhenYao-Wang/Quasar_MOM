@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.SegmentResponse
             InitializeFromTwins(source, target);
         }
 
-        public SegmentResponseContainsEquipmentRelationship(Guid sourceId, Guid targetId) : this()
+        public SegmentResponseContainsEquipmentRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

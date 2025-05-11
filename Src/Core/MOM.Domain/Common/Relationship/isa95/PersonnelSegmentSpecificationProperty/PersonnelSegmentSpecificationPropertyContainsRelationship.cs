@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelSegmentSpecificationProp
             InitializeFromTwins(source, target);
         }
 
-        public PersonnelSegmentSpecificationPropertyContainsRelationship(Guid sourceId, Guid targetId) : this()
+        public PersonnelSegmentSpecificationPropertyContainsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

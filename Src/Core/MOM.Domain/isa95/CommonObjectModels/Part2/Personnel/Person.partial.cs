@@ -49,7 +49,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </summary>
         public List<AvailablePermission> AvailablePermissions { get; set; } = new();
 
-        public Person(string Id, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? departmentDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null) : this()
+        public Person(string Id, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null) : this()
         {
             this.Id = Id;
             this.WorkStatus = workStatus;
@@ -61,9 +61,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             {
                 this.DefinedByAddTarget(teamOfGroupDtId.Value);
             }
-            if (departmentDtId != null)
+            if (OrgDtId != null)
             {
-                this.DefinedByAddTarget(departmentDtId.Value);
+                this.DefinedByAddTarget(OrgDtId.Value);
             }
             if (positionDtId_List != null)
             {
@@ -74,7 +74,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             }
         }
 
-        public void Update(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? departmentDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null, IEnumerable<PersonProperty> properties = null)
+        public void Update(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null, IEnumerable<PersonProperty> properties = null)
         {
             this.Id = Id;
             this.WorkStatus = workStatus;
@@ -90,9 +90,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             {
                 this.DefinedByAddTarget(teamOfGroupDtId.Value);
             }
-            if (departmentDtId != null)
+            if (OrgDtId != null)
             {
-                this.DefinedByAddTarget(departmentDtId.Value);
+                this.DefinedByAddTarget(OrgDtId.Value);
             }
             if (positionDtId_List != null)
             {

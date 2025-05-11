@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EvaluatedProperty
             InitializeFromTwins(source, target);
         }
 
-        public EvaluatedPropertyCorrespondsToRelationship(Guid sourceId, Guid targetId) : this()
+        public EvaluatedPropertyCorrespondsToRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

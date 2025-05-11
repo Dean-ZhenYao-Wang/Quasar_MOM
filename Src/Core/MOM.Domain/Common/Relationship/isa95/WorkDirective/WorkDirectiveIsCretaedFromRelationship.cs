@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkDirective
             InitializeFromTwins(source, target);
         }
 
-        public WorkDirectiveIsCretaedFromRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkDirectiveIsCretaedFromRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

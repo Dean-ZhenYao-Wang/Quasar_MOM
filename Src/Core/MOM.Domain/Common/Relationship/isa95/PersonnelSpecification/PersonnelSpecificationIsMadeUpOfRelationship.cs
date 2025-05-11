@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelSpecification
             InitializeFromTwins(source, target);
         }
 
-        public PersonnelSpecificationIsMadeUpOfRelationship(Guid sourceId, Guid targetId) : this()
+        public PersonnelSpecificationIsMadeUpOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

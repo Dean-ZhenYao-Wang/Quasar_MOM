@@ -44,7 +44,7 @@ public abstract class Relationship<TTarget> : BasicRelationship, IEquatable<Basi
     /// </summary>
     /// <param name="sourceDtId">源数字孪生唯一标识符</param>
     /// <param name="targetDtId">目标数字孪生唯一标识符</param>
-    protected void InitializeFromTwins(Guid sourceDtId, Guid targetDtId)
+    protected void InitializeFromTwins(Guid? sourceDtId, Guid targetDtId)
     {
         SourceId = sourceDtId;
         TargetId = targetDtId;

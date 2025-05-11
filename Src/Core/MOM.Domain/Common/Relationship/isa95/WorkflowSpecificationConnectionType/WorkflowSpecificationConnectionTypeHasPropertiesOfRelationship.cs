@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkflowSpecificationConnectionTy
             InitializeFromTwins(source, target);
         }
 
-        public WorkflowSpecificationConnectionTypeHasPropertiesOfRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkflowSpecificationConnectionTypeHasPropertiesOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

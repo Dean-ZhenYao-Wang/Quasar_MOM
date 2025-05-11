@@ -2,8 +2,8 @@
 {
     public partial class ProductionUnit
     {
-        public ProductionUnit(string name, string description = "", bool active = false, Guid? responsibleDtId = null)
-            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Production_Unit, name, description, active, responsibleDtId)
+        public ProductionUnit(string name, string address = "", string description = "", bool active = false, Guid? responsibleDtId = null)
+            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Production_Unit, name,address, description, active, responsibleDtId)
         {
         }
     }

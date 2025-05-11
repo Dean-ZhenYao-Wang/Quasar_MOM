@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsResponse
             InitializeFromTwins(source, target);
         }
 
-        public OperationsResponseCorrespondsToRequirementRelationship(Guid sourceId, Guid targetId) : this()
+        public OperationsResponseCorrespondsToRequirementRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

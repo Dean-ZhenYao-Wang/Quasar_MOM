@@ -1,5 +1,4 @@
 ﻿using Asp.Versioning;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.Features.Permission.Commands.AddButton;
@@ -12,11 +11,7 @@ using MOM.Application.Features.Permission.Queries.GetButtonList;
 using MOM.Application.Features.Permission.Queries.GetMenuList;
 using MOM.Application.Features.Permission.Queries.GetMenuTree;
 using MOM.Application.Infrastructure;
-using MOM.Application.Infrastructure.Services;
-using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
-using MOM.Domain.Permission;
-using Newtonsoft.Json;
 
 namespace 系统基础数据.Controllers.v1
 {
@@ -32,49 +27,56 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(new GetMenuTreeQuery());
         }
+
         [HttpPost]
         public async Task<BaseResult> AddMenu(AddMenuCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
+
         [HttpPost]
         public async Task<BaseResult> AddButton(AddButtonCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
+
         [HttpPut]
         public async Task<BaseResult> UpdateMenu(UpdateMenuCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
+
         [HttpPut]
         public async Task<BaseResult> UpdateButton(UpdateButtonCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
+
         [HttpDelete]
         public async Task<BaseResult> DeleteMenu(DeleteMenuCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
+
         [HttpDelete]
         public async Task<BaseResult> DeleteButton(DeleteButtonCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
+
         [HttpGet]
         public async Task<BaseResult<List<MenuResponse>>> GetMenuList([FromQuery] GetMenuListQuery command)
         {
-
             var model = await Mediator.Send(command);
             return model;
         }
+
         [HttpGet]
         [Route("{menuDtId}")]
         public async Task<BaseResult<List<ButtonResponse>>> GetButtonList(Guid menuDtId)

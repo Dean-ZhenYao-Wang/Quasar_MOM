@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentSegmentSpecification
             InitializeFromTwins(source, target);
         }
 
-        public EquipmentSegmentSpecificationIsMadeUpOfRelationship(Guid sourceId, Guid targetId) : this()
+        public EquipmentSegmentSpecificationIsMadeUpOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

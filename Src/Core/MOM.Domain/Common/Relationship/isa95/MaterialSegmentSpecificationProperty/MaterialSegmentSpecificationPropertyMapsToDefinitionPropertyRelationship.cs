@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialSegmentSpecificationPrope
             InitializeFromTwins(source, target);
         }
 
-        public MaterialSegmentSpecificationPropertyMapsToDefinitionPropertyRelationship(Guid sourceId, Guid targetId) : this()
+        public MaterialSegmentSpecificationPropertyMapsToDefinitionPropertyRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

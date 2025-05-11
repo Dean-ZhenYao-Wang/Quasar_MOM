@@ -35,21 +35,21 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         [JsonPropertyName("modelNumber")]
         public string ModelNumber { get; set; }
         /// <summary>
-        /// 使用部门的DtId
+        /// 使用组织的DtId
         /// </summary>
-        [JsonPropertyName("useDepartmentDtId")]
-        public Guid? UseDepartmentDtId { get; set; }
+        [JsonPropertyName("useOrgDtId")]
+        public Guid? UseOrgDtId { get; set; }
         /// <summary>
-        /// 使用部门
+        /// 使用组织
         /// </summary>
         [JsonIgnore]
-        [ForeignKey(nameof(UseDepartmentDtId))]
-        public virtual PersonnelClass? UseDepartment { get; set; }
+        [ForeignKey(nameof(UseOrgDtId))]
+        public virtual PersonnelClass? UseOrg { get; set; }
         /// <summary>
-        /// 使用部门
+        /// 使用组织
         /// </summary>
-        [JsonPropertyName("departmentName")]
-        public string? UseDepartmentName { get => UseDepartment?.Id; }
+        [JsonPropertyName("OrgName")]
+        public string? UseOrgName { get => UseOrg?.Id; }
         /// <summary>
         /// 设备状态
         /// </summary>
@@ -130,12 +130,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.Description = description;
             this.EquipmentLevel = EquipmentLevel;
         }
-        public Equipment(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, Guid? useDepartmentDtId, EquipmentStatusType status, DateTime enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, description, equipmentLevel)
+        public Equipment(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, Guid? useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, description, equipmentLevel)
         {
             Number = number;
             Specification = specification;
             ModelNumber = modelNumber;
-            UseDepartmentDtId = useDepartmentDtId;
+            UseOrgDtId = useOrgDtId;
             Status = status;
             EnabledTime = enabledTime;
             ResponsibleDtId = responsibleDtId;
@@ -182,7 +182,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.Description = description ?? string.Empty;
             this.EquipmentLevel = equipmentLevel;
         }
-        public void Update(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, Guid useDepartmentDtId, EquipmentStatusType status, DateTime enabledTime, Guid responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
+        public void Update(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, Guid useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
         {
             this.Id = Id;
             this.Description = description ?? string.Empty;
@@ -190,7 +190,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.Number = number;
             this.Specification = specification;
             this.ModelNumber = modelNumber;
-            this.UseDepartmentDtId = useDepartmentDtId;
+            this.UseOrgDtId = useOrgDtId;
             this.Status = status;
             this.EnabledTime = enabledTime;
             this.ResponsibleDtId = responsibleDtId;

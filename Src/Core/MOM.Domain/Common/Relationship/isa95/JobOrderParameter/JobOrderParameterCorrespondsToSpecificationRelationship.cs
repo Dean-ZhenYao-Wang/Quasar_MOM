@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.JobOrderParameter
             InitializeFromTwins(source, target);
         }
 
-        public JobOrderParameterCorrespondsToSpecificationRelationship(Guid sourceId, Guid targetId) : this()
+        public JobOrderParameterCorrespondsToSpecificationRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

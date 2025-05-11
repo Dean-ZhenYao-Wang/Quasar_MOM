@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.ResourceNetworkConnectionTypeProp
             InitializeFromTwins(source, target);
         }
 
-        public ResourceNetworkConnectionTypePropertyMapsToRelationship(Guid sourceId, Guid targetId) : this()
+        public ResourceNetworkConnectionTypePropertyMapsToRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

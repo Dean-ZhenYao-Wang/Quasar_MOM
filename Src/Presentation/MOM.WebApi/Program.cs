@@ -158,19 +158,19 @@ builder.Host.UseSerilog(Log.Logger);
 
 
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
 
-    if (!useInMemoryDatabase)
-    {
-        //await services.GetRequiredService<ApplicationDbContext>().Database.MigrateAsync();
-        //await services.GetRequiredService<FileManagerDbContext>().Database.MigrateAsync();
-    }
+//    if (!useInMemoryDatabase)
+//    {
+//        await services.GetRequiredService<ApplicationDbContext>().Database.MigrateAsync();
+//        await services.GetRequiredService<FileManagerDbContext>().Database.MigrateAsync();
+//    }
 
-    //Seed Data
-    //await DefaultData.SeedAsync(services.GetRequiredService<ApplicationDbContext>(), enterpriseSettings);
-}
+//    //Seed Data
+//    await DefaultData.SeedAsync(services.GetRequiredService<ApplicationDbContext>(), enterpriseSettings);
+//}
 app.UseCustomLocalization();
 app.UseAnyCors();
 app.UseRouting();

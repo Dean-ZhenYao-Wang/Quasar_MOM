@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkMasterCapability
             InitializeFromTwins(source, target);
         }
 
-        public WorkMasterCapabilityIsACollectionOfPhysicalAssetRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkMasterCapabilityIsACollectionOfPhysicalAssetRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

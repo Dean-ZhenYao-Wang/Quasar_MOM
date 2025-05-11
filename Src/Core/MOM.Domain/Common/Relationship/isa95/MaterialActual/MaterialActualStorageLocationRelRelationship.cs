@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialActual
             InitializeFromTwins(source, target);
         }
 
-        public MaterialActualStorageLocationRelRelationship(Guid sourceId, Guid targetId) : this()
+        public MaterialActualStorageLocationRelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

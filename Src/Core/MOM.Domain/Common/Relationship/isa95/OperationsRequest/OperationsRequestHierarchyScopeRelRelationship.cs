@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsRequest
             InitializeFromTwins(source, target);
         }
 
-        public OperationsRequestHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : this()
+        public OperationsRequestHierarchyScopeRelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

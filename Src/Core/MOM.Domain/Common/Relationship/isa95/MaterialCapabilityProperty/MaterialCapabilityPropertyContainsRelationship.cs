@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialCapabilityProperty
             InitializeFromTwins(source, target);
         }
 
-        public MaterialCapabilityPropertyContainsRelationship(Guid sourceId, Guid targetId) : this()
+        public MaterialCapabilityPropertyContainsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

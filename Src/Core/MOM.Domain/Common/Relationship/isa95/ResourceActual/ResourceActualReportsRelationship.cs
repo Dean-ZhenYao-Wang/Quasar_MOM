@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.ResourceActual
             InitializeFromTwins(source, target);
         }
 
-        public ResourceActualReportsRelationship(Guid sourceId, Guid targetId) : this()
+        public ResourceActualReportsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

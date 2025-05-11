@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsTestRequirement
             InitializeFromTwins(source, target);
         }
 
-        public OperationsTestRequirementMapsToAPropertyElementInRelationship(Guid sourceId, Guid targetId) : this()
+        public OperationsTestRequirementMapsToAPropertyElementInRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

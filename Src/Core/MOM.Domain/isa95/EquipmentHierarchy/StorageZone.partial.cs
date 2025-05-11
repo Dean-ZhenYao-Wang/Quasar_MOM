@@ -2,8 +2,8 @@
 {
     public partial class StorageZone
     {
-        public StorageZone(string name, string description = "", bool active = false, Guid? responsibleDtId = null)
-            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Storage_Zone, name, description, active, responsibleDtId)
+        public StorageZone(string name, string address = "", string description = "", bool active = false, Guid? responsibleDtId = null)
+            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Storage_Zone, name,address, description, active, responsibleDtId)
         {
         }
     }

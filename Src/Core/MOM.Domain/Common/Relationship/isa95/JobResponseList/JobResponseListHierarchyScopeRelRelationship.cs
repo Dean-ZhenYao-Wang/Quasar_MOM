@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.JobResponseList
             InitializeFromTwins(source, target);
         }
 
-        public JobResponseListHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : this()
+        public JobResponseListHierarchyScopeRelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

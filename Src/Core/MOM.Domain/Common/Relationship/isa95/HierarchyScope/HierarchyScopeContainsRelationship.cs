@@ -19,7 +19,7 @@ namespace MOM.Domain.Common.Relationship.isa95.HierarchyScope
             InitializeFromTwins(source, target);
         }
 
-        public HierarchyScopeContainsRelationship(Guid sourceId, Guid targetId) : this()
+        public HierarchyScopeContainsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

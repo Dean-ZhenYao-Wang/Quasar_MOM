@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PropertyMeasurement
             InitializeFromTwins(source, target);
         }
 
-        public PropertyMeasurementMeasuredWithMethodOfRelationship(Guid sourceId, Guid targetId) : this()
+        public PropertyMeasurementMeasuredWithMethodOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

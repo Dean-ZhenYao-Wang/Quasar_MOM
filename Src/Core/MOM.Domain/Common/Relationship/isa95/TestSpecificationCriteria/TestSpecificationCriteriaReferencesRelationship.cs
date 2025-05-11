@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.TestSpecificationCriteria
             InitializeFromTwins(source, target);
         }
 
-        public TestSpecificationCriteriaReferencesRelationship(Guid sourceId, Guid targetId) : this()
+        public TestSpecificationCriteriaReferencesRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

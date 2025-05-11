@@ -34,7 +34,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </summary>
         [JsonIgnore]
         public virtual PersonHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new PersonHasValuesOfRelationshipCollection();
-
+        /// <summary>
+        /// 确定交换的信息在基于角色的设备层次结构中的位置。可选地，层次结构作用域定义人员定义的作用域。
+        /// </summary>
         [MaxLength(1)]
         [JsonIgnore]
         public virtual PersonHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new PersonHierarchyScopeRelRelationshipCollection();

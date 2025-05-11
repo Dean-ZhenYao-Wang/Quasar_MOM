@@ -20,7 +20,7 @@ namespace MOM.Domain.Common.Relationship.isa95.Area
             InitializeFromTwins(source, target);
         }
 
-        public AreaWorkCenterRelationship(Guid sourceId, Guid targetId) : this()
+        public AreaWorkCenterRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

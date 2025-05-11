@@ -15,7 +15,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentActualProperty
             InitializeFromTwins(source, target);
         }
 
-        public EquipmentActualPropertyMapsToPropertyRelationship(Guid sourceId, Guid targetId) : this()
+        public EquipmentActualPropertyMapsToPropertyRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

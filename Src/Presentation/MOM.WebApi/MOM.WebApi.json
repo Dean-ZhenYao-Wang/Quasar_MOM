@@ -647,250 +647,6 @@
         ]
       }
     },
-    "/api/v{version}/Department/AddDepartment": {
-      "post": {
-        "tags": [
-          "Department"
-        ],
-        "parameters": [
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddDepartmentCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddDepartmentCommand"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AddDepartmentCommand"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
-    "/api/v{version}/Department/DeleteDepartment": {
-      "delete": {
-        "tags": [
-          "Department"
-        ],
-        "parameters": [
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteDepartmentCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteDepartmentCommand"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteDepartmentCommand"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
-    "/api/v{version}/Department/UpdateDepartment": {
-      "delete": {
-        "tags": [
-          "Department"
-        ],
-        "parameters": [
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateDepartmentCommand"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateDepartmentCommand"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateDepartmentCommand"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResult"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
-    "/api/v{version}/Department/GetDepartTree": {
-      "get": {
-        "tags": [
-          "Department"
-        ],
-        "parameters": [
-          {
-            "name": "sourceDtId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfListOfDepartmentResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfListOfDepartmentResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseResultOfListOfDepartmentResponse"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "Bearer": [ ]
-          }
-        ]
-      }
-    },
     "/api/v{version}/Menu/GetMenuTree": {
       "get": {
         "tags": [
@@ -1423,6 +1179,332 @@
           }
         ]
       }
+    },
+    "/api/v{version}/Org/GetOrgTable": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "parameters": [
+          {
+            "name": "SourceDtId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResponseOfOrgResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResponseOfOrgResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedResponseOfOrgResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v{version}/Org/AddOrg": {
+      "post": {
+        "tags": [
+          "Org"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddOrgCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddOrgCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddOrgCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v{version}/Org/DeleteOrg": {
+      "delete": {
+        "tags": [
+          "Org"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteOrgCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteOrgCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteOrgCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v{version}/Org/UpdateOrg": {
+      "delete": {
+        "tags": [
+          "Org"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrgCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrgCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrgCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResult"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/v{version}/Org/GetDepartTree": {
+      "get": {
+        "tags": [
+          "Org"
+        ],
+        "parameters": [
+          {
+            "name": "sourceDtId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResultOfListOfTreeNodeOfOrgResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResultOfListOfTreeNodeOfOrgResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseResultOfListOfTreeNodeOfOrgResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": [ ]
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -1452,28 +1534,6 @@
           "icon": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "AddDepartmentCommand": {
-        "required": [
-          "responsibleDtId",
-          "id"
-        ],
-        "type": "object",
-        "properties": {
-          "sourceDtId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "responsibleDtId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "id": {
-            "type": "string"
           }
         }
       },
@@ -1523,6 +1583,47 @@
           }
         }
       },
+      "AddOrgCommand": {
+        "required": [
+          "id",
+          "name",
+          "equipmentLevel",
+          "active"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "equipmentLevel": {
+            "$ref": "#/components/schemas/HierarchyScopeEquipmentLevel"
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "responsibleDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
       "AddPersonCommand": {
         "required": [
           "id",
@@ -1560,7 +1661,7 @@
             "format": "uuid",
             "nullable": true
           },
-          "departmentDtId": {
+          "orgDtId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
@@ -1692,27 +1793,6 @@
           }
         }
       },
-      "BaseResultOfListOfDepartmentResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DepartmentResponse"
-            },
-            "nullable": true
-          },
-          "success": {
-            "type": "boolean"
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
       "BaseResultOfListOfMenuResponse": {
         "type": "object",
         "properties": {
@@ -1783,6 +1863,27 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ResourcePropertyResponse"
+            },
+            "nullable": true
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "BaseResultOfListOfTreeNodeOfOrgResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TreeNodeOfOrgResponse"
             },
             "nullable": true
           },
@@ -1878,7 +1979,7 @@
           }
         }
       },
-      "DeleteDepartmentCommand": {
+      "DeleteMenuCommand": {
         "type": "object",
         "properties": {
           "dtIds": {
@@ -1890,7 +1991,7 @@
           }
         }
       },
-      "DeleteMenuCommand": {
+      "DeleteOrgCommand": {
         "type": "object",
         "properties": {
           "dtIds": {
@@ -1911,39 +2012,6 @@
               "type": "string",
               "format": "uuid"
             }
-          }
-        }
-      },
-      "DepartmentResponse": {
-        "required": [
-          "responsibleDtId",
-          "id"
-        ],
-        "type": "object",
-        "properties": {
-          "sourceDtId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/#/properties/data/items"
-            }
-          },
-          "dtId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "responsibleDtId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "id": {
-            "type": "string"
           }
         }
       },
@@ -1984,6 +2052,22 @@
             "format": "uuid"
           }
         }
+      },
+      "HierarchyScopeEquipmentLevel": {
+        "enum": [
+          "Enterprise",
+          "Site",
+          "Area",
+          "Work_Center",
+          "Work_Unit",
+          "Process_Cell",
+          "Unit",
+          "Production_Line",
+          "Production_Unit",
+          "Work_Cell",
+          "Storage_Zone",
+          "Storage_Unit"
+        ]
       },
       "MenuResponse": {
         "required": [
@@ -2093,6 +2177,154 @@
           null
         ],
         "nullable": true
+      },
+      "OrgResponse": {
+        "required": [
+          "id",
+          "name",
+          "equipmentLevel",
+          "active"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceName": {
+            "type": "string"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/#/properties/data/items"
+            }
+          },
+          "dtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "equipmentLevel": {
+            "$ref": "#/components/schemas/HierarchyScopeEquipmentLevel"
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "responsibleDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "OrgResponse2": {
+        "required": [
+          "id",
+          "name",
+          "equipmentLevel",
+          "active"
+        ],
+        "type": "object",
+        "properties": {
+          "sourceDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceName": {
+            "type": "string"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrgResponse"
+            }
+          },
+          "dtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "equipmentLevel": {
+            "$ref": "#/components/schemas/HierarchyScopeEquipmentLevel"
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "responsibleDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean"
+          }
+        },
+        "nullable": true
+      },
+      "PagedResponseOfOrgResponse": {
+        "type": "object",
+        "properties": {
+          "pageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrgResponse"
+            },
+            "nullable": true
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
       },
       "PagedResponseOfPersonResponse": {
         "type": "object",
@@ -2255,7 +2487,7 @@
             "format": "uuid",
             "nullable": true
           },
-          "departmentDtId": {
+          "orgDtId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
@@ -2399,6 +2631,41 @@
           }
         }
       },
+      "TreeNodeOfOrgResponse": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OrgResponse2"
+          },
+          "type": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/#/properties/data/items"
+            }
+          },
+          "selectable": {
+            "type": "boolean"
+          },
+          "leaf": {
+            "type": "boolean"
+          },
+          "loading": {
+            "type": "boolean"
+          }
+        }
+      },
       "UpdateButtonCommand": {
         "required": [
           "id",
@@ -2419,28 +2686,6 @@
           "icon": {
             "type": "string",
             "nullable": true
-          }
-        }
-      },
-      "UpdateDepartmentCommand": {
-        "required": [
-          "responsibleDtId",
-          "id"
-        ],
-        "type": "object",
-        "properties": {
-          "dtId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "responsibleDtId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "id": {
-            "type": "string"
           }
         }
       },
@@ -2490,6 +2735,52 @@
           }
         }
       },
+      "UpdateOrgCommand": {
+        "required": [
+          "id",
+          "name",
+          "equipmentLevel",
+          "active"
+        ],
+        "type": "object",
+        "properties": {
+          "dtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "equipmentLevel": {
+            "$ref": "#/components/schemas/HierarchyScopeEquipmentLevel"
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "responsibleDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sourceDtId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
       "UpdatePersonCommand": {
         "required": [
           "id",
@@ -2527,7 +2818,7 @@
             "format": "uuid",
             "nullable": true
           },
-          "departmentDtId": {
+          "orgDtId": {
             "type": "string",
             "format": "uuid",
             "nullable": true
@@ -2570,10 +2861,10 @@
       "name": "Person"
     },
     {
-      "name": "Department"
+      "name": "Menu"
     },
     {
-      "name": "Menu"
+      "name": "Org"
     }
   ]
 }

@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialActualProperty
             InitializeFromTwins(source, target);
         }
 
-        public MaterialActualPropertyMapsToLotPropertyRelationship(Guid sourceId, Guid targetId) : this()
+        public MaterialActualPropertyMapsToLotPropertyRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

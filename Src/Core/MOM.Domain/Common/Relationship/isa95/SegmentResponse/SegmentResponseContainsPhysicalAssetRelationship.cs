@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.SegmentResponse
             InitializeFromTwins(source, target);
         }
 
-        public SegmentResponseContainsPhysicalAssetRelationship(Guid sourceId, Guid targetId) : this()
+        public SegmentResponseContainsPhysicalAssetRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

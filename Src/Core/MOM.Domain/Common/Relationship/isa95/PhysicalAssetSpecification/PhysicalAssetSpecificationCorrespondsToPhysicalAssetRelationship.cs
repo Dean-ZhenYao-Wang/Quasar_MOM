@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PhysicalAssetSpecification
             InitializeFromTwins(source, target);
         }
 
-        public PhysicalAssetSpecificationCorrespondsToPhysicalAssetRelationship(Guid sourceId, Guid targetId) : this()
+        public PhysicalAssetSpecificationCorrespondsToPhysicalAssetRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

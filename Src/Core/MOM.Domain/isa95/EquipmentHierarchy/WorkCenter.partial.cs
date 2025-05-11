@@ -1,13 +1,14 @@
 ﻿using MOM.Domain.Common.EnumType;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net;
 using System.Text.Json.Serialization;
 
 namespace MOM.Domain.isa95.EquipmentHierarchy
 {
     public partial class WorkCenter
     {
-        public WorkCenter(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string description = "", bool active = false, Guid? responsibleDtId = null) : base(equipmentLevel, ID, description, active)
+        public WorkCenter(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string address = "", string description = "", bool active = false, Guid? responsibleDtId = null) : base(equipmentLevel, ID, address, description, active)
         {
             ResponsibleDtId = responsibleDtId;
         }

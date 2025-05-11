@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.SegmentRequirement
             InitializeFromTwins(source, target);
         }
 
-        public SegmentRequirementContainsPersonnelRelationship(Guid sourceId, Guid targetId) : this()
+        public SegmentRequirementContainsPersonnelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

@@ -1,14 +1,8 @@
-﻿using Azure.Core;
-using Microsoft.EntityFrameworkCore;
-using MOM.Application.DTOs.Department;
-using MOM.Application.DTOs.Department.Responses;
-using MOM.Application.DTOs.Menu.Responses;
-using MOM.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using MOM.Application.DTOs.HierarchyScope.Responses;
 using MOM.Application.Interfaces.Repositories;
-using MOM.Domain.Common;
 using MOM.Domain.Common.Relationship.isa95.PersonnelClass;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using MOM.Domain.isa95.EquipmentHierarchy;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
@@ -26,15 +20,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         public async Task AddAsync(PersonnelClass model, Guid? sourceDtId)
         {
             await AddAsync(model);
-            if (sourceDtId == null || sourceDtId == Guid.Empty)
-            {
-                var enterprise = new Enterprise(model.Id, string.Empty, true);
-                model.HierarchyScopeRel.Add(new PersonnelClassHierarchyScopeRelRelationship(model, enterprise));
-            }
-            else
-            {
-                await personnelClassIncludesPropertiesOfRelationships.AddAsync(new PersonnelClassIncludesPropertiesOfRelationship(sourceDtId.Value, model.DtId));
-            }
+            await personnelClassIncludesPropertiesOfRelationships.AddAsync(new PersonnelClassIncludesPropertiesOfRelationship(sourceDtId, model.DtId));
         }
 
         public async Task DeleteAsync(Guid[] dtIds)
@@ -61,24 +47,24 @@ namespace MOM.Infrastructure.Persistence.Repositories
             }
         }
 
-        public async Task<List<DepartmentResponse>> GetDepartmentTreeAsync(Guid? sourceDtId)
+        public async Task<List<OrgResponse>> GetOrgTreeAsync(Guid? sourceDtId)
         {
-            List<DepartmentResponse> returnModel = null;
+            List<OrgResponse> returnModel = null;
 
-            if (sourceDtId != null && sourceDtId != Guid.Empty)
-            {
-                returnModel = await personnelClassIncludesPropertiesOfRelationships.Where(m => m.SourceId == sourceDtId.Value)
-                    .Select(m => m.Target.ToDepartmentResponse())
-                    .ToListAsync();
-            }
-            else
-            {
-                returnModel = await this.DbSet.Where(m => m.Description.Equals("部门")
-                &&
-                    !personnelClassIncludesPropertiesOfRelationships.Where(r=>r.TargetId==m.DtId).Any())
-                     .Select(m => m.ToDepartmentResponse())
-                     .ToListAsync();
-            }
+            //if (sourceDtId != null && sourceDtId != Guid.Empty)
+            //{
+            //    returnModel = await personnelClassIncludesPropertiesOfRelationships.Where(m => m.SourceId == sourceDtId.Value)
+            //        .Select(m => m.Target.ToOrgResponse())
+            //        .ToListAsync();
+            //}
+            //else
+            //{
+            //    returnModel = await this.DbSet.Where(m => m.Description.Equals("组织")
+            //    &&
+            //        !personnelClassIncludesPropertiesOfRelationships.Where(r=>r.TargetId==m.DtId).Any())
+            //         .Select(m => m.ToOrgResponse())
+            //         .ToListAsync();
+            //}
 
 
             return returnModel;

@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentRequirement
             InitializeFromTwins(source, target);
         }
 
-        public EquipmentRequirementHasValuesOfRelationship(Guid sourceId, Guid targetId) : this()
+        public EquipmentRequirementHasValuesOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

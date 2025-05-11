@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.SegmentData
             InitializeFromTwins(source, target);
         }
 
-        public SegmentDataHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : this()
+        public SegmentDataHierarchyScopeRelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

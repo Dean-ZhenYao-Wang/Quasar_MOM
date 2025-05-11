@@ -5,7 +5,7 @@
         public string? Address { get; set; }
 
         public Site(string name, string description = "", bool active = false, string address = "", Guid? responsibleDtId = null)
-            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Site, name, description, active)
+            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Site, name, address, description, active)
         {
             this.Address = address;
             this.ResponsibleDtId = responsibleDtId;

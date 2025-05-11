@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialSegmentSpecification
             InitializeFromTwins(source, target);
         }
 
-        public MaterialSegmentSpecificationCorrespondsToSublotRelationship(Guid sourceId, Guid targetId) : this()
+        public MaterialSegmentSpecificationCorrespondsToSublotRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

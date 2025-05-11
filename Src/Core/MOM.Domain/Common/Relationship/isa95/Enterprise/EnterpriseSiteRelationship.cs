@@ -20,7 +20,7 @@ namespace MOM.Domain.Common.Relationship.isa95.Enterprise
             InitializeFromTwins(source, target);
         }
 
-        public EnterpriseSiteRelationship(Guid sourceId, Guid targetId) : this()
+        public EnterpriseSiteRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

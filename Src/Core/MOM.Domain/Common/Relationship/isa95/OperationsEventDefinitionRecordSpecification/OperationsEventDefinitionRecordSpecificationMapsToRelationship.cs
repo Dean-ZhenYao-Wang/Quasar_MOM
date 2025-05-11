@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsEventDefinitionRecordSp
             InitializeFromTwins(source, target);
         }
 
-        public OperationsEventDefinitionRecordSpecificationMapsToRelationship(Guid sourceId, Guid targetId) : this()
+        public OperationsEventDefinitionRecordSpecificationMapsToRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialSpecificationProperty
             InitializeFromTwins(source, target);
         }
 
-        public MaterialSpecificationPropertyMapsToLotPropertyRelationship(Guid sourceId, Guid targetId) : this()
+        public MaterialSpecificationPropertyMapsToLotPropertyRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

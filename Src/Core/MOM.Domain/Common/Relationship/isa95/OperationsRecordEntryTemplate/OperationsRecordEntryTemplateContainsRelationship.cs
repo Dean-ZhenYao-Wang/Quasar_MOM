@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsRecordEntryTemplate
             InitializeFromTwins(source, target);
         }
 
-        public OperationsRecordEntryTemplateContainsRelationship(Guid sourceId, Guid targetId) : this()
+        public OperationsRecordEntryTemplateContainsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

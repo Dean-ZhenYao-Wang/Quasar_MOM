@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialSublot
             InitializeFromTwins(source, target);
         }
 
-        public MaterialSublotIsAssembledFromLotRelationship(Guid sourceId, Guid targetId) : this()
+        public MaterialSublotIsAssembledFromLotRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

@@ -1,5 +1,6 @@
 ﻿using Azure.Core;
 using Microsoft.EntityFrameworkCore;
+using MOM.Application.DTOs.Menu;
 using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;

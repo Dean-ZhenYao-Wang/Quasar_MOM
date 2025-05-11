@@ -30,7 +30,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             return person.Where(m => m.IsDelete == false).AsNoTracking().ToListAsync();
         }
-        public Task<PaginationResponseDto<PersonResponse>> GetPagedListAsync(int pageNumber, int pageSize)
+        public Task<PagedResponse<PersonResponse>> GetPagedListAsync(int pageNumber, int pageSize)
         {
             var query = person.Where(m => m.IsDelete == false)
                 .OrderBy(m => m.Created)
@@ -46,7 +46,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                     TeamOfGroupDtId = personnelClass.Where(c => c.Id.Equals("TeamOfGroup"))
                     .Select(c => c.IncludesPropertiesOf.Where(i => m.DefinedBy.Select(d => d.TargetId).Contains(i.DtId)).Select(i => i.Target).FirstOrDefault())
                     .FirstOrDefault().DtId,
-                    DepartmentDtId = personnelClass.Where(c => c.Id.Equals("Department"))
+                    OrgDtId = personnelClass.Where(c => c.Id.Equals("Org"))
                     .Select(c => c.IncludesPropertiesOf.Where(i => m.DefinedBy.Select(d => d.TargetId).Contains(i.DtId)).Select(i => i.Target).FirstOrDefault())
                     .FirstOrDefault().DtId,//Position
                     PositionDtId_List = personnelClass.Where(c => c.Id.Equals("Position"))

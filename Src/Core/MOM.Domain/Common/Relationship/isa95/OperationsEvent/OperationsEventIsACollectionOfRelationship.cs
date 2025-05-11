@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsEvent
             InitializeFromTwins(source, target);
         }
 
-        public OperationsEventIsACollectionOfRelationship(Guid sourceId, Guid targetId) : this()
+        public OperationsEventIsACollectionOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

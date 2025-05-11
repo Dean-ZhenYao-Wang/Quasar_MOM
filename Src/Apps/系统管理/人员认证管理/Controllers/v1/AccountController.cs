@@ -5,7 +5,6 @@ using MOM.Application.DTOs.Account.Responses;
 using MOM.Application.Features.Personnel.Commands.Authentication;
 using MOM.Application.Features.Personnel.Commands.ChangePassword;
 using MOM.Application.Infrastructure;
-using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
 
 namespace 人员认证管理.Controllers.v1
@@ -20,6 +19,7 @@ namespace 人员认证管理.Controllers.v1
             var model = await Mediator.Send(command);
             return model;
         }
+
         /// <summary>
         /// 密码修改成功需要重新登录
         /// </summary>

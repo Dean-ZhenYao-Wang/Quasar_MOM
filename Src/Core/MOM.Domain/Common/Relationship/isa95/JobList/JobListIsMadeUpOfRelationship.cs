@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.JobList
             InitializeFromTwins(source, target);
         }
 
-        public JobListIsMadeUpOfRelationship(Guid sourceId, Guid targetId) : this()
+        public JobListIsMadeUpOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

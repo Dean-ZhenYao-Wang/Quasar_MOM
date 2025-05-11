@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.ToResourceReferenceProperty
             InitializeFromTwins(source, target);
         }
 
-        public ToResourceReferencePropertyContainsRelationship(Guid sourceId, Guid targetId) : this()
+        public ToResourceReferencePropertyContainsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

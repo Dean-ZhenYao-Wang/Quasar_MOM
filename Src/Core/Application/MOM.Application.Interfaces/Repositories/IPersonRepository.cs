@@ -13,7 +13,7 @@ namespace MOM.Application.Interfaces.Repositories
     {
         Task DeleteAsync(Guid[] dtIds);
         Task<Person> FindByNameAsync(string userName);
-        Task<PaginationResponseDto<PersonResponse>> GetPagedListAsync(int pageNumber, int pageSize);
+        Task<PagedResponse<PersonResponse>> GetPagedListAsync(int pageNumber, int pageSize);
 
         /// <summary>
         /// 获取负责人下拉列表数据，此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）

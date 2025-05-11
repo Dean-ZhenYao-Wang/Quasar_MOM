@@ -85,18 +85,27 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             dbContext.Set<T>().RemoveRange(entities);
         }
-
-        protected async Task<PaginationResponseDto<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class
+        public async Task<PagedResponse<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class
         {
             var count = await query.CountAsync();
 
-            var pagedResult = await query
+            List<TEntity> pagedResult = null;
+            if (pageSize > 0)
+            {
+                pagedResult = await query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .AsNoTracking()
                 .ToListAsync();
+            }
+            else
+            {
+                pagedResult = await query
+                .AsNoTracking()
+                .ToListAsync();
+            }
 
-            return new(pagedResult, count, pageNumber, pageSize);
+                return PagedResponse<TEntity>.Ok(new PaginationResponseDto<TEntity>(pagedResult, count, pageNumber, pageSize));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationsMaterialBill
             InitializeFromTwins(source, target);
         }
 
-        public OperationsMaterialBillIsACollectionOfRelationship(Guid sourceId, Guid targetId) : this()
+        public OperationsMaterialBillIsACollectionOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

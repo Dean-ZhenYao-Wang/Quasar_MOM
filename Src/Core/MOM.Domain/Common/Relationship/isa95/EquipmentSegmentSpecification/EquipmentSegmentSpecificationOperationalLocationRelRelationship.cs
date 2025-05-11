@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentSegmentSpecification
             InitializeFromTwins(source, target);
         }
 
-        public EquipmentSegmentSpecificationOperationalLocationRelRelationship(Guid sourceId, Guid targetId) : this()
+        public EquipmentSegmentSpecificationOperationalLocationRelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

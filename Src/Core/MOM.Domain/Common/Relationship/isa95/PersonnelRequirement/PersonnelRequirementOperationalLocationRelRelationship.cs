@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelRequirement
             InitializeFromTwins(source, target);
         }
 
-        public PersonnelRequirementOperationalLocationRelRelationship(Guid sourceId, Guid targetId) : this()
+        public PersonnelRequirementOperationalLocationRelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

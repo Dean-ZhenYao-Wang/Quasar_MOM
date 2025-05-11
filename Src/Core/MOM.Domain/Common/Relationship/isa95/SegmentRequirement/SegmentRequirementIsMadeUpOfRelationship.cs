@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.SegmentRequirement
             InitializeFromTwins(source, target);
         }
 
-        public SegmentRequirementIsMadeUpOfRelationship(Guid sourceId, Guid targetId) : this()
+        public SegmentRequirementIsMadeUpOfRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

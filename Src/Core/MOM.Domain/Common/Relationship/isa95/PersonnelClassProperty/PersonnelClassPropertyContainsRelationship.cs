@@ -18,7 +18,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelClassProperty
             InitializeFromTwins(source, target);
         }
 
-        public PersonnelClassPropertyContainsRelationship(Guid sourceId, Guid targetId) : this()
+        public PersonnelClassPropertyContainsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

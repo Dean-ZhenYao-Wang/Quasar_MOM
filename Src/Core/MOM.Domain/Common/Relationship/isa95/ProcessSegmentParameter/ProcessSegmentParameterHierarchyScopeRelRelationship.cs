@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.ProcessSegmentParameter
             InitializeFromTwins(source, target);
         }
 
-        public ProcessSegmentParameterHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : this()
+        public ProcessSegmentParameterHierarchyScopeRelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

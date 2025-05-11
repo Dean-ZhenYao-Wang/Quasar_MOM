@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkRecordEntry
             InitializeFromTwins(source, target);
         }
 
-        public WorkRecordEntryCorrespondsToAnEntryInRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkRecordEntryCorrespondsToAnEntryInRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

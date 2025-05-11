@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PhysicalAssetCapabilityProperty
             InitializeFromTwins(source, target);
         }
 
-        public PhysicalAssetCapabilityPropertyMapsToClassPropertyRelationship(Guid sourceId, Guid targetId) : this()
+        public PhysicalAssetCapabilityPropertyMapsToClassPropertyRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

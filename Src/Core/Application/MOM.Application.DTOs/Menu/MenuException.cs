@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MOM.Domain.Permission
+namespace MOM.Application.DTOs.Menu
 {
     public static class MenuException
     {
-        public static MenuTreeNodeResponse ToMenuTreeNodeResponse(this Menu menu)
+        public static MenuTreeNodeResponse ToMenuTreeNodeResponse(this Domain.Permission.Menu menu)
         {
             return new MenuTreeNodeResponse
             {

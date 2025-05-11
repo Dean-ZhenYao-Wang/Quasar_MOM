@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialRequirement
             InitializeFromTwins(source, target);
         }
 
-        public MaterialRequirementCorrespondsToClassRelationship(Guid sourceId, Guid targetId) : this()
+        public MaterialRequirementCorrespondsToClassRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

@@ -3,6 +3,20 @@
     <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Contexts\Configurations\AreaConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\EnterpriseConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\ProcessCellConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\ProductionLineConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\ProductionUnitConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\SiteConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\StorageUnitConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\StorageZoneConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\UnitConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\WorkCellConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\WorkCenterConfiguration.cs" />
+    <Compile Remove="Contexts\Configurations\WorkUnitConfiguration.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.3" />
@@ -15,5 +29,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Application\MOM.Application\MOM.Application.csproj" />
     <ProjectReference Include="..\..\Core\MOM.Domain\MOM.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

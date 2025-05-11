@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkDefinition
             InitializeFromTwins(source, target);
         }
 
-        public WorkDefinitionContainsEquipmentRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkDefinitionContainsEquipmentRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

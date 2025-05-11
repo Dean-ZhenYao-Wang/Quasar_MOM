@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkPerformance
             InitializeFromTwins(source, target);
         }
 
-        public WorkPerformanceIsMadeUpOfPerformanceRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkPerformanceIsMadeUpOfPerformanceRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

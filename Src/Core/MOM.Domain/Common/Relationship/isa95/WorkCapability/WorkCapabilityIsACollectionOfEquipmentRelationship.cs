@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkCapability
             InitializeFromTwins(source, target);
         }
 
-        public WorkCapabilityIsACollectionOfEquipmentRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkCapabilityIsACollectionOfEquipmentRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

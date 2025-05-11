@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.TestSpecificationProperty
             InitializeFromTwins(source, target);
         }
 
-        public TestSpecificationPropertyContainsRelationship(Guid sourceId, Guid targetId) : this()
+        public TestSpecificationPropertyContainsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

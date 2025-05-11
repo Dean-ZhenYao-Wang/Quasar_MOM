@@ -43,9 +43,9 @@ namespace MOM.Application.DTOs.Personnel.Requests
         /// </summary>
         public Guid? TeamOfGroupDtId { get; set; }
         /// <summary>
-        /// 部门
+        /// 组织
         /// </summary>
-        public Guid? DepartmentDtId { get; set; }
+        public Guid? OrgDtId { get; set; }
         /// <summary>
         /// 职位/角色
         /// </summary>
@@ -56,7 +56,7 @@ namespace MOM.Application.DTOs.Personnel.Requests
         public IEnumerable<ResourcePropertyResponse> Properties { get; set; } = new List<ResourcePropertyResponse>();
         public virtual Person ToPerson()
         {
-            Person person = new Person(Id, Name, WorkStatus, Email, PhoneNumber, TeamOfGroupDtId, DepartmentDtId, PositionDtId_List, Description);
+            Person person = new Person(Id, Name, WorkStatus, Email, PhoneNumber, TeamOfGroupDtId, OrgDtId, PositionDtId_List, Description);
             if (Properties != null)
                 foreach (var item in Properties)
                 {

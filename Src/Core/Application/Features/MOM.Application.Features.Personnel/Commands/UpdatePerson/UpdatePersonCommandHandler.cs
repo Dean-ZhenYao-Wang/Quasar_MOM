@@ -19,7 +19,7 @@ namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
                 return new Error(ErrorCode.NotFound, translator.GetString(TranslatorMessages.NotFound()));
             }
 
-            person.Update(request.Id, request.Name, request.WorkStatus, request.Email, request.PhoneNumber, request.TeamOfGroupDtId, request.DepartmentDtId, request.PositionDtId_List, request.Description, request.Properties.Select(m => m.ToPersonProperty()));
+            person.Update(request.Id, request.Name, request.WorkStatus, request.Email, request.PhoneNumber, request.TeamOfGroupDtId, request.OrgDtId, request.PositionDtId_List, request.Description, request.Properties.Select(m => m.ToPersonProperty()));
            await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }

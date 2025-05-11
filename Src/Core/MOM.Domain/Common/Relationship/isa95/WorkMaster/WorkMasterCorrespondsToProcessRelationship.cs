@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkMaster
             InitializeFromTwins(source, target);
         }
 
-        public WorkMasterCorrespondsToProcessRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkMasterCorrespondsToProcessRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

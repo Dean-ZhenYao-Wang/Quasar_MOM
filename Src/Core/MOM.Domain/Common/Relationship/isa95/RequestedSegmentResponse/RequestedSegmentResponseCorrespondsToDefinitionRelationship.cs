@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.RequestedSegmentResponse
             InitializeFromTwins(source, target);
         }
 
-        public RequestedSegmentResponseCorrespondsToDefinitionRelationship(Guid sourceId, Guid targetId) : this()
+        public RequestedSegmentResponseCorrespondsToDefinitionRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

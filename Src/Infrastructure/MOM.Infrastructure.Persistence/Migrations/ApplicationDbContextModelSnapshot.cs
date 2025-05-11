@@ -178,6 +178,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -188,6 +191,10 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<int>("EquipmentLevel")
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "equipmentLevel");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("ResponsibleDtId")
                         .HasColumnType("uniqueidentifier");
@@ -1032,9 +1039,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasAnnotation("Relational:JsonPropertyName", "supplier");
 
-                    b.Property<Guid?>("UseDepartmentDtId")
+                    b.Property<Guid?>("UseOrgDtId")
                         .HasColumnType("uniqueidentifier")
-                        .HasAnnotation("Relational:JsonPropertyName", "useDepartmentDtId");
+                        .HasAnnotation("Relational:JsonPropertyName", "useOrgDtId");
 
                     b.Property<DateTime?>("WarrantyPeriod")
                         .HasColumnType("datetime2")
@@ -1042,7 +1049,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ResponsibleDtId");
 
-                    b.HasIndex("UseDepartmentDtId");
+                    b.HasIndex("UseOrgDtId");
 
                     b.ToTable("Equipment");
                 });
@@ -1243,28 +1250,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasAnnotation("Relational:JsonPropertyName", "workType");
 
                     b.ToTable("WorkDefinition");
-                });
-
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Area.AreaWorkCenterRelationship", b =>
-                {
-                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
-
-                    b.HasIndex("SourceId");
-
-                    b.HasIndex("TargetId");
-
-                    b.ToTable("AreaWorkCenterRelationship");
-                });
-
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Enterprise.EnterpriseSiteRelationship", b =>
-                {
-                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
-
-                    b.HasIndex("SourceId");
-
-                    b.HasIndex("TargetId");
-
-                    b.ToTable("EnterpriseSiteRelationship");
                 });
 
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship", b =>
@@ -2839,17 +2824,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("PhysicalAssetSpecificationPropertyMapsToPropertyRelationship");
                 });
 
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Site.SiteAreaRelationship", b =>
-                {
-                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
-
-                    b.HasIndex("SourceId");
-
-                    b.HasIndex("TargetId");
-
-                    b.ToTable("SiteAreaRelationship");
-                });
-
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.TestSpecification.TestSpecificationEvaluatesRelationship", b =>
                 {
                     b.HasBaseType("MOM.Domain.Common.BasicRelationship");
@@ -2994,17 +2968,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("TestableObjectSpecifiesRelationship");
                 });
 
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.WorkCenter.WorkCenterWorkUnitRelationship", b =>
-                {
-                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
-
-                    b.HasIndex("SourceId");
-
-                    b.HasIndex("TargetId");
-
-                    b.ToTable("WorkCenterWorkUnitRelationship");
-                });
-
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.WorkDefinition.WorkDefinitionContainsEquipmentRelationship", b =>
                 {
                     b.HasBaseType("MOM.Domain.Common.BasicRelationship");
@@ -3089,99 +3052,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("WorkDefinitionHierarchyScopeRelRelationship");
                 });
 
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Area", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.CommonObjectModels.HierarchyScope");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("Area", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Enterprise", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.CommonObjectModels.HierarchyScope");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("Enterprise", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Site", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.CommonObjectModels.HierarchyScope");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("Site", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.CommonObjectModels.HierarchyScope");
-
-                    b.ToTable("WorkCenter", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.WorkUnit", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.CommonObjectModels.HierarchyScope");
-
-                    b.ToTable("WorkUnit", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.ProcessCell", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter");
-
-                    b.ToTable("ProcessCell", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.ProductionLine", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter");
-
-                    b.ToTable("ProductionLine", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.ProductionUnit", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter");
-
-                    b.ToTable("ProductionUnit", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.StorageZone", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter");
-
-                    b.ToTable("StorageZone", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.StorageUnit", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.EquipmentHierarchy.WorkUnit");
-
-                    b.ToTable("StorageUnit", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Unit", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.EquipmentHierarchy.WorkUnit");
-
-                    b.ToTable("Unit", (string)null);
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.WorkCell", b =>
-                {
-                    b.HasBaseType("MOM.Domain.isa95.EquipmentHierarchy.WorkUnit");
-
-                    b.ToTable("WorkCell", (string)null);
-                });
-
             modelBuilder.Entity("MOM.Domain.Permission.AvailablePermission", b =>
                 {
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", "Person")
@@ -3264,9 +3134,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("ResponsibleDtId");
 
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "UseDepartment")
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "UseOrg")
                         .WithMany()
-                        .HasForeignKey("UseDepartmentDtId");
+                        .HasForeignKey("UseOrgDtId");
 
                     b.OwnsOne("MOM.Domain.isa95.CommonObjectModels.SpatialDefinition", "SpatialDefinition", b1 =>
                         {
@@ -3301,43 +3171,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.Navigation("SpatialDefinition");
 
-                    b.Navigation("UseDepartment");
-                });
-
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Area.AreaWorkCenterRelationship", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.Area", "Source")
-                        .WithMany("WorkCenter")
-                        .HasForeignKey("SourceId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter", "Target")
-                        .WithMany()
-                        .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Source");
-
-                    b.Navigation("Target");
-                });
-
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Enterprise.EnterpriseSiteRelationship", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.Enterprise", "Source")
-                        .WithMany("Site")
-                        .HasForeignKey("SourceId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.Site", "Target")
-                        .WithMany()
-                        .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Source");
-
-                    b.Navigation("Target");
+                    b.Navigation("UseOrg");
                 });
 
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship", b =>
@@ -5125,24 +4959,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("Target");
                 });
 
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Site.SiteAreaRelationship", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.Site", "Source")
-                        .WithMany("Area")
-                        .HasForeignKey("SourceId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.Area", "Target")
-                        .WithMany()
-                        .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Source");
-
-                    b.Navigation("Target");
-                });
-
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.TestSpecification.TestSpecificationEvaluatesRelationship", b =>
                 {
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest.EvaluatedProperty", "Target")
@@ -5296,24 +5112,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestableObject", null)
                         .WithMany("Specifies")
                         .HasForeignKey("TestableObjectDtId");
-
-                    b.Navigation("Target");
-                });
-
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.WorkCenter.WorkCenterWorkUnitRelationship", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter", "Source")
-                        .WithMany("WorkUnit")
-                        .HasForeignKey("SourceId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.WorkUnit", "Target")
-                        .WithMany()
-                        .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Source");
 
                     b.Navigation("Target");
                 });
@@ -5826,26 +5624,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("ContainsPhysicalAsset");
 
                     b.Navigation("HierarchyScopeRel");
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Area", b =>
-                {
-                    b.Navigation("WorkCenter");
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Enterprise", b =>
-                {
-                    b.Navigation("Site");
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Site", b =>
-                {
-                    b.Navigation("Area");
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.WorkCenter", b =>
-                {
-                    b.Navigation("WorkUnit");
                 });
 #pragma warning restore 612, 618
         }

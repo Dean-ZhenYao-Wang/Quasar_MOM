@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkDefinition
             InitializeFromTwins(source, target);
         }
 
-        public WorkDefinitionHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkDefinitionHierarchyScopeRelRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

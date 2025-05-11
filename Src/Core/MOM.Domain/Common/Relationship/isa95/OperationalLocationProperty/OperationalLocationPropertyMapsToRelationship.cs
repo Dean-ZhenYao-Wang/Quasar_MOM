@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationalLocationProperty
             InitializeFromTwins(source, target);
         }
 
-        public OperationalLocationPropertyMapsToRelationship(Guid sourceId, Guid targetId) : this()
+        public OperationalLocationPropertyMapsToRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.WorkCenter
             InitializeFromTwins(source, target);
         }
 
-        public WorkCenterWorkUnitRelationship(Guid sourceId, Guid targetId) : this()
+        public WorkCenterWorkUnitRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }

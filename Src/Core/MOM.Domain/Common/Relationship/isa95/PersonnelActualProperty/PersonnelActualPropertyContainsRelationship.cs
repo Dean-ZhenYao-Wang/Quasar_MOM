@@ -12,7 +12,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelActualProperty
             InitializeFromTwins(source, target);
         }
 
-        public PersonnelActualPropertyContainsRelationship(Guid sourceId, Guid targetId) : this()
+        public PersonnelActualPropertyContainsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
         }
