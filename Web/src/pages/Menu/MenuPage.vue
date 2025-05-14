@@ -87,7 +87,7 @@
                   label="添加按钮"
                   color="positive"
                   @click="addButton"
-                  v-if="selectedSubMenu"
+                  v-if="selectedSubMenu != ''"
                 />
               </div>
             </div>
@@ -228,7 +228,7 @@ export default {
       },
       tableConfig: {
         rowKey: 'dtId',
-        selection: 'single',
+        selection: 'multiple',
         columns: [
           { name: 'id', label: '菜单编号', field: 'id', align: 'left' },
           { name: 'name', label: '菜单名称', field: 'name', align: 'left' },
@@ -246,7 +246,7 @@ export default {
     const selectedMenuDtId = ref('')
     const subMenus = ref([])
     const subMenuLoading = ref(false)
-    const selectedSubMenu = ref([])
+    const selectedSubMenu = ref('')
     const buttons = ref([])
     const buttonsLoading = ref(false)
 
@@ -291,7 +291,7 @@ export default {
       )
       subMenus.value = menuStore.childMenus
       subMenuLoading.value = false
-      selectedSubMenu.value = []
+      selectedSubMenu.value = ''
       buttons.value = []
     }
 
@@ -303,6 +303,7 @@ export default {
       }
 
       buttonsLoading.value = true
+      selectedSubMenu.value = rows[0].dtId
       await menuStore.getButtons(rows[0].dtId)
       buttons.value = menuStore.buttons
       buttonsLoading.value = false
@@ -386,7 +387,7 @@ export default {
         name: '',
         id: '',
         icon: '',
-        menuDtId: selectedSubMenu.value[0].dtId,
+        menuDtId: selectedSubMenu.value,
       }
       editingButton.value = false
       buttonDialog.value = true
@@ -404,11 +405,11 @@ export default {
       if (buttonForm.value.dtId) {
         await menuStore.updateButton(buttonForm.value)
         buttonDialog.value = false
-        onSubMenuSelected(selectedSubMenu.value) // 刷新数据
+        onSubMenuSelected([{ dtId: selectedSubMenu.value }]) // 刷新数据
       } else {
         await menuStore.addButton(buttonForm.value)
         buttonDialog.value = false
-        onSubMenuSelected(selectedSubMenu.value) // 刷新数据
+        onSubMenuSelected([{ dtId: selectedSubMenu.value }]) // 刷新数据
       }
     }
 
@@ -421,7 +422,7 @@ export default {
         persistent: true,
       }).onOk(async () => {
         await menuStore.deleteButton(row)
-        onSubMenuSelected(selectedSubMenu.value) // 刷新数据
+        onSubMenuSelected([{ dtId: selectedSubMenu.value }]) // 刷新数据
       })
     }
 
