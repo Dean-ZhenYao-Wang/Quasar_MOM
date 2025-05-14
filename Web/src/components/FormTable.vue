@@ -6,6 +6,7 @@
         <component
           :is="getComponentType(field.type)"
           v-model="queryParams[name]"
+          v-show="field.show || field.show == undefined"
           class="col"
           v-bind="field.props"
           :label="field.label"
@@ -23,25 +24,31 @@
     <q-table
       :rows="tableData"
       :columns="columns"
-      selection="multiple"
+      :loading="loading"
+      :selection="config.tableConfig.selection"
       v-model:selected="selectedRows"
+      @update:selected="selected"
       v-model:pagination="pagination"
       @request="onTableChange"
     >
+      <template v-if="$slots[`body-cell-${name}`]" v-slot:[`body-cell-${name}`]="props">
+        <slot :name="`body-cell-${name}`" v-bind="props"></slot>
+      </template>
       <!-- 操作列插槽 -->
-      <template #body-cell-actions="props">
-        <q-td :props="props">
-          <q-btn-group flat>
-            <q-btn icon="visibility" dense @click="handleView(props.row)" />
-            <q-btn icon="edit" dense @click="showEditDialog(props.row)" />
-            <q-btn
-              icon="delete"
-              dense
-              @click="handleDelete(props.row[config.tableConfig.rowKey])"
-            />
-            <slot name="action-buttons" :row="props.row"></slot>
-          </q-btn-group>
-        </q-td>
+      <template v-if="$slots['body-cell-actions']" #body-cell-actions="props">
+        <slot name="body-cell-actions" v-bind="props">
+          <q-td :props="props">
+            <q-btn-group flat>
+              <q-btn icon="visibility" dense @click="handleView(props.row)" />
+              <q-btn icon="edit" dense @click="showEditDialog(props.row)" />
+              <q-btn
+                icon="delete"
+                dense
+                @click="handleDelete(props.row[config.tableConfig.rowKey])"
+              />
+            </q-btn-group>
+          </q-td>
+        </slot>
       </template>
     </q-table>
 
@@ -112,6 +119,7 @@ const props = defineProps({
   update: Function,
   delete: Function,
   batchDelete: Function,
+  selected: Function,
 })
 
 // 移除原有的axios相关代码
@@ -125,6 +133,7 @@ const pagination = defineModel('pagination', {
     rowsNumber: 0,
   },
 })
+const loading = defineModel('loading', { default: true })
 // 表单数据
 const formData = reactive({})
 const formDialogVisible = ref(false)
@@ -159,7 +168,7 @@ const fetchData = async () => {
     }
 
     // 触发搜索事件并等待父组件处理
-    await props.search(params)
+    if (props.search) await props.search(params)
   } catch (error) {
     handleError(error)
   }

@@ -11,7 +11,9 @@ namespace MOM.Application.Features.Permission.Queries.GetMenuList
         public async Task<BaseResult<List<MenuResponse>>> Handle(GetMenuListQuery request, CancellationToken cancellationToken)
         {
             return await menuRepository.DbSet.Where(m => m.ParentMenuDtId == request.ParentMenuDtId)
-                .OrderBy(m=>m.Id)
+                .Where(m => !string.IsNullOrWhiteSpace(request.Id) ? m.Id.Contains(request.Id) : true)
+                .Where(m => !string.IsNullOrWhiteSpace(request.Name) ? m.Name.Contains(request.Name) : true)
+                .OrderBy(m => m.Id)
                 .Select(m => new MenuResponse
                 {
                     Id = m.Id,

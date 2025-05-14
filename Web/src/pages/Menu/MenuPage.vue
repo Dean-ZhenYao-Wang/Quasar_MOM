@@ -7,14 +7,14 @@
           <div class="row items-center">
             <div class="col text-h6">菜单树</div>
             <div class="col-auto">
-              <q-btn icon="add" color="positive" @click="addSubMenu" v-if="!selectedMenu" />
-              <q-btn icon="edit" color="red" flat dense @click="editSubMenu(selectedMenu)" />
+              <q-btn icon="add" color="positive" @click="addMenu" v-if="!selectedMenuDtId" />
+              <q-btn icon="edit" color="red" flat dense @click="editMenu(selectedMenuDtId)" />
               <q-btn
                 icon="delete"
                 color="negative"
                 flat
                 dense
-                @click="confirmDeleteSubMenu(selectedMenu)"
+                @click="confirmDeleteMenu(selectedMenuDtId)"
               />
             </div>
           </div>
@@ -26,7 +26,7 @@
             node-key="dtId"
             label-key="name"
             selected-color="primary"
-            v-model:selected="selectedMenu"
+            v-model:selected="selectedMenuDtId"
             @update:selected="onMenuSelected"
           />
         </q-card-section>
@@ -41,26 +41,17 @@
           <q-card-section class="bg-primary text-white">
             <div class="row items-center">
               <div class="col text-h6">子菜单列表</div>
-              <div class="col-auto">
-                <q-btn
-                  icon="add"
-                  label="添加子菜单"
-                  color="positive"
-                  @click="addSubMenu"
-                  v-if="selectedMenu"
-                />
-              </div>
             </div>
           </q-card-section>
           <q-card-section>
-            <q-table
-              :rows="subMenus"
-              :columns="subMenuColumns"
-              row-key="dtId"
+            <form-table
+              :config="menu_table_Config"
+              v-model:tableData="subMenus"
               :loading="subMenuLoading"
-              v-model:selected="selectedSubMenu"
-              @update:selected="onSubMenuSelected"
-              selection="single"
+              :selected="onSubMenuSelected"
+              :search="onMenuSelected"
+              :create="saveMenu"
+              :batchDelete="handleBatchDeleteMenu"
             >
               <template v-slot:body-cell-hidden="props">
                 <q-td :props="props">
@@ -69,17 +60,17 @@
               </template>
               <template v-slot:body-cell-actions="props">
                 <q-td :props="props">
-                  <q-btn icon="edit" color="primary" flat dense @click="editSubMenu(props.row)" />
+                  <q-btn icon="edit" color="primary" flat dense @click="editMenu(props.row)" />
                   <q-btn
                     icon="delete"
                     color="negative"
                     flat
                     dense
-                    @click="confirmDeleteSubMenu(props.row)"
+                    @click="confirmDeleteMenu(props.row)"
                   />
                 </q-td>
               </template>
-            </q-table>
+            </form-table>
           </q-card-section>
         </q-card>
       </div>
@@ -127,26 +118,25 @@
     </div>
 
     <!-- 添加/编辑子菜单对话框 -->
-    <q-dialog v-model="subMenuDialog" persistent>
+    <q-dialog v-model="menuDialog" persistent>
       <q-card style="min-width: 400px">
         <q-card-section>
-          <div class="text-h6">{{ editingSubMenu ? '编辑子菜单' : '添加子菜单' }}</div>
+          <div class="text-h6">{{ editingMenu ? '编辑菜单' : '添加菜单' }}</div>
         </q-card-section>
         <q-card-section>
-          <q-form @submit="saveSubMenu">
+          <q-form @submit="saveMenu(menuForm)">
             <q-input
-              v-model="subMenuForm.id"
+              v-model="menuForm.id"
               label="菜单编号"
               :rules="[(val) => !!val || '请输入菜单编号']"
             />
             <q-input
-              v-model="subMenuForm.name"
+              v-model="menuForm.name"
               label="菜单名称"
               :rules="[(val) => !!val || '请输入菜单名称']"
             />
-            <q-input v-model="subMenuForm.path" label="路由路径" />
-            <q-input v-model="subMenuForm.icon" label="图标"></q-input>
-            <q-toggle v-model="subMenuForm.hidden" label="是否不可见" />
+            <q-input v-model="menuForm.path" label="路由路径" />
+            <q-input v-model="menuForm.icon" label="图标"></q-input>
             <div class="q-mt-md">
               <q-btn label="取消" color="negative" flat @click="subMenuDialog = false" />
               <q-btn label="保存" type="submit" color="primary" class="q-ml-sm" />
@@ -193,28 +183,72 @@ import { useMenuStore } from 'src/stores/menu'
 
 export default {
   setup() {
+    const menu_table_Config = {
+      queryFields: {
+        id: {
+          type: 'q-input',
+          label: '编号',
+          props: {
+            outlined: true,
+          },
+        },
+        name: {
+          type: 'q-input',
+          label: '名称',
+          props: {
+            outlined: true,
+          },
+        },
+      },
+      formFields: {
+        dtId: {
+          show: false,
+          type: 'q-input',
+          label: '数据库唯一标识',
+        },
+        id: {
+          type: 'q-input',
+          label: '编号',
+          rules: [(val) => !!val || '必填字段'],
+        },
+        name: {
+          type: 'q-input',
+          label: '名称',
+          rules: [(val) => !!val || '必填字段'],
+        },
+        path: {
+          type: 'q-input',
+          label: '路径',
+          rules: [(val) => !!val || '必填字段'],
+        },
+        icon: {
+          type: 'q-input',
+          label: '图标',
+        },
+      },
+      tableConfig: {
+        rowKey: 'dtId',
+        selection: 'single',
+        columns: [
+          { name: 'id', label: '菜单编号', field: 'id', align: 'left' },
+          { name: 'name', label: '菜单名称', field: 'name', align: 'left' },
+          { name: 'path', label: '路由路径', field: 'path', align: 'left' },
+          { name: 'icon', label: '图标', field: 'icon', align: 'left' },
+        ],
+      },
+    }
     const $q = useQuasar()
     const menuStore = useMenuStore()
     const menuTreeComponent = ref(null)
     // 菜单树数据
     const menuTree = ref([])
 
-    const selectedMenu = ref([])
+    const selectedMenuDtId = ref('')
     const subMenus = ref([])
     const subMenuLoading = ref(false)
     const selectedSubMenu = ref([])
     const buttons = ref([])
     const buttonsLoading = ref(false)
-
-    // 子菜单表格列定义
-    const subMenuColumns = [
-      { name: 'id', label: '菜单编号', field: 'id', align: 'left' },
-      { name: 'name', label: '菜单名称', field: 'name', align: 'left' },
-      { name: 'path', label: '路由路径', field: 'path', align: 'left' },
-      { name: 'icon', label: '图标', field: 'icon', align: 'left' },
-      { name: 'hidden', label: '是否不可见', field: 'visible', align: 'center' },
-      { name: 'actions', label: '操作', align: 'center' },
-    ]
 
     // 按钮表格列定义
     const buttonColumns = [
@@ -247,10 +281,14 @@ export default {
     })
 
     // 选择菜单时加载子菜单
-    const onMenuSelected = async (dtId) => {
-      if (!dtId) return
+    const onMenuSelected = async (queryParams) => {
+      if (!selectedMenuDtId.value) return
       subMenuLoading.value = true
-      await menuStore.getChildMenus(dtId)
+      await menuStore.getChildMenus(
+        selectedMenuDtId.value,
+        queryParams?.id ? queryParams.id : '',
+        queryParams?.name ? queryParams.name : '',
+      )
       subMenus.value = menuStore.childMenus
       subMenuLoading.value = false
       selectedSubMenu.value = []
@@ -284,60 +322,61 @@ export default {
       editingMenu.value = false
       menuDialog.value = true
     }
-    // 添加子菜单
-    const addSubMenu = () => {
-      menuForm.value = {
-        id: '',
-        name: '',
-        path: '',
-        icon: '',
-        parentMenuDtId: selectedMenu.value,
-        depth:
-          selectedMenu.value == null
-            ? 0
-            : menuTreeComponent.value.getNodeByKey(selectedMenu.value).depth + 1,
-        hidden: false,
-      }
-      editingMenu.value = false
-      menuDialog.value = true
-    }
 
     // 编辑菜单
     const editMenu = (row) => {
       if (row.name) menuForm.value = { ...row }
-      else menuForm.value = { ...menuTreeComponent.value.getNodeByKey(selectedMenu.value) }
+      else menuForm.value = { ...menuTreeComponent.value.getNodeByKey(selectedMenuDtId.value) }
       editingMenu.value = true
       menuDialog.value = true
     }
 
     // 保存菜单
-    const saveMenu = async () => {
+    const saveMenu = async (payload) => {
+      menuForm.value = { ...payload }
+      menuForm.value.parentMenuDtId = selectedMenuDtId.value
+      menuForm.value.depth =
+        selectedMenuDtId.value == null
+          ? 0
+          : menuTreeComponent.value.getNodeByKey(selectedMenuDtId.value).depth + 1
+      menuForm.value.hidden = false
+
       if (menuForm.value.dtId) {
         await menuStore.updateMenu(menuForm.value)
-        menuDialog.value = false
-        if (menuForm.value.parentMenuDtId != null) await onMenuSelected(selectedMenu.value) // 刷新数据
+        //if (menuForm.value.parentMenuDtId != null) await onMenuSelected(selectedMenu.value) // 刷新数据
         await getMenuTree()
       } else {
         await menuStore.addMenu(menuForm.value)
-        menuDialog.value = false
-        if (menuForm.value.parentMenuDtId != null) await onMenuSelected(selectedMenu.value) // 刷新数据
+        //if (menuForm.value.parentMenuDtId != null) await onMenuSelected(selectedMenu.value) // 刷新数据
         await getMenuTree()
       }
+      menuDialog.value = false
     }
 
     // 确认删除菜单
-    const confirmDeleteMenu = (row) => {
-      console.log(row)
+    const confirmDeleteMenu = async (row) => {
       $q.dialog({
         title: '确认删除',
-        message: `确定要删除菜单 "${row.name || menuTreeComponent.value.getNodeByKey(selectedMenu.value).name}" 吗？`,
+        message: `确定要删除菜单 "${row.name || menuTreeComponent.value.getNodeByKey(selectedMenuDtId.value).name}" 吗？`,
         cancel: true,
         persistent: true,
       }).onOk(async () => {
         await menuStore.deleteMenu(row)
-        if (row.name)
-          await onMenuSelected(selectedMenu.value) // 刷新数据
-        else await getMenuTree()
+        if (row.name) await onMenuSelected() // 刷新数据
+        await getMenuTree()
+      })
+    }
+    //确认批量删除菜单
+    const handleBatchDeleteMenu = async (dtIds) => {
+      $q.dialog({
+        title: '确认删除',
+        message: `确定要删除这几个菜单吗？`,
+        cancel: true,
+        persistent: true,
+      }).onOk(async () => {
+        await menuStore.deleteMenus(dtIds)
+        await onMenuSelected() // 刷新数据
+        await getMenuTree()
       })
     }
 
@@ -394,24 +433,23 @@ export default {
       await getMenuTree()
       // 初始化时选中第一个菜单
       if (menuTree.value.length > 0) {
-        selectedMenu.value = menuTree.value[0].dtId
-        onMenuSelected(selectedMenu.value)
+        selectedMenuDtId.value = menuTree.value[0].dtId
+        onMenuSelected()
       }
     })
 
     return {
       menuTree,
-      selectedMenu,
+      selectedMenuDtId,
       subMenus,
       subMenuLoading,
-      subMenuColumns,
       selectedSubMenu,
       buttons,
       buttonsLoading,
       buttonColumns,
-      subMenuDialog: menuDialog,
-      editingSubMenu: editingMenu,
-      subMenuForm: menuForm,
+      menuDialog,
+      editingMenu,
+      menuForm,
       buttonDialog,
       editingButton,
       buttonForm,
@@ -419,15 +457,16 @@ export default {
       getMenuTree,
       onMenuSelected,
       onSubMenuSelected,
-      addSubMenu,
       addMenu,
-      editSubMenu: editMenu,
-      saveSubMenu: saveMenu,
-      confirmDeleteSubMenu: confirmDeleteMenu,
+      editMenu,
+      saveMenu,
+      confirmDeleteMenu,
       addButton,
       editButton,
       saveButton,
       confirmDeleteButton,
+      menu_table_Config,
+      handleBatchDeleteMenu,
     }
   },
 }

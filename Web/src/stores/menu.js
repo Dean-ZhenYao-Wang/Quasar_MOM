@@ -14,8 +14,14 @@ export const useMenuStore = defineStore('menuStore', {
       const response = await api.get('/api/v{version}/Menu/GetMenuTree')
       this.menuTree = response.data
     },
-    async getChildMenus(dtId) {
-      const response = await api.get(`/api/v{version}/Menu/GetMenuList?ParentMenuDtId=${dtId}`)
+    async getChildMenus(dtId, id, name) {
+      console.log('getChildMenus')
+      console.log(dtId)
+      console.log(id)
+      console.log(name)
+      const response = await api.get(
+        `/api/v{version}/Menu/GetMenuList?ParentMenuDtId=${dtId}&Id=${id}&Name=${name}`,
+      )
       this.childMenus = response.data
     },
     async getButtons(dtId) {
@@ -57,6 +63,22 @@ export const useMenuStore = defineStore('menuStore', {
     async deleteMenu(menu) {
       await api
         .delete('/api/v{version}/Menu/DeleteMenu', { data: { dtIds: [menu.dtId || menu] } })
+        .then(() => {
+          Notify.create({
+            message: '菜单删除成功',
+            color: 'positive',
+          })
+        })
+        .catch(() => {
+          Notify.create({
+            message: '菜单删除失败',
+            color: 'positive',
+          })
+        })
+    },
+    async deleteMenus(dtIds) {
+      await api
+        .delete('/api/v{version}/Menu/DeleteMenu', { data: { dtIds: dtIds } })
         .then(() => {
           Notify.create({
             message: '菜单删除成功',

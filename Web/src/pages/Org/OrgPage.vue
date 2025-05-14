@@ -110,6 +110,7 @@ const table_Config = {
   },
   tableConfig: {
     rowKey: 'dtId',
+    selection: 'multiple',
     columns: [
       { name: 'id', label: '编号', field: 'id' },
       { name: 'name', label: '名称', field: 'name' },
