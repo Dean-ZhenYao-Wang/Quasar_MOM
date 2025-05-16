@@ -14,9 +14,9 @@
       </template>
 
       <div class="col-auto row q-col-gutter-sm">
-        <q-btn color="primary" @click="handleSearch">查询</q-btn>
-        <q-btn color="positive" @click="showAddDialog">新增</q-btn>
-        <q-btn color="negative" @click="handleBatchDelete">删除</q-btn>
+        <q-btn color="primary" @click="handleSearch" v-permit="'select'">查询</q-btn>
+        <q-btn color="positive" @click="showAddDialog" v-permit="'add'">新增</q-btn>
+        <q-btn color="negative" @click="handleBatchDelete" v-permit="'delete'">删除</q-btn>
       </div>
     </div>
 
@@ -31,21 +31,34 @@
       v-model:pagination="pagination"
       @request="onTableChange"
     >
-      <template v-if="$slots[`body-cell-${name}`]" v-slot:[`body-cell-${name}`]="props">
+      <template v-slot:[`body-cell-${name}`]="props">
         <slot :name="`body-cell-${name}`" v-bind="props"></slot>
       </template>
       <!-- 操作列插槽 -->
-      <template v-if="$slots['body-cell-actions']" #body-cell-actions="props">
+      <template #body-cell-actions="props">
         <slot name="body-cell-actions" v-bind="props">
           <q-td :props="props">
             <q-btn-group flat>
-              <q-btn icon="visibility" dense @click="handleView(props.row)" />
-              <q-btn icon="edit" dense @click="showEditDialog(props.row)" />
+              <q-btn
+                icon="visibility"
+                dense
+                @click="handleView(props.row)"
+                v-permit="route.path + ':view'"
+              />
+              <q-btn
+                icon="edit"
+                dense
+                @click="showEditDialog(props.row)"
+                v-permit="route.path + ':edit'"
+              />
               <q-btn
                 icon="delete"
                 dense
                 @click="handleDelete(props.row[config.tableConfig.rowKey])"
+                v-permit="route.path + ':delete'"
               />
+              <!-- 扩展插槽（允许父组件在此位置添加更多按钮） -->
+              <slot name="actions-append" v-bind="props"></slot>
             </q-btn-group>
           </q-td>
         </slot>
@@ -94,6 +107,8 @@ import * as PrimeVue from 'primevue'
 import ResponsibleSelect from './ResponsibleSelect.vue'
 import HierarchyScopeEquipmentLevel from './HierarchyScopeEquipmentLevel.vue'
 import OrgSelect from './OrgSelect.vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 
 const getComponentType = (type) => {
   const componentMap = {
@@ -133,7 +148,7 @@ const pagination = defineModel('pagination', {
     rowsNumber: 0,
   },
 })
-const loading = defineModel('loading', { default: true })
+const loading = ref(false)
 // 表单数据
 const formData = reactive({})
 const formDialogVisible = ref(false)
@@ -161,6 +176,7 @@ const handleSearch = async () => {
 // 修改后的获取数据方法
 const fetchData = async () => {
   try {
+    loading.value = true
     const params = {
       ...queryParams,
       page: pagination.value.page,
@@ -169,6 +185,7 @@ const fetchData = async () => {
 
     // 触发搜索事件并等待父组件处理
     if (props.search) await props.search(params)
+    loading.value = false
   } catch (error) {
     handleError(error)
   }

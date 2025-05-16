@@ -31,8 +31,13 @@ export const useOrgStore = defineStore('orgStore', {
         })
     },
     async DeleteOrg(dtIds) {
-      console.log(dtIds)
       await api.delete('/api/v{version}/Org/DeleteOrg', { data: { DtIds: dtIds } })
+    },
+    async SettingPermission(data) {
+      await api.post('/api/v{version}/Org/SettingPermission', data)
+    },
+    async Permission(dtId) {
+      return await api.get('/api/v{version}/Org/Permission?orgDtId=' + dtId)
     },
   },
 })

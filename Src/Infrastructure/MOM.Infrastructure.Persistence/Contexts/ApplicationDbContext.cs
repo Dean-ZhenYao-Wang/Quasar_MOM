@@ -24,7 +24,8 @@ namespace MOM.Infrastructure.Persistence.Contexts
         public DbSet<AvailablePermission> AvailablePermissions { get; set; }
         public DbSet<Button> Buttons { get; set; }
         public DbSet<Menu> Menus { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<PersonnelClassPermission> PersonnelClassPermission { get; set; }
+        public DbSet<OrgPermission> OrgPermission { get; set; }
         #endregion
         public DbSet<HierarchyScope> HierarchyScopes { get; set; }
         public DbSet<HierarchyScopeContainsRelationship> HierarchyScopeContainsRelationship { get; set; }

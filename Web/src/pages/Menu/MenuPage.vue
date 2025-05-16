@@ -47,18 +47,12 @@
             <form-table
               :config="menu_table_Config"
               v-model:tableData="subMenus"
-              :loading="subMenuLoading"
               :selected="onSubMenuSelected"
               :search="onMenuSelected"
               :create="saveMenu"
               :batchDelete="handleBatchDeleteMenu"
             >
-              <template v-slot:body-cell-hidden="props">
-                <q-td :props="props">
-                  {{ props.row.hidden ? '是' : '否' }}
-                </q-td>
-              </template>
-              <template v-slot:body-cell-actions="props">
+              <template #body-cell-actions="props">
                 <q-td :props="props">
                   <q-btn icon="edit" color="primary" flat dense @click="editMenu(props.row)" />
                   <q-btn
@@ -164,7 +158,6 @@
               label="权限编码"
               :rules="[(val) => !!val || '请输入权限编码']"
             />
-            <q-input v-model="buttonForm.icon" label="图标" />
             <div class="q-mt-md">
               <q-btn label="取消" color="negative" flat @click="buttonDialog = false" />
               <q-btn label="保存" type="submit" color="primary" class="q-ml-sm" />
@@ -245,7 +238,6 @@ export default {
 
     const selectedMenuDtId = ref('')
     const subMenus = ref([])
-    const subMenuLoading = ref(false)
     const selectedSubMenu = ref('')
     const buttons = ref([])
     const buttonsLoading = ref(false)
@@ -276,21 +268,18 @@ export default {
     const editingButton = ref(false)
     const buttonForm = ref({
       name: '',
-      code: '',
-      icon: '',
+      id: '',
     })
 
     // 选择菜单时加载子菜单
     const onMenuSelected = async (queryParams) => {
       if (!selectedMenuDtId.value) return
-      subMenuLoading.value = true
       await menuStore.getChildMenus(
         selectedMenuDtId.value,
         queryParams?.id ? queryParams.id : '',
         queryParams?.name ? queryParams.name : '',
       )
       subMenus.value = menuStore.childMenus
-      subMenuLoading.value = false
       selectedSubMenu.value = ''
       buttons.value = []
     }
@@ -386,7 +375,6 @@ export default {
       buttonForm.value = {
         name: '',
         id: '',
-        icon: '',
         menuDtId: selectedSubMenu.value,
       }
       editingButton.value = false
@@ -443,7 +431,6 @@ export default {
       menuTree,
       selectedMenuDtId,
       subMenus,
-      subMenuLoading,
       selectedSubMenu,
       buttons,
       buttonsLoading,

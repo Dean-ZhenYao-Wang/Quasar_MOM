@@ -7,6 +7,7 @@ using MOM.Domain.isa95.CommonObjectModels;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Persistence.Seeds
@@ -30,6 +31,12 @@ namespace MOM.Infrastructure.Persistence.Seeds
                 PersonnelClass personnelClass = new PersonnelClass("超级管理员", "角色", enterprise);
                 applicationDbContext.PersonnelClasses.Add(personnelClass);
                 applicationDbContext.PersonnelClassIncludesPropertiesOfRelationships.Add(new PersonnelClassIncludesPropertiesOfRelationship(null, personnelClass.DtId));
+
+                applicationDbContext.PersonnelClassPermission.Add(new Domain.Permission.PersonnelClassPermission()
+                {
+                    PersonnelClassDtId=personnelClass.DtId,
+                    MenuButtonId= "*:*:*"
+                });
 
 
                 admin.HierarchyScopeRel.Add(new Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship(admin.DtId, enterprise.DtId));

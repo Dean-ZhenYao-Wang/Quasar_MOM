@@ -22,7 +22,7 @@ using static OrchardCore.OrchardCoreConstants;
 
 namespace MOM.Application.Features.Personnel.Commands.Authentication
 {
-    public class AuthenticationCommandHandler(IPersonRepository personRepository, ITranslator translator, JwtSettings jwtSettings, IUnitOfWork unitOfWork) : IRequestHandler<AuthenticationCommand, BaseResult<AuthenticationResponse>>
+    public class AuthenticationCommandHandler(IPersonRepository personRepository, IPersonnelClassPermissionRepository personnelClassPermissionRepository, ITranslator translator, JwtSettings jwtSettings, IUnitOfWork unitOfWork) : IRequestHandler<AuthenticationCommand, BaseResult<AuthenticationResponse>>
     {
         public async Task<BaseResult<AuthenticationResponse>> Handle(AuthenticationCommand request, CancellationToken cancellationToken)
         {
@@ -59,23 +59,25 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
             }
             user.SecurityStamp = Guid.NewGuid().ToString();
 
-            var returnModel = GetAuthenticationResponse(user);
+            var returnModel = await GetAuthenticationResponse(user);
             await unitOfWork.SaveChangesAsync();
             return returnModel;
         }
-        private AuthenticationResponse GetAuthenticationResponse(Person user)
+        private async Task<AuthenticationResponse> GetAuthenticationResponse(Person user)
         {
             var jwToken = GenerateJwtToken();
 
             var rolesList = new List<string>();
+            rolesList = await personnelClassPermissionRepository.GetPersonnelClassPermissionListAsync(user.DefinedBy.Select(m => m.TargetId));
+
 
             return new AuthenticationResponse()
             {
                 JwToken = jwToken,
                 Email = user.ContactInformation.Email,
                 EmployeeNumber = user.Id,
-                Name=user.Name,
-                Photo=user.Photo,
+                Name = user.Name,
+                Photo = user.Photo,
                 Roles = rolesList
             };
 

@@ -7,6 +7,8 @@ using MOM.Application.Features.HierarchyScope.Commands.DeleteOrg;
 using MOM.Application.Features.HierarchyScope.Commands.UpdateOrg;
 using MOM.Application.Features.HierarchyScope.Queries.GetOrgTable;
 using MOM.Application.Features.HierarchyScope.Queries.GetOrgTree;
+using MOM.Application.Features.Permission.Commands.OrgSettingPermission;
+using MOM.Application.Features.Permission.Queries.GetOrgPermissionLis;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
 
@@ -69,6 +71,27 @@ namespace 系统基础数据.Controllers.v1
         public async Task<BaseResult<List<TreeNode<OrgResponse>>>> GetDepartTree([FromQuery] Guid? sourceDtId)
         {
             return await Mediator.Send(new GetOrgTreeQuery { SourceDtId = sourceDtId });
+        }
+        /// <summary>
+        /// 给组织结构配置基本权限
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost]
+
+        public async Task<BaseResult> SettingPermission(OrgSettingPermissionCommand command)
+        {
+            return await Mediator.Send(command);
+        }
+        /// <summary>
+        /// 获取指定组织的权限列表
+        /// </summary>
+        /// <param name="orgDtId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<BaseResult<List<string>>> Permission([FromQuery] Guid orgDtId)
+        {
+            return await Mediator.Send(new GetOrgPermissionListQuery { OrgDtId = orgDtId });
         }
     }
 }

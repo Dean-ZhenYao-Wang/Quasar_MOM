@@ -37,6 +37,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.HasPropertiesOf.Clear();
             this.IsDelete = true;
         }
-        public virtual List<Permission.Permission> Permissions { get; set; }
+        public virtual List<Permission.PersonnelClassPermission> Permissions { get; set; }
     }
 }
