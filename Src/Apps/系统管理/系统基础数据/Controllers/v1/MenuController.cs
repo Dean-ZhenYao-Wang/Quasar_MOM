@@ -84,5 +84,13 @@ namespace 系统基础数据.Controllers.v1
             var model = await Mediator.Send(new GetButtonListQuery() { ParentMenuDtId = menuDtId });
             return model;
         }
+
+        [HttpGet]
+        [Route("{menuId}")]
+        public async Task<BaseResult<List<ButtonResponse>>> ButtonList(string menuId)
+        {
+            var model = await Mediator.Send(new GetButtonListQuery() { ParentMenuId = menuId });
+            return model;
+        }
     }
 }

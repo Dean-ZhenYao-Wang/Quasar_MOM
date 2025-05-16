@@ -13,6 +13,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
 {
     public class ButtonRepository(ApplicationDbContext dbContext) : GenericRepository<Button>(dbContext), IButtonRepository
     {
+        private DbSet<Menu> Menus = dbContext.Menus;
         public async Task DeleteAsync(Guid[] dtIds)
         {
             using var transaction = await dbContext.Database.BeginTransactionAsync();
@@ -31,6 +32,12 @@ namespace MOM.Infrastructure.Persistence.Repositories
         public Task<List<Button>> GetButtonsByMenuIdAsync(Guid menuDtId)
         {
             return Where(m => m.MenuDtId == menuDtId).OrderBy(m => m.Id).Select(m => m).AsQueryable().ToListAsync();
+        }
+        public override Task<Button> AddAsync(Button entity)
+        {
+            if (this.Where(m => m.Id.Equals(entity.Id)).Any()|| Menus.Where(m => m.Id.Equals(entity.Id)).Any())
+                throw new ApplicationException("按钮编号必须唯一");
+            return base.AddAsync(entity);
         }
     }
 }

@@ -293,7 +293,7 @@ export default {
 
       buttonsLoading.value = true
       selectedSubMenu.value = rows[0].dtId
-      await menuStore.getButtons(rows[0].dtId)
+      await menuStore.getButtonList(rows[0].dtId)
       buttons.value = menuStore.buttons
       buttonsLoading.value = false
     }

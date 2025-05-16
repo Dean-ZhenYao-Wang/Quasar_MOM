@@ -24,8 +24,12 @@ export const useMenuStore = defineStore('menuStore', {
       )
       this.childMenus = response.data
     },
-    async getButtons(dtId) {
+    async getButtonList(dtId) {
       const response = await api.get(`/api/v{version}/Menu/GetButtonList/${dtId}`)
+      this.buttons = response.data
+    },
+    async buttonList(dtId) {
+      const response = await api.get(`/api/v{version}/Menu/ButtonList/${dtId}`)
       this.buttons = response.data
     },
     async updateMenu(menuForm) {

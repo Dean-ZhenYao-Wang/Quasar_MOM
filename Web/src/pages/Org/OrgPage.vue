@@ -36,7 +36,8 @@ const oldSelectIds = ref([])
 
 const permissionDialogVisible = ref(false)
 const orgSettingPermission = async (ids) => {
-  await orgStore.SettingPermission({ menuButtonIds: ids, orgDtId: settingOrgDtId.value })
+  await orgStore.SettingPermission({ menuButtonIds: ids, owner: settingOrgDtId.value })
+  permissionDialogVisible.value = false
 }
 const settingOrgDtId = ref(null)
 const openPermissionDialog = async (row) => {

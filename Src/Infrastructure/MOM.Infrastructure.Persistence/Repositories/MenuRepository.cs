@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs.Menu;
 using MOM.Application.DTOs.Menu.Responses;
@@ -69,6 +70,12 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 child.Children = GetChildren(child, allMenus);
             }
             return children;
+        }
+        public override Task<Menu> AddAsync(Menu entity)
+        {
+            if (buttons.Where(m => m.Id.Equals(entity.Id)).Any() || this.Where(m => m.DtId != entity.DtId && m.Id.Equals(entity.Id)).Any())
+                throw new ApplicationException("菜单编号必须唯一");
+            return base.AddAsync(entity);
         }
     }
 }

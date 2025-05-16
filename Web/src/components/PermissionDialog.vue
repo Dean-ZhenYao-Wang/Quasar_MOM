@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="dialogVisible" @hide="dialogClose">
+  <q-dialog v-model="dialogVisible" @hide="dialogClose" @before-show="beforeShow">
     <!-- 左侧树形菜单 -->
     <div class="col-3 q-pr-md">
       <q-card class="full-height">
@@ -66,6 +66,8 @@ const emit = defineEmits(['update:modelValue'])
 const dialogClose = () => {
   ticked.value = []
   selectedButtonRows.value = []
+  oldSelectButtonIds.value = []
+  buttons.value = []
   emit('update:modelValue', false)
 }
 const menuStore = useMenuStore()
@@ -88,10 +90,10 @@ const oldSelectButtonIds = ref([])
 const tickedTarget = async (target) => {
   if (target.length > 0) {
     //取最后一个
-    await menuStore.getButtons(target[target.length - 1])
+    await menuStore.buttonList(target[target.length - 1])
     buttons.value = menuStore.buttons
     buttons.value.forEach((x) => {
-      if (ticked.value.findIndex(x.id) > -1) {
+      if (ticked.value.some((t) => t === x.id)) {
         selectedButtonRows.value.push(x)
         oldSelectButtonIds.value.push(x.id)
       }
@@ -101,9 +103,14 @@ const tickedTarget = async (target) => {
   }
 }
 const ok = async () => {
+  console.log(selectedButtonRows.value)
   let B = selectedButtonRows.value.map((item) => item.id)
+  console.log(B)
   let aNotInB = oldSelectButtonIds.value.filter((item) => !B.includes(item)) //需要删除的
+  console.log('A', oldSelectButtonIds)
+  console.log('需要删除的-aNotInB', aNotInB)
   let bNotInA = B.filter((item) => !oldSelectButtonIds.value.includes(item)) //需要添加的
+  console.log('需要添加的-bNotInA', bNotInA)
 
   ticked.value = ticked.value.filter((item) => !aNotInB.includes(item))
 
@@ -113,8 +120,12 @@ const getMenuTree = async () => {
   await menuStore.getMenuTree()
   menuTree.value = menuStore.menuTree
 }
+
+const beforeShow = async () => {
+  if (props.oldSelectIds.length > 0) ticked.value = [...props.oldSelectIds]
+}
+
 onMounted(async () => {
   await getMenuTree()
-  ticked.value = { ...props.oldSelectIds }
 })
 </script>

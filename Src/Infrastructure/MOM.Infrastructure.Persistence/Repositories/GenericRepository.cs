@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Asp.Versioning.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using MOM.Application.DTOs;
 using MOM.Application.Interfaces.Repositories;
@@ -66,7 +67,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
             return await dbContext.Set<T>().Where(predicate).ExecuteUpdateAsync(func);
         }
 
-        public async Task<T> AddAsync(T entity)
+        public virtual async Task<T> AddAsync(T entity)
         {
             await dbContext.Set<T>().AddAsync(entity);
             return entity;

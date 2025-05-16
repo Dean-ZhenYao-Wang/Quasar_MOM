@@ -10,7 +10,17 @@ namespace MOM.Application.Features.Permission.Queries.GetButtonList
     {
         public async Task<BaseResult<List<ButtonResponse>>> Handle(GetButtonListQuery request, CancellationToken cancellationToken)
         {
-            return await buttonRepository.DbSet.Where(m => m.MenuDtId == request.ParentMenuDtId)
+            var query = buttonRepository.DbSet
+                .Include(m => m.Menu)
+                .AsNoTracking();
+
+            if (request.ParentMenuDtId != null)
+                query = query.Where(m => m.MenuDtId == request.ParentMenuDtId);
+
+            if (!string.IsNullOrWhiteSpace(request.ParentMenuId))
+                query = query.Where(m => m.Menu.Id.Equals(request.ParentMenuId));
+
+            return await query
                 .Select(m => new ButtonResponse
                 {
                     DtId = m.DtId,
@@ -18,7 +28,7 @@ namespace MOM.Application.Features.Permission.Queries.GetButtonList
                     Name = m.Name,
                     Icon = m.Icon,
                     MenuDtId = m.MenuDtId,
-                }).AsNoTracking().ToListAsync();
+                }).ToListAsync();
         }
     }
 }
