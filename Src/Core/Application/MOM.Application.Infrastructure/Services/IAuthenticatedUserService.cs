@@ -4,7 +4,7 @@ namespace MOM.Application.Infrastructure.Services
     {
         string DtId { get; }
         string UserName { get; }
-        string[] DefinedBy { get; }
+        List<string> Roles { get; }
     }
 
 }

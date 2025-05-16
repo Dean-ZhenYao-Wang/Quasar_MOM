@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs.Menu;
 using MOM.Application.DTOs.Menu.Responses;
+using MOM.Application.Infrastructure.Services;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
@@ -14,10 +15,10 @@ using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Persistence.Repositories
 {
-    public class MenuRepository(ApplicationDbContext dbContext) : GenericRepository<Menu>(dbContext), IMenuRepository
+    public class MenuRepository(ApplicationDbContext dbContext, IAuthenticatedUserService currentUser) : GenericRepository<Menu>(dbContext), IMenuRepository
     {
         private readonly DbSet<Button> buttons = dbContext.Set<Button>();
-        
+
 
         public async Task DeleteAsync(Guid[] dtIds)
         {
@@ -41,7 +42,12 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
         public async Task<List<MenuTreeNodeResponse>> GetMenuTreeAsync()
         {
-            var allMenus = await DbSet.AsNoTracking().OrderBy(m=>m.Id).ToListAsync();
+            var allMenus_Query = DbSet.AsNoTracking();
+            if (!currentUser.Roles.Contains("*:*:*"))
+            {
+                allMenus_Query = allMenus_Query.Where(m => currentUser.Roles.Contains(m.Id));
+            }
+            var allMenus = await allMenus_Query.OrderBy(m => m.Id).ToListAsync();
             var menuList = BuildTree(allMenus);
             return menuList;
         }

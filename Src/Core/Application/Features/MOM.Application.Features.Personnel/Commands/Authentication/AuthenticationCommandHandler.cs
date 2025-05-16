@@ -65,11 +65,12 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
         }
         private async Task<AuthenticationResponse> GetAuthenticationResponse(Person user)
         {
-            var jwToken = GenerateJwtToken();
 
             var rolesList = new List<string>();
             rolesList = await personnelClassPermissionRepository.GetPersonnelClassPermissionListAsync(user.DefinedBy.Select(m => m.TargetId));
 
+
+            var jwToken = GenerateJwtToken();
 
             return new AuthenticationResponse()
             {
@@ -90,6 +91,7 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
                     new(JwtRegisteredClaimNames.Iss,iss),
                     new(JwtRegisteredClaimNames.Aud,aud),
                     new(ClaimTypes.NameIdentifier,user.DtId.ToString()),
+                    new ("Roles",string.Join(",",rolesList)),
                     new Claim("SecurityStamp", user.SecurityStamp),
                 };
 

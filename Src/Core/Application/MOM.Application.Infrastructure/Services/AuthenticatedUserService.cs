@@ -7,6 +7,6 @@ namespace MOM.Application.Infrastructure.Services
     {
         public string DtId { get; } = httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
         public string UserName { get; } = httpContextAccessor.HttpContext?.User.Identity?.Name;
-        public string[] DefinedBy { get; } = httpContextAccessor.HttpContext?.User.FindFirstValue("DefinedBy")?.Split(',') ?? Array.Empty<string>();
+        public List<string> Roles { get; } = httpContextAccessor.HttpContext?.User.FindFirstValue("Roles")?.Split(',').ToList() ?? new List<string>();
     }
 }
