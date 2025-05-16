@@ -5,7 +5,7 @@ export default {
     const { value } = binding
     const permissions = store.roles || []
     const superPermission = '*:*:*' // 超级管理员通配符
-    if (!permissions.includes(superPermission) || !permissions.some((p) => p === value)) {
+    if (!(permissions.includes(superPermission) || permissions.some((p) => p == value))) {
       el.parentNode?.removeChild(el)
     }
   },
