@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace MOM.Application.Infrastructure.Extensions
 {
@@ -13,13 +14,12 @@ namespace MOM.Application.Infrastructure.Extensions
                 setup.DefaultApiVersion = new ApiVersion(1, 0);
                 setup.AssumeDefaultVersionWhenUnspecified = true;
                 setup.ReportApiVersions = true;
+            })
+                .AddApiExplorer(setup =>
+            {
+                setup.GroupNameFormat = "'v'VVV";
+                setup.SubstituteApiVersionInUrl = true;
             });
-
-            //services.AddScalarWithVersioning().AddVersionedApiExplorer(setup =>
-            //{
-            //    setup.GroupNameFormat = "'v'VVV";
-            //    setup.SubstituteApiVersionInUrl = true;
-            //});
 
             return services;
         }

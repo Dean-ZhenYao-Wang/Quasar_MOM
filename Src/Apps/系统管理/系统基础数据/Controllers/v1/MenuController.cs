@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.Features.Permission.Commands.AddButton;
@@ -15,6 +16,7 @@ using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
 {
+    [Tags("菜单管理")]
     [ApiVersion("1")]
     public sealed class MenuController : BaseApiController
     {

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MOM.Application.Features.Personnel</name>
+    </assembly>
+    <members>
+        <member name="T:MOM.Application.Features.Personnel.Queries.GetProperties.GetPropertiesQuery">
+             <summary>
+            获取指定人员的自定义属性清单
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Personnel.Queries.GetResponsibles.GetResponsiblesQuery">
+            <summary>
+            获取负责人下拉列表数据，此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
+            </summary>
+        </member>
+    </members>
+</doc>

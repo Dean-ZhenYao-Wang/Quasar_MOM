@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MOM.Application.Features.Permission</name>
+    </assembly>
+    <members>
+        <member name="P:MOM.Application.Features.Permission.Queries.GetMenuList.GetMenuListQuery.ParentMenuDtId">
+            <summary>
+            所属组织DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Permission.Queries.GetMenuList.GetMenuListQuery.Id">
+            <summary>
+            菜单编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Permission.Queries.GetMenuList.GetMenuListQuery.Name">
+            <summary>
+            菜单名称
+            </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Queries.GetMenuTree.GetMenuTreeQuery">
+            <summary>
+            菜单管理页面获得所有菜单树
+            </summary>
+        </member>
+    </members>
+</doc>

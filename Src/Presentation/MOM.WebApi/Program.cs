@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,7 +29,6 @@ using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 builder.Services.AddHttpContextAccessor();
 
@@ -158,6 +158,22 @@ builder.Host.UseSerilog(Log.Logger);
 
 
 var app = builder.Build();
+// 添加路由调试中间件
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/debug-routes")
+    {
+        var endpointDataSource = context.RequestServices.GetRequiredService<EndpointDataSource>();
+        foreach (var endpoint in endpointDataSource.Endpoints)
+        {
+            var routePattern = (endpoint as RouteEndpoint)?.RoutePattern?.RawText;
+            var httpMethods = endpoint.Metadata.GetMetadata<HttpMethodMetadata>()?.HttpMethods;
+            await context.Response.WriteAsync($"{string.Join(", ", httpMethods)}: {routePattern}\n");
+        }
+        return;
+    }
+    await next();
+});
 //using (var scope = app.Services.CreateScope())
 //{
 //    var services = scope.ServiceProvider;

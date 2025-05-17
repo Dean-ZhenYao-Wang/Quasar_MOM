@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Common;
 using MOM.Application.DTOs.HierarchyScope.Responses;
@@ -14,17 +15,11 @@ using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
 {
-    /// <summary>
-    /// 组织管理
-    /// </summary>
+    [Tags("组织管理")]
     [ApiVersion("1")]
     public sealed class OrgController : BaseApiController
     {
-        /// <summary>
-        /// 查询组织列表
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
+        [EndpointSummary("查询组织列表")]
         [HttpGet]
         public async Task<PagedResponse<OrgResponse>> GetOrgTable([FromQuery] GetOrgTableQuery query)
         {

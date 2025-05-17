@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.Infrastructure;
@@ -9,7 +10,8 @@ using MOM.Application.Wrappers;
 
 namespace MOM.WebApi.Controllers.v1
 {
-    [ApiVersion("1")]
+    [Tags("附件文件管理")]
+    [ApiVersionNeutral]
     public class FileController(IFileManagerService fileManagerService) : BaseApiController
     {
         [HttpGet]

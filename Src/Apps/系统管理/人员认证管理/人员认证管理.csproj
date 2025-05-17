@@ -10,7 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
-    <PackageReference Include="OrchardCore.Module.Targets" Version="2.1.6" />
+    <PackageReference Include="OrchardCore.Module.Targets" Version="2.1.7" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Application\Features\MOM.Application.Features.Personnel\MOM.Application.Features.Personnel.csproj" />

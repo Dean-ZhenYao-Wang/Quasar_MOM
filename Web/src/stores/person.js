@@ -6,7 +6,7 @@ export const usePersonStore = defineStore('personStore', {
   getters: {},
   actions: {
     async GetResponsibles() {
-      const response = await api.get('/api/v{version}/Person/GetResponsibles')
+      const response = await api.get('/api/v1/Person/GetResponsibles')
       return response
     },
   },

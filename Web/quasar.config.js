@@ -58,7 +58,6 @@ export default defineConfig((ctx) => {
       // analyze: true,
       env: {
         API_BASE_URL: ctx.dev ? 'http://localhost:5000' : 'https://api.example.com',
-        API_VERSION: ctx.dev ? '1' : '1', // 默认版本
         AUTH_TOKEN_KEY: ctx.dev ? 'dev_auth_key' : JSON.stringify(process.env.AUTH_TOKEN_KEY),
       },
       // rawDefine: {}

@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Asp.Versioning;
 using Hangfire.Tags.Attributes;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
 
-namespace MOM.WebApi.Controllers.v1
+namespace MOM.WebApi.Controllers.v2
 {
     /// <summary>
     /// 系统通用注释内容
     /// </summary>
-    [ApiVersion("1", Deprecated = true)]
+    [ApiVersion("2")]
     public class DocController : BaseApiController
     {
         /// <summary>
@@ -22,7 +21,6 @@ namespace MOM.WebApi.Controllers.v1
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [AllowAnonymous]
         public Dictionary<string, string> GetErrorCodes()
         {
             return Enum.GetValues(typeof(ErrorCode))

@@ -9,7 +9,7 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="OrchardCore.Module.Targets" Version="2.1.6" />
+    <PackageReference Include="OrchardCore.Module.Targets" Version="2.1.7" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Application\Features\MOM.Application.Features.HierarchyScope\MOM.Application.Features.HierarchyScope.csproj" />

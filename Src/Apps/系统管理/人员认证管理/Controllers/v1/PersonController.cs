@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Personnel.Responses;
 using MOM.Application.DTOs.Resource.Responses;
@@ -14,9 +15,7 @@ using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 
 namespace 人员认证管理.Controllers.v1
 {
-    /// <summary>
-    /// 人员管理
-    /// </summary>
+    [Tags("人员管理")]
     [ApiVersion("1")]
     public sealed class PersonController : BaseApiController
     {

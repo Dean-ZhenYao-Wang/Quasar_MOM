@@ -4,9 +4,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Application\MOM.Application\MOM.Application.csproj" />

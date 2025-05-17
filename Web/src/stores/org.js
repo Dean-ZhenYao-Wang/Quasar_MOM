@@ -7,16 +7,16 @@ export const useOrgStore = defineStore('orgStore', {
   getters: {},
   actions: {
     async getOrgTable(params) {
-      const response = await api.get('/api/v{version}/Org/GetOrgTable', { params })
+      const response = await api.get('/api/v1/Org/GetOrgTable', { params })
       return response
     },
     async getDepartTree(params) {
-      const response = await api.get('/api/v{version}/Org/GetDepartTree', { params })
+      const response = await api.get('/api/v1/Org/GetDepartTree', { params })
       return response.data
     },
     async AddOrg(menuForm) {
       await api
-        .post('/api/v{version}/Org/AddOrg', menuForm)
+        .post('/api/v1/Org/AddOrg', menuForm)
         .then(() => {
           Notify.create({
             message: '添加成功',
@@ -31,13 +31,13 @@ export const useOrgStore = defineStore('orgStore', {
         })
     },
     async DeleteOrg(dtIds) {
-      await api.delete('/api/v{version}/Org/DeleteOrg', { data: { DtIds: dtIds } })
+      await api.delete('/api/v1/Org/DeleteOrg', { data: { DtIds: dtIds } })
     },
     async SettingPermission(data) {
-      await api.post('/api/v{version}/Org/SettingPermission', data)
+      await api.post('/api/v1/Org/SettingPermission', data)
     },
     async Permission(dtId) {
-      return await api.get('/api/v{version}/Org/Permission?orgDtId=' + dtId)
+      return await api.get('/api/v1/Org/Permission?orgDtId=' + dtId)
     },
   },
 })

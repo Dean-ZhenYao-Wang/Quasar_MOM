@@ -11,7 +11,7 @@ export const useMenuStore = defineStore('menuStore', {
   getters: {},
   actions: {
     async getMenuTree() {
-      const response = await api.get('/api/v{version}/Menu/GetMenuTree')
+      const response = await api.get('/api/v1/Menu/GetMenuTree')
       this.menuTree = response.data
     },
     async getChildMenus(dtId, id, name) {
@@ -20,21 +20,21 @@ export const useMenuStore = defineStore('menuStore', {
       console.log(id)
       console.log(name)
       const response = await api.get(
-        `/api/v{version}/Menu/GetMenuList?ParentMenuDtId=${dtId}&Id=${id}&Name=${name}`,
+        `/api/v1/Menu/GetMenuList?ParentMenuDtId=${dtId}&Id=${id}&Name=${name}`,
       )
       this.childMenus = response.data
     },
     async getButtonList(dtId) {
-      const response = await api.get(`/api/v{version}/Menu/GetButtonList/${dtId}`)
+      const response = await api.get(`/api/v1/Menu/GetButtonList/${dtId}`)
       this.buttons = response.data
     },
     async buttonList(dtId) {
-      const response = await api.get(`/api/v{version}/Menu/ButtonList/${dtId}`)
+      const response = await api.get(`/api/v1/Menu/ButtonList/${dtId}`)
       this.buttons = response.data
     },
     async updateMenu(menuForm) {
       await api
-        .put('/api/v{version}/Menu/UpdateMenu', menuForm)
+        .put('/api/v1/Menu/UpdateMenu', menuForm)
         .then(() => {
           Notify.create({
             message: '菜单更新成功',
@@ -50,7 +50,7 @@ export const useMenuStore = defineStore('menuStore', {
     },
     async addMenu(menuForm) {
       await api
-        .post('/api/v{version}/Menu/AddMenu', menuForm)
+        .post('/api/v1/Menu/AddMenu', menuForm)
         .then(() => {
           Notify.create({
             message: '菜单添加成功',
@@ -66,7 +66,7 @@ export const useMenuStore = defineStore('menuStore', {
     },
     async deleteMenu(menu) {
       await api
-        .delete('/api/v{version}/Menu/DeleteMenu', { data: { dtIds: [menu.dtId || menu] } })
+        .delete('/api/v1/Menu/DeleteMenu', { data: { dtIds: [menu.dtId || menu] } })
         .then(() => {
           Notify.create({
             message: '菜单删除成功',
@@ -82,7 +82,7 @@ export const useMenuStore = defineStore('menuStore', {
     },
     async deleteMenus(dtIds) {
       await api
-        .delete('/api/v{version}/Menu/DeleteMenu', { data: { dtIds: dtIds } })
+        .delete('/api/v1/Menu/DeleteMenu', { data: { dtIds: dtIds } })
         .then(() => {
           Notify.create({
             message: '菜单删除成功',
@@ -98,7 +98,7 @@ export const useMenuStore = defineStore('menuStore', {
     },
     async updateButton(buttonForm) {
       await api
-        .put('/api/v{version}/Menu/UpdateButton', buttonForm)
+        .put('/api/v1/Menu/UpdateButton', buttonForm)
         .then(() => {
           Notify.create({
             message: '按钮更新成功',
@@ -114,7 +114,7 @@ export const useMenuStore = defineStore('menuStore', {
     },
     async addButton(buttonForm) {
       await api
-        .post('/api/v{version}/Menu/AddButton', buttonForm)
+        .post('/api/v1/Menu/AddButton', buttonForm)
         .then(() => {
           Notify.create({
             message: '按钮添加成功',
@@ -130,7 +130,7 @@ export const useMenuStore = defineStore('menuStore', {
     },
     async deleteButton(button) {
       await api
-        .delete('/api/v{version}/Menu/DeleteButton', { data: { dtIds: [button.dtId || button] } })
+        .delete('/api/v1/Menu/DeleteButton', { data: { dtIds: [button.dtId || button] } })
         .then(() => {
           Notify.create({
             message: '按钮删除成功',

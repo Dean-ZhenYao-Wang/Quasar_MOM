@@ -4,6 +4,8 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>$(MSBuildProjectDirectory)\MOM.Application.Features.PersonnelClass.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

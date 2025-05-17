@@ -16,7 +16,7 @@ export const useCurrentUserStore = defineStore('currentUserStore', {
   },
   actions: {
     async Login(userName, passWord) {
-      const response = await api.post('/api/v{version}/Account/Authenticate', {
+      const response = await api.post('/api/v1/Account/Authenticate', {
         username: userName,
         password: passWord,
       })
@@ -28,7 +28,7 @@ export const useCurrentUserStore = defineStore('currentUserStore', {
       return true
     },
     async ChangePassword(current_hashHex, confirm_hashHex) {
-      await api.put('/api/v{version}/Account/ChangePassword', {
+      await api.put('/api/v1/Account/ChangePassword', {
         password: current_hashHex,
         confirmPassword: confirm_hashHex,
       })

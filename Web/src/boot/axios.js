@@ -11,10 +11,6 @@ export default defineBoot(({ app, router }) => {
   // 请求拦截器
   api.interceptors.request.use(
     (config) => {
-      config.url = config.url
-        .replace(/{version}/g, process.env.API_VERSION)
-        .replace(/\/v\{version\}/, `/v${process.env.API_VERSION}`)
-
       // 添加 token 到请求头
       const token = userStore.jwtToken
       if (token) {

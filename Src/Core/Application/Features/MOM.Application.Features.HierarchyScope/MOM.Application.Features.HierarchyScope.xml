@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MOM.Application.Features.HierarchyScope</name>
+    </assembly>
+    <members>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery.SourceDtId">
+            <summary>
+            上级组织DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery.Page">
+            <summary>
+            要查看的页数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery.PageSize">
+            <summary>
+            每页展示条数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetOrgTree.GetOrgTreeQuery.SourceDtId">
+            <summary>
+            上级菜单DtId
+            </summary>
+        </member>
+    </members>
+</doc>
