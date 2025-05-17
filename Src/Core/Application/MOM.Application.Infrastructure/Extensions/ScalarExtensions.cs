@@ -13,15 +13,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace MOM.Application.Infrastructure.Extensions
 {
     public static class ScalarExtensions
     {
         static string[] versions = ["v1", "v2"];
+        public static List<string> EnumsList { get; set; } = new List<string>();
         public static IApplicationBuilder UseScalarWithVersioning(this WebApplication app)
         {
             // 获取API版本描述提供者
@@ -91,6 +94,7 @@ namespace MOM.Application.Infrastructure.Extensions
                 foreach (var file in files)
                 {
                     setup.IncludeXmlComments(file, true);
+                    setup.SchemaFilter<DescribeEnumMembers>(XDocument.Load(file));
                 }
 
             });
@@ -128,6 +132,66 @@ namespace MOM.Application.Infrastructure.Extensions
             }
 
             return info;
+        }
+    }
+    /// <summary>
+    /// Swagger schema filter to modify description of enum types so they
+    /// show the XML docs attached to each member of the enum.
+    /// </summary>
+    public class DescribeEnumMembers : ISchemaFilter
+    {
+        private readonly XDocument mXmlComments;
+
+        /// <summary>
+        /// Initialize schema filter.
+        /// </summary>
+        /// <param name="argXmlComments">Document containing XML docs for enum members.</param>
+        public DescribeEnumMembers(XDocument argXmlComments)
+          => mXmlComments = argXmlComments;
+
+        /// <summary>
+        /// Apply this schema filter.
+        /// </summary>
+        /// <param name="argSchema">Target schema object.</param>
+        /// <param name="argContext">Schema filter context.</param>
+        public void Apply(OpenApiSchema argSchema, SchemaFilterContext argContext)
+        {
+            var EnumType = argContext.Type;
+
+            if (!EnumType.IsEnum) return;
+            if (!ScalarExtensions.EnumsList.Contains(EnumType.FullName))
+            {
+                var sb = new StringBuilder(argSchema.Description);
+
+                sb.AppendLine("<p>Possible values:</p>");
+                sb.AppendLine("<ul>");
+
+                foreach (var EnumMemberName in Enum.GetNames(EnumType))
+                {
+                    var FullEnumMemberName = $"F:{EnumType.FullName}.{EnumMemberName}";
+
+                    var EnumMemberDescription = mXmlComments.XPathEvaluate(
+                      $"normalize-space(//member[@name = '{FullEnumMemberName}']/summary/text())"
+                    ) as string;
+
+                    if (string.IsNullOrEmpty(EnumMemberDescription)) continue;
+                    if (!ScalarExtensions.EnumsList.Contains(EnumType.FullName))
+                    {
+                        ScalarExtensions.EnumsList.Add(EnumType.FullName);
+                    }
+                    sb.AppendLine($"<li><b>{EnumMemberName}</b>: {EnumMemberDescription}</li>");
+                }
+                if (!ScalarExtensions.EnumsList.Contains(EnumType.FullName))
+                {
+                    sb = null;
+                    return;
+                }
+
+
+                sb.AppendLine("</ul>");
+
+                argSchema.Description = sb.ToString();
+            }
         }
     }
 }

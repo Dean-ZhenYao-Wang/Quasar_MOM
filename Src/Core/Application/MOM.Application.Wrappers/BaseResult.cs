@@ -5,7 +5,13 @@ namespace MOM.Application.Wrappers
 {
     public class BaseResult
     {
+        /// <summary>
+        /// 业务处理状态<br>true: 业务处理成功；false: 业务处理失败</br>
+        /// </summary>
         public bool Success { get; set; }
+        /// <summary>
+        /// 错误信息，Success为false时此处才有元素
+        /// </summary>
         public List<Error> Errors { get; set; }
 
         public static BaseResult Ok()
@@ -37,6 +43,9 @@ namespace MOM.Application.Wrappers
 
     public class BaseResult<TData> : BaseResult
     {
+        /// <summary>
+        /// 数据
+        /// </summary>
         public TData Data { get; set; }
 
         public static BaseResult<TData> Ok(TData data)

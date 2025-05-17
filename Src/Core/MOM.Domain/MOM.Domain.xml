@@ -998,6 +998,21 @@
             需要在所有需要被测试的对象中增加一个属性指向TestableObject，原ISA中(n)...(0.n)关系的测试规范由TestableObject进行中转
             </summary>
         </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HierarchyScope">
+            <summary>
+            所属设备角色层次
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.OperationalLocation">
+            <summary>
+            当前操作位置
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.OperationalLocationType">
+            <summary>
+            操作位置类型
+            </summary>
+        </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HasValuesOf">
             <summary>
             扩展属性、不参与业务规则

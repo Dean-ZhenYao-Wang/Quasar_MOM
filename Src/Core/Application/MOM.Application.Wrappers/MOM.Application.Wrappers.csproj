@@ -4,7 +4,17 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>$(MSBuildProjectDirectory)\MOM.Application.Wrappers.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="MOM.Application.Wrappers.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="MOM.Application.Wrappers.xml" />
+  </ItemGroup>
 
   <ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
