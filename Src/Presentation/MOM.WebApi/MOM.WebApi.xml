@@ -4,21 +4,11 @@
         <name>MOM.WebApi</name>
     </assembly>
     <members>
-        <member name="T:MOM.WebApi.Controllers.v1.DocController">
-            <summary>
-            系统通用注释内容
-            </summary>
-        </member>
         <member name="M:MOM.WebApi.Controllers.v1.DocController.GetErrorCodes">
             <summary>
             所有错误代码对应解释
             </summary>
             <returns></returns>
-        </member>
-        <member name="T:MOM.WebApi.Controllers.v2.DocController">
-            <summary>
-            系统通用注释内容
-            </summary>
         </member>
         <member name="M:MOM.WebApi.Controllers.v2.DocController.GetErrorCodes">
             <summary>

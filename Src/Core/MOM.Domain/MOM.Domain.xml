@@ -1,0 +1,1279 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MOM.Domain</name>
+    </assembly>
+    <members>
+        <member name="P:MOM.Domain.Common.BaseEntity.DtId">
+            <summary>
+            数据库唯一主键
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BaseEntity.Id">
+            <summary>
+            名称/编号/标题等
+            对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.BasicRelationship">
+             <summary>
+             虽然关系可以自定义架构，但所有关系实例都应包含以下基础属性。该基类可确保自定义关系具备必要的基础属性。
+             </summary>
+             <remarks>
+             <para>
+             此辅助类仅适用于 <see cref="N:System.Text.Json"/> 序列化库。当与 <see cref="!:Azure.Core.Serialization.ObjectSerializer"/> 
+             （通过 <see cref="!:DigitalTwinsClientOptions"/> 参数传入）一起使用时，仅支持默认的 <see cref="!:Azure.Core.Serialization.JsonObjectSerializer"/>。
+             </para>
+             <para>
+             更多示例请参考 <see href="https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">官方代码库示例</see>。
+             </para>
+             </remarks>
+             <example>
+             以下示例演示如何使用 BasicRelationship 类序列化并创建楼宇数字孪生到楼层数字孪生的关系：
+            
+             <code snippet="Snippet:DigitalTwinsSampleCreateBasicRelationship" language="csharp">
+             var buildingFloorRelationshipPayload = new BasicRelationship
+             {
+                 Id = &quot;buildingFloorRelationshipId&quot;,
+                 SourceId = &quot;buildingTwinId&quot;,
+                 TargetId = &quot;floorTwinId&quot;,
+                 Name = &quot;contains&quot;,
+                 Properties =
+                 {
+                     { &quot;Prop1&quot;, &quot;Prop1 value&quot; },
+                     { &quot;Prop2&quot;, 6 }
+                 }
+             };
+            
+             Response&lt;BasicRelationship&gt; createBuildingFloorRelationshipResponse = await client
+                 .CreateOrReplaceRelationshipAsync&lt;BasicRelationship&gt;(&quot;buildingTwinId&quot;, &quot;buildingFloorRelationshipId&quot;, buildingFloorRelationshipPayload);
+             Console.WriteLine($&quot;Created a digital twin relationship &apos;{createBuildingFloorRelationshipResponse.Value.Id}&apos; &quot; +
+                 $&quot;from twin &apos;{createBuildingFloorRelationshipResponse.Value.SourceId}&apos; to twin &apos;{createBuildingFloorRelationshipResponse.Value.TargetId}&apos;.&quot;);
+             </code>
+            
+             以下示例演示如何使用 BasicRelationship 类获取并反序列化关系：
+            
+             <code snippet="Snippet:DigitalTwinsSampleGetBasicRelationship" language="csharp">
+             Response&lt;BasicRelationship&gt; getBasicRelationshipResponse = await client.GetRelationshipAsync&lt;BasicRelationship&gt;(
+                 &quot;buildingTwinId&quot;,
+                 &quot;buildingFloorRelationshipId&quot;);
+             if (getBasicRelationshipResponse.GetRawResponse().Status == (int)HttpStatusCode.OK)
+             {
+                 BasicRelationship basicRelationship = getBasicRelationshipResponse.Value;
+                 Console.WriteLine($&quot;Retrieved relationship &apos;{basicRelationship.Id}&apos; from twin {basicRelationship.SourceId}.\n\t&quot; +
+                     $&quot;Prop1: {basicRelationship.Properties[&quot;Prop1&quot;]}\n\t&quot; +
+                     $&quot;Prop2: {basicRelationship.Properties[&quot;Prop2&quot;]}&quot;);
+             }
+             </code>
+             </example>
+        </member>
+        <member name="P:MOM.Domain.Common.BasicRelationship.TargetId">
+            <summary>
+            目标数字孪生的唯一标识符。该属性存在于所有关系中。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BasicRelationship.SourceId">
+            <summary>
+            源数字孪生的唯一标识符。该属性存在于所有关系中。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BasicRelationship.Name">
+            <summary>
+            关系名称，定义链接类型（例如"contains"）。该属性存在于所有关系中。
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.ContactInformation">
+            <summary>
+            联系方式
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.ContactInformation.PhoneNumber">
+            <summary>
+            联系电话
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.ContactInformation.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Enterprise">
+            <summary>
+            企业
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Site">
+            <summary>
+            场所/工厂
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Area">
+            <summary>
+            区域/车间
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Work_Center">
+            <summary>
+            工作中心/CellGroup
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Work_Unit">
+            <summary>
+            工作单元/Cell
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Process_Cell">
+            <summary>
+            生产工艺段：用于批生产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Unit">
+            <summary>
+            单元：用于批生产的设备/用于连续生产的设备
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Production_Line">
+            <summary>
+            产线：用于重复或离散生产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Production_Unit">
+            <summary>
+            工段/工位：用于重复或离散生产的设备
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Work_Cell">
+            <summary>
+            生产单元：用于连续生产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Storage_Zone">
+            <summary>
+            存储区：用于存储或运输
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Storage_Unit">
+            <summary>
+            存储单元：用于存储或运输的设备
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Enterprise">
+            <summary>
+            企业
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Site">
+            <summary>
+            场所/工厂
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Area">
+            <summary>
+            区域/车间
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Work_Center">
+            <summary>
+            工作中心/CellGroup
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Work_Unit">
+            <summary>
+            工作单元/Cell
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Process_Cell">
+            <summary>
+            生产工艺段：用于批生产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Unit">
+            <summary>
+            单元：用于批生产的设备/用于连续生产的设备
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Production_Line">
+            <summary>
+            产线：用于重复或离散生产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Production_Unit">
+            <summary>
+            工段/工位：用于重复或离散生产的设备
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Work_Cell">
+            <summary>
+            生产单元：用于连续生产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Storage_Zone">
+            <summary>
+            存储区：用于存储或运输
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Storage_Unit">
+            <summary>
+            存储单元：用于存储或运输的设备
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentStatusType.在用">
+            <summary>
+            在用
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentStatusType.维修">
+            <summary>
+            维修
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentStatusType.故障">
+            <summary>
+            故障
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentStatusType.停用">
+            <summary>
+            停用
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentStatusType.报废">
+            <summary>
+            报废
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Enterprise">
+            <summary>
+            企业
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Site">
+            <summary>
+            场所/工厂
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Area">
+            <summary>
+            区域/车间/部门
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Work_Center">
+            <summary>
+            工作中心/CellGroup
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Work_Unit">
+            <summary>
+            工作单元/Cell
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Process_Cell">
+            <summary>
+            生产工艺段：用于批生产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Unit">
+            <summary>
+            单元：用于批生产的设备/用于连续生产的设备
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Production_Line">
+            <summary>
+            产线：用于重复或离散生产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Production_Unit">
+            <summary>
+            工段/工位：用于重复或离散生产的设备
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Work_Cell">
+            <summary>
+            生产单元：用于连续生产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Storage_Zone">
+            <summary>
+            存储区：用于存储或运输
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Storage_Unit">
+            <summary>
+            存储单元：用于存储或运输的设备
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.MaterialClassAssemblyRelationship">
+            <summary>
+            组装关系的类型
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.MaterialClassAssemblyType">
+            <summary>
+            组装的类型
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialClassAssemblyType.physical">
+            <summary>
+            组件的物理连接或在同一区域
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialClassAssemblyType.logical">
+            <summary>
+            组装的组件不一定是物理连接或在同一区域
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.MaterialDefinitionAssemblyRelationship">
+            <summary>
+            组装关系的类型
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.MaterialDefinitionAssemblyType">
+            <summary>
+            组装的类型
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.MaterialLotAssemblyRelationship">
+            <summary>
+            定义组装关系的类型
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotAssemblyRelationship.permanent">
+            <summary>
+            在生产过程中不打算拆分的组件
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotAssemblyRelationship.transient">
+            <summary>
+            在生产过程中使用的临时组件，如不同材料的托盘或批处理套件
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.MaterialLotAssemblyType">
+            <summary>
+            定义组装类型
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotAssemblyType.physical">
+            <summary>
+            组件的物理连接或在同一区域
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotAssemblyType.logical">
+            <summary>
+            组装的组件不一定是物理连接或在同一区域
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.MaterialLotDisposition">
+            <summary>
+            一个物料批次或物料批次组装的计划和物流处置。
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotDisposition.planned">
+            <summary>
+            一个尚未实际存在的物料批次，被分配给一个操作请求(分段需求)或工作请求(第4部分对象)或工作订单(第4部分对象)。
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotDisposition.inProcess">
+            <summary>
+            这批材料正在加工中
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotDisposition.restricted">
+            <summary>
+            某批物料因限制条件不允许正常使用
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotDisposition.unrestricted">
+            <summary>
+            材料批允许正常使用，不受限制
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotDisposition.closed">
+            <summary>
+            物料已被核对为完全消耗、售出或处置
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.MaterialLotStorageLocationType">
+            <summary>
+            指示存储位置属性是指操作位置、设备或物理资产对象，还是包含存储位置的描述。
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotStorageLocationType.operationalLocation">
+            <summary>
+            存储位置属性引用操作位置
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotStorageLocationType.equipment">
+            <summary>
+            存储位置属性引用设备对象
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotStorageLocationType.physicalAsset">
+            <summary>
+            存储位置属性引用物理资产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialLotStorageLocationType.description">
+            <summary>
+            存储位置属性包含存储位置的描述，例如街道地址
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.MaterialSublotStorageLocationType">
+            <summary>
+            指示存储位置属性是指操作位置、设备或物理资产对象，还是包含存储位置的描述。
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialSublotStorageLocationType.operationalLocation">
+            <summary>
+            存储位置属性引用操作位置
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialSublotStorageLocationType.equipment">
+            <summary>
+            存储位置属性引用设备对象
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialSublotStorageLocationType.physicalAsset">
+            <summary>
+            存储位置属性引用物理资产
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialSublotStorageLocationType.description">
+            <summary>
+            存储位置属性包含存储位置的描述，例如街道地址
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.OperationsDefinitionDefinitionType">
+            <summary>
+            操作定义的类型
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.OperationsDefinitionOperationsType">
+            <summary>
+            所需的属性。可能的值是:生产、维护、质量、库存或混合
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.PersonOperationalLocationType.operationalLocation">
+            <summary>
+            操作位置属性引用操作位置;
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.PersonOperationalLocationType.description">
+            <summary>
+            操作位置属性包含操作位置的描述，例如街道地址。
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.ResourceClassPropertyPropertyType">
+            <summary>
+            属性的类型
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.ResourceClassPropertyPropertyType.classType">
+            <summary>
+            属性值是为类定义的，没有与实例关联的值
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.ResourceClassPropertyPropertyType.instanceType">
+            <summary>
+            类的属性值未定义
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.ResourceClassPropertyPropertyType.defaultType">
+            <summary>
+            属性值被定义为类的默认实例值，但是类的各个实例可以重新定义特定的值。
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship`1">
+            <summary>
+            用于实现DTDL模型特定关系的抽象基类
+            </summary>
+            <typeparam name="TTarget">目标数字孪生类型，需继承自BaseEntity</typeparam>
+        </member>
+        <member name="P:MOM.Domain.Common.Relationship`1.Target">
+            <summary>
+            获取或设置关系的目标数字孪生
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship`1.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship`1.InitializeFromTwins(MOM.Domain.Common.BaseEntity,`0)">
+            <summary>
+            根据源数字孪生和目标数字孪生初始化关系属性
+            </summary>
+            <param name="source">作为关系来源的数字孪生</param>
+            <param name="target">作为关系目标的数字孪生</param>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship`1.InitializeFromTwins(System.Nullable{System.Guid},System.Guid)">
+            <summary>
+            根据源数字孪生ID和目标数字孪生ID初始化关系属性
+            </summary>
+            <param name="sourceDtId">源数字孪生唯一标识符</param>
+            <param name="targetDtId">目标数字孪生唯一标识符</param>
+        </member>
+        <member name="T:MOM.Domain.Common.RelationshipCollection`2">
+            <summary>
+            用于实现DTDL模型特定关系集合的抽象基类
+            </summary>
+            <typeparam name="TRelationship">DTDL模型的具体关系实现类型</typeparam>
+            <typeparam name="TTarget">关系目标类型（需继承自BaseEntity）</typeparam>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.#ctor">
+            <summary>
+            初始化<see cref="T:MOM.Domain.Common.RelationshipCollection`2"/>类的新实例
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            使用现有关系集合初始化<see cref="T:MOM.Domain.Common.RelationshipCollection`2"/>类的新实例
+            </summary>
+            <param name="relationships">用于初始化的关系集合</param>
+        </member>
+        <member name="P:MOM.Domain.Common.RelationshipCollection`2.Targets">
+            <summary>
+            获取当前关系集合中未被标记删除的目标数字孪生集合
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.RelationshipCollection`2.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:MOM.Domain.Common.RelationshipCollection`2.IsReadOnly">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.Add(`0)">
+            <summary>
+            添加单个关系到集合
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            批量添加多个关系到集合
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.Add(System.Guid,System.Guid)">
+            <summary>
+            通过数字孪生ID创建并添加新关系
+            </summary>
+            <param name="sourceDtId">源数字孪生唯一标识符</param>
+            <param name="targetDtId">目标数字孪生唯一标识符</param>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.Contains(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.CopyTo(`0[],System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.Remove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.Remove(System.Guid)">
+            <summary>
+            根据目标数字孪生ID移除关系
+            </summary>
+            <param name="dtId">目标数字孪生唯一标识符</param>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.Remove(System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            批量根据目标数字孪生ID集合移除关系
+            </summary>
+            <param name="dtIds">目标数字孪生唯一标识符集合</param>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipCollection`2.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.RelationshipEqualityComparer">
+            <summary>
+            用于ADT基础关系的相等性比较器实现
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipEqualityComparer.Equals(MOM.Domain.Common.BasicRelationship,MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.RelationshipEqualityComparer.GetHashCode(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.SourceValueAttribute">
+            <summary>
+            属性类用于保存附加的元数据，这些元数据可通过DTDL枚举属性获得。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.SourceValueAttribute.Value">
+            <summary>
+            获取或设置分配给属性的值。
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.TwinEqualityComparer.Equals(MOM.Domain.Common.BaseEntity,MOM.Domain.Common.BaseEntity)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.TwinEqualityComparer.GetHashCode(MOM.Domain.Common.BaseEntity)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.HierarchyScope">
+            <summary>
+            设备角色层次结构，逻辑工厂结构
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.ResponsibleDtId">
+            <summary>
+            负责人DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Responsible">
+            <summary>
+            负责人
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Active">
+            <summary>
+            激活--默认处于禁用状态。
+            禁用后，这将阻止跟踪和追溯、OEE 停机时间、SPC、设置和转换以及调度模块使用该区域及其下方的任何其他生产项目
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.HierarchyScope">
+            <summary>
+            标识交换的信息在基于角色的设备层次结构中的位置。
+            </summary>
+            <remarks>可选地，层次作用域定义设备类的作用域，例如定义设备类的站点或区域。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.AssemblyType">
+            <summary>
+            组装类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.AssemblyRelationship">
+            <summary>
+            组装关系的类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.IncludesPropertiesOf">
+            <summary>
+            线性分类 在物料主数据建设工程，往往分类采用线分类   https://zhuanlan.zhihu.com/p/496464306
+            当前分类包含的子分类
+            </summary>
+            <remarks>父子关系<br></br>This material class(s) include properties of the material class.<br></br>该材料类别包括该材料类别的属性。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.IsAssembledFrom">
+            <summary>
+            面分类 又称平行分类 物料模板采用面分类 https://zhuanlan.zhihu.com/p/496464306
+            组成当前分类的类型
+            </summary>
+            <remarks>组合关系<br></br>This parent material class is whole of the child material class(s) as the part.<br></br>这个父材质类是子材质类的整体。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.HasPropertiesOf">
+            <summary>
+            该物料类的物料类属性。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.HierarchyScopeRel">
+            <summary>
+            适合层次结构范围
+            </summary>
+            <remarks>可选的层次关系。不是标准规格的一部分。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.HierarchyScope">
+            <summary>
+            标识交换的信息在基于角色的设备层次结构中的位置。
+            </summary>
+            <remarks>可选地，层次作用域定义设备类的作用域，例如定义设备类的站点或区域。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.AssemblyType">
+            <summary>
+            组装类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.AssemblyRelationship">
+            <summary>
+            组装关系的类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.IsAssembledFrom">
+            <summary>
+            组合关系
+            </summary>
+            <remarks>This material definition is part of the related object as the whole<br></br>这个物料的定义是作为整体的有关对象的一部分</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.HasPropertiesOf">
+            <summary>
+            本物料定义的物料定义属性。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.IsMemberOfClass">
+            <summary>
+            This material definition objects support this material class.<br>这个物料定义对象支持这个物料类。</br>
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.HierarchyScopeRel">
+            <summary>
+            适合层次结构范围
+            </summary>
+            <remarks>可选的层次关系。不是标准规格的一部分。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.Number">
+            <summary>
+            物料编码
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.Specification">
+            <summary>
+            规格
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.Texture">
+            <summary>
+            材质
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.ModelNumber">
+            <summary>
+            型号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.Weight">
+            <summary>
+            重量
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.UnitPrice">
+            <summary>
+            单价
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.UnitOfMeasurement">
+            <summary>
+            计量单位
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty.PropertyType">
+            <summary>
+            定义属性的类型。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty.Contains">
+            <summary>
+            嵌套的物料定义属性作为整体构成了这个物料定义属性的一部分。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty.MapsTo">
+            <summary>
+            如果父物料定义支持物料类，则物料类属性应用于物料定义属性。这个物料定义属性映射到相应的物料类属性。
+            0...1
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.HierarchyScope">
+            <summary>
+            标识交换的信息在基于角色的设备层次结构中的位置。
+            </summary>
+            <remarks>可选地，层次作用域定义设备类的作用域，例如定义设备类的站点或区域。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.StorageLocation">
+            <summary>
+            标识物料批次的存放位置。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.StorageLocationType">
+            <summary>
+            指示存储位置属性是指操作位置、设备或物理资产对象，还是包含存储位置的描述。
+            </summary>
+            <remarks>指定存储位置时必选</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.AssemblyType">
+            <summary>
+            定义组装类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.AssemblyRelationship">
+            <summary>
+            定义组装关系的类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.Status">
+            <summary>
+            物料在生产作业中的状态。实现定义的值
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.Disposition">
+            <summary>
+            一个物料批次或物料批次组装的计划和物流处置。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.Quantity">
+            <summary>
+            物料批次的数量。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.QuantityUnitOfMeasure">
+            <summary>
+            相关量的度量单位
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.IsAssembledFrom">
+            <summary>
+            组成当前批次的批次
+            </summary>
+            <remarks>组合关系<br></br>This material lot is part of the related object as the whole<br></br>这批材料作为整体是相关对象的一部分</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.HasValuesOf">
+            <summary>
+            该物料批次的物料批次属性
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.DefinedBy">
+            <summary>
+            定义这批材料的材料定义
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.IsAssembledFromSublot">
+            <summary>
+            组成当前批次的子批次
+            </summary>
+            <remarks>组合关系<br></br>This material lot is part of the related object as the whole<br></br>这批材料作为整体是相关对象的一部分</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.HierarchyScopeRel">
+            <summary>
+            适合层次结构范围
+            </summary>
+            <remarks>可选的层次关系。不是标准规格的一部分。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.StorageLocationRel">
+            <summary>
+            适合存放地点
+            </summary>
+            <remarks>与存储位置的可选关系。不是标准规格的一部分。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.HierarchyScope">
+            <summary>
+            标识交换的信息在基于角色的设备层次结构中的位置。
+            </summary>
+            <remarks>可选地，层次作用域定义设备类的作用域，例如定义设备类的站点或区域。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.StorageLocation">
+            <summary>
+            标识物料批次的存放位置。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.StorageLocationType">
+            <summary>
+            指示存储位置属性是指操作位置、设备或物理资产对象，还是包含存储位置的描述。
+            </summary>
+            <remarks>指定存储位置时必选</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.AssemblyType">
+            <summary>
+            定义组装类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.AssemblyRelationship">
+            <summary>
+            定义组装关系的类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.Status">
+            <summary>
+            物料在生产作业中的状态。实现定义的值
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.Disposition">
+            <summary>
+            一个物料子批次或物料子批次组装的计划和物流处置。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.Quantity">
+            <summary>
+            物料子批次的数量。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.QuantityUnitOfMeasure">
+            <summary>
+            相关量的度量单位
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.IsMadeUpOf">
+            <summary>
+            子批次的子批次，非组成关系，而是分解关系，当前子批次被分解成当前属性所指向的子批次清单
+            IsMadeUpOf 与 IsAssembledFrom的定义还存疑，目前还不确定到底应该是什么定义
+            </summary>
+            <remarks>This material sublot is part of the related object as the whole<br></br>这个材料子批次是相关对象作为整体的一部分</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.HasValuesOf">
+            <summary>
+            该物料子批次的物料子批次属性
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.IsAssembledFrom">
+            <summary>
+            组成当前子批次的子批次
+            IsMadeUpOf 与 IsAssembledFrom的定义还存疑，目前还不确定到底应该是什么定义
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.IsAssembledFromLot">
+            <summary>
+            组成当前子批次的批次
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.HierarchyScopeRel">
+            <summary>
+            适合层次结构范围
+            </summary>
+            <remarks>可选的层次关系。不是标准规格的一部分。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.StorageLocationRel">
+            <summary>
+            适合存放地点
+            </summary>
+            <remarks>与存储位置的可选关系。不是标准规格的一部分。</remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsCapability.MaterialCapability.IsAssembledFrom">
+            <summary>
+            组合关系
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.MaterialSpecification.IsAssembledFrom">
+            <summary>
+            组合关系
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.OperationsDefinition.Name">
+            <summary>
+            工艺名称
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.OperationsDefinition.Description">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.OperationsDefinition.BomKey">
+            <summary>
+            todo 待BOM功能完成后使用
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.OperationsDefinition.FileName">
+            <summary>
+            todo 待文件上传限制功能添加完成后，限制才有效果
+            附件名称 文件大小不能超过5MB，格式为doc/xls/xlsx/pdf/jpg/png/txt的文件
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.OperationsDefinition.Status">
+            <summary>
+            状态 True：启用 False：禁用
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.OperationsMaterialBillItem.IsAssembledFrom">
+            <summary>
+            组合关系
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsEvent.OperationsEventClass.IsAssembledFrom">
+            <summary>
+            组合关系
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsEvent.OperationsEventDefinition.IsAssembledFrom">
+            <summary>
+            组合关系
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.MaterialActual.IsAssembledFrom">
+            <summary>
+            组合关系
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.MaterialRequirement.IsAssembledFrom">
+            <summary>
+            组合关系
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestableObject">
+            <summary>
+            需要在所有需要被测试的对象中增加一个属性指向TestableObject，原ISA中(n)...(0.n)关系的测试规范由TestableObject进行中转
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HasValuesOf">
+            <summary>
+            扩展属性、不参与业务规则
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HierarchyScopeRel">
+            <summary>
+            确定交换的信息在基于角色的设备层次结构中的位置。可选地，层次结构作用域定义人员定义的作用域。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.ContactInformation">
+            <summary>
+            联系方式
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Photo">
+            <summary>
+            照片
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.WorkStatus">
+            <summary>
+            在职\休假\离职
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.LockoutOnFailure">
+            <summary>
+            是否已锁定账号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.LockoutDateTime">
+            <summary>
+            账号锁定时间
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.FailedCount">
+            <summary>
+            密码错误次数
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.SecurityStamp">
+            <summary>
+            其变更会立即使所有已颁发的Toekn失效
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.AvailablePermissions">
+            <summary>
+            扩展权限,对人员类权限的扩展或限制,此条件仅针对个人有效
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.DefinedByAddTarget(System.Guid)">
+            <summary>
+            所属人员类绑定
+            </summary>
+            <param name="teamOfGroupDtId"></param>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Description">
+            <summary>
+            说明-系统内部做业务区分使用的
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Remark">
+            <summary>
+            备注-页面上显示给用户看的，用户自己编辑的备注信息
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.ResponsibleDtId">
+            <summary>
+            负责人DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.DefinedBy">
+            <summary>
+            所属设备类清单
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.HasValuesOf">
+            <summary>
+            自定义属性清单
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.IsMadeUpOf">
+            <summary>
+            这个父设备是子设备的整体。<br/>
+            组成关系
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.ImplementedBy">
+            <summary>
+            对应的实物资产<br/>
+            该设备在工艺段中的作用是由实物资产实现的。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.SpatialDefinition">
+            <summary>
+            空间定义
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Number">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Specification">
+            <summary>
+            规格
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.ModelNumber">
+            <summary>
+            型号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.UseOrgDtId">
+            <summary>
+            使用组织的DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.UseOrg">
+            <summary>
+            使用组织
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.UseOrgName">
+            <summary>
+            使用组织
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Status">
+            <summary>
+            设备状态
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.EnabledTime">
+            <summary>
+            启用时间
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.ResponsibleDtId">
+            <summary>
+            责任人DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Responsible">
+            <summary>
+            责任人
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.ResponsibleName">
+            <summary>
+            责任人
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Supplier">
+            <summary>
+            供应商
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.FactoryNumber">
+            <summary>
+            出厂编号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.DepreciationLife">
+            <summary>
+            折旧年限
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.FactoryDate">
+            <summary>
+            出厂日期
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.InitialPrice">
+            <summary>
+            原始价格
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.DateOfPurchase">
+            <summary>
+            购买日期
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.WarrantyPeriod">
+            <summary>
+            保修期
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.EquipmentLevel">
+            <summary>
+            在基于角色的装备层次中级别的标识
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.IncludesPropertiesOf">
+            <summary>
+            当前分类包含的子分类。<br/>
+            父子关系（主要类别，如生产类、一起类、辅助类、工具类、运输类、管理类等）<br/>
+            设备->主要设备->甲类设备<br/>
+            设备->主要设备->乙类设备<br/>
+            设备->产线->罐装产线
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.IsMadeUpOf">
+            <summary>
+            这个父设备类是子设备类的整体。<br/> 
+            组成关系（具体的设备类别，如反应器、压缩机、CNC、叉车、行车等）<br/>
+            罐装产线->A类设备<br/>
+            罐装产线->B类设备<br/>
+            A类设备与B类设备共同组成罐装产线
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.HasPropertiesOf">
+            <summary>
+            自定义属性清单
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.ProcessSegment.MaterialSegmentSpecification.IsAssembledFrom">
+            <summary>
+            组合关系
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar.WorkCalendarDefinition">
+            <summary>
+            工作日程定义
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar.WorkCalendarDefinition.DefinitionType">
+            <summary>
+            日历定义类型<br></br>
+            定义工作日历定义的类型。没有定义标准日历定义类型。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.ResourceClassProperty.PropertyType">
+            <summary>
+            定义属性的类型。
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Permission.AvailablePermission">
+            <summary>
+            针对个人的权限,可以是对菜单的限制,也可以是对按钮的限制
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.AvailablePermission.Available">
+            <summary>
+            是否可用,用来做单独的权限的不可用限制,用来进行差集计算
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Menu.Hidden">
+            <summary>
+            是否隐藏菜单
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Menu.AlwaysShow">
+            <summary>
+            是否总是显示
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Menu.Depth">
+            <summary>
+            第几层的菜单
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Permission.OrgPermission">
+            <summary>
+            组织的权限,可以是对菜单的限制,也可以是对按钮的限制
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Permission.PersonnelClassPermission">
+            <summary>
+            职位的权限,可以是对菜单的限制,也可以是对按钮的限制
+            </summary>
+        </member>
+    </members>
+</doc>

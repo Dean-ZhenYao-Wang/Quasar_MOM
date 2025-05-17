@@ -4,7 +4,17 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>$(MSBuildProjectDirectory)\MOM.Application.DTOs.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="MOM.Application.DTOs.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="MOM.Application.DTOs.xml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />

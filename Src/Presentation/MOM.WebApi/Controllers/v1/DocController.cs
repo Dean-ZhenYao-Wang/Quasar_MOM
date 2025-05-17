@@ -11,9 +11,7 @@ using MOM.Application.Wrappers;
 
 namespace MOM.WebApi.Controllers.v1
 {
-    /// <summary>
-    /// 系统通用注释内容
-    /// </summary>
+    [Tags("系统通用注释内容")]
     [ApiVersion("1", Deprecated = true)]
     public class DocController : BaseApiController
     {

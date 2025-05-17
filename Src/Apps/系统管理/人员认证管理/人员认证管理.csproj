@@ -4,7 +4,15 @@
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>$(MSBuildProjectDirectory)\人员认证管理.xml</DocumentationFile>
   </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="人员认证管理.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="人员认证管理.xml" />
+  </ItemGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>

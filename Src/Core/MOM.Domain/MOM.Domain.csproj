@@ -2,6 +2,8 @@
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
 		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>$(MSBuildProjectDirectory)\MOM.Domain.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Remove="Common\Relationship\isa95\Area\**" />
@@ -19,6 +21,12 @@
 	  <None Remove="Common\Relationship\isa95\Site\**" />
 	  <None Remove="Common\Relationship\isa95\WorkCenter\**" />
 	  <None Remove="isa95\EquipmentHierarchy\**" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="MOM.Domain.xml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <AdditionalFiles Include="MOM.Domain.xml" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />

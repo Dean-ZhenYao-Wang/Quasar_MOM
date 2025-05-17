@@ -19,7 +19,11 @@ namespace 系统基础数据.Controllers.v1
     [ApiVersion("1")]
     public sealed class OrgController : BaseApiController
     {
-        [EndpointSummary("查询组织列表")]
+        /// <summary>
+        /// 查询组织列表
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<PagedResponse<OrgResponse>> GetOrgTable([FromQuery] GetOrgTableQuery query)
         {

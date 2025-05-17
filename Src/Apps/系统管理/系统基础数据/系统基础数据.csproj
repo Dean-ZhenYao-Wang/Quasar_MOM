@@ -4,7 +4,15 @@
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>$(MSBuildProjectDirectory)\系统基础数据.xml</DocumentationFile>
   </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="系统基础数据.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="系统基础数据.xml" />
+  </ItemGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>

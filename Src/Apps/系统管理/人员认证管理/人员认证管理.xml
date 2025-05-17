@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>人员认证管理</name>
+    </assembly>
+    <members>
+        <member name="M:人员认证管理.Controllers.v1.AccountController.Authenticate(MOM.Application.Features.Personnel.Commands.Authentication.AuthenticationCommand)">
+            <summary>
+            账号登录
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:人员认证管理.Controllers.v1.AccountController.ChangePassword(MOM.Application.Features.Personnel.Commands.ChangePassword.ChangePasswordCommand)">
+            <summary>
+            密码修改成功需要重新登录
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:人员认证管理.Controllers.v1.PersonController.GetResponsibles">
+            <summary>
+            获取负责人下拉列表数据，此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:人员认证管理.Controllers.v1.PersonController.GetProperties(MOM.Application.Features.Personnel.Queries.GetProperties.GetPropertiesQuery)">
+            <summary>
+            获取指定人员的自定义属性清单
+            </summary>
+            <param name="dtId">指定人员的DtId</param>
+            <returns></returns>
+        </member>
+        <member name="M:人员认证管理.Controllers.v1.PersonController.AddPerson(MOM.Application.Features.Personnel.Commands.AddPerson.AddPersonCommand)">
+            <summary>
+            添加人员/创建账号
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:人员认证管理.Controllers.v1.PersonController.GetPageListPerson(MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedListPersonQuery)">
+            <summary>
+            分页获取人员
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:人员认证管理.Controllers.v1.PersonController.DeletePerson(MOM.Application.Features.Personnel.Commands.DeletePerson.DeletePersonCommand)">
+            <summary>
+            删除人员
+            </summary>
+            <param name="dtIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:人员认证管理.Controllers.v1.PersonController.UpdatePerson(MOM.Application.Features.Personnel.Commands.UpdatePerson.UpdatePersonCommand)">
+            <summary>
+            修改人员
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

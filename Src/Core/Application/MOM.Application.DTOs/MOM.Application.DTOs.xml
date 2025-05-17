@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MOM.Application.DTOs</name>
+    </assembly>
+    <members>
+        <member name="P:MOM.Application.DTOs.Account.Requests.ChangePasswordRequest.Password">
+            <summary>
+            旧密码
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Account.Requests.ChangePasswordRequest.ConfirmPassword">
+            <summary>
+            新密码
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Account.Responses.AuthenticationResponse.EmployeeNumber">
+            <summary>
+            工号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Account.Responses.AuthenticationResponse.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Account.Responses.AuthenticationResponse.Photo">
+            <summary>
+            照片路径
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Account.Responses.AuthenticationResponse.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Account.Responses.AuthenticationResponse.Roles">
+            <summary>
+            可访问的菜单及按钮编号清单
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Common.TreeNode`1.key">
+            <summary>
+            节点的强制唯一键
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Common.TreeNode`1.label">
+            <summary>
+            节点的标签
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Common.TreeNode`1.data">
+            <summary>
+            节点表示的数据
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Common.TreeNode`1.type">
+            <summary>
+            要匹配模板的节点类型
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Common.TreeNode`1.icon">
+            <summary>
+            要在内容旁边显示的节点的图标
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Common.TreeNode`1.children">
+            <summary>
+            作为子项的 treenodes 数组
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Common.TreeNode`1.selectable">
+            <summary>
+            启用选择模式时节点是否可选
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Common.TreeNode`1.leaf">
+            <summary>
+            指定节点是否具有子项。用于延迟加载。若为true时，前端控件则是看children是否含有元素，如果有则会显示折叠图标，否则不显示
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Common.TreeNode`1.loading">
+            <summary>
+            指定节点加载。用于 Tree 和 TreeTable
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.Id">
+            <summary>
+            组织编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.Name">
+            <summary>
+            组织名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.EquipmentLevel">
+            <summary>
+            层次结构范围设备级别
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.Address">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.ResponsibleDtId">
+            <summary>
+            负责人的DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.SourceDtId">
+            <summary>
+            上级组织DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.Description">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.Active">
+            <summary>
+            激活--默认处于禁用状态。
+            禁用后，这将阻止跟踪和追溯、OEE 停机时间、SPC、设置和转换以及调度模块使用该区域及其下方的任何其他生产项目
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Responses.OrgResponse.SourceDtId">
+            <summary>
+            所属组织DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Responses.OrgResponse.SourceName">
+            <summary>
+            所属组织名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.ButtonRequest.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.Hidden">
+            <summary>
+            是否隐藏菜单
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.AlwaysShow">
+            <summary>
+            是否总是显示
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.Depth">
+            <summary>
+            第几层的菜单
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Responses.MenuResponse.IsChild">
+            <summary>
+            是否有子菜单
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonnelClassRequest.Id">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Id">
+            <summary>
+            UserName 账号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.WorkStatus">
+            <summary>
+            在职\休假\离职
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Description">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.PhoneNumber">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.TeamOfGroupDtId">
+            <summary>
+            班组
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.OrgDtId">
+            <summary>
+            组织
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.PositionDtId_List">
+            <summary>
+            职位/角色
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Properties">
+            <summary>
+            自定义属性清单
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.Id">
+            <summary>
+            名称
+            对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.Description">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.ValueUnitOfMeasure">
+            <summary>
+            值的度量单位
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.mapToDtId">
+            <summary>
+            映射自哪个类属性
+            </summary>
+        </member>
+    </members>
+</doc>
