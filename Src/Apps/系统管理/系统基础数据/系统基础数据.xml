@@ -38,6 +38,13 @@
             <param name="request"></param>
             <returns></returns>
         </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.GetDepartTree(System.Nullable{System.Guid})">
+            <summary>
+            获取组织树形
+            </summary>
+            <param name="sourceDtId">上级节点的DtId</param>
+            <returns></returns>
+        </member>
         <member name="M:系统基础数据.Controllers.v1.OrgController.SettingPermission(MOM.Application.Features.Permission.Commands.OrgSettingPermission.OrgSettingPermissionCommand)">
             <summary>
             给组织结构配置基本权限
@@ -49,8 +56,8 @@
             <summary>
             获取指定组织的权限列表
             </summary>
-            <param name="orgDtId"></param>
-            <returns></returns>
+            <param name="orgDtId">指定组织的dtId</param>
+            <returns>该组织所拥有权限的菜单或按钮的编号</returns>
         </member>
     </members>
 </doc>

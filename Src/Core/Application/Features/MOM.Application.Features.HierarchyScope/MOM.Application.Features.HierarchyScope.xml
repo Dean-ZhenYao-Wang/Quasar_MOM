@@ -4,6 +4,11 @@
         <name>MOM.Application.Features.HierarchyScope</name>
     </assembly>
     <members>
+        <member name="P:MOM.Application.Features.HierarchyScope.Commands.DeleteOrg.DeleteOrgCommand.DtIds">
+            <summary>
+            要删除的组织DtId清单
+            </summary>
+        </member>
         <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery.SourceDtId">
             <summary>
             上级组织DtId

@@ -24,5 +24,10 @@
             菜单管理页面获得所有菜单树
             </summary>
         </member>
+        <member name="P:MOM.Application.Features.Permission.Queries.GetOrgPermissionLis.GetOrgPermissionListQuery.OrgDtId">
+            <summary>
+            指定组织的DtId
+            </summary>
+        </member>
     </members>
 </doc>
