@@ -20,8 +20,11 @@ namespace 人员认证管理.Controllers.v1
     public sealed class PersonController : BaseApiController
     {
         /// <summary>
-        /// 获取负责人下拉列表数据，此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
+        /// 获取负责人下拉列表数据
         /// </summary>
+        /// <remarks>
+        /// 此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
+        /// </remarks>
         /// <returns></returns>
         [HttpGet]
         public async Task<BaseResult<List<Person>>> GetResponsibles()

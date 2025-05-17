@@ -20,8 +20,11 @@
         </member>
         <member name="M:人员认证管理.Controllers.v1.PersonController.GetResponsibles">
             <summary>
-            获取负责人下拉列表数据，此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
+            获取负责人下拉列表数据
             </summary>
+            <remarks>
+            此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
+            </remarks>
             <returns></returns>
         </member>
         <member name="M:人员认证管理.Controllers.v1.PersonController.GetProperties(MOM.Application.Features.Personnel.Queries.GetProperties.GetPropertiesQuery)">
