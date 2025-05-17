@@ -15,6 +15,9 @@ namespace MOM.Application.Features.Personnel.Queries.GetProperties
     /// </summary>
     public class GetPropertiesQuery : IRequest<List<ResourcePropertyResponse>>
     {
+        /// <summary>
+        /// 指定人员的DtId
+        /// </summary>
         public Guid DtId { get; set; }
     }
 }

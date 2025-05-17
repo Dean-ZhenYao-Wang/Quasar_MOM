@@ -242,6 +242,26 @@
             报废
             </summary>
         </member>
+        <member name="T:MOM.Domain.Common.EnumType.GenderType">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.GenderType.Male">
+            <summary>
+            男
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.GenderType.Female">
+            <summary>
+            女
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.GenderType.Unknown">
+            <summary>
+            未知
+            </summary>
+        </member>
         <member name="F:MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel.Enterprise">
             <summary>
             企业
@@ -452,6 +472,11 @@
             所需的属性。可能的值是:生产、维护、质量、库存或混合
             </summary>
         </member>
+        <member name="T:MOM.Domain.Common.EnumType.PersonOperationalLocationType">
+            <summary>
+            操作位置类型
+            </summary>
+        </member>
         <member name="F:MOM.Domain.Common.EnumType.PersonOperationalLocationType.operationalLocation">
             <summary>
             操作位置属性引用操作位置;
@@ -460,6 +485,26 @@
         <member name="F:MOM.Domain.Common.EnumType.PersonOperationalLocationType.description">
             <summary>
             操作位置属性包含操作位置的描述，例如街道地址。
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.PersonWorkStatus">
+            <summary>
+            工作状态
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.PersonWorkStatus.Employed">
+            <summary>
+            在职
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.PersonWorkStatus.Vacation">
+            <summary>
+            休假
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.PersonWorkStatus.Dimission">
+            <summary>
+            离职
             </summary>
         </member>
         <member name="T:MOM.Domain.Common.EnumType.ResourceClassPropertyPropertyType">
@@ -1000,7 +1045,7 @@
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HierarchyScope">
             <summary>
-            所属设备角色层次
+            所属设备角色层次/所属组织
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.OperationalLocation">
@@ -1010,7 +1055,7 @@
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.OperationalLocationType">
             <summary>
-            操作位置类型
+            当前操作位置类型
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HasValuesOf">
@@ -1040,7 +1085,7 @@
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.WorkStatus">
             <summary>
-            在职\休假\离职
+            工作状态：在职\休假\离职
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.LockoutOnFailure">
@@ -1260,9 +1305,19 @@
             针对个人的权限,可以是对菜单的限制,也可以是对按钮的限制
             </summary>
         </member>
+        <member name="P:MOM.Domain.Permission.AvailablePermission.MenuButtonId">
+            <summary>
+            菜单或按钮编号
+            </summary>
+        </member>
         <member name="P:MOM.Domain.Permission.AvailablePermission.Available">
             <summary>
             是否可用,用来做单独的权限的不可用限制,用来进行差集计算
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.AvailablePermission.PersonDtId">
+            <summary>
+            具有此权限的人的数据库唯一Key
             </summary>
         </member>
         <member name="P:MOM.Domain.Permission.Menu.Hidden">

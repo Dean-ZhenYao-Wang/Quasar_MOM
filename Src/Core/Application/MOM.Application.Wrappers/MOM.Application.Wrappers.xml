@@ -39,6 +39,36 @@
             说明
             </summary>
         </member>
+        <member name="P:MOM.Application.Wrappers.PagedResponse`1.PageNumber">
+            <summary>
+            查看的页数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Wrappers.PagedResponse`1.PageSize">
+            <summary>
+            每页显示的数据条数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Wrappers.PagedResponse`1.TotalPages">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Wrappers.PagedResponse`1.TotalItems">
+            <summary>
+            数据总条数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Wrappers.PaginationRequestParameter.PageNumber">
+            <summary>
+            要查看的页数：从1开始数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Wrappers.PaginationRequestParameter.PageSize">
+            <summary>
+            每页显示数据条数
+            </summary>
+        </member>
         <member name="P:MOM.Application.Wrappers.TranslatorMessages.AccountMessages.TheUserNameOrPasswordIsIncorrect">
             <summary>
             用户名或密码错误

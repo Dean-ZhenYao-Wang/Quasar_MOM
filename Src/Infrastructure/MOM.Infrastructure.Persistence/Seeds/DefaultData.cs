@@ -19,7 +19,7 @@ namespace MOM.Infrastructure.Persistence.Seeds
             if (!await applicationDbContext.Person.AnyAsync())
             {
 
-                Person admin = new Person("admin", "超级管理员", PersonWorkStatus.在职);
+                Person admin = new Person("admin", "超级管理员", PersonWorkStatus.Employed);
                 admin.PassWord = "Sam@123456".Sha1Signature().Sha1Signature(admin.DtId.ToString());
                 admin.SecurityStamp = Guid.NewGuid().ToString();
                 applicationDbContext.Person.Add(admin);

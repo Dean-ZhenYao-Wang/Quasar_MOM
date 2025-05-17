@@ -14,8 +14,17 @@ namespace MOM.Application.DTOs.Resource.Responses
 {
     public class ResourcePropertyResponse : ResourcePropertyRequest
     {
+        /// <summary>
+        /// 主键：数据库唯一
+        /// </summary>
         public Guid key { get; set; }
+        /// <summary>
+        /// 为Key的值
+        /// </summary>
         public Guid dtId { get { return key; } }
+        /// <summary>
+        /// 子自定义属性清单
+        /// </summary>
         public virtual List<ResourcePropertyResponse> children { get; set; }
         public ResourcePropertyResponse() { }
         public ResourcePropertyResponse(PersonProperty dbModel)

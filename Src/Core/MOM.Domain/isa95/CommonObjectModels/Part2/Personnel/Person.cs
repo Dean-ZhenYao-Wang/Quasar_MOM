@@ -15,7 +15,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         {
         }
         /// <summary>
-        /// 所属设备角色层次
+        /// 所属设备角色层次/所属组织
         /// </summary>
         [JsonPropertyName("hierarchyScope")]
         public string? HierarchyScope { get; set; }
@@ -28,7 +28,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         [JsonPropertyName("operationalLocation")]
         public string? OperationalLocation { get; set; }
         /// <summary>
-        /// 操作位置类型
+        /// 当前操作位置类型
         /// </summary>
         [JsonPropertyName("operationalLocationType")]
         public PersonOperationalLocationType? OperationalLocationType { get; set; }

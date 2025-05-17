@@ -13,6 +13,9 @@ namespace MOM.Application.DTOs.Personnel.Requests
 {
     public class PersonRequest
     {
+        /// <summary>
+        /// 当前人员的数据库唯一key，如果是新增人员则无需传递此字段的值
+        /// </summary>
         public Guid DtId { get; set; } = Guid.NewGuid();
         /// <summary>
         /// UserName 账号
@@ -25,7 +28,7 @@ namespace MOM.Application.DTOs.Personnel.Requests
         /// <summary>
         /// 在职\休假\离职
         /// </summary>
-        public PersonWorkStatus WorkStatus { get; set; } = PersonWorkStatus.在职;
+        public PersonWorkStatus WorkStatus { get; set; } = PersonWorkStatus.Employed;
         /// <summary>
         /// 备注
         /// </summary>

@@ -31,7 +31,6 @@
             <summary>
             获取指定人员的自定义属性清单
             </summary>
-            <param name="dtId">指定人员的DtId</param>
             <returns></returns>
         </member>
         <member name="M:人员认证管理.Controllers.v1.PersonController.AddPerson(MOM.Application.Features.Personnel.Commands.AddPerson.AddPersonCommand)">

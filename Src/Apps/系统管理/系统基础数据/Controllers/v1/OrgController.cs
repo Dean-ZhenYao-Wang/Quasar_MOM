@@ -65,7 +65,11 @@ namespace 系统基础数据.Controllers.v1
             var model = await Mediator.Send(command);
             return model;
         }
-
+        /// <summary>
+        /// 获取组织树形
+        /// </summary>
+        /// <param name="sourceDtId">上级节点的DtId</param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<BaseResult<List<TreeNode<OrgResponse>>>> GetDepartTree([FromQuery] Guid? sourceDtId)
         {
@@ -85,8 +89,8 @@ namespace 系统基础数据.Controllers.v1
         /// <summary>
         /// 获取指定组织的权限列表
         /// </summary>
-        /// <param name="orgDtId"></param>
-        /// <returns></returns>
+        /// <param name="orgDtId">指定组织的dtId</param>
+        /// <returns>该组织所拥有权限的菜单或按钮的编号</returns>
         [HttpGet]
         public async Task<BaseResult<List<string>>> Permission([FromQuery] Guid orgDtId)
         {

@@ -4,10 +4,20 @@
         <name>MOM.Application.Features.Personnel</name>
     </assembly>
     <members>
+        <member name="P:MOM.Application.Features.Personnel.Commands.DeletePerson.DeletePersonCommand.DtIds">
+            <summary>
+            需要被删除的人员的DtId清单
+            </summary>
+        </member>
         <member name="T:MOM.Application.Features.Personnel.Queries.GetProperties.GetPropertiesQuery">
              <summary>
             获取指定人员的自定义属性清单
              </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetProperties.GetPropertiesQuery.DtId">
+            <summary>
+            指定人员的DtId
+            </summary>
         </member>
         <member name="T:MOM.Application.Features.Personnel.Queries.GetResponsibles.GetResponsiblesQuery">
             <summary>

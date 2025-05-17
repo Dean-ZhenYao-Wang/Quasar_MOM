@@ -18,27 +18,12 @@ namespace MOM.Infrastructure.Persistence.Repositories
 {
     public class MenuRepository(ApplicationDbContext dbContext, IAuthenticatedUserService currentUser) : GenericRepository<Menu>(dbContext), IMenuRepository
     {
-        private readonly DbSet<Button> buttons = dbContext.Set<Button>();
 
 
         public async Task DeleteAsync(Guid[] dtIds)
         {
-            using var transaction = await dbContext.Database.BeginTransactionAsync();
-            try
-            {
-                await this.ExecuteUpdateAsync(m => dtIds.Contains(m.DtId), m => m.SetProperty(p => p.IsDelete, true));
-                await dbContext.Buttons.Where(m => dtIds.Contains(m.MenuDtId)).ExecuteUpdateAsync(m => m.SetProperty(p => p.IsDelete, true));
-                await this.ExecuteUpdateAsync(m => m.ParentMenuDtId != null && dtIds.Contains(m.ParentMenuDtId.Value), m => m.SetProperty(p => p.IsDelete, true));
-                await dbContext.Buttons.Where(m => dbContext.Menus.Where(p => p.ParentMenuDtId != null && dtIds.Contains(p.ParentMenuDtId.Value)).Select(p => p.DtId)
-                .Contains(m.MenuDtId)).ExecuteUpdateAsync(m => m.SetProperty(p => p.IsDelete, true));
-                await transaction.CommitAsync();
-            }
-            catch (Exception ex)
-            {
-                // 回滚事务
-                await transaction.RollbackAsync();
-                throw new ApplicationException(ex.Message, ex.InnerException);
-            }
+            await this.ExecuteUpdateAsync(m => dtIds.Contains(m.DtId), m => m.SetProperty(p => p.IsDelete, true));
+            await this.ExecuteUpdateAsync(m => m.ParentMenuDtId != null && dtIds.Contains(m.ParentMenuDtId.Value), m => m.SetProperty(p => p.IsDelete, true));
         }
 
         public async Task<List<MenuTreeNodeResponse>> GetMenuTreeAsync()
@@ -71,11 +56,13 @@ namespace MOM.Infrastructure.Persistence.Repositories
             }
             return children;
         }
-        public override Task<Menu> AddAsync(Menu entity)
+
+        public async Task<Guid[]> GetButtonDtIdsAsync(Guid[] dtIds)
         {
-            if (buttons.Where(m => m.Id.Equals(entity.Id)).Any() || this.Where(m => m.DtId != entity.DtId && m.Id.Equals(entity.Id)).Any())
-                throw new ApplicationException("菜单编号必须唯一");
-            return base.AddAsync(entity);
+           return await this.DbSet.AsNoTracking()
+                .Where(m => dtIds.Contains(m.DtId))
+                .SelectMany(m => m.Buttons.Select(b => b.DtId))
+                .ToArrayAsync();
         }
     }
 }

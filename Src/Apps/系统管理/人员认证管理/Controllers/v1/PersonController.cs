@@ -35,7 +35,6 @@ namespace 人员认证管理.Controllers.v1
         /// <summary>
         /// 获取指定人员的自定义属性清单
         /// </summary>
-        /// <param name="dtId">指定人员的DtId</param>
         /// <returns></returns>
         [HttpGet]
         public async Task<BaseResult<List<ResourcePropertyResponse>>> GetProperties(GetPropertiesQuery command)

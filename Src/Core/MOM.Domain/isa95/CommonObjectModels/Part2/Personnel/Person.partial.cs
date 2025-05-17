@@ -24,7 +24,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </summary>
         public string Photo { get; set; } = string.Empty;
         /// <summary>
-        /// 在职\休假\离职
+        /// 工作状态：在职\休假\离职
         /// </summary>
         public PersonWorkStatus WorkStatus { get; set; }
         /// <summary>

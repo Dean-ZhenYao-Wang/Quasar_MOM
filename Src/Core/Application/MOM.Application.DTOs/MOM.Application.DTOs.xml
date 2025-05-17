@@ -125,6 +125,11 @@
             禁用后，这将阻止跟踪和追溯、OEE 停机时间、SPC、设置和转换以及调度模块使用该区域及其下方的任何其他生产项目
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.UpdateOrgRequest.DtId">
+            <summary>
+            组织的数据库唯一Key
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.HierarchyScope.Responses.OrgResponse.SourceDtId">
             <summary>
             所属组织DtId
@@ -168,6 +173,11 @@
         <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonnelClassRequest.Id">
             <summary>
             名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.DtId">
+            <summary>
+            当前人员的数据库唯一key，如果是新增人员则无需传递此字段的值
             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Id">
@@ -244,6 +254,21 @@
         <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.mapToDtId">
             <summary>
             映射自哪个类属性
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Resource.Responses.ResourcePropertyResponse.key">
+            <summary>
+            主键：数据库唯一
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Resource.Responses.ResourcePropertyResponse.dtId">
+            <summary>
+            为Key的值
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Resource.Responses.ResourcePropertyResponse.children">
+            <summary>
+            子自定义属性清单
             </summary>
         </member>
     </members>
