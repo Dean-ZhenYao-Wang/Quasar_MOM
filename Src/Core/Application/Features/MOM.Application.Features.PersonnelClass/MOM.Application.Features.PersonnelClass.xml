@@ -4,5 +4,25 @@
         <name>MOM.Application.Features.PersonnelClass</name>
     </assembly>
     <members>
+        <member name="P:MOM.Application.Features.PersonnelClass.Commands.UpdatePosition.UpdatePositionCommand.DtId">
+            <summary>
+            职位的数据库唯一主键
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedPositionQuery.Id">
+            <summary>
+            职位名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedPositionQuery.PageNumber">
+            <summary>
+            要查看的页数：从1开始数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedPositionQuery.PageSize">
+            <summary>
+            每页显示数据条数
+            </summary>
+        </member>
     </members>
 </doc>

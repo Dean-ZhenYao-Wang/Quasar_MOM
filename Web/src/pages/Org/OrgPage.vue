@@ -6,6 +6,7 @@
       v-model:pagination="pagination"
       :search="handleSearch"
       :create="handleCreate"
+      :update="handleUpdate"
       :batchDelete="handleBatchDelete"
       :delete="handleDelete"
     >
@@ -27,10 +28,9 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount } from 'vue'
+import { ref } from 'vue'
 import { useOrgStore } from 'src/stores/org'
 const orgStore = useOrgStore()
-const orgNodes = ref([])
 
 const oldSelectIds = ref([])
 
@@ -46,9 +46,6 @@ const openPermissionDialog = async (row) => {
   oldSelectIds.value = response.data
   permissionDialogVisible.value = true
 }
-onBeforeMount(async () => {
-  orgNodes.value = await orgStore.getDepartTree()
-})
 
 const table_Config = {
   queryFields: {
@@ -165,6 +162,9 @@ const handleSearch = async (queryParams) => {
 }
 const handleCreate = async (payload) => {
   await orgStore.AddOrg(payload)
+}
+const handleUpdate = async (payload) => {
+  await orgStore.UpdateOrg(payload)
 }
 const handleBatchDelete = async (dtIds) => {
   await batchDelete(dtIds)

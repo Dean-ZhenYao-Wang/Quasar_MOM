@@ -59,7 +59,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpPut]
         public async Task<BaseResult> UpdateOrg(UpdateOrgCommand command)
         {
             var model = await Mediator.Send(command);

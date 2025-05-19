@@ -2,21 +2,16 @@ import { defineStore, acceptHMRUpdate } from 'pinia'
 import { api } from 'boot/axios'
 import { Notify } from 'quasar'
 
-export const useOrgStore = defineStore('orgStore', {
+export const usePositionStore = defineStore('positionStore', {
   state: () => ({}),
   getters: {},
   actions: {
-    async getOrgTable(params) {
-      const response = await api.get('/api/v1/Org/GetOrgTable', { params })
-      return response
+    async GetPaged(params) {
+      return await api.get('/api/v1/Position/GetPaged', { params })
     },
-    async getDepartTree(params) {
-      const response = await api.get('/api/v1/Org/GetDepartTree', { params })
-      return response.data
-    },
-    async AddOrg(payload) {
+    async Add(payload) {
       await api
-        .post('/api/v1/Org/AddOrg', payload)
+        .post('/api/v1/Position/Add', payload)
         .then(() => {
           Notify.create({
             message: '添加成功',
@@ -30,9 +25,9 @@ export const useOrgStore = defineStore('orgStore', {
           })
         })
     },
-    async UpdateOrg(payload) {
+    async Update(payload) {
       await api
-        .put('/api/v1/Org/UpdateOrg ', payload)
+        .post('/api/v1/Position/Update ', payload)
         .then(() => {
           Notify.create({
             message: '修改成功',
@@ -46,18 +41,15 @@ export const useOrgStore = defineStore('orgStore', {
           })
         })
     },
-    async DeleteOrg(dtIds) {
-      await api.delete('/api/v1/Org/DeleteOrg', { data: { DtIds: dtIds } })
+    async Delete(dtIds) {
+      await api.delete('/api/v1/Position/Delete', { data: { DtIds: dtIds } })
     },
     async SettingPermission(payload) {
-      await api.post('/api/v1/Org/SettingPermission', payload)
-    },
-    async Permission(dtId) {
-      return await api.get('/api/v1/Org/Permission?orgDtId=' + dtId)
+      await api.post('/api/v1/Position/SettingPermission', payload)
     },
   },
 })
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useOrgStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(usePositionStore, import.meta.hot))
 }

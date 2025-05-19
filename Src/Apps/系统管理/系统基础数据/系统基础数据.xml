@@ -59,5 +59,40 @@
             <param name="orgDtId">指定组织的dtId</param>
             <returns>该组织所拥有权限的菜单或按钮的编号</returns>
         </member>
+        <member name="M:系统基础数据.Controllers.v1.PositionController.GetPaged(MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedPositionQuery)">
+            <summary>
+            查询职位列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.PositionController.Add(MOM.Application.Features.PersonnelClass.Commands.AddPsitoion.AddPositionCommand)">
+            <summary>
+            新增职位
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.PositionController.Update(MOM.Application.Features.PersonnelClass.Commands.UpdatePosition.UpdatePositionCommand)">
+            <summary>
+            修改职位
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.PositionController.Delete(MOM.Application.Features.PersonnelClass.Commands.DeletePosition.DeletePositionCommand)">
+            <summary>
+            删除职位
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.PositionController.SettingPermission(MOM.Application.Features.Permission.Commands.PositionSettingPermission.PositionSettingPermissionCommand)">
+            <summary>
+            给职位配置基本权限
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

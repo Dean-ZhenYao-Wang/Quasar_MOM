@@ -15,12 +15,11 @@ namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
     {
         public async Task<PagedResponse<PersonnelClassResponse>> Handle(GetPagedPositionQuery request, CancellationToken cancellationToken)
         {
-            var query = personnelClassRepository
-                .Where(m => m.Description.Equals("职位"))
-                .Where(x => !string.IsNullOrWhiteSpace(request.Id) && x.Id.Contains(request.Id))
-                .Where(x => !string.IsNullOrWhiteSpace(request.Remark) && x.Remark.Contains(request.Remark))
-                .AsQueryable()
+            var query = personnelClassRepository.DbSet
                 .Include(x => x.Permissions)
+                .Where(x => x.Description.Equals("职位"))
+                .Where(x => !string.IsNullOrWhiteSpace(request.Id) ? x.Id.Contains(request.Id) : true)
+                .Where(x => !string.IsNullOrWhiteSpace(request.Remark) ? x.Remark.Contains(request.Remark) : true)
                 .Select(x => new PersonnelClassResponse
                 {
                     DtId = x.DtId,

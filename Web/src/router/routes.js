@@ -8,6 +8,7 @@ const routes = [
       { path: '', component: () => import('pages/IndexPage.vue') },
       { path: 'system/menu', component: () => import('pages/Menu/MenuPage.vue') },
       { path: 'org/org', component: () => import('pages/Org/OrgPage.vue') },
+      { path: 'org/position', component: () => import('pages/Org/PositionPage.vue') },
     ],
   },
   {

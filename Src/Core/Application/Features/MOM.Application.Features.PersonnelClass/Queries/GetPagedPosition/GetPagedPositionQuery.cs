@@ -14,6 +14,10 @@ namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
 {
     public class GetPagedPositionQuery : PersonnelClassRequest, IRequest<PagedResponse<PersonnelClassResponse>>
     {
+        /// <summary>
+        /// 职位名称
+        /// </summary>
+        public string? Id { get; set; }
         PaginationRequestParameter paginationRequestParameter = new PaginationRequestParameter();
         /// <summary>
         /// 要查看的页数：从1开始数

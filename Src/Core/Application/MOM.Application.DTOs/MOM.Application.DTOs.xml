@@ -39,6 +39,11 @@
             可访问的菜单及按钮编号清单
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.Common.DeleteCommand.DtIds">
+            <summary>
+            需要被删除的对象的DtId清单
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Common.TreeNode`1.key">
             <summary>
             节点的强制唯一键
@@ -180,9 +185,36 @@
             所有者DtId,谁对这些菜单和按钮具有权限
             </summary>
         </member>
-        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonnelClassRequest.Id">
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.AddPositionRequest.Id">
             <summary>
             名称
+            </summary>
+        </member>
+        <member name="M:MOM.Application.DTOs.PersonnelClass.Requests.AddPositionRequest.ToPersonnelClass(System.String)">
+            <summary>
+            转换成db模型
+            </summary>
+            <param name="description">说明-系统内部做业务区分使用的</param>
+            <returns></returns>
+        </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.PersonnelClassRequest.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Responses.PersonnelClassResponse.DtId">
+            <summary>
+            数据库唯一主键
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Responses.PersonnelClassResponse.Id">
+            <summary>
+            职位名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Responses.PersonnelClassResponse.Permissions">
+            <summary>
+            权限清单，菜单或按钮的编号
             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.DtId">

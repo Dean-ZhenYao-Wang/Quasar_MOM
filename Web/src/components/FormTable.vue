@@ -126,7 +126,7 @@ const props = defineProps({
     type: Object,
     required: true,
     validator: (value) => {
-      return ['queryFields', 'formFields', 'tableColumns'].every((key) => key in value)
+      return ['queryFields', 'formFields', 'tableConfig'].every((key) => key in value)
     },
   },
   search: Function,
@@ -162,6 +162,7 @@ const showAddDialog = () => {
   formDialogVisible.value = true
 }
 const showEditDialog = (row) => {
+  currentEditId.value = row[props.config.tableConfig.rowKey]
   Object.assign(formData, row)
   showAddDialog()
 }

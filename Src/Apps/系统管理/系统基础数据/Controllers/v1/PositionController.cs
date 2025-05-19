@@ -52,10 +52,10 @@ namespace 系统基础数据.Controllers.v1
         /// <summary>
         /// 删除职位
         /// </summary>
-        /// <param name="dtIds"></param>
+        /// <param name="command"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<BaseResult> Dekete(DeletePositionCommand command)
+        public async Task<BaseResult> Delete(DeletePositionCommand command)
         {
             return await Mediator.Send(command);
         }
