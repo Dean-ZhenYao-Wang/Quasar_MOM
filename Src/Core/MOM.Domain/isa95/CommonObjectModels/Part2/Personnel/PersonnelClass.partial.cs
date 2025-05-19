@@ -7,7 +7,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// <summary>
         /// 说明-系统内部做业务区分使用的
         /// </summary>
-        public string? Description { get; set; }
+        public string Description { get; set; }
         /// <summary>
         /// 备注-页面上显示给用户看的，用户自己编辑的备注信息
         /// </summary>
@@ -44,6 +44,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.HasPropertiesOf.Clear();
             this.IsDelete = true;
         }
-        public virtual List<Permission.PersonnelClassPermission> Permissions { get; set; }
+        public virtual List<Permission.PersonnelClassPermission> Permissions { get; set; } = new List<PersonnelClassPermission>();
     }
 }

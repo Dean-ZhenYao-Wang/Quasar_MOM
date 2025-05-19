@@ -25,26 +25,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
         public async Task DeleteAsync(Guid[] dtIds)
         {
-            using var transaction = await dbContext.Database.BeginTransactionAsync();
-            try
-            {
-                await this.ExecuteUpdateAsync(m => dtIds.Contains(m.DtId), setters => setters.SetProperty(pc => pc.IsDelete, true));
-                await personnelClassIncludesPropertiesOfRelationships
-                    .Where(m => dtIds.Contains(m.SourceId.Value))
-                    .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));
-                await personnelClassHasPropertiesOfRelationships
-                    .Where(m => dtIds.Contains(m.DtId))
-                    .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));
-                await personnelClassHierarchyScopeRelRelationships
-                    .Where(m => dtIds.Contains(m.DtId))
-                    .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));
-                await transaction.CommitAsync();
-            }
-            catch (Exception ex)
-            {
-                await transaction.RollbackAsync();
-                throw new ApplicationException(ex.Message, ex.InnerException);
-            }
+            await this.ExecuteUpdateAsync(m => dtIds.Contains(m.DtId), setters => setters.SetProperty(pc => pc.IsDelete, true));
         }
 
         public async Task<List<OrgResponse>> GetOrgTreeAsync(Guid? sourceDtId)

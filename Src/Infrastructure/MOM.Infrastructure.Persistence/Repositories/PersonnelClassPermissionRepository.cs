@@ -30,6 +30,11 @@ namespace MOM.Infrastructure.Persistence.Repositories
             DbSet.RemoveRange(DbSet.Where(m => m.PersonnelClassDtId == personnelClassDtId && menuButtonIds.Contains(m.MenuButtonId)));
         }
 
+        public async Task<List<string>> GetByOwnerAsync(Guid owner)
+        {
+            return await DbSet.AsNoTracking().Where(m => m.PersonnelClassDtId == owner).Select(m => m.MenuButtonId).ToListAsync();
+        }
+
         public Task<List<string>> GetPersonnelClassPermissionListAsync(Guid personnelClassDtId)
         {
             return DbSet.AsNoTracking().Where(m => m.PersonnelClassDtId == personnelClassDtId).Select(m => m.MenuButtonId).ToListAsync();

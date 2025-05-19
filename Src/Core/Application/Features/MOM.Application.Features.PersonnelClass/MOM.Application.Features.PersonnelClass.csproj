@@ -12,10 +12,4 @@
     <ProjectReference Include="..\..\MOM.Application\MOM.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Commands\" />
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
 </Project>
