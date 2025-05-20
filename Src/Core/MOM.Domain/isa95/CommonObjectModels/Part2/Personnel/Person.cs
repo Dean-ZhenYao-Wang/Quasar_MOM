@@ -18,7 +18,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// 所属设备角色层次/所属组织
         /// </summary>
         [JsonPropertyName("hierarchyScope")]
-        public string? HierarchyScope { get; set; }
+        public string? HierarchyScope { get { return HierarchyScopeRel.FirstOrDefault()?.Name; } }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }

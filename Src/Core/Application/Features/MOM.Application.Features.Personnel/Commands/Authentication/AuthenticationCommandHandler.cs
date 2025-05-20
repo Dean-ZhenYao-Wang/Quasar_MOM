@@ -1,28 +1,19 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using MOM.Application.DTOs.Account.Responses;
-using MOM.Application.Features.Personnel.Commands.UpdatePerson;
 using MOM.Application.Features.Personnel.Settings;
 using MOM.Application.Infrastructure.Extensions;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using static OrchardCore.OrchardCoreConstants;
 
 namespace MOM.Application.Features.Personnel.Commands.Authentication
 {
-    public class AuthenticationCommandHandler(IPersonRepository personRepository, IPersonnelClassPermissionRepository personnelClassPermissionRepository, ITranslator translator, JwtSettings jwtSettings, IUnitOfWork unitOfWork) : IRequestHandler<AuthenticationCommand, BaseResult<AuthenticationResponse>>
+    public class AuthenticationCommandHandler(IPersonRepository personRepository, IPersonnelClassPermissionRepository personnelClassPermissionRepository, IOrgPermissionRepository orgPermissionRepository, ITranslator translator, JwtSettings jwtSettings, IUnitOfWork unitOfWork) : IRequestHandler<AuthenticationCommand, BaseResult<AuthenticationResponse>>
     {
         public async Task<BaseResult<AuthenticationResponse>> Handle(AuthenticationCommand request, CancellationToken cancellationToken)
         {
@@ -66,9 +57,14 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
         private async Task<AuthenticationResponse> GetAuthenticationResponse(Person user)
         {
 
-            var rolesList = new List<string>();
-            rolesList = await personnelClassPermissionRepository.GetPersonnelClassPermissionListAsync(user.DefinedBy.Select(m => m.TargetId));
+            var personnelClassPermissionList = await personnelClassPermissionRepository.GetPersonnelClassPermissionListAsync(user.DefinedBy.Select(m => m.TargetId));
+            if (!string.IsNullOrWhiteSpace(user.HierarchyScope))
+            {
+                var orgPermissionList = await orgPermissionRepository.GetOrgPermissionListAsync(user.HierarchyScopeRel.First().Target.DtId);
+                personnelClassPermissionList.AddRange(orgPermissionList);
+            }
 
+            List<string> rolesList = personnelClassPermissionList.Distinct().ToList();
 
             var jwToken = GenerateJwtToken();
 
