@@ -56,6 +56,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         [MaxLength(1)]
         [JsonIgnore]
         public virtual PersonOperationalLocationRelRelationshipCollection OperationalLocationRel { get; set; } = new PersonOperationalLocationRelRelationshipCollection();
+        /// <summary>
+        /// 在空间上将人物角色定义为零维点、一维线、二维形状或三维实体<br/>
+        /// / / WKT / POLYGON（(-646.99 676.18, -645.14 683.09, -)）
+        /// </summary>
+        [JsonIgnore]
+        public SpatialDefinition SpatialDefinition { get; set; }
 
         public override bool Equals(object? obj)
         {

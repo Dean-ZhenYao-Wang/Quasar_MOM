@@ -17,7 +17,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.3")
+                .HasAnnotation("ProductVersion", "9.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -894,10 +894,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<string>("HierarchyScope")
-                        .HasColumnType("nvarchar(max)")
-                        .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
-
                     b.Property<DateTime?>("LockoutDateTime")
                         .HasColumnType("datetime2");
 
@@ -959,6 +955,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.HasBaseType("MOM.Domain.Common.BaseEntity");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HierarchyScope")
@@ -970,6 +967,8 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.Property<Guid?>("ResponsibleDtId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("ResponsibleDtId");
 
                     b.ToTable("PersonnelClasses");
                 });
@@ -3137,6 +3136,41 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("Responsible");
                 });
 
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation", b =>
+                {
+                    b.OwnsOne("MOM.Domain.isa95.CommonObjectModels.SpatialDefinition", "SpatialDefinition", b1 =>
+                        {
+                            b1.Property<Guid>("OperationalLocationDtId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Format")
+                                .HasColumnType("nvarchar(max)")
+                                .HasAnnotation("Relational:JsonPropertyName", "format");
+
+                            b1.Property<string>("SRID")
+                                .HasColumnType("nvarchar(max)")
+                                .HasAnnotation("Relational:JsonPropertyName", "SRID");
+
+                            b1.Property<string>("SRIDauthority")
+                                .HasColumnType("nvarchar(max)")
+                                .HasAnnotation("Relational:JsonPropertyName", "SRIDauthority");
+
+                            b1.Property<string>("Value")
+                                .HasColumnType("nvarchar(max)")
+                                .HasAnnotation("Relational:JsonPropertyName", "value");
+
+                            b1.HasKey("OperationalLocationDtId");
+
+                            b1.ToTable("OperationalLocation");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OperationalLocationDtId");
+                        });
+
+                    b.Navigation("SpatialDefinition")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", b =>
                 {
                     b.OwnsOne("MOM.Domain.Common.ContactInformation", "ContactInformation", b1 =>
@@ -3158,8 +3192,49 @@ namespace MOM.Infrastructure.Persistence.Migrations
                                 .HasForeignKey("PersonDtId");
                         });
 
+                    b.OwnsOne("MOM.Domain.isa95.CommonObjectModels.SpatialDefinition", "SpatialDefinition", b1 =>
+                        {
+                            b1.Property<Guid>("PersonDtId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Format")
+                                .HasColumnType("nvarchar(max)")
+                                .HasAnnotation("Relational:JsonPropertyName", "format");
+
+                            b1.Property<string>("SRID")
+                                .HasColumnType("nvarchar(max)")
+                                .HasAnnotation("Relational:JsonPropertyName", "SRID");
+
+                            b1.Property<string>("SRIDauthority")
+                                .HasColumnType("nvarchar(max)")
+                                .HasAnnotation("Relational:JsonPropertyName", "SRIDauthority");
+
+                            b1.Property<string>("Value")
+                                .HasColumnType("nvarchar(max)")
+                                .HasAnnotation("Relational:JsonPropertyName", "value");
+
+                            b1.HasKey("PersonDtId");
+
+                            b1.ToTable("Person");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PersonDtId");
+                        });
+
                     b.Navigation("ContactInformation")
                         .IsRequired();
+
+                    b.Navigation("SpatialDefinition")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleDtId");
+
+                    b.Navigation("Responsible");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment", b =>

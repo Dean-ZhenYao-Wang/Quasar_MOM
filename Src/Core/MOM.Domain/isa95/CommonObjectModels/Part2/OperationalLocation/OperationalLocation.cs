@@ -30,6 +30,11 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
 
         [JsonIgnore]
         public virtual OperationalLocationHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationalLocationHierarchyScopeRelRelationshipCollection();
+        /// <summary>
+        /// 在空间上将设备定义为零维点、一维线、二维形状或三维实体。
+        /// </summary>
+        [JsonIgnore]
+        public SpatialDefinition SpatialDefinition { get; set; }
 
         public override bool Equals(object? obj)
         {
