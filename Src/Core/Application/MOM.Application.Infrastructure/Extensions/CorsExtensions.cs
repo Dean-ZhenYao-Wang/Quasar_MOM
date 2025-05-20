@@ -17,6 +17,7 @@ namespace MOM.Application.Infrastructure.Extensions
                 });
             });
         }
+
         public static IApplicationBuilder UseAnyCors(this IApplicationBuilder app)
         {
             return app.UseCors("Any");

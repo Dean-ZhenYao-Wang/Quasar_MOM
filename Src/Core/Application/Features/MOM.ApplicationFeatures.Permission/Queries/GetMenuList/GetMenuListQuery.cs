@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.Wrappers;
-using MOM.Domain.Permission;
 
 namespace MOM.Application.Features.Permission.Queries.GetMenuList
 {
@@ -11,10 +10,12 @@ namespace MOM.Application.Features.Permission.Queries.GetMenuList
         /// 所属组织DtId
         /// </summary>
         public Guid? ParentMenuDtId { get; set; }
+
         /// <summary>
         /// 菜单编号
         /// </summary>
         public string? Id { get; set; }
+
         /// <summary>
         /// 菜单名称
         /// </summary>

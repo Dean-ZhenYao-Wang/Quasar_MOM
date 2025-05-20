@@ -4,6 +4,5 @@ namespace MOM.Application.Interfaces.Repositories
 {
     public interface IPersonnelClassIncludesPropertiesOfRelationshipRepository : IGenericRepository<PersonnelClassIncludesPropertiesOfRelationship>
     {
-
     }
 }

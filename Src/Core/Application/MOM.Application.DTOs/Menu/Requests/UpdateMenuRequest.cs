@@ -1,4 +1,5 @@
 ﻿namespace MOM.Application.DTOs.Menu.Requests
 {
-    public class UpdateMenuRequest : AddMenuRequest { }
+    public class UpdateMenuRequest : AddMenuRequest
+    { }
 }

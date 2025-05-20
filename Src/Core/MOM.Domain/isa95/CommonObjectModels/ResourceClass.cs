@@ -3,7 +3,6 @@ namespace MOM.Domain.isa95.CommonObjectModels
     using MOM.Domain.Common;
     using System;
     using System.Collections.Generic;
-    using System.Text.Json.Serialization;
 
     public abstract class ResourceClass : BaseEntity, IEquatable<ResourceClass>
     {

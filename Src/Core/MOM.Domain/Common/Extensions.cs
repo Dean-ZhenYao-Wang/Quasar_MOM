@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MOM.Domain.Common
+﻿namespace MOM.Domain.Common
 {
     internal static class Extensions
     {
@@ -21,6 +15,5 @@ namespace MOM.Domain.Common
 
             return hash;
         }
-
     }
 }

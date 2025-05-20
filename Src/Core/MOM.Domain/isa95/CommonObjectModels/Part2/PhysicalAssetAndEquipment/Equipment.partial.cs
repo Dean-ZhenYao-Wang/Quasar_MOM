@@ -8,9 +8,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
 {
     public partial class Equipment
     {
-
         [JsonPropertyName("description")]
         public string Description { get; set; }
+
         /// <summary>
         /// 空间定义
         /// </summary>
@@ -22,46 +22,54 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         [Required]
         [JsonPropertyName("number")]
         public string Number { get; set; }
+
         /// <summary>
         /// 规格
         /// </summary>
         [Required]
         [JsonPropertyName("specification")]
         public string Specification { get; set; }
+
         /// <summary>
         /// 型号
         /// </summary>
         [Required]
         [JsonPropertyName("modelNumber")]
         public string ModelNumber { get; set; }
+
         /// <summary>
         /// 使用组织的DtId
         /// </summary>
         [JsonPropertyName("useOrgDtId")]
         public Guid? UseOrgDtId { get; set; }
+
         /// <summary>
         /// 使用组织
         /// </summary>
         [JsonIgnore]
         [ForeignKey(nameof(UseOrgDtId))]
         public virtual PersonnelClass? UseOrg { get; set; }
+
         /// <summary>
         /// 使用组织
         /// </summary>
         [JsonPropertyName("OrgName")]
         public string? UseOrgName { get => UseOrg?.Id; }
+
         /// <summary>
         /// 设备状态
         /// </summary>
         [Required]
         [JsonPropertyName("status")]
         public EquipmentStatusType Status { get; set; }
+
         /// <summary>
         /// 启用时间
         /// </summary>
         [Required]
         [JsonPropertyName("enabledTime")]
         public DateTime EnabledTime { get; set; }
+
         /// <summary>
         /// 责任人DtId
         /// </summary>
@@ -85,39 +93,46 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
                 return Responsible?.Name;
             }
         }
+
         /// <summary>
         /// 供应商
         /// </summary>
         [Required]
         [JsonPropertyName("supplier")]
         public string Supplier { get; set; }
+
         /// <summary>
         /// 出厂编号
         /// </summary>
         [Required]
         [JsonPropertyName("factoryNumber")]
         public string FactoryNumber { get; set; }
+
         /// <summary>
         /// 折旧年限
         /// </summary>
         [Required]
         [JsonPropertyName("depreciationLife")]
         public int DepreciationLife { get; set; }
+
         /// <summary>
         /// 出厂日期
         /// </summary>
         [JsonPropertyName("factoryDate")]
         public DateTime? FactoryDate { get; set; }
+
         /// <summary>
         /// 原始价格
         /// </summary>
         [JsonPropertyName("initialPrice")]
         public decimal? InitialPrice { get; set; }
+
         /// <summary>
         /// 购买日期
         /// </summary>
         [JsonPropertyName("dateOfPurchase")]
         public DateTime? DateOfPurchase { get; set; }
+
         /// <summary>
         /// 保修期
         /// </summary>
@@ -130,6 +145,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.Description = description;
             this.EquipmentLevel = EquipmentLevel;
         }
+
         public Equipment(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, Guid? useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, description, equipmentLevel)
         {
             Number = number;
@@ -182,6 +198,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.Description = description ?? string.Empty;
             this.EquipmentLevel = equipmentLevel;
         }
+
         public void Update(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, Guid useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
         {
             this.Id = Id;

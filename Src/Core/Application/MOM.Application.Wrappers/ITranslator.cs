@@ -8,6 +8,7 @@
         }
 
         string GetString(string name);
+
         string GetString(TranslatorMessageDto input);
     }
 }

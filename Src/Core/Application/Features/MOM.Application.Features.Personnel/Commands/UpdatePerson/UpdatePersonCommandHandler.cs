@@ -1,14 +1,11 @@
 ﻿using MediatR;
-using MOM.Application.DTOs.Resource.Responses;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using System.Linq;
 
 namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
 {
-    public class UpdatePersonCommandHandler(IPersonRepository personRepository, ITranslator translator,IUnitOfWork unitOfWork) : IRequestHandler<UpdatePersonCommand, BaseResult>
+    public class UpdatePersonCommandHandler(IPersonRepository personRepository, ITranslator translator, IUnitOfWork unitOfWork) : IRequestHandler<UpdatePersonCommand, BaseResult>
     {
         public async Task<BaseResult> Handle(UpdatePersonCommand request, CancellationToken cancellationToken)
         {
@@ -20,7 +17,7 @@ namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
             }
 
             person.Update(request.Id, request.Name, request.WorkStatus, request.Email, request.PhoneNumber, request.TeamOfGroupDtId, request.OrgDtId, request.PositionDtId_List, request.Description, request.Properties.Select(m => m.ToPersonProperty()));
-           await unitOfWork.SaveChangesAsync();
+            await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }
     }

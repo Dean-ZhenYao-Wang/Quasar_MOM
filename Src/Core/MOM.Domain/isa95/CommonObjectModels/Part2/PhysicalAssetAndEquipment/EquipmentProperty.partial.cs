@@ -1,6 +1,4 @@
-﻿using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-
-namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
+﻿namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
 {
     public partial class EquipmentProperty
     {

@@ -14,19 +14,23 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         public Person()
         {
         }
+
         /// <summary>
         /// 所属设备角色层次/所属组织
         /// </summary>
         [JsonPropertyName("hierarchyScope")]
-        public string? HierarchyScope { get { return HierarchyScopeRel.FirstOrDefault()?.Name; } }
+        public string? HierarchyScope
+        { get { return HierarchyScopeRel.FirstOrDefault()?.Name; } }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
         /// <summary>
         /// 当前操作位置
         /// </summary>
         [JsonPropertyName("operationalLocation")]
         public string? OperationalLocation { get; set; }
+
         /// <summary>
         /// 当前操作位置类型
         /// </summary>
@@ -35,11 +39,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 
         [JsonIgnore]
         public virtual PersonDefinedByRelationshipCollection DefinedBy { get; set; } = new PersonDefinedByRelationshipCollection();
+
         /// <summary>
         /// 扩展属性、不参与业务规则
         /// </summary>
         [JsonIgnore]
         public virtual PersonHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new PersonHasValuesOfRelationshipCollection();
+
         /// <summary>
         /// 确定交换的信息在基于角色的设备层次结构中的位置。可选地，层次结构作用域定义人员定义的作用域。
         /// </summary>

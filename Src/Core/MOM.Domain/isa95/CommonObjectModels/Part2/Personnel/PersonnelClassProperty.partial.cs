@@ -5,8 +5,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 {
     public partial class PersonnelClassProperty
     {
-
-        public PersonnelClassProperty(ResourceClassPropertyPropertyType propertyType, string ID, string? description = null, string? value = null, string? valueUnitOfMeasure = null) : base(propertyType, ID,description, value, valueUnitOfMeasure) { }
+        public PersonnelClassProperty(ResourceClassPropertyPropertyType propertyType, string ID, string? description = null, string? value = null, string? valueUnitOfMeasure = null) : base(propertyType, ID, description, value, valueUnitOfMeasure)
+        {
+        }
 
         public void Delete()
         {
@@ -21,6 +22,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         {
             this.Contains.Add(new PersonnelClassPropertyContainsRelationship(this.DtId, targetDtId));
         }
+
         public void ContainsAddTarget(PersonnelClassProperty target)
         {
             this.Contains.Add(new PersonnelClassPropertyContainsRelationship(this, target));

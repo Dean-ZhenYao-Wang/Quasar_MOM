@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Interfaces;
 using MOM.Infrastructure.FileManager.Contexts;
 using MOM.Infrastructure.FileManager.Models;
+using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.FileManager.Services
 {
@@ -37,6 +37,7 @@ namespace MOM.Infrastructure.FileManager.Services
                 file.UpdateContent(content);
             }
         }
+
         public async Task<int> SaveChangesAsync() =>
             await fileManagerDbContext.SaveChangesAsync();
     }

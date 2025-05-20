@@ -8,6 +8,7 @@ namespace MOM.Application.Interfaces.Repositories
     public interface IHierarchyScopeContainsRelationshipRepository : IGenericRepository<HierarchyScopeContainsRelationship>
     {
         Task<PagedResponse<OrgResponse>> GetOrgListAsync(Guid? sourceDtId, string id, string name, int page, int pageSize);
+
         Task<List<TreeNode<OrgResponse>>> GetOrgTreeAsync(Guid? sourceDtId);
     }
 }

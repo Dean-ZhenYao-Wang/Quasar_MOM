@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text.Json;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using MOM.Application.Wrappers;
+using System.Net;
+using System.Text.Json;
 
 namespace MOM.Application.Infrastructure.Middlewares
 {
@@ -33,15 +30,18 @@ namespace MOM.Application.Infrastructure.Middlewares
                             responseModel.AddError(new Error(ErrorCode.ModelStateNotValid, validationFailure.ErrorMessage, validationFailure.PropertyName));
                         }
                         break;
+
                     case KeyNotFoundException e:
                         // not found error
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         responseModel.AddError(new Error(ErrorCode.NotFound, e.Message));
                         break;
+
                     case CommandExecutionException e:
                         response.StatusCode = 999;
-                        responseModel.AddError(new Error(ErrorCode.Exception,e.ErrorCode, e.Message));
+                        responseModel.AddError(new Error(ErrorCode.Exception, e.ErrorCode, e.Message));
                         break;
+
                     default:
                         // unhandled error
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;

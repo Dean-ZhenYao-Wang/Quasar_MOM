@@ -1,6 +1,7 @@
 namespace MOM.Application.Features.Personnel.Settings
 {
 #pragma warning disable
+
     public class JwtSettings
     {
         public string Key { get; set; }
@@ -8,5 +9,6 @@ namespace MOM.Application.Features.Personnel.Settings
         public string Audience { get; set; }
         public double DurationInMinutes { get; set; }
     }
-#pragma warning disable 
+
+#pragma warning disable
 }

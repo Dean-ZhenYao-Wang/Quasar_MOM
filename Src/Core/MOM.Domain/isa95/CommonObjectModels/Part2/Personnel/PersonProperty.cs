@@ -18,8 +18,8 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 
         //[JsonIgnore]
         public virtual PersonPropertyContainsRelationshipCollection Contains { get; set; } = new PersonPropertyContainsRelationshipCollection();
+
         [MaxLength(1)]
-        //[JsonIgnore]
         public virtual PersonPropertyMapsToRelationshipCollection MapsTo { get; set; } = new PersonPropertyMapsToRelationshipCollection();
 
         public override bool Equals(object? obj)

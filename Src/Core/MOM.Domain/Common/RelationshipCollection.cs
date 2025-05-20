@@ -6,7 +6,6 @@ namespace MOM.Domain.Common;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 
 /// <summary>
 /// 用于实现DTDL模型特定关系集合的抽象基类

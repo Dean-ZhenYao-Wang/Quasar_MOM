@@ -3,6 +3,7 @@ namespace MOM.Domain.Common.EnumType
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 所需的属性。可能的值是:生产、维护、质量、库存或混合
     /// </summary>

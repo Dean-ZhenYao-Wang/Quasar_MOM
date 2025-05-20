@@ -1,12 +1,5 @@
 ﻿using MOM.Application.DTOs.Common;
 using MOM.Application.DTOs.HierarchyScope.Responses;
-using MOM.Domain.isa95.CommonObjectModels;
-using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MOM.Application.DTOs.HierarchyScope
 {
@@ -31,12 +24,12 @@ namespace MOM.Application.DTOs.HierarchyScope
                     Address = hierarchyScope.Address
                 },
                 children = hierarchyScope.Contains.Select(m => m.Target.ToOrgTreeResponse(m.DtId)).OrderBy(m => m.data.Id).ToList(),
-
             };
 
             return OrgResponse;
         }
-        public static OrgResponse ToOrgItemResponse(this Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope, Guid? sourceDtId = null, string sourceName="")
+
+        public static OrgResponse ToOrgItemResponse(this Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope, Guid? sourceDtId = null, string sourceName = "")
         {
             OrgResponse OrgResponse = new()
             {
@@ -49,7 +42,7 @@ namespace MOM.Application.DTOs.HierarchyScope
                 Description = hierarchyScope.Description,
                 SourceDtId = sourceDtId,
                 Address = hierarchyScope.Address,
-                SourceName= sourceName
+                SourceName = sourceName
             };
 
             return OrgResponse;

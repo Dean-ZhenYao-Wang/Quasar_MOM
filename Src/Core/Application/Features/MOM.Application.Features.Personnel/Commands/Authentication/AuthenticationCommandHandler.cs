@@ -54,9 +54,9 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
             await unitOfWork.SaveChangesAsync();
             return returnModel;
         }
+
         private async Task<AuthenticationResponse> GetAuthenticationResponse(Person user)
         {
-
             var personnelClassPermissionList = await personnelClassPermissionRepository.GetPersonnelClassPermissionListAsync(user.DefinedBy.Select(m => m.TargetId));
             if (!string.IsNullOrWhiteSpace(user.HierarchyScope))
             {

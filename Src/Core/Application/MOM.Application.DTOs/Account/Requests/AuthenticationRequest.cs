@@ -9,6 +9,7 @@ namespace MOM.Application.DTOs.Account.Requests
 
         public string Password { get; set; }
     }
+
     public class AuthenticationRequestValidator : AbstractValidator<AuthenticationRequest>
     {
         public AuthenticationRequestValidator(ITranslator translator)

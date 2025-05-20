@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Asp.Versioning;
-using Hangfire.Tags.Attributes;
+﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MOM.WebApi.Controllers.v1
 {

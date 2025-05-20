@@ -3,10 +3,8 @@
 
 namespace MOM.Domain.Common;
 
-using MOM.Domain.isa95.CommonObjectModels;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 /// <summary>
 /// 用于实现DTDL模型特定关系的抽象基类
@@ -36,7 +34,7 @@ public abstract class Relationship<TTarget> : BasicRelationship, IEquatable<Basi
         SourceId = source.DtId;
         TargetId = target.DtId;
         Target = target;
-        Id= $"{source.Id}-{target.Id}";
+        Id = $"{source.Id}-{target.Id}";
     }
 
     /// <summary>

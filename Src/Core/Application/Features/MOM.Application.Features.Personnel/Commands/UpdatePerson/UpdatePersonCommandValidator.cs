@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
@@ -8,7 +7,6 @@ namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
     {
         public UpdatePersonCommandValidator(ITranslator translator)
         {
-
             RuleFor(p => p.Name)
                 .NotNull()
                 .NotEmpty()
@@ -16,5 +14,4 @@ namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
                 .WithName(p => translator[nameof(p.Name)]);
         }
     }
-
 }

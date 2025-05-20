@@ -15,7 +15,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
 {
     public class HierarchyScopeContainsRelationshipRepository(ApplicationDbContext dbContext) : GenericRepository<HierarchyScopeContainsRelationship>(dbContext), IHierarchyScopeContainsRelationshipRepository
     {
-
         public async Task<List<TreeNode<OrgResponse>>> GetOrgTreeAsync(Guid? sourceDtId)
         {
             List<TreeNode<OrgResponse>> returnModel = null;

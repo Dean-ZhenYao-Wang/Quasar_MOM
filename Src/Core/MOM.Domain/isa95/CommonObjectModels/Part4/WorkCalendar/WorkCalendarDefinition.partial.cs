@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar
 {
@@ -18,13 +13,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar
         /// </summary>
         [JsonPropertyName("definitionType")]
         public string DefinitionType { get; set; }
+
         public string? Description { get; set; }
-        public WorkCalendarDefinition(string ID,string? description,string definitionType)
+
+        public WorkCalendarDefinition(string ID, string? description, string definitionType)
         {
-            this.Id= Id;
+            this.Id = Id;
             Description = description;
             DefinitionType = definitionType;
         }
+
         public void Update(string ID, string? description, string definitionType)
         {
             this.Id = Id;
@@ -38,7 +36,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar
             {
                 item.Target.Delete();
             }
-            foreach(var item in HasPropertiesOf)
+            foreach (var item in HasPropertiesOf)
             {
                 item.Target.Delete();
             }

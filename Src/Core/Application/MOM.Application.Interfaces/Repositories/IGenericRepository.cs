@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Interfaces.Repositories
 {
@@ -10,14 +8,23 @@ namespace MOM.Application.Interfaces.Repositories
         Microsoft.EntityFrameworkCore.DbSet<T> DbSet { get; }
 
         Task<T> GetByIdAsync(object id);
+
         Task<T> AddAsync(T entity);
+
         void Update(T entity);
+
         void Delete(T entity);
+
         Task<IEnumerable<T>> GetByIdsAsync<TKey>(IEnumerable<TKey> ids) where TKey : notnull;
+
         void DeleteRange(IEnumerable<T> entities);
+
         IEnumerable<T> Where(Func<T, bool> predicate);
+
         Task<int> ExecuteUpdateAsync(Expression<Func<T, bool>> predicate, Expression<Func<Microsoft.EntityFrameworkCore.Query.SetPropertyCalls<T>, Microsoft.EntityFrameworkCore.Query.SetPropertyCalls<T>>> func);
+
         Task<Wrappers.PagedResponse<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class;
+
         IIncludableQueryable<T, TProperty> Include<TProperty>(Expression<Func<T, TProperty>> path);
     }
 }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MOM.Application.DTOs.PersonnelClass.Requests
+﻿namespace MOM.Application.DTOs.PersonnelClass.Requests
 {
-    public class AddPositionRequest:PersonnelClassRequest
+    public class AddPositionRequest : PersonnelClassRequest
     {
     }
 }

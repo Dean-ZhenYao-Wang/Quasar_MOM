@@ -7,6 +7,7 @@ namespace MOM.Application.DTOs.Account.Requests
     {
         public string UserName { get; set; }
     }
+
     public class ChangeUserNameRequestValidator : AbstractValidator<ChangeUserNameRequest>
     {
         public ChangeUserNameRequestValidator(ITranslator translator)

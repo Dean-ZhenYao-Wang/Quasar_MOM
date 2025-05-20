@@ -1,7 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.EntityFrameworkCore;
-using MOM.Application.DTOs.Menu.Responses;
+﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs.Personnel.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
@@ -10,10 +7,7 @@ using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
-using System.Configuration.Assemblies;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Persistence.Repositories
@@ -22,6 +16,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
     {
         private readonly DbSet<Person> person = dbContext.Set<Person>();
         private readonly DbSet<PersonnelClass> personnelClass = dbContext.Set<PersonnelClass>();
+
         /// <summary>
         /// 获取负责人下拉列表数据，此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
         /// </summary>
@@ -30,6 +25,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             return person.Where(m => m.IsDelete == false).AsNoTracking().ToListAsync();
         }
+
         public Task<PagedResponse<PersonResponse>> GetPagedListAsync(int pageNumber, int pageSize)
         {
             var query = person.Where(m => m.IsDelete == false)

@@ -9,6 +9,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelClass
         {
             Name = "hasPropertiesOf";
         }
+
         [JsonIgnore]
         [ForeignKey(nameof(SourceId))]
         public virtual Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass Source { get; set; }

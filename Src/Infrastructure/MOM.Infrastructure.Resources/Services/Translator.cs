@@ -1,14 +1,12 @@
-﻿using System.Globalization;
-using System.Resources;
-using MOM.Application.DTOs;
-using MOM.Application.Wrappers;
+﻿using MOM.Application.Wrappers;
 using MOM.Infrastructure.Resources.ProjectResources;
+using System.Globalization;
+using System.Resources;
 
 namespace MOM.Infrastructure.Resources.Services
 {
     public class Translator : ITranslator
     {
-
         private readonly ResourceManager resourceMessages = new(typeof(ResourceMessages).FullName, typeof(ResourceMessages).Assembly);
         private readonly ResourceManager resourceGeneral = new(typeof(ResourceGeneral).FullName, typeof(ResourceGeneral).Assembly);
 

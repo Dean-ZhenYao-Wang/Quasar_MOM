@@ -1,7 +1,6 @@
 namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
 {
     using MOM.Domain.Common;
-    using MOM.Domain.Common.EnumType;
     using MOM.Domain.Common.Relationship.isa95.EquipmentClassProperty;
     using MOM.Domain.isa95.CommonObjectModels;
     using System;

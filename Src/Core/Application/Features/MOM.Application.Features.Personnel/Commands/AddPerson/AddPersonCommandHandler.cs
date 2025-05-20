@@ -7,7 +7,7 @@ using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 
 namespace MOM.Application.Features.Personnel.Commands.AddPerson
 {
-    public class AddPersonCommandHandler(IPersonRepository personRepository,IUnitOfWork unitOfWork) : IRequestHandler<AddPersonCommand, BaseResult>
+    public class AddPersonCommandHandler(IPersonRepository personRepository, IUnitOfWork unitOfWork) : IRequestHandler<AddPersonCommand, BaseResult>
     {
         public async Task<BaseResult> Handle(AddPersonCommand request, CancellationToken cancellationToken)
         {

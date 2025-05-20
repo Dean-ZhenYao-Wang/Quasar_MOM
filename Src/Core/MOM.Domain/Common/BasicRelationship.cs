@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace MOM.Domain.Common
 {
@@ -9,7 +7,7 @@ namespace MOM.Domain.Common
     /// </summary>
     /// <remarks>
     /// <para>
-    /// 此辅助类仅适用于 <see cref="System.Text.Json"/> 序列化库。当与 <see cref="Azure.Core.Serialization.ObjectSerializer"/> 
+    /// 此辅助类仅适用于 <see cref="System.Text.Json"/> 序列化库。当与 <see cref="Azure.Core.Serialization.ObjectSerializer"/>
     /// （通过 <see cref="DigitalTwinsClientOptions"/> 参数传入）一起使用时，仅支持默认的 <see cref="Azure.Core.Serialization.JsonObjectSerializer"/>。
     /// </para>
     /// <para>

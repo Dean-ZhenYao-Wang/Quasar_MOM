@@ -1,18 +1,15 @@
 ﻿using MOM.Application.DTOs.Personnel.Responses;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Interfaces.Repositories
 {
     public interface IPersonRepository : IGenericRepository<Person>
     {
         Task DeleteAsync(Guid[] dtIds);
+
         Task<Person> FindByNameAsync(string userName);
+
         Task<PagedResponse<PersonResponse>> GetPagedListAsync(int pageNumber, int pageSize);
 
         /// <summary>

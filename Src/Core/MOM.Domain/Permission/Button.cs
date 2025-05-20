@@ -5,10 +5,12 @@ namespace MOM.Domain.Permission
 {
     public class Button : BaseEntity
     {
-        public required string Name { get; set; }
+        public string Name { get; set; }
         public string? Icon { get; set; }
+
         [ForeignKey(nameof(MenuDtId))]
-        public required Guid MenuDtId { get; set; }
+        public Guid MenuDtId { get; set; }
+
         public virtual Menu Menu { get; set; }
 
         public void Update(string id, string name, string? icon)

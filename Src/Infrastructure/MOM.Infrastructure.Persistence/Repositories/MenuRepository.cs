@@ -1,12 +1,8 @@
-﻿using Azure.Core;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs.Menu;
 using MOM.Application.DTOs.Menu.Responses;
 using MOM.Application.Infrastructure.Services;
-using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
-using MOM.Application.Wrappers;
 using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
@@ -18,8 +14,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
 {
     public class MenuRepository(ApplicationDbContext dbContext, IAuthenticatedUserService currentUser) : GenericRepository<Menu>(dbContext), IMenuRepository
     {
-
-
         public async Task DeleteAsync(Guid[] dtIds)
         {
             await this.ExecuteUpdateAsync(m => dtIds.Contains(m.DtId), m => m.SetProperty(p => p.IsDelete, true));
@@ -37,6 +31,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
             var menuList = BuildTree(allMenus);
             return menuList;
         }
+
         private List<MenuTreeNodeResponse> BuildTree(List<Menu> menus)
         {
             var rootMenus = menus.Where(m => m.ParentMenuDtId == null).Select(m => m.ToMenuTreeNodeResponse()).ToList();
@@ -59,10 +54,10 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
         public async Task<Guid[]> GetButtonDtIdsAsync(Guid[] dtIds)
         {
-           return await this.DbSet.AsNoTracking()
-                .Where(m => dtIds.Contains(m.DtId))
-                .SelectMany(m => m.Buttons.Select(b => b.DtId))
-                .ToArrayAsync();
+            return await this.DbSet.AsNoTracking()
+                 .Where(m => dtIds.Contains(m.DtId))
+                 .SelectMany(m => m.Buttons.Select(b => b.DtId))
+                 .ToArrayAsync();
         }
     }
 }

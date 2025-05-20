@@ -1,12 +1,12 @@
-﻿using System.Linq;
-using System.Reflection;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Infrastructure.Persistence.Contexts;
 using MOM.Infrastructure.Persistence.Repositories;
+using System.Linq;
+using System.Reflection;
 
 namespace MOM.Infrastructure.Persistence
 {
@@ -30,6 +30,7 @@ namespace MOM.Infrastructure.Persistence
 
             return services;
         }
+
         private static void RegisterRepositories(this IServiceCollection services)
         {
             var interfaceType = typeof(IGenericRepository<>);

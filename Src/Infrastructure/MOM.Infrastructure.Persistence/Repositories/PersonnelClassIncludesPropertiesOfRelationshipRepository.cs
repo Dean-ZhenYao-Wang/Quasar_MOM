@@ -4,8 +4,7 @@ using MOM.Infrastructure.Persistence.Contexts;
 
 namespace MOM.Infrastructure.Persistence.Repositories
 {
-    public class PersonnelClassIncludesPropertiesOfRelationshipRepository(ApplicationDbContext dbContext):GenericRepository<PersonnelClassIncludesPropertiesOfRelationship>(dbContext), IPersonnelClassIncludesPropertiesOfRelationshipRepository
+    public class PersonnelClassIncludesPropertiesOfRelationshipRepository(ApplicationDbContext dbContext) : GenericRepository<PersonnelClassIncludesPropertiesOfRelationship>(dbContext), IPersonnelClassIncludesPropertiesOfRelationshipRepository
     {
-
     }
 }

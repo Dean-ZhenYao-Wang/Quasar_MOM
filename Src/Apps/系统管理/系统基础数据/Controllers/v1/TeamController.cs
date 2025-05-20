@@ -37,6 +37,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(query);
         }
+
         /// <summary>
         /// 新增班组
         /// </summary>
@@ -47,6 +48,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(command);
         }
+
         /// <summary>
         /// 修改班组
         /// </summary>
@@ -57,6 +59,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(command);
         }
+
         /// <summary>
         /// 删除班组
         /// </summary>
@@ -74,7 +77,6 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
-
         public async Task<BaseResult> SettingPermission(PersonnelClassSettingPermissionCommand command)
         {
             return await Mediator.Send(command);

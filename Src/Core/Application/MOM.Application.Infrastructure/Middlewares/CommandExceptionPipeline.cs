@@ -1,11 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using MOM.Application.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Infrastructure.Middlewares
 {
@@ -47,7 +42,7 @@ namespace MOM.Application.Infrastructure.Middlewares
                 // 返回错误响应（适配BaseResult）
                 if (typeof(TResponse) == typeof(BaseResult))
                 {
-                    return (TResponse)(object)BaseResult.Failure(new Error(ErrorCode.Exception,"COMMAND_FAILED", ex.Message));
+                    return (TResponse)(object)BaseResult.Failure(new Error(ErrorCode.Exception, "COMMAND_FAILED", ex.Message));
                 }
 
                 throw new CommandExecutionException("命令执行失败", ex);

@@ -65,6 +65,7 @@ namespace 系统基础数据.Controllers.v1
             var model = await Mediator.Send(command);
             return model;
         }
+
         /// <summary>
         /// 获取组织树形
         /// </summary>
@@ -75,17 +76,18 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(new GetOrgTreeQuery { SourceDtId = sourceDtId });
         }
+
         /// <summary>
         /// 给组织结构配置基本权限
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
-
         public async Task<BaseResult> SettingPermission(OrgSettingPermissionCommand command)
         {
             return await Mediator.Send(command);
         }
+
         /// <summary>
         /// 获取指定组织的权限列表
         /// </summary>

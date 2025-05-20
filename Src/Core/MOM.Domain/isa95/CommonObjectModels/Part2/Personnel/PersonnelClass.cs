@@ -22,6 +22,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 
         [JsonIgnore]
         public virtual PersonnelClassHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new PersonnelClassHasPropertiesOfRelationshipCollection();
+
         [MaxLength(1)]
         [JsonIgnore]
         public virtual PersonnelClassHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new PersonnelClassHierarchyScopeRelRelationshipCollection();

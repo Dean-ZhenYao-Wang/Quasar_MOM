@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MOM.Application.Wrappers
+﻿namespace MOM.Application.Wrappers
 {
     public class PaginationResponseDto<T>(List<T> data, int count, int pageNumber, int pageSize)
     {

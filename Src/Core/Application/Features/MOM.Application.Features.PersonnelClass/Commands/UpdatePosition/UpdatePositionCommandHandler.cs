@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
@@ -13,7 +12,7 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdatePosition
             var position = await personnelClassRepository.GetByIdAsync(request.DtId);
             if (position == null)
             {
-                return BaseResult.Failure(new Error(ErrorCode.NotFound,"Position not found."));
+                return BaseResult.Failure(new Error(ErrorCode.NotFound, "Position not found."));
             }
             position.Id = request.Id;
             position.Remark = request.Remark;
@@ -23,5 +22,4 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdatePosition
             return BaseResult.Ok();
         }
     }
-
 }

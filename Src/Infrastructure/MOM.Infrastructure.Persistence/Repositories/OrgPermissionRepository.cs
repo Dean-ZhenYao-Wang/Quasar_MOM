@@ -1,7 +1,5 @@
-﻿using Azure.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Interfaces.Repositories;
-using MOM.Application.Wrappers;
 using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
@@ -20,7 +18,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
         public Task<List<string>> GetOrgPermissionListAsync(Guid orgDtId)
         {
-            return DbSet.AsNoTracking().Where(m=>m.OrgDtId==orgDtId).Select(m=>m.MenuButtonId).ToListAsync();
+            return DbSet.AsNoTracking().Where(m => m.OrgDtId == orgDtId).Select(m => m.MenuButtonId).ToListAsync();
         }
 
         public async Task AddRangeAsync(List<string> menuButtonIds, Guid orgDtId)

@@ -1,12 +1,8 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MOM.Application.DTOs.HierarchyScope.Responses;
 using MOM.Application.DTOs.PersonnelClass.Responses;
-using MOM.Application.Features.HierarchyScope.Queries.GetOrgTable;
-using MOM.Application.Features.Permission.Commands.OrgSettingPermission;
 using MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission;
-using MOM.Application.Features.Permission.Commands.PositionSettingPermission;
 using MOM.Application.Features.PersonnelClass.Commands.AddPsitoion;
 using MOM.Application.Features.PersonnelClass.Commands.DeletePosition;
 using MOM.Application.Features.PersonnelClass.Commands.UpdatePosition;
@@ -30,6 +26,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(query);
         }
+
         /// <summary>
         /// 新增职位
         /// </summary>
@@ -40,6 +37,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(command);
         }
+
         /// <summary>
         /// 修改职位
         /// </summary>
@@ -50,6 +48,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(command);
         }
+
         /// <summary>
         /// 删除职位
         /// </summary>
@@ -67,7 +66,6 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
-
         public async Task<BaseResult> SettingPermission(PersonnelClassSettingPermissionCommand command)
         {
             return await Mediator.Send(command);

@@ -10,7 +10,6 @@ namespace MOM.Application.Infrastructure.Filters
     /// </summary>
     public class SwaggerOperationFilter : IOperationFilter
     {
-
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var apiDescription = context.ApiDescription;

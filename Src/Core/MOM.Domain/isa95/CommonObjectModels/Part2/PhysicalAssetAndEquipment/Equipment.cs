@@ -26,22 +26,26 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
 
         [JsonPropertyName("equipmentLevel")]
         public EquipmentEquipmentLevel? EquipmentLevel { get; set; }
+
         /// <summary>
         /// 所属设备类清单
         /// </summary>
         [JsonIgnore]
         public virtual EquipmentDefinedByRelationshipCollection DefinedBy { get; set; } = new EquipmentDefinedByRelationshipCollection();
+
         /// <summary>
         /// 自定义属性清单
         /// </summary>
         [JsonIgnore]
         public virtual EquipmentHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new EquipmentHasValuesOfRelationshipCollection();
+
         /// <summary>
         /// 这个父设备是子设备的整体。<br/>
         /// 组成关系
         /// </summary>
         [JsonIgnore]
         public virtual EquipmentIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new EquipmentIsMadeUpOfRelationshipCollection();
+
         /// <summary>
         /// 对应的实物资产<br/>
         /// 该设备在工艺段中的作用是由实物资产实现的。

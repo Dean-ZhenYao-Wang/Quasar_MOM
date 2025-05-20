@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 

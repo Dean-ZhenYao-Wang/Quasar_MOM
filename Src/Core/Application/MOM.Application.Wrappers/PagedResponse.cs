@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MOM.Application.Wrappers
+﻿namespace MOM.Application.Wrappers
 {
     public class PagedResponse<T> : BaseResult<List<T>>
     {
@@ -10,14 +6,17 @@ namespace MOM.Application.Wrappers
         /// 查看的页数
         /// </summary>
         public int PageNumber { get; set; }
+
         /// <summary>
         /// 每页显示的数据条数
         /// </summary>
         public int PageSize { get; set; }
+
         /// <summary>
         /// 总页数
         /// </summary>
         public int TotalPages { get; set; }
+
         /// <summary>
         /// 数据总条数
         /// </summary>
@@ -50,6 +49,5 @@ namespace MOM.Application.Wrappers
 
         public static implicit operator PagedResponse<T>(List<Error> errors)
             => new() { Success = false, Errors = errors };
-
     }
 }

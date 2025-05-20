@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MOM.Application.DTOs.Account.Responses
+﻿namespace MOM.Application.DTOs.Account.Responses
 {
     public class UserDto
     {

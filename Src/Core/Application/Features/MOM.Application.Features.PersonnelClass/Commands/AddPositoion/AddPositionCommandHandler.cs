@@ -1,14 +1,7 @@
 ﻿using MediatR;
-using MOM.Application.Infrastructure.Extensions;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Features.PersonnelClass.Commands.AddPsitoion
 {

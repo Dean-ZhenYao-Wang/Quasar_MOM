@@ -9,11 +9,13 @@ namespace MOM.Application.DTOs.Account.Requests
         /// 旧密码
         /// </summary>
         public string Password { get; set; }
+
         /// <summary>
         /// 新密码
         /// </summary>
         public string ConfirmPassword { get; set; }
     }
+
     public class ChangePasswordRequestValidator : AbstractValidator<ChangePasswordRequest>
     {
         public ChangePasswordRequestValidator(ITranslator translator)

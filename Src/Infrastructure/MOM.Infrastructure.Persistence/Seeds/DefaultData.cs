@@ -7,7 +7,6 @@ using MOM.Domain.isa95.CommonObjectModels;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Persistence.Seeds
@@ -18,7 +17,6 @@ namespace MOM.Infrastructure.Persistence.Seeds
         {
             if (!await applicationDbContext.Person.AnyAsync())
             {
-
                 Person admin = new Person("admin", "超级管理员", PersonWorkStatus.Employed);
                 admin.PassWord = "Sam@123456".Sha1Signature().Sha1Signature(admin.DtId.ToString());
                 admin.SecurityStamp = Guid.NewGuid().ToString();
@@ -34,10 +32,9 @@ namespace MOM.Infrastructure.Persistence.Seeds
 
                 applicationDbContext.PersonnelClassPermission.Add(new Domain.Permission.PersonnelClassPermission()
                 {
-                    PersonnelClassDtId=personnelClass.DtId,
-                    MenuButtonId= "*:*:*"
+                    PersonnelClassDtId = personnelClass.DtId,
+                    MenuButtonId = "*:*:*"
                 });
-
 
                 admin.HierarchyScopeRel.Add(new Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship(admin.DtId, enterprise.DtId));
                 admin.DefinedByAddTarget(personnelClass.DtId);

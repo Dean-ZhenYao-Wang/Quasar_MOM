@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.EntityFrameworkCore;
-using MOM.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Contexts;
@@ -22,6 +20,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             return Where(m => m.MenuDtId == menuDtId).OrderBy(m => m.Id).Select(m => m).AsQueryable().ToListAsync();
         }
+
         public override Task<Button> AddAsync(Button entity)
         {
             return base.AddAsync(entity);

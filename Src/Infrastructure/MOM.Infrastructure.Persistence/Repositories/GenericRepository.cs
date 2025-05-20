@@ -1,15 +1,11 @@
-﻿using Asp.Versioning.Routing;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using MOM.Application.DTOs;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.Domain.isa95.CommonObjectModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Persistence.Repositories
@@ -17,14 +13,17 @@ namespace MOM.Infrastructure.Persistence.Repositories
     public class GenericRepository<T>(DbContext dbContext) : IGenericRepository<T> where T : class
     {
         public DbSet<T> DbSet { get => dbContext.Set<T>(); }
+
         public virtual IEnumerable<T> Where(Func<T, bool> predicate)
         {
             return dbContext.Set<T>().Where(predicate);
         }
+
         public virtual async Task<T> GetByIdAsync(object id)
         {
             return await dbContext.Set<T>().FindAsync(id);
         }
+
         public virtual async Task<IEnumerable<T>> GetByIdsAsync<TKey>(IEnumerable<TKey> ids)
      where TKey : notnull // 约束 TKey 为非空类型
         {
@@ -83,10 +82,12 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             dbContext.Set<T>().Remove(entity);
         }
+
         public void DeleteRange(IEnumerable<T> entities)
         {
             dbContext.Set<T>().RemoveRange(entities);
         }
+
         public async Task<PagedResponse<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class
         {
             var count = await query.CountAsync();
@@ -109,6 +110,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
             return PagedResponse<TEntity>.Ok(new PaginationResponseDto<TEntity>(pagedResult, count, pageNumber, pageSize));
         }
+
         public IIncludableQueryable<T, TProperty> Include<TProperty>(Expression<Func<T, TProperty>> path)
         {
             return dbContext.Set<T>().Include(path);

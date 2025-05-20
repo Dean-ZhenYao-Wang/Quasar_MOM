@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System.Globalization;
 
 namespace MOM.Application.Infrastructure.Extensions
 {
@@ -25,12 +23,12 @@ namespace MOM.Application.Infrastructure.Extensions
 
             return services;
         }
+
         public static IApplicationBuilder UseCustomLocalization(this IApplicationBuilder app)
         {
             app.UseRequestLocalization(app.ApplicationServices.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
             return app;
         }
-
     }
 }

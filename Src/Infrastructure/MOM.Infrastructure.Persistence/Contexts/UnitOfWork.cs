@@ -7,15 +7,18 @@ namespace MOM.Infrastructure.Persistence.Contexts
 {
     public class UnitOfWork(ApplicationDbContext dbContext) : IUnitOfWork
     {
-        public DbContext Relationships { get; set; }= dbContext;
+        public DbContext Relationships { get; set; } = dbContext;
+
         public async Task<bool> SaveChangesAsync()
         {
             return await dbContext.SaveChangesAsync() > 0;
         }
+
         public bool SaveChanges()
         {
             return dbContext.SaveChanges() > 0;
         }
+
         public async Task<IDbContextTransaction> BeginTransactionAsync()
         {
             return await dbContext.Database.BeginTransactionAsync();

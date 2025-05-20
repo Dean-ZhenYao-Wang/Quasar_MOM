@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace MOM.Application.Wrappers
+﻿namespace MOM.Application.Wrappers
 {
     public class BaseResult
     {
@@ -9,6 +6,7 @@ namespace MOM.Application.Wrappers
         /// 业务处理状态<br>true: 业务处理成功；false: 业务处理失败</br>
         /// </summary>
         public bool Success { get; set; }
+
         /// <summary>
         /// 错误信息，Success为false时此处才有元素
         /// </summary>
@@ -50,6 +48,7 @@ namespace MOM.Application.Wrappers
 
         public static BaseResult<TData> Ok(TData data)
             => new() { Success = true, Data = data };
+
         public new static BaseResult<TData> Failure()
             => new() { Success = false };
 

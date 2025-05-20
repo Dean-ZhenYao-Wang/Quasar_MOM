@@ -20,11 +20,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
 
         [JsonPropertyName("hierarchyScope")]
         public string HierarchyScope => HierarchyScopeRel.FirstOrDefault() == null ? string.Empty : HierarchyScopeRel.FirstOrDefault().Target.Id;
+
         /// <summary>
         /// 在基于角色的装备层次中级别的标识
         /// </summary>
         [JsonPropertyName("equipmentLevel")]
         public EquipmentClassEquipmentLevel? EquipmentLevel { get; set; }
+
         /// <summary>
         /// 当前分类包含的子分类。<br/>
         /// 父子关系（主要类别，如生产类、一起类、辅助类、工具类、运输类、管理类等）<br/>
@@ -34,8 +36,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </summary>
         [JsonIgnore]
         public virtual EquipmentClassIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new EquipmentClassIncludesPropertiesOfRelationshipCollection();
+
         /// <summary>
-        /// 这个父设备类是子设备类的整体。<br/> 
+        /// 这个父设备类是子设备类的整体。<br/>
         /// 组成关系（具体的设备类别，如反应器、压缩机、CNC、叉车、行车等）<br/>
         /// 罐装产线->A类设备<br/>
         /// 罐装产线->B类设备<br/>

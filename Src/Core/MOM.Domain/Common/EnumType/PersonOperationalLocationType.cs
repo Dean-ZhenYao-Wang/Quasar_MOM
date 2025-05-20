@@ -15,6 +15,7 @@ namespace MOM.Domain.Common.EnumType
         /// </summary>
         [EnumMember(Value = "操作位置属性引用操作位置"), Display(Name = "Operational Location", Description = "操作位置属性引用操作位置;")]
         operationalLocation,
+
         /// <summary>
         /// 操作位置属性包含操作位置的描述，例如街道地址。
         /// </summary>

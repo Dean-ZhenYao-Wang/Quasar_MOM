@@ -1,15 +1,8 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MOM.Application.DTOs.PersonnelClass.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.Domain.Common.Relationship.isa95.PersonnelClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
 {

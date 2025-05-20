@@ -1,7 +1,5 @@
 ﻿using Asp.Versioning;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace MOM.Application.Infrastructure.Extensions
 {
@@ -23,6 +21,5 @@ namespace MOM.Application.Infrastructure.Extensions
 
             return services;
         }
-
     }
 }

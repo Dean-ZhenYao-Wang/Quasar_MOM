@@ -1,7 +1,4 @@
-﻿using MOM.Application.DTOs.Common;
-using MOM.Application.DTOs.HierarchyScope.Responses;
-using MOM.Application.Wrappers;
-using MOM.Domain.isa95.CommonObjectModels;
+﻿using MOM.Domain.isa95.CommonObjectModels;
 
 namespace MOM.Application.Interfaces.Repositories
 {

@@ -18,6 +18,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar
 
         [JsonPropertyName("hierarchyScope")]
         public string? HierarchyScope { get; set; }
+
         [MaxLength(1)]
         [JsonIgnore]
         public virtual WorkCalendarDefinedByRelationshipCollection DefinedBy { get; set; } = new WorkCalendarDefinedByRelationshipCollection();

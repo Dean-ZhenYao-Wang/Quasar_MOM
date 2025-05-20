@@ -26,6 +26,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
                 this.IncludesPropertiesOf.Add(new Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship(this.DtId, item));
             }
         }
+
         public async void PutIsMadeUpOf(List<Guid> childClassDtId)
         {
             var haveDtIds = this.IsMadeUpOf.Select(m => m.TargetId).ToList();
@@ -50,12 +51,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
 
         public void HasPropertiesOfAddTarget(EquipmentClassProperty equipmentClassProperty)
         {
-            this.HasPropertiesOf.Add(new Common.Relationship.isa95.EquipmentClass.EquipmentClassHasPropertiesOfRelationship(this,equipmentClassProperty));
+            this.HasPropertiesOf.Add(new Common.Relationship.isa95.EquipmentClass.EquipmentClassHasPropertiesOfRelationship(this, equipmentClassProperty));
         }
 
         public void Delete()
         {
-            foreach(var item in HasPropertiesOf)
+            foreach (var item in HasPropertiesOf)
             {
                 item.Target.Delete();
             }

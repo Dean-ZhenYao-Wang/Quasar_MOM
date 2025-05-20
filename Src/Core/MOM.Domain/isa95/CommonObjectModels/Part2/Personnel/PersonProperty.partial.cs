@@ -25,12 +25,10 @@
             this.IsDelete = true;
         }
 
-
         public void ContainsAddTarget(PersonProperty personProperty)
         {
             this.Contains.Add(new Common.Relationship.isa95.PersonProperty.PersonPropertyContainsRelationship(this, personProperty));
         }
-
 
         public void Update(string iD, string? description, string? value, string? valueUnitOfMeasure)
         {

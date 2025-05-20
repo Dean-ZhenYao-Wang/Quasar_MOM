@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MOM.Domain.Common;
 using MOM.Domain.isa95.CommonObjectModels.Part4.WorkDefinition;
-using System;
-using System.Reflection.Emit;
 
 namespace MOM.Infrastructure.Persistence.Contexts.Configurations
 {
@@ -22,6 +20,7 @@ namespace MOM.Infrastructure.Persistence.Contexts.Configurations
             builder.UseTpcMappingStrategy();
         }
     }
+
     public class BasicRelationshipConfiguration : IEntityTypeConfiguration<BasicRelationship>
     {
         public void Configure(EntityTypeBuilder<BasicRelationship> builder)

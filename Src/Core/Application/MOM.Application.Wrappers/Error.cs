@@ -6,10 +6,12 @@ namespace MOM.Application.Wrappers
         /// ´íÎó±àºÅ
         /// </summary>
         public ErrorCode ErrorCode { get; set; } = errorCode;
+
         /// <summary>
         /// ×Ö¶ÎÃû³Æ
         /// </summary>
         public string FieldName { get; set; } = fieldName;
+
         /// <summary>
         /// ËµÃ÷
         /// </summary>

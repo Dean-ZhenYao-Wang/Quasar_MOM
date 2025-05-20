@@ -15,11 +15,13 @@ namespace MOM.Domain.Common.EnumType
         /// </summary>
         [EnumMember(Value = "男"), Display(Name = "男")]
         Male,
+
         /// <summary>
         /// 女
         /// </summary>
         [EnumMember(Value = "女"), Display(Name = "女")]
         Female,
+
         /// <summary>
         /// 未知
         /// </summary>

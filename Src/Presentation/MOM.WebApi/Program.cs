@@ -2,10 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -15,11 +13,9 @@ using MOM.Application.Infrastructure.Middlewares;
 using MOM.Application.Infrastructure.Services;
 using MOM.Application.Wrappers;
 using MOM.Infrastructure.FileManager;
-using MOM.Infrastructure.FileManager.Contexts;
 using MOM.Infrastructure.Hangfire;
 using MOM.Infrastructure.Persistence;
 using MOM.Infrastructure.Persistence.Contexts;
-using MOM.Infrastructure.Persistence.Seeds;
 using MOM.Infrastructure.Resources;
 using Serilog;
 using System;
@@ -27,14 +23,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
 
 var enterpriseSettings = builder.Configuration.GetSection(nameof(EnterpriseSettings)).Get<EnterpriseSettings>();
 builder.Services.AddSingleton(enterpriseSettings);
-
 
 bool useInMemoryDatabase = builder.Configuration.GetValue<bool>("UseInMemoryDatabase");
 builder.Services.AddPersistenceInfrastructure(builder.Configuration, useInMemoryDatabase);
@@ -53,18 +47,17 @@ builder.Services.AddAuthentication(options =>
     o.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,//是否验证签名,不验证的话可以篡改数据，不安全
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),//解密的密钥      
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),//解密的密钥
         ValidateIssuer = true,//是否验证发行人，就是验证载荷中的Iss是否对应ValidIssuer参数
         ValidIssuer = jwtSettings.Issuer,//发行人
         ValidateAudience = true,//是否验证订阅人，就是验证载荷中的Aud是否对应ValidAudience参数
-        ValidAudience = jwtSettings.Audience,//订阅人  
+        ValidAudience = jwtSettings.Audience,//订阅人
         ValidateLifetime = true,//是否验证过期时间，过期了就拒绝访问
         ClockSkew = TimeSpan.Zero,//这个是缓冲过期时间，也就是说，即使我们配置了过期时间，这里也要考虑进去，过期时间+缓冲，默认好像是7分钟，你可以直接设置为0
     };
 
     o.RequireHttpsMetadata = false;
     o.SaveToken = false;
-
 
     o.Events = new JwtBearerEvents()
     {
@@ -125,7 +118,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-
 builder.Services.AddResourcesInfrastructure();
 builder.Services.AddHangfireInfrastructure(builder.Configuration);
 builder.Services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
@@ -155,7 +147,6 @@ Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configurat
     .Enrich.FromLogContext()
     .CreateLogger();
 builder.Host.UseSerilog(Log.Logger);
-
 
 var app = builder.Build();
 // 添加路由调试中间件
@@ -200,6 +191,4 @@ app.MapControllers();
 app.UseOrchardCore();
 app.UseSerilogRequestLogging();
 
-
 app.Run();
-

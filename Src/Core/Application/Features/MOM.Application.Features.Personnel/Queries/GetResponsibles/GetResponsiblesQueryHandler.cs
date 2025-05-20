@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using MOM.Application.Interfaces.Repositories;
-using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Features.Personnel.Queries.GetResponsibles
 {

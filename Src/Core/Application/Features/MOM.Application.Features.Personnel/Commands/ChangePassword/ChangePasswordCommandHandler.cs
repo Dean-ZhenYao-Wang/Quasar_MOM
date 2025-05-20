@@ -7,7 +7,7 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Personnel.Commands.ChangePassword
 {
-    public class ChangePasswordCommandHandler(ITranslator translator, IPersonRepository personRepository, IAuthenticatedUserService authenticated,IUnitOfWork unitOfWork) : IRequestHandler<ChangePasswordCommand, BaseResult>
+    public class ChangePasswordCommandHandler(ITranslator translator, IPersonRepository personRepository, IAuthenticatedUserService authenticated, IUnitOfWork unitOfWork) : IRequestHandler<ChangePasswordCommand, BaseResult>
     {
         public async Task<BaseResult> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
         {
@@ -21,9 +21,9 @@ namespace MOM.Application.Features.Personnel.Commands.ChangePassword
             }
             else
             {
-                return BaseResult.Failure(new Error(ErrorCode.FieldDataInvalid,"密码错误"));
+                return BaseResult.Failure(new Error(ErrorCode.FieldDataInvalid, "密码错误"));
             }
-                await unitOfWork.SaveChangesAsync();
+            await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }
     }

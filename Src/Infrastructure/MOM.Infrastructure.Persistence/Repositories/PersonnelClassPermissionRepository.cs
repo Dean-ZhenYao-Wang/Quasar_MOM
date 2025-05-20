@@ -39,6 +39,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             return DbSet.AsNoTracking().Where(m => m.PersonnelClassDtId == personnelClassDtId).Select(m => m.MenuButtonId).ToListAsync();
         }
+
         public Task<List<string>> GetPersonnelClassPermissionListAsync(IEnumerable<Guid> personnelClassDtIds)
         {
             return DbSet.AsNoTracking().Where(m => personnelClassDtIds.Contains(m.PersonnelClassDtId)).Select(m => m.MenuButtonId).Distinct().ToListAsync();

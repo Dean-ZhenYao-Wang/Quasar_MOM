@@ -1,21 +1,12 @@
 ﻿using Asp.Versioning.ApiExplorer;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-using Microsoft.AspNetCore.OpenApi;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Scalar.AspNetCore;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
@@ -23,8 +14,9 @@ namespace MOM.Application.Infrastructure.Extensions
 {
     public static class ScalarExtensions
     {
-        static string[] versions = ["v1", "v2"];
+        private static string[] versions = ["v1", "v2"];
         public static List<string> EnumsList { get; set; } = new List<string>();
+
         public static IApplicationBuilder UseScalarWithVersioning(this WebApplication app)
         {
             // 获取API版本描述提供者
@@ -96,11 +88,11 @@ namespace MOM.Application.Infrastructure.Extensions
                     setup.IncludeXmlComments(file, true);
                     setup.SchemaFilter<DescribeEnumMembers>(XDocument.Load(file));
                 }
-
             });
             return services;
         }
     }
+
     public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
         private readonly IApiVersionDescriptionProvider _provider;
@@ -134,6 +126,7 @@ namespace MOM.Application.Infrastructure.Extensions
             return info;
         }
     }
+
     /// <summary>
     /// Swagger schema filter to modify description of enum types so they
     /// show the XML docs attached to each member of the enum.
@@ -186,7 +179,6 @@ namespace MOM.Application.Infrastructure.Extensions
                     sb = null;
                     return;
                 }
-
 
                 sb.AppendLine("</ul>");
 

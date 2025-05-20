@@ -6,7 +6,9 @@ namespace MOM.Application.Interfaces.Repositories
     public interface IMenuRepository : IGenericRepository<Menu>
     {
         Task DeleteAsync(Guid[] dtIds);
+
         Task<Guid[]> GetButtonDtIdsAsync(Guid[] dtIds);
+
         Task<List<MenuTreeNodeResponse>> GetMenuTreeAsync();
     }
 }

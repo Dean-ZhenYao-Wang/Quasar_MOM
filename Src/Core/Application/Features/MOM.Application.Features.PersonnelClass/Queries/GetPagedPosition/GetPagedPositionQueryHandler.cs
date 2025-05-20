@@ -3,11 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs.PersonnelClass.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
 {

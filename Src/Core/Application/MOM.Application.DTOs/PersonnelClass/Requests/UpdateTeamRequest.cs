@@ -1,5 +1,4 @@
-﻿
-namespace MOM.Application.DTOs.PersonnelClass.Requests
+﻿namespace MOM.Application.DTOs.PersonnelClass.Requests
 {
     public class UpdateTeamRequest : AddTeamRequest
     {

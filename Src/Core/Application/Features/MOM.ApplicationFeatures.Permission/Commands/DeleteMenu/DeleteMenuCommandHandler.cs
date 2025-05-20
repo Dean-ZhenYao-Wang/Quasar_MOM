@@ -1,13 +1,7 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Features.Permission.Commands.DeleteMenu
 {
@@ -18,7 +12,6 @@ namespace MOM.Application.Features.Permission.Commands.DeleteMenu
             using var transaction = await unitOfWork.BeginTransactionAsync();
             try
             {
-
                 await menuRepository.DeleteAsync(request.DtIds);
                 await buttonRepository.DeleteAsync(dtIds: await menuRepository.GetButtonDtIdsAsync(request.DtIds));
 

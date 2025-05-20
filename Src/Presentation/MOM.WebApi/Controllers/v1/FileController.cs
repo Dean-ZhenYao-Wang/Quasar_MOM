@@ -1,12 +1,12 @@
-﻿using System.IO;
-using System.Net.Mime;
-using System.Threading.Tasks;
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces;
 using MOM.Application.Wrappers;
+using System.IO;
+using System.Net.Mime;
+using System.Threading.Tasks;
 
 namespace MOM.WebApi.Controllers.v1
 {

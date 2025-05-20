@@ -6,7 +6,6 @@ using MOM.Domain.Common;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection.Emit;
 
 namespace MOM.Infrastructure.Persistence.Extensions
 {
@@ -67,6 +66,7 @@ namespace MOM.Infrastructure.Persistence.Extensions
 
             builder.ApplyConfigurationsFromAssembly(context.GetType().Assembly);
         }
+
         private static LambdaExpression ConvertExpression<TInterface>(Expression<Func<TInterface, bool>> expression, Type entityType)
         {
             var parameter = Expression.Parameter(entityType);

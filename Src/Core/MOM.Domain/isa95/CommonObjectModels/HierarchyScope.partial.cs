@@ -39,12 +39,13 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 禁用后，这将阻止跟踪和追溯、OEE 停机时间、SPC、设置和转换以及调度模块使用该区域及其下方的任何其他生产项目
         /// </summary>
         public bool Active { get; set; }
+
         /// <summary>
         /// 地址
         /// </summary>
         public string? Address { get; set; }
 
-        public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string Id,string name,string? address=null, bool active = false, string? description = null) : this()
+        public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string Id, string name, string? address = null, bool active = false, string? description = null) : this()
         {
             EquipmentLevel = equipmentLevel;
             this.Id = Id;

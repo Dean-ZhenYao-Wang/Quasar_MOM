@@ -1,19 +1,12 @@
 ﻿using MediatR;
-using MOM.Application.Infrastructure.Extensions;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Features.PersonnelClass.Commands.AddTeam
 {
     public class AddTeamCommandHandler(IPersonnelClassRepository personnelClassRepository,
-        IPersonnelClassIncludesPropertiesOfRelationshipRepository personnelClassIncludesPropertiesOfRelationshipRepository, 
+        IPersonnelClassIncludesPropertiesOfRelationshipRepository personnelClassIncludesPropertiesOfRelationshipRepository,
         IUnitOfWork unitOfWork) : IRequestHandler<AddTeamCommand, BaseResult>
     {
         public async Task<BaseResult> Handle(AddTeamCommand request, CancellationToken cancellationToken)

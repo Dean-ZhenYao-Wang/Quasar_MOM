@@ -1,49 +1,55 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MOM.Domain.Common;
+﻿using MOM.Domain.Common;
 using MOM.Domain.Common.EnumType;
 using MOM.Domain.Permission;
-using System;
-using System.Text.Json.Serialization;
 
 namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 {
-    
     public partial class Person
     {
         public string? Description { get; set; }
+
         /// <summary>
         /// 性别
         /// </summary>
         public GenderType Gender { get; set; } = 0;
+
         /// <summary>
         /// 联系方式
         /// </summary>
         public ContactInformation ContactInformation { get; set; } = new ContactInformation();
+
         /// <summary>
         /// 照片
         /// </summary>
         public string Photo { get; set; } = string.Empty;
+
         /// <summary>
         /// 工作状态：在职\休假\离职
         /// </summary>
         public PersonWorkStatus WorkStatus { get; set; }
+
         /// <summary>
         /// 是否已锁定账号
         /// </summary>
         public bool LockoutOnFailure { get; set; }
+
         /// <summary>
         /// 账号锁定时间
         /// </summary>
         public DateTime? LockoutDateTime { get; set; }
+
         public string PassWord { get; set; } = string.Empty;
+
         /// <summary>
         /// 密码错误次数
         /// </summary>
         public int FailedCount { get; set; } = 0;
+
         /// <summary>
         /// 其变更会立即使所有已颁发的Toekn失效
         /// </summary>
         public string SecurityStamp { get; set; } = Guid.NewGuid().ToString(); // 示例初始化
+
         /// <summary>
         /// 扩展权限,对人员类权限的扩展或限制,此条件仅针对个人有效
         /// </summary>
@@ -106,7 +112,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             人员特征列表在修改时的增删改处理(properties, haveDtIds);
         }
 
-        private void 人员特征列表在修改时的增删改处理(IEnumerable<PersonProperty> properties,  List<Guid> haveDtIds)
+        private void 人员特征列表在修改时的增删改处理(IEnumerable<PersonProperty> properties, List<Guid> haveDtIds)
         {
             var requestDtIds = properties.Select(m => m.DtId).ToList();
             var notHaveDtIds = requestDtIds.Except(haveDtIds);
@@ -126,6 +132,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             //删除的删除
             this.HasValuesOf.Remove(deleteDtIds);
         }
+
         private void PropertyContiansUpdate(PersonProperty propertyViewModel, PersonProperty property)
         {
             var havePropertyDtIds = property.Contains.Select(m => m.TargetId).ToList();
@@ -147,6 +154,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             //删除的删除
             property.Contains.Remove(deletePropertyDtIds);
         }
+
         /// <summary>
         /// 所属人员类绑定
         /// </summary>
@@ -160,7 +168,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         {
             this.IsDelete = true;
         }
-
 
         public void HasValuesOfAddTarget(PersonProperty personProperty)
         {

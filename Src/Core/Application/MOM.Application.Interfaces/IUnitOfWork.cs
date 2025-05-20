@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Interfaces
 {
@@ -9,8 +8,11 @@ namespace MOM.Application.Interfaces
         DbContext Relationships { get; set; }
 
         Task<bool> SaveChangesAsync();
+
         Task<IDbContextTransaction> BeginTransactionAsync();
+
         Task CommitAsync(IDbContextTransaction transaction);
+
         Task RollbackAsync(IDbContextTransaction transaction);
     }
 }

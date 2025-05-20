@@ -6,5 +6,4 @@ namespace MOM.Application.Infrastructure.Services
         string UserName { get; }
         List<string> Roles { get; }
     }
-
 }

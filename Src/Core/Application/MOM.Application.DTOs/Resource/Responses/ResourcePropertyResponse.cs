@@ -2,13 +2,6 @@
 using MOM.Domain.Common.Relationship.isa95.PersonProperty;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace MOM.Application.DTOs.Resource.Responses
 {
@@ -18,15 +11,21 @@ namespace MOM.Application.DTOs.Resource.Responses
         /// 主键：数据库唯一
         /// </summary>
         public Guid key { get; set; }
+
         /// <summary>
         /// 为Key的值
         /// </summary>
-        public Guid dtId { get { return key; } }
+        public Guid dtId
+        { get { return key; } }
+
         /// <summary>
         /// 子自定义属性清单
         /// </summary>
         public virtual List<ResourcePropertyResponse> children { get; set; }
-        public ResourcePropertyResponse() { }
+
+        public ResourcePropertyResponse()
+        { }
+
         public ResourcePropertyResponse(PersonProperty dbModel)
         {
             Id = dbModel.Id;
@@ -36,6 +35,7 @@ namespace MOM.Application.DTOs.Resource.Responses
             key = dbModel.DtId;
             children = dbModel.Contains.Select(x => new ResourcePropertyResponse(x.Target)).ToList();
         }
+
         public ResourcePropertyResponse(EquipmentProperty dbModel)
         {
             Id = dbModel.Id;
@@ -67,6 +67,7 @@ namespace MOM.Application.DTOs.Resource.Responses
             }
             return parentProperty;
         }
+
         public EquipmentProperty ToEquipmentProperty()
         {
             var equipmentProperty = new EquipmentProperty()
@@ -77,7 +78,7 @@ namespace MOM.Application.DTOs.Resource.Responses
                 ValueUnitOfMeasure = ValueUnitOfMeasure
             };
             equipmentProperty.DtId = key;
-            if (mapToDtId!=null)
+            if (mapToDtId != null)
                 equipmentProperty.MapsTo.Add(new Domain.Common.Relationship.isa95.EquipmentProperty.EquipmentPropertyMapsToRelationship(equipmentProperty.DtId, mapToDtId.Value));
             if (children != null)
             {

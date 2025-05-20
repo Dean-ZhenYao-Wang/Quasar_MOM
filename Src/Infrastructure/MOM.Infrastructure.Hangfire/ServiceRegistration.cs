@@ -6,8 +6,6 @@ using Hangfire.Tags.SqlServer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using MOM.Application.Interfaces;
 
 namespace MOM.Infrastructure.Hangfire
 {
@@ -34,13 +32,13 @@ namespace MOM.Infrastructure.Hangfire
 
                 #endregion SqlServer
 
-
                 .UseTagsWithSql()//nuget引入Hangfire.Tags.SqlServer
                 .UseHangfireHttpJob();
             });
             services.AddHangfireServer();
             return services;
         }
+
         public static IApplicationBuilder UseHangfire(this IApplicationBuilder app)
         {
             app.UseHangfireDashboard("/hangfire", new DashboardOptions()

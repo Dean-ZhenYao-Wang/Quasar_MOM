@@ -22,7 +22,6 @@ namespace MOM.Application.Features.PersonnelClass.Commands.DeletePosition
                     throw new ApplicationException("存在拥有下属人员分类的人员分类，无法删除");
                 }
 
-
                 await unitOfWork.Relationships.Set<PersonnelClassIncludesPropertiesOfRelationship>()
                     .Where(m => request.DtIds.Contains(m.TargetId))
                     .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));

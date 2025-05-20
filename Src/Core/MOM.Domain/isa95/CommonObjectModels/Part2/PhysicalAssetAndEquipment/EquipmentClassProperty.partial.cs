@@ -19,7 +19,7 @@
 
         public void Delete()
         {
-            foreach(var item in this.Contains.Where(m=>m.Target.IsDelete==false))
+            foreach (var item in this.Contains.Where(m => m.Target.IsDelete == false))
             {
                 item.Target.Delete();
             }

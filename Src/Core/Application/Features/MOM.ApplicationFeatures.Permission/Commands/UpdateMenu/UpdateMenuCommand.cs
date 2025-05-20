@@ -4,8 +4,7 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Permission.Commands.UpdateMenu
 {
-    public class UpdateMenuCommand:UpdateMenuRequest,IRequest<BaseResult>
+    public class UpdateMenuCommand : UpdateMenuRequest, IRequest<BaseResult>
     {
-
     }
 }

@@ -1,6 +1,5 @@
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentActualProperty
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 

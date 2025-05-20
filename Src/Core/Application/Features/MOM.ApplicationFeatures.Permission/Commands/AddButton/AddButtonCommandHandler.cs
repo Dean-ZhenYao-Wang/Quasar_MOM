@@ -9,7 +9,7 @@ namespace MOM.Application.Features.Permission.Commands.AddButton
     {
         public async Task<BaseResult> Handle(AddButtonCommand request, CancellationToken cancellationToken)
         {
-            if (menuRepository.Where(m => m.Id.Equals(request.Id)).Any()||buttonRepository.Where(m => m.Id.Equals(request.Id)).Any())
+            if (menuRepository.Where(m => m.Id.Equals(request.Id)).Any() || buttonRepository.Where(m => m.Id.Equals(request.Id)).Any())
             {
                 throw new ApplicationException("按钮编号必须唯一");
             }

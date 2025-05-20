@@ -10,7 +10,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.Description = description;
             this.Manufacturer = manufacturer;
             this.HierarchyScope = hierarchyScope;
-            if (hierarchyScope!=null)
+            if (hierarchyScope != null)
                 this.HierarchyScopeRel.Add(new PhysicalAssetClassHierarchyScopeRelRelationship(this.DtId, hierarchyScope.Value));
         }
 

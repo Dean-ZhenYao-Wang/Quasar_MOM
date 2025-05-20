@@ -11,8 +11,10 @@ namespace MOM.Domain.Permission
     {
         [Key]
         public Guid DtId { get; set; } = Guid.NewGuid();
+
         public string MenuButtonId { get; set; }
         public Guid OrgDtId { get; set; }
+
         [ForeignKey(nameof(OrgDtId))]
         public virtual HierarchyScope Org { get; set; }
     }

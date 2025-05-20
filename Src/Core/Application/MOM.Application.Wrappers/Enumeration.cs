@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 
 namespace MOM.Application.Wrappers
 {
@@ -27,6 +22,7 @@ namespace MOM.Application.Wrappers
                 .ToList();
 
         public static TEnum? FromId(int id) => All.FirstOrDefault(x => x.Id == id);
+
         public static TEnum? FromName(string name) => All.FirstOrDefault(x => x.Name == name);
 
         public bool Equals(Enumeration<TEnum>? other) =>

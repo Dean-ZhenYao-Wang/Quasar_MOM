@@ -24,6 +24,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar
 
         [JsonIgnore]
         public virtual WorkCalendarDefinitionHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new WorkCalendarDefinitionHasPropertiesOfRelationshipCollection();
+
         [MaxLength(1)]
         [JsonIgnore]
         public virtual WorkCalendarDefinitionHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkCalendarDefinitionHierarchyScopeRelRelationshipCollection();
