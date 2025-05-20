@@ -16,9 +16,9 @@ namespace MOM.Application.Features.PersonnelClass.Commands.AddPsitoion
     {
         public async Task<BaseResult> Handle(AddPositionCommand request, CancellationToken cancellationToken)
         {
-            Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass addPerson = request.ToPersonnelClass("职位");
+            Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass addClass = request.ToPersonnelClass("职位");
 
-            await personnelClassRepository.AddAsync(addPerson);
+            await personnelClassRepository.AddAsync(addClass);
             await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }

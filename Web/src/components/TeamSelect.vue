@@ -1,11 +1,11 @@
 <template>
   <q-select
     :label="label"
-    :options="personList"
+    :options="teamList"
     :emit-value="true"
     :map-options="true"
     option-value="dtId"
-    option-label="name"
+    option-label="id"
     :rules="rules"
     :loading="loading"
     v-model="model"
@@ -14,26 +14,26 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { usePersonStore } from 'src/stores/person'
+import { useTeamStore } from 'src/stores/team'
 
 const model = defineModel()
 
 defineProps({
   label: {
     typeo: String,
-    default: '负责人',
+    default: '所属班组',
   },
   rules: Array,
 })
 
-const personStore = usePersonStore()
-const personList = ref([])
+const teamStore = useTeamStore()
+const teamList = ref([])
 const loading = ref(false)
 
 onMounted(async () => {
   loading.value = true
-  const list = await personStore.GetResponsibles()
-  personList.value = list.data
+  const list = await teamStore.selectOptions()
+  teamList.value = list
   loading.value = false
 })
 </script>

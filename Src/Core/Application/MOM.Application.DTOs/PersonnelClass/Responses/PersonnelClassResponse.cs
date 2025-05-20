@@ -14,10 +14,6 @@ namespace MOM.Application.DTOs.PersonnelClass.Responses
         /// </summary>
         public Guid DtId { get; set; }
         /// <summary>
-        /// 职位名称
-        /// </summary>
-        public string Id { get; set; }
-        /// <summary>
         /// 权限清单，菜单或按钮的编号
         /// </summary>
         public IEnumerable<string> Permissions { get; set; }

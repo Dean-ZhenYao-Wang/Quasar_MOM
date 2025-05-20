@@ -29,21 +29,21 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useOrgStore } from 'src/stores/org'
-const orgStore = useOrgStore()
+import { useTeamStore } from 'src/stores/team'
+const teamStore = useTeamStore()
 
 const oldSelectIds = ref([])
 
 const permissionDialogVisible = ref(false)
 const orgSettingPermission = async (ids) => {
-  await orgStore.SettingPermission({ menuButtonIds: ids, owner: settingOrgDtId.value })
+  await teamStore.SettingPermission({ menuButtonIds: ids, owner: settingPositionDtId.value })
   permissionDialogVisible.value = false
+  await handleSearch({ page: pagination.value.page, pageSize: pagination.value.rowsPerPage })
 }
-const settingOrgDtId = ref(null)
+const settingPositionDtId = ref(null)
 const openPermissionDialog = async (row) => {
-  settingOrgDtId.value = row.dtId
-  let response = await orgStore.Permission(row.dtId)
-  oldSelectIds.value = response.data
+  settingPositionDtId.value = row.dtId
+  oldSelectIds.value = row.permissions
   permissionDialogVisible.value = true
 }
 
@@ -51,21 +51,21 @@ const table_Config = {
   queryFields: {
     id: {
       type: 'q-input',
-      label: '编号',
-      props: {
-        outlined: true,
-      },
-    },
-    name: {
-      type: 'q-input',
       label: '名称',
       props: {
         outlined: true,
       },
     },
+    remark: {
+      type: 'q-input',
+      label: '备注',
+      props: {
+        outlined: true,
+      },
+    },
     sourceDtId: {
-      type: 'OrgSelect',
-      label: '所属组织',
+      type: 'TeamSelect',
+      label: '所属班组',
       props: {
         clearable: true,
       },
@@ -79,22 +79,8 @@ const table_Config = {
     },
     id: {
       type: 'q-input',
-      label: '编号',
-      rules: [(val) => !!val || '必填字段'],
-    },
-    name: {
-      type: 'q-input',
       label: '名称',
       rules: [(val) => !!val || '必填字段'],
-    },
-    equipmentLevel: {
-      type: 'HierarchyScopeEquipmentLevel',
-      label: '类型',
-      rules: [(val) => !!val || '必填字段'],
-    },
-    address: {
-      type: 'q-input',
-      label: '地址',
     },
     responsibleDtId: {
       type: 'ResponsibleSelect',
@@ -105,31 +91,13 @@ const table_Config = {
       rules: [(val) => !!val || '必填字段'],
     },
     sourceDtId: {
-      type: 'OrgSelect',
-      label: '所属组织',
+      type: 'TeamSelect',
+      label: '所属班组',
       props: {
         clearable: true,
       },
     },
-    active: {
-      type: 'q-btn-toggle',
-      label: '是否启用',
-      props: {
-        class: 'my-custom-toggle',
-        'no-caps': true,
-        rounded: true,
-        unelevated: true,
-        'toggle-color': 'primary',
-        color: 'white',
-        'text-color': 'primary',
-        options: [
-          { label: '启用', value: true },
-          { label: '停用', value: false },
-        ],
-      },
-      rules: [(val) => !!val || '必填字段'],
-    },
-    description: {
+    remark: {
       type: 'q-input',
       label: '备注',
     },
@@ -138,13 +106,10 @@ const table_Config = {
     rowKey: 'dtId',
     selection: 'multiple',
     columns: [
-      { name: 'id', label: '编号', field: 'id' },
-      { name: 'name', label: '名称', field: 'name' },
-      { name: 'equipmentLevel', label: '类型', field: 'equipmentLevel' },
-      { name: 'address', label: '地址', field: 'address' },
+      { name: 'id', label: '名称', field: 'id' },
+      { name: 'remark', label: '备注', field: 'remark' },
       { name: 'responsibleName', label: '负责人', field: 'responsibleName' },
-      { name: 'description', label: '备注', field: 'description' },
-      { name: 'sourceName', label: '所属组织', field: 'sourceName' },
+      { name: 'sourceName', label: '所属班组', field: 'sourceName' },
     ],
   },
 }
@@ -156,15 +121,15 @@ const pagination = ref({
   rowsNumber: 0,
 })
 const handleSearch = async (queryParams) => {
-  const response = await orgStore.getOrgTable(queryParams)
-  tableData.value = response.data
+  const response = await teamStore.GetPaged(queryParams)
+  tableData.value = response
   pagination.value.rowsNumber = response.totalItems
 }
 const handleCreate = async (payload) => {
-  await orgStore.AddOrg(payload)
+  await teamStore.Add(payload)
 }
 const handleUpdate = async (payload) => {
-  await orgStore.UpdateOrg(payload)
+  await teamStore.Update(payload)
 }
 const handleBatchDelete = async (dtIds) => {
   await batchDelete(dtIds)
@@ -173,6 +138,6 @@ const handleDelete = async (dtId) => {
   await batchDelete([dtId])
 }
 const batchDelete = async (dtIds) => {
-  await orgStore.DeleteOrg(dtIds)
+  await teamStore.Delete(dtIds)
 }
 </script>

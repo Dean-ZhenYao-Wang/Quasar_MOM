@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Persistence.Repositories
@@ -106,7 +107,11 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .ToListAsync();
             }
 
-                return PagedResponse<TEntity>.Ok(new PaginationResponseDto<TEntity>(pagedResult, count, pageNumber, pageSize));
+            return PagedResponse<TEntity>.Ok(new PaginationResponseDto<TEntity>(pagedResult, count, pageNumber, pageSize));
+        }
+        public IIncludableQueryable<T, TProperty> Include<TProperty>(Expression<Func<T, TProperty>> path)
+        {
+            return dbContext.Set<T>().Include(path);
         }
     }
 }

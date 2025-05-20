@@ -1134,6 +1134,11 @@
             负责人DtId
             </summary>
         </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Responsible">
+            <summary>
+            负责人
+            </summary>
+        </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.DefinedBy">
             <summary>
             所属设备类清单

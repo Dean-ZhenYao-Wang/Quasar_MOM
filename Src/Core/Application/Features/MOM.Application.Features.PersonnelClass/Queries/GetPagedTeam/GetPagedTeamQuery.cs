@@ -12,16 +12,21 @@ using System.Threading.Tasks;
 
 namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
 {
-    public class GetPagedPositionQuery : IRequest<PagedResponse<PersonnelClassResponse>>
+    public class GetPagedTeamQuery :IRequest<PagedResponse<TeamResponse>>
     {
         /// <summary>
-        /// 职位名称
+        /// 名称
         /// </summary>
         public string? Id { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
         public string? Remark { get; set; }
+        /// <summary>
+        /// 所属班组的DtId
+        /// </summary>
+        public Guid? sourceDtId { get; set; }
+
         PaginationRequestParameter paginationRequestParameter = new PaginationRequestParameter();
         /// <summary>
         /// 要查看的页数：从1开始数

@@ -73,7 +73,7 @@
         </q-card-section>
 
         <q-card-section>
-          <q-form>
+          <q-form ref="quasarForm">
             <div class="row q-col-gutter-md">
               <template v-for="(field, name) in config.formFields" :key="name">
                 <component
@@ -101,14 +101,17 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, useTemplateRef } from 'vue'
+import { useRoute } from 'vue-router'
 import { useQuasar, QInput, QSelect, QBtnToggle } from 'quasar'
 import * as PrimeVue from 'primevue'
 import ResponsibleSelect from './ResponsibleSelect.vue'
 import HierarchyScopeEquipmentLevel from './HierarchyScopeEquipmentLevel.vue'
 import OrgSelect from './OrgSelect.vue'
-import { useRoute } from 'vue-router'
+import TeamSelect from './TeamSelect.vue'
 const route = useRoute()
+
+const quasarForm = useTemplateRef('quasarForm')
 
 const getComponentType = (type) => {
   const componentMap = {
@@ -118,6 +121,7 @@ const getComponentType = (type) => {
     ResponsibleSelect: ResponsibleSelect,
     HierarchyScopeEquipmentLevel: HierarchyScopeEquipmentLevel,
     OrgSelect: OrgSelect,
+    TeamSelect: TeamSelect,
   }
   return componentMap[type] || PrimeVue[type] || type
 }
@@ -196,11 +200,15 @@ const fetchData = async () => {
 const submitForm = async () => {
   try {
     const payload = { ...formData }
-
-    // 根据编辑/新增状态触发不同事件
-    currentEditId.value ? await props.update(payload) : await props.create(payload)
-    onReset()
-    await fetchData()
+    quasarForm.value.validate().then(async (res) => {
+      console.log('rrr')
+      console.log(res)
+      if (!res) return
+      // 根据编辑/新增状态触发不同事件
+      currentEditId.value ? await props.update(payload) : await props.create(payload)
+      onReset()
+      await fetchData()
+    })
   } catch (error) {
     handleError(error)
   }

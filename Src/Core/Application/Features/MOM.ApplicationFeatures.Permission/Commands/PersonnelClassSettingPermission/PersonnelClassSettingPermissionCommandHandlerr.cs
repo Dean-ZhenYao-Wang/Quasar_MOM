@@ -1,22 +1,14 @@
 ﻿using MediatR;
-using MOM.Application.DTOs.Permission.Requests;
-using MOM.Application.Features.Permission.Commands.OrgSettingPermission;
+using MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MOM.Application.Features.Permission.Commands.PositionSettingPermission
 {
-    public class PositionSettingPermissionCommand : SettingPermissionRequest, IRequest<BaseResult> { }
-
-    public class PositionSettingPermissionCommandHandlerr(IPersonnelClassPermissionRepository personnelClassPermissionRepository, IUnitOfWork unitOfWork) : IRequestHandler<PositionSettingPermissionCommand, BaseResult>
+    public class PersonnelClassSettingPermissionCommandHandlerr(IPersonnelClassPermissionRepository personnelClassPermissionRepository, IUnitOfWork unitOfWork) : IRequestHandler<PersonnelClassSettingPermissionCommand, BaseResult>
     {
-        public async Task<BaseResult> Handle(PositionSettingPermissionCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResult> Handle(PersonnelClassSettingPermissionCommand request, CancellationToken cancellationToken)
         {
             List<string> dbMenuButtonIds = await personnelClassPermissionRepository.GetByOwnerAsync(request.Owner);
             if (dbMenuButtonIds.Count == 0)

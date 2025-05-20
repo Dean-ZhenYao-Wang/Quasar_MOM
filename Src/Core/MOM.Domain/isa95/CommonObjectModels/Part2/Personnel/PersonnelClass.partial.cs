@@ -16,6 +16,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// 负责人DtId
         /// </summary>
         public Guid? ResponsibleDtId { get; set; }
+        /// <summary>
+        /// 负责人
+        /// </summary>
+        public virtual Person Responsible { get; set; }
 
         public PersonnelClass(string Id, string? description = null, HierarchyScope? hierarchyScope = null) : this()
         {

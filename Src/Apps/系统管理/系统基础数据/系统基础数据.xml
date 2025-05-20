@@ -80,16 +80,57 @@
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.PositionController.Delete(MOM.Application.Features.PersonnelClass.Commands.DeletePosition.DeletePositionCommand)">
+        <member name="M:系统基础数据.Controllers.v1.PositionController.Delete(MOM.Application.Features.PersonnelClass.Commands.DeletePosition.DeletePersonnelClassCommand)">
             <summary>
             删除职位
             </summary>
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.PositionController.SettingPermission(MOM.Application.Features.Permission.Commands.PositionSettingPermission.PositionSettingPermissionCommand)">
+        <member name="M:系统基础数据.Controllers.v1.PositionController.SettingPermission(MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission.PersonnelClassSettingPermissionCommand)">
             <summary>
             给职位配置基本权限
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.TeamController.SelectOptions">
+            <summary>
+            查询班组下拉列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.TeamController.GetPaged(MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedTeamQuery)">
+            <summary>
+            查询班组列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.TeamController.Add(MOM.Application.Features.PersonnelClass.Commands.AddTeam.AddTeamCommand)">
+            <summary>
+            新增班组
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.TeamController.Update(MOM.Application.Features.PersonnelClass.Commands.UpdateTeam.UpdateTeamCommand)">
+            <summary>
+            修改班组
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.TeamController.Delete(MOM.Application.Features.PersonnelClass.Commands.DeletePosition.DeletePersonnelClassCommand)">
+            <summary>
+            删除班组
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.TeamController.SettingPermission(MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission.PersonnelClassSettingPermissionCommand)">
+            <summary>
+            给班组配置基本权限
             </summary>
             <param name="command"></param>
             <returns></returns>

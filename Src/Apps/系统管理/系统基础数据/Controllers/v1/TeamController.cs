@@ -1,57 +1,64 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MOM.Application.DTOs.HierarchyScope.Responses;
 using MOM.Application.DTOs.PersonnelClass.Responses;
-using MOM.Application.Features.HierarchyScope.Queries.GetOrgTable;
-using MOM.Application.Features.Permission.Commands.OrgSettingPermission;
 using MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission;
-using MOM.Application.Features.Permission.Commands.PositionSettingPermission;
-using MOM.Application.Features.PersonnelClass.Commands.AddPsitoion;
+using MOM.Application.Features.PersonnelClass.Commands.AddTeam;
 using MOM.Application.Features.PersonnelClass.Commands.DeletePosition;
-using MOM.Application.Features.PersonnelClass.Commands.UpdatePosition;
+using MOM.Application.Features.PersonnelClass.Commands.UpdateTeam;
 using MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition;
+using MOM.Application.Features.PersonnelClass.Queries.GetTeamSelectOptions;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
 {
-    [Tags("职位管理")]
+    [Tags("班组管理")]
     [ApiVersion("1")]
-    public sealed class PositionController : BaseApiController
+    public sealed class TeamController : BaseApiController
     {
         /// <summary>
-        /// 查询职位列表
+        /// 查询班组下拉列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<BaseResult<List<PersonnelClassResponse>>> SelectOptions()
+        {
+            return await Mediator.Send(new GetTeamSelectOptionsQuery());
+        }
+
+        /// <summary>
+        /// 查询班组列表
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PagedResponse<PersonnelClassResponse>> GetPaged([FromQuery] GetPagedPositionQuery query)
+        public async Task<PagedResponse<TeamResponse>> GetPaged([FromQuery] GetPagedTeamQuery query)
         {
             return await Mediator.Send(query);
         }
         /// <summary>
-        /// 新增职位
+        /// 新增班组
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<BaseResult> Add(AddPositionCommand command)
+        public async Task<BaseResult> Add(AddTeamCommand command)
         {
             return await Mediator.Send(command);
         }
         /// <summary>
-        /// 修改职位
+        /// 修改班组
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<BaseResult> Update(UpdatePositionCommand command)
+        public async Task<BaseResult> Update(UpdateTeamCommand command)
         {
             return await Mediator.Send(command);
         }
         /// <summary>
-        /// 删除职位
+        /// 删除班组
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
@@ -62,7 +69,7 @@ namespace 系统基础数据.Controllers.v1
         }
 
         /// <summary>
-        /// 给职位配置基本权限
+        /// 给班组配置基本权限
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>

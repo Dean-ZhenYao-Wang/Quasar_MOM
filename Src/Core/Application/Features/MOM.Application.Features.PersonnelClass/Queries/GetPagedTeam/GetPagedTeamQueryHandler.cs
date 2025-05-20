@@ -1,0 +1,44 @@
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using MOM.Application.DTOs.PersonnelClass.Responses;
+using MOM.Application.Interfaces.Repositories;
+using MOM.Application.Wrappers;
+using MOM.Domain.Common.Relationship.isa95.PersonnelClass;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
+{
+    public class GetPagedTeamQueryHandler(IPersonnelClassIncludesPropertiesOfRelationshipRepository personnelClassIncludesPropertiesOfRelationshipRepository, IPersonnelClassPermissionRepository personnelClassPermissionRepository) : IRequestHandler<GetPagedTeamQuery, PagedResponse<TeamResponse>>
+    {
+        public async Task<PagedResponse<TeamResponse>> Handle(GetPagedTeamQuery request, CancellationToken cancellationToken)
+        {
+            var query = personnelClassIncludesPropertiesOfRelationshipRepository
+                .Include(navigation => navigation.Target)
+                .ThenInclude(t => t.Responsible)
+                .Include(navigation => navigation.Target)
+                .ThenInclude(t => t.Permissions)
+                .Where(m => m.Target.Description.Equals("班组"))
+                .Where(x => request.sourceDtId != null ? x.SourceId == request.sourceDtId : true)
+                .Where(x => !string.IsNullOrWhiteSpace(request.Id) ? x.Target.Id.Contains(request.Id) : true)
+                .Where(x => !string.IsNullOrWhiteSpace(request.Remark) ? x.Target.Remark.Contains(request.Remark) : true)
+                .Select(x => new TeamResponse
+                {
+                    DtId = x.Target.DtId,
+                    Id = x.Target.Id,
+                    Remark = x.Target.Remark,
+                    ResponsibleDtId = x.Target.ResponsibleDtId.Value,
+                    ResponsibleName = x.Target.Responsible.Name,
+                    SourceDtId = x.SourceId,
+                    SourceName = x.Source == null ? string.Empty : x.Source.Id,
+                    Permissions = x.Target.Permissions.Select(p => p.MenuButtonId)
+                });
+
+            return await personnelClassIncludesPropertiesOfRelationshipRepository.PagedAsync(query, request.PageNumber, request.PageSize);
+        }
+    }
+}

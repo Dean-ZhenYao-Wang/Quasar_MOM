@@ -14,12 +14,42 @@
             职位名称
             </summary>
         </member>
+        <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedPositionQuery.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
         <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedPositionQuery.PageNumber">
             <summary>
             要查看的页数：从1开始数
             </summary>
         </member>
         <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedPositionQuery.PageSize">
+            <summary>
+            每页显示数据条数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedTeamQuery.Id">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedTeamQuery.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedTeamQuery.sourceDtId">
+            <summary>
+            所属班组的DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedTeamQuery.PageNumber">
+            <summary>
+            要查看的页数：从1开始数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedTeamQuery.PageSize">
             <summary>
             每页显示数据条数
             </summary>
