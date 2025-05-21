@@ -6,6 +6,10 @@ export const usePositionStore = defineStore('positionStore', {
   state: () => ({}),
   getters: {},
   actions: {
+    async selectOptions() {
+      const response = await api.get('/api/v1/Position/SelectOptions')
+      return response.data
+    },
     async GetPaged(params) {
       return await api.get('/api/v1/Position/GetPaged', { params })
     },
