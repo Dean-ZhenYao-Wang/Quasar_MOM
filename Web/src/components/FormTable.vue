@@ -1,7 +1,10 @@
 <template>
   <div class="q-pa-md">
     <!-- 查询条件区域 -->
-    <div class="row q-col-gutter-md q-mb-md">
+    <div
+      class="row q-col-gutter-md q-mb-md"
+      style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px"
+    >
       <template v-for="(field, name) in config.queryFields" :key="name">
         <component
           :is="getComponentType(field.type)"
@@ -109,6 +112,7 @@ import ResponsibleSelect from './ResponsibleSelect.vue'
 import HierarchyScopeEquipmentLevel from './HierarchyScopeEquipmentLevel.vue'
 import OrgSelect from './OrgSelect.vue'
 import TeamSelect from './TeamSelect.vue'
+import PositionSelect from './PositionSelect.vue'
 const route = useRoute()
 
 const quasarForm = useTemplateRef('quasarForm')
@@ -122,6 +126,7 @@ const getComponentType = (type) => {
     HierarchyScopeEquipmentLevel: HierarchyScopeEquipmentLevel,
     OrgSelect: OrgSelect,
     TeamSelect: TeamSelect,
+    PositionSelect: PositionSelect,
   }
   return componentMap[type] || PrimeVue[type] || type
 }
