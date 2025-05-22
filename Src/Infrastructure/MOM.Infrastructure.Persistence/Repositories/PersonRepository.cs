@@ -14,7 +14,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
 {
     public class PersonRepository(ApplicationDbContext dbContext) : GenericRepository<Person>(dbContext), IPersonRepository
     {
-        private readonly DbSet<Person> person = dbContext.Set<Person>();
         private readonly DbSet<PersonnelClass> personnelClass = dbContext.Set<PersonnelClass>();
 
         /// <summary>
@@ -23,12 +22,12 @@ namespace MOM.Infrastructure.Persistence.Repositories
         /// <returns></returns>
         public Task<List<Person>> GetResponsiblesAsync()
         {
-            return person.Where(m => m.IsDelete == false).AsNoTracking().ToListAsync();
+            return this.AsNoTracking().Where(m => m.IsDelete == false).ToListAsync();
         }
 
         public Task<PagedResponse<PersonResponse>> GetPagedListAsync(int pageNumber, int pageSize)
         {
-            var query = person.Where(m => m.IsDelete == false)
+            var query = this.Where(m => m.IsDelete == false)
                 .OrderBy(m => m.Created)
                 .Select(m => new PersonResponse()
                 {
@@ -39,23 +38,23 @@ namespace MOM.Infrastructure.Persistence.Repositories
                     Description = m.Description,
                     Email = m.ContactInformation.Email,
                     PhoneNumber = m.ContactInformation.PhoneNumber,
-                    TeamOfGroupDtId = personnelClass.Where(c => c.Id.Equals("TeamOfGroup"))
-                    .Select(c => c.IncludesPropertiesOf.Where(i => m.DefinedBy.Select(d => d.TargetId).Contains(i.DtId)).Select(i => i.Target).FirstOrDefault())
-                    .FirstOrDefault().DtId,
-                    OrgDtId = personnelClass.Where(c => c.Id.Equals("Org"))
-                    .Select(c => c.IncludesPropertiesOf.Where(i => m.DefinedBy.Select(d => d.TargetId).Contains(i.DtId)).Select(i => i.Target).FirstOrDefault())
-                    .FirstOrDefault().DtId,//Position
-                    PositionDtId_List = personnelClass.Where(c => c.Id.Equals("Position"))
-                    .Select(c => c.IncludesPropertiesOf.Where(i => m.DefinedBy.Select(d => d.TargetId).Contains(i.DtId)).Select(i => i.Target.DtId))
-                    .FirstOrDefault(),
+                    //TeamOfGroupDtId = personnelClass.Where(c => c.Id.Equals("TeamOfGroup"))
+                    //.Select(c => c.IncludesPropertiesOf.Where(i => m.DefinedBy.Select(d => d.TargetId).Contains(i.DtId)).Select(i => i.Target).FirstOrDefault())
+                    //.FirstOrDefault().DtId,
+                    //OrgDtId = personnelClass.Where(c => c.Id.Equals("Org"))
+                    //.Select(c => c.IncludesPropertiesOf.Where(i => m.DefinedBy.Select(d => d.TargetId).Contains(i.DtId)).Select(i => i.Target).FirstOrDefault())
+                    //.FirstOrDefault().DtId,//Position
+                    //PositionDtId_List = personnelClass.Where(c => c.Id.Equals("Position"))
+                    //.Select(c => c.IncludesPropertiesOf.Where(i => m.DefinedBy.Select(d => d.TargetId).Contains(i.DtId)).Select(i => i.Target.DtId))
+                    //.FirstOrDefault(),
                     //Properties = m.HasValuesOf.Select(v => new MOM.Application.DTOs.Resource.ResourcePropertyViewModel(v.Target))  前端要单独通过调用接口获取
-                });
-            return PagedAsync(query, pageNumber, pageSize);
+                }).AsQueryable();
+            return this.PagedAsync(query, pageNumber, pageSize);
         }
 
-        public Task<Person> FindByNameAsync(string userName)
+        public async Task<Person> FindByNameAsync(string userName)
         {
-            return person.Where(m => m.Id.Equals(userName))
+            return await this.DbSet.Where(m => m.Id.Equals(userName))
                 .Include(m => m.DefinedBy)
                 .ThenInclude(d => d.Target)
                 .FirstOrDefaultAsync();

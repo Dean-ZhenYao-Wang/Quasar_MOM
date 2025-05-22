@@ -18,7 +18,10 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             return dbContext.Set<T>().Where(predicate);
         }
-
+        public virtual IQueryable<T> AsNoTracking()
+        {
+            return dbContext.Set<T>().AsNoTracking();
+        }
         public virtual async Task<T> GetByIdAsync(object id)
         {
             return await dbContext.Set<T>().FindAsync(id);

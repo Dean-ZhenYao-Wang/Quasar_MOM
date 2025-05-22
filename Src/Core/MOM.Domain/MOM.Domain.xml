@@ -487,11 +487,6 @@
             操作位置属性包含操作位置的描述，例如街道地址。
             </summary>
         </member>
-        <member name="T:MOM.Domain.Common.EnumType.PersonWorkStatus">
-            <summary>
-            工作状态
-            </summary>
-        </member>
         <member name="F:MOM.Domain.Common.EnumType.PersonWorkStatus.Employed">
             <summary>
             在职

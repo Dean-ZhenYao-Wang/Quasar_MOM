@@ -9,6 +9,46 @@
             需要被删除的人员的DtId清单
             </summary>
         </member>
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.Id">
+            <summary>
+            UserName 账号 工号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.WorkStatus">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.PhoneNumber">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.TeamOfGroupDtId">
+            <summary>
+            班组
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.PositionDtId">
+            <summary>
+            职位
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.OrgDtId">
+            <summary>
+            组织
+            </summary>
+        </member>
         <member name="T:MOM.Application.Features.Personnel.Queries.GetProperties.GetPropertiesQuery">
              <summary>
             获取指定人员的自定义属性清单

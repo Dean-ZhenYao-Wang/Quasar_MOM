@@ -27,36 +27,9 @@
             </remarks>
             <returns></returns>
         </member>
-        <member name="M:人员认证管理.Controllers.v1.PersonController.GetProperties(MOM.Application.Features.Personnel.Queries.GetProperties.GetPropertiesQuery)">
+        <member name="M:人员认证管理.Controllers.v1.PersonController.GetPaged(MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery)">
             <summary>
-            获取指定人员的自定义属性清单
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:人员认证管理.Controllers.v1.PersonController.AddPerson(MOM.Application.Features.Personnel.Commands.AddPerson.AddPersonCommand)">
-            <summary>
-            添加人员/创建账号
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:人员认证管理.Controllers.v1.PersonController.GetPageListPerson(MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedListPersonQuery)">
-            <summary>
-            分页获取人员
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:人员认证管理.Controllers.v1.PersonController.DeletePerson(MOM.Application.Features.Personnel.Commands.DeletePerson.DeletePersonCommand)">
-            <summary>
-            删除人员
-            </summary>
-            <param name="dtIds"></param>
-            <returns></returns>
-        </member>
-        <member name="M:人员认证管理.Controllers.v1.PersonController.UpdatePerson(MOM.Application.Features.Personnel.Commands.UpdatePerson.UpdatePersonCommand)">
-            <summary>
-            修改人员
+            查询人员列表
             </summary>
             <param name="request"></param>
             <returns></returns>

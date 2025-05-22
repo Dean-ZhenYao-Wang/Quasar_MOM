@@ -9,15 +9,15 @@ namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
     {
         public async Task<BaseResult> Handle(UpdatePersonCommand request, CancellationToken cancellationToken)
         {
-            var person = await personRepository.GetByIdAsync(request.DtId);
+            //var person = await personRepository.GetByIdAsync(request.DtId);
 
-            if (person is null)
-            {
-                return new Error(ErrorCode.NotFound, translator.GetString(TranslatorMessages.NotFound()));
-            }
+            //if (person is null)
+            //{
+            //    return new Error(ErrorCode.NotFound, translator.GetString(TranslatorMessages.NotFound()));
+            //}
 
-            person.Update(request.Id, request.Name, request.WorkStatus, request.Email, request.PhoneNumber, request.TeamOfGroupDtId, request.OrgDtId, request.PositionDtId_List, request.Description, request.Properties.Select(m => m.ToPersonProperty()));
-            await unitOfWork.SaveChangesAsync();
+            //person.Update(request.Id, request.Name, request.WorkStatus, request.Email, request.PhoneNumber, request.TeamDtId, request.OrgDtId, request.PositionDtId_List, request.Description);
+            //await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }
     }

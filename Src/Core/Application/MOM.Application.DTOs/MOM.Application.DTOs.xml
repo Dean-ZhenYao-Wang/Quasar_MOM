@@ -246,11 +246,6 @@
             所属班组名称
             </summary>
         </member>
-        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.DtId">
-            <summary>
-            当前人员的数据库唯一key，如果是新增人员则无需传递此字段的值
-            </summary>
-        </member>
         <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Id">
             <summary>
             UserName 账号
@@ -281,7 +276,7 @@
             手机号
             </summary>
         </member>
-        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.TeamOfGroupDtId">
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.TeamDtId">
             <summary>
             班组
             </summary>
@@ -296,9 +291,64 @@
             职位/角色
             </summary>
         </member>
-        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Properties">
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.DtId">
             <summary>
-            自定义属性清单
+            当前人员的数据库唯一key，如果是新增人员则无需传递此字段的值
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Id">
+            <summary>
+            UserName 账号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.WorkStatus">
+            <summary>
+            在职\休假\离职
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Description">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Email">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.PhoneNumber">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Team">
+            <summary>
+            班组
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.PositionList">
+            <summary>
+            职位/角色
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Position">
+            <summary>
+            职位/角色的名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.PositionDtId_List">
+            <summary>
+            职位/角色
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Org">
+            <summary>
+            组织
             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.Id">

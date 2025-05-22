@@ -59,6 +59,12 @@
             <param name="orgDtId">指定组织的dtId</param>
             <returns>该组织所拥有权限的菜单或按钮的编号</returns>
         </member>
+        <member name="M:系统基础数据.Controllers.v1.PositionController.SelectOptions">
+            <summary>
+            查询职位下拉列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:系统基础数据.Controllers.v1.PositionController.GetPaged(MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedPositionQuery)">
             <summary>
             查询职位列表

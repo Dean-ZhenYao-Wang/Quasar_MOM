@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MOM.Application.DTOs.Account.Responses;
 using MOM.Application.Features.Personnel.Settings;
@@ -17,7 +18,11 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
     {
         public async Task<BaseResult<AuthenticationResponse>> Handle(AuthenticationCommand request, CancellationToken cancellationToken)
         {
-            var user = await personRepository.FindByNameAsync(request.UserName);
+            var user = await personRepository.DbSet
+                .Include(m => m.DefinedBy)
+                .ThenInclude(d => d.Target)
+                .Where(m => m.Id.Equals(request.UserName) || m.ContactInformation.Email.Equals(request.UserName) || m.ContactInformation.PhoneNumber.Equals(request.UserName))
+                .FirstOrDefaultAsync();
             if (user == null)
             {
                 return new Error(ErrorCode.NotFound, translator.GetString(TranslatorMessages.AccountMessages.TheUserNameOrPasswordIsIncorrect));

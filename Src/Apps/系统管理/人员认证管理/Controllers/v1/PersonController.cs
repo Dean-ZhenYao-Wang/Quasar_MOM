@@ -31,62 +31,63 @@ namespace 人员认证管理.Controllers.v1
         {
             return await Mediator.Send(new GetResponsiblesQuery());
         }
-
         /// <summary>
-        /// 获取指定人员的自定义属性清单
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<BaseResult<List<ResourcePropertyResponse>>> GetProperties(GetPropertiesQuery command)
-        {
-            return await Mediator.Send(command);
-        }
-
-        /// <summary>
-        /// 添加人员/创建账号
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<BaseResult> AddPerson(AddPersonCommand request)//属性尤其是从人员类继承的属性（mapsTo）
-        {
-            var model = await Mediator.Send(request);
-            return model;
-        }
-
-        /// <summary>
-        /// 分页获取人员
+        /// 查询人员列表
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PagedResponse<PersonResponse>> GetPageListPerson([FromQuery] GetPagedListPersonQuery request)
+        public async Task<PagedResponse<PersonResponse>> GetPaged([FromQuery] GetPagedPersonQuery request)
         {
             return await Mediator.Send(request);
         }
 
-        /// <summary>
-        /// 删除人员
-        /// </summary>
-        /// <param name="dtIds"></param>
-        /// <returns></returns>
-        [HttpDelete]
-        public async Task<BaseResult> DeletePerson(DeletePersonCommand command)
-        {
-            var deleteResoult = await Mediator.Send(command);
-            return deleteResoult;
-        }
 
-        /// <summary>
-        /// 修改人员
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        [HttpPut]
-        public async Task<BaseResult> UpdatePerson(UpdatePersonCommand command)//属性尤其是从人员类继承的属性（mapsTo）
-        {
-            var updateResoult = await Mediator.Send(command);
-            return updateResoult;
-        }
+        ///// <summary>
+        ///// 获取指定人员的自定义属性清单
+        ///// </summary>
+        ///// <returns></returns>
+        //[HttpGet]
+        //public async Task<BaseResult<List<ResourcePropertyResponse>>> GetProperties(GetPropertiesQuery command)
+        //{
+        //    return await Mediator.Send(command);
+        //}
+
+        ///// <summary>
+        ///// 添加人员/创建账号
+        ///// </summary>
+        ///// <param name="request"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //public async Task<BaseResult> AddPerson(AddPersonCommand request)//属性尤其是从人员类继承的属性（mapsTo）
+        //{
+        //    var model = await Mediator.Send(request);
+        //    return model;
+        //}
+
+
+        ///// <summary>
+        ///// 删除人员
+        ///// </summary>
+        ///// <param name="dtIds"></param>
+        ///// <returns></returns>
+        //[HttpDelete]
+        //public async Task<BaseResult> DeletePerson(DeletePersonCommand command)
+        //{
+        //    var deleteResoult = await Mediator.Send(command);
+        //    return deleteResoult;
+        //}
+
+        ///// <summary>
+        ///// 修改人员
+        ///// </summary>
+        ///// <param name="request"></param>
+        ///// <returns></returns>
+        //[HttpPut]
+        //public async Task<BaseResult> UpdatePerson(UpdatePersonCommand command)//属性尤其是从人员类继承的属性（mapsTo）
+        //{
+        //    var updateResoult = await Mediator.Send(command);
+        //    return updateResoult;
+        //}
     }
 }
