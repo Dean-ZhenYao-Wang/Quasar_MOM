@@ -34,9 +34,16 @@
       v-model:pagination="pagination"
       @request="onTableChange"
     >
-      <template v-slot:[`body-cell-${name}`]="props">
-        <slot :name="`body-cell-${name}`" v-bind="props"></slot>
+      <!-- 仅当父组件提供对应插槽时才生成该列的插槽 -->
+      <template v-slot:body-cell="props">
+        <template v-if="$slots[`body-cell-${props.col.name}`]">
+          <q-td :props="props"> <slot :name="`body-cell-${props.col.name}`" v-bind="props" /></q-td>
+        </template>
+        <template v-else>
+          <q-td :props="props"> {{ props.row[props.col.name] }} </q-td>
+        </template>
       </template>
+
       <!-- 操作列插槽 -->
       <template #body-cell-actions="props">
         <slot name="body-cell-actions" v-bind="props">
