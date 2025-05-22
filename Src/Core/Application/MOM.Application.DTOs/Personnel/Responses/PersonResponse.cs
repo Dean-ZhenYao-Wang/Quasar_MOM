@@ -45,6 +45,10 @@ namespace MOM.Application.DTOs.Personnel.Responses
         /// </summary>
         public ResponseObject Team { get; set; }
         /// <summary>
+        /// 班组唯一标识
+        /// </summary>
+        public Guid? TeamDtId { get { return Team?.DtId; } }
+        /// <summary>
         /// 职位/角色
         /// </summary>
         [JsonIgnore]
@@ -70,5 +74,7 @@ namespace MOM.Application.DTOs.Personnel.Responses
         /// 组织
         /// </summary>
         public ResponseObject Org { get; set; }
+
+        public Guid? OrgDtId { get { return Org?.DtId; } }
     }
 }
