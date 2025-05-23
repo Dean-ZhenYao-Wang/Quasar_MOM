@@ -16,7 +16,7 @@ export const usePersonStore = defineStore('personStore', {
     },
     async Add(payload) {
       await api
-        .post('/api/v1/Team/Add', payload)
+        .post('/api/v1/Person/Add', payload)
         .then(() => {
           Notify.create({
             message: '添加成功',
@@ -32,7 +32,7 @@ export const usePersonStore = defineStore('personStore', {
     },
     async Update(payload) {
       await api
-        .post('/api/v1/Team/Update ', payload)
+        .put('/api/v1/Person/Update ', payload)
         .then(() => {
           Notify.create({
             message: '修改成功',
@@ -47,10 +47,10 @@ export const usePersonStore = defineStore('personStore', {
         })
     },
     async Delete(dtIds) {
-      await api.delete('/api/v1/Team/Delete', { data: { DtIds: dtIds } })
+      await api.delete('/api/v1/Person/Delete', { data: { DtIds: dtIds } })
     },
     async SettingPermission(payload) {
-      await api.post('/api/v1/Team/SettingPermission', payload)
+      await api.post('/api/v1/Person/SettingPermission', payload)
     },
   },
 })

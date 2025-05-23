@@ -63,6 +63,7 @@ namespace MOM.Infrastructure.Persistence.Extensions
             }
             // 应用全局过滤条件
             builder.Entity<BaseEntity>().HasQueryFilter(e => !e.IsDelete);
+            builder.Entity<BasicRelationship>().HasQueryFilter(e => !e.IsDelete);
 
             builder.ApplyConfigurationsFromAssembly(context.GetType().Assembly);
         }

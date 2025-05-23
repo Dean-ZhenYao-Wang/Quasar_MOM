@@ -1,7 +1,14 @@
+using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+
 namespace MOM.Domain.Common.Relationship.isa95.Person
 {
     public class PersonHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PersonHierarchyScopeRelRelationship>
     {
+        [JsonIgnore]
+        [ForeignKey(nameof(SourceId))]
+        public virtual Domain.isa95.CommonObjectModels.Part2.Personnel.Person Source { get; set; }
         public PersonHierarchyScopeRelRelationship()
         {
             Name = "hierarchyScopeRel";

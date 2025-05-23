@@ -24,6 +24,7 @@ namespace MOM.Application.Features.Personnel.Queries.GetPagedListPerson
                 .Where(p => request.TeamOfGroupDtId.HasValue ? p.DefinedBy.Any(d => d.TargetId == request.TeamOfGroupDtId.Value) : true)
                 .Where(p => request.PositionDtId.HasValue ? p.DefinedBy.Any(d => d.TargetId == request.PositionDtId.Value) : true)
                 .Where(p => request.OrgDtId.HasValue ? p.HierarchyScopeRel.Any(d => d.TargetId == request.OrgDtId) : true)
+                .OrderBy(p => p.Id)
                 .Select(p => new PersonResponse
                 {
                     DtId = p.DtId,
@@ -33,9 +34,9 @@ namespace MOM.Application.Features.Personnel.Queries.GetPagedListPerson
                     Description = p.Description,
                     Email = p.ContactInformation.Email,
                     PhoneNumber = p.ContactInformation.PhoneNumber,
-                    Team = p.DefinedBy.Where(d => d.Target.Description.Equals("班组")).Select(d => new ResponseObject { DtId = d.Target.DtId, Id = d.Target.Id }).FirstOrDefault(),
-                    Org = p.HierarchyScopeRel.Where(d => d.Target.Description.Equals("组织")).Select(d => new ResponseObject { DtId = d.Target.DtId, Id = d.Target.Id }).FirstOrDefault(),
-                    PositionList = p.DefinedBy.Where(d => d.Target.Description.Equals("职位")).Select(d => new ResponseObject { DtId = d.Target.DtId, Id = d.Target.Id })
+                    Team = p.DefinedBy.Where(d => d.Target.Description.Equals("班组")).Select(d => new ResponseObject { DtId = d.Target.DtId, Label = d.Target.Id }).FirstOrDefault(),
+                    Org = p.HierarchyScopeRel.Select(d => new ResponseObject { DtId = d.Target.DtId, Label = d.Target.Name }).FirstOrDefault(),
+                    PositionList = p.DefinedBy.Where(d => d.Target.Description.Equals("职位")).Select(d => new ResponseObject { DtId = d.Target.DtId, Label = d.Target.Id })
                 });
 
             return await personRepository.PagedAsync(query, request.Page, request.PageSize);

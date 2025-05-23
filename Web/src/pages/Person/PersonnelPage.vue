@@ -10,6 +10,23 @@
       :batchDelete="handleBatchDelete"
       :delete="handleDelete"
     >
+      <template v-slot:body-cell-workStatus="{ row }">
+        <template v-if="row.workStatus == 'Employed'">
+          <div>
+            <q-badge color="purple" label="在职" />
+          </div>
+        </template>
+        <template v-else-if="row.workStatus == 'Vacation'">
+          <div>
+            <q-badge color="purple" label="休假" />
+          </div>
+        </template>
+        <template v-if="row.workStatus == 'Dimission'">
+          <div>
+            <q-badge color="purple" label="离职" />
+          </div>
+        </template>
+      </template>
       <template #actions-append="{ row }">
         <q-btn
           label="配置权限"
@@ -85,11 +102,9 @@ const table_Config = {
         ],
         'option-value': 'value',
         'option-label': 'label',
+        'emit-value': true,
+        'map-options': true,
       },
-      // defaultValue: {
-      //   label: '在职',
-      //   value: 'Employed',
-      // },
     },
     email: {
       type: 'q-input',
@@ -141,26 +156,92 @@ const table_Config = {
     id: {
       type: 'q-input',
       label: '工号',
-      rules: [(val) => !!val || '必填字段'],
-    },
-    responsibleDtId: {
-      type: 'ResponsibleSelect',
-      label: '负责人',
       props: {
-        clearable: true,
+        outlined: true,
       },
       rules: [(val) => !!val || '必填字段'],
     },
-    sourceDtId: {
-      type: 'TeamSelect',
-      label: '所属班组',
-      props: {
-        clearable: true,
-      },
-    },
-    remark: {
+    name: {
       type: 'q-input',
-      label: '备注',
+      label: '姓名',
+      props: {
+        outlined: true,
+      },
+      rules: [(val) => !!val || '必填字段'],
+    },
+    workStatus: {
+      type: 'q-select',
+      label: '状态',
+      props: {
+        outlined: true,
+        clearable: true,
+        options: [
+          {
+            label: '在职',
+            value: 'Employed',
+          },
+          {
+            label: '休假',
+            value: 'Vacation',
+          },
+          {
+            label: '离职',
+            value: 'Dimission',
+          },
+        ],
+        'option-value': 'value',
+        'option-label': 'label',
+        'emit-value': true,
+        'map-options': true,
+      },
+      defaultValue: {
+        label: '在职',
+        value: 'Employed',
+      },
+      rules: [(val) => !!val || '必填字段'],
+    },
+    email: {
+      type: 'q-input',
+      label: '邮箱',
+      props: {
+        outlined: true,
+        clearable: true,
+      },
+    },
+    phoneNumber: {
+      type: 'q-input',
+      label: '手机号',
+      props: {
+        outlined: true,
+        clearable: true,
+      },
+    },
+    teamDtId: {
+      type: 'TeamSelect',
+      label: '班组',
+      props: {
+        outlined: true,
+        clearable: true,
+      },
+    },
+    positionDtId_List: {
+      type: 'PositionSelect',
+      label: '职位',
+      props: {
+        outlined: true,
+        clearable: true,
+        multiple: true,
+      },
+      rules: [(val) => !!val || '必填字段'],
+    },
+    orgDtId: {
+      type: 'OrgSelect',
+      label: '组织',
+      props: {
+        outlined: true,
+        clearable: true,
+      },
+      rules: [(val) => !!val || '必填字段'],
     },
   },
   tableConfig: {
@@ -172,9 +253,9 @@ const table_Config = {
       { name: 'workStatus', label: '状态', field: 'workStatus' },
       { name: 'email', label: '邮箱', field: 'email' },
       { name: 'phoneNumber', label: '手机号', field: 'phoneNumber' },
-      { name: 'Org', label: '组织', field: 'Org' },
-      { name: 'Team', label: '班组', field: 'Team' },
-      { name: 'PositionList', label: '职位', field: 'PositionList' },
+      { name: 'orgName', label: '组织', field: 'orgName' },
+      { name: 'teamName', label: '班组', field: 'teamName' },
+      { name: 'position', label: '职位', field: 'position' },
     ],
   },
 }

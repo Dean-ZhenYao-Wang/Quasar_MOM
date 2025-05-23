@@ -291,6 +291,11 @@
             职位/角色
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.UpdatePersonRequest.DtId">
+            <summary>
+            人员的唯一标识
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.DtId">
             <summary>
             当前人员的数据库唯一key，如果是新增人员则无需传递此字段的值
@@ -331,6 +336,16 @@
             班组
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.TeamName">
+            <summary>
+            班组
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.TeamDtId">
+            <summary>
+            班组唯一标识
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.PositionList">
             <summary>
             职位/角色
@@ -347,6 +362,16 @@
             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Org">
+            <summary>
+            组织
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.OrgDtId">
+            <summary>
+            组织
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.OrgName">
             <summary>
             组织
             </summary>

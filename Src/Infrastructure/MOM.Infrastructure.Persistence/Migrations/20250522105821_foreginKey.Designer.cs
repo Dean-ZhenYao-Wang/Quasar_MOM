@@ -4,6 +4,7 @@ using MOM.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MOM.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250522105821_foreginKey")]
+    partial class foreginKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,51 +49,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.Property<Guid?>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DtId");
-
-                    b.ToTable((string)null);
-
-                    b.UseTpcMappingStrategy();
-                });
-
-            modelBuilder.Entity("MOM.Domain.Common.BasicRelationship", b =>
-                {
-                    b.Property<Guid>("DtId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("LastModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasAnnotation("Relational:JsonPropertyName", "name");
-
-                    b.Property<Guid?>("SourceId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasAnnotation("Relational:JsonPropertyName", "sourceId");
-
-                    b.Property<Guid>("TargetId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasAnnotation("Relational:JsonPropertyName", "targetId");
 
                     b.HasKey("DtId");
 
@@ -160,6 +118,26 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.HasIndex("PersonnelClassDtId");
 
                     b.ToTable("PersonnelClassPermission");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.BasicRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
+
+                    b.Property<Guid?>("SourceId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasAnnotation("Relational:JsonPropertyName", "sourceId");
+
+                    b.Property<Guid>("TargetId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasAnnotation("Relational:JsonPropertyName", "targetId");
+
+                    b.ToTable((string)null);
                 });
 
             modelBuilder.Entity("MOM.Domain.Permission.Button", b =>
@@ -2360,7 +2338,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TargetId");
 
-                    b.ToTable("PersonDefinedByRelationship");
+                    b.ToTable("PersonDefinedByRelationships");
                 });
 
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Person.PersonHasValuesOfRelationship", b =>
@@ -4512,8 +4490,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 {
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", "Source")
                         .WithMany("HierarchyScopeRel")
-                        .HasForeignKey("SourceId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("SourceId");
 
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "Target")
                         .WithMany()

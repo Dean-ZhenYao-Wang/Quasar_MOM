@@ -67,6 +67,17 @@
              </code>
              </example>
         </member>
+        <member name="P:MOM.Domain.Common.BasicRelationship.DtId">
+            <summary>
+            数据库唯一主键
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BasicRelationship.Id">
+            <summary>
+            名称/编号/标题等
+            对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
+            </summary>
+        </member>
         <member name="P:MOM.Domain.Common.BasicRelationship.TargetId">
             <summary>
             目标数字孪生的唯一标识符。该属性存在于所有关系中。
@@ -1119,11 +1130,24 @@
             扩展权限,对人员类权限的扩展或限制,此条件仅针对个人有效
             </summary>
         </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.TeamAddTarget(System.Nullable{System.Guid})">
+            <summary>
+            班组绑定
+            </summary>
+            <param name="teamDtId"></param>
+        </member>
         <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.DefinedByAddTarget(System.Guid)">
             <summary>
             所属人员类绑定
             </summary>
-            <param name="teamOfGroupDtId"></param>
+            <param name="targetDtId"></param>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.DefinedByAddTarget(System.Collections.Generic.IEnumerable{System.Guid},System.String)">
+            <summary>
+            所属人员类绑定
+            </summary>
+            <param name="targetDtIds">要绑定的人员类唯一标识清单</param>
+            <param name="type">要绑定的人员类分类</param>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Description">
             <summary>

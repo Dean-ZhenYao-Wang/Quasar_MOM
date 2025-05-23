@@ -37,7 +37,7 @@ namespace MOM.Infrastructure.Persistence.Seeds
                 });
 
                 admin.HierarchyScopeRel.Add(new Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship(admin.DtId, enterprise.DtId));
-                admin.DefinedByAddTarget(personnelClass.DtId);
+                admin.DefinedByAddTarget(new Guid[] { personnelClass.DtId }, "角色");
 
                 await applicationDbContext.SaveChangesAsync();
             }

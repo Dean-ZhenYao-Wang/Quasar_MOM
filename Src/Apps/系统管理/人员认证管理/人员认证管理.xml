@@ -34,5 +34,26 @@
             <param name="request"></param>
             <returns></returns>
         </member>
+        <member name="M:人员认证管理.Controllers.v1.PersonController.Add(MOM.Application.Features.Personnel.Commands.AddPerson.AddPersonCommand)">
+            <summary>
+            添加人员/创建账号
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:人员认证管理.Controllers.v1.PersonController.Delete(MOM.Application.Features.Personnel.Commands.DeletePerson.DeletePersonCommand)">
+            <summary>
+            删除人员
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:人员认证管理.Controllers.v1.PersonController.Update(MOM.Application.Features.Personnel.Commands.UpdatePerson.UpdatePersonCommand)">
+            <summary>
+            修改人员
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

@@ -43,7 +43,12 @@ namespace MOM.Application.DTOs.Personnel.Responses
         /// <summary>
         /// 班组
         /// </summary>
+        [JsonIgnore]
         public ResponseObject Team { get; set; }
+        /// <summary>
+        /// 班组
+        /// </summary>
+        public string? TeamName { get { return Team?.Label; } }
         /// <summary>
         /// 班组唯一标识
         /// </summary>
@@ -60,7 +65,7 @@ namespace MOM.Application.DTOs.Personnel.Responses
         {
             get
             {
-                return PositionList.Count() > 0 ? PositionList.Select(m => m.Id).Aggregate((a, b) => a + "、" + b) : string.Empty; // 顿号分隔
+                return PositionList.Count() > 0 ? PositionList.Select(m => m.Label).Aggregate((a, b) => a + "、" + b) : string.Empty; // 顿号分隔
             }
         }
         /// <summary>
@@ -74,7 +79,13 @@ namespace MOM.Application.DTOs.Personnel.Responses
         /// 组织
         /// </summary>
         public ResponseObject Org { get; set; }
-
+        /// <summary>
+        /// 组织
+        /// </summary>
         public Guid? OrgDtId { get { return Org?.DtId; } }
+        /// <summary>
+        /// 组织
+        /// </summary>
+        public string? OrgName { get { return Org?.Label; } }
     }
 }

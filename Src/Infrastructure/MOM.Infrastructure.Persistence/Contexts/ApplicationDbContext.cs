@@ -19,7 +19,8 @@ namespace MOM.Infrastructure.Persistence.Contexts
         public DbSet<PersonnelClass> PersonnelClasses { get; set; }
         public DbSet<PersonnelClassIncludesPropertiesOfRelationship> PersonnelClassIncludesPropertiesOfRelationships { get; set; }
         public DbSet<Person> Person { get; set; }
-        public DbSet<PersonDefinedByRelationship> PersonDefinedByRelationships { get; set; }
+        public DbSet<PersonDefinedByRelationship> PersonDefinedByRelationship { get; set; }
+        public DbSet<PersonHierarchyScopeRelRelationship> PersonHierarchyScopeRelRelationship { get; set; }
 
         #endregion Personnel
 

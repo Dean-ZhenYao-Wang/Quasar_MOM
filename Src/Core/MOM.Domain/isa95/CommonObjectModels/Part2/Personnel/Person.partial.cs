@@ -53,7 +53,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// <summary>
         /// 扩展权限,对人员类权限的扩展或限制,此条件仅针对个人有效
         /// </summary>
-        public List<AvailablePermission> AvailablePermissions { get; set; } = new();
+        public virtual List<AvailablePermission> AvailablePermissions { get; set; } = new();
 
         public Person(string Id, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null) : this()
         {
@@ -69,14 +69,11 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             }
             if (OrgDtId != null)
             {
-                this.DefinedByAddTarget(OrgDtId.Value);
+                this.HierarchyScopeRelAddTarget(OrgDtId.Value);
             }
             if (positionDtId_List != null)
             {
-                foreach (var positionDtId in positionDtId_List)
-                {
-                    this.DefinedByAddTarget(positionDtId);
-                }
+                this.DefinedByAddTarget(positionDtId_List, "职位");
             }
         }
 
@@ -88,32 +85,40 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.Name = name;
             this.ContactInformation.Email = email;
             this.ContactInformation.PhoneNumber = phoneNumber;
-            foreach (var item in DefinedBy)
-            {
-                DefinedBy.Remove(item);
-            }
-            if (teamOfGroupDtId != null)
-            {
-                this.DefinedByAddTarget(teamOfGroupDtId.Value);
-            }
+            this.TeamAddTarget(teamOfGroupDtId);
             if (OrgDtId != null)
             {
-                this.DefinedByAddTarget(OrgDtId.Value);
+                this.HierarchyScopeRelAddOrUpdateTarget(this.HierarchyScopeRel.FirstOrDefault()?.TargetId, OrgDtId.Value);
             }
             if (positionDtId_List != null)
             {
-                foreach (var positionDtId in positionDtId_List)
-                {
-                    this.DefinedByAddTarget(positionDtId);
-                }
+                this.DefinedByAddTarget(positionDtId_List, "职位");
             }
 
             var haveDtIds = this.HasValuesOf.Select(m => m.TargetId).ToList();
             人员特征列表在修改时的增删改处理(properties, haveDtIds);
         }
+        public void HierarchyScopeRelAddOrUpdateTarget(Guid? oldOrgDtId, Guid newOrgDtID)
+        {
+            if (oldOrgDtId == null)
+                this.HierarchyScopeRelAddTarget(newOrgDtID);
+            else
+            {
+                var old = this.HierarchyScopeRel.Where(h => h.TargetId == oldOrgDtId.Value)
+                    .FirstOrDefault();
+                if (old != null)
+                    old.IsDelete = true;
+                this.HierarchyScopeRelAddTarget(newOrgDtID);
+            }
+        }
+        private void HierarchyScopeRelAddTarget(Guid orgDtId)
+        {
+            this.HierarchyScopeRel.Add(new Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship(this.DtId, orgDtId));
+        }
 
         private void 人员特征列表在修改时的增删改处理(IEnumerable<PersonProperty> properties, List<Guid> haveDtIds)
         {
+            if (properties == null) properties = new List<PersonProperty>();
             var requestDtIds = properties.Select(m => m.DtId).ToList();
             var notHaveDtIds = requestDtIds.Except(haveDtIds);
             var deleteDtIds = haveDtIds.Except(requestDtIds);
@@ -130,7 +135,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
                 this.HasValuesOfAddTarget(m);
             }
             //删除的删除
-            this.HasValuesOf.Remove(deleteDtIds);
+            foreach (var item in this.HasValuesOf.Where(m => deleteDtIds.Contains(m.TargetId)))
+            {
+                item.IsDelete = true;
+            }
         }
 
         private void PropertyContiansUpdate(PersonProperty propertyViewModel, PersonProperty property)
@@ -154,14 +162,54 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             //删除的删除
             property.Contains.Remove(deletePropertyDtIds);
         }
-
+        /// <summary>
+        /// 班组绑定
+        /// </summary>
+        /// <param name="teamDtId"></param>
+        public void TeamAddTarget(Guid? teamDtId)
+        {
+            bool add = true;
+            foreach (var item in this.DefinedBy.Where(m => m.Target.Description.Equals("班组")))
+            {
+                if (item.TargetId != teamDtId)
+                {
+                    item.IsDelete = true;
+                }
+                else
+                {
+                    add = false;
+                }
+            }
+            if (add && teamDtId != null)
+                this.DefinedByAddTarget(teamDtId.Value);
+        }
         /// <summary>
         /// 所属人员类绑定
         /// </summary>
-        /// <param name="teamOfGroupDtId"></param>
-        public void DefinedByAddTarget(Guid teamOfGroupDtId)
+        /// <param name="targetDtId"></param>
+        private void DefinedByAddTarget(Guid targetDtId)
         {
-            this.DefinedBy.Add(new Common.Relationship.isa95.Person.PersonDefinedByRelationship(this.DtId, teamOfGroupDtId));
+            this.DefinedBy.Add(new Common.Relationship.isa95.Person.PersonDefinedByRelationship(this.DtId, targetDtId));
+        }
+        /// <summary>
+        /// 所属人员类绑定
+        /// </summary>
+        /// <param name="targetDtIds">要绑定的人员类唯一标识清单</param>
+        /// <param name="type">要绑定的人员类分类</param>
+        public void DefinedByAddTarget(IEnumerable<Guid> targetDtIds, string type)
+        {
+            List<Guid> A = this.DefinedBy.Where(m => m.Target != null && m.Target.Description.Equals(type)).Select(m => m.TargetId).ToList();
+            // A中有但B中没有的元素,需要删除的角色
+            List<Guid> aNotInB = A.Except(targetDtIds).ToList();
+            this.DefinedBy.Remove(aNotInB);
+
+            // B中有但A中没有的元素，需要添加的角色
+            List<Guid> bNotInA = targetDtIds.Except(A).ToList();
+
+            foreach (var positionDtId in bNotInA)
+            {
+                this.DefinedByAddTarget(positionDtId);
+            }
         }
 
         public void Delete()

@@ -12,6 +12,7 @@ using MOM.Application.Features.Personnel.Queries.GetResponsibles;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace 人员认证管理.Controllers.v1
 {
@@ -53,41 +54,41 @@ namespace 人员认证管理.Controllers.v1
         //    return await Mediator.Send(command);
         //}
 
-        ///// <summary>
-        ///// 添加人员/创建账号
-        ///// </summary>
-        ///// <param name="request"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //public async Task<BaseResult> AddPerson(AddPersonCommand request)//属性尤其是从人员类继承的属性（mapsTo）
-        //{
-        //    var model = await Mediator.Send(request);
-        //    return model;
-        //}
+        /// <summary>
+        /// 添加人员/创建账号
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<BaseResult> Add(AddPersonCommand command)
+        {
+            var model = await Mediator.Send(command);
+            return model;
+        }
 
 
-        ///// <summary>
-        ///// 删除人员
-        ///// </summary>
-        ///// <param name="dtIds"></param>
-        ///// <returns></returns>
-        //[HttpDelete]
-        //public async Task<BaseResult> DeletePerson(DeletePersonCommand command)
-        //{
-        //    var deleteResoult = await Mediator.Send(command);
-        //    return deleteResoult;
-        //}
+        /// <summary>
+        /// 删除人员
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<BaseResult> Delete(DeletePersonCommand command)
+        {
+            var deleteResoult = await Mediator.Send(command);
+            return deleteResoult;
+        }
 
-        ///// <summary>
-        ///// 修改人员
-        ///// </summary>
-        ///// <param name="request"></param>
-        ///// <returns></returns>
-        //[HttpPut]
-        //public async Task<BaseResult> UpdatePerson(UpdatePersonCommand command)//属性尤其是从人员类继承的属性（mapsTo）
-        //{
-        //    var updateResoult = await Mediator.Send(command);
-        //    return updateResoult;
-        //}
+        /// <summary>
+        /// 修改人员
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<BaseResult> Update(UpdatePersonCommand command)
+        {
+            var updateResoult = await Mediator.Send(command);
+            return updateResoult;
+        }
     }
 }
