@@ -690,6 +690,11 @@
             地址
             </summary>
         </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Permissions">
+            <summary>
+            权限清单
+            </summary>
+        </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.HierarchyScope">
             <summary>
             标识交换的信息在基于角色的设备层次结构中的位置。

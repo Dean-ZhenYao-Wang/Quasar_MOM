@@ -1,5 +1,6 @@
 ﻿using MOM.Application.DTOs.Personnel.Requests;
 using MOM.Domain.Common.EnumType;
+using MOM.Domain.Permission;
 using System.Text.Json.Serialization;
 
 namespace MOM.Application.DTOs.Personnel.Responses
@@ -87,5 +88,40 @@ namespace MOM.Application.DTOs.Personnel.Responses
         /// 组织
         /// </summary>
         public string? OrgName { get { return Org?.Label; } }
+        /// <summary>
+        /// 具有的权限清单
+        /// </summary>
+        public IEnumerable<string> Permissions
+        {
+            get
+            {
+                return DefinedByPermissions
+                    .Union(HierarchyScopeRelPermissions)
+                    .Union(AvailablePermissions.Where(m => m.Available).Select(m => m.MenuButtonId))
+                    .Except(AvailablePermissions.Where(m => m.Available == false).Select(m => m.MenuButtonId))
+                    .Distinct()
+                    .ToList();
+            }
+        }
+        /// <summary>
+        /// 所属人员类权限清单
+        /// </summary>
+        [JsonIgnore]
+        public IEnumerable<string> DefinedByPermissions { get; set; } = new List<string>();
+        /// <summary>
+        /// 所属组织权限清单
+        /// </summary>
+        [JsonIgnore]
+        public IEnumerable<string> HierarchyScopeRelPermissions { get; set; } = new List<string>();
+        /// <summary>
+        /// 当前人的特殊权限
+        /// </summary>
+        [JsonIgnore]
+        public IEnumerable<AvailablePerm> AvailablePermissions { get; set; } = new List<AvailablePerm>();
+    }
+    public class AvailablePerm
+    {
+        public bool Available { get; set; }
+        public string MenuButtonId { get; set; }
     }
 }

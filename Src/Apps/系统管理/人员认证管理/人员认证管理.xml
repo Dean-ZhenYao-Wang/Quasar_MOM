@@ -55,5 +55,12 @@
             <param name="command"></param>
             <returns></returns>
         </member>
+        <member name="M:人员认证管理.Controllers.v1.PersonController.SettingPermission(MOM.Application.Features.Permission.Commands.PersonnelSettingPermission.PersonnelSettingPermissionCommand)">
+            <summary>
+            给人配置基本特殊指定权限
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

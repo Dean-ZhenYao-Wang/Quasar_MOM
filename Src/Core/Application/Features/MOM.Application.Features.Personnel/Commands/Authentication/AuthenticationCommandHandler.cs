@@ -21,6 +21,11 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
             var user = await personRepository.DbSet
                 .Include(m => m.DefinedBy)
                 .ThenInclude(d => d.Target)
+                .ThenInclude(t => t.Permissions)
+                .Include(m => m.HierarchyScopeRel)
+                .ThenInclude(h => h.Target)
+                .ThenInclude(t => t.Permissions)
+                .Include(m => m.AvailablePermissions)
                 .Where(m => m.Id.Equals(request.UserName) || m.ContactInformation.Email.Equals(request.UserName) || m.ContactInformation.PhoneNumber.Equals(request.UserName))
                 .FirstOrDefaultAsync();
             if (user == null)
@@ -62,14 +67,11 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
 
         private async Task<AuthenticationResponse> GetAuthenticationResponse(Person user)
         {
-            var personnelClassPermissionList = await personnelClassPermissionRepository.GetPersonnelClassPermissionListAsync(user.DefinedBy.Select(m => m.TargetId));
-            if (!string.IsNullOrWhiteSpace(user.HierarchyScope))
-            {
-                var orgPermissionList = await orgPermissionRepository.GetOrgPermissionListAsync(user.HierarchyScopeRel.First().Target.DtId);
-                personnelClassPermissionList.AddRange(orgPermissionList);
-            }
+            var personnelClassPermissionList = user.DefinedBy.Select(d => d.Target.Permissions.Select(t => t.MenuButtonId)).SelectMany(t => t).ToList();
+            personnelClassPermissionList.AddRange(user.HierarchyScopeRel.Select(m => m.Target.Permissions.Select(t => t.MenuButtonId)).SelectMany(t => t).ToList());
+            personnelClassPermissionList.AddRange(user.AvailablePermissions.Where(m => m.Available).Select(m => m.MenuButtonId).ToList());
 
-            List<string> rolesList = personnelClassPermissionList.Distinct().ToList();
+            List<string> rolesList = personnelClassPermissionList.Except(user.AvailablePermissions.Where(m => m.Available = false).Select(m => m.MenuButtonId)).Distinct().ToList();
 
             var jwToken = GenerateJwtToken();
 

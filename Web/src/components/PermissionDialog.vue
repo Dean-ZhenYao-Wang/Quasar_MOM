@@ -113,7 +113,7 @@ const ok = async () => {
   console.log('需要添加的-bNotInA', bNotInA)
 
   ticked.value = ticked.value.filter((item) => !aNotInB.includes(item))
-
+  console.log('结果', [...ticked.value, ...bNotInA])
   if (props.ok) await props.ok([...ticked.value, ...bNotInA])
 }
 const getMenuTree = async () => {

@@ -2,20 +2,24 @@
 using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs;
 using MOM.Application.DTOs.Personnel.Responses;
+using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
+using MOM.Domain.Permission;
 
 namespace MOM.Application.Features.Personnel.Queries.GetPagedListPerson
 {
-    public class GetPagedPersonQueryHandler(IPersonRepository personRepository) : IRequestHandler<GetPagedPersonQuery, PagedResponse<PersonResponse>>
+    public class GetPagedPersonQueryHandler(IPersonRepository personRepository, IUnitOfWork unitOfWork) : IRequestHandler<GetPagedPersonQuery, PagedResponse<PersonResponse>>
     {
         public async Task<PagedResponse<PersonResponse>> Handle(GetPagedPersonQuery request, CancellationToken cancellationToken)
         {
             var query = personRepository.AsNoTracking()
                 .Include(p => p.DefinedBy)
                 .ThenInclude(d => d.Target)
+                .ThenInclude(t => t.Permissions)
                 .Include(p => p.HierarchyScopeRel)
                 .ThenInclude(h => h.Target)
+                .ThenInclude(t => t.Permissions)
                 .Where(p => !string.IsNullOrWhiteSpace(request.Id) ? p.Id.Contains(request.Id) : true)
                 .Where(p => !string.IsNullOrWhiteSpace(request.Name) ? p.Name.Contains(request.Name) : true)
                 .Where(p => request.WorkStatus.HasValue ? p.WorkStatus == request.WorkStatus.Value : true)
@@ -36,7 +40,10 @@ namespace MOM.Application.Features.Personnel.Queries.GetPagedListPerson
                     PhoneNumber = p.ContactInformation.PhoneNumber,
                     Team = p.DefinedBy.Where(d => d.Target.Description.Equals("班组")).Select(d => new ResponseObject { DtId = d.Target.DtId, Label = d.Target.Id }).FirstOrDefault(),
                     Org = p.HierarchyScopeRel.Select(d => new ResponseObject { DtId = d.Target.DtId, Label = d.Target.Name }).FirstOrDefault(),
-                    PositionList = p.DefinedBy.Where(d => d.Target.Description.Equals("职位")).Select(d => new ResponseObject { DtId = d.Target.DtId, Label = d.Target.Id })
+                    PositionList = p.DefinedBy.Where(d => d.Target.Description.Equals("职位")).Select(d => new ResponseObject { DtId = d.Target.DtId, Label = d.Target.Id }),
+                    DefinedByPermissions = p.DefinedBy.SelectMany(d => d.Target.Permissions.Select(perm => perm.MenuButtonId)),
+                    HierarchyScopeRelPermissions = p.HierarchyScopeRel.SelectMany(h => h.Target.Permissions.Select(perm => perm.MenuButtonId)),
+                    AvailablePermissions = p.AvailablePermissions.Select(ap => new AvailablePerm { Available = ap.Available, MenuButtonId = ap.MenuButtonId })
                 });
 
             return await personRepository.PagedAsync(query, request.Page, request.PageSize);

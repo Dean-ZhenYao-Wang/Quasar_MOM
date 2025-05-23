@@ -53,13 +53,17 @@ const oldSelectIds = ref([])
 
 const permissionDialogVisible = ref(false)
 const orgSettingPermission = async (ids) => {
-  await personStore.SettingPermission({ menuButtonIds: ids, owner: settingPositionDtId.value })
+  await personStore.SettingPermission({
+    menuButtonIds: ids,
+    oldMenuButtonIds: oldSelectIds.value,
+    owner: settingPersonnelDtId.value,
+  })
   permissionDialogVisible.value = false
   await handleSearch({ page: pagination.value.page, pageSize: pagination.value.rowsPerPage })
 }
-const settingPositionDtId = ref(null)
+const settingPersonnelDtId = ref(null)
 const openPermissionDialog = async (row) => {
-  settingPositionDtId.value = row.dtId
+  settingPersonnelDtId.value = row.dtId
   oldSelectIds.value = row.permissions
   permissionDialogVisible.value = true
 }

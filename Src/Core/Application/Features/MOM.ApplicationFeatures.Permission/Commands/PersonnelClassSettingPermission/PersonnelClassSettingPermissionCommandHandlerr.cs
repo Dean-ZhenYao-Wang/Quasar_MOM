@@ -6,7 +6,7 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Permission.Commands.PositionSettingPermission
 {
-    public class PersonnelClassSettingPermissionCommandHandlerr(IPersonnelClassPermissionRepository personnelClassPermissionRepository, IUnitOfWork unitOfWork) : IRequestHandler<PersonnelClassSettingPermissionCommand, BaseResult>
+    public class PersonnelSettingPermissionCommandHandlerr(IPersonnelClassPermissionRepository personnelClassPermissionRepository, IUnitOfWork unitOfWork) : IRequestHandler<PersonnelClassSettingPermissionCommand, BaseResult>
     {
         public async Task<BaseResult> Handle(PersonnelClassSettingPermissionCommand request, CancellationToken cancellationToken)
         {

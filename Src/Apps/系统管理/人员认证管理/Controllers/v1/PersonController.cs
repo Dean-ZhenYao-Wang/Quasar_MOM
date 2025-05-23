@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Personnel.Responses;
 using MOM.Application.DTOs.Resource.Responses;
+using MOM.Application.Features.Permission.Commands.PersonnelSettingPermission;
 using MOM.Application.Features.Personnel.Commands.AddPerson;
 using MOM.Application.Features.Personnel.Commands.DeletePerson;
 using MOM.Application.Features.Personnel.Commands.UpdatePerson;
@@ -89,6 +90,16 @@ namespace 人员认证管理.Controllers.v1
         {
             var updateResoult = await Mediator.Send(command);
             return updateResoult;
+        }
+        /// <summary>
+        /// 给人配置基本特殊指定权限
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<BaseResult> SettingPermission(PersonnelSettingPermissionCommand command)
+        {
+            return await Mediator.Send(command);
         }
     }
 }

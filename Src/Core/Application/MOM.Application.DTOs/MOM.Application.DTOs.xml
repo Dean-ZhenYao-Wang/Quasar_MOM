@@ -376,6 +376,26 @@
             组织
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Permissions">
+            <summary>
+            具有的权限清单
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.DefinedByPermissions">
+            <summary>
+            所属人员类权限清单
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.HierarchyScopeRelPermissions">
+            <summary>
+            所属组织权限清单
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.AvailablePermissions">
+            <summary>
+            当前人的特殊权限
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.Id">
             <summary>
             名称

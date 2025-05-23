@@ -1,5 +1,6 @@
 ﻿using MOM.Domain.Common.EnumType;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
+using MOM.Domain.Permission;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -44,6 +45,10 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 地址
         /// </summary>
         public string? Address { get; set; }
+        /// <summary>
+        /// 权限清单
+        /// </summary>
+        public virtual ICollection<OrgPermission> Permissions { get; set; } = new List<OrgPermission>();
 
         public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string Id, string name, string? address = null, bool active = false, string? description = null) : this()
         {

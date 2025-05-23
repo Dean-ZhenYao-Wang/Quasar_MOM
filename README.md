@@ -9,3 +9,4 @@
 4、仓储的实现写在/Src/Infrastructure/MOM.Infrastructure.Persistence/Repositories中
 # 注意
 1、如果需要本地化，可使用MOM.Application.Wrappers的ITranslator
+2、一旦针对具体的个人设置权限后，以后设置权限基本都需要顾及到这个个人的权限考虑，仅限个别特殊人员才进行此项配置，非必要不要进行

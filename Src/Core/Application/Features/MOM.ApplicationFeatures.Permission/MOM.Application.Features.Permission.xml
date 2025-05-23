@@ -4,6 +4,11 @@
         <name>MOM.Application.Features.Permission</name>
     </assembly>
     <members>
+        <member name="P:MOM.Application.Features.Permission.Commands.PersonnelSettingPermission.PersonnelSettingPermissionCommand.oldMenuButtonIds">
+            <summary>
+            原始的菜单或按钮的DtId清单
+            </summary>
+        </member>
         <member name="P:MOM.Application.Features.Permission.Queries.GetMenuList.GetMenuListQuery.ParentMenuDtId">
             <summary>
             所属组织DtId
