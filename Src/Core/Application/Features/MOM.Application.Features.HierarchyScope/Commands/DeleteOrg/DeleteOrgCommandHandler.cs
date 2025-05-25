@@ -19,11 +19,11 @@ namespace MOM.Application.Features.HierarchyScope.Commands.DeleteOrg
                     .Where(m => command.DtIds.Contains(m.SourceId.Value) || command.DtIds.Contains(m.TargetId))
                     .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));
 
-                await unitOfWork.CommitAsync(transaction);
+                await unitOfWork.CommitAsync();
             }
             catch (Exception ex)
             {
-                await unitOfWork.RollbackAsync(transaction);
+                await unitOfWork.RollbackAsync();
                 throw new ApplicationException(ex.Message, ex.InnerException);
             }
 

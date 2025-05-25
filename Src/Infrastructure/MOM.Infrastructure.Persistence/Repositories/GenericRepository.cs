@@ -14,7 +14,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
     {
         public DbSet<T> DbSet { get => dbContext.Set<T>(); }
 
-        public virtual IEnumerable<T> Where(Func<T, bool> predicate)
+        public virtual IQueryable<T> Where(Expression<Func<T, bool>> predicate)
         {
             return dbContext.Set<T>().Where(predicate);
         }
@@ -70,10 +70,14 @@ namespace MOM.Infrastructure.Persistence.Repositories
             return await dbContext.Set<T>().Where(predicate).ExecuteUpdateAsync(func);
         }
 
-        public virtual async Task<T> AddAsync(T entity)
+        public virtual async Task AddAsync(T entity)
         {
             await dbContext.Set<T>().AddAsync(entity);
-            return entity;
+        }
+        public virtual async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entitys)
+        {
+            await dbContext.Set<T>().AddRangeAsync(entitys);
+            return entitys;
         }
 
         public void Update(T entity)
@@ -117,6 +121,11 @@ namespace MOM.Infrastructure.Persistence.Repositories
         public IIncludableQueryable<T, TProperty> Include<TProperty>(Expression<Func<T, TProperty>> path)
         {
             return dbContext.Set<T>().Include(path);
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await dbContext.SaveChangesAsync();
         }
     }
 }

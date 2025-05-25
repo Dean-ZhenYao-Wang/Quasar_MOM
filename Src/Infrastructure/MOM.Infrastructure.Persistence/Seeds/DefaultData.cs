@@ -24,11 +24,13 @@ namespace MOM.Infrastructure.Persistence.Seeds
                 admin.SecurityStamp = Guid.NewGuid().ToString();
                 applicationDbContext.Person.Add(admin);
 
-                var enterprise = new HierarchyScope(HierarchyScopeEquipmentLevel.Enterprise, "0000", enterpriseSettings.Name, enterpriseSettings.Address, true, "系统购买者");
-                applicationDbContext.HierarchyScopes.Add(enterprise);
-                applicationDbContext.HierarchyScopeContainsRelationship.Add(new HierarchyScopeContainsRelationship(null, enterprise.DtId));
+                //var enterprise = new HierarchyScope(HierarchyScopeEquipmentLevel.Enterprise, "0000", enterpriseSettings.Name, enterpriseSettings.Address, true, "系统购买者");
+                //applicationDbContext.HierarchyScopes.Add(enterprise);
+                //applicationDbContext.HierarchyScopeContainsRelationship.Add(new HierarchyScopeContainsRelationship(null, enterprise.DtId, 0));
+                //applicationDbContext.HierarchyScopeContainsRelationship.Add(new HierarchyScopeContainsRelationship(enterprise.DtId, enterprise.DtId, 1));
 
-                PersonnelClass personnelClass = new PersonnelClass("超级管理员", "角色", enterprise);
+                //PersonnelClass personnelClass = new PersonnelClass("超级管理员", "角色", enterprise);
+                PersonnelClass personnelClass = new PersonnelClass("超级管理员", "角色");
                 applicationDbContext.PersonnelClasses.Add(personnelClass);
                 applicationDbContext.PersonnelClassIncludesPropertiesOfRelationships.Add(new PersonnelClassIncludesPropertiesOfRelationship(null, personnelClass.DtId));
 
@@ -38,7 +40,7 @@ namespace MOM.Infrastructure.Persistence.Seeds
                     MenuButtonId = "*:*:*"
                 });
 
-                admin.HierarchyScopeRelDtId = enterprise.DtId;
+                //admin.HierarchyScopeRelDtId = enterprise.DtId;
                 admin.DefinedByAddTarget(new Guid[] { personnelClass.DtId }, "角色");
 
 

@@ -124,7 +124,15 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddResourcesInfrastructure();
 builder.Services.AddHangfireInfrastructure(builder.Configuration);
-builder.Services.AddScoped<IAuthenticatedUserService, AuthenticatedUserService>();
+
+
+builder.Services.AddTransient<IAuthenticatedUserService>(serviceProvider =>
+{
+    var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+    return new AuthenticatedUserService(httpContextAccessor);
+});
+
+
 builder.Services.AddControllers();
 builder.Services.AddVersioning();
 builder.Services.AddFluentValidationAutoValidation();

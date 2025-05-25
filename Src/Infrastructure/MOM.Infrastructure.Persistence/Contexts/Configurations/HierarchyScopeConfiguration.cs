@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MOM.Domain.Common.Relationship.isa95.HierarchyScope;
 using MOM.Domain.isa95.CommonObjectModels;
 
 namespace MOM.Infrastructure.Persistence.Contexts.Configurations

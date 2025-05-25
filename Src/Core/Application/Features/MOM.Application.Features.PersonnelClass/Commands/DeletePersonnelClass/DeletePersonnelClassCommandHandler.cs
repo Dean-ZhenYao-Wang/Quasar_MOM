@@ -34,13 +34,13 @@ namespace MOM.Application.Features.PersonnelClass.Commands.DeletePosition
                     .Where(m => request.DtIds.Contains(m.SourceId.Value))
                     .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));
 
-                await unitOfWork.CommitAsync(transaction);
+                await unitOfWork.CommitAsync();
 
                 return BaseResult.Ok();
             }
             catch (Exception ex)
             {
-                await unitOfWork.RollbackAsync(transaction);
+                await unitOfWork.RollbackAsync();
                 throw new ApplicationException(ex.Message, ex.InnerException);
             }
         }

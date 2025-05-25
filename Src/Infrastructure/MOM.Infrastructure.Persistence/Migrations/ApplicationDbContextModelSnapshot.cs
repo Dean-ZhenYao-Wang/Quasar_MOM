@@ -226,6 +226,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Depth")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -237,6 +240,10 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "equipmentLevel");
 
+                    b.Property<string>("FullPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -244,7 +251,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<Guid?>("ResponsibleDtId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("SourceDtId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasIndex("ResponsibleDtId");
+
+                    b.HasIndex("SourceDtId");
 
                     b.ToTable("HierarchyScope", (string)null);
                 });
@@ -1623,6 +1635,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship", b =>
                 {
                     b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.Property<int>("Depth")
+                        .HasColumnType("int");
 
                     b.HasIndex("SourceId");
 
@@ -3150,7 +3165,13 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("ResponsibleDtId");
 
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "Source")
+                        .WithMany()
+                        .HasForeignKey("SourceDtId");
+
                     b.Navigation("Responsible");
+
+                    b.Navigation("Source");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation", b =>

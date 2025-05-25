@@ -18,10 +18,10 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
         public Task<List<Button>> GetButtonsByMenuIdAsync(Guid menuDtId)
         {
-            return Where(m => m.MenuDtId == menuDtId).OrderBy(m => m.Id).Select(m => m).AsQueryable().ToListAsync();
+            return Where(m => m.MenuDtId == menuDtId).OrderBy(m => m.Id).Select(m => m).ToListAsync();
         }
 
-        public override Task<Button> AddAsync(Button entity)
+        public override Task AddAsync(Button entity)
         {
             return base.AddAsync(entity);
         }

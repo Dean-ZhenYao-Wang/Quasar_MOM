@@ -47,7 +47,7 @@ namespace MOM.Application.DTOs.HierarchyScope.Requests
 
         public virtual Domain.isa95.CommonObjectModels.HierarchyScope ToHierarchyScope()
         {
-            Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope = new Domain.isa95.CommonObjectModels.HierarchyScope(this.EquipmentLevel, this.Id, this.Name, this.Address, this.Active, this.Description);
+            Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope = new Domain.isa95.CommonObjectModels.HierarchyScope(this.EquipmentLevel, this.Id, this.Name, this.Address, this.Active, this.Description,this.SourceDtId);
             hierarchyScope.ResponsibleDtId = this.ResponsibleDtId;
             hierarchyScope.Address = this.Address;
             return hierarchyScope;

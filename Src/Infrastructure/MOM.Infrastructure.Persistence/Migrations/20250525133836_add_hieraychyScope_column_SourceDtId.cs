@@ -1,19 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace MOM.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class add_PersonnelClass_Column_Remark : Migration
+    public partial class add_hieraychyScope_column_SourceDtId : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Remark",
-                table: "PersonnelClasses",
-                type: "nvarchar(max)",
+            migrationBuilder.AddColumn<Guid>(
+                name: "SourceDtId",
+                table: "HierarchyScope",
+                type: "uniqueidentifier",
                 nullable: true);
         }
 
@@ -21,8 +22,8 @@ namespace MOM.Infrastructure.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Remark",
-                table: "PersonnelClasses");
+                name: "SourceDtId",
+                table: "HierarchyScope");
         }
     }
 }

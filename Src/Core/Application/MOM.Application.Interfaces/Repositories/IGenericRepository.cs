@@ -9,7 +9,7 @@ namespace MOM.Application.Interfaces.Repositories
 
         Task<T> GetByIdAsync(object id);
 
-        Task<T> AddAsync(T entity);
+        Task AddAsync(T entity);
 
         void Update(T entity);
 
@@ -19,7 +19,7 @@ namespace MOM.Application.Interfaces.Repositories
 
         void DeleteRange(IEnumerable<T> entities);
 
-        IEnumerable<T> Where(Func<T, bool> predicate);
+        IQueryable<T> Where(Expression<Func<T, bool>> predicate);
 
         Task<int> ExecuteUpdateAsync(Expression<Func<T, bool>> predicate, Expression<Func<Microsoft.EntityFrameworkCore.Query.SetPropertyCalls<T>, Microsoft.EntityFrameworkCore.Query.SetPropertyCalls<T>>> func);
 
@@ -27,5 +27,6 @@ namespace MOM.Application.Interfaces.Repositories
 
         IIncludableQueryable<T, TProperty> Include<TProperty>(Expression<Func<T, TProperty>> path);
         IQueryable<T> AsNoTracking();
+        Task<int> SaveChangesAsync();
     }
 }

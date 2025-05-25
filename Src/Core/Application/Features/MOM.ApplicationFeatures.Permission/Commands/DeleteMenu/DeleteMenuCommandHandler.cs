@@ -15,12 +15,12 @@ namespace MOM.Application.Features.Permission.Commands.DeleteMenu
                 await menuRepository.DeleteAsync(request.DtIds);
                 await buttonRepository.DeleteAsync(dtIds: await menuRepository.GetButtonDtIdsAsync(request.DtIds));
 
-                await unitOfWork.CommitAsync(transaction);
+                await unitOfWork.CommitAsync();
             }
             catch (Exception ex)
             {
                 // 回滚事务
-                await unitOfWork.RollbackAsync(transaction);
+                await unitOfWork.RollbackAsync();
                 throw new ApplicationException(ex.Message, ex.InnerException);
             }
             return BaseResult.Ok();

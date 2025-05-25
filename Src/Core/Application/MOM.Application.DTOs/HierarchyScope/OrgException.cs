@@ -44,7 +44,8 @@ namespace MOM.Application.DTOs.HierarchyScope
                 Description = hierarchyScope.Description,
                 SourceDtId = sourceDtId,
                 Address = hierarchyScope.Address,
-                SourceName = sourceName
+                SourceName = sourceName,
+                FullPath = hierarchyScope.FullPath
             };
 
             return OrgResponse;

@@ -8,6 +8,7 @@ namespace MOM.Infrastructure.Persistence.Contexts
     public class UnitOfWork(ApplicationDbContext dbContext) : IUnitOfWork
     {
         public DbContext Relationships { get; set; } = dbContext;
+        private IDbContextTransaction tran;
 
         public async Task<bool> SaveChangesAsync()
         {
@@ -21,31 +22,32 @@ namespace MOM.Infrastructure.Persistence.Contexts
 
         public async Task<IDbContextTransaction> BeginTransactionAsync()
         {
-            return await dbContext.Database.BeginTransactionAsync();
+            tran= await dbContext.Database.BeginTransactionAsync();
+            return tran;
         }
 
-        public async Task CommitAsync(IDbContextTransaction transaction)
+        public async Task CommitAsync()
         {
             try
             {
                 await dbContext.SaveChangesAsync();
-                await transaction.CommitAsync();
+                await tran.CommitAsync();
             }
             finally
             {
-                await transaction.DisposeAsync();
+                await tran.DisposeAsync();
             }
         }
 
-        public async Task RollbackAsync(IDbContextTransaction transaction)
+        public async Task RollbackAsync()
         {
             try
             {
-                await transaction.RollbackAsync();
+                await tran.RollbackAsync();
             }
             finally
             {
-                await transaction.DisposeAsync();
+                await tran.DisposeAsync();
             }
         }
     }

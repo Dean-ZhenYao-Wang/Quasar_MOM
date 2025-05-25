@@ -10,31 +10,30 @@ namespace MOM.Application.Features.HierarchyScope.Commands.UpdateOrg
     {
         public async Task<BaseResult> Handle(UpdateOrgCommand request, CancellationToken cancellationToken)
         {
-            var Org = await hierarchyScopeRepository.GetByIdAsync(request.DtId);
-
-            if (Org is null)
+            using var tran = await unitOfWork.BeginTransactionAsync();
+            try
             {
-                return new Error(ErrorCode.NotFound, translator.GetString(TranslatorMessages.NotFound()));
-            }
 
-            Org.Update(request.ToHierarchyScope());
+                var Org = await hierarchyScopeRepository.GetByIdAsync(request.DtId);
 
-            var oldSource = hierarchyScopeContainsRelationshipRepository
-                .Where(m => m.TargetId.Equals(request.DtId))
-                .FirstOrDefault();
-            if (oldSource != null && oldSource.SourceId != request.SourceDtId)
-            {
-                oldSource.IsDelete = false;
-            }
-            else
-            {
-                if (request.SourceDtId != null)
+                if (Org is null)
                 {
-                    await hierarchyScopeContainsRelationshipRepository.AddAsync(new HierarchyScopeContainsRelationship(request.SourceDtId, request.DtId));
+                    return new Error(ErrorCode.NotFound, translator.GetString(TranslatorMessages.NotFound()));
                 }
-            }
 
-            await unitOfWork.SaveChangesAsync();
+                Org.Update(request.ToHierarchyScope());
+                if (request.SourceDtId == null)
+                    Org.FullPath = Org.Name;
+
+                await hierarchyScopeContainsRelationshipRepository.MoveNodeAsync(request.DtId, request.SourceDtId);
+
+                await unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                await unitOfWork.RollbackAsync();
+                throw;
+            }
             return BaseResult.Ok();
         }
     }

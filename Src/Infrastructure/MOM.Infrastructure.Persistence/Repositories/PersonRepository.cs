@@ -48,7 +48,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                     //.Select(c => c.IncludesPropertiesOf.Where(i => m.DefinedBy.Select(d => d.TargetId).Contains(i.DtId)).Select(i => i.Target.DtId))
                     //.FirstOrDefault(),
                     //Properties = m.HasValuesOf.Select(v => new MOM.Application.DTOs.Resource.ResourcePropertyViewModel(v.Target))  前端要单独通过调用接口获取
-                }).AsQueryable();
+                });
             return this.PagedAsync(query, pageNumber, pageSize);
         }
 

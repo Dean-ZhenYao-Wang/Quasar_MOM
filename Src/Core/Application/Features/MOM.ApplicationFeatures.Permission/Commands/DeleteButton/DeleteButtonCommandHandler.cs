@@ -13,11 +13,11 @@ namespace MOM.Application.Features.Permission.Commands.DeleteButton
             try
             {
                 await buttonRepository.DeleteAsync(request.DtIds);
-                await unitOfWork.CommitAsync(transaction);
+                await unitOfWork.CommitAsync();
             }
             catch (Exception ex)
             {
-                await unitOfWork.RollbackAsync(transaction);
+                await unitOfWork.RollbackAsync();
                 throw new ApplicationException(ex.Message, ex.InnerException);
             }
             return BaseResult.Ok();

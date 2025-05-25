@@ -9,7 +9,10 @@ namespace MOM.Domain.Common.Relationship.isa95.HierarchyScope
         {
             Name = "contains";
         }
-
+        /// <summary>
+        /// …Ó∂»
+        /// </summary>
+        public int Depth { get; set; }
         [JsonIgnore]
         [ForeignKey(nameof(SourceId))]
         public virtual MOM.Domain.isa95.CommonObjectModels.HierarchyScope Source { get; set; }
@@ -22,6 +25,15 @@ namespace MOM.Domain.Common.Relationship.isa95.HierarchyScope
         public HierarchyScopeContainsRelationship(Guid? sourceId, Guid targetId) : this()
         {
             InitializeFromTwins(sourceId, targetId);
+        }
+        public HierarchyScopeContainsRelationship(Guid? sourceId, Guid targetId,int depth) : this()
+        {
+            InitializeFromTwins(sourceId, targetId);
+            this.Depth = depth;
+        }
+        public HierarchyScopeContainsRelationship(Guid? sourceId, MOM.Domain.isa95.CommonObjectModels.HierarchyScope target, int depth) : this(sourceId,target.DtId,depth)
+        {
+            this.Target= target;
         }
 
         public override bool Equals(object? obj)

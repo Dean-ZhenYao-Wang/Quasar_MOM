@@ -21,5 +21,9 @@ namespace MOM.Application.DTOs.HierarchyScope.Responses
         /// 负责人姓名
         /// </summary>
         public string? ResponsibleName { get; set; }
+        /// <summary>
+        /// 路径
+        /// </summary>
+        public string FullPath { get; internal set; }
     }
 }

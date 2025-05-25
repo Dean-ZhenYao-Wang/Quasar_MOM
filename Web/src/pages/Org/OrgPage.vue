@@ -18,57 +18,12 @@
         </template>
         <template v-else-if="row.equipmentLevel == 'Site'">
           <div>
-            <q-badge color="purple" label="场所/工厂" />
+            <q-badge color="purple" label="工厂" />
           </div>
         </template>
         <template v-else-if="row.equipmentLevel == 'Area'">
           <div>
-            <q-badge color="purple" label="区域/车间/部门" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Work_Center'">
-          <div>
-            <q-badge color="purple" label="工作中心/CellGroup" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Work_Unit'">
-          <div>
-            <q-badge color="purple" label="工作单元/Cell" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Process_Cell'">
-          <div>
-            <q-badge color="purple" label="生产工艺段：用于批生产" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Unit'">
-          <div>
-            <q-badge color="purple" label="单元：用于批生产的设备/用于连续生产的设备" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Production_Line'">
-          <div>
-            <q-badge color="purple" label="产线：用于重复或离散生产" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Production_Unit'">
-          <div>
-            <q-badge color="purple" label="工段/工位：用于重复或离散生产的设备" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Work_Cell'">
-          <div>
-            <q-badge color="purple" label="生产单元：用于连续生产" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Storage_Zone'">
-          <div>
-            <q-badge color="purple" label="存储区：用于存储或运输" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Storage_Unit'">
-          <div>
-            <q-badge color="purple" label="存储单元：用于存储或运输的设备" />
+            <q-badge color="purple" label="车间/部门" />
           </div>
         </template>
       </template>
@@ -211,6 +166,7 @@ const table_Config = {
       { name: 'responsibleName', label: '负责人', field: 'responsibleName' },
       { name: 'description', label: '备注', field: 'description' },
       { name: 'sourceName', label: '所属组织', field: 'sourceName' },
+      { name: 'fullPath', label: '路径', field: 'fullPath' },
     ],
   },
 }

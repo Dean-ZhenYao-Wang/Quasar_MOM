@@ -13,6 +13,14 @@ namespace MOM.Domain.isa95.CommonObjectModels
     public partial class HierarchyScope
     {
         public string Name { get; set; }
+        /// <summary>
+        /// 路径
+        /// </summary>
+        public string FullPath { get; set; } = string.Empty;
+        /// <summary>
+        /// 当前深度
+        /// </summary>
+        public int Depth { get; set; }
         public string? Description { get; set; }
 
         /// <summary>
@@ -57,8 +65,14 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 人员清单
         /// </summary>
         public virtual ICollection<Person> Peoples { get; set; } = new List<Person>();
+        /// <summary>
+        /// 父级唯一标识
+        /// </summary>
+        public Guid? SourceDtId { get; set; }
+        [ForeignKey(nameof(SourceDtId))]
+        public virtual HierarchyScope Source { get; set; }
 
-        public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string Id, string name, string? address = null, bool active = false, string? description = null) : this()
+        public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string Id, string name, string? address = null, bool active = false, string? description = null, Guid? sourceDtId = null) : this()
         {
             EquipmentLevel = equipmentLevel;
             this.Id = Id;
@@ -66,6 +80,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
             Address = address;
             Description = description;
             Active = active;
+            SourceDtId = sourceDtId;
         }
 
         public void Delete()
@@ -105,6 +120,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
             this.EquipmentID = hierarchyScope.EquipmentID;
             this.ResponsibleDtId = hierarchyScope.ResponsibleDtId;
             this.Address = hierarchyScope.Address;
+            this.SourceDtId = hierarchyScope.SourceDtId;
         }
     }
 }

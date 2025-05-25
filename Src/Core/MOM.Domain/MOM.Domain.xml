@@ -648,6 +648,11 @@
         <member name="M:MOM.Domain.Common.RelationshipEqualityComparer.GetHashCode(MOM.Domain.Common.BasicRelationship)">
             <inheritdoc/>
         </member>
+        <member name="P:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.Depth">
+            <summary>
+            深度
+            </summary>
+        </member>
         <member name="T:MOM.Domain.Common.SourceValueAttribute">
             <summary>
             属性类用于保存附加的元数据，这些元数据可通过DTDL枚举属性获得。
@@ -667,6 +672,16 @@
         <member name="T:MOM.Domain.isa95.CommonObjectModels.HierarchyScope">
             <summary>
             设备角色层次结构，逻辑工厂结构
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.FullPath">
+            <summary>
+            路径
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Depth">
+            <summary>
+            当前深度
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.ResponsibleDtId">
@@ -703,6 +718,11 @@
         <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Peoples">
             <summary>
             人员清单
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.SourceDtId">
+            <summary>
+            父级唯一标识
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.HierarchyScope">

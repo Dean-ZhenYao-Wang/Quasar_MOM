@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MOM.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250522105821_foreginKey")]
-    partial class foreginKey
+    [Migration("20250525133836_add_hieraychyScope_column_SourceDtId")]
+    partial class add_hieraychyScope_column_SourceDtId
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,51 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.Property<Guid?>("LastModifiedBy")
                         .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("DtId");
+
+                    b.ToTable((string)null);
+
+                    b.UseTpcMappingStrategy();
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.BasicRelationship", b =>
+                {
+                    b.Property<Guid>("DtId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasAnnotation("Relational:JsonPropertyName", "name");
+
+                    b.Property<Guid?>("SourceId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasAnnotation("Relational:JsonPropertyName", "sourceId");
+
+                    b.Property<Guid>("TargetId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasAnnotation("Relational:JsonPropertyName", "targetId");
 
                     b.HasKey("DtId");
 
@@ -120,26 +165,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("PersonnelClassPermission");
                 });
 
-            modelBuilder.Entity("MOM.Domain.Common.BasicRelationship", b =>
-                {
-                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasAnnotation("Relational:JsonPropertyName", "name");
-
-                    b.Property<Guid?>("SourceId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasAnnotation("Relational:JsonPropertyName", "sourceId");
-
-                    b.Property<Guid>("TargetId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasAnnotation("Relational:JsonPropertyName", "targetId");
-
-                    b.ToTable((string)null);
-                });
-
             modelBuilder.Entity("MOM.Domain.Permission.Button", b =>
                 {
                     b.HasBaseType("MOM.Domain.Common.BaseEntity");
@@ -204,6 +229,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Depth")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -215,11 +243,18 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "equipmentLevel");
 
+                    b.Property<string>("FullPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("ResponsibleDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SourceDtId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasIndex("ResponsibleDtId");
@@ -897,6 +932,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("HierarchyScopeRelDtId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime?>("LockoutDateTime")
                         .HasColumnType("datetime2");
 
@@ -931,6 +969,8 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Property<int>("WorkStatus")
                         .HasColumnType("int");
 
+                    b.HasIndex("HierarchyScopeRelDtId");
+
                     b.ToTable("Person");
                 });
 
@@ -961,15 +1001,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("HierarchyScope")
-                        .HasColumnType("nvarchar(max)")
-                        .HasAnnotation("Relational:JsonPropertyName", "hierarchyScope");
+                    b.Property<Guid?>("HierarchyScopeRelDtId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Remark")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("ResponsibleDtId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("HierarchyScopeRelDtId");
 
                     b.HasIndex("ResponsibleDtId");
 
@@ -1595,6 +1636,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship", b =>
                 {
                     b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.Property<int>("Depth")
+                        .HasColumnType("int");
 
                     b.HasIndex("SourceId");
 
@@ -2338,7 +2382,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("TargetId");
 
-                    b.ToTable("PersonDefinedByRelationships");
+                    b.ToTable("PersonDefinedByRelationship");
                 });
 
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Person.PersonHasValuesOfRelationship", b =>
@@ -2408,17 +2452,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.HasIndex("TargetId");
 
                     b.ToTable("PersonnelClassHasPropertiesOfRelationship");
-                });
-
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship", b =>
-                {
-                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
-
-                    b.HasIndex("SourceId");
-
-                    b.HasIndex("TargetId");
-
-                    b.ToTable("PersonnelClassHierarchyScopeRelRelationship");
                 });
 
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship", b =>
@@ -3088,7 +3121,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("MOM.Domain.Permission.OrgPermission", b =>
                 {
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "Org")
-                        .WithMany()
+                        .WithMany("Permissions")
                         .HasForeignKey("OrgDtId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -3173,6 +3206,11 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", b =>
                 {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "HierarchyScopeRel")
+                        .WithMany("Peoples")
+                        .HasForeignKey("HierarchyScopeRelDtId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.OwnsOne("MOM.Domain.Common.ContactInformation", "ContactInformation", b1 =>
                         {
                             b1.Property<Guid>("PersonDtId")
@@ -3224,15 +3262,24 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("ContactInformation")
                         .IsRequired();
 
+                    b.Navigation("HierarchyScopeRel");
+
                     b.Navigation("SpatialDefinition")
                         .IsRequired();
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", b =>
                 {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "HierarchyScopeRel")
+                        .WithMany("Teams")
+                        .HasForeignKey("HierarchyScopeRelDtId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", "Responsible")
                         .WithMany()
                         .HasForeignKey("ResponsibleDtId");
+
+                    b.Navigation("HierarchyScopeRel");
 
                     b.Navigation("Responsible");
                 });
@@ -4489,7 +4536,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship", b =>
                 {
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", "Source")
-                        .WithMany("HierarchyScopeRel")
+                        .WithMany()
                         .HasForeignKey("SourceId");
 
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "Target")
@@ -4562,24 +4609,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty", "Target")
-                        .WithMany()
-                        .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Source");
-
-                    b.Navigation("Target");
-                });
-
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "Source")
-                        .WithMany("HierarchyScopeRel")
-                        .HasForeignKey("SourceId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "Target")
                         .WithMany()
                         .HasForeignKey("TargetId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -5327,6 +5356,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", b =>
                 {
                     b.Navigation("Contains");
+
+                    b.Navigation("Peoples");
+
+                    b.Navigation("Permissions");
+
+                    b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass", b =>
@@ -5611,8 +5646,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
                     b.Navigation("HasValuesOf");
 
-                    b.Navigation("HierarchyScopeRel");
-
                     b.Navigation("OperationalLocationRel");
                 });
 
@@ -5626,8 +5659,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", b =>
                 {
                     b.Navigation("HasPropertiesOf");
-
-                    b.Navigation("HierarchyScopeRel");
 
                     b.Navigation("IncludesPropertiesOf");
 

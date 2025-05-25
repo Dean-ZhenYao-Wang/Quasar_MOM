@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -131,26 +130,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EvaluatedProperty", x => x.DtId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "HierarchyScopeContainsRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HierarchyScopeContainsRelationship", x => x.DtId);
                 });
 
             migrationBuilder.CreateTable(
@@ -426,7 +405,11 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    HierarchyScope = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    HierarchyScope = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpatialDefinition_Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpatialDefinition_Format = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpatialDefinition_SRID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpatialDefinition_SRIDauthority = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -527,58 +510,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ParameterSpecification", x => x.DtId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Person",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    HierarchyScope = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OperationalLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OperationalLocationType = table.Column<int>(type: "int", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    ContactInformation_PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContactInformation_Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WorkStatus = table.Column<int>(type: "int", nullable: false),
-                    LockoutOnFailure = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    PassWord = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FailedCount = table.Column<int>(type: "int", nullable: false),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Person", x => x.DtId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonnelClasses",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    HierarchyScope = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonnelClasses", x => x.DtId);
                 });
 
             migrationBuilder.CreateTable(
@@ -895,26 +826,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkCenterWorkUnitRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkCenterWorkUnitRelationship", x => x.DtId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "WorkDefinition",
                 columns: table => new
                 {
@@ -935,32 +846,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkDefinition", x => x.DtId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EquipmentClassHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EquipmentClassDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EquipmentClassHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_EquipmentClassHierarchyScopeRelRelationship_EquipmentClass_EquipmentClassDtId",
-                        column: x => x.EquipmentClassDtId,
-                        principalTable: "EquipmentClass",
-                        principalColumn: "DtId");
                 });
 
             migrationBuilder.CreateTable(
@@ -1164,32 +1049,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EquipmentSpecificationHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EquipmentSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EquipmentSpecificationHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_EquipmentSpecificationHierarchyScopeRelRelationship_EquipmentSpecification_EquipmentSpecificationDtId",
-                        column: x => x.EquipmentSpecificationDtId,
-                        principalTable: "EquipmentSpecification",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EquipmentSpecificationIsMadeUpOfRelationship",
                 columns: table => new
                 {
@@ -1338,32 +1197,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MaterialClassHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaterialClassDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MaterialClassHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_MaterialClassHierarchyScopeRelRelationship_MaterialClass_MaterialClassDtId",
-                        column: x => x.MaterialClassDtId,
-                        principalTable: "MaterialClass",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MaterialClassIncludesPropertiesOfRelationship",
                 columns: table => new
                 {
@@ -1471,32 +1304,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         principalTable: "MaterialClassProperty",
                         principalColumn: "DtId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MaterialDefinitionHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaterialDefinitionDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MaterialDefinitionHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_MaterialDefinitionHierarchyScopeRelRelationship_MaterialDefinition_MaterialDefinitionDtId",
-                        column: x => x.MaterialDefinitionDtId,
-                        principalTable: "MaterialDefinition",
-                        principalColumn: "DtId");
                 });
 
             migrationBuilder.CreateTable(
@@ -1674,32 +1481,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MaterialLotDefinedByRelationship_MaterialLot_MaterialLotDtId",
-                        column: x => x.MaterialLotDtId,
-                        principalTable: "MaterialLot",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MaterialLotHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaterialLotDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MaterialLotHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_MaterialLotHierarchyScopeRelRelationship_MaterialLot_MaterialLotDtId",
                         column: x => x.MaterialLotDtId,
                         principalTable: "MaterialLot",
                         principalColumn: "DtId");
@@ -2040,32 +1821,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MaterialSpecificationHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaterialSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MaterialSpecificationHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_MaterialSpecificationHierarchyScopeRelRelationship_MaterialSpecification_MaterialSpecificationDtId",
-                        column: x => x.MaterialSpecificationDtId,
-                        principalTable: "MaterialSpecification",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MaterialSpecificationIsAssembledFromRelationship",
                 columns: table => new
                 {
@@ -2348,32 +2103,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MaterialSublotHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaterialSublotDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MaterialSublotHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_MaterialSublotHierarchyScopeRelRelationship_MaterialSublot_MaterialSublotDtId",
-                        column: x => x.MaterialSublotDtId,
-                        principalTable: "MaterialSublot",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MaterialSublotIsAssembledFromLotRelationship",
                 columns: table => new
                 {
@@ -2612,32 +2341,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OperationalLocationHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OperationalLocationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OperationalLocationHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_OperationalLocationHierarchyScopeRelRelationship_OperationalLocation_OperationalLocationDtId",
-                        column: x => x.OperationalLocationDtId,
-                        principalTable: "OperationalLocation",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OperationalLocationIsMadeUpOfRelationship",
                 columns: table => new
                 {
@@ -2661,32 +2364,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         principalTable: "OperationalLocation",
                         principalColumn: "DtId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OperationalLocationClassHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OperationalLocationClassDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OperationalLocationClassHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_OperationalLocationClassHierarchyScopeRelRelationship_OperationalLocationClass_OperationalLocationClassDtId",
-                        column: x => x.OperationalLocationClassDtId,
-                        principalTable: "OperationalLocationClass",
-                        principalColumn: "DtId");
                 });
 
             migrationBuilder.CreateTable(
@@ -2948,671 +2625,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ParameterSpecificationHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ParameterSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ParameterSpecificationHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_ParameterSpecificationHierarchyScopeRelRelationship_ParameterSpecification_ParameterSpecificationDtId",
-                        column: x => x.ParameterSpecificationDtId,
-                        principalTable: "ParameterSpecification",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Area",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Area", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_Area_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AvailablePermissions",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MenuButtonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Available = table.Column<bool>(type: "bit", nullable: false),
-                    PersonDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AvailablePermissions", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_AvailablePermissions_Person_PersonDtId",
-                        column: x => x.PersonDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Enterprise",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Enterprise", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_Enterprise_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "HierarchyScope",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HierarchyScope", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_HierarchyScope_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PersonHierarchyScopeRelRelationship_Person_PersonDtId",
-                        column: x => x.PersonDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonOperationalLocationRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonOperationalLocationRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PersonOperationalLocationRelRelationship_OperationalLocation_TargetId",
-                        column: x => x.TargetId,
-                        principalTable: "OperationalLocation",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PersonOperationalLocationRelRelationship_Person_PersonDtId",
-                        column: x => x.PersonDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProcessCell",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProcessCell", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_ProcessCell_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductionLine",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductionLine", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_ProductionLine_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductionUnit",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductionUnit", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_ProductionUnit_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Site",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Site", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_Site_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StorageUnit",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StorageUnit", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_StorageUnit_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StorageZone",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StorageZone", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_StorageZone_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Unit",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Unit", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_Unit_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WorkCell",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkCell", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_WorkCell_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WorkCenter",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkCenter", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_WorkCenter_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WorkUnit",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkUnit", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_WorkUnit_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Equipment",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    EquipmentLevel = table.Column<int>(type: "int", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpatialDefinition_Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SpatialDefinition_Format = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SpatialDefinition_SRID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SpatialDefinition_SRIDauthority = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Specification = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ModelNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UseOrgDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    EnabledTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Supplier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FactoryNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepreciationLife = table.Column<int>(type: "int", nullable: false),
-                    FactoryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    InitialPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    DateOfPurchase = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    WarrantyPeriod = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Equipment", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_Equipment_Person_ResponsibleDtId",
-                        column: x => x.ResponsibleDtId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                    table.ForeignKey(
-                        name: "FK_Equipment_PersonnelClasses_UseOrgDtId",
-                        column: x => x.UseOrgDtId,
-                        principalTable: "PersonnelClasses",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Permissions",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MenuButtonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonnelClassDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permissions", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_Permissions_PersonnelClasses_PersonnelClassDtId",
-                        column: x => x.PersonnelClassDtId,
-                        principalTable: "PersonnelClasses",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonDefinedByRelationships",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonDefinedByRelationships", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PersonDefinedByRelationships_Person_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                    table.ForeignKey(
-                        name: "FK_PersonDefinedByRelationships_PersonnelClasses_TargetId",
-                        column: x => x.TargetId,
-                        principalTable: "PersonnelClasses",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonnelClassHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonnelClassHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PersonnelClassHierarchyScopeRelRelationship_PersonnelClasses_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "PersonnelClasses",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonnelClassIncludesPropertiesOfRelationships",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonnelClassIncludesPropertiesOfRelationships", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PersonnelClassIncludesPropertiesOfRelationships_PersonnelClasses_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "PersonnelClasses",
-                        principalColumn: "DtId");
-                    table.ForeignKey(
-                        name: "FK_PersonnelClassIncludesPropertiesOfRelationships_PersonnelClasses_TargetId",
-                        column: x => x.TargetId,
-                        principalTable: "PersonnelClasses",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonnelClassHasPropertiesOfRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonnelClassHasPropertiesOfRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PersonnelClassHasPropertiesOfRelationship_PersonnelClassProperty_TargetId",
-                        column: x => x.TargetId,
-                        principalTable: "PersonnelClassProperty",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PersonnelClassHasPropertiesOfRelationship_PersonnelClasses_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "PersonnelClasses",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PersonnelClassPropertyContainsRelationship",
                 columns: table => new
                 {
@@ -3641,96 +2653,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         principalTable: "PersonnelClassProperty",
                         principalColumn: "DtId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonnelSpecificationCorrespondsToPersonnelClassRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonnelSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonnelSpecificationCorrespondsToPersonnelClassRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PersonnelSpecificationCorrespondsToPersonnelClassRelationship_PersonnelClasses_TargetId",
-                        column: x => x.TargetId,
-                        principalTable: "PersonnelClasses",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PersonnelSpecificationCorrespondsToPersonnelClassRelationship_PersonnelSpecification_PersonnelSpecificationDtId",
-                        column: x => x.PersonnelSpecificationDtId,
-                        principalTable: "PersonnelSpecification",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonnelSpecificationCorrespondsToPersonRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonnelSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonnelSpecificationCorrespondsToPersonRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PersonnelSpecificationCorrespondsToPersonRelationship_Person_TargetId",
-                        column: x => x.TargetId,
-                        principalTable: "Person",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PersonnelSpecificationCorrespondsToPersonRelationship_PersonnelSpecification_PersonnelSpecificationDtId",
-                        column: x => x.PersonnelSpecificationDtId,
-                        principalTable: "PersonnelSpecification",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PersonnelSpecificationHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PersonnelSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonnelSpecificationHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PersonnelSpecificationHierarchyScopeRelRelationship_PersonnelSpecification_PersonnelSpecificationDtId",
-                        column: x => x.PersonnelSpecificationDtId,
-                        principalTable: "PersonnelSpecification",
-                        principalColumn: "DtId");
                 });
 
             migrationBuilder.CreateTable(
@@ -3882,37 +2804,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PersonHasValuesOfRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PersonHasValuesOfRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PersonHasValuesOfRelationship_PersonProperty_TargetId",
-                        column: x => x.TargetId,
-                        principalTable: "PersonProperty",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PersonHasValuesOfRelationship_Person_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "Person",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PersonnelSpecificationPropertyMapsToPropertyRelationship",
                 columns: table => new
                 {
@@ -4007,32 +2898,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PhysicalAssetHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhysicalAssetDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PhysicalAssetHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PhysicalAssetHierarchyScopeRelRelationship_PhysicalAsset_PhysicalAssetDtId",
-                        column: x => x.PhysicalAssetDtId,
-                        principalTable: "PhysicalAsset",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PhysicalAssetIsMadeUpOfRelationship",
                 columns: table => new
                 {
@@ -4087,32 +2952,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         name: "FK_PhysicalAssetPhysicalLocationRelRelationship_PhysicalAsset_PhysicalAssetDtId",
                         column: x => x.PhysicalAssetDtId,
                         principalTable: "PhysicalAsset",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PhysicalAssetClassHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhysicalAssetClassDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PhysicalAssetClassHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PhysicalAssetClassHierarchyScopeRelRelationship_PhysicalAssetClass_PhysicalAssetClassDtId",
-                        column: x => x.PhysicalAssetClassDtId,
-                        principalTable: "PhysicalAssetClass",
                         principalColumn: "DtId");
                 });
 
@@ -4410,32 +3249,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         principalTable: "PhysicalAsset",
                         principalColumn: "DtId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PhysicalAssetSpecificationHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhysicalAssetSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PhysicalAssetSpecificationHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_PhysicalAssetSpecificationHierarchyScopeRelRelationship_PhysicalAssetSpecification_PhysicalAssetSpecificationDtId",
-                        column: x => x.PhysicalAssetSpecificationDtId,
-                        principalTable: "PhysicalAssetSpecification",
-                        principalColumn: "DtId");
                 });
 
             migrationBuilder.CreateTable(
@@ -4971,32 +3784,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TestSpecificationHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TestSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TestSpecificationHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_TestSpecificationHierarchyScopeRelRelationship_TestSpecification_TestSpecificationDtId",
-                        column: x => x.TestSpecificationDtId,
-                        principalTable: "TestSpecification",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TestSpecificationIsMadeUpOfRelationship",
                 columns: table => new
                 {
@@ -5433,33 +4220,21 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkDefinitionHierarchyScopeRelRelationship",
+                name: "AvailablePermissions",
                 columns: table => new
                 {
                     DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WorkDefinitionDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    MenuButtonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Available = table.Column<bool>(type: "bit", nullable: false),
+                    PersonDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkDefinitionHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_WorkDefinitionHierarchyScopeRelRelationship_WorkDefinition_WorkDefinitionDtId",
-                        column: x => x.WorkDefinitionDtId,
-                        principalTable: "WorkDefinition",
-                        principalColumn: "DtId");
+                    table.PrimaryKey("PK_AvailablePermissions", x => x.DtId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AreaWorkCenterRelationship",
+                name: "Equipment",
                 columns: table => new
                 {
                     DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -5469,80 +4244,30 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    EquipmentLevel = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SpatialDefinition_Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpatialDefinition_Format = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpatialDefinition_SRID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpatialDefinition_SRIDauthority = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Specification = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModelNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UseOrgDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    EnabledTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Supplier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FactoryNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DepreciationLife = table.Column<int>(type: "int", nullable: false),
+                    FactoryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    InitialPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    DateOfPurchase = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    WarrantyPeriod = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AreaWorkCenterRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_AreaWorkCenterRelationship_Area_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "Area",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EnterpriseSiteRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EnterpriseSiteRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_EnterpriseSiteRelationship_Enterprise_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "Enterprise",
-                        principalColumn: "DtId");
-                    table.ForeignKey(
-                        name: "FK_EnterpriseSiteRelationship_Site_TargetId",
-                        column: x => x.TargetId,
-                        principalTable: "Site",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SiteAreaRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SiteAreaRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_SiteAreaRelationship_Area_TargetId",
-                        column: x => x.TargetId,
-                        principalTable: "Area",
-                        principalColumn: "DtId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SiteAreaRelationship_Site_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "Site",
-                        principalColumn: "DtId");
+                    table.PrimaryKey("PK_Equipment", x => x.DtId);
                 });
 
             migrationBuilder.CreateTable(
@@ -5604,32 +4329,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EquipmentHasValuesOfRelationship_Equipment_EquipmentDtId",
-                        column: x => x.EquipmentDtId,
-                        principalTable: "Equipment",
-                        principalColumn: "DtId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EquipmentHierarchyScopeRelRelationship",
-                columns: table => new
-                {
-                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EquipmentDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EquipmentHierarchyScopeRelRelationship", x => x.DtId);
-                    table.ForeignKey(
-                        name: "FK_EquipmentHierarchyScopeRelRelationship_Equipment_EquipmentDtId",
                         column: x => x.EquipmentDtId,
                         principalTable: "Equipment",
                         principalColumn: "DtId");
@@ -5725,20 +4424,950 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Area_ResponsibleDtId",
-                table: "Area",
-                column: "ResponsibleDtId");
+            migrationBuilder.CreateTable(
+                name: "EquipmentClassHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EquipmentClassDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EquipmentClassHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_EquipmentClassHierarchyScopeRelRelationship_EquipmentClass_EquipmentClassDtId",
+                        column: x => x.EquipmentClassDtId,
+                        principalTable: "EquipmentClass",
+                        principalColumn: "DtId");
+                });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_AreaWorkCenterRelationship_SourceId",
-                table: "AreaWorkCenterRelationship",
-                column: "SourceId");
+            migrationBuilder.CreateTable(
+                name: "EquipmentHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EquipmentDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EquipmentHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_EquipmentHierarchyScopeRelRelationship_Equipment_EquipmentDtId",
+                        column: x => x.EquipmentDtId,
+                        principalTable: "Equipment",
+                        principalColumn: "DtId");
+                });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_AreaWorkCenterRelationship_TargetId",
-                table: "AreaWorkCenterRelationship",
-                column: "TargetId");
+            migrationBuilder.CreateTable(
+                name: "EquipmentSpecificationHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EquipmentSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EquipmentSpecificationHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_EquipmentSpecificationHierarchyScopeRelRelationship_EquipmentSpecification_EquipmentSpecificationDtId",
+                        column: x => x.EquipmentSpecificationDtId,
+                        principalTable: "EquipmentSpecification",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HierarchyScope",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    EquipmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EquipmentLevel = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Depth = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HierarchyScope", x => x.DtId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HierarchyScopeContainsRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Depth = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HierarchyScopeContainsRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_HierarchyScopeContainsRelationship_HierarchyScope_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId");
+                    table.ForeignKey(
+                        name: "FK_HierarchyScopeContainsRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MaterialClassHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaterialClassDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MaterialClassHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_MaterialClassHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MaterialClassHierarchyScopeRelRelationship_MaterialClass_MaterialClassDtId",
+                        column: x => x.MaterialClassDtId,
+                        principalTable: "MaterialClass",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MaterialDefinitionHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaterialDefinitionDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MaterialDefinitionHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_MaterialDefinitionHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MaterialDefinitionHierarchyScopeRelRelationship_MaterialDefinition_MaterialDefinitionDtId",
+                        column: x => x.MaterialDefinitionDtId,
+                        principalTable: "MaterialDefinition",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MaterialLotHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaterialLotDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MaterialLotHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_MaterialLotHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MaterialLotHierarchyScopeRelRelationship_MaterialLot_MaterialLotDtId",
+                        column: x => x.MaterialLotDtId,
+                        principalTable: "MaterialLot",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MaterialSpecificationHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaterialSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MaterialSpecificationHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_MaterialSpecificationHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MaterialSpecificationHierarchyScopeRelRelationship_MaterialSpecification_MaterialSpecificationDtId",
+                        column: x => x.MaterialSpecificationDtId,
+                        principalTable: "MaterialSpecification",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MaterialSublotHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaterialSublotDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MaterialSublotHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_MaterialSublotHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MaterialSublotHierarchyScopeRelRelationship_MaterialSublot_MaterialSublotDtId",
+                        column: x => x.MaterialSublotDtId,
+                        principalTable: "MaterialSublot",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OperationalLocationClassHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OperationalLocationClassDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OperationalLocationClassHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_OperationalLocationClassHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OperationalLocationClassHierarchyScopeRelRelationship_OperationalLocationClass_OperationalLocationClassDtId",
+                        column: x => x.OperationalLocationClassDtId,
+                        principalTable: "OperationalLocationClass",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OperationalLocationHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OperationalLocationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OperationalLocationHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_OperationalLocationHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OperationalLocationHierarchyScopeRelRelationship_OperationalLocation_OperationalLocationDtId",
+                        column: x => x.OperationalLocationDtId,
+                        principalTable: "OperationalLocation",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrgPermission",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MenuButtonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrgDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrgPermission", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_OrgPermission_HierarchyScope_OrgDtId",
+                        column: x => x.OrgDtId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ParameterSpecificationHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParameterSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ParameterSpecificationHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_ParameterSpecificationHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ParameterSpecificationHierarchyScopeRelRelationship_ParameterSpecification_ParameterSpecificationDtId",
+                        column: x => x.ParameterSpecificationDtId,
+                        principalTable: "ParameterSpecification",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Person",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OperationalLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OperationalLocationType = table.Column<int>(type: "int", nullable: true),
+                    HierarchyScopeRelDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SpatialDefinition_Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpatialDefinition_Format = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpatialDefinition_SRID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpatialDefinition_SRIDauthority = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    ContactInformation_PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactInformation_Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkStatus = table.Column<int>(type: "int", nullable: false),
+                    LockoutOnFailure = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PassWord = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FailedCount = table.Column<int>(type: "int", nullable: false),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Person", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_Person_HierarchyScope_HierarchyScopeRelDtId",
+                        column: x => x.HierarchyScopeRelDtId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonnelSpecificationHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PersonnelSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonnelSpecificationHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonnelSpecificationHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonnelSpecificationHierarchyScopeRelRelationship_PersonnelSpecification_PersonnelSpecificationDtId",
+                        column: x => x.PersonnelSpecificationDtId,
+                        principalTable: "PersonnelSpecification",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhysicalAssetClassHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhysicalAssetClassDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhysicalAssetClassHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PhysicalAssetClassHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PhysicalAssetClassHierarchyScopeRelRelationship_PhysicalAssetClass_PhysicalAssetClassDtId",
+                        column: x => x.PhysicalAssetClassDtId,
+                        principalTable: "PhysicalAssetClass",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhysicalAssetHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhysicalAssetDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhysicalAssetHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PhysicalAssetHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PhysicalAssetHierarchyScopeRelRelationship_PhysicalAsset_PhysicalAssetDtId",
+                        column: x => x.PhysicalAssetDtId,
+                        principalTable: "PhysicalAsset",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PhysicalAssetSpecificationHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhysicalAssetSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PhysicalAssetSpecificationHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PhysicalAssetSpecificationHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PhysicalAssetSpecificationHierarchyScopeRelRelationship_PhysicalAssetSpecification_PhysicalAssetSpecificationDtId",
+                        column: x => x.PhysicalAssetSpecificationDtId,
+                        principalTable: "PhysicalAssetSpecification",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TestSpecificationHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TestSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TestSpecificationHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_TestSpecificationHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TestSpecificationHierarchyScopeRelRelationship_TestSpecification_TestSpecificationDtId",
+                        column: x => x.TestSpecificationDtId,
+                        principalTable: "TestSpecification",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WorkDefinitionHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    WorkDefinitionDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkDefinitionHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_WorkDefinitionHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_WorkDefinitionHierarchyScopeRelRelationship_WorkDefinition_WorkDefinitionDtId",
+                        column: x => x.WorkDefinitionDtId,
+                        principalTable: "WorkDefinition",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonHasValuesOfRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonHasValuesOfRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonHasValuesOfRelationship_PersonProperty_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "PersonProperty",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonHasValuesOfRelationship_Person_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "Person",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonHierarchyScopeRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonHierarchyScopeRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonHierarchyScopeRelRelationship_Person_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "Person",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonnelClasses",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    HierarchyScopeRelDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Remark = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ResponsibleDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonnelClasses", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonnelClasses_HierarchyScope_HierarchyScopeRelDtId",
+                        column: x => x.HierarchyScopeRelDtId,
+                        principalTable: "HierarchyScope",
+                        principalColumn: "DtId");
+                    table.ForeignKey(
+                        name: "FK_PersonnelClasses_Person_ResponsibleDtId",
+                        column: x => x.ResponsibleDtId,
+                        principalTable: "Person",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonnelSpecificationCorrespondsToPersonRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PersonnelSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonnelSpecificationCorrespondsToPersonRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonnelSpecificationCorrespondsToPersonRelationship_Person_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "Person",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonnelSpecificationCorrespondsToPersonRelationship_PersonnelSpecification_PersonnelSpecificationDtId",
+                        column: x => x.PersonnelSpecificationDtId,
+                        principalTable: "PersonnelSpecification",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonOperationalLocationRelRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PersonDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonOperationalLocationRelRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonOperationalLocationRelRelationship_OperationalLocation_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "OperationalLocation",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonOperationalLocationRelRelationship_Person_PersonDtId",
+                        column: x => x.PersonDtId,
+                        principalTable: "Person",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonDefinedByRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonDefinedByRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonDefinedByRelationship_Person_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "Person",
+                        principalColumn: "DtId");
+                    table.ForeignKey(
+                        name: "FK_PersonDefinedByRelationship_PersonnelClasses_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "PersonnelClasses",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonnelClassHasPropertiesOfRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonnelClassHasPropertiesOfRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonnelClassHasPropertiesOfRelationship_PersonnelClassProperty_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "PersonnelClassProperty",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonnelClassHasPropertiesOfRelationship_PersonnelClasses_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "PersonnelClasses",
+                        principalColumn: "DtId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonnelClassIncludesPropertiesOfRelationships",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonnelClassIncludesPropertiesOfRelationships", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonnelClassIncludesPropertiesOfRelationships_PersonnelClasses_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "PersonnelClasses",
+                        principalColumn: "DtId");
+                    table.ForeignKey(
+                        name: "FK_PersonnelClassIncludesPropertiesOfRelationships_PersonnelClasses_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "PersonnelClasses",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonnelClassPermission",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MenuButtonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PersonnelClassDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonnelClassPermission", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonnelClassPermission_PersonnelClasses_PersonnelClassDtId",
+                        column: x => x.PersonnelClassDtId,
+                        principalTable: "PersonnelClasses",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PersonnelSpecificationCorrespondsToPersonnelClassRelationship",
+                columns: table => new
+                {
+                    DtId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SourceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PersonnelSpecificationDtId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonnelSpecificationCorrespondsToPersonnelClassRelationship", x => x.DtId);
+                    table.ForeignKey(
+                        name: "FK_PersonnelSpecificationCorrespondsToPersonnelClassRelationship_PersonnelClasses_TargetId",
+                        column: x => x.TargetId,
+                        principalTable: "PersonnelClasses",
+                        principalColumn: "DtId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PersonnelSpecificationCorrespondsToPersonnelClassRelationship_PersonnelSpecification_PersonnelSpecificationDtId",
+                        column: x => x.PersonnelSpecificationDtId,
+                        principalTable: "PersonnelSpecification",
+                        principalColumn: "DtId");
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AvailablePermissions_PersonDtId",
@@ -5749,21 +5378,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 name: "IX_Buttons_MenuDtId",
                 table: "Buttons",
                 column: "MenuDtId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Enterprise_ResponsibleDtId",
-                table: "Enterprise",
-                column: "ResponsibleDtId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EnterpriseSiteRelationship_SourceId",
-                table: "EnterpriseSiteRelationship",
-                column: "SourceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EnterpriseSiteRelationship_TargetId",
-                table: "EnterpriseSiteRelationship",
-                column: "TargetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Equipment_ResponsibleDtId",
@@ -6491,6 +6105,11 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 column: "TargetId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrgPermission_OrgDtId",
+                table: "OrgPermission",
+                column: "OrgDtId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ParameterSpecificationContainsRelationship_TargetId",
                 table: "ParameterSpecificationContainsRelationship",
                 column: "TargetId");
@@ -6506,18 +6125,18 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 column: "TargetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permissions_PersonnelClassDtId",
-                table: "Permissions",
-                column: "PersonnelClassDtId");
+                name: "IX_Person_HierarchyScopeRelDtId",
+                table: "Person",
+                column: "HierarchyScopeRelDtId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonDefinedByRelationships_SourceId",
-                table: "PersonDefinedByRelationships",
+                name: "IX_PersonDefinedByRelationship_SourceId",
+                table: "PersonDefinedByRelationship",
                 column: "SourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonDefinedByRelationships_TargetId",
-                table: "PersonDefinedByRelationships",
+                name: "IX_PersonDefinedByRelationship_TargetId",
+                table: "PersonDefinedByRelationship",
                 column: "TargetId");
 
             migrationBuilder.CreateIndex(
@@ -6531,14 +6150,24 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 column: "TargetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonHierarchyScopeRelRelationship_PersonDtId",
+                name: "IX_PersonHierarchyScopeRelRelationship_SourceId",
                 table: "PersonHierarchyScopeRelRelationship",
-                column: "PersonDtId");
+                column: "SourceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonHierarchyScopeRelRelationship_TargetId",
                 table: "PersonHierarchyScopeRelRelationship",
                 column: "TargetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonnelClasses_HierarchyScopeRelDtId",
+                table: "PersonnelClasses",
+                column: "HierarchyScopeRelDtId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonnelClasses_ResponsibleDtId",
+                table: "PersonnelClasses",
+                column: "ResponsibleDtId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonnelClassHasPropertiesOfRelationship_SourceId",
@@ -6551,16 +6180,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 column: "TargetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersonnelClassHierarchyScopeRelRelationship_SourceId",
-                table: "PersonnelClassHierarchyScopeRelRelationship",
-                column: "SourceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PersonnelClassHierarchyScopeRelRelationship_TargetId",
-                table: "PersonnelClassHierarchyScopeRelRelationship",
-                column: "TargetId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PersonnelClassIncludesPropertiesOfRelationships_SourceId",
                 table: "PersonnelClassIncludesPropertiesOfRelationships",
                 column: "SourceId");
@@ -6569,6 +6188,11 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 name: "IX_PersonnelClassIncludesPropertiesOfRelationships_TargetId",
                 table: "PersonnelClassIncludesPropertiesOfRelationships",
                 column: "TargetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonnelClassPermission_PersonnelClassDtId",
+                table: "PersonnelClassPermission",
+                column: "PersonnelClassDtId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonnelClassPropertyContainsRelationship_SourceId",
@@ -6886,46 +6510,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 column: "TargetId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProcessCell_ResponsibleDtId",
-                table: "ProcessCell",
-                column: "ResponsibleDtId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductionLine_ResponsibleDtId",
-                table: "ProductionLine",
-                column: "ResponsibleDtId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductionUnit_ResponsibleDtId",
-                table: "ProductionUnit",
-                column: "ResponsibleDtId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Site_ResponsibleDtId",
-                table: "Site",
-                column: "ResponsibleDtId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SiteAreaRelationship_SourceId",
-                table: "SiteAreaRelationship",
-                column: "SourceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SiteAreaRelationship_TargetId",
-                table: "SiteAreaRelationship",
-                column: "TargetId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StorageUnit_ResponsibleDtId",
-                table: "StorageUnit",
-                column: "ResponsibleDtId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StorageZone_ResponsibleDtId",
-                table: "StorageZone",
-                column: "ResponsibleDtId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TestableObjectHasTestableObjectPropertyValuesOfRelationship_TargetId",
                 table: "TestableObjectHasTestableObjectPropertyValuesOfRelationship",
                 column: "TargetId");
@@ -7026,31 +6610,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 column: "TestSpecificationDtId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Unit_ResponsibleDtId",
-                table: "Unit",
-                column: "ResponsibleDtId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkCell_ResponsibleDtId",
-                table: "WorkCell",
-                column: "ResponsibleDtId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkCenter_ResponsibleDtId",
-                table: "WorkCenter",
-                column: "ResponsibleDtId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkCenterWorkUnitRelationship_SourceId",
-                table: "WorkCenterWorkUnitRelationship",
-                column: "SourceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkCenterWorkUnitRelationship_TargetId",
-                table: "WorkCenterWorkUnitRelationship",
-                column: "TargetId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_WorkDefinitionContainsEquipmentRelationship_TargetId",
                 table: "WorkDefinitionContainsEquipmentRelationship",
                 column: "TargetId");
@@ -7110,26 +6669,72 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 table: "WorkDefinitionHierarchyScopeRelRelationship",
                 column: "WorkDefinitionDtId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkUnit_ResponsibleDtId",
-                table: "WorkUnit",
-                column: "ResponsibleDtId");
+            migrationBuilder.AddForeignKey(
+                name: "FK_AvailablePermissions_Person_PersonDtId",
+                table: "AvailablePermissions",
+                column: "PersonDtId",
+                principalTable: "Person",
+                principalColumn: "DtId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Equipment_Person_ResponsibleDtId",
+                table: "Equipment",
+                column: "ResponsibleDtId",
+                principalTable: "Person",
+                principalColumn: "DtId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Equipment_PersonnelClasses_UseOrgDtId",
+                table: "Equipment",
+                column: "UseOrgDtId",
+                principalTable: "PersonnelClasses",
+                principalColumn: "DtId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_EquipmentClassHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                table: "EquipmentClassHierarchyScopeRelRelationship",
+                column: "TargetId",
+                principalTable: "HierarchyScope",
+                principalColumn: "DtId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_EquipmentHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                table: "EquipmentHierarchyScopeRelRelationship",
+                column: "TargetId",
+                principalTable: "HierarchyScope",
+                principalColumn: "DtId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_EquipmentSpecificationHierarchyScopeRelRelationship_HierarchyScope_TargetId",
+                table: "EquipmentSpecificationHierarchyScopeRelRelationship",
+                column: "TargetId",
+                principalTable: "HierarchyScope",
+                principalColumn: "DtId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_HierarchyScope_Person_ResponsibleDtId",
+                table: "HierarchyScope",
+                column: "ResponsibleDtId",
+                principalTable: "Person",
+                principalColumn: "DtId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AreaWorkCenterRelationship");
+            migrationBuilder.DropForeignKey(
+                name: "FK_HierarchyScope_Person_ResponsibleDtId",
+                table: "HierarchyScope");
 
             migrationBuilder.DropTable(
                 name: "AvailablePermissions");
 
             migrationBuilder.DropTable(
                 name: "Buttons");
-
-            migrationBuilder.DropTable(
-                name: "EnterpriseSiteRelationship");
 
             migrationBuilder.DropTable(
                 name: "EquipmentClassHasPropertiesOfRelationship");
@@ -7205,9 +6810,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "EvaluatedPropertyReferencesRelationship");
-
-            migrationBuilder.DropTable(
-                name: "HierarchyScope");
 
             migrationBuilder.DropTable(
                 name: "HierarchyScopeContainsRelationship");
@@ -7381,16 +6983,16 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 name: "OperationsTestRequirementSpecifiesRelationship");
 
             migrationBuilder.DropTable(
+                name: "OrgPermission");
+
+            migrationBuilder.DropTable(
                 name: "ParameterSpecificationContainsRelationship");
 
             migrationBuilder.DropTable(
                 name: "ParameterSpecificationHierarchyScopeRelRelationship");
 
             migrationBuilder.DropTable(
-                name: "Permissions");
-
-            migrationBuilder.DropTable(
-                name: "PersonDefinedByRelationships");
+                name: "PersonDefinedByRelationship");
 
             migrationBuilder.DropTable(
                 name: "PersonHasValuesOfRelationship");
@@ -7402,10 +7004,10 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 name: "PersonnelClassHasPropertiesOfRelationship");
 
             migrationBuilder.DropTable(
-                name: "PersonnelClassHierarchyScopeRelRelationship");
+                name: "PersonnelClassIncludesPropertiesOfRelationships");
 
             migrationBuilder.DropTable(
-                name: "PersonnelClassIncludesPropertiesOfRelationships");
+                name: "PersonnelClassPermission");
 
             migrationBuilder.DropTable(
                 name: "PersonnelClassPropertyContainsRelationship");
@@ -7516,24 +7118,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 name: "PhysicalAssetSpecificationSpecifiesRelationship");
 
             migrationBuilder.DropTable(
-                name: "ProcessCell");
-
-            migrationBuilder.DropTable(
-                name: "ProductionLine");
-
-            migrationBuilder.DropTable(
-                name: "ProductionUnit");
-
-            migrationBuilder.DropTable(
-                name: "SiteAreaRelationship");
-
-            migrationBuilder.DropTable(
-                name: "StorageUnit");
-
-            migrationBuilder.DropTable(
-                name: "StorageZone");
-
-            migrationBuilder.DropTable(
                 name: "TestableObjectHasTestableObjectPropertyValuesOfRelationship");
 
             migrationBuilder.DropTable(
@@ -7567,18 +7151,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 name: "TestSpecificationSpecifiesTestForOperationsRelationship");
 
             migrationBuilder.DropTable(
-                name: "Unit");
-
-            migrationBuilder.DropTable(
-                name: "WorkCell");
-
-            migrationBuilder.DropTable(
-                name: "WorkCenter");
-
-            migrationBuilder.DropTable(
-                name: "WorkCenterWorkUnitRelationship");
-
-            migrationBuilder.DropTable(
                 name: "WorkDefinitionContainsEquipmentRelationship");
 
             migrationBuilder.DropTable(
@@ -7597,13 +7169,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 name: "WorkDefinitionHierarchyScopeRelRelationship");
 
             migrationBuilder.DropTable(
-                name: "WorkUnit");
-
-            migrationBuilder.DropTable(
                 name: "Menus");
-
-            migrationBuilder.DropTable(
-                name: "Enterprise");
 
             migrationBuilder.DropTable(
                 name: "EquipmentClass");
@@ -7684,12 +7250,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 name: "PhysicalAssetSpecificationProperty");
 
             migrationBuilder.DropTable(
-                name: "Area");
-
-            migrationBuilder.DropTable(
-                name: "Site");
-
-            migrationBuilder.DropTable(
                 name: "TestableObjectProperty");
 
             migrationBuilder.DropTable(
@@ -7733,6 +7293,9 @@ namespace MOM.Infrastructure.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Person");
+
+            migrationBuilder.DropTable(
+                name: "HierarchyScope");
         }
     }
 }

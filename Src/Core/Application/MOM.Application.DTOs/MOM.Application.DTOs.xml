@@ -155,6 +155,11 @@
             负责人姓名
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Responses.OrgResponse.FullPath">
+            <summary>
+            路径
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Menu.Requests.ButtonRequest.Id">
             <summary>
             编号

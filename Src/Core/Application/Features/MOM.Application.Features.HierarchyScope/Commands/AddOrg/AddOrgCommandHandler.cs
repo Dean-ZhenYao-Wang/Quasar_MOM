@@ -10,12 +10,22 @@ namespace MOM.Application.Features.HierarchyScope.Commands.AddOrg
     {
         public async Task<BaseResult> Handle(AddOrgCommand request, CancellationToken cancellationToken)
         {
-            var model = request.ToHierarchyScope();
-            await hierarchyScopeRepository.AddAsync(model);
+            using var transaction = await unitOfWork.BeginTransactionAsync();
+            try
+            {
+                var model = request.ToHierarchyScope();
+                await hierarchyScopeRepository.AddAsync(model);
+                await hierarchyScopeRepository.SaveChangesAsync();
 
-            await hierarchyScopeContainsRelationshipRepository.AddAsync(new HierarchyScopeContainsRelationship(request.SourceDtId, model.DtId));
+                await hierarchyScopeContainsRelationshipRepository.AddAsync(request.SourceDtId, model);
 
-            await unitOfWork.SaveChangesAsync();
+                await unitOfWork.CommitAsync();
+            }
+            catch (Exception)
+            {
+                await unitOfWork.RollbackAsync();
+                throw;
+            }
             return BaseResult.Ok();
         }
     }

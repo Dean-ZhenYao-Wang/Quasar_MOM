@@ -11,8 +11,8 @@ namespace MOM.Application.Interfaces
 
         Task<IDbContextTransaction> BeginTransactionAsync();
 
-        Task CommitAsync(IDbContextTransaction transaction);
+        Task CommitAsync();
 
-        Task RollbackAsync(IDbContextTransaction transaction);
+        Task RollbackAsync();
     }
 }
