@@ -24,8 +24,8 @@ namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
                     DtId = x.Target.DtId,
                     Id = x.Target.Id,
                     Remark = x.Target.Remark,
-                    ResponsibleDtId = x.Target.ResponsibleDtId.Value,
-                    ResponsibleName = x.Target.Responsible.Name,
+                    ResponsibleDtId = x.Target.ResponsibleDtId,
+                    ResponsibleName = x.Target.ResponsibleDtId==null?null:x.Target.Responsible.Name,
                     SourceDtId = x.SourceId,
                     SourceName = x.Source == null ? string.Empty : x.Source.Id,
                     Permissions = x.Target.Permissions.Select(p => p.MenuButtonId)

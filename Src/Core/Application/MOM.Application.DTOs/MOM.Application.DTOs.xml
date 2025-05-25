@@ -145,6 +145,16 @@
             所属组织名称
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Responses.OrgResponse.Children">
+            <summary>
+            下辖组织清单
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.HierarchyScope.Responses.OrgResponse.ResponsibleName">
+            <summary>
+            负责人姓名
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Menu.Requests.ButtonRequest.Id">
             <summary>
             编号
@@ -193,6 +203,11 @@
         <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.AddTeamRequest.SourceDtId">
             <summary>
             所属班组唯一标识
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.AddTeamRequest.OrgDtId">
+            <summary>
+            所属组织唯一标识
             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.PersonnelClassRequest.Id">

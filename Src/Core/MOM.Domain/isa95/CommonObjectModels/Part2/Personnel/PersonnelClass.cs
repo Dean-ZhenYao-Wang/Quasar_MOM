@@ -6,6 +6,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
 
     public partial class PersonnelClass : ResourceClass, IEquatable<PersonnelClass>
@@ -15,17 +16,17 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         }
 
         [JsonPropertyName("hierarchyScope")]
-        public string? HierarchyScope { get; set; }
+        public string? HierarchyScope { get { return HierarchyScopeRel?.Name; } }
 
         [JsonIgnore]
         public virtual PersonnelClassIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new PersonnelClassIncludesPropertiesOfRelationshipCollection();
 
         [JsonIgnore]
         public virtual PersonnelClassHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new PersonnelClassHasPropertiesOfRelationshipCollection();
-
-        [MaxLength(1)]
+        [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
-        public virtual PersonnelClassHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new PersonnelClassHierarchyScopeRelRelationshipCollection();
+        public virtual HierarchyScope HierarchyScopeRel { get; set; }
+        public Guid? HierarchyScopeRelDtId { get; set; }
 
         public override bool Equals(object? obj)
         {

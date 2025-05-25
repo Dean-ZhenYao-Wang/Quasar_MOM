@@ -88,7 +88,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.TeamAddTarget(teamOfGroupDtId);
             if (OrgDtId != null)
             {
-                this.HierarchyScopeRelAddOrUpdateTarget(this.HierarchyScopeRel.FirstOrDefault()?.TargetId, OrgDtId.Value);
+                this.HierarchyScopeRelAddOrUpdateTarget(this.HierarchyScopeRel, OrgDtId.Value);
             }
             if (positionDtId_List != null)
             {
@@ -98,14 +98,17 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             var haveDtIds = this.HasValuesOf.Select(m => m.TargetId).ToList();
             人员特征列表在修改时的增删改处理(properties, haveDtIds);
         }
-        public void HierarchyScopeRelAddOrUpdateTarget(Guid? oldOrgDtId, Guid newOrgDtID)
+        /// <summary>
+        /// 仅绑定ID，并未绑定对象
+        /// </summary>
+        /// <param name="old"></param>
+        /// <param name="newOrgDtID"></param>
+        public void HierarchyScopeRelAddOrUpdateTarget(HierarchyScope old, Guid newOrgDtID)
         {
-            if (oldOrgDtId == null)
+            if (old == null)
                 this.HierarchyScopeRelAddTarget(newOrgDtID);
             else
             {
-                var old = this.HierarchyScopeRel.Where(h => h.TargetId == oldOrgDtId.Value)
-                    .FirstOrDefault();
                 if (old != null)
                     old.IsDelete = true;
                 this.HierarchyScopeRelAddTarget(newOrgDtID);
@@ -113,7 +116,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         }
         private void HierarchyScopeRelAddTarget(Guid orgDtId)
         {
-            this.HierarchyScopeRel.Add(new Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship(this.DtId, orgDtId));
+            this.HierarchyScopeRelDtId = orgDtId;
         }
 
         private void 人员特征列表在修改时的增删改处理(IEnumerable<PersonProperty> properties, List<Guid> haveDtIds)

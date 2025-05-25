@@ -2,7 +2,7 @@
 {
     public class ResponseObject
     {
-        public Guid DtId { get; set; }
-        public string Label { get; set; }
+        public Guid? DtId { get; set; }
+        public string? Label { get; set; }
     }
 }

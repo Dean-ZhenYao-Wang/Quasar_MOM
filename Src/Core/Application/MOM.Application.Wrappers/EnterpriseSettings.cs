@@ -9,5 +9,9 @@
 
         public string Description { get; set; }
         public string Address { get; set; }
+        /// <summary>
+        /// 本网站外网根目录
+        /// </summary>
+        public string Host { get; set; }
     }
 }

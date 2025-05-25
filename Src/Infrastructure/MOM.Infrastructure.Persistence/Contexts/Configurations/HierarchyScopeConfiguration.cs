@@ -13,6 +13,14 @@ namespace MOM.Infrastructure.Persistence.Contexts.Configurations
                 .WithOne(st => st.Source)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(hs => hs.SourceId);
+            builder.HasMany(hs => hs.Peoples)
+                .WithOne(p => p.HierarchyScopeRel)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(p => p.HierarchyScopeRelDtId);
+            builder.HasMany(hs => hs.Teams)
+                .WithOne(p => p.HierarchyScopeRel)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(p => p.HierarchyScopeRelDtId);
         }
     }
 }

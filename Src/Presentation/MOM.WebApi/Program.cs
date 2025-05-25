@@ -23,6 +23,7 @@ using MOM.Infrastructure.Resources;
 using Serilog;
 using System;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 
@@ -193,5 +194,12 @@ app.UseHealthChecks("/health");
 app.MapControllers();
 app.UseOrchardCore();
 app.UseSerilogRequestLogging();
+
+
+var client = new HttpClient();
+client.Timeout = TimeSpan.FromSeconds(60);
+#pragma warning disable CS4014 // 由于此调用不会等待，因此在调用完成前将继续执行当前方法
+client.GetAsync(enterpriseSettings.Host + "/api/v1/Doc/GetErrorCodes");
+#pragma warning restore CS4014 // 由于此调用不会等待，因此在调用完成前将继续执行当前方法
 
 app.Run();

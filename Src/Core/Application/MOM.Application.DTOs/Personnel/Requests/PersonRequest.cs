@@ -49,7 +49,7 @@ namespace MOM.Application.DTOs.Personnel.Requests
         /// <summary>
         /// 职位/角色
         /// </summary>
-        public required IEnumerable<Guid> PositionDtId_List { get; set; } = new List<Guid>();
+        public required IEnumerable<Guid>? PositionDtId_List { get; set; }
 
         public virtual Person ToPerson()
         {

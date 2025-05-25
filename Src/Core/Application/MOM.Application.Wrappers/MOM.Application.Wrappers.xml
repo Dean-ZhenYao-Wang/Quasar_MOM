@@ -24,6 +24,11 @@
             公司名称
             </summary>
         </member>
+        <member name="P:MOM.Application.Wrappers.EnterpriseSettings.Host">
+            <summary>
+            本网站外网根目录
+            </summary>
+        </member>
         <member name="P:MOM.Application.Wrappers.Error.ErrorCode">
             <summary>
             错误编号

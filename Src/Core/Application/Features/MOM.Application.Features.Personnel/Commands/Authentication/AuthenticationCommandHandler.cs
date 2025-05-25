@@ -23,7 +23,6 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
                 .ThenInclude(d => d.Target)
                 .ThenInclude(t => t.Permissions)
                 .Include(m => m.HierarchyScopeRel)
-                .ThenInclude(h => h.Target)
                 .ThenInclude(t => t.Permissions)
                 .Include(m => m.AvailablePermissions)
                 .Where(m => m.Id.Equals(request.UserName) || m.ContactInformation.Email.Equals(request.UserName) || m.ContactInformation.PhoneNumber.Equals(request.UserName))
@@ -68,8 +67,8 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
         private async Task<AuthenticationResponse> GetAuthenticationResponse(Person user)
         {
             var personnelClassPermissionList = user.DefinedBy.Select(d => d.Target.Permissions.Select(t => t.MenuButtonId)).SelectMany(t => t).ToList();
-            personnelClassPermissionList.AddRange(user.HierarchyScopeRel.Select(m => m.Target.Permissions.Select(t => t.MenuButtonId)).SelectMany(t => t).ToList());
-            personnelClassPermissionList.AddRange(user.AvailablePermissions.Where(m => m.Available).Select(m => m.MenuButtonId).ToList());
+            //personnelClassPermissionList.AddRange(user.HierarchyScopeRel.Permissions.Select(t => t.MenuButtonId).ToList());
+            //personnelClassPermissionList.AddRange(user.AvailablePermissions.Where(m => m.Available).Select(m => m.MenuButtonId).ToList());
 
             List<string> rolesList = personnelClassPermissionList.Except(user.AvailablePermissions.Where(m => m.Available = false).Select(m => m.MenuButtonId)).Distinct().ToList();
 

@@ -12,8 +12,14 @@ namespace MOM.Application.DTOs.HierarchyScope.Responses
         /// <summary>
         /// 所属组织名称
         /// </summary>
-        public string SourceName { get; set; }
-
+        public string? SourceName { get; set; }
+        /// <summary>
+        /// 下辖组织清单
+        /// </summary>
         public List<OrgResponse> Children { get; set; } = new List<OrgResponse>();
+        /// <summary>
+        /// 负责人姓名
+        /// </summary>
+        public string? ResponsibleName { get; set; }
     }
 }

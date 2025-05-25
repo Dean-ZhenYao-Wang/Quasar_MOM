@@ -29,7 +29,8 @@ namespace MOM.Application.DTOs.HierarchyScope
             return OrgResponse;
         }
 
-        public static OrgResponse ToOrgItemResponse(this Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope, Guid? sourceDtId = null, string sourceName = "")
+        public static OrgResponse ToOrgItemResponse(this Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope, 
+            Guid? sourceDtId = null, string? responsibleName = null, string? sourceName = null)
         {
             OrgResponse OrgResponse = new()
             {
@@ -37,6 +38,7 @@ namespace MOM.Application.DTOs.HierarchyScope
                 Id = hierarchyScope.Id,
                 Name = hierarchyScope.Name,
                 ResponsibleDtId = hierarchyScope.ResponsibleDtId,
+                ResponsibleName = responsibleName,
                 EquipmentLevel = hierarchyScope.EquipmentLevel,
                 Active = hierarchyScope.Active,
                 Description = hierarchyScope.Description,

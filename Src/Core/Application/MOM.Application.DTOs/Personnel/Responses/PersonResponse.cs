@@ -74,7 +74,7 @@ namespace MOM.Application.DTOs.Personnel.Responses
         /// </summary>
         public IEnumerable<Guid> PositionDtId_List
         {
-            get { return PositionList.Count() > 0 ? PositionList.Select(m => m.DtId) : new List<Guid>(); }
+            get { return PositionList.Count() > 0 ? PositionList.Where(m => m.DtId != null).Select(m => m.DtId.Value) : new List<Guid>(); }
         }
         /// <summary>
         /// 组织

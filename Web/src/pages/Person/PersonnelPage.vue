@@ -21,7 +21,7 @@
             <q-badge color="purple" label="休假" />
           </div>
         </template>
-        <template v-if="row.workStatus == 'Dimission'">
+        <template v-else-if="row.workStatus == 'Dimission'">
           <div>
             <q-badge color="purple" label="离职" />
           </div>
@@ -236,7 +236,6 @@ const table_Config = {
         clearable: true,
         multiple: true,
       },
-      rules: [(val) => !!val || '必填字段'],
     },
     orgDtId: {
       type: 'OrgSelect',
@@ -245,7 +244,6 @@ const table_Config = {
         outlined: true,
         clearable: true,
       },
-      rules: [(val) => !!val || '必填字段'],
     },
   },
   tableConfig: {

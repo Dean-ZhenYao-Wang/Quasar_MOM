@@ -49,11 +49,12 @@ namespace MOM.Infrastructure.Persistence.Repositories
             var query = this.DbSet
                     .AsNoTracking()
                     .Include(m => m.Source)
+                    .ThenInclude(s => s.Responsible)
                     .Include(m => m.Target)
                     .Where(m => sourceDtId != null ? m.SourceId == sourceDtId : true)
                     .Where(m => !string.IsNullOrWhiteSpace(id) ? m.Target.Id.Contains(id) : true)
                     .Where(m => !string.IsNullOrWhiteSpace(name) ? m.Target.Name.Contains(name) : true)
-                    .Select(m => m.Target.ToOrgItemResponse(m.SourceId, m.SourceId != null ? m.Source.Name : string.Empty));
+                    .Select(m => m.Target.ToOrgItemResponse(m.SourceId, m.SourceId == null?null:m.Source.ResponsibleName, m.SourceId != null ? m.Source.Name : string.Empty));
 
             return await PagedAsync(query, page, pageSize);
         }

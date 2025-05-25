@@ -5,12 +5,12 @@
         /// <summary>
         /// 负责人唯一标识
         /// </summary>
-        public Guid ResponsibleDtId { get; set; }
+        public Guid? ResponsibleDtId { get; set; }
 
         /// <summary>
         /// 负责人姓名
         /// </summary>
-        public string ResponsibleName { get; set; }
+        public string? ResponsibleName { get; set; }
 
         /// <summary>
         /// 所属班组唯一标识

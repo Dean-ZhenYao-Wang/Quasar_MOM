@@ -88,7 +88,14 @@ const table_Config = {
       props: {
         clearable: true,
       },
-      rules: [(val) => !!val || '必填字段'],
+      // rules: [(val) => !!val || '必填字段'],
+    },
+    orgDtId: {
+      type: 'OrgSelect',
+      label: '所属组织',
+      props: {
+        clearable: true,
+      },
     },
     sourceDtId: {
       type: 'TeamSelect',
@@ -109,6 +116,7 @@ const table_Config = {
       { name: 'id', label: '名称', field: 'id' },
       { name: 'remark', label: '备注', field: 'remark' },
       { name: 'responsibleName', label: '负责人', field: 'responsibleName' },
+      { name: 'orgName', lable: '所属组织', field: 'orgName' },
       { name: 'sourceName', label: '所属班组', field: 'sourceName' },
     ],
   },

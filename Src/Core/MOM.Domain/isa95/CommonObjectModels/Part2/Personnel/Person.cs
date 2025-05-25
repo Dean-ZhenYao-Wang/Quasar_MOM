@@ -7,6 +7,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
 
     public partial class Person : Resource, IEquatable<Person>
@@ -20,7 +21,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </summary>
         [JsonPropertyName("hierarchyScope")]
         public string? HierarchyScope
-        { get { return HierarchyScopeRel.FirstOrDefault()?.Name; } }
+        { get { return HierarchyScopeRel?.Name; } }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
@@ -50,8 +51,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// 确定交换的信息在基于角色的设备层次结构中的位置。可选地，层次结构作用域定义人员定义的作用域。
         /// </summary>
         //[MaxLength(1)]
+        [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
-        public virtual PersonHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new PersonHierarchyScopeRelRelationshipCollection();
+        public virtual HierarchyScope HierarchyScopeRel { get; set; }
+        /// <summary>
+        /// 确定交换的信息在基于角色的设备层次结构中的位置。可选地，层次结构作用域定义人员定义的作用域。
+        /// </summary>
+        public Guid? HierarchyScopeRelDtId { get; set; }
 
         //[MaxLength(1)]
         [JsonIgnore]

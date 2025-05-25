@@ -30,8 +30,8 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             this.Description = description;
             if (hierarchyScope != null)
             {
-                this.HierarchyScope = hierarchyScope.Id;
-                this.HierarchyScopeRel.Add(new Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship(this, hierarchyScope));
+                this.HierarchyScopeRelDtId = hierarchyScope.DtId;
+                this.HierarchyScopeRel = hierarchyScope;
             }
         }
 
@@ -47,7 +47,8 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             {
                 item.Target.Delete();
             }
-            this.HierarchyScopeRel.Clear();
+            this.HierarchyScopeRelDtId = null;
+            this.HierarchyScopeRel = null;
             this.IncludesPropertiesOf.Clear();
             this.HasPropertiesOf.Clear();
             this.IsDelete = true;

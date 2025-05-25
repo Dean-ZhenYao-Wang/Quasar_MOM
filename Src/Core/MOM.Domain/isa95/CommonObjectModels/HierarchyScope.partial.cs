@@ -25,7 +25,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// </summary>
         [JsonIgnore]
         [ForeignKey(nameof(ResponsibleDtId))]
-        public virtual Person Responsible { get; set; }
+        public virtual Person? Responsible { get; set; }
 
         public string? ResponsibleName
         {
@@ -49,6 +49,14 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 权限清单
         /// </summary>
         public virtual ICollection<OrgPermission> Permissions { get; set; } = new List<OrgPermission>();
+        /// <summary>
+        /// 班组清单
+        /// </summary>
+        public virtual ICollection<PersonnelClass> Teams { get; set; } = new List<PersonnelClass>();
+        /// <summary>
+        /// 人员清单
+        /// </summary>
+        public virtual ICollection<Person> Peoples { get; set; } = new List<Person>();
 
         public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string Id, string name, string? address = null, bool active = false, string? description = null) : this()
         {
