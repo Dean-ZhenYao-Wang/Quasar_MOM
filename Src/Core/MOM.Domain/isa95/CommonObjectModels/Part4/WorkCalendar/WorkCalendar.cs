@@ -21,16 +21,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar
 
         [MaxLength(1)]
         [JsonIgnore]
-        public virtual WorkCalendarDefinedByRelationshipCollection DefinedBy { get; set; } = new WorkCalendarDefinedByRelationshipCollection();
+public virtual List<WorkCalendarDefinedByRelationship> DefinedBy { get; set; } = new List<WorkCalendarDefinedByRelationship>();
 
         [JsonIgnore]
-        public virtual WorkCalendarContainsRelationshipCollection Contains { get; set; } = new WorkCalendarContainsRelationshipCollection();
+public virtual List<WorkCalendarContainsRelationship> Contains { get; set; } = new List<WorkCalendarContainsRelationship>();
 
         [JsonIgnore]
-        public virtual WorkCalendarHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new WorkCalendarHasValuesOfRelationshipCollection();
+public virtual List<WorkCalendarHasValuesOfRelationship> HasValuesOf { get; set; } = new List<WorkCalendarHasValuesOfRelationship>();
 
         [JsonIgnore]
-        public virtual WorkCalendarHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkCalendarHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkCalendarHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkCalendarHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

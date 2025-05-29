@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialRequirement
 {
-    public class MaterialRequirementCorrespondsToSublotRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot>, IEquatable<MaterialRequirementCorrespondsToSublotRelationship>
+    public class MaterialRequirementCorrespondsToSublotRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.MaterialRequirement ,Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot>, IEquatable<MaterialRequirementCorrespondsToSublotRelationship>
     {
         public MaterialRequirementCorrespondsToSublotRelationship()
         {

@@ -4,24 +4,11 @@ using System.Text.Json.Serialization;
 
 namespace MOM.Domain.Common.Relationship.isa95.Person
 {
-    public class PersonHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PersonHierarchyScopeRelRelationship>
+    public class PersonHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.Person ,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PersonHierarchyScopeRelRelationship>
     {
-        [JsonIgnore]
-        [ForeignKey(nameof(SourceId))]
-        public virtual Domain.isa95.CommonObjectModels.Part2.Personnel.Person Source { get; set; }
-        public PersonHierarchyScopeRelRelationship()
+        public PersonHierarchyScopeRelRelationship():base()
         {
             Name = "hierarchyScopeRel";
-        }
-
-        public PersonHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.Person source, Domain.isa95.CommonObjectModels.HierarchyScope target) : this()
-        {
-            InitializeFromTwins(source, target);
-        }
-
-        public PersonHierarchyScopeRelRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
         }
 
         public override bool Equals(object? obj)

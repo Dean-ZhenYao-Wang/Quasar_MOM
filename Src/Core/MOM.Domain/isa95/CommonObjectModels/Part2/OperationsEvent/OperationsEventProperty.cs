@@ -26,10 +26,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsEvent
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsEventPropertyMapsToRelationshipCollection MapsTo { get; set; } = new OperationsEventPropertyMapsToRelationshipCollection();
+public virtual List<OperationsEventPropertyMapsToRelationship> MapsTo { get; set; } = new List<OperationsEventPropertyMapsToRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventPropertyContainsRelationshipCollection Contains { get; set; } = new OperationsEventPropertyContainsRelationshipCollection();
+public virtual List<OperationsEventPropertyContainsRelationship> Contains { get; set; } = new List<OperationsEventPropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

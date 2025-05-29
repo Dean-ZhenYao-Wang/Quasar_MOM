@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentRequirement
 {
-    public class EquipmentRequirementIsMadeUpOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.EquipmentRequirement>, IEquatable<EquipmentRequirementIsMadeUpOfRelationship>
+    public class EquipmentRequirementIsMadeUpOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.EquipmentRequirement,Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.EquipmentRequirement>, IEquatable<EquipmentRequirementIsMadeUpOfRelationship>
     {
         public EquipmentRequirementIsMadeUpOfRelationship()
         {

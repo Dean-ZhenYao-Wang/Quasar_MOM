@@ -28,16 +28,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsPerformance
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual MaterialActualPropertyContainsRelationshipCollection Contains { get; set; } = new MaterialActualPropertyContainsRelationshipCollection();
+public virtual List<MaterialActualPropertyContainsRelationship> Contains { get; set; } = new List<MaterialActualPropertyContainsRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialActualPropertyMapsToClassPropertyRelationshipCollection MapsToClassProperty { get; set; } = new MaterialActualPropertyMapsToClassPropertyRelationshipCollection();
+public virtual List<MaterialActualPropertyMapsToClassPropertyRelationship> MapsToClassProperty { get; set; } = new List<MaterialActualPropertyMapsToClassPropertyRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialActualPropertyMapsToDefinitionPropertyRelationshipCollection MapsToDefinitionProperty { get; set; } = new MaterialActualPropertyMapsToDefinitionPropertyRelationshipCollection();
+public virtual List<MaterialActualPropertyMapsToDefinitionPropertyRelationship> MapsToDefinitionProperty { get; set; } = new List<MaterialActualPropertyMapsToDefinitionPropertyRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialActualPropertyMapsToLotPropertyRelationshipCollection MapsToLotProperty { get; set; } = new MaterialActualPropertyMapsToLotPropertyRelationshipCollection();
+public virtual List<MaterialActualPropertyMapsToLotPropertyRelationship> MapsToLotProperty { get; set; } = new List<MaterialActualPropertyMapsToLotPropertyRelationship>();
 
         public override bool Equals(object? obj)
         {

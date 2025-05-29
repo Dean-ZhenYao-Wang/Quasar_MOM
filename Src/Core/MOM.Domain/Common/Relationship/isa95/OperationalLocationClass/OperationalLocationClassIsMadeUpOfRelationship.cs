@@ -1,20 +1,10 @@
 namespace MOM.Domain.Common.Relationship.isa95.OperationalLocationClass
 {
-    public class OperationalLocationClassIsMadeUpOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationClassIsMadeUpOfRelationship>
+    public class OperationalLocationClassIsMadeUpOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass ,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationClassIsMadeUpOfRelationship>
     {
-        public OperationalLocationClassIsMadeUpOfRelationship()
+        public OperationalLocationClassIsMadeUpOfRelationship():base()
         {
             Name = "isMadeUpOf";
-        }
-
-        public OperationalLocationClassIsMadeUpOfRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass target) : this()
-        {
-            InitializeFromTwins(source, target);
-        }
-
-        public OperationalLocationClassIsMadeUpOfRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
         }
 
         public override bool Equals(object? obj)

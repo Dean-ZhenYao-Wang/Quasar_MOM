@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentSpecification
 {
-    public class EquipmentSpecificationOperationalLocationRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation>, IEquatable<EquipmentSpecificationOperationalLocationRelRelationship>
+    public class EquipmentSpecificationOperationalLocationRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.EquipmentSpecification ,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation>, IEquatable<EquipmentSpecificationOperationalLocationRelRelationship>
     {
         public EquipmentSpecificationOperationalLocationRelRelationship()
         {

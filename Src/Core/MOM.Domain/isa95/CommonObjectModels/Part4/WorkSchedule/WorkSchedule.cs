@@ -35,13 +35,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkSchedule
         public WorkScheduleScheduleState? ScheduleState { get; set; }
 
         [JsonIgnore]
-        public virtual WorkScheduleIsMadeUpOfScheduleRelationshipCollection IsMadeUpOfSchedule { get; set; } = new WorkScheduleIsMadeUpOfScheduleRelationshipCollection();
+public virtual List<WorkScheduleIsMadeUpOfScheduleRelationship> IsMadeUpOfSchedule { get; set; } = new List<WorkScheduleIsMadeUpOfScheduleRelationship>();
 
         [JsonIgnore]
-        public virtual WorkScheduleIsMadeUpOfRequestRelationshipCollection IsMadeUpOfRequest { get; set; } = new WorkScheduleIsMadeUpOfRequestRelationshipCollection();
+public virtual List<WorkScheduleIsMadeUpOfRequestRelationship> IsMadeUpOfRequest { get; set; } = new List<WorkScheduleIsMadeUpOfRequestRelationship>();
 
         [JsonIgnore]
-        public virtual WorkScheduleHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkScheduleHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkScheduleHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkScheduleHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -28,16 +28,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.ProcessSegment
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual MaterialSegmentSpecificationPropertyContainsRelationshipCollection Contains { get; set; } = new MaterialSegmentSpecificationPropertyContainsRelationshipCollection();
+public virtual List<MaterialSegmentSpecificationPropertyContainsRelationship> Contains { get; set; } = new List<MaterialSegmentSpecificationPropertyContainsRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialSegmentSpecificationPropertyMapsToClassPropertyRelationshipCollection MapsToClassProperty { get; set; } = new MaterialSegmentSpecificationPropertyMapsToClassPropertyRelationshipCollection();
+public virtual List<MaterialSegmentSpecificationPropertyMapsToClassPropertyRelationship> MapsToClassProperty { get; set; } = new List<MaterialSegmentSpecificationPropertyMapsToClassPropertyRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialSegmentSpecificationPropertyMapsToDefinitionPropertyRelationshipCollection MapsToDefinitionProperty { get; set; } = new MaterialSegmentSpecificationPropertyMapsToDefinitionPropertyRelationshipCollection();
+public virtual List<MaterialSegmentSpecificationPropertyMapsToDefinitionPropertyRelationship> MapsToDefinitionProperty { get; set; } = new List<MaterialSegmentSpecificationPropertyMapsToDefinitionPropertyRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialSegmentSpecificationPropertyMapsToLotPropertyRelationshipCollection MapsToLotProperty { get; set; } = new MaterialSegmentSpecificationPropertyMapsToLotPropertyRelationshipCollection();
+public virtual List<MaterialSegmentSpecificationPropertyMapsToLotPropertyRelationship> MapsToLotProperty { get; set; } = new List<MaterialSegmentSpecificationPropertyMapsToLotPropertyRelationship>();
 
         public override bool Equals(object? obj)
         {

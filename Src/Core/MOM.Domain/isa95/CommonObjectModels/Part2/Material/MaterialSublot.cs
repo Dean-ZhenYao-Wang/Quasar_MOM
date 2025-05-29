@@ -79,40 +79,40 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         /// </summary>
         /// <remarks>This material sublot is part of the related object as the whole<br></br>这个材料子批次是相关对象作为整体的一部分</remarks>
         [JsonIgnore]
-        public virtual MaterialSublotIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new MaterialSublotIsMadeUpOfRelationshipCollection();
+public virtual List<MaterialSublotIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<MaterialSublotIsMadeUpOfRelationship>();
 
         /// <summary>
         /// 该物料子批次的物料子批次属性
         /// </summary>
         [JsonIgnore]
-        public virtual MaterialSublotHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new MaterialSublotHasValuesOfRelationshipCollection();
+public virtual List<MaterialSublotHasValuesOfRelationship> HasValuesOf { get; set; } = new List<MaterialSublotHasValuesOfRelationship>();
 
         /// <summary>
         /// 组成当前子批次的子批次
         /// IsMadeUpOf 与 IsAssembledFrom的定义还存疑，目前还不确定到底应该是什么定义
         /// </summary>
         [JsonIgnore]
-        public virtual MaterialSublotIsAssembledFromRelationshipCollection IsAssembledFrom { get; set; } = new MaterialSublotIsAssembledFromRelationshipCollection();
+public virtual List<MaterialSublotIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<MaterialSublotIsAssembledFromRelationship>();
 
         /// <summary>
         /// 组成当前子批次的批次
         /// </summary>
         [JsonIgnore]
-        public virtual MaterialSublotIsAssembledFromLotRelationshipCollection IsAssembledFromLot { get; set; } = new MaterialSublotIsAssembledFromLotRelationshipCollection();
+public virtual List<MaterialSublotIsAssembledFromLotRelationship> IsAssembledFromLot { get; set; } = new List<MaterialSublotIsAssembledFromLotRelationship>();
 
         /// <summary>
         /// 适合层次结构范围
         /// </summary>
         /// <remarks>可选的层次关系。不是标准规格的一部分。</remarks>
         [JsonIgnore]
-        public virtual MaterialSublotHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new MaterialSublotHierarchyScopeRelRelationshipCollection();
+public virtual List<MaterialSublotHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<MaterialSublotHierarchyScopeRelRelationship>();
 
         /// <summary>
         /// 适合存放地点
         /// </summary>
         /// <remarks>与存储位置的可选关系。不是标准规格的一部分。</remarks>
         [JsonIgnore]
-        public virtual MaterialSublotStorageLocationRelRelationshipCollection StorageLocationRel { get; set; } = new MaterialSublotStorageLocationRelRelationshipCollection();
+public virtual List<MaterialSublotStorageLocationRelRelationship> StorageLocationRel { get; set; } = new List<MaterialSublotStorageLocationRelRelationship>();
 
         public override bool Equals(object? obj)
         {

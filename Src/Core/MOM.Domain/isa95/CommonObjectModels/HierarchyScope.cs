@@ -20,7 +20,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
         public HierarchyScopeEquipmentLevel EquipmentLevel { get; set; }
 
         [JsonIgnore]
-        public virtual HierarchyScopeContainsRelationshipCollection Contains { get; set; } = new HierarchyScopeContainsRelationshipCollection();
+public virtual List<HierarchyScopeContainsRelationship> Contains { get; set; } = new List<HierarchyScopeContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

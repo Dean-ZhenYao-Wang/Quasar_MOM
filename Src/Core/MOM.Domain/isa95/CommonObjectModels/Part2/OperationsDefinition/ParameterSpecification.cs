@@ -19,10 +19,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition
         public string? HierarchyScope { get; set; }
 
         [JsonIgnore]
-        public virtual ParameterSpecificationContainsRelationshipCollection Contains { get; set; } = new ParameterSpecificationContainsRelationshipCollection();
+public virtual List<ParameterSpecificationContainsRelationship> Contains { get; set; } = new List<ParameterSpecificationContainsRelationship>();
 
         [JsonIgnore]
-        public virtual ParameterSpecificationHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new ParameterSpecificationHierarchyScopeRelRelationshipCollection();
+public virtual List<ParameterSpecificationHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<ParameterSpecificationHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

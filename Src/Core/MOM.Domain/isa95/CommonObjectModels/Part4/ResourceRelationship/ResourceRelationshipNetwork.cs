@@ -23,10 +23,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.ResourceRelationship
         public ResourceRelationshipNetworkRelationshipForm? RelationshipForm { get; set; }
 
         [JsonIgnore]
-        public virtual ResourceRelationshipNetworkIsACollectionOfRelationshipCollection IsACollectionOf { get; set; } = new ResourceRelationshipNetworkIsACollectionOfRelationshipCollection();
-
+        public virtual new List<ResourceRelationshipNetworkIsACollectionOfRelationship> IsACollectionOf { get; set; } = new List<ResourceRelationshipNetworkIsACollectionOfRelationship>();
         [JsonIgnore]
-        public virtual ResourceRelationshipNetworkHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new ResourceRelationshipNetworkHasPropertiesOfRelationshipCollection();
+        public virtual new List<ResourceRelationshipNetworkHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<ResourceRelationshipNetworkHasPropertiesOfRelationship> ();
 
         public override bool Equals(object? obj)
         {

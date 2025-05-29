@@ -33,34 +33,34 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.ProcessSegment
         public string? DurationUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual ProcessSegmentIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new ProcessSegmentIsMadeUpOfRelationshipCollection();
+public virtual List<ProcessSegmentIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<ProcessSegmentIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new ProcessSegmentIncludesPropertiesOfRelationshipCollection();
+public virtual List<ProcessSegmentIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<ProcessSegmentIncludesPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentHasAnExecutionDependencyOnRelationshipCollection HasAnExecutionDependencyOn { get; set; } = new ProcessSegmentHasAnExecutionDependencyOnRelationshipCollection();
+public virtual List<ProcessSegmentHasAnExecutionDependencyOnRelationship> HasAnExecutionDependencyOn { get; set; } = new List<ProcessSegmentHasAnExecutionDependencyOnRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentHasAnExecutionDependencyOnSegmentRelationshipCollection HasAnExecutionDependencyOnSegment { get; set; } = new ProcessSegmentHasAnExecutionDependencyOnSegmentRelationshipCollection();
+public virtual List<ProcessSegmentHasAnExecutionDependencyOnSegmentRelationship> HasAnExecutionDependencyOnSegment { get; set; } = new List<ProcessSegmentHasAnExecutionDependencyOnSegmentRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentContainsParameterRelationshipCollection ContainsParameter { get; set; } = new ProcessSegmentContainsParameterRelationshipCollection();
+public virtual List<ProcessSegmentContainsParameterRelationship> ContainsParameter { get; set; } = new List<ProcessSegmentContainsParameterRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentContainsPersonnelSpecificationRelationshipCollection ContainsPersonnelSpecification { get; set; } = new ProcessSegmentContainsPersonnelSpecificationRelationshipCollection();
+public virtual List<ProcessSegmentContainsPersonnelSpecificationRelationship> ContainsPersonnelSpecification { get; set; } = new List<ProcessSegmentContainsPersonnelSpecificationRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentContainsEquipmentSpecificationRelationshipCollection ContainsEquipmentSpecification { get; set; } = new ProcessSegmentContainsEquipmentSpecificationRelationshipCollection();
+public virtual List<ProcessSegmentContainsEquipmentSpecificationRelationship> ContainsEquipmentSpecification { get; set; } = new List<ProcessSegmentContainsEquipmentSpecificationRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentContainsPhysicalAssetSpecificationRelationshipCollection ContainsPhysicalAssetSpecification { get; set; } = new ProcessSegmentContainsPhysicalAssetSpecificationRelationshipCollection();
+public virtual List<ProcessSegmentContainsPhysicalAssetSpecificationRelationship> ContainsPhysicalAssetSpecification { get; set; } = new List<ProcessSegmentContainsPhysicalAssetSpecificationRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentContainsMaterialSpecificationRelationshipCollection ContainsMaterialSpecification { get; set; } = new ProcessSegmentContainsMaterialSpecificationRelationshipCollection();
+public virtual List<ProcessSegmentContainsMaterialSpecificationRelationship> ContainsMaterialSpecification { get; set; } = new List<ProcessSegmentContainsMaterialSpecificationRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new ProcessSegmentHierarchyScopeRelRelationshipCollection();
+public virtual List<ProcessSegmentHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<ProcessSegmentHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialActual
 {
-    public class MaterialActualCorrespondsToClassRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass>, IEquatable<MaterialActualCorrespondsToClassRelationship>
+    public class MaterialActualCorrespondsToClassRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.MaterialActual,Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass>, IEquatable<MaterialActualCorrespondsToClassRelationship>
     {
         public MaterialActualCorrespondsToClassRelationship()
         {

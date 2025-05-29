@@ -58,16 +58,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkRecord
         public string? Language { get; set; }
 
         [JsonIgnore]
-        public virtual WorkRecordDefinedByRelationshipCollection DefinedBy { get; set; } = new WorkRecordDefinedByRelationshipCollection();
+public virtual List<WorkRecordDefinedByRelationship> DefinedBy { get; set; } = new List<WorkRecordDefinedByRelationship>();
 
         [JsonIgnore]
-        public virtual WorkRecordContainsRelationshipCollection Contains { get; set; } = new WorkRecordContainsRelationshipCollection();
+public virtual List<WorkRecordContainsRelationship> Contains { get; set; } = new List<WorkRecordContainsRelationship>();
 
         [JsonIgnore]
-        public virtual WorkRecordRecordsActionOnRelationshipCollection RecordsActionOn { get; set; } = new WorkRecordRecordsActionOnRelationshipCollection();
+public virtual List<WorkRecordRecordsActionOnRelationship> RecordsActionOn { get; set; } = new List<WorkRecordRecordsActionOnRelationship>();
 
         [JsonIgnore]
-        public virtual WorkRecordHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkRecordHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkRecordHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkRecordHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

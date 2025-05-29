@@ -31,13 +31,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkRecord
         public DateTime? RecordTimestamp { get; set; }
 
         [JsonIgnore]
-        public virtual WorkRecordEntryContainsRelationshipCollection Contains { get; set; } = new WorkRecordEntryContainsRelationshipCollection();
+public virtual List<WorkRecordEntryContainsRelationship> Contains { get; set; } = new List<WorkRecordEntryContainsRelationship>();
 
         [JsonIgnore]
-        public virtual WorkRecordEntryCorrespondsToAnEntryInRelationshipCollection CorrespondsToAnEntryIn { get; set; } = new WorkRecordEntryCorrespondsToAnEntryInRelationshipCollection();
+public virtual List<WorkRecordEntryCorrespondsToAnEntryInRelationship> CorrespondsToAnEntryIn { get; set; } = new List<WorkRecordEntryCorrespondsToAnEntryInRelationship>();
 
         [JsonIgnore]
-        public virtual WorkRecordEntryCorrespondsToAnExternalEntryInRelationshipCollection CorrespondsToAnExternalEntryIn { get; set; } = new WorkRecordEntryCorrespondsToAnExternalEntryInRelationshipCollection();
+public virtual List<WorkRecordEntryCorrespondsToAnExternalEntryInRelationship> CorrespondsToAnExternalEntryIn { get; set; } = new List<WorkRecordEntryCorrespondsToAnExternalEntryInRelationship>();
 
         public override bool Equals(object? obj)
         {

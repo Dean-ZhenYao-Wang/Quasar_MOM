@@ -3,7 +3,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentActualProperty
     using System;
     using System.Collections.Generic;
 
-    public class EquipmentActualPropertyMapsToPropertyRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentProperty>, IEquatable<EquipmentActualPropertyMapsToPropertyRelationship>
+    public class EquipmentActualPropertyMapsToPropertyRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.EquipmentActualProperty,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentProperty>, IEquatable<EquipmentActualPropertyMapsToPropertyRelationship>
     {
         public EquipmentActualPropertyMapsToPropertyRelationship()
         {

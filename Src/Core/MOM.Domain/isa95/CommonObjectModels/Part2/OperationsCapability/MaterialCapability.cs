@@ -59,28 +59,28 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsCapability
         /// 组合关系
         /// </summary>
         [JsonIgnore]
-        public virtual MaterialCapabilityIsAssembledFromRelationshipCollection IsAssembledFrom { get; set; } = new MaterialCapabilityIsAssembledFromRelationshipCollection();
+        public virtual new List<MaterialCapabilityIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<MaterialCapabilityIsAssembledFromRelationship> ();
 
         [JsonIgnore]
-        public virtual MaterialCapabilityHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new MaterialCapabilityHasValuesOfRelationshipCollection();
+        public virtual new List<MaterialCapabilityHasValuesOfRelationship> HasValuesOf { get; set; } = new List<MaterialCapabilityHasValuesOfRelationship> ();
 
         [JsonIgnore]
-        public virtual MaterialCapabilityCorrespondsToClassRelationshipCollection CorrespondsToClass { get; set; } = new MaterialCapabilityCorrespondsToClassRelationshipCollection();
+        public virtual new List<MaterialCapabilityCorrespondsToClassRelationship> CorrespondsToClass { get; set; } = new List<MaterialCapabilityCorrespondsToClassRelationship> ();
 
         [JsonIgnore]
-        public virtual MaterialCapabilityCorrespondsToDefinitionRelationshipCollection CorrespondsToDefinition { get; set; } = new MaterialCapabilityCorrespondsToDefinitionRelationshipCollection();
+        public virtual new List<MaterialCapabilityCorrespondsToDefinitionRelationship> CorrespondsToDefinition { get; set; } = new List<MaterialCapabilityCorrespondsToDefinitionRelationship> ();
 
         [JsonIgnore]
-        public virtual MaterialCapabilityCorrespondsToLotRelationshipCollection CorrespondsToLot { get; set; } = new MaterialCapabilityCorrespondsToLotRelationshipCollection();
+        public virtual new List<MaterialCapabilityCorrespondsToLotRelationship> CorrespondsToLot { get; set; } = new List<MaterialCapabilityCorrespondsToLotRelationship> ();
 
         [JsonIgnore]
-        public virtual MaterialCapabilityCorrespondsToSublotRelationshipCollection CorrespondsToSublot { get; set; } = new MaterialCapabilityCorrespondsToSublotRelationshipCollection();
+        public virtual new List<MaterialCapabilityCorrespondsToSublotRelationship> CorrespondsToSublot { get; set; } = new List<MaterialCapabilityCorrespondsToSublotRelationship> ();
 
         [JsonIgnore]
-        public virtual MaterialCapabilityHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new MaterialCapabilityHierarchyScopeRelRelationshipCollection();
+        public virtual new List<MaterialCapabilityHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<MaterialCapabilityHierarchyScopeRelRelationship> ();
 
         [JsonIgnore]
-        public virtual MaterialCapabilityStorageLocationRelRelationshipCollection StorageLocationRel { get; set; } = new MaterialCapabilityStorageLocationRelRelationshipCollection();
+        public virtual new List<MaterialCapabilityStorageLocationRelRelationship> StorageLocationRel { get; set; } = new List<MaterialCapabilityStorageLocationRelRelationship> ();
 
         public override bool Equals(object? obj)
         {

@@ -1,20 +1,31 @@
+
 namespace MOM.Domain.Common.Relationship.isa95.PersonProperty
 {
-    public partial class PersonPropertyContainsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty>, IEquatable<PersonPropertyContainsRelationship>
+    public partial class PersonPropertyContainsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty,Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty>, IEquatable<PersonPropertyContainsRelationship>
     {
-        public PersonPropertyContainsRelationship()
+        public PersonPropertyContainsRelationship():base()
         {
             Name = "contains";
         }
 
-        public PersonPropertyContainsRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty source, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty target) : this()
+        public PersonPropertyContainsRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty source, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty target) : base(source, target)
         {
-            InitializeFromTwins(source, target);
         }
 
-        public PersonPropertyContainsRelationship(Guid? sourceId, Guid targetId) : this()
+        public PersonPropertyContainsRelationship(Guid? sourceId, Guid targetId) : base(sourceId, targetId)
         {
-            InitializeFromTwins(sourceId, targetId);
+        }
+
+        public PersonPropertyContainsRelationship(Guid? sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
+        {
+        }
+
+        public PersonPropertyContainsRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
+        {
+        }
+
+        public PersonPropertyContainsRelationship(Guid? sourceId, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty target, int depth) : base(sourceId, target, depth)
+        {
         }
 
         public override bool Equals(object? obj)

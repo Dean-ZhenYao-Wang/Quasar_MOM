@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.JobResponseList
 {
-    public class JobResponseListIsMadeUpOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkPerformance.JobResponse>, IEquatable<JobResponseListIsMadeUpOfRelationship>
+    public class JobResponseListIsMadeUpOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkPerformance.JobResponseList,Domain.isa95.CommonObjectModels.Part4.WorkPerformance.JobResponse>, IEquatable<JobResponseListIsMadeUpOfRelationship>
     {
         public JobResponseListIsMadeUpOfRelationship()
         {

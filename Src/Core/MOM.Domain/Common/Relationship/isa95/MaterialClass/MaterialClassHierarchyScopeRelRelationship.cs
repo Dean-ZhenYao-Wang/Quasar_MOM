@@ -1,22 +1,11 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialClass
 {
-    public class MaterialClassHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<MaterialClassHierarchyScopeRelRelationship>
+    public class MaterialClassHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass ,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<MaterialClassHierarchyScopeRelRelationship>
     {
-        public MaterialClassHierarchyScopeRelRelationship()
+        public MaterialClassHierarchyScopeRelRelationship() : base()
         {
             Name = "hierarchyScopeRel";
         }
-
-        public MaterialClassHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass source, Domain.isa95.CommonObjectModels.HierarchyScope target) : this()
-        {
-            InitializeFromTwins(source, target);
-        }
-
-        public MaterialClassHierarchyScopeRelRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
-        }
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as MaterialClassHierarchyScopeRelRelationship);

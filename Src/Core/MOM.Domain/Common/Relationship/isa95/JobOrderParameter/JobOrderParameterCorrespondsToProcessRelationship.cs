@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.JobOrderParameter
 {
-    public class JobOrderParameterCorrespondsToProcessRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.ProcessSegment.ProcessSegmentParameter>, IEquatable<JobOrderParameterCorrespondsToProcessRelationship>
+    public class JobOrderParameterCorrespondsToProcessRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkSchedule.JobOrderParameter,Domain.isa95.CommonObjectModels.Part2.ProcessSegment.ProcessSegmentParameter>, IEquatable<JobOrderParameterCorrespondsToProcessRelationship>
     {
         public JobOrderParameterCorrespondsToProcessRelationship()
         {

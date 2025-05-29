@@ -16,7 +16,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:TestSpecificationProperty;1";
 
         [JsonIgnore]
-        public virtual TestSpecificationPropertyContainsRelationshipCollection Contains { get; set; } = new TestSpecificationPropertyContainsRelationshipCollection();
+public virtual List<TestSpecificationPropertyContainsRelationship> Contains { get; set; } = new List<TestSpecificationPropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

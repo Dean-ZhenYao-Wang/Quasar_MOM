@@ -19,10 +19,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         public string? HierarchyScope { get { return HierarchyScopeRel?.Name; } }
 
         [JsonIgnore]
-        public virtual PersonnelClassIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new PersonnelClassIncludesPropertiesOfRelationshipCollection();
+public virtual List<PersonnelClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<PersonnelClassIncludesPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelClassHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new PersonnelClassHasPropertiesOfRelationshipCollection();
+public virtual List<PersonnelClassHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<PersonnelClassHasPropertiesOfRelationship>();
         [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
         public virtual HierarchyScope HierarchyScopeRel { get; set; }
@@ -55,7 +55,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 
         public List<Guid> GetHaveChildClassDtIdList()
         {
-            return this.IncludesPropertiesOf.Targets.Where(m => m.IsDelete == false).Select(m => m.DtId).ToList();
+            return this.IncludesPropertiesOf.Where(m => m.Target.IsDelete == false).Select(m => m.DtId).ToList();
         }
 
         public void IncludesPropertiesOfAddTarget(Guid targetDtId)
@@ -65,7 +65,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 
         public void IncludesPropertiesOfRemoveTargets(IEnumerable<Guid> deleteDtIds)
         {
-            this.IncludesPropertiesOf.Remove(deleteDtIds);
+            this.IncludesPropertiesOf.RemoveAll(m => deleteDtIds.Contains(m.TargetId));
         }
 
         public void HasPropertiesOfAddTarget(PersonnelClassProperty personnelClassProperty)

@@ -19,10 +19,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest
         public static string ModelId { get; } = "dtmi:digitaltwins:isa95:TestableObject;1";
 
         [JsonIgnore]
-        public virtual TestableObjectSpecifiesRelationshipCollection Specifies { get; set; } = new TestableObjectSpecifiesRelationshipCollection();
+public virtual List<TestableObjectSpecifiesRelationship> Specifies { get; set; } = new List<TestableObjectSpecifiesRelationship>();
 
         [JsonIgnore]
-        public virtual TestableObjectHasTestableObjectPropertyValuesOfRelationshipCollection HasTestableObjectPropertyValuesOf { get; set; } = new TestableObjectHasTestableObjectPropertyValuesOfRelationshipCollection();
+public virtual List<TestableObjectHasTestableObjectPropertyValuesOfRelationship> HasTestableObjectPropertyValuesOf { get; set; } = new List<TestableObjectHasTestableObjectPropertyValuesOfRelationship>();
 
         public override bool Equals(object? obj)
         {

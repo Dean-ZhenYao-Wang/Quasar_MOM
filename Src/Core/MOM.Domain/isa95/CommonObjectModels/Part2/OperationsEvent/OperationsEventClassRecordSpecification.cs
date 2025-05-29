@@ -16,7 +16,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsEvent
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:OperationsEventClassRecordSpecification;1";
 
         [JsonIgnore]
-        public virtual OperationsEventClassRecordSpecificationContainsRelationshipCollection Contains { get; set; } = new OperationsEventClassRecordSpecificationContainsRelationshipCollection();
+public virtual List<OperationsEventClassRecordSpecificationContainsRelationship> Contains { get; set; } = new List<OperationsEventClassRecordSpecificationContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

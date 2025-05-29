@@ -22,7 +22,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkfowSpecification
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationPropertyContainsRelationshipCollection Contains { get; set; } = new WorkflowSpecificationPropertyContainsRelationshipCollection();
+public virtual List<WorkflowSpecificationPropertyContainsRelationship> Contains { get; set; } = new List<WorkflowSpecificationPropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

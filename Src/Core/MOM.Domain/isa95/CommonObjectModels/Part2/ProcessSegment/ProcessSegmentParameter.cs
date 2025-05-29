@@ -19,10 +19,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.ProcessSegment
         public string? HierarchyScope { get; set; }
 
         [JsonIgnore]
-        public virtual ProcessSegmentParameterContainsRelationshipCollection Contains { get; set; } = new ProcessSegmentParameterContainsRelationshipCollection();
+public virtual List<ProcessSegmentParameterContainsRelationship> Contains { get; set; } = new List<ProcessSegmentParameterContainsRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentParameterHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new ProcessSegmentParameterHierarchyScopeRelRelationshipCollection();
+public virtual List<ProcessSegmentParameterHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<ProcessSegmentParameterHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

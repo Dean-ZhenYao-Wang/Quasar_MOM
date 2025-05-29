@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialSpecification
 {
-    public class MaterialSpecificationCorrespondsToLotRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot>, IEquatable<MaterialSpecificationCorrespondsToLotRelationship>
+    public class MaterialSpecificationCorrespondsToLotRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.MaterialSpecification ,Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot>, IEquatable<MaterialSpecificationCorrespondsToLotRelationship>
     {
         public MaterialSpecificationCorrespondsToLotRelationship()
         {

@@ -1,20 +1,28 @@
+
+
 namespace MOM.Domain.Common.Relationship.isa95.Person
 {
-    public partial class PersonHasValuesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty>, IEquatable<PersonHasValuesOfRelationship>
+    public partial class PersonHasValuesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.Person,Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty>, IEquatable<PersonHasValuesOfRelationship>
     {
-        public PersonHasValuesOfRelationship()
+        public PersonHasValuesOfRelationship():base()
         {
             Name = "hasValuesOf";
         }
 
-        public PersonHasValuesOfRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.Person source, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty target) : this()
+        public PersonHasValuesOfRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.Person source, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty target) : base(source, target)
         {
-            InitializeFromTwins(source, target);
         }
 
-        public PersonHasValuesOfRelationship(Guid? sourceId, Guid targetId) : this()
+        public PersonHasValuesOfRelationship(Guid? sourceId, Guid targetId) : base(sourceId, targetId)
         {
-            InitializeFromTwins(sourceId, targetId);
+        }
+
+        public PersonHasValuesOfRelationship(Guid? sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
+        {
+        }
+
+        public PersonHasValuesOfRelationship(Guid? sourceId, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty target, int depth) : base(sourceId, target, depth)
+        {
         }
 
         public override bool Equals(object? obj)

@@ -28,13 +28,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkAlert
         public string? Category { get; set; }
 
         [JsonIgnore]
-        public virtual WorkAlertDefinedByRelationshipCollection DefinedBy { get; set; } = new WorkAlertDefinedByRelationshipCollection();
+public virtual List<WorkAlertDefinedByRelationship> DefinedBy { get; set; } = new List<WorkAlertDefinedByRelationship>();
 
         [JsonIgnore]
-        public virtual WorkAlertHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new WorkAlertHasValuesOfRelationshipCollection();
+public virtual List<WorkAlertHasValuesOfRelationship> HasValuesOf { get; set; } = new List<WorkAlertHasValuesOfRelationship>();
 
         [JsonIgnore]
-        public virtual WorkAlertHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkAlertHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkAlertHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkAlertHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

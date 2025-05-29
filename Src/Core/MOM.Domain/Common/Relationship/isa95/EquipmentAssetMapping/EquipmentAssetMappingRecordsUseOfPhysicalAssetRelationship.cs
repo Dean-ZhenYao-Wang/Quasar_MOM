@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping
 {
-    public class EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset>, IEquatable<EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship>
+    public class EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset>, IEquatable<EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship>
     {
         public EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship()
         {

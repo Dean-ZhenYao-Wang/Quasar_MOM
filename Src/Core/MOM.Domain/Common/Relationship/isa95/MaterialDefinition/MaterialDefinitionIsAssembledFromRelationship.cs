@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialDefinition
 {
-    public class MaterialDefinitionIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition>, IEquatable<MaterialDefinitionIsAssembledFromRelationship>
+    public class MaterialDefinitionIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition ,Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition>, IEquatable<MaterialDefinitionIsAssembledFromRelationship>
     {
         public MaterialDefinitionIsAssembledFromRelationship()
         {

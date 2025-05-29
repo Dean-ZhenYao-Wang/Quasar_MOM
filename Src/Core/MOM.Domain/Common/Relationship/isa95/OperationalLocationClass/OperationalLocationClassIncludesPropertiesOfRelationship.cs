@@ -1,20 +1,10 @@
 namespace MOM.Domain.Common.Relationship.isa95.OperationalLocationClass
 {
-    public class OperationalLocationClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationClassIncludesPropertiesOfRelationship>
+    public class OperationalLocationClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass ,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationClassIncludesPropertiesOfRelationship>
     {
-        public OperationalLocationClassIncludesPropertiesOfRelationship()
+        public OperationalLocationClassIncludesPropertiesOfRelationship():base()
         {
             Name = "includesPropertiesOf";
-        }
-
-        public OperationalLocationClassIncludesPropertiesOfRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass target) : this()
-        {
-            InitializeFromTwins(source, target);
-        }
-
-        public OperationalLocationClassIncludesPropertiesOfRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
         }
 
         public override bool Equals(object? obj)

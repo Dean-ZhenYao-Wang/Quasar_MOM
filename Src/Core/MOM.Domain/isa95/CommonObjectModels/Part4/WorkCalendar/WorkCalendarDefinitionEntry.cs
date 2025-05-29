@@ -28,10 +28,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar
         public string EntryType { get; set; }
 
         [JsonIgnore]
-        public virtual WorkCalendarDefinitionEntryIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new WorkCalendarDefinitionEntryIsMadeUpOfRelationshipCollection();
+public virtual List<WorkCalendarDefinitionEntryIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<WorkCalendarDefinitionEntryIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual WorkCalendarDefinitionEntryHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new WorkCalendarDefinitionEntryHasPropertiesOfRelationshipCollection();
+public virtual List<WorkCalendarDefinitionEntryHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<WorkCalendarDefinitionEntryHasPropertiesOfRelationship>();
 
         public override bool Equals(object? obj)
         {

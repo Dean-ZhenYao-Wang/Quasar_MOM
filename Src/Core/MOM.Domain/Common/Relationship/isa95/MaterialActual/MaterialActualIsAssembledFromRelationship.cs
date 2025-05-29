@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialActual
 {
-    public class MaterialActualIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.MaterialActual>, IEquatable<MaterialActualIsAssembledFromRelationship>
+    public class MaterialActualIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.MaterialActual,Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.MaterialActual>, IEquatable<MaterialActualIsAssembledFromRelationship>
     {
         public MaterialActualIsAssembledFromRelationship()
         {

@@ -19,25 +19,25 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkfowSpecification
         public string? HierarchyScope { get; set; }
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationNodeContainsRelationshipCollection Contains { get; set; } = new WorkflowSpecificationNodeContainsRelationshipCollection();
+public virtual List<WorkflowSpecificationNodeContainsRelationship> Contains { get; set; } = new List<WorkflowSpecificationNodeContainsRelationship>();
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationNodeIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new WorkflowSpecificationNodeIncludesPropertiesOfRelationshipCollection();
+public virtual List<WorkflowSpecificationNodeIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<WorkflowSpecificationNodeIncludesPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationNodeCorrespondsToWorkMasterRelationshipCollection CorrespondsToWorkMaster { get; set; } = new WorkflowSpecificationNodeCorrespondsToWorkMasterRelationshipCollection();
+public virtual List<WorkflowSpecificationNodeCorrespondsToWorkMasterRelationship> CorrespondsToWorkMaster { get; set; } = new List<WorkflowSpecificationNodeCorrespondsToWorkMasterRelationship>();
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationNodeCorrespondsToWorkDirectiveRelationshipCollection CorrespondsToWorkDirective { get; set; } = new WorkflowSpecificationNodeCorrespondsToWorkDirectiveRelationshipCollection();
+public virtual List<WorkflowSpecificationNodeCorrespondsToWorkDirectiveRelationship> CorrespondsToWorkDirective { get; set; } = new List<WorkflowSpecificationNodeCorrespondsToWorkDirectiveRelationship>();
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationNodeDefinedByRelationshipCollection DefinedBy { get; set; } = new WorkflowSpecificationNodeDefinedByRelationshipCollection();
+public virtual List<WorkflowSpecificationNodeDefinedByRelationship> DefinedBy { get; set; } = new List<WorkflowSpecificationNodeDefinedByRelationship>();
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationNodeHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new WorkflowSpecificationNodeHasPropertiesOfRelationshipCollection();
+public virtual List<WorkflowSpecificationNodeHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<WorkflowSpecificationNodeHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationNodeHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkflowSpecificationNodeHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkflowSpecificationNodeHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkflowSpecificationNodeHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

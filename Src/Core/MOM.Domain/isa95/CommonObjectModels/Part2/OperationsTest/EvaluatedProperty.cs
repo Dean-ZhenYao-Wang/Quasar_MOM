@@ -16,13 +16,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:EvaluatedProperty;1";
 
         [JsonIgnore]
-        public virtual EvaluatedPropertyCorrespondsToRelationshipCollection CorrespondsTo { get; set; } = new EvaluatedPropertyCorrespondsToRelationshipCollection();
+public virtual List<EvaluatedPropertyCorrespondsToRelationship> CorrespondsTo { get; set; } = new List<EvaluatedPropertyCorrespondsToRelationship>();
 
         [JsonIgnore]
-        public virtual EvaluatedPropertyMeasuredWithMethodOfRelationshipCollection MeasuredWithMethodOf { get; set; } = new EvaluatedPropertyMeasuredWithMethodOfRelationshipCollection();
+public virtual List<EvaluatedPropertyMeasuredWithMethodOfRelationship> MeasuredWithMethodOf { get; set; } = new List<EvaluatedPropertyMeasuredWithMethodOfRelationship>();
 
         [JsonIgnore]
-        public virtual EvaluatedPropertyReferencesRelationshipCollection References { get; set; } = new EvaluatedPropertyReferencesRelationshipCollection();
+public virtual List<EvaluatedPropertyReferencesRelationship> References { get; set; } = new List<EvaluatedPropertyReferencesRelationship>();
 
         public override bool Equals(object? obj)
         {

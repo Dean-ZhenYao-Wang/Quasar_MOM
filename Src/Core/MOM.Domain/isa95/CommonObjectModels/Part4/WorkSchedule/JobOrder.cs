@@ -50,28 +50,28 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkSchedule
         public string? CommandRule { get; set; }
 
         [JsonIgnore]
-        public virtual JobOrderCorrespondsToWorkMasterRelationshipCollection CorrespondsToWorkMaster { get; set; } = new JobOrderCorrespondsToWorkMasterRelationshipCollection();
+public virtual List<JobOrderCorrespondsToWorkMasterRelationship> CorrespondsToWorkMaster { get; set; } = new List<JobOrderCorrespondsToWorkMasterRelationship>();
 
         [JsonIgnore]
-        public virtual JobOrderCorrespondsToRequirementRelationshipCollection CorrespondsToRequirement { get; set; } = new JobOrderCorrespondsToRequirementRelationshipCollection();
+public virtual List<JobOrderCorrespondsToRequirementRelationship> CorrespondsToRequirement { get; set; } = new List<JobOrderCorrespondsToRequirementRelationship>();
 
         [JsonIgnore]
-        public virtual JobOrderContainsParameterRelationshipCollection ContainsParameter { get; set; } = new JobOrderContainsParameterRelationshipCollection();
+public virtual List<JobOrderContainsParameterRelationship> ContainsParameter { get; set; } = new List<JobOrderContainsParameterRelationship>();
 
         [JsonIgnore]
-        public virtual JobOrderContainsPersonnelRelationshipCollection ContainsPersonnel { get; set; } = new JobOrderContainsPersonnelRelationshipCollection();
+public virtual List<JobOrderContainsPersonnelRelationship> ContainsPersonnel { get; set; } = new List<JobOrderContainsPersonnelRelationship>();
 
         [JsonIgnore]
-        public virtual JobOrderContainsEquipmentRelationshipCollection ContainsEquipment { get; set; } = new JobOrderContainsEquipmentRelationshipCollection();
+public virtual List<JobOrderContainsEquipmentRelationship> ContainsEquipment { get; set; } = new List<JobOrderContainsEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual JobOrderContainsPhysicalAssetRelationshipCollection ContainsPhysicalAsset { get; set; } = new JobOrderContainsPhysicalAssetRelationshipCollection();
+public virtual List<JobOrderContainsPhysicalAssetRelationship> ContainsPhysicalAsset { get; set; } = new List<JobOrderContainsPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual JobOrderContainsMaterialRelationshipCollection ContainsMaterial { get; set; } = new JobOrderContainsMaterialRelationshipCollection();
+public virtual List<JobOrderContainsMaterialRelationship> ContainsMaterial { get; set; } = new List<JobOrderContainsMaterialRelationship>();
 
         [JsonIgnore]
-        public virtual JobOrderHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new JobOrderHierarchyScopeRelRelationshipCollection();
+public virtual List<JobOrderHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<JobOrderHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentSpecification
 {
-    public class EquipmentSpecificationSpecifiesRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestSpecification>, IEquatable<EquipmentSpecificationSpecifiesRelationship>
+    public class EquipmentSpecificationSpecifiesRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.EquipmentSpecification, Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestSpecification>, IEquatable<EquipmentSpecificationSpecifiesRelationship>
     {
         public EquipmentSpecificationSpecifiesRelationship()
         {

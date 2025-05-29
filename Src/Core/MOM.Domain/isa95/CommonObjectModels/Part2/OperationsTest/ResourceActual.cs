@@ -16,7 +16,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:ResourceActual;1";
 
         [JsonIgnore]
-        public virtual ResourceActualReportsRelationshipCollection Reports { get; set; } = new ResourceActualReportsRelationshipCollection();
+public virtual List<ResourceActualReportsRelationship> Reports { get; set; } = new List<ResourceActualReportsRelationship>();
 
         public override bool Equals(object? obj)
         {

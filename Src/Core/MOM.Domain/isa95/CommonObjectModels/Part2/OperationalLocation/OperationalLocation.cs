@@ -13,23 +13,20 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         {
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:OperationalLocation;1";
-
         [JsonPropertyName("hierarchyScope")]
         public string? HierarchyScope { get; set; }
 
         [JsonIgnore]
-        public virtual OperationalLocationDefinedByRelationshipCollection DefinedBy { get; set; } = new OperationalLocationDefinedByRelationshipCollection();
+public virtual List<OperationalLocationDefinedByRelationship> DefinedBy { get; set; } = new List<OperationalLocationDefinedByRelationship>();
 
         [JsonIgnore]
-        public virtual OperationalLocationHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new OperationalLocationHasValuesOfRelationshipCollection();
+public virtual List<OperationalLocationHasValuesOfRelationship> HasValuesOf { get; set; } = new List<OperationalLocationHasValuesOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationalLocationIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new OperationalLocationIsMadeUpOfRelationshipCollection();
+public virtual List<OperationalLocationIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<OperationalLocationIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationalLocationHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationalLocationHierarchyScopeRelRelationshipCollection();
+public virtual List<OperationalLocationHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationalLocationHierarchyScopeRelRelationship>();
         /// <summary>
         /// 在空间上将设备定义为零维点、一维线、二维形状或三维实体。
         /// </summary>

@@ -35,25 +35,25 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual PhysicalAssetSpecificationIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new PhysicalAssetSpecificationIsMadeUpOfRelationshipCollection();
+public virtual List<PhysicalAssetSpecificationIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<PhysicalAssetSpecificationIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetSpecificationSpecifiesRelationshipCollection Specifies { get; set; } = new PhysicalAssetSpecificationSpecifiesRelationshipCollection();
+public virtual List<PhysicalAssetSpecificationSpecifiesRelationship> Specifies { get; set; } = new List<PhysicalAssetSpecificationSpecifiesRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetSpecificationHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new PhysicalAssetSpecificationHasPropertiesOfRelationshipCollection();
+public virtual List<PhysicalAssetSpecificationHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<PhysicalAssetSpecificationHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetSpecificationCorrespondsToPhysicalAssetClassRelationshipCollection CorrespondsToPhysicalAssetClass { get; set; } = new PhysicalAssetSpecificationCorrespondsToPhysicalAssetClassRelationshipCollection();
+public virtual List<PhysicalAssetSpecificationCorrespondsToPhysicalAssetClassRelationship> CorrespondsToPhysicalAssetClass { get; set; } = new List<PhysicalAssetSpecificationCorrespondsToPhysicalAssetClassRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetSpecificationCorrespondsToPhysicalAssetRelationshipCollection CorrespondsToPhysicalAsset { get; set; } = new PhysicalAssetSpecificationCorrespondsToPhysicalAssetRelationshipCollection();
+public virtual List<PhysicalAssetSpecificationCorrespondsToPhysicalAssetRelationship> CorrespondsToPhysicalAsset { get; set; } = new List<PhysicalAssetSpecificationCorrespondsToPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetSpecificationHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new PhysicalAssetSpecificationHierarchyScopeRelRelationshipCollection();
+public virtual List<PhysicalAssetSpecificationHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<PhysicalAssetSpecificationHierarchyScopeRelRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetSpecificationPhysicalLocationRelRelationshipCollection PhysicalLocationRel { get; set; } = new PhysicalAssetSpecificationPhysicalLocationRelRelationshipCollection();
+public virtual List<PhysicalAssetSpecificationPhysicalLocationRelRelationship> PhysicalLocationRel { get; set; } = new List<PhysicalAssetSpecificationPhysicalLocationRelRelationship>();
 
         public override bool Equals(object? obj)
         {

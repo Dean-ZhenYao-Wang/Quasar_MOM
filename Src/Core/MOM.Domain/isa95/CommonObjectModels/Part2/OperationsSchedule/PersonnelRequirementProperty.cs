@@ -28,13 +28,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsSchedule
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual PersonnelRequirementPropertyContainsRelationshipCollection Contains { get; set; } = new PersonnelRequirementPropertyContainsRelationshipCollection();
+public virtual List<PersonnelRequirementPropertyContainsRelationship> Contains { get; set; } = new List<PersonnelRequirementPropertyContainsRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelRequirementPropertyMapsToClassPropertyRelationshipCollection MapsToClassProperty { get; set; } = new PersonnelRequirementPropertyMapsToClassPropertyRelationshipCollection();
+public virtual List<PersonnelRequirementPropertyMapsToClassPropertyRelationship> MapsToClassProperty { get; set; } = new List<PersonnelRequirementPropertyMapsToClassPropertyRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelRequirementPropertyMapsToPropertyRelationshipCollection MapsToProperty { get; set; } = new PersonnelRequirementPropertyMapsToPropertyRelationshipCollection();
+public virtual List<PersonnelRequirementPropertyMapsToPropertyRelationship> MapsToProperty { get; set; } = new List<PersonnelRequirementPropertyMapsToPropertyRelationship>();
 
         public override bool Equals(object? obj)
         {

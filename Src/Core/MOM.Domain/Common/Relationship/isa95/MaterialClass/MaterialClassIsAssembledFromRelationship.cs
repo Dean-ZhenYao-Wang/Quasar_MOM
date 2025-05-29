@@ -1,20 +1,10 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialClass
 {
-    public class MaterialClassIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass>, IEquatable<MaterialClassIsAssembledFromRelationship>
+    public class MaterialClassIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass ,Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass>, IEquatable<MaterialClassIsAssembledFromRelationship>
     {
-        public MaterialClassIsAssembledFromRelationship()
+        public MaterialClassIsAssembledFromRelationship() : base()
         {
             Name = "IsAssembledFrom";
-        }
-
-        public MaterialClassIsAssembledFromRelationship(Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass source, Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass target) : this()
-        {
-            InitializeFromTwins(source, target);
-        }
-
-        public MaterialClassIsAssembledFromRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
         }
 
         public override bool Equals(object? obj)

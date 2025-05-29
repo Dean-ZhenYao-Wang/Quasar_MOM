@@ -31,20 +31,20 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 所属设备类清单
         /// </summary>
         [JsonIgnore]
-        public virtual EquipmentDefinedByRelationshipCollection DefinedBy { get; set; } = new EquipmentDefinedByRelationshipCollection();
+public virtual List<EquipmentDefinedByRelationship> DefinedBy { get; set; } = new List<EquipmentDefinedByRelationship>();
 
         /// <summary>
         /// 自定义属性清单
         /// </summary>
         [JsonIgnore]
-        public virtual EquipmentHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new EquipmentHasValuesOfRelationshipCollection();
+public virtual List<EquipmentHasValuesOfRelationship> HasValuesOf { get; set; } = new List<EquipmentHasValuesOfRelationship>();
 
         /// <summary>
         /// 这个父设备是子设备的整体。<br/>
         /// 组成关系
         /// </summary>
         [JsonIgnore]
-        public virtual EquipmentIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new EquipmentIsMadeUpOfRelationshipCollection();
+public virtual List<EquipmentIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<EquipmentIsMadeUpOfRelationship>();
 
         /// <summary>
         /// 对应的实物资产<br/>
@@ -52,11 +52,11 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </summary>
         [JsonIgnore]
         [MaxLength(1)]
-        public virtual EquipmentImplementedByRelationshipCollection ImplementedBy { get; set; } = new EquipmentImplementedByRelationshipCollection();
+public virtual List<EquipmentImplementedByRelationship> ImplementedBy { get; set; } = new List<EquipmentImplementedByRelationship>();
 
         [JsonIgnore]
         [MaxLength(1)]
-        public virtual EquipmentHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new EquipmentHierarchyScopeRelRelationshipCollection();
+public virtual List<EquipmentHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<EquipmentHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -35,13 +35,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsPerformance
         public DateTime? PublishedDate { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsPerformanceIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new OperationsPerformanceIsMadeUpOfRelationshipCollection();
+public virtual List<OperationsPerformanceIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<OperationsPerformanceIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsPerformanceReferencesRelationshipCollection References { get; set; } = new OperationsPerformanceReferencesRelationshipCollection();
+public virtual List<OperationsPerformanceReferencesRelationship> References { get; set; } = new List<OperationsPerformanceReferencesRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsPerformanceHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsPerformanceHierarchyScopeRelRelationshipCollection();
+public virtual List<OperationsPerformanceHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationsPerformanceHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

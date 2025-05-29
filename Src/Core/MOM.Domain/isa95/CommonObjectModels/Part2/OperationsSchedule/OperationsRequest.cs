@@ -35,19 +35,19 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsSchedule
         public OperationsRequestRequestState? RequestState { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsRequestIsMadeUpOfResponseRelationshipCollection IsMadeUpOfResponse { get; set; } = new OperationsRequestIsMadeUpOfResponseRelationshipCollection();
+public virtual List<OperationsRequestIsMadeUpOfResponseRelationship> IsMadeUpOfResponse { get; set; } = new List<OperationsRequestIsMadeUpOfResponseRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsRequestCorrespondsToDefinitionRelationshipCollection CorrespondsToDefinition { get; set; } = new OperationsRequestCorrespondsToDefinitionRelationshipCollection();
+public virtual List<OperationsRequestCorrespondsToDefinitionRelationship> CorrespondsToDefinition { get; set; } = new List<OperationsRequestCorrespondsToDefinitionRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsRequestCorrespondsToSegmentRelationshipCollection CorrespondsToSegment { get; set; } = new OperationsRequestCorrespondsToSegmentRelationshipCollection();
+public virtual List<OperationsRequestCorrespondsToSegmentRelationship> CorrespondsToSegment { get; set; } = new List<OperationsRequestCorrespondsToSegmentRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsRequestIsMadeUpOfRequirementRelationshipCollection IsMadeUpOfRequirement { get; set; } = new OperationsRequestIsMadeUpOfRequirementRelationshipCollection();
+public virtual List<OperationsRequestIsMadeUpOfRequirementRelationship> IsMadeUpOfRequirement { get; set; } = new List<OperationsRequestIsMadeUpOfRequirementRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsRequestHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsRequestHierarchyScopeRelRelationshipCollection();
+public virtual List<OperationsRequestHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationsRequestHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

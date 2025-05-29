@@ -16,10 +16,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsEvent
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:OperationsEventDefinitionRecordSpecification;1";
 
         [JsonIgnore]
-        public virtual OperationsEventDefinitionRecordSpecificationMapsToRelationshipCollection MapsTo { get; set; } = new OperationsEventDefinitionRecordSpecificationMapsToRelationshipCollection();
+public virtual List<OperationsEventDefinitionRecordSpecificationMapsToRelationship> MapsTo { get; set; } = new List<OperationsEventDefinitionRecordSpecificationMapsToRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventDefinitionRecordSpecificationContainsRelationshipCollection Contains { get; set; } = new OperationsEventDefinitionRecordSpecificationContainsRelationshipCollection();
+public virtual List<OperationsEventDefinitionRecordSpecificationContainsRelationship> Contains { get; set; } = new List<OperationsEventDefinitionRecordSpecificationContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

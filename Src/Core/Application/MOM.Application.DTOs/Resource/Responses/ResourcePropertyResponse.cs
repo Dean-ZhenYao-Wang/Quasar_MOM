@@ -1,7 +1,6 @@
 ﻿using MOM.Application.DTOs.Resource.Requests;
 using MOM.Domain.Common.Relationship.isa95.PersonProperty;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment;
 
 namespace MOM.Application.DTOs.Resource.Responses
 {
@@ -36,15 +35,15 @@ namespace MOM.Application.DTOs.Resource.Responses
             children = dbModel.Contains.Select(x => new ResourcePropertyResponse(x.Target)).ToList();
         }
 
-        public ResourcePropertyResponse(EquipmentProperty dbModel)
-        {
-            Id = dbModel.Id;
-            Description = dbModel.Description;
-            Value = dbModel.Value;
-            ValueUnitOfMeasure = dbModel.ValueUnitOfMeasure;
-            key = dbModel.DtId;
-            children = dbModel.Contains.Select(x => new ResourcePropertyResponse(x.Target)).ToList();
-        }
+        //public ResourcePropertyResponse(EquipmentProperty dbModel)
+        //{
+        //    Id = dbModel.Id;
+        //    Description = dbModel.Description;
+        //    Value = dbModel.Value;
+        //    ValueUnitOfMeasure = dbModel.ValueUnitOfMeasure;
+        //    key = dbModel.DtId;
+        //    children = dbModel.Contains.Select(x => new ResourcePropertyResponse(x.Target)).ToList();
+        //}
 
         public PersonProperty ToPersonProperty()
         {
@@ -68,26 +67,26 @@ namespace MOM.Application.DTOs.Resource.Responses
             return parentProperty;
         }
 
-        public EquipmentProperty ToEquipmentProperty()
-        {
-            var equipmentProperty = new EquipmentProperty()
-            {
-                Id = Id,
-                Description = Description ?? string.Empty,
-                Value = Value,
-                ValueUnitOfMeasure = ValueUnitOfMeasure
-            };
-            equipmentProperty.DtId = key;
-            if (mapToDtId != null)
-                equipmentProperty.MapsTo.Add(new Domain.Common.Relationship.isa95.EquipmentProperty.EquipmentPropertyMapsToRelationship(equipmentProperty.DtId, mapToDtId.Value));
-            if (children != null)
-            {
-                children.ForEach(x =>
-                {
-                    equipmentProperty.ContainsAddTarget(x.ToEquipmentProperty());
-                });
-            }
-            return equipmentProperty;
-        }
+        //public EquipmentProperty ToEquipmentProperty()
+        //{
+        //    var equipmentProperty = new EquipmentProperty()
+        //    {
+        //        Id = Id,
+        //        Description = Description ?? string.Empty,
+        //        Value = Value,
+        //        ValueUnitOfMeasure = ValueUnitOfMeasure
+        //    };
+        //    equipmentProperty.DtId = key;
+        //    if (mapToDtId != null)
+        //        equipmentProperty.MapsTo.Add(new Domain.Common.Relationship.isa95.EquipmentProperty.EquipmentPropertyMapsToRelationship(equipmentProperty.DtId, mapToDtId.Value));
+        //    if (children != null)
+        //    {
+        //        children.ForEach(x =>
+        //        {
+        //            equipmentProperty.ContainsAddTarget(x.ToEquipmentProperty());
+        //        });
+        //    }
+        //    return equipmentProperty;
+        //}
     }
 }

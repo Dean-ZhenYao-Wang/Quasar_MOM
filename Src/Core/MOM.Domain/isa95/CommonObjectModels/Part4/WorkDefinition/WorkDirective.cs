@@ -16,13 +16,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkDefinition
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:WorkDirective;1";
 
         [JsonIgnore]
-        public virtual WorkDirectiveIsCretaedFromRelationshipCollection IsCretaedFrom { get; set; } = new WorkDirectiveIsCretaedFromRelationshipCollection();
+public virtual List<WorkDirectiveIsCretaedFromRelationship> IsCretaedFrom { get; set; } = new List<WorkDirectiveIsCretaedFromRelationship>();
 
         [JsonIgnore]
-        public virtual WorkDirectiveContainsRelationshipCollection Contains { get; set; } = new WorkDirectiveContainsRelationshipCollection();
+public virtual List<WorkDirectiveContainsRelationship> Contains { get; set; } = new List<WorkDirectiveContainsRelationship>();
 
         [JsonIgnore]
-        public virtual WorkDirectiveHasARelationshipCollection HasA { get; set; } = new WorkDirectiveHasARelationshipCollection();
+public virtual List<WorkDirectiveHasARelationship> HasA { get; set; } = new List<WorkDirectiveHasARelationship>();
 
         public override bool Equals(object? obj)
         {

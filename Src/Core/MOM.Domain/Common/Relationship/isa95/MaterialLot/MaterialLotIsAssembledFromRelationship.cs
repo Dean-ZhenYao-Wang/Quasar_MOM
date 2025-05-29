@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialLot
 {
-    public class MaterialLotIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot>, IEquatable<MaterialLotIsAssembledFromRelationship>
+    public class MaterialLotIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot ,Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot>, IEquatable<MaterialLotIsAssembledFromRelationship>
     {
         public MaterialLotIsAssembledFromRelationship()
         {

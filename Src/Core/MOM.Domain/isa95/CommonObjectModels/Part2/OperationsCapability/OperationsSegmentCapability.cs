@@ -47,16 +47,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsCapability
         public virtual OperationsSegmentCapabilityIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new OperationsSegmentCapabilityIsMadeUpOfRelationshipCollection();
 
         [JsonIgnore]
-        public virtual OperationsSegmentCapabilityIsACollectionOfPersonnelRelationshipCollection IsACollectionOfPersonnel { get; set; } = new OperationsSegmentCapabilityIsACollectionOfPersonnelRelationshipCollection();
+        public virtual List<OperationsSegmentCapabilityIsACollectionOfPersonnelRelationship> IsACollectionOfPersonnel { get; set; } = new List<OperationsSegmentCapabilityIsACollectionOfPersonnelRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentCapabilityIsACollectionOfEquipmentRelationshipCollection IsACollectionOfEquipment { get; set; } = new OperationsSegmentCapabilityIsACollectionOfEquipmentRelationshipCollection();
+        public virtual List<OperationsSegmentCapabilityIsACollectionOfEquipmentRelationship> IsACollectionOfEquipment { get; set; } = new List<OperationsSegmentCapabilityIsACollectionOfEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentCapabilityIsACollectionOfPhysicalAssetRelationshipCollection IsACollectionOfPhysicalAsset { get; set; } = new OperationsSegmentCapabilityIsACollectionOfPhysicalAssetRelationshipCollection();
+        public virtual List<OperationsSegmentCapabilityIsACollectionOfPhysicalAssetRelationship> IsACollectionOfPhysicalAsset { get; set; } = new List<OperationsSegmentCapabilityIsACollectionOfPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentCapabilityIsACollectionOfMaterialRelationshipCollection IsACollectionOfMaterial { get; set; } = new OperationsSegmentCapabilityIsACollectionOfMaterialRelationshipCollection();
+        public virtual List<OperationsSegmentCapabilityIsACollectionOfMaterialRelationship> IsACollectionOfMaterial { get; set; } = new List<OperationsSegmentCapabilityIsACollectionOfMaterialRelationship>();
 
         [JsonIgnore]
         public virtual OperationsSegmentCapabilityHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsSegmentCapabilityHierarchyScopeRelRelationshipCollection();

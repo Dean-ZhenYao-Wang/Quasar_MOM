@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.JobResponseList
 {
-    public class JobResponseListHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<JobResponseListHierarchyScopeRelRelationship>
+    public class JobResponseListHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkPerformance.JobResponseList ,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<JobResponseListHierarchyScopeRelRelationship>
     {
         public JobResponseListHierarchyScopeRelRelationship()
         {

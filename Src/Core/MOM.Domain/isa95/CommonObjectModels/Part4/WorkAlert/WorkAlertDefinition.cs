@@ -25,10 +25,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkAlert
         public string? Category { get; set; }
 
         [JsonIgnore]
-        public virtual WorkAlertDefinitionHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new WorkAlertDefinitionHasPropertiesOfRelationshipCollection();
+public virtual List<WorkAlertDefinitionHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<WorkAlertDefinitionHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual WorkAlertDefinitionHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkAlertDefinitionHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkAlertDefinitionHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkAlertDefinitionHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

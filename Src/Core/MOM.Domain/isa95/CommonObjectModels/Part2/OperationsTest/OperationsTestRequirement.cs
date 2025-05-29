@@ -16,13 +16,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:OperationsTestRequirement;1";
 
         [JsonIgnore]
-        public virtual OperationsTestRequirementSpecifiesRelationshipCollection Specifies { get; set; } = new OperationsTestRequirementSpecifiesRelationshipCollection();
+public virtual List<OperationsTestRequirementSpecifiesRelationship> Specifies { get; set; } = new List<OperationsTestRequirementSpecifiesRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsTestRequirementCorrespondsToAnElementInRelationshipCollection CorrespondsToAnElementIn { get; set; } = new OperationsTestRequirementCorrespondsToAnElementInRelationshipCollection();
+public virtual List<OperationsTestRequirementCorrespondsToAnElementInRelationship> CorrespondsToAnElementIn { get; set; } = new List<OperationsTestRequirementCorrespondsToAnElementInRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsTestRequirementMapsToAPropertyElementInRelationshipCollection MapsToAPropertyElementIn { get; set; } = new OperationsTestRequirementMapsToAPropertyElementInRelationshipCollection();
+public virtual List<OperationsTestRequirementMapsToAPropertyElementInRelationship> MapsToAPropertyElementIn { get; set; } = new List<OperationsTestRequirementMapsToAPropertyElementInRelationship>();
 
         public override bool Equals(object? obj)
         {

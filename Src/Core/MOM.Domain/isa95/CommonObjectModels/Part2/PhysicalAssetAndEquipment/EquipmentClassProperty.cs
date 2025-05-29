@@ -17,7 +17,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:EquipmentClassProperty;1";
 
         [JsonIgnore]
-        public virtual EquipmentClassPropertyContainsRelationshipCollection Contains { get; set; } = new EquipmentClassPropertyContainsRelationshipCollection();
+public virtual List<EquipmentClassPropertyContainsRelationship> Contains { get; set; } = new List<EquipmentClassPropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

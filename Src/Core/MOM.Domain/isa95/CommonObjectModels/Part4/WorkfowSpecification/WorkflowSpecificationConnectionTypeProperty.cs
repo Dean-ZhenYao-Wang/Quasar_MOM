@@ -22,10 +22,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkfowSpecification
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationConnectionTypePropertyContainsRelationshipCollection Contains { get; set; } = new WorkflowSpecificationConnectionTypePropertyContainsRelationshipCollection();
+public virtual List<WorkflowSpecificationConnectionTypePropertyContainsRelationship> Contains { get; set; } = new List<WorkflowSpecificationConnectionTypePropertyContainsRelationship>();
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationConnectionTypePropertyMapsToRelationshipCollection MapsTo { get; set; } = new WorkflowSpecificationConnectionTypePropertyMapsToRelationshipCollection();
+public virtual List<WorkflowSpecificationConnectionTypePropertyMapsToRelationship> MapsTo { get; set; } = new List<WorkflowSpecificationConnectionTypePropertyMapsToRelationship>();
 
         public override bool Equals(object? obj)
         {

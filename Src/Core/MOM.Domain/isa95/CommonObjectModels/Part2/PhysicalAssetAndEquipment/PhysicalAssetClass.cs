@@ -23,16 +23,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         public Guid? HierarchyScope { get; set; }
 
         [JsonIgnore]
-        public virtual PhysicalAssetClassIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new PhysicalAssetClassIncludesPropertiesOfRelationshipCollection();
+public virtual List<PhysicalAssetClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<PhysicalAssetClassIncludesPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetClassIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new PhysicalAssetClassIsMadeUpOfRelationshipCollection();
+public virtual List<PhysicalAssetClassIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<PhysicalAssetClassIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetClassHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new PhysicalAssetClassHasPropertiesOfRelationshipCollection();
+public virtual List<PhysicalAssetClassHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<PhysicalAssetClassHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetClassHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new PhysicalAssetClassHierarchyScopeRelRelationshipCollection();
+public virtual List<PhysicalAssetClassHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<PhysicalAssetClassHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

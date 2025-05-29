@@ -17,7 +17,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:MaterialClassProperty;1";
 
         [JsonIgnore]
-        public virtual MaterialClassPropertyContainsRelationshipCollection Contains { get; set; } = new MaterialClassPropertyContainsRelationshipCollection();
+public virtual List<MaterialClassPropertyContainsRelationship> Contains { get; set; } = new List<MaterialClassPropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

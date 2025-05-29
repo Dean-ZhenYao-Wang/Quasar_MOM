@@ -44,25 +44,25 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCapability
         public string? HierarchyScope { get; set; }
 
         [JsonIgnore]
-        public virtual WorkMasterCapabilityCorrespondsToRelationshipCollection CorrespondsTo { get; set; } = new WorkMasterCapabilityCorrespondsToRelationshipCollection();
+        public virtual new List<WorkMasterCapabilityCorrespondsToRelationship> CorrespondsTo { get; set; } = new List<WorkMasterCapabilityCorrespondsToRelationship>();
 
         [JsonIgnore]
-        public virtual WorkMasterCapabilityIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new WorkMasterCapabilityIsMadeUpOfRelationshipCollection();
+        public virtual new List<WorkMasterCapabilityIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<WorkMasterCapabilityIsMadeUpOfRelationship>();
+    
+        [JsonIgnore]
+        public virtual List<WorkMasterCapabilityIsACollectionOfPersonnelRelationship> IsACollectionOfPersonnel { get; set; } = new List<WorkMasterCapabilityIsACollectionOfPersonnelRelationship>();
 
         [JsonIgnore]
-        public virtual WorkMasterCapabilityIsACollectionOfPersonnelRelationshipCollection IsACollectionOfPersonnel { get; set; } = new WorkMasterCapabilityIsACollectionOfPersonnelRelationshipCollection();
+        public virtual List<WorkMasterCapabilityIsACollectionOfEquipmentRelationship> IsACollectionOfEquipment { get; set; } = new List<WorkMasterCapabilityIsACollectionOfEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual WorkMasterCapabilityIsACollectionOfEquipmentRelationshipCollection IsACollectionOfEquipment { get; set; } = new WorkMasterCapabilityIsACollectionOfEquipmentRelationshipCollection();
+        public virtual List<WorkMasterCapabilityIsACollectionOfPhysicalAssetRelationship> IsACollectionOfPhysicalAsset { get; set; } = new List<WorkMasterCapabilityIsACollectionOfPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual WorkMasterCapabilityIsACollectionOfPhysicalAssetRelationshipCollection IsACollectionOfPhysicalAsset { get; set; } = new WorkMasterCapabilityIsACollectionOfPhysicalAssetRelationshipCollection();
+        public virtual List<WorkMasterCapabilityIsACollectionOfMaterialRelationship> IsACollectionOfMaterial { get; set; } = new List<WorkMasterCapabilityIsACollectionOfMaterialRelationship>();
 
         [JsonIgnore]
-        public virtual WorkMasterCapabilityIsACollectionOfMaterialRelationshipCollection IsACollectionOfMaterial { get; set; } = new WorkMasterCapabilityIsACollectionOfMaterialRelationshipCollection();
-
-        [JsonIgnore]
-        public virtual WorkMasterCapabilityHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkMasterCapabilityHierarchyScopeRelRelationshipCollection();
+        public virtual List<WorkMasterCapabilityHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkMasterCapabilityHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

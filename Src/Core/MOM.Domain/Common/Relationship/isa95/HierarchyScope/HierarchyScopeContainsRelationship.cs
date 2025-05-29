@@ -3,37 +3,27 @@ using System.Text.Json.Serialization;
 
 namespace MOM.Domain.Common.Relationship.isa95.HierarchyScope
 {
-    public class HierarchyScopeContainsRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<HierarchyScopeContainsRelationship>
+    public class HierarchyScopeContainsRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.HierarchyScope, MOM.Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<HierarchyScopeContainsRelationship>
     {
-        public HierarchyScopeContainsRelationship()
+        public HierarchyScopeContainsRelationship():base()
         {
             Name = "contains";
         }
-        /// <summary>
-        /// …Ó∂»
-        /// </summary>
-        public int Depth { get; set; }
-        [JsonIgnore]
-        [ForeignKey(nameof(SourceId))]
-        public virtual MOM.Domain.isa95.CommonObjectModels.HierarchyScope Source { get; set; }
 
-        public HierarchyScopeContainsRelationship(MOM.Domain.isa95.CommonObjectModels.HierarchyScope source, MOM.Domain.isa95.CommonObjectModels.HierarchyScope target) : this()
+        public HierarchyScopeContainsRelationship(Domain.isa95.CommonObjectModels.HierarchyScope source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)
         {
-            InitializeFromTwins(source, target);
         }
 
-        public HierarchyScopeContainsRelationship(Guid? sourceId, Guid targetId) : this()
+        public HierarchyScopeContainsRelationship(Guid? sourceId, Guid targetId) : base(sourceId, targetId)
         {
-            InitializeFromTwins(sourceId, targetId);
         }
-        public HierarchyScopeContainsRelationship(Guid? sourceId, Guid targetId,int depth) : this()
+
+        public HierarchyScopeContainsRelationship(Guid? sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
         {
-            InitializeFromTwins(sourceId, targetId);
-            this.Depth = depth;
         }
-        public HierarchyScopeContainsRelationship(Guid? sourceId, MOM.Domain.isa95.CommonObjectModels.HierarchyScope target, int depth) : this(sourceId,target.DtId,depth)
+
+        public HierarchyScopeContainsRelationship(Guid? sourceId, Domain.isa95.CommonObjectModels.HierarchyScope target, int depth) : base(sourceId, target, depth)
         {
-            this.Target= target;
         }
 
         public override bool Equals(object? obj)

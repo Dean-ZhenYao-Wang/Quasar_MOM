@@ -50,19 +50,19 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsEvent
         /// 组合关系
         /// </summary>
         [JsonIgnore]
-        public virtual OperationsEventDefinitionIsAssembledFromRelationshipCollection IsAssembledFrom { get; set; } = new OperationsEventDefinitionIsAssembledFromRelationshipCollection();
+public virtual List<OperationsEventDefinitionIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<OperationsEventDefinitionIsAssembledFromRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventDefinitionIsAMemberOfRelationshipCollection IsAMemberOf { get; set; } = new OperationsEventDefinitionIsAMemberOfRelationshipCollection();
+public virtual List<OperationsEventDefinitionIsAMemberOfRelationship> IsAMemberOf { get; set; } = new List<OperationsEventDefinitionIsAMemberOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventDefinitionHasRecordSpecificationsOfRelationshipCollection HasRecordSpecificationsOf { get; set; } = new OperationsEventDefinitionHasRecordSpecificationsOfRelationshipCollection();
+public virtual List<OperationsEventDefinitionHasRecordSpecificationsOfRelationship> HasRecordSpecificationsOf { get; set; } = new List<OperationsEventDefinitionHasRecordSpecificationsOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventDefinitionHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new OperationsEventDefinitionHasPropertiesOfRelationshipCollection();
+public virtual List<OperationsEventDefinitionHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<OperationsEventDefinitionHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventDefinitionHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsEventDefinitionHierarchyScopeRelRelationshipCollection();
+public virtual List<OperationsEventDefinitionHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationsEventDefinitionHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

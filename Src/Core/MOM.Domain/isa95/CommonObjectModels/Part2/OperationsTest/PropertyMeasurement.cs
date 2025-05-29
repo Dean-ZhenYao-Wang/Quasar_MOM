@@ -28,10 +28,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest
         public DateTime? Expiration { get; set; }
 
         [JsonIgnore]
-        public virtual PropertyMeasurementRecordsMeasurementOfRelationshipCollection RecordsMeasurementOf { get; set; } = new PropertyMeasurementRecordsMeasurementOfRelationshipCollection();
+public virtual List<PropertyMeasurementRecordsMeasurementOfRelationship> RecordsMeasurementOf { get; set; } = new List<PropertyMeasurementRecordsMeasurementOfRelationship>();
 
         [JsonIgnore]
-        public virtual PropertyMeasurementMeasuredWithMethodOfRelationshipCollection MeasuredWithMethodOf { get; set; } = new PropertyMeasurementMeasuredWithMethodOfRelationshipCollection();
+public virtual List<PropertyMeasurementMeasuredWithMethodOfRelationship> MeasuredWithMethodOf { get; set; } = new List<PropertyMeasurementMeasuredWithMethodOfRelationship>();
 
         public override bool Equals(object? obj)
         {

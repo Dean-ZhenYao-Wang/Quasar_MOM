@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentActual
 {
-    public class EquipmentActualHasValuesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.EquipmentActualProperty>, IEquatable<EquipmentActualHasValuesOfRelationship>
+    public class EquipmentActualHasValuesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.EquipmentActual,Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.EquipmentActualProperty>, IEquatable<EquipmentActualHasValuesOfRelationship>
     {
         public EquipmentActualHasValuesOfRelationship()
         {

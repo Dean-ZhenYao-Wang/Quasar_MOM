@@ -16,7 +16,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkfowSpecification
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:WorkflowSpecificationNodeType;1";
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationNodeTypeHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new WorkflowSpecificationNodeTypeHasPropertiesOfRelationshipCollection();
+public virtual List<WorkflowSpecificationNodeTypeHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<WorkflowSpecificationNodeTypeHasPropertiesOfRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -38,19 +38,19 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkSchedule
         public WorkRequestRequestState? RequestState { get; set; }
 
         [JsonIgnore]
-        public virtual WorkRequestIsMadeUpOfRequestRelationshipCollection IsMadeUpOfRequest { get; set; } = new WorkRequestIsMadeUpOfRequestRelationshipCollection();
+public virtual List<WorkRequestIsMadeUpOfRequestRelationship> IsMadeUpOfRequest { get; set; } = new List<WorkRequestIsMadeUpOfRequestRelationship>();
 
         [JsonIgnore]
-        public virtual WorkRequestIsMadeUpOfJobRelationshipCollection IsMadeUpOfJob { get; set; } = new WorkRequestIsMadeUpOfJobRelationshipCollection();
+public virtual List<WorkRequestIsMadeUpOfJobRelationship> IsMadeUpOfJob { get; set; } = new List<WorkRequestIsMadeUpOfJobRelationship>();
 
         [JsonIgnore]
-        public virtual WorkRequestCorrespondsToRequestRelationshipCollection CorrespondsToRequest { get; set; } = new WorkRequestCorrespondsToRequestRelationshipCollection();
+public virtual List<WorkRequestCorrespondsToRequestRelationship> CorrespondsToRequest { get; set; } = new List<WorkRequestCorrespondsToRequestRelationship>();
 
         [JsonIgnore]
-        public virtual WorkRequestCorrespondsToRequirementRelationshipCollection CorrespondsToRequirement { get; set; } = new WorkRequestCorrespondsToRequirementRelationshipCollection();
+public virtual List<WorkRequestCorrespondsToRequirementRelationship> CorrespondsToRequirement { get; set; } = new List<WorkRequestCorrespondsToRequirementRelationship>();
 
         [JsonIgnore]
-        public virtual WorkRequestHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkRequestHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkRequestHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkRequestHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -35,37 +35,37 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsPerformance
         public SegmentResponseSegmentState? SegmentState { get; set; }
 
         [JsonIgnore]
-        public virtual SegmentResponseCorrespondsToDefinitionRelationshipCollection CorrespondsToDefinition { get; set; } = new SegmentResponseCorrespondsToDefinitionRelationshipCollection();
+public virtual List<SegmentResponseCorrespondsToDefinitionRelationship> CorrespondsToDefinition { get; set; } = new List<SegmentResponseCorrespondsToDefinitionRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentResponseCorrespondsToSegmentRelationshipCollection CorrespondsToSegment { get; set; } = new SegmentResponseCorrespondsToSegmentRelationshipCollection();
+public virtual List<SegmentResponseCorrespondsToSegmentRelationship> CorrespondsToSegment { get; set; } = new List<SegmentResponseCorrespondsToSegmentRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentResponseCorrespondsToAProcessSegmentRelationshipCollection CorrespondsToAProcessSegment { get; set; } = new SegmentResponseCorrespondsToAProcessSegmentRelationshipCollection();
+public virtual List<SegmentResponseCorrespondsToAProcessSegmentRelationship> CorrespondsToAProcessSegment { get; set; } = new List<SegmentResponseCorrespondsToAProcessSegmentRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentResponseCorrespondsToRequirementRelationshipCollection CorrespondsToRequirement { get; set; } = new SegmentResponseCorrespondsToRequirementRelationshipCollection();
+public virtual List<SegmentResponseCorrespondsToRequirementRelationship> CorrespondsToRequirement { get; set; } = new List<SegmentResponseCorrespondsToRequirementRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentResponseIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new SegmentResponseIsMadeUpOfRelationshipCollection();
+public virtual List<SegmentResponseIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<SegmentResponseIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentResponseContainsDataRelationshipCollection ContainsData { get; set; } = new SegmentResponseContainsDataRelationshipCollection();
+public virtual List<SegmentResponseContainsDataRelationship> ContainsData { get; set; } = new List<SegmentResponseContainsDataRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentResponseContainsPersonnelRelationshipCollection ContainsPersonnel { get; set; } = new SegmentResponseContainsPersonnelRelationshipCollection();
+public virtual List<SegmentResponseContainsPersonnelRelationship> ContainsPersonnel { get; set; } = new List<SegmentResponseContainsPersonnelRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentResponseContainsEquipmentRelationshipCollection ContainsEquipment { get; set; } = new SegmentResponseContainsEquipmentRelationshipCollection();
+public virtual List<SegmentResponseContainsEquipmentRelationship> ContainsEquipment { get; set; } = new List<SegmentResponseContainsEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentResponseContainsPhysicalAssetRelationshipCollection ContainsPhysicalAsset { get; set; } = new SegmentResponseContainsPhysicalAssetRelationshipCollection();
+public virtual List<SegmentResponseContainsPhysicalAssetRelationship> ContainsPhysicalAsset { get; set; } = new List<SegmentResponseContainsPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentResponseContainsMaterialRelationshipCollection ContainsMaterial { get; set; } = new SegmentResponseContainsMaterialRelationshipCollection();
+public virtual List<SegmentResponseContainsMaterialRelationship> ContainsMaterial { get; set; } = new List<SegmentResponseContainsMaterialRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentResponseHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new SegmentResponseHierarchyScopeRelRelationshipCollection();
+public virtual List<SegmentResponseHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<SegmentResponseHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

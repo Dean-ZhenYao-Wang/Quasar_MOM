@@ -32,10 +32,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkSchedule
         public DateTime? PublishedDate { get; set; }
 
         [JsonIgnore]
-        public virtual JobListIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new JobListIsMadeUpOfRelationshipCollection();
+public virtual List<JobListIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<JobListIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual JobListHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new JobListHierarchyScopeRelRelationshipCollection();
+public virtual List<JobListHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<JobListHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

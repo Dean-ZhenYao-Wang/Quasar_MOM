@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.JobOrderParameter
 {
-    public class JobOrderParameterHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<JobOrderParameterHierarchyScopeRelRelationship>
+    public class JobOrderParameterHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkSchedule.JobOrderParameter,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<JobOrderParameterHierarchyScopeRelRelationship>
     {
         public JobOrderParameterHierarchyScopeRelRelationship()
         {

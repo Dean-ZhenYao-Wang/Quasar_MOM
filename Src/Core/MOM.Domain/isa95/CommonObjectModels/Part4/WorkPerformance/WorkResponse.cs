@@ -32,16 +32,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkPerformance
         public WorkResponseResponseState? ResponseState { get; set; }
 
         [JsonIgnore]
-        public virtual WorkResponseIsMadeUpOfResponseRelationshipCollection IsMadeUpOfResponse { get; set; } = new WorkResponseIsMadeUpOfResponseRelationshipCollection();
+public virtual List<WorkResponseIsMadeUpOfResponseRelationship> IsMadeUpOfResponse { get; set; } = new List<WorkResponseIsMadeUpOfResponseRelationship>();
 
         [JsonIgnore]
-        public virtual WorkResponseIsMadeUpOfJobRelationshipCollection IsMadeUpOfJob { get; set; } = new WorkResponseIsMadeUpOfJobRelationshipCollection();
+public virtual List<WorkResponseIsMadeUpOfJobRelationship> IsMadeUpOfJob { get; set; } = new List<WorkResponseIsMadeUpOfJobRelationship>();
 
         [JsonIgnore]
-        public virtual WorkResponseCorrespondsToRelationshipCollection CorrespondsTo { get; set; } = new WorkResponseCorrespondsToRelationshipCollection();
+public virtual List<WorkResponseCorrespondsToRelationship> CorrespondsTo { get; set; } = new List<WorkResponseCorrespondsToRelationship>();
 
         [JsonIgnore]
-        public virtual WorkResponseHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkResponseHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkResponseHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkResponseHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

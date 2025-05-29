@@ -1,20 +1,10 @@
 namespace MOM.Domain.Common.Relationship.isa95.OperationalLocation
 {
-    public class OperationalLocationHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<OperationalLocationHierarchyScopeRelRelationship>
+    public class OperationalLocationHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation ,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<OperationalLocationHierarchyScopeRelRelationship>
     {
-        public OperationalLocationHierarchyScopeRelRelationship()
+        public OperationalLocationHierarchyScopeRelRelationship():base()
         {
             Name = "hierarchyScopeRel";
-        }
-
-        public OperationalLocationHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation source, Domain.isa95.CommonObjectModels.HierarchyScope target) : this()
-        {
-            InitializeFromTwins(source, target);
-        }
-
-        public OperationalLocationHierarchyScopeRelRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
         }
 
         public override bool Equals(object? obj)

@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.OperationsCapability
 {
-    public class OperationsCapabilityIsACollectionOfOperationsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsCapability.OperationsSegmentCapability>, IEquatable<OperationsCapabilityIsACollectionOfOperationsRelationship>
+    public class OperationsCapabilityIsACollectionOfOperationsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsCapability.OperationsCapability,Domain.isa95.CommonObjectModels.Part2.OperationsCapability.OperationsSegmentCapability>, IEquatable<OperationsCapabilityIsACollectionOfOperationsRelationship>
     {
         public OperationsCapabilityIsACollectionOfOperationsRelationship()
         {

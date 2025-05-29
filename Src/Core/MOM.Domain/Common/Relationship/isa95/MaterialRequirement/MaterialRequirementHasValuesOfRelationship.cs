@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialRequirement
 {
-    public class MaterialRequirementHasValuesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.MaterialRequirementProperty>, IEquatable<MaterialRequirementHasValuesOfRelationship>
+    public class MaterialRequirementHasValuesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.MaterialRequirement,Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.MaterialRequirementProperty>, IEquatable<MaterialRequirementHasValuesOfRelationship>
     {
         public MaterialRequirementHasValuesOfRelationship()
         {

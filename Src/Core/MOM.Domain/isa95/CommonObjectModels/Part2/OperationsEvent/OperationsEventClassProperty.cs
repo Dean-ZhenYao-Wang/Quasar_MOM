@@ -26,7 +26,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsEvent
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsEventClassPropertyContainsRelationshipCollection Contains { get; set; } = new OperationsEventClassPropertyContainsRelationshipCollection();
+public virtual List<OperationsEventClassPropertyContainsRelationship> Contains { get; set; } = new List<OperationsEventClassPropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

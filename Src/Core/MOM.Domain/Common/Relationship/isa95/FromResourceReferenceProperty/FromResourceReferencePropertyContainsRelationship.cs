@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.FromResourceReferenceProperty
 {
-    public class FromResourceReferencePropertyContainsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.ResourceRelationship.FromResourceReferenceProperty>, IEquatable<FromResourceReferencePropertyContainsRelationship>
+    public class FromResourceReferencePropertyContainsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.ResourceRelationship.FromResourceReferenceProperty ,Domain.isa95.CommonObjectModels.Part4.ResourceRelationship.FromResourceReferenceProperty>, IEquatable<FromResourceReferencePropertyContainsRelationship>
     {
         public FromResourceReferencePropertyContainsRelationship()
         {

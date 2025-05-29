@@ -35,22 +35,22 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsPerformance
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual PhysicalAssetActualIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new PhysicalAssetActualIsMadeUpOfRelationshipCollection();
+public virtual List<PhysicalAssetActualIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<PhysicalAssetActualIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetActualHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new PhysicalAssetActualHasValuesOfRelationshipCollection();
+public virtual List<PhysicalAssetActualHasValuesOfRelationship> HasValuesOf { get; set; } = new List<PhysicalAssetActualHasValuesOfRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetActualCorrespondsToPhysicalAssetClassRelationshipCollection CorrespondsToPhysicalAssetClass { get; set; } = new PhysicalAssetActualCorrespondsToPhysicalAssetClassRelationshipCollection();
+public virtual List<PhysicalAssetActualCorrespondsToPhysicalAssetClassRelationship> CorrespondsToPhysicalAssetClass { get; set; } = new List<PhysicalAssetActualCorrespondsToPhysicalAssetClassRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetActualCorrespondsToPhysicalAssetRelationshipCollection CorrespondsToPhysicalAsset { get; set; } = new PhysicalAssetActualCorrespondsToPhysicalAssetRelationshipCollection();
+public virtual List<PhysicalAssetActualCorrespondsToPhysicalAssetRelationship> CorrespondsToPhysicalAsset { get; set; } = new List<PhysicalAssetActualCorrespondsToPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetActualHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new PhysicalAssetActualHierarchyScopeRelRelationshipCollection();
+public virtual List<PhysicalAssetActualHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<PhysicalAssetActualHierarchyScopeRelRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetActualPhysicalLocationRelRelationshipCollection PhysicalLocationRel { get; set; } = new PhysicalAssetActualPhysicalLocationRelRelationshipCollection();
+public virtual List<PhysicalAssetActualPhysicalLocationRelRelationship> PhysicalLocationRel { get; set; } = new List<PhysicalAssetActualPhysicalLocationRelRelationship>();
 
         public override bool Equals(object? obj)
         {

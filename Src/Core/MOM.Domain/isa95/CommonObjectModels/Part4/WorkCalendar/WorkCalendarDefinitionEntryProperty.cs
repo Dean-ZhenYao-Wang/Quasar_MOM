@@ -22,7 +22,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual WorkCalendarDefinitionEntryPropertyContainsRelationshipCollection Contains { get; set; } = new WorkCalendarDefinitionEntryPropertyContainsRelationshipCollection();
+public virtual List<WorkCalendarDefinitionEntryPropertyContainsRelationship> Contains { get; set; } = new List<WorkCalendarDefinitionEntryPropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

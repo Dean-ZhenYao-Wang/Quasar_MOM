@@ -26,14 +26,14 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         /// 嵌套的物料定义属性作为整体构成了这个物料定义属性的一部分。
         /// </summary>
         [JsonIgnore]
-        public virtual MaterialDefinitionPropertyContainsRelationshipCollection Contains { get; set; } = new MaterialDefinitionPropertyContainsRelationshipCollection();
+public virtual List<MaterialDefinitionPropertyContainsRelationship> Contains { get; set; } = new List<MaterialDefinitionPropertyContainsRelationship>();
 
         /// <summary>
         /// 如果父物料定义支持物料类，则物料类属性应用于物料定义属性。这个物料定义属性映射到相应的物料类属性。
         /// 0...1
         /// </summary>
         [JsonIgnore]
-        public virtual MaterialDefinitionPropertyMapsToRelationshipCollection MapsTo { get; set; } = new MaterialDefinitionPropertyMapsToRelationshipCollection();
+public virtual List<MaterialDefinitionPropertyMapsToRelationship> MapsTo { get; set; } = new List<MaterialDefinitionPropertyMapsToRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -41,26 +41,26 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         /// </summary>
         /// <remarks>This material definition is part of the related object as the whole<br></br>这个物料的定义是作为整体的有关对象的一部分</remarks>
         [JsonIgnore]
-        public virtual MaterialDefinitionIsAssembledFromRelationshipCollection IsAssembledFrom { get; set; } = new MaterialDefinitionIsAssembledFromRelationshipCollection();
+public virtual List<MaterialDefinitionIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<MaterialDefinitionIsAssembledFromRelationship>();
 
         /// <summary>
         /// 本物料定义的物料定义属性。
         /// </summary>
         [JsonIgnore]
-        public virtual MaterialDefinitionHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new MaterialDefinitionHasPropertiesOfRelationshipCollection();
+public virtual List<MaterialDefinitionHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<MaterialDefinitionHasPropertiesOfRelationship>();
 
         /// <summary>
         /// This material definition objects support this material class.<br>这个物料定义对象支持这个物料类。</br>
         /// </summary>
         [JsonIgnore]
-        public virtual MaterialDefinitionIsMemberOfClassRelationshipCollection IsMemberOfClass { get; set; } = new MaterialDefinitionIsMemberOfClassRelationshipCollection();
+public virtual List<MaterialDefinitionIsMemberOfClassRelationship> IsMemberOfClass { get; set; } = new List<MaterialDefinitionIsMemberOfClassRelationship>();
 
         /// <summary>
         /// 适合层次结构范围
         /// </summary>
         /// <remarks>可选的层次关系。不是标准规格的一部分。</remarks>
         [JsonIgnore]
-        public virtual MaterialDefinitionHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new MaterialDefinitionHierarchyScopeRelRelationshipCollection();
+public virtual List<MaterialDefinitionHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<MaterialDefinitionHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

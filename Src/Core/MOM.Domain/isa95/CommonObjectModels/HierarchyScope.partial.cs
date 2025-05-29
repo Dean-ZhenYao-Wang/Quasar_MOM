@@ -17,10 +17,6 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 路径
         /// </summary>
         public string FullPath { get; set; } = string.Empty;
-        /// <summary>
-        /// 当前深度
-        /// </summary>
-        public int Depth { get; set; }
         public string? Description { get; set; }
 
         /// <summary>
@@ -56,15 +52,15 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// <summary>
         /// 权限清单
         /// </summary>
-        public virtual ICollection<OrgPermission> Permissions { get; set; } = new List<OrgPermission>();
+public virtual List<OrgPermission> Permissions { get; set; } = new List<OrgPermission>();
         /// <summary>
         /// 班组清单
         /// </summary>
-        public virtual ICollection<PersonnelClass> Teams { get; set; } = new List<PersonnelClass>();
+public virtual List<PersonnelClass> Teams { get; set; } = new List<PersonnelClass>();
         /// <summary>
         /// 人员清单
         /// </summary>
-        public virtual ICollection<Person> Peoples { get; set; } = new List<Person>();
+public virtual List<Person> Peoples { get; set; } = new List<Person>();
         /// <summary>
         /// 父级唯一标识
         /// </summary>
@@ -85,7 +81,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
 
         public void Delete()
         {
-            if (this.Contains.Any(st => st.Target.IsDelete == false))
+            if (this.Contains.Any(st => st.IsDelete == false))
             {
                 throw new MethodAccessException("存在子级，无法删除，是否强制删除(强制删除时子级也将会被删除)。");
             }

@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialSegmentSpecification
 {
-    public class MaterialSegmentSpecificationIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.ProcessSegment.MaterialSegmentSpecification>, IEquatable<MaterialSegmentSpecificationIsAssembledFromRelationship>
+    public class MaterialSegmentSpecificationIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.ProcessSegment.MaterialSegmentSpecification ,Domain.isa95.CommonObjectModels.Part2.ProcessSegment.MaterialSegmentSpecification>, IEquatable<MaterialSegmentSpecificationIsAssembledFromRelationship>
     {
         public MaterialSegmentSpecificationIsAssembledFromRelationship()
         {

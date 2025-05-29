@@ -28,16 +28,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsCapability
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual MaterialCapabilityPropertyContainsRelationshipCollection Contains { get; set; } = new MaterialCapabilityPropertyContainsRelationshipCollection();
+public virtual List<MaterialCapabilityPropertyContainsRelationship> Contains { get; set; } = new List<MaterialCapabilityPropertyContainsRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialCapabilityPropertyMapsToClassPropertyRelationshipCollection MapsToClassProperty { get; set; } = new MaterialCapabilityPropertyMapsToClassPropertyRelationshipCollection();
+public virtual List<MaterialCapabilityPropertyMapsToClassPropertyRelationship> MapsToClassProperty { get; set; } = new List<MaterialCapabilityPropertyMapsToClassPropertyRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialCapabilityPropertyMapsToDefinitionPropertyRelationshipCollection MapsToDefinitionProperty { get; set; } = new MaterialCapabilityPropertyMapsToDefinitionPropertyRelationshipCollection();
+public virtual List<MaterialCapabilityPropertyMapsToDefinitionPropertyRelationship> MapsToDefinitionProperty { get; set; } = new List<MaterialCapabilityPropertyMapsToDefinitionPropertyRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialCapabilityPropertyMapsToLotPropertyRelationshipCollection MapsToLotProperty { get; set; } = new MaterialCapabilityPropertyMapsToLotPropertyRelationshipCollection();
+public virtual List<MaterialCapabilityPropertyMapsToLotPropertyRelationship> MapsToLotProperty { get; set; } = new List<MaterialCapabilityPropertyMapsToLotPropertyRelationship>();
 
         public override bool Equals(object? obj)
         {

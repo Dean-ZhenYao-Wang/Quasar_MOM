@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.EvaluatedProperty
 {
-    public class EvaluatedPropertyReferencesRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestSpecificationCriteria>, IEquatable<EvaluatedPropertyReferencesRelationship>
+    public class EvaluatedPropertyReferencesRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsTest.EvaluatedProperty ,Domain.isa95.CommonObjectModels.Part2.OperationsTest.TestSpecificationCriteria>, IEquatable<EvaluatedPropertyReferencesRelationship>
     {
         public EvaluatedPropertyReferencesRelationship()
         {

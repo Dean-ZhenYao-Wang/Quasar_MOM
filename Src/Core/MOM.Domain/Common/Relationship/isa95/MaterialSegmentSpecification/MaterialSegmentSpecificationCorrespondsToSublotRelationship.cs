@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialSegmentSpecification
 {
-    public class MaterialSegmentSpecificationCorrespondsToSublotRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot>, IEquatable<MaterialSegmentSpecificationCorrespondsToSublotRelationship>
+    public class MaterialSegmentSpecificationCorrespondsToSublotRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.ProcessSegment.MaterialSegmentSpecification ,Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot>, IEquatable<MaterialSegmentSpecificationCorrespondsToSublotRelationship>
     {
         public MaterialSegmentSpecificationCorrespondsToSublotRelationship()
         {

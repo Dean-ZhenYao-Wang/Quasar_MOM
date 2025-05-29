@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentSegmentSpecificationProperty
 {
-    public class EquipmentSegmentSpecificationPropertyMapsToPropertyRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentProperty>, IEquatable<EquipmentSegmentSpecificationPropertyMapsToPropertyRelationship>
+    public class EquipmentSegmentSpecificationPropertyMapsToPropertyRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.ProcessSegment.EquipmentSegmentSpecificationProperty ,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentProperty>, IEquatable<EquipmentSegmentSpecificationPropertyMapsToPropertyRelationship>
     {
         public EquipmentSegmentSpecificationPropertyMapsToPropertyRelationship()
         {

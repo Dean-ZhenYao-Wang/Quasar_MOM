@@ -44,31 +44,31 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsSchedule
         /// 组合关系
         /// </summary>
         [JsonIgnore]
-        public virtual MaterialRequirementIsAssembledFromRelationshipCollection IsAssembledFrom { get; set; } = new MaterialRequirementIsAssembledFromRelationshipCollection();
+public virtual List<MaterialRequirementIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<MaterialRequirementIsAssembledFromRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialRequirementHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new MaterialRequirementHasValuesOfRelationshipCollection();
+public virtual List<MaterialRequirementHasValuesOfRelationship> HasValuesOf { get; set; } = new List<MaterialRequirementHasValuesOfRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialRequirementContainsRelationshipCollection Contains { get; set; } = new MaterialRequirementContainsRelationshipCollection();
+public virtual List<MaterialRequirementContainsRelationship> Contains { get; set; } = new List<MaterialRequirementContainsRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialRequirementCorrespondsToClassRelationshipCollection CorrespondsToClass { get; set; } = new MaterialRequirementCorrespondsToClassRelationshipCollection();
+public virtual List<MaterialRequirementCorrespondsToClassRelationship> CorrespondsToClass { get; set; } = new List<MaterialRequirementCorrespondsToClassRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialRequirementCorrespondsToDefinitionRelationshipCollection CorrespondsToDefinition { get; set; } = new MaterialRequirementCorrespondsToDefinitionRelationshipCollection();
+public virtual List<MaterialRequirementCorrespondsToDefinitionRelationship> CorrespondsToDefinition { get; set; } = new List<MaterialRequirementCorrespondsToDefinitionRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialRequirementCorrespondsToLotRelationshipCollection CorrespondsToLot { get; set; } = new MaterialRequirementCorrespondsToLotRelationshipCollection();
+public virtual List<MaterialRequirementCorrespondsToLotRelationship> CorrespondsToLot { get; set; } = new List<MaterialRequirementCorrespondsToLotRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialRequirementCorrespondsToSublotRelationshipCollection CorrespondsToSublot { get; set; } = new MaterialRequirementCorrespondsToSublotRelationshipCollection();
+public virtual List<MaterialRequirementCorrespondsToSublotRelationship> CorrespondsToSublot { get; set; } = new List<MaterialRequirementCorrespondsToSublotRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialRequirementHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new MaterialRequirementHierarchyScopeRelRelationshipCollection();
+public virtual List<MaterialRequirementHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<MaterialRequirementHierarchyScopeRelRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialRequirementStorageLocationRelRelationshipCollection StorageLocationRel { get; set; } = new MaterialRequirementStorageLocationRelRelationshipCollection();
+public virtual List<MaterialRequirementStorageLocationRelRelationship> StorageLocationRel { get; set; } = new List<MaterialRequirementStorageLocationRelRelationship>();
 
         public override bool Equals(object? obj)
         {

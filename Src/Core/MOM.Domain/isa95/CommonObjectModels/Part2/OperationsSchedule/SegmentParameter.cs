@@ -25,16 +25,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsSchedule
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual SegmentParameterContainsRelationshipCollection Contains { get; set; } = new SegmentParameterContainsRelationshipCollection();
+public virtual List<SegmentParameterContainsRelationship> Contains { get; set; } = new List<SegmentParameterContainsRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentParameterCorrespondsToSpecificationRelationshipCollection CorrespondsToSpecification { get; set; } = new SegmentParameterCorrespondsToSpecificationRelationshipCollection();
+public virtual List<SegmentParameterCorrespondsToSpecificationRelationship> CorrespondsToSpecification { get; set; } = new List<SegmentParameterCorrespondsToSpecificationRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentParameterCorrespondsToProcessRelationshipCollection CorrespondsToProcess { get; set; } = new SegmentParameterCorrespondsToProcessRelationshipCollection();
+public virtual List<SegmentParameterCorrespondsToProcessRelationship> CorrespondsToProcess { get; set; } = new List<SegmentParameterCorrespondsToProcessRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentParameterHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new SegmentParameterHierarchyScopeRelRelationshipCollection();
+public virtual List<SegmentParameterHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<SegmentParameterHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -16,7 +16,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.ResourceRelationship
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:ResourceNetworkConnectionType;1";
 
         [JsonIgnore]
-        public virtual ResourceNetworkConnectionTypeHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new ResourceNetworkConnectionTypeHasPropertiesOfRelationshipCollection();
+public virtual List<ResourceNetworkConnectionTypeHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<ResourceNetworkConnectionTypeHasPropertiesOfRelationship>();
 
         public override bool Equals(object? obj)
         {

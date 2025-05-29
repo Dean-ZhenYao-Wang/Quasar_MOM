@@ -163,7 +163,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
                 property.ContainsAddTarget(p.Target);
             }
             //删除的删除
-            property.Contains.Remove(deletePropertyDtIds);
+            foreach (var item in property.Contains.Where(m => deletePropertyDtIds.Contains(m.TargetId)))
+            {
+                item.IsDelete = true;
+            }
         }
         /// <summary>
         /// 班组绑定
@@ -204,7 +207,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             List<Guid> A = this.DefinedBy.Where(m => m.Target != null && m.Target.Description.Equals(type)).Select(m => m.TargetId).ToList();
             // A中有但B中没有的元素,需要删除的角色
             List<Guid> aNotInB = A.Except(targetDtIds).ToList();
-            this.DefinedBy.Remove(aNotInB);
+            foreach (var item in DefinedBy.Where(m => aNotInB.Contains(m.TargetId)))
+            {
+                item.IsDelete = true;
+            }
 
             // B中有但A中没有的元素，需要添加的角色
             List<Guid> bNotInA = targetDtIds.Except(A).ToList();

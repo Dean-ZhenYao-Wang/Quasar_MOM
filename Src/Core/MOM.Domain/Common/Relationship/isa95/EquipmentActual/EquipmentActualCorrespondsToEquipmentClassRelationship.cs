@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentActual
 {
-    public class EquipmentActualCorrespondsToEquipmentClassRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass>, IEquatable<EquipmentActualCorrespondsToEquipmentClassRelationship>
+    public class EquipmentActualCorrespondsToEquipmentClassRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.EquipmentActual,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass>, IEquatable<EquipmentActualCorrespondsToEquipmentClassRelationship>
     {
         public EquipmentActualCorrespondsToEquipmentClassRelationship()
         {

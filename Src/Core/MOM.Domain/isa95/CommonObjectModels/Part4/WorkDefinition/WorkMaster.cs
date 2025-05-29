@@ -20,19 +20,19 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkDefinition
         public WorkMasterDefinitionType? DefinitionType { get; set; }
 
         [JsonIgnore]
-        public virtual WorkMasterIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new WorkMasterIncludesPropertiesOfRelationshipCollection();
+public virtual List<WorkMasterIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<WorkMasterIncludesPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual WorkMasterCorrespondsToProcessRelationshipCollection CorrespondsToProcess { get; set; } = new WorkMasterCorrespondsToProcessRelationshipCollection();
+public virtual List<WorkMasterCorrespondsToProcessRelationship> CorrespondsToProcess { get; set; } = new List<WorkMasterCorrespondsToProcessRelationship>();
 
         [JsonIgnore]
-        public virtual WorkMasterCorrespondsToDefinitionRelationshipCollection CorrespondsToDefinition { get; set; } = new WorkMasterCorrespondsToDefinitionRelationshipCollection();
+public virtual List<WorkMasterCorrespondsToDefinitionRelationship> CorrespondsToDefinition { get; set; } = new List<WorkMasterCorrespondsToDefinitionRelationship>();
 
         [JsonIgnore]
-        public virtual WorkMasterCorrespondsToOperationsRelationshipCollection CorrespondsToOperations { get; set; } = new WorkMasterCorrespondsToOperationsRelationshipCollection();
+public virtual List<WorkMasterCorrespondsToOperationsRelationship> CorrespondsToOperations { get; set; } = new List<WorkMasterCorrespondsToOperationsRelationship>();
 
         [JsonIgnore]
-        public virtual WorkMasterHasARelationshipCollection HasA { get; set; } = new WorkMasterHasARelationshipCollection();
+public virtual List<WorkMasterHasARelationship> HasA { get; set; } = new List<WorkMasterHasARelationship>();
 
         public override bool Equals(object? obj)
         {

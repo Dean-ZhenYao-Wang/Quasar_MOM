@@ -35,16 +35,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkPerformance
         public WorkPerformanceWorkState? WorkState { get; set; }
 
         [JsonIgnore]
-        public virtual WorkPerformanceIsMadeUpOfPerformanceRelationshipCollection IsMadeUpOfPerformance { get; set; } = new WorkPerformanceIsMadeUpOfPerformanceRelationshipCollection();
+public virtual List<WorkPerformanceIsMadeUpOfPerformanceRelationship> IsMadeUpOfPerformance { get; set; } = new List<WorkPerformanceIsMadeUpOfPerformanceRelationship>();
 
         [JsonIgnore]
-        public virtual WorkPerformanceIsMadeUpOfResponseRelationshipCollection IsMadeUpOfResponse { get; set; } = new WorkPerformanceIsMadeUpOfResponseRelationshipCollection();
+public virtual List<WorkPerformanceIsMadeUpOfResponseRelationship> IsMadeUpOfResponse { get; set; } = new List<WorkPerformanceIsMadeUpOfResponseRelationship>();
 
         [JsonIgnore]
-        public virtual WorkPerformanceCorrespondsToRelationshipCollection CorrespondsTo { get; set; } = new WorkPerformanceCorrespondsToRelationshipCollection();
+public virtual List<WorkPerformanceCorrespondsToRelationship> CorrespondsTo { get; set; } = new List<WorkPerformanceCorrespondsToRelationship>();
 
         [JsonIgnore]
-        public virtual WorkPerformanceHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkPerformanceHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkPerformanceHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkPerformanceHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

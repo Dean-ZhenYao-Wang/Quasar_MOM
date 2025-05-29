@@ -39,13 +39,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         public PersonOperationalLocationType? OperationalLocationType { get; set; }
 
         [JsonIgnore]
-        public virtual PersonDefinedByRelationshipCollection DefinedBy { get; set; } = new PersonDefinedByRelationshipCollection();
+public virtual List<PersonDefinedByRelationship> DefinedBy { get; set; } = new List<PersonDefinedByRelationship>();
 
         /// <summary>
         /// 扩展属性、不参与业务规则
         /// </summary>
         [JsonIgnore]
-        public virtual PersonHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new PersonHasValuesOfRelationshipCollection();
+public virtual List<PersonHasValuesOfRelationship> HasValuesOf { get; set; } = new List<PersonHasValuesOfRelationship>();
 
         /// <summary>
         /// 确定交换的信息在基于角色的设备层次结构中的位置。可选地，层次结构作用域定义人员定义的作用域。
@@ -61,7 +61,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
 
         //[MaxLength(1)]
         [JsonIgnore]
-        public virtual PersonOperationalLocationRelRelationshipCollection OperationalLocationRel { get; set; } = new PersonOperationalLocationRelRelationshipCollection();
+public virtual List<PersonOperationalLocationRelRelationship> OperationalLocationRel { get; set; } = new List<PersonOperationalLocationRelRelationship>();
         /// <summary>
         /// 在空间上将人物角色定义为零维点、一维线、二维形状或三维实体<br/>
         /// / / WKT / POLYGON（(-646.99 676.18, -645.14 683.09, -)）

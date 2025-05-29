@@ -16,10 +16,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:MaterialLotProperty;1";
 
         [JsonIgnore]
-        public virtual MaterialLotPropertyContainsRelationshipCollection Contains { get; set; } = new MaterialLotPropertyContainsRelationshipCollection();
+public virtual List<MaterialLotPropertyContainsRelationship> Contains { get; set; } = new List<MaterialLotPropertyContainsRelationship>();
 
         [JsonIgnore]
-        public virtual MaterialLotPropertyMapsToRelationshipCollection MapsTo { get; set; } = new MaterialLotPropertyMapsToRelationshipCollection();
+public virtual List<MaterialLotPropertyMapsToRelationship> MapsTo { get; set; } = new List<MaterialLotPropertyMapsToRelationship>();
 
         public override bool Equals(object? obj)
         {

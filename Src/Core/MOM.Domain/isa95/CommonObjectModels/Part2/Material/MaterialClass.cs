@@ -42,7 +42,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         /// </summary>
         /// <remarks>父子关系<br></br>This material class(s) include properties of the material class.<br></br>该材料类别包括该材料类别的属性。</remarks>
         [JsonIgnore]
-        public virtual MaterialClassIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new MaterialClassIncludesPropertiesOfRelationshipCollection();
+public virtual List<MaterialClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<MaterialClassIncludesPropertiesOfRelationship>();
 
         /// <summary>
         /// 面分类 又称平行分类 物料模板采用面分类 https://zhuanlan.zhihu.com/p/496464306
@@ -50,20 +50,20 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         /// </summary>
         /// <remarks>组合关系<br></br>This parent material class is whole of the child material class(s) as the part.<br></br>这个父材质类是子材质类的整体。</remarks>
         [JsonIgnore]
-        public virtual MaterialClassIsAssembledFromRelationshipCollection IsAssembledFrom { get; set; } = new MaterialClassIsAssembledFromRelationshipCollection();
+public virtual List<MaterialClassIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<MaterialClassIsAssembledFromRelationship>();
 
         /// <summary>
         /// 该物料类的物料类属性。
         /// </summary>
         [JsonIgnore]
-        public virtual MaterialClassHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new MaterialClassHasPropertiesOfRelationshipCollection();
+public virtual List<MaterialClassHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<MaterialClassHasPropertiesOfRelationship>();
 
         /// <summary>
         /// 适合层次结构范围
         /// </summary>
         /// <remarks>可选的层次关系。不是标准规格的一部分。</remarks>
         [JsonIgnore]
-        public virtual MaterialClassHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new MaterialClassHierarchyScopeRelRelationshipCollection();
+public virtual List<MaterialClassHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<MaterialClassHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

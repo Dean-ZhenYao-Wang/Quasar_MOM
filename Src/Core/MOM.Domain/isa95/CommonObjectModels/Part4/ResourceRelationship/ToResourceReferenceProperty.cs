@@ -22,13 +22,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.ResourceRelationship
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual ToResourceReferencePropertyContainsRelationshipCollection Contains { get; set; } = new ToResourceReferencePropertyContainsRelationshipCollection();
+public virtual List<ToResourceReferencePropertyContainsRelationship> Contains { get; set; } = new List<ToResourceReferencePropertyContainsRelationship>();
 
         [JsonIgnore]
-        public virtual ToResourceReferencePropertyMapsToClassPropertyRelationshipCollection MapsToClassProperty { get; set; } = new ToResourceReferencePropertyMapsToClassPropertyRelationshipCollection();
+public virtual List<ToResourceReferencePropertyMapsToClassPropertyRelationship> MapsToClassProperty { get; set; } = new List<ToResourceReferencePropertyMapsToClassPropertyRelationship>();
 
         [JsonIgnore]
-        public virtual ToResourceReferencePropertyMapsToPropertyRelationshipCollection MapsToProperty { get; set; } = new ToResourceReferencePropertyMapsToPropertyRelationshipCollection();
+public virtual List<ToResourceReferencePropertyMapsToPropertyRelationship> MapsToProperty { get; set; } = new List<ToResourceReferencePropertyMapsToPropertyRelationship>();
 
         public override bool Equals(object? obj)
         {

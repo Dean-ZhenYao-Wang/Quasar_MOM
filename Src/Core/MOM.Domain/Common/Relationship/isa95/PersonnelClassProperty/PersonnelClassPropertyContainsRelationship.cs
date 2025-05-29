@@ -3,25 +3,19 @@ using System.Text.Json.Serialization;
 
 namespace MOM.Domain.Common.Relationship.isa95.PersonnelClassProperty
 {
-    public class PersonnelClassPropertyContainsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty>, IEquatable<PersonnelClassPropertyContainsRelationship>
+    public class PersonnelClassPropertyContainsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty,Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty>, IEquatable<PersonnelClassPropertyContainsRelationship>
     {
-        public PersonnelClassPropertyContainsRelationship()
+        public PersonnelClassPropertyContainsRelationship():base()
         {
             Name = "contains";
         }
 
-        [JsonIgnore]
-        [ForeignKey(nameof(SourceId))]
-        public virtual Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty Source { get; set; }
-
-        public PersonnelClassPropertyContainsRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty source, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty target) : this()
+        public PersonnelClassPropertyContainsRelationship(Guid? sourceId, Guid targetId) : base(sourceId, targetId)
         {
-            InitializeFromTwins(source, target);
         }
 
-        public PersonnelClassPropertyContainsRelationship(Guid? sourceId, Guid targetId) : this()
+        public PersonnelClassPropertyContainsRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty source, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty target) : base(source, target)
         {
-            InitializeFromTwins(sourceId, targetId);
         }
 
         public override bool Equals(object? obj)

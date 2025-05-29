@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.PersonProperty
 {
-    public partial class PersonPropertyMapsToRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty>, IEquatable<PersonPropertyMapsToRelationship>
+    public partial class PersonPropertyMapsToRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty,Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty>, IEquatable<PersonPropertyMapsToRelationship>
     {
         public PersonPropertyMapsToRelationship()
         {

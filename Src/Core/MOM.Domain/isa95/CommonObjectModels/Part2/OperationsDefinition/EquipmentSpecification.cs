@@ -35,25 +35,25 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual EquipmentSpecificationIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new EquipmentSpecificationIsMadeUpOfRelationshipCollection();
+public virtual List<EquipmentSpecificationIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<EquipmentSpecificationIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual EquipmentSpecificationSpecifiesRelationshipCollection Specifies { get; set; } = new EquipmentSpecificationSpecifiesRelationshipCollection();
+public virtual List<EquipmentSpecificationSpecifiesRelationship> Specifies { get; set; } = new List<EquipmentSpecificationSpecifiesRelationship>();
 
         [JsonIgnore]
-        public virtual EquipmentSpecificationHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new EquipmentSpecificationHasPropertiesOfRelationshipCollection();
+public virtual List<EquipmentSpecificationHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<EquipmentSpecificationHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual EquipmentSpecificationCorrespondsToEquipmentClassRelationshipCollection CorrespondsToEquipmentClass { get; set; } = new EquipmentSpecificationCorrespondsToEquipmentClassRelationshipCollection();
+public virtual List<EquipmentSpecificationCorrespondsToEquipmentClassRelationship> CorrespondsToEquipmentClass { get; set; } = new List<EquipmentSpecificationCorrespondsToEquipmentClassRelationship>();
 
         [JsonIgnore]
-        public virtual EquipmentSpecificationCorrespondsToEquipmentRelationshipCollection CorrespondsToEquipment { get; set; } = new EquipmentSpecificationCorrespondsToEquipmentRelationshipCollection();
+public virtual List<EquipmentSpecificationCorrespondsToEquipmentRelationship> CorrespondsToEquipment { get; set; } = new List<EquipmentSpecificationCorrespondsToEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual EquipmentSpecificationHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new EquipmentSpecificationHierarchyScopeRelRelationshipCollection();
+public virtual List<EquipmentSpecificationHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<EquipmentSpecificationHierarchyScopeRelRelationship>();
 
         [JsonIgnore]
-        public virtual EquipmentSpecificationOperationalLocationRelRelationshipCollection OperationalLocationRel { get; set; } = new EquipmentSpecificationOperationalLocationRelRelationshipCollection();
+public virtual List<EquipmentSpecificationOperationalLocationRelRelationship> OperationalLocationRel { get; set; } = new List<EquipmentSpecificationOperationalLocationRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -50,22 +50,22 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsCapability
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual PersonnelCapabilityIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new PersonnelCapabilityIsMadeUpOfRelationshipCollection();
+public virtual List<PersonnelCapabilityIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<PersonnelCapabilityIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelCapabilityHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new PersonnelCapabilityHasValuesOfRelationshipCollection();
+public virtual List<PersonnelCapabilityHasValuesOfRelationship> HasValuesOf { get; set; } = new List<PersonnelCapabilityHasValuesOfRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelCapabilityCorrespondsToPersonnelClassRelationshipCollection CorrespondsToPersonnelClass { get; set; } = new PersonnelCapabilityCorrespondsToPersonnelClassRelationshipCollection();
+public virtual List<PersonnelCapabilityCorrespondsToPersonnelClassRelationship> CorrespondsToPersonnelClass { get; set; } = new List<PersonnelCapabilityCorrespondsToPersonnelClassRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelCapabilityCorrespondsToPersonRelationshipCollection CorrespondsToPerson { get; set; } = new PersonnelCapabilityCorrespondsToPersonRelationshipCollection();
+public virtual List<PersonnelCapabilityCorrespondsToPersonRelationship> CorrespondsToPerson { get; set; } = new List<PersonnelCapabilityCorrespondsToPersonRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelCapabilityHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new PersonnelCapabilityHierarchyScopeRelRelationshipCollection();
+public virtual List<PersonnelCapabilityHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<PersonnelCapabilityHierarchyScopeRelRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelCapabilityOperationalLocationRelRelationshipCollection OperationalLocationRel { get; set; } = new PersonnelCapabilityOperationalLocationRelRelationshipCollection();
+public virtual List<PersonnelCapabilityOperationalLocationRelRelationship> OperationalLocationRel { get; set; } = new List<PersonnelCapabilityOperationalLocationRelRelationship>();
 
         public override bool Equals(object? obj)
         {

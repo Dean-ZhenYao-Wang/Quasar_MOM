@@ -20,14 +20,14 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar
         public string? HierarchyScope { get; set; }
 
         [JsonIgnore]
-        public virtual WorkCalendarDefinitionContainsRelationshipCollection Contains { get; set; } = new WorkCalendarDefinitionContainsRelationshipCollection();
+public virtual List<WorkCalendarDefinitionContainsRelationship> Contains { get; set; } = new List<WorkCalendarDefinitionContainsRelationship>();
 
         [JsonIgnore]
-        public virtual WorkCalendarDefinitionHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new WorkCalendarDefinitionHasPropertiesOfRelationshipCollection();
+public virtual List<WorkCalendarDefinitionHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<WorkCalendarDefinitionHasPropertiesOfRelationship>();
 
         [MaxLength(1)]
         [JsonIgnore]
-        public virtual WorkCalendarDefinitionHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkCalendarDefinitionHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkCalendarDefinitionHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkCalendarDefinitionHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

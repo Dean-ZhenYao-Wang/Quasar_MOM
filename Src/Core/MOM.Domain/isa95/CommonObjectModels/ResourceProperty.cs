@@ -11,9 +11,6 @@ namespace MOM.Domain.isa95.CommonObjectModels
         {
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:ResourceProperty;1";
-
         [JsonPropertyName("value")]
         public string? Value { get; set; }
 

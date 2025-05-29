@@ -32,10 +32,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkPerformance
         public string? HierarchyScope { get; set; }
 
         [JsonIgnore]
-        public virtual JobResponseListIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new JobResponseListIsMadeUpOfRelationshipCollection();
+public virtual List<JobResponseListIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<JobResponseListIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseListHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new JobResponseListHierarchyScopeRelRelationshipCollection();
+public virtual List<JobResponseListHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<JobResponseListHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

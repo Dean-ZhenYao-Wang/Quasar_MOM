@@ -3,6 +3,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition
     using MOM.Domain.Common;
     using MOM.Domain.Common.EnumType;
     using MOM.Domain.Common.Relationship.isa95.OperationsMaterialBill;
+    using MOM.Domain.Common.Relationship.isa95.OperationsMaterialBillItem;
     using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
@@ -23,10 +24,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition
         public OperationsMaterialBillUseType? UseType { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsMaterialBillIsACollectionOfRelationshipCollection IsACollectionOf { get; set; } = new OperationsMaterialBillIsACollectionOfRelationshipCollection();
+        public new List<OperationsMaterialBillIsACollectionOfRelationship> IsACollectionOf { get; set; } = new List<OperationsMaterialBillIsACollectionOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsMaterialBillHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsMaterialBillHierarchyScopeRelRelationshipCollection();
+        public new List<OperationsMaterialBillHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationsMaterialBillHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

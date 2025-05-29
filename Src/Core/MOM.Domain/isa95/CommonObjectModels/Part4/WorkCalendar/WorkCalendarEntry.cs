@@ -25,13 +25,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkCalendar
         public string? EntryType { get; set; }
 
         [JsonIgnore]
-        public virtual WorkCalendarEntryMapsToRelationshipCollection MapsTo { get; set; } = new WorkCalendarEntryMapsToRelationshipCollection();
+public virtual List<WorkCalendarEntryMapsToRelationship> MapsTo { get; set; } = new List<WorkCalendarEntryMapsToRelationship>();
 
         [JsonIgnore]
-        public virtual WorkCalendarEntryIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new WorkCalendarEntryIsMadeUpOfRelationshipCollection();
+public virtual List<WorkCalendarEntryIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<WorkCalendarEntryIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual WorkCalendarEntryHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new WorkCalendarEntryHasValuesOfRelationshipCollection();
+public virtual List<WorkCalendarEntryHasValuesOfRelationship> HasValuesOf { get; set; } = new List<WorkCalendarEntryHasValuesOfRelationship>();
 
         public override bool Equals(object? obj)
         {

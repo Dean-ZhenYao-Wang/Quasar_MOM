@@ -28,13 +28,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsCapability
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual PhysicalAssetCapabilityPropertyContainsRelationshipCollection Contains { get; set; } = new PhysicalAssetCapabilityPropertyContainsRelationshipCollection();
+public virtual List<PhysicalAssetCapabilityPropertyContainsRelationship> Contains { get; set; } = new List<PhysicalAssetCapabilityPropertyContainsRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetCapabilityPropertyMapsToClassPropertyRelationshipCollection MapsToClassProperty { get; set; } = new PhysicalAssetCapabilityPropertyMapsToClassPropertyRelationshipCollection();
+public virtual List<PhysicalAssetCapabilityPropertyMapsToClassPropertyRelationship> MapsToClassProperty { get; set; } = new List<PhysicalAssetCapabilityPropertyMapsToClassPropertyRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetCapabilityPropertyMapsToPropertyRelationshipCollection MapsToProperty { get; set; } = new PhysicalAssetCapabilityPropertyMapsToPropertyRelationshipCollection();
+public virtual List<PhysicalAssetCapabilityPropertyMapsToPropertyRelationship> MapsToProperty { get; set; } = new List<PhysicalAssetCapabilityPropertyMapsToPropertyRelationship>();
 
         public override bool Equals(object? obj)
         {

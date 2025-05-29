@@ -31,13 +31,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsEvent
         public DateTime? RecordTimestamp { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsEventRecordEntryContainsRelationshipCollection Contains { get; set; } = new OperationsEventRecordEntryContainsRelationshipCollection();
+public virtual List<OperationsEventRecordEntryContainsRelationship> Contains { get; set; } = new List<OperationsEventRecordEntryContainsRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventRecordEntryCorrespondsToAnEntryInRelationshipCollection CorrespondsToAnEntryIn { get; set; } = new OperationsEventRecordEntryCorrespondsToAnEntryInRelationshipCollection();
+public virtual List<OperationsEventRecordEntryCorrespondsToAnEntryInRelationship> CorrespondsToAnEntryIn { get; set; } = new List<OperationsEventRecordEntryCorrespondsToAnEntryInRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventRecordEntryCorrespondsToAnExternalEntryInRelationshipCollection CorrespondsToAnExternalEntryIn { get; set; } = new OperationsEventRecordEntryCorrespondsToAnExternalEntryInRelationshipCollection();
+public virtual List<OperationsEventRecordEntryCorrespondsToAnExternalEntryInRelationship> CorrespondsToAnExternalEntryIn { get; set; } = new List<OperationsEventRecordEntryCorrespondsToAnExternalEntryInRelationship>();
 
         public override bool Equals(object? obj)
         {

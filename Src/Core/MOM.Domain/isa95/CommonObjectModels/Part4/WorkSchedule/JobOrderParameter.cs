@@ -25,16 +25,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkSchedule
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual JobOrderParameterContainsRelationshipCollection Contains { get; set; } = new JobOrderParameterContainsRelationshipCollection();
+public virtual List<JobOrderParameterContainsRelationship> Contains { get; set; } = new List<JobOrderParameterContainsRelationship>();
 
         [JsonIgnore]
-        public virtual JobOrderParameterCorrespondsToSpecificationRelationshipCollection CorrespondsToSpecification { get; set; } = new JobOrderParameterCorrespondsToSpecificationRelationshipCollection();
+public virtual List<JobOrderParameterCorrespondsToSpecificationRelationship> CorrespondsToSpecification { get; set; } = new List<JobOrderParameterCorrespondsToSpecificationRelationship>();
 
         [JsonIgnore]
-        public virtual JobOrderParameterCorrespondsToProcessRelationshipCollection CorrespondsToProcess { get; set; } = new JobOrderParameterCorrespondsToProcessRelationshipCollection();
+public virtual List<JobOrderParameterCorrespondsToProcessRelationship> CorrespondsToProcess { get; set; } = new List<JobOrderParameterCorrespondsToProcessRelationship>();
 
         [JsonIgnore]
-        public virtual JobOrderParameterHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new JobOrderParameterHierarchyScopeRelRelationshipCollection();
+public virtual List<JobOrderParameterHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<JobOrderParameterHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -1,20 +1,10 @@
 namespace MOM.Domain.Common.Relationship.isa95.OperationalLocationProperty
 {
-    public class OperationalLocationPropertyMapsToRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClassProperty>, IEquatable<OperationalLocationPropertyMapsToRelationship>
+    public class OperationalLocationPropertyMapsToRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationProperty ,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClassProperty>, IEquatable<OperationalLocationPropertyMapsToRelationship>
     {
-        public OperationalLocationPropertyMapsToRelationship()
+        public OperationalLocationPropertyMapsToRelationship():base()
         {
             Name = "mapsTo";
-        }
-
-        public OperationalLocationPropertyMapsToRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationProperty source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClassProperty target) : this()
-        {
-            InitializeFromTwins(source, target);
-        }
-
-        public OperationalLocationPropertyMapsToRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
         }
 
         public override bool Equals(object? obj)

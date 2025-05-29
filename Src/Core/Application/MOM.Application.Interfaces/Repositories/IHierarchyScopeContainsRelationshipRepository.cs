@@ -6,12 +6,7 @@ using MOM.Domain.isa95.CommonObjectModels;
 
 namespace MOM.Application.Interfaces.Repositories
 {
-    public interface IHierarchyScopeContainsRelationshipRepository : IGenericRepository<HierarchyScopeContainsRelationship>
+    public interface IHierarchyScopeContainsRelationshipRepository : IRelationshipRepository<HierarchyScopeContainsRelationship,HierarchyScope,HierarchyScope>
     {
-        Task AddAsync(Guid? parentId, HierarchyScope newNode);
-        Task<string> GetFullPathAsync(Guid nodeId);
-
-        Task<List<TreeNode<OrgResponse>>> GetOrgTreeAsync(Guid? sourceDtId);
-        Task MoveNodeAsync(Guid nodeId, Guid? newParentId);
     }
 }

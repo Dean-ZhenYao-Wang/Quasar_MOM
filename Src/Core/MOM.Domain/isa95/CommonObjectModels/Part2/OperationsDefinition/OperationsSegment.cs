@@ -33,37 +33,37 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition
         public string? DurationUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsSegmentCorrespondsToRelationshipCollection CorrespondsTo { get; set; } = new OperationsSegmentCorrespondsToRelationshipCollection();
+public virtual List<OperationsSegmentCorrespondsToRelationship> CorrespondsTo { get; set; } = new List<OperationsSegmentCorrespondsToRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new OperationsSegmentIsMadeUpOfRelationshipCollection();
+public virtual List<OperationsSegmentIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<OperationsSegmentIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentHasAnExecutionDependencyOnRelationshipCollection HasAnExecutionDependencyOn { get; set; } = new OperationsSegmentHasAnExecutionDependencyOnRelationshipCollection();
+public virtual List<OperationsSegmentHasAnExecutionDependencyOnRelationship> HasAnExecutionDependencyOn { get; set; } = new List<OperationsSegmentHasAnExecutionDependencyOnRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new OperationsSegmentIncludesPropertiesOfRelationshipCollection();
+public virtual List<OperationsSegmentIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<OperationsSegmentIncludesPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentHasAnExecutionDependencyOnSegmentRelationshipCollection HasAnExecutionDependencyOnSegment { get; set; } = new OperationsSegmentHasAnExecutionDependencyOnSegmentRelationshipCollection();
+public virtual List<OperationsSegmentHasAnExecutionDependencyOnSegmentRelationship> HasAnExecutionDependencyOnSegment { get; set; } = new List<OperationsSegmentHasAnExecutionDependencyOnSegmentRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentContainsParameterRelationshipCollection ContainsParameter { get; set; } = new OperationsSegmentContainsParameterRelationshipCollection();
+public virtual List<OperationsSegmentContainsParameterRelationship> ContainsParameter { get; set; } = new List<OperationsSegmentContainsParameterRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentContainsPersonnelRelationshipCollection ContainsPersonnel { get; set; } = new OperationsSegmentContainsPersonnelRelationshipCollection();
+public virtual List<OperationsSegmentContainsPersonnelRelationship> ContainsPersonnel { get; set; } = new List<OperationsSegmentContainsPersonnelRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentContainsEquipmentRelationshipCollection ContainsEquipment { get; set; } = new OperationsSegmentContainsEquipmentRelationshipCollection();
+public virtual List<OperationsSegmentContainsEquipmentRelationship> ContainsEquipment { get; set; } = new List<OperationsSegmentContainsEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentContainsPhysicalAssetRelationshipCollection ContainsPhysicalAsset { get; set; } = new OperationsSegmentContainsPhysicalAssetRelationshipCollection();
+public virtual List<OperationsSegmentContainsPhysicalAssetRelationship> ContainsPhysicalAsset { get; set; } = new List<OperationsSegmentContainsPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentContainsMaterialRelationshipCollection ContainsMaterial { get; set; } = new OperationsSegmentContainsMaterialRelationshipCollection();
+public virtual List<OperationsSegmentContainsMaterialRelationship> ContainsMaterial { get; set; } = new List<OperationsSegmentContainsMaterialRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsSegmentHierarchyScopeRelRelationshipCollection();
+public virtual List<OperationsSegmentHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationsSegmentHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

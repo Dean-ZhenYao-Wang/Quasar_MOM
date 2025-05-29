@@ -19,7 +19,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:EquipmentClass;1";
 
         [JsonPropertyName("hierarchyScope")]
-        public string HierarchyScope => HierarchyScopeRel.FirstOrDefault() == null ? string.Empty : HierarchyScopeRel.FirstOrDefault().Target.Id;
+        public string HierarchyScope => HierarchyScopeRel.FirstOrDefault() == null ? string.Empty : HierarchyScopeRel.FirstOrDefault().Target.Id.ToString();
 
         /// <summary>
         /// 在基于角色的装备层次中级别的标识
@@ -35,7 +35,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 设备->产线->罐装产线
         /// </summary>
         [JsonIgnore]
-        public virtual EquipmentClassIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new EquipmentClassIncludesPropertiesOfRelationshipCollection();
+public virtual List<EquipmentClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<EquipmentClassIncludesPropertiesOfRelationship>();
 
         /// <summary>
         /// 这个父设备类是子设备类的整体。<br/>
@@ -45,17 +45,17 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// A类设备与B类设备共同组成罐装产线
         /// </summary>
         [JsonIgnore]
-        public virtual EquipmentClassIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new EquipmentClassIsMadeUpOfRelationshipCollection();
+public virtual List<EquipmentClassIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<EquipmentClassIsMadeUpOfRelationship>();
 
         /// <summary>
         /// 自定义属性清单
         /// </summary>
         [JsonIgnore]
-        public virtual EquipmentClassHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new EquipmentClassHasPropertiesOfRelationshipCollection();
+public virtual List<EquipmentClassHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<EquipmentClassHasPropertiesOfRelationship>();
 
         [JsonIgnore]
         [MaxLength(1)]
-        public virtual EquipmentClassHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new EquipmentClassHierarchyScopeRelRelationshipCollection();
+public virtual List<EquipmentClassHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<EquipmentClassHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

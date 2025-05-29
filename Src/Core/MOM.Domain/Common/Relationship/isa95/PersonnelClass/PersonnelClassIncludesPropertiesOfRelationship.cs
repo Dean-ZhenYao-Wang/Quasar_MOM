@@ -3,25 +3,31 @@ using System.Text.Json.Serialization;
 
 namespace MOM.Domain.Common.Relationship.isa95.PersonnelClass
 {
-    public class PersonnelClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass>, IEquatable<PersonnelClassIncludesPropertiesOfRelationship>
+    public class PersonnelClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass ,Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass>, IEquatable<PersonnelClassIncludesPropertiesOfRelationship>
     {
-        public PersonnelClassIncludesPropertiesOfRelationship()
+        public PersonnelClassIncludesPropertiesOfRelationship():base()
         {
             Name = "includesPropertiesOf";
         }
 
-        [JsonIgnore]
-        [ForeignKey(nameof(SourceId))]
-        public virtual Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass Source { get; set; }
-
-        public PersonnelClassIncludesPropertiesOfRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass source, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass target) : this()
+        public PersonnelClassIncludesPropertiesOfRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass source, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass target) : base(source, target)
         {
-            InitializeFromTwins(source, target);
         }
 
-        public PersonnelClassIncludesPropertiesOfRelationship(Guid? sourceId, Guid targetId) : this()
+        public PersonnelClassIncludesPropertiesOfRelationship(Guid? sourceId, Guid targetId) : base(sourceId, targetId)
         {
-            InitializeFromTwins(sourceId, targetId);
+        }
+
+        public PersonnelClassIncludesPropertiesOfRelationship(Guid? sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
+        {
+        }
+
+        public PersonnelClassIncludesPropertiesOfRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
+        {
+        }
+
+        public PersonnelClassIncludesPropertiesOfRelationship(Guid? sourceId, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass target, int depth) : base(sourceId, target, depth)
+        {
         }
 
         public override bool Equals(object? obj)

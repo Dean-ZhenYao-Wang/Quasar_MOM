@@ -28,13 +28,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.ProcessSegment
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual PersonnelSegmentSpecificationPropertyContainsRelationshipCollection Contains { get; set; } = new PersonnelSegmentSpecificationPropertyContainsRelationshipCollection();
+public virtual List<PersonnelSegmentSpecificationPropertyContainsRelationship> Contains { get; set; } = new List<PersonnelSegmentSpecificationPropertyContainsRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelSegmentSpecificationPropertyMapsToClassPropertyRelationshipCollection MapsToClassProperty { get; set; } = new PersonnelSegmentSpecificationPropertyMapsToClassPropertyRelationshipCollection();
+public virtual List<PersonnelSegmentSpecificationPropertyMapsToClassPropertyRelationship> MapsToClassProperty { get; set; } = new List<PersonnelSegmentSpecificationPropertyMapsToClassPropertyRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelSegmentSpecificationPropertyMapsToPropertyRelationshipCollection MapsToProperty { get; set; } = new PersonnelSegmentSpecificationPropertyMapsToPropertyRelationshipCollection();
+public virtual List<PersonnelSegmentSpecificationPropertyMapsToPropertyRelationship> MapsToProperty { get; set; } = new List<PersonnelSegmentSpecificationPropertyMapsToPropertyRelationship>();
 
         public override bool Equals(object? obj)
         {

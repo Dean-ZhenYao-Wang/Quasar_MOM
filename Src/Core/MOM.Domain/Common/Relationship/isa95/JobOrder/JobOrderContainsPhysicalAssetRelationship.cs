@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.JobOrder
 {
-    public class JobOrderContainsPhysicalAssetRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.PhysicalAssetRequirement>, IEquatable<JobOrderContainsPhysicalAssetRelationship>
+    public class JobOrderContainsPhysicalAssetRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkSchedule.JobOrder,Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.PhysicalAssetRequirement>, IEquatable<JobOrderContainsPhysicalAssetRelationship>
     {
         public JobOrderContainsPhysicalAssetRelationship()
         {

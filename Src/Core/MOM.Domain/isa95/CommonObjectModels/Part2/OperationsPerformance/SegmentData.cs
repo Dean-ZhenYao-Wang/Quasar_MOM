@@ -25,10 +25,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsPerformance
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual SegmentDataContainsRelationshipCollection Contains { get; set; } = new SegmentDataContainsRelationshipCollection();
+public virtual List<SegmentDataContainsRelationship> Contains { get; set; } = new List<SegmentDataContainsRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentDataHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new SegmentDataHierarchyScopeRelRelationshipCollection();
+public virtual List<SegmentDataHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<SegmentDataHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -16,16 +16,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.ResourceRelationship
         public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:ResourceNetworkConnection;1";
 
         [JsonIgnore]
-        public virtual ResourceNetworkConnectionDefinedByRelationshipCollection DefinedBy { get; set; } = new ResourceNetworkConnectionDefinedByRelationshipCollection();
+public virtual List<ResourceNetworkConnectionDefinedByRelationship> DefinedBy { get; set; } = new List<ResourceNetworkConnectionDefinedByRelationship>();
 
         [JsonIgnore]
-        public virtual ResourceNetworkConnectionConnectsToRelationshipCollection ConnectsTo { get; set; } = new ResourceNetworkConnectionConnectsToRelationshipCollection();
+public virtual List<ResourceNetworkConnectionConnectsToRelationship> ConnectsTo { get; set; } = new List<ResourceNetworkConnectionConnectsToRelationship>();
 
         [JsonIgnore]
-        public virtual ResourceNetworkConnectionConnectsFromRelationshipCollection ConnectsFrom { get; set; } = new ResourceNetworkConnectionConnectsFromRelationshipCollection();
+public virtual List<ResourceNetworkConnectionConnectsFromRelationship> ConnectsFrom { get; set; } = new List<ResourceNetworkConnectionConnectsFromRelationship>();
 
         [JsonIgnore]
-        public virtual ResourceNetworkConnectionHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new ResourceNetworkConnectionHasPropertiesOfRelationshipCollection();
+public virtual List<ResourceNetworkConnectionHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<ResourceNetworkConnectionHasPropertiesOfRelationship>();
 
         public override bool Equals(object? obj)
         {

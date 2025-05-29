@@ -20,13 +20,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.ResourceRelationship
         public ToResourceReferenceResourceType? ResourceType { get; set; }
 
         [JsonIgnore]
-        public virtual ToResourceReferenceHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new ToResourceReferenceHasPropertiesOfRelationshipCollection();
+public virtual List<ToResourceReferenceHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<ToResourceReferenceHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual ToResourceReferenceCorrespondsToResourceClassRelationshipCollection CorrespondsToResourceClass { get; set; } = new ToResourceReferenceCorrespondsToResourceClassRelationshipCollection();
+public virtual List<ToResourceReferenceCorrespondsToResourceClassRelationship> CorrespondsToResourceClass { get; set; } = new List<ToResourceReferenceCorrespondsToResourceClassRelationship>();
 
         [JsonIgnore]
-        public virtual ToResourceReferenceCorrespondsToResourceRelationshipCollection CorrespondsToResource { get; set; } = new ToResourceReferenceCorrespondsToResourceRelationshipCollection();
+public virtual List<ToResourceReferenceCorrespondsToResourceRelationship> CorrespondsToResource { get; set; } = new List<ToResourceReferenceCorrespondsToResourceRelationship>();
 
         public override bool Equals(object? obj)
         {

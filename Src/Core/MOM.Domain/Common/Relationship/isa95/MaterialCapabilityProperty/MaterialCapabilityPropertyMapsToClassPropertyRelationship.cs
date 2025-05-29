@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialCapabilityProperty
 {
-    public class MaterialCapabilityPropertyMapsToClassPropertyRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialClassProperty>, IEquatable<MaterialCapabilityPropertyMapsToClassPropertyRelationship>
+    public class MaterialCapabilityPropertyMapsToClassPropertyRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsCapability.MaterialCapabilityProperty,Domain.isa95.CommonObjectModels.Part2.Material.MaterialClassProperty>, IEquatable<MaterialCapabilityPropertyMapsToClassPropertyRelationship>
     {
         public MaterialCapabilityPropertyMapsToClassPropertyRelationship()
         {

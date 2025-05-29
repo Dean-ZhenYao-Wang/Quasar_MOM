@@ -22,16 +22,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsEvent
         /// 组合关系
         /// </summary>
         [JsonIgnore]
-        public virtual OperationsEventClassIsAssembledFromRelationshipCollection IsAssembledFrom { get; set; } = new OperationsEventClassIsAssembledFromRelationshipCollection();
+public virtual List<OperationsEventClassIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<OperationsEventClassIsAssembledFromRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventClassIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new OperationsEventClassIncludesPropertiesOfRelationshipCollection();
+public virtual List<OperationsEventClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<OperationsEventClassIncludesPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventClassHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new OperationsEventClassHasPropertiesOfRelationshipCollection();
+public virtual List<OperationsEventClassHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<OperationsEventClassHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventClassHasRecordSpecificationOfRelationshipCollection HasRecordSpecificationOf { get; set; } = new OperationsEventClassHasRecordSpecificationOfRelationshipCollection();
+public virtual List<OperationsEventClassHasRecordSpecificationOfRelationship> HasRecordSpecificationOf { get; set; } = new List<OperationsEventClassHasRecordSpecificationOfRelationship>();
 
         public override bool Equals(object? obj)
         {

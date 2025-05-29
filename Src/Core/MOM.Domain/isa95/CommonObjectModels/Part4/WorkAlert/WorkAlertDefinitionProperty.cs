@@ -22,7 +22,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkAlert
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual WorkAlertDefinitionPropertyContainsRelationshipCollection Contains { get; set; } = new WorkAlertDefinitionPropertyContainsRelationshipCollection();
+public virtual List<WorkAlertDefinitionPropertyContainsRelationship> Contains { get; set; } = new List<WorkAlertDefinitionPropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

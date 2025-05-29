@@ -12,23 +12,20 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         {
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:OperationalLocationClass;1";
-
         [JsonPropertyName("hierarchyScope")]
         public string? HierarchyScope { get; set; }
 
         [JsonIgnore]
-        public virtual OperationalLocationClassIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new OperationalLocationClassIncludesPropertiesOfRelationshipCollection();
+public virtual List<OperationalLocationClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<OperationalLocationClassIncludesPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationalLocationClassIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new OperationalLocationClassIsMadeUpOfRelationshipCollection();
+public virtual List<OperationalLocationClassIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<OperationalLocationClassIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationalLocationClassHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new OperationalLocationClassHasPropertiesOfRelationshipCollection();
+public virtual List<OperationalLocationClassHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<OperationalLocationClassHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationalLocationClassHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationalLocationClassHierarchyScopeRelRelationshipCollection();
+public virtual List<OperationalLocationClassHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationalLocationClassHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

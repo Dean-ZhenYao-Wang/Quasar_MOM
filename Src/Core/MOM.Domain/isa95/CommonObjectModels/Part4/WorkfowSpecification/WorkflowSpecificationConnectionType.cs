@@ -22,7 +22,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkfowSpecification
         public string? ToMultiplicity { get; set; }
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationConnectionTypeHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new WorkflowSpecificationConnectionTypeHasPropertiesOfRelationshipCollection();
+public virtual List<WorkflowSpecificationConnectionTypeHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<WorkflowSpecificationConnectionTypeHasPropertiesOfRelationship>();
 
         public override bool Equals(object? obj)
         {

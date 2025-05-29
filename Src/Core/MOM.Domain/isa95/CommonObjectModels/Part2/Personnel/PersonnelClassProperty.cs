@@ -14,10 +14,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         }
 
         [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:PersonnelClassProperty;1";
-
-        [JsonIgnore]
-        public virtual PersonnelClassPropertyContainsRelationshipCollection Contains { get; set; } = new PersonnelClassPropertyContainsRelationshipCollection();
+public virtual List<PersonnelClassPropertyContainsRelationship> Contains { get; set; } = new List<PersonnelClassPropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

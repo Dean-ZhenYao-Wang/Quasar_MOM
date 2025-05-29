@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.JobResponse
 {
-    public class JobResponseCorrespondsToSpecificationRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkfowSpecification.WorkflowSpecification>, IEquatable<JobResponseCorrespondsToSpecificationRelationship>
+    public class JobResponseCorrespondsToSpecificationRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkPerformance.JobResponse ,Domain.isa95.CommonObjectModels.Part4.WorkfowSpecification.WorkflowSpecification>, IEquatable<JobResponseCorrespondsToSpecificationRelationship>
     {
         public JobResponseCorrespondsToSpecificationRelationship()
         {

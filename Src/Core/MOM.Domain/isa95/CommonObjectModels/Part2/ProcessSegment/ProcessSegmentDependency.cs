@@ -26,10 +26,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.ProcessSegment
         public string? DependencyFactorUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual ProcessSegmentDependencyProcessSegmentFromRelationshipCollection ProcessSegmentFrom { get; set; } = new ProcessSegmentDependencyProcessSegmentFromRelationshipCollection();
+public virtual List<ProcessSegmentDependencyProcessSegmentFromRelationship> ProcessSegmentFrom { get; set; } = new List<ProcessSegmentDependencyProcessSegmentFromRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentDependencyProcessSegmentToRelationshipCollection ProcessSegmentTo { get; set; } = new ProcessSegmentDependencyProcessSegmentToRelationshipCollection();
+public virtual List<ProcessSegmentDependencyProcessSegmentToRelationship> ProcessSegmentTo { get; set; } = new List<ProcessSegmentDependencyProcessSegmentToRelationship>();
 
         public override bool Equals(object? obj)
         {

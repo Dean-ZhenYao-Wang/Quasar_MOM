@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentRequirementProperty
 {
-    public class EquipmentRequirementPropertyContainsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.EquipmentRequirementProperty>, IEquatable<EquipmentRequirementPropertyContainsRelationship>
+    public class EquipmentRequirementPropertyContainsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.EquipmentRequirementProperty,Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.EquipmentRequirementProperty>, IEquatable<EquipmentRequirementPropertyContainsRelationship>
     {
         public EquipmentRequirementPropertyContainsRelationship()
         {

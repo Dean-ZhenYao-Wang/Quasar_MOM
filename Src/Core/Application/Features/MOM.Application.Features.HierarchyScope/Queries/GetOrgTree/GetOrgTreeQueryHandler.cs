@@ -9,7 +9,8 @@ namespace MOM.Application.Features.HierarchyScope.Queries.GetOrgTree
     {
         public async Task<List<TreeNode<OrgResponse>>> Handle(GetOrgTreeQuery request, CancellationToken cancellationToken)
         {
-            return await hierarchyScopeContainsRelationshipRepository.GetOrgTreeAsync(request.SourceDtId);
+            //return await hierarchyScopeContainsRelationshipRepository.GetOrgTreeAsync(request.SourceDtId);
+            return null;
         }
     }
 }

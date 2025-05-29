@@ -22,10 +22,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.ResourceRelationship
         public string? ValueUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual ResourceNetworkConnectionTypePropertyMapsToRelationshipCollection MapsTo { get; set; } = new ResourceNetworkConnectionTypePropertyMapsToRelationshipCollection();
+public virtual List<ResourceNetworkConnectionTypePropertyMapsToRelationship> MapsTo { get; set; } = new List<ResourceNetworkConnectionTypePropertyMapsToRelationship>();
 
         [JsonIgnore]
-        public virtual ResourceNetworkConnectionTypePropertyContainsRelationshipCollection Contains { get; set; } = new ResourceNetworkConnectionTypePropertyContainsRelationshipCollection();
+public virtual List<ResourceNetworkConnectionTypePropertyContainsRelationship> Contains { get; set; } = new List<ResourceNetworkConnectionTypePropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

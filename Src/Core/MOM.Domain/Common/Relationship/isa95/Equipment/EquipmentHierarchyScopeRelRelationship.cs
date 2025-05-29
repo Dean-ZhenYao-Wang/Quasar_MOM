@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.Equipment
 {
-    public class EquipmentHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<EquipmentHierarchyScopeRelRelationship>
+    public class EquipmentHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<EquipmentHierarchyScopeRelRelationship>
     {
         public EquipmentHierarchyScopeRelRelationship()
         {

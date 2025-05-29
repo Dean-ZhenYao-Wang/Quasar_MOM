@@ -35,25 +35,25 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsSchedule
         public RequestedSegmentResponseSegmentState? SegmentState { get; set; }
 
         [JsonIgnore]
-        public virtual RequestedSegmentResponseCorrespondsToDefinitionRelationshipCollection CorrespondsToDefinition { get; set; } = new RequestedSegmentResponseCorrespondsToDefinitionRelationshipCollection();
+public virtual List<RequestedSegmentResponseCorrespondsToDefinitionRelationship> CorrespondsToDefinition { get; set; } = new List<RequestedSegmentResponseCorrespondsToDefinitionRelationship>();
 
         [JsonIgnore]
-        public virtual RequestedSegmentResponseCorrespondsToSegmentRelationshipCollection CorrespondsToSegment { get; set; } = new RequestedSegmentResponseCorrespondsToSegmentRelationshipCollection();
+public virtual List<RequestedSegmentResponseCorrespondsToSegmentRelationship> CorrespondsToSegment { get; set; } = new List<RequestedSegmentResponseCorrespondsToSegmentRelationship>();
 
         [JsonIgnore]
-        public virtual RequestedSegmentResponseCorrespondsToAProcessSegmentRelationshipCollection CorrespondsToAProcessSegment { get; set; } = new RequestedSegmentResponseCorrespondsToAProcessSegmentRelationshipCollection();
+public virtual List<RequestedSegmentResponseCorrespondsToAProcessSegmentRelationship> CorrespondsToAProcessSegment { get; set; } = new List<RequestedSegmentResponseCorrespondsToAProcessSegmentRelationship>();
 
         [JsonIgnore]
-        public virtual RequestedSegmentResponseCorrespondsToRequirementRelationshipCollection CorrespondsToRequirement { get; set; } = new RequestedSegmentResponseCorrespondsToRequirementRelationshipCollection();
+public virtual List<RequestedSegmentResponseCorrespondsToRequirementRelationship> CorrespondsToRequirement { get; set; } = new List<RequestedSegmentResponseCorrespondsToRequirementRelationship>();
 
         [JsonIgnore]
-        public virtual RequestedSegmentResponseIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new RequestedSegmentResponseIsMadeUpOfRelationshipCollection();
+public virtual List<RequestedSegmentResponseIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<RequestedSegmentResponseIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual RequestedSegmentResponseContainsDataRelationshipCollection ContainsData { get; set; } = new RequestedSegmentResponseContainsDataRelationshipCollection();
+public virtual List<RequestedSegmentResponseContainsDataRelationship> ContainsData { get; set; } = new List<RequestedSegmentResponseContainsDataRelationship>();
 
         [JsonIgnore]
-        public virtual RequestedSegmentResponseHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new RequestedSegmentResponseHierarchyScopeRelRelationshipCollection();
+public virtual List<RequestedSegmentResponseHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<RequestedSegmentResponseHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

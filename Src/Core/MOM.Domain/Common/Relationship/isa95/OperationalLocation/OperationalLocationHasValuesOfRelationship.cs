@@ -1,22 +1,11 @@
 namespace MOM.Domain.Common.Relationship.isa95.OperationalLocation
 {
-    public class OperationalLocationHasValuesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationProperty>, IEquatable<OperationalLocationHasValuesOfRelationship>
+    public class OperationalLocationHasValuesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationProperty>, IEquatable<OperationalLocationHasValuesOfRelationship>
     {
-        public OperationalLocationHasValuesOfRelationship()
+        public OperationalLocationHasValuesOfRelationship():base()
         {
             Name = "hasValuesOf";
         }
-
-        public OperationalLocationHasValuesOfRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationProperty target) : this()
-        {
-            InitializeFromTwins(source, target);
-        }
-
-        public OperationalLocationHasValuesOfRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
-        }
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as OperationalLocationHasValuesOfRelationship);

@@ -38,34 +38,34 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsSchedule
         public SegmentRequirementSegmentState? SegmentState { get; set; }
 
         [JsonIgnore]
-        public virtual SegmentRequirementCorrespondsToDefinitionRelationshipCollection CorrespondsToDefinition { get; set; } = new SegmentRequirementCorrespondsToDefinitionRelationshipCollection();
+public virtual List<SegmentRequirementCorrespondsToDefinitionRelationship> CorrespondsToDefinition { get; set; } = new List<SegmentRequirementCorrespondsToDefinitionRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentRequirementCorrespondsToSegmentRelationshipCollection CorrespondsToSegment { get; set; } = new SegmentRequirementCorrespondsToSegmentRelationshipCollection();
+public virtual List<SegmentRequirementCorrespondsToSegmentRelationship> CorrespondsToSegment { get; set; } = new List<SegmentRequirementCorrespondsToSegmentRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentRequirementCorrespondsToAProcessSegmentRelationshipCollection CorrespondsToAProcessSegment { get; set; } = new SegmentRequirementCorrespondsToAProcessSegmentRelationshipCollection();
+public virtual List<SegmentRequirementCorrespondsToAProcessSegmentRelationship> CorrespondsToAProcessSegment { get; set; } = new List<SegmentRequirementCorrespondsToAProcessSegmentRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentRequirementIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new SegmentRequirementIsMadeUpOfRelationshipCollection();
+public virtual List<SegmentRequirementIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<SegmentRequirementIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentRequirementContainsParameterRelationshipCollection ContainsParameter { get; set; } = new SegmentRequirementContainsParameterRelationshipCollection();
+public virtual List<SegmentRequirementContainsParameterRelationship> ContainsParameter { get; set; } = new List<SegmentRequirementContainsParameterRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentRequirementContainsPersonnelRelationshipCollection ContainsPersonnel { get; set; } = new SegmentRequirementContainsPersonnelRelationshipCollection();
+public virtual List<SegmentRequirementContainsPersonnelRelationship> ContainsPersonnel { get; set; } = new List<SegmentRequirementContainsPersonnelRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentRequirementContainsEquipmentRelationshipCollection ContainsEquipment { get; set; } = new SegmentRequirementContainsEquipmentRelationshipCollection();
+public virtual List<SegmentRequirementContainsEquipmentRelationship> ContainsEquipment { get; set; } = new List<SegmentRequirementContainsEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentRequirementContainsPhysicalAssetRelationshipCollection ContainsPhysicalAsset { get; set; } = new SegmentRequirementContainsPhysicalAssetRelationshipCollection();
+public virtual List<SegmentRequirementContainsPhysicalAssetRelationship> ContainsPhysicalAsset { get; set; } = new List<SegmentRequirementContainsPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentRequirementContainsMaterialRelationshipCollection ContainsMaterial { get; set; } = new SegmentRequirementContainsMaterialRelationshipCollection();
+public virtual List<SegmentRequirementContainsMaterialRelationship> ContainsMaterial { get; set; } = new List<SegmentRequirementContainsMaterialRelationship>();
 
         [JsonIgnore]
-        public virtual SegmentRequirementHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new SegmentRequirementHierarchyScopeRelRelationshipCollection();
+public virtual List<SegmentRequirementHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<SegmentRequirementHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

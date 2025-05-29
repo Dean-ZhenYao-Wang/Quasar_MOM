@@ -41,22 +41,22 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsCapability
         public string? HierarchyScope { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsCapabilityIsACollectionOfProcessRelationshipCollection IsACollectionOfProcess { get; set; } = new OperationsCapabilityIsACollectionOfProcessRelationshipCollection();
+        public virtual List<OperationsCapabilityIsACollectionOfProcessRelationship> IsACollectionOfProcess { get; set; } = new List<OperationsCapabilityIsACollectionOfProcessRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsCapabilityIsACollectionOfOperationsRelationshipCollection IsACollectionOfOperations { get; set; } = new OperationsCapabilityIsACollectionOfOperationsRelationshipCollection();
+        public virtual List<OperationsCapabilityIsACollectionOfOperationsRelationship> IsACollectionOfOperations { get; set; } = new List<OperationsCapabilityIsACollectionOfOperationsRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsCapabilityIsACollectionOfPersonnelRelationshipCollection IsACollectionOfPersonnel { get; set; } = new OperationsCapabilityIsACollectionOfPersonnelRelationshipCollection();
+        public virtual List<OperationsCapabilityIsACollectionOfPersonnelRelationship> IsACollectionOfPersonnel { get; set; } = new List<OperationsCapabilityIsACollectionOfPersonnelRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsCapabilityIsACollectionOfEquipmentRelationshipCollection IsACollectionOfEquipment { get; set; } = new OperationsCapabilityIsACollectionOfEquipmentRelationshipCollection();
+        public virtual List<OperationsCapabilityIsACollectionOfEquipmentRelationship> IsACollectionOfEquipment { get; set; } = new List<OperationsCapabilityIsACollectionOfEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsCapabilityIsACollectionOfPhysicalAssetRelationshipCollection IsACollectionOfPhysicalAsset { get; set; } = new OperationsCapabilityIsACollectionOfPhysicalAssetRelationshipCollection();
+        public virtual List<OperationsCapabilityIsACollectionOfPhysicalAssetRelationship> IsACollectionOfPhysicalAsset { get; set; } = new List<OperationsCapabilityIsACollectionOfPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsCapabilityIsACollectionOfMaterialRelationshipCollection IsACollectionOfMaterial { get; set; } = new OperationsCapabilityIsACollectionOfMaterialRelationshipCollection();
+        public virtual List<OperationsCapabilityIsACollectionOfMaterialRelationship> IsACollectionOfMaterial { get; set; } = new List<OperationsCapabilityIsACollectionOfMaterialRelationship>();
 
         [JsonIgnore]
         public virtual OperationsCapabilityHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsCapabilityHierarchyScopeRelRelationshipCollection();

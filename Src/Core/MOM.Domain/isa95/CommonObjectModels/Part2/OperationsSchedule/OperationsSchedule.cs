@@ -35,10 +35,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsSchedule
         public OperationsScheduleScheduleState? ScheduleState { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsScheduleIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new OperationsScheduleIsMadeUpOfRelationshipCollection();
+public virtual List<OperationsScheduleIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<OperationsScheduleIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsScheduleHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsScheduleHierarchyScopeRelRelationshipCollection();
+public virtual List<OperationsScheduleHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationsScheduleHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -89,5 +89,9 @@ namespace MOM.Domain.Common
         /// </summary>
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        /// <summary>
+        /// 深度
+        /// </summary>
+        public int Depth { get; set; }
     }
 }

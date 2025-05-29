@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.JobResponseData
 {
-    public class JobResponseDataContainsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkPerformance.JobResponseData>, IEquatable<JobResponseDataContainsRelationship>
+    public class JobResponseDataContainsRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkPerformance.JobResponseData,Domain.isa95.CommonObjectModels.Part4.WorkPerformance.JobResponseData>, IEquatable<JobResponseDataContainsRelationship>
     {
         public JobResponseDataContainsRelationship()
         {

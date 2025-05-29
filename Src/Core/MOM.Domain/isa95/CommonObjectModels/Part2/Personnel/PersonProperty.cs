@@ -12,15 +12,11 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         public PersonProperty()
         {
         }
-
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:PersonProperty;1";
-
         //[JsonIgnore]
-        public virtual PersonPropertyContainsRelationshipCollection Contains { get; set; } = new PersonPropertyContainsRelationshipCollection();
+        public virtual List<PersonPropertyContainsRelationship> Contains { get; set; } = new List<PersonPropertyContainsRelationship>();
 
         [MaxLength(1)]
-        public virtual PersonPropertyMapsToRelationshipCollection MapsTo { get; set; } = new PersonPropertyMapsToRelationshipCollection();
+        public virtual List<PersonPropertyMapsToRelationship> MapsTo { get; set; } = new List<PersonPropertyMapsToRelationship>();
 
         public override bool Equals(object? obj)
         {

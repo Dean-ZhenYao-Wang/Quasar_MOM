@@ -1,20 +1,10 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialClass
 {
-    public class MaterialClassHasPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialClassProperty>, IEquatable<MaterialClassHasPropertiesOfRelationship>
+    public class MaterialClassHasPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass, Domain.isa95.CommonObjectModels.Part2.Material.MaterialClassProperty>, IEquatable<MaterialClassHasPropertiesOfRelationship>
     {
-        public MaterialClassHasPropertiesOfRelationship()
+        public MaterialClassHasPropertiesOfRelationship() : base()
         {
             Name = "hasPropertiesOf";
-        }
-
-        public MaterialClassHasPropertiesOfRelationship(Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass source, Domain.isa95.CommonObjectModels.Part2.Material.MaterialClassProperty target) : this()
-        {
-            InitializeFromTwins(source, target);
-        }
-
-        public MaterialClassHasPropertiesOfRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
         }
 
         public override bool Equals(object? obj)

@@ -5,13 +5,16 @@ namespace MOM.Domain.Common;
 
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 /// <summary>
 /// 用于实现DTDL模型特定关系的抽象基类
 /// </summary>
-/// <typeparam name="TTarget">目标数字孪生类型，需继承自BaseEntity</typeparam>
+/// <typeparam name="TSource">父级，需要继承自BaseEntity</typeparam>
+/// <typeparam name="TTarget">子级，需要继承自BaseEntity</typeparam>
 //[NotMapped]
-public abstract class Relationship<TTarget> : BasicRelationship, IEquatable<BasicRelationship>
+public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquatable<BasicRelationship>
+    where TSource : BaseEntity
     where TTarget : BaseEntity
 {
     /// <summary>
@@ -20,6 +23,9 @@ public abstract class Relationship<TTarget> : BasicRelationship, IEquatable<Basi
     //[JsonIgnore]
     [ForeignKey(nameof(TargetId))]
     public virtual TTarget Target { get; set; }
+    [JsonIgnore]
+    [ForeignKey(nameof(SourceId))]
+    public virtual TSource Source { get; set; }
 
     /// <inheritdoc/>
     public abstract bool Equals(BasicRelationship? other);
@@ -47,5 +53,34 @@ public abstract class Relationship<TTarget> : BasicRelationship, IEquatable<Basi
         SourceId = sourceDtId;
         TargetId = targetDtId;
         Id = $"{sourceDtId}-{targetDtId}";
+    }
+    public Relationship()
+    {
+        Name = "default";
+        Depth = 0;
+    }
+
+    public Relationship(TSource source, TTarget target) : this()
+    {
+        InitializeFromTwins(source, target);
+    }
+
+    public Relationship(Guid? sourceId, Guid targetId) : this()
+    {
+        InitializeFromTwins(sourceId, targetId);
+    }
+    public Relationship(Guid? sourceId, Guid targetId, int depth) : this()
+    {
+        InitializeFromTwins(sourceId, targetId);
+        this.Depth = depth;
+    }
+    public Relationship(Guid sourceId, Guid targetId, int depth) : this()
+    {
+        InitializeFromTwins(sourceId, targetId);
+        this.Depth = depth;
+    }
+    public Relationship(Guid? sourceId, TTarget target, int depth) : this(sourceId, target.DtId, depth)
+    {
+        this.Target = target;
     }
 }

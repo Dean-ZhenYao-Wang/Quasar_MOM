@@ -12,9 +12,6 @@ namespace MOM.Domain.isa95.CommonObjectModels
         {
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:ResourceClassProperty;1";
-
         /// <summary>
         /// 定义属性的类型。
         /// </summary>

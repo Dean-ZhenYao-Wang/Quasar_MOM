@@ -26,16 +26,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkfowSpecification
         public string? DependencyFactorUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationConnectionDefinedByRelationshipCollection DefinedBy { get; set; } = new WorkflowSpecificationConnectionDefinedByRelationshipCollection();
+public virtual List<WorkflowSpecificationConnectionDefinedByRelationship> DefinedBy { get; set; } = new List<WorkflowSpecificationConnectionDefinedByRelationship>();
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationConnectionHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new WorkflowSpecificationConnectionHasPropertiesOfRelationshipCollection();
+public virtual List<WorkflowSpecificationConnectionHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<WorkflowSpecificationConnectionHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationConnectionConnectsToRelationshipCollection ConnectsTo { get; set; } = new WorkflowSpecificationConnectionConnectsToRelationshipCollection();
+public virtual List<WorkflowSpecificationConnectionConnectsToRelationship> ConnectsTo { get; set; } = new List<WorkflowSpecificationConnectionConnectsToRelationship>();
 
         [JsonIgnore]
-        public virtual WorkflowSpecificationConnectionConnectsFromRelationshipCollection ConnectsFrom { get; set; } = new WorkflowSpecificationConnectionConnectsFromRelationshipCollection();
+public virtual List<WorkflowSpecificationConnectionConnectsFromRelationship> ConnectsFrom { get; set; } = new List<WorkflowSpecificationConnectionConnectsFromRelationship>();
 
         public override bool Equals(object? obj)
         {

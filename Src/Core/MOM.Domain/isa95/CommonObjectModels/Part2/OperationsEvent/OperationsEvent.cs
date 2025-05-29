@@ -50,19 +50,19 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsEvent
         public string? Source { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsEventIsACollectionOfRelationshipCollection IsACollectionOf { get; set; } = new OperationsEventIsACollectionOfRelationshipCollection();
+        public virtual List<OperationsEventIsACollectionOfRelationship> IsACollectionOf { get; set; } = new List<OperationsEventIsACollectionOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsEventHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new OperationsEventHasValuesOfRelationshipCollection();
+        public virtual List<OperationsEventHasValuesOfRelationship> HasValuesOf { get; set; } = new List<OperationsEventHasValuesOfRelationship> ();
 
         [JsonIgnore]
-        public virtual OperationsEventDefinedByRelationshipCollection DefinedBy { get; set; } = new OperationsEventDefinedByRelationshipCollection();
+        public virtual List<OperationsEventDefinedByRelationship> DefinedBy { get; set; } = new List<OperationsEventDefinedByRelationship> ();
 
         [JsonIgnore]
-        public virtual OperationsEventIsMadeOfRelationshipCollection IsMadeOf { get; set; } = new OperationsEventIsMadeOfRelationshipCollection();
+        public virtual List<OperationsEventIsMadeOfRelationship> IsMadeOf { get; set; } = new List<OperationsEventIsMadeOfRelationship> ();
 
         [JsonIgnore]
-        public virtual OperationsEventHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsEventHierarchyScopeRelRelationshipCollection();
+        public virtual List<OperationsEventHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationsEventHierarchyScopeRelRelationship> ();
 
         public override bool Equals(object? obj)
         {

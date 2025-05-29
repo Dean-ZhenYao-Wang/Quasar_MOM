@@ -35,25 +35,25 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.ProcessSegment
         public string? QuantityUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual PersonnelSegmentSpecificationIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new PersonnelSegmentSpecificationIsMadeUpOfRelationshipCollection();
+public virtual List<PersonnelSegmentSpecificationIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<PersonnelSegmentSpecificationIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelSegmentSpecificationSpecifiesRelationshipCollection Specifies { get; set; } = new PersonnelSegmentSpecificationSpecifiesRelationshipCollection();
+public virtual List<PersonnelSegmentSpecificationSpecifiesRelationship> Specifies { get; set; } = new List<PersonnelSegmentSpecificationSpecifiesRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelSegmentSpecificationHasPropertiesOfRelationshipCollection HasPropertiesOf { get; set; } = new PersonnelSegmentSpecificationHasPropertiesOfRelationshipCollection();
+public virtual List<PersonnelSegmentSpecificationHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<PersonnelSegmentSpecificationHasPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelSegmentSpecificationCorrespondsToPersonnelClassRelationshipCollection CorrespondsToPersonnelClass { get; set; } = new PersonnelSegmentSpecificationCorrespondsToPersonnelClassRelationshipCollection();
+public virtual List<PersonnelSegmentSpecificationCorrespondsToPersonnelClassRelationship> CorrespondsToPersonnelClass { get; set; } = new List<PersonnelSegmentSpecificationCorrespondsToPersonnelClassRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelSegmentSpecificationCorrespondsToPersonRelationshipCollection CorrespondsToPerson { get; set; } = new PersonnelSegmentSpecificationCorrespondsToPersonRelationshipCollection();
+public virtual List<PersonnelSegmentSpecificationCorrespondsToPersonRelationship> CorrespondsToPerson { get; set; } = new List<PersonnelSegmentSpecificationCorrespondsToPersonRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelSegmentSpecificationHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new PersonnelSegmentSpecificationHierarchyScopeRelRelationshipCollection();
+public virtual List<PersonnelSegmentSpecificationHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<PersonnelSegmentSpecificationHierarchyScopeRelRelationship>();
 
         [JsonIgnore]
-        public virtual PersonnelSegmentSpecificationOperationalLocationRelRelationshipCollection OperationalLocationRel { get; set; } = new PersonnelSegmentSpecificationOperationalLocationRelRelationshipCollection();
+public virtual List<PersonnelSegmentSpecificationOperationalLocationRelRelationship> OperationalLocationRel { get; set; } = new List<PersonnelSegmentSpecificationOperationalLocationRelRelationship>();
 
         public override bool Equals(object? obj)
         {

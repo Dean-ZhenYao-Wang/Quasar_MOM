@@ -32,22 +32,22 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsPerformance
         public OperationsResponseResponseState? ResponseState { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsResponseCorrespondsToRequestRelationshipCollection CorrespondsToRequest { get; set; } = new OperationsResponseCorrespondsToRequestRelationshipCollection();
+public virtual List<OperationsResponseCorrespondsToRequestRelationship> CorrespondsToRequest { get; set; } = new List<OperationsResponseCorrespondsToRequestRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsResponseCorrespondsToDefinitionRelationshipCollection CorrespondsToDefinition { get; set; } = new OperationsResponseCorrespondsToDefinitionRelationshipCollection();
+public virtual List<OperationsResponseCorrespondsToDefinitionRelationship> CorrespondsToDefinition { get; set; } = new List<OperationsResponseCorrespondsToDefinitionRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsResponseCorrespondsToSegmentRelationshipCollection CorrespondsToSegment { get; set; } = new OperationsResponseCorrespondsToSegmentRelationshipCollection();
+public virtual List<OperationsResponseCorrespondsToSegmentRelationship> CorrespondsToSegment { get; set; } = new List<OperationsResponseCorrespondsToSegmentRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsResponseCorrespondsToRequirementRelationshipCollection CorrespondsToRequirement { get; set; } = new OperationsResponseCorrespondsToRequirementRelationshipCollection();
+public virtual List<OperationsResponseCorrespondsToRequirementRelationship> CorrespondsToRequirement { get; set; } = new List<OperationsResponseCorrespondsToRequirementRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsResponseIsMadeUpOfRequirementRelationshipCollection IsMadeUpOfRequirement { get; set; } = new OperationsResponseIsMadeUpOfRequirementRelationshipCollection();
+public virtual List<OperationsResponseIsMadeUpOfRequirementRelationship> IsMadeUpOfRequirement { get; set; } = new List<OperationsResponseIsMadeUpOfRequirementRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsResponseHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsResponseHierarchyScopeRelRelationshipCollection();
+public virtual List<OperationsResponseHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationsResponseHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

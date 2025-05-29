@@ -33,19 +33,19 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         public PhysicalAssetPhysicalLocationType? PhysicalLocationType { get; set; }
 
         [JsonIgnore]
-        public virtual PhysicalAssetDefinedByRelationshipCollection DefinedBy { get; set; } = new PhysicalAssetDefinedByRelationshipCollection();
+public virtual List<PhysicalAssetDefinedByRelationship> DefinedBy { get; set; } = new List<PhysicalAssetDefinedByRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new PhysicalAssetHasValuesOfRelationshipCollection();
+public virtual List<PhysicalAssetHasValuesOfRelationship> HasValuesOf { get; set; } = new List<PhysicalAssetHasValuesOfRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new PhysicalAssetIsMadeUpOfRelationshipCollection();
+public virtual List<PhysicalAssetIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<PhysicalAssetIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new PhysicalAssetHierarchyScopeRelRelationshipCollection();
+public virtual List<PhysicalAssetHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<PhysicalAssetHierarchyScopeRelRelationship>();
 
         [JsonIgnore]
-        public virtual PhysicalAssetPhysicalLocationRelRelationshipCollection PhysicalLocationRel { get; set; } = new PhysicalAssetPhysicalLocationRelRelationshipCollection();
+public virtual List<PhysicalAssetPhysicalLocationRelRelationship> PhysicalLocationRel { get; set; } = new List<PhysicalAssetPhysicalLocationRelRelationship>();
 
         public override bool Equals(object? obj)
         {

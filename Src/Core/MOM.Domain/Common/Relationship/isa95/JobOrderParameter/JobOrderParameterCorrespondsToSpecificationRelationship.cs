@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.JobOrderParameter
 {
-    public class JobOrderParameterCorrespondsToSpecificationRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.ParameterSpecification>, IEquatable<JobOrderParameterCorrespondsToSpecificationRelationship>
+    public class JobOrderParameterCorrespondsToSpecificationRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkSchedule.JobOrderParameter ,Domain.isa95.CommonObjectModels.Part2.OperationsDefinition.ParameterSpecification>, IEquatable<JobOrderParameterCorrespondsToSpecificationRelationship>
     {
         public JobOrderParameterCorrespondsToSpecificationRelationship()
         {

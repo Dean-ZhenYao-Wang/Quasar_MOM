@@ -1,20 +1,10 @@
 namespace MOM.Domain.Common.Relationship.isa95.Person
 {
-    public class PersonOperationalLocationRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation>, IEquatable<PersonOperationalLocationRelRelationship>
+    public class PersonOperationalLocationRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.Person ,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation>, IEquatable<PersonOperationalLocationRelRelationship>
     {
-        public PersonOperationalLocationRelRelationship()
+        public PersonOperationalLocationRelRelationship():base()
         {
             Name = "operationalLocationRel";
-        }
-
-        public PersonOperationalLocationRelRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.Person source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation target) : this()
-        {
-            InitializeFromTwins(source, target);
-        }
-
-        public PersonOperationalLocationRelRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
         }
 
         public override bool Equals(object? obj)

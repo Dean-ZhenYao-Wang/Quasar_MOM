@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialSegmentSpecification
 {
-    public class MaterialSegmentSpecificationCorrespondsToDefinitionRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition>, IEquatable<MaterialSegmentSpecificationCorrespondsToDefinitionRelationship>
+    public class MaterialSegmentSpecificationCorrespondsToDefinitionRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.ProcessSegment.MaterialSegmentSpecification ,Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition>, IEquatable<MaterialSegmentSpecificationCorrespondsToDefinitionRelationship>
     {
         public MaterialSegmentSpecificationCorrespondsToDefinitionRelationship()
         {

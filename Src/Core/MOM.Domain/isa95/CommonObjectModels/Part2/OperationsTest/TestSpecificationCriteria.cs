@@ -29,7 +29,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest
         public string? OtherResult { get; set; }
 
         [JsonIgnore]
-        public virtual TestSpecificationCriteriaReferencesRelationshipCollection References { get; set; } = new TestSpecificationCriteriaReferencesRelationshipCollection();
+public virtual List<TestSpecificationCriteriaReferencesRelationship> References { get; set; } = new List<TestSpecificationCriteriaReferencesRelationship>();
 
         public override bool Equals(object? obj)
         {

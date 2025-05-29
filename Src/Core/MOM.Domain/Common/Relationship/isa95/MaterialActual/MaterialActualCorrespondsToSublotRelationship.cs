@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialActual
 {
-    public class MaterialActualCorrespondsToSublotRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot>, IEquatable<MaterialActualCorrespondsToSublotRelationship>
+    public class MaterialActualCorrespondsToSublotRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsPerformance.MaterialActual,Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot>, IEquatable<MaterialActualCorrespondsToSublotRelationship>
     {
         public MaterialActualCorrespondsToSublotRelationship()
         {

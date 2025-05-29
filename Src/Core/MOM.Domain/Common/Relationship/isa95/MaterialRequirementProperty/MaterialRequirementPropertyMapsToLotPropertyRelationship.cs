@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialRequirementProperty
 {
-    public class MaterialRequirementPropertyMapsToLotPropertyRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialLotProperty>, IEquatable<MaterialRequirementPropertyMapsToLotPropertyRelationship>
+    public class MaterialRequirementPropertyMapsToLotPropertyRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.MaterialRequirementProperty,Domain.isa95.CommonObjectModels.Part2.Material.MaterialLotProperty>, IEquatable<MaterialRequirementPropertyMapsToLotPropertyRelationship>
     {
         public MaterialRequirementPropertyMapsToLotPropertyRelationship()
         {

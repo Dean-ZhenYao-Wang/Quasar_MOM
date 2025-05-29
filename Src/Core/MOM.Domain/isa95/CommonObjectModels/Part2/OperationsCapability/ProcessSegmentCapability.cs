@@ -44,16 +44,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsCapability
         public virtual ProcessSegmentCapabilityIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new ProcessSegmentCapabilityIsMadeUpOfRelationshipCollection();
 
         [JsonIgnore]
-        public virtual ProcessSegmentCapabilityIsACollectionOfPersonnelRelationshipCollection IsACollectionOfPersonnel { get; set; } = new ProcessSegmentCapabilityIsACollectionOfPersonnelRelationshipCollection();
+        public virtual List<ProcessSegmentCapabilityIsACollectionOfPersonnelRelationship> IsACollectionOfPersonnel { get; set; } = new List<ProcessSegmentCapabilityIsACollectionOfPersonnelRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentCapabilityIsACollectionOfEquipmentRelationshipCollection IsACollectionOfEquipment { get; set; } = new ProcessSegmentCapabilityIsACollectionOfEquipmentRelationshipCollection();
+        public virtual List<ProcessSegmentCapabilityIsACollectionOfEquipmentRelationship> IsACollectionOfEquipment { get; set; } = new List<ProcessSegmentCapabilityIsACollectionOfEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentCapabilityIsACollectionOfPhysicalAssetRelationshipCollection IsACollectionOfPhysicalAsset { get; set; } = new ProcessSegmentCapabilityIsACollectionOfPhysicalAssetRelationshipCollection();
+        public virtual List<ProcessSegmentCapabilityIsACollectionOfPhysicalAssetRelationship> IsACollectionOfPhysicalAsset { get; set; } = new List<ProcessSegmentCapabilityIsACollectionOfPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual ProcessSegmentCapabilityIsACollectionOfMaterialRelationshipCollection IsACollectionOfMaterial { get; set; } = new ProcessSegmentCapabilityIsACollectionOfMaterialRelationshipCollection();
+        public virtual List<ProcessSegmentCapabilityIsACollectionOfMaterialRelationship> IsACollectionOfMaterial { get; set; } = new List<ProcessSegmentCapabilityIsACollectionOfMaterialRelationship>();
 
         [JsonIgnore]
         public virtual ProcessSegmentCapabilityHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new ProcessSegmentCapabilityHierarchyScopeRelRelationshipCollection();

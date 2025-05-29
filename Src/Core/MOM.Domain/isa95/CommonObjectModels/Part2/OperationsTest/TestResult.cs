@@ -33,19 +33,19 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest
         public DateTime? Expiration { get; set; }
 
         [JsonIgnore]
-        public virtual TestResultIsMadeUpOfResultsRelationshipCollection IsMadeUpOfResults { get; set; } = new TestResultIsMadeUpOfResultsRelationshipCollection();
+public virtual List<TestResultIsMadeUpOfResultsRelationship> IsMadeUpOfResults { get; set; } = new List<TestResultIsMadeUpOfResultsRelationship>();
 
         [JsonIgnore]
-        public virtual TestResultIsMadeUpOfMeasurementsRelationshipCollection IsMadeUpOfMeasurements { get; set; } = new TestResultIsMadeUpOfMeasurementsRelationshipCollection();
+public virtual List<TestResultIsMadeUpOfMeasurementsRelationship> IsMadeUpOfMeasurements { get; set; } = new List<TestResultIsMadeUpOfMeasurementsRelationship>();
 
         [JsonIgnore]
-        public virtual TestResultGeneratedInContextOfRelationshipCollection GeneratedInContextOf { get; set; } = new TestResultGeneratedInContextOfRelationshipCollection();
+public virtual List<TestResultGeneratedInContextOfRelationship> GeneratedInContextOf { get; set; } = new List<TestResultGeneratedInContextOfRelationship>();
 
         [JsonIgnore]
-        public virtual TestResultRecordsTestResultsForRelationshipCollection RecordsTestResultsFor { get; set; } = new TestResultRecordsTestResultsForRelationshipCollection();
+public virtual List<TestResultRecordsTestResultsForRelationship> RecordsTestResultsFor { get; set; } = new List<TestResultRecordsTestResultsForRelationship>();
 
         [JsonIgnore]
-        public virtual TestResultHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new TestResultHierarchyScopeRelRelationshipCollection();
+public virtual List<TestResultHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<TestResultHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

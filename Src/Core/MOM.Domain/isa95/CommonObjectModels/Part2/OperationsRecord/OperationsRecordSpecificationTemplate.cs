@@ -29,7 +29,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsRecord
         public string? AtionMultiplicity { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsRecordSpecificationTemplateContainsRelationshipCollection Contains { get; set; } = new OperationsRecordSpecificationTemplateContainsRelationshipCollection();
+public virtual List<OperationsRecordSpecificationTemplateContainsRelationship> Contains { get; set; } = new List<OperationsRecordSpecificationTemplateContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

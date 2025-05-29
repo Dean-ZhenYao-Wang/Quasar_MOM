@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialRequirement
 {
-    public class MaterialRequirementStorageLocationRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation>, IEquatable<MaterialRequirementStorageLocationRelRelationship>
+    public class MaterialRequirementStorageLocationRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.MaterialRequirement,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation>, IEquatable<MaterialRequirementStorageLocationRelRelationship>
     {
         public MaterialRequirementStorageLocationRelRelationship()
         {

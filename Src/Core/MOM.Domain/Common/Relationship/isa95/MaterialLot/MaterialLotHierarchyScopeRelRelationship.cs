@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.MaterialLot
 {
-    public class MaterialLotHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<MaterialLotHierarchyScopeRelRelationship>
+    public class MaterialLotHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot ,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<MaterialLotHierarchyScopeRelRelationship>
     {
         public MaterialLotHierarchyScopeRelRelationship()
         {

@@ -36,22 +36,22 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkDefinition
         public DateTime? PublishedDate { get; set; }
 
         [JsonIgnore]
-        public virtual WorkDefinitionContainsParameterRelationshipCollection ContainsParameter { get; set; } = new WorkDefinitionContainsParameterRelationshipCollection();
+public virtual List<WorkDefinitionContainsParameterRelationship> ContainsParameter { get; set; } = new List<WorkDefinitionContainsParameterRelationship>();
 
         [JsonIgnore]
-        public virtual WorkDefinitionContainsPersonnelRelationshipCollection ContainsPersonnel { get; set; } = new WorkDefinitionContainsPersonnelRelationshipCollection();
+public virtual List<WorkDefinitionContainsPersonnelRelationship> ContainsPersonnel { get; set; } = new List<WorkDefinitionContainsPersonnelRelationship>();
 
         [JsonIgnore]
-        public virtual WorkDefinitionContainsEquipmentRelationshipCollection ContainsEquipment { get; set; } = new WorkDefinitionContainsEquipmentRelationshipCollection();
+public virtual List<WorkDefinitionContainsEquipmentRelationship> ContainsEquipment { get; set; } = new List<WorkDefinitionContainsEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual WorkDefinitionContainsPhysicalAssetRelationshipCollection ContainsPhysicalAsset { get; set; } = new WorkDefinitionContainsPhysicalAssetRelationshipCollection();
+public virtual List<WorkDefinitionContainsPhysicalAssetRelationship> ContainsPhysicalAsset { get; set; } = new List<WorkDefinitionContainsPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual WorkDefinitionContainsMaterialRelationshipCollection ContainsMaterial { get; set; } = new WorkDefinitionContainsMaterialRelationshipCollection();
+public virtual List<WorkDefinitionContainsMaterialRelationship> ContainsMaterial { get; set; } = new List<WorkDefinitionContainsMaterialRelationship>();
 
         [JsonIgnore]
-        public virtual WorkDefinitionHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new WorkDefinitionHierarchyScopeRelRelationshipCollection();
+public virtual List<WorkDefinitionHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<WorkDefinitionHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

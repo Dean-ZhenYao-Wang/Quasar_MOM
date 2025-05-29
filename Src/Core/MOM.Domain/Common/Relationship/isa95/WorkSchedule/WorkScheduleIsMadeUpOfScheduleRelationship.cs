@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.WorkSchedule
 {
-    public class WorkScheduleIsMadeUpOfScheduleRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkSchedule.WorkSchedule>, IEquatable<WorkScheduleIsMadeUpOfScheduleRelationship>
+    public class WorkScheduleIsMadeUpOfScheduleRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkSchedule.WorkSchedule,Domain.isa95.CommonObjectModels.Part4.WorkSchedule.WorkSchedule>, IEquatable<WorkScheduleIsMadeUpOfScheduleRelationship>
     {
         public WorkScheduleIsMadeUpOfScheduleRelationship()
         {

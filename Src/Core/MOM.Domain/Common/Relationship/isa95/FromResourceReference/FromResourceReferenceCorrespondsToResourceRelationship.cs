@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.FromResourceReference
 {
-    public class FromResourceReferenceCorrespondsToResourceRelationship : Relationship<Domain.isa95.CommonObjectModels.Resource>, IEquatable<FromResourceReferenceCorrespondsToResourceRelationship>
+    public class FromResourceReferenceCorrespondsToResourceRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.ResourceRelationship.FromResourceReference ,Domain.isa95.CommonObjectModels.Resource>, IEquatable<FromResourceReferenceCorrespondsToResourceRelationship>
     {
         public FromResourceReferenceCorrespondsToResourceRelationship()
         {

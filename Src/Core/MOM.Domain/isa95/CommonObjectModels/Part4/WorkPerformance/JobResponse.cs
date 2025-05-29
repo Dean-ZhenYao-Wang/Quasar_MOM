@@ -35,37 +35,37 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkPerformance
         public JobResponseJobState? JobState { get; set; }
 
         [JsonIgnore]
-        public virtual JobResponseCorrespondsToWorkMasterRelationshipCollection CorrespondsToWorkMaster { get; set; } = new JobResponseCorrespondsToWorkMasterRelationshipCollection();
+public virtual List<JobResponseCorrespondsToWorkMasterRelationship> CorrespondsToWorkMaster { get; set; } = new List<JobResponseCorrespondsToWorkMasterRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseCorrespondsToWorkDirectiveRelationshipCollection CorrespondsToWorkDirective { get; set; } = new JobResponseCorrespondsToWorkDirectiveRelationshipCollection();
+public virtual List<JobResponseCorrespondsToWorkDirectiveRelationship> CorrespondsToWorkDirective { get; set; } = new List<JobResponseCorrespondsToWorkDirectiveRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseCorrespondsToSpecificationRelationshipCollection CorrespondsToSpecification { get; set; } = new JobResponseCorrespondsToSpecificationRelationshipCollection();
+public virtual List<JobResponseCorrespondsToSpecificationRelationship> CorrespondsToSpecification { get; set; } = new List<JobResponseCorrespondsToSpecificationRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseCorrespondsToSpecificationNodeRelationshipCollection CorrespondsToSpecificationNode { get; set; } = new JobResponseCorrespondsToSpecificationNodeRelationshipCollection();
+public virtual List<JobResponseCorrespondsToSpecificationNodeRelationship> CorrespondsToSpecificationNode { get; set; } = new List<JobResponseCorrespondsToSpecificationNodeRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseCorrespondsToJobOrderRelationshipCollection CorrespondsToJobOrder { get; set; } = new JobResponseCorrespondsToJobOrderRelationshipCollection();
+public virtual List<JobResponseCorrespondsToJobOrderRelationship> CorrespondsToJobOrder { get; set; } = new List<JobResponseCorrespondsToJobOrderRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseContainsDataRelationshipCollection ContainsData { get; set; } = new JobResponseContainsDataRelationshipCollection();
+public virtual List<JobResponseContainsDataRelationship> ContainsData { get; set; } = new List<JobResponseContainsDataRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseContainsPersonnelRelationshipCollection ContainsPersonnel { get; set; } = new JobResponseContainsPersonnelRelationshipCollection();
+public virtual List<JobResponseContainsPersonnelRelationship> ContainsPersonnel { get; set; } = new List<JobResponseContainsPersonnelRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseContainsEquipmentRelationshipCollection ContainsEquipment { get; set; } = new JobResponseContainsEquipmentRelationshipCollection();
+public virtual List<JobResponseContainsEquipmentRelationship> ContainsEquipment { get; set; } = new List<JobResponseContainsEquipmentRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseContainsPhysicalAssetRelationshipCollection ContainsPhysicalAsset { get; set; } = new JobResponseContainsPhysicalAssetRelationshipCollection();
+public virtual List<JobResponseContainsPhysicalAssetRelationship> ContainsPhysicalAsset { get; set; } = new List<JobResponseContainsPhysicalAssetRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseContainsMaterialRelationshipCollection ContainsMaterial { get; set; } = new JobResponseContainsMaterialRelationshipCollection();
+public virtual List<JobResponseContainsMaterialRelationship> ContainsMaterial { get; set; } = new List<JobResponseContainsMaterialRelationship>();
 
         [JsonIgnore]
-        public virtual JobResponseHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new JobResponseHierarchyScopeRelRelationshipCollection();
+public virtual List<JobResponseHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<JobResponseHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

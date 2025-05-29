@@ -45,25 +45,25 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsTest
         public string? RecurrenceTimeInterval { get; set; }
 
         [JsonIgnore]
-        public virtual TestSpecificationIsMadeUpOfRelationshipCollection IsMadeUpOf { get; set; } = new TestSpecificationIsMadeUpOfRelationshipCollection();
+public virtual List<TestSpecificationIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<TestSpecificationIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-        public virtual TestSpecificationSpecifiesTestForOperationsRelationshipCollection SpecifiesTestForOperations { get; set; } = new TestSpecificationSpecifiesTestForOperationsRelationshipCollection();
+public virtual List<TestSpecificationSpecifiesTestForOperationsRelationship> SpecifiesTestForOperations { get; set; } = new List<TestSpecificationSpecifiesTestForOperationsRelationship>();
 
         [JsonIgnore]
-        public virtual TestSpecificationHasValuesOfRelationshipCollection HasValuesOf { get; set; } = new TestSpecificationHasValuesOfRelationshipCollection();
+public virtual List<TestSpecificationHasValuesOfRelationship> HasValuesOf { get; set; } = new List<TestSpecificationHasValuesOfRelationship>();
 
         [JsonIgnore]
-        public virtual TestSpecificationIsMadeUpOfCriteriaRelationshipCollection IsMadeUpOfCriteria { get; set; } = new TestSpecificationIsMadeUpOfCriteriaRelationshipCollection();
+public virtual List<TestSpecificationIsMadeUpOfCriteriaRelationship> IsMadeUpOfCriteria { get; set; } = new List<TestSpecificationIsMadeUpOfCriteriaRelationship>();
 
         [JsonIgnore]
-        public virtual TestSpecificationEvaluatesRelationshipCollection Evaluates { get; set; } = new TestSpecificationEvaluatesRelationshipCollection();
+public virtual List<TestSpecificationEvaluatesRelationship> Evaluates { get; set; } = new List<TestSpecificationEvaluatesRelationship>();
 
         [JsonIgnore]
-        public virtual TestSpecificationSpecifiesTestForObjectRelationshipCollection SpecifiesTestForObject { get; set; } = new TestSpecificationSpecifiesTestForObjectRelationshipCollection();
+public virtual List<TestSpecificationSpecifiesTestForObjectRelationship> SpecifiesTestForObject { get; set; } = new List<TestSpecificationSpecifiesTestForObjectRelationship>();
 
         [JsonIgnore]
-        public virtual TestSpecificationHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new TestSpecificationHierarchyScopeRelRelationshipCollection();
+public virtual List<TestSpecificationHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<TestSpecificationHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

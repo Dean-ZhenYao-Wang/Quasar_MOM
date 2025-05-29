@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.JobOrder
 {
-    public class JobOrderCorrespondsToRequirementRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.SegmentRequirement>, IEquatable<JobOrderCorrespondsToRequirementRelationship>
+    public class JobOrderCorrespondsToRequirementRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkSchedule.JobOrder,Domain.isa95.CommonObjectModels.Part2.OperationsSchedule.SegmentRequirement>, IEquatable<JobOrderCorrespondsToRequirementRelationship>
     {
         public JobOrderCorrespondsToRequirementRelationship()
         {

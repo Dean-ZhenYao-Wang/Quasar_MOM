@@ -26,10 +26,10 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition
         public string? DependencyFactorUnitOfMeasure { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsSegmentDependencyOperationsSegmentFromRelationshipCollection OperationsSegmentFrom { get; set; } = new OperationsSegmentDependencyOperationsSegmentFromRelationshipCollection();
+public virtual List<OperationsSegmentDependencyOperationsSegmentFromRelationship> OperationsSegmentFrom { get; set; } = new List<OperationsSegmentDependencyOperationsSegmentFromRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsSegmentDependencyOperationsSegmentToRelationshipCollection OperationsSegmentTo { get; set; } = new OperationsSegmentDependencyOperationsSegmentToRelationshipCollection();
+public virtual List<OperationsSegmentDependencyOperationsSegmentToRelationship> OperationsSegmentTo { get; set; } = new List<OperationsSegmentDependencyOperationsSegmentToRelationship>();
 
         public override bool Equals(object? obj)
         {

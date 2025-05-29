@@ -30,16 +30,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition
         public OperationsDefinitionDefinitionType? DefinitionType { get; set; }
 
         [JsonIgnore]
-        public virtual OperationsDefinitionContainsRelationshipCollection Contains { get; set; } = new OperationsDefinitionContainsRelationshipCollection();
+public virtual List<OperationsDefinitionContainsRelationship> Contains { get; set; } = new List<OperationsDefinitionContainsRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsDefinitionIncludesPropertiesOfRelationshipCollection IncludesPropertiesOf { get; set; } = new OperationsDefinitionIncludesPropertiesOfRelationshipCollection();
+public virtual List<OperationsDefinitionIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<OperationsDefinitionIncludesPropertiesOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsDefinitionHasAssociatedRelationshipCollection HasAssociated { get; set; } = new OperationsDefinitionHasAssociatedRelationshipCollection();
+public virtual List<OperationsDefinitionHasAssociatedRelationship> HasAssociated { get; set; } = new List<OperationsDefinitionHasAssociatedRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsDefinitionHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsDefinitionHierarchyScopeRelRelationshipCollection();
+public virtual List<OperationsDefinitionHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationsDefinitionHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.Equipment
 {
-    public class EquipmentImplementedByRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset>, IEquatable<EquipmentImplementedByRelationship>
+    public class EquipmentImplementedByRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset>, IEquatable<EquipmentImplementedByRelationship>
     {
         public EquipmentImplementedByRelationship()
         {

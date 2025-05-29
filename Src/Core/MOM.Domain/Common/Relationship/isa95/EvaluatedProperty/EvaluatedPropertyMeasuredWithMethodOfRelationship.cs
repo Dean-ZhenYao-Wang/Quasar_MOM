@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.EvaluatedProperty
 {
-    public class EvaluatedPropertyMeasuredWithMethodOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part4.WorkDefinition.WorkDefinition>, IEquatable<EvaluatedPropertyMeasuredWithMethodOfRelationship>
+    public class EvaluatedPropertyMeasuredWithMethodOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationsTest.EvaluatedProperty ,Domain.isa95.CommonObjectModels.Part4.WorkDefinition.WorkDefinition>, IEquatable<EvaluatedPropertyMeasuredWithMethodOfRelationship>
     {
         public EvaluatedPropertyMeasuredWithMethodOfRelationship()
         {

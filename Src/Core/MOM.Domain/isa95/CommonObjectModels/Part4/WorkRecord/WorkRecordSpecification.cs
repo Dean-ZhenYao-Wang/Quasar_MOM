@@ -29,7 +29,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part4.WorkRecord
         public string? ActionMultiplicity { get; set; }
 
         [JsonIgnore]
-        public virtual WorkRecordSpecificationContainsRelationshipCollection Contains { get; set; } = new WorkRecordSpecificationContainsRelationshipCollection();
+public virtual List<WorkRecordSpecificationContainsRelationship> Contains { get; set; } = new List<WorkRecordSpecificationContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

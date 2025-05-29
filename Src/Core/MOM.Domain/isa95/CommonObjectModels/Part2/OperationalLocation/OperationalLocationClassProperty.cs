@@ -13,8 +13,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         {
         }
 
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:OperationalLocationClassProperty;1";
 
         [JsonPropertyName("value")]
         public string? Value { get; set; }
@@ -26,7 +24,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         public virtual OperationalLocationClassPropertyPropertyType? PropertyType { get; set; }
 
         [JsonIgnore]
-        public virtual OperationalLocationClassPropertyContainsRelationshipCollection Contains { get; set; } = new OperationalLocationClassPropertyContainsRelationshipCollection();
+public virtual List<OperationalLocationClassPropertyContainsRelationship> Contains { get; set; } = new List<OperationalLocationClassPropertyContainsRelationship>();
 
         public override bool Equals(object? obj)
         {

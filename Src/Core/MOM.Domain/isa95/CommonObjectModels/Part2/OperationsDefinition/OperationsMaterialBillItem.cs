@@ -44,13 +44,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationsDefinition
         /// 组合关系
         /// </summary>
         [JsonIgnore]
-        public virtual OperationsMaterialBillItemIsAssembledFromRelationshipCollection IsAssembledFrom { get; set; } = new OperationsMaterialBillItemIsAssembledFromRelationshipCollection();
+public virtual List<OperationsMaterialBillItemIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<OperationsMaterialBillItemIsAssembledFromRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsMaterialBillItemIsUseOfRelationshipCollection IsUseOf { get; set; } = new OperationsMaterialBillItemIsUseOfRelationshipCollection();
+public virtual List<OperationsMaterialBillItemIsUseOfRelationship> IsUseOf { get; set; } = new List<OperationsMaterialBillItemIsUseOfRelationship>();
 
         [JsonIgnore]
-        public virtual OperationsMaterialBillItemHierarchyScopeRelRelationshipCollection HierarchyScopeRel { get; set; } = new OperationsMaterialBillItemHierarchyScopeRelRelationshipCollection();
+public virtual List<OperationsMaterialBillItemHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationsMaterialBillItemHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {
