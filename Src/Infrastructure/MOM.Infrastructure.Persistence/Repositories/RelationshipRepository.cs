@@ -220,6 +220,10 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 await this.InsertPath(currentDtId, parentDtId.Value);
             await this.InsertSelfLink(currentDtId);
         }
+        public async Task AddAsync(Guid currentDtId, Guid? parentDtId)
+        {
+            await this.MoveNode(currentDtId, parentDtId);
+        }
         public async Task InsertSelfLink(Guid currentDtId)
         {
             // Replace the instantiation of T with a factory method or delegate to create the instance
@@ -260,8 +264,22 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
         public async Task<int> DeletePath(Guid currentDtId)
         {
-            return await this.Where(m => m.TargetId == currentDtId)
+            var newParent = await this.GetSourceDtId(currentDtId, 1);
+            await this.Where(m => m.TargetId == currentDtId)
                   .ExecuteUpdateAsync(m => m.SetProperty(p => p.IsDelete, true));
+            await MoveSubTree(currentDtId, newParent);
+            return 1;
+        }
+        public async Task<int> DeletePath(IEnumerable<Guid> currentDtIds)
+        {
+            foreach (var currentDtId in currentDtIds)
+            {
+                var newParent = await this.GetSourceDtId(currentDtId, 1);
+                await this.Where(m => m.TargetId == currentDtId)
+                      .ExecuteUpdateAsync(m => m.SetProperty(p => p.IsDelete, true));
+                await MoveSubTree(currentDtId, newParent);
+            }
+            return 1;
         }
 
         /// <summary>

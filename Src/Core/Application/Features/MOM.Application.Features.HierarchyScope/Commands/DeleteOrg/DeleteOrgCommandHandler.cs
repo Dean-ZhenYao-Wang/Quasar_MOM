@@ -15,9 +15,9 @@ namespace MOM.Application.Features.HierarchyScope.Commands.DeleteOrg
             {
                 await hierarchyScopeRepository.DeleteAsync(command.DtIds);
 
-                await hierarchyScopeContainsRelationshipRepository.DbSet
-                    .Where(m => command.DtIds.Contains(m.SourceId.Value) || command.DtIds.Contains(m.TargetId))
-                    .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));
+
+                await hierarchyScopeContainsRelationshipRepository.DeletePath(command.DtIds);
+
 
                 await unitOfWork.CommitAsync();
             }

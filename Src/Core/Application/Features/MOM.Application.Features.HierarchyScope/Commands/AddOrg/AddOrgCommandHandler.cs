@@ -17,7 +17,7 @@ namespace MOM.Application.Features.HierarchyScope.Commands.AddOrg
                 await hierarchyScopeRepository.AddAsync(model);
                 await hierarchyScopeRepository.SaveChangesAsync();
 
-                //await hierarchyScopeContainsRelationshipRepository.AddAsync(request.SourceDtId, model);
+                await hierarchyScopeContainsRelationshipRepository.AddAsync(model.DtId, request.SourceDtId);
 
                 await unitOfWork.CommitAsync();
             }

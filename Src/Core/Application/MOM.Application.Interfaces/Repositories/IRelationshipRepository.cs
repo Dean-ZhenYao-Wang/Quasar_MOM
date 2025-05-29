@@ -9,7 +9,9 @@ namespace MOM.Application.Interfaces.Repositories
         where TSource : BaseEntity
         where TTarget : BaseEntity
     {
+        Task AddAsync(Guid currentDtId, Guid? parentDtId);
         Task<int> DeletePath(Guid currentDtId);
+        Task<int> DeletePath(IEnumerable<Guid> currentDtIds);
         Task<List<TTarget>> GetChildren(Guid currentNodeDtId);
         Task<int?> GetDepth(Guid currentNodeDtId, Guid? parentDtId);
         Task<int?> GetLevel(Guid currentNodeDtId);
