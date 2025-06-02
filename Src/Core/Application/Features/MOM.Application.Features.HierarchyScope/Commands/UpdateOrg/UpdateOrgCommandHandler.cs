@@ -26,6 +26,12 @@ namespace MOM.Application.Features.HierarchyScope.Commands.UpdateOrg
                     Org.FullPath = Org.Name;
 
                 await hierarchyScopeContainsRelationshipRepository.MoveNode(request.DtId, request.SourceDtId);
+                await hierarchyScopeContainsRelationshipRepository.SaveChangesAsync();
+
+                if (Org.SourceDtId != null)
+                {
+                    Org.FullPath = await hierarchyScopeContainsRelationshipRepository.GetPathAsync(Org.DtId);
+                }
 
                 await unitOfWork.CommitAsync();
             }

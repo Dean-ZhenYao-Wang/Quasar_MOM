@@ -87,16 +87,16 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .ToListAsync();
         }
         /// <summary>
-        /// 获取根节点到此节点（含）路径上的所有的节点对象。
+        /// 获取根节点到此节点（含）路径上的所有的节点名称。
         /// </summary>
         /// <param name="parentDtId"></param>
         /// <returns>节点列表，越上级的节点在列表中的位置越靠前</returns>
-        public async Task<List<TSource>> GetPath(Guid currentDtId)
+        public async Task<string> GetPathAsync(Guid currentDtId)
         {
-            return await this.Where(m => m.TargetId == currentDtId && m.SourceId != null)
+            return string.Join("/",await this.Where(m => m.TargetId == currentDtId && m.SourceId != null)
                 .OrderByDescending(m => m.Depth)
-                .Select(m => m.Source)
-                .ToListAsync();
+                .Select(m => m.Source.Name)
+                .ToListAsync());
         }
         /// <summary>
         /// 获取指定分类（含）到其某个的上级分类（不含）之间的所有分类的对象。
@@ -104,14 +104,14 @@ namespace MOM.Infrastructure.Persistence.Repositories
         /// </summary>
         /// <param name="parentDtId">上级节点</param>
         /// <returns>节点列表，越靠上的节点在列表中的位置越靠前</returns>
-        public async Task<List<TSource>> GetPath(Guid currentDtId, Guid parentDtId)
+        public async Task<string> GetPath(Guid currentDtId, Guid parentDtId)
         {
-            return await this.Where(m => m.TargetId == currentDtId
+            return string.Join("/", await this.Where(m => m.TargetId == currentDtId
             && m.Depth < (this.Where(d => d.TargetId == currentDtId
                 && d.SourceId == parentDtId)
                 .Select(d => d.Depth).First()))
                 .Select(m => m.Source)
-                .ToListAsync();
+                .ToListAsync());
         }
         /// <summary>
         /// 将一个分类移动到目标分类下面（成为其子分类）。被移动分类的子类将自动上浮
@@ -226,13 +226,8 @@ namespace MOM.Infrastructure.Persistence.Repositories
         }
         public async Task InsertSelfLink(Guid currentDtId)
         {
-            // Replace the instantiation of T with a factory method or delegate to create the instance
-            var relationship = new T
-            {
-                SourceId = currentDtId,
-                TargetId = currentDtId,
-                Depth = 0
-            };
+            var relationship = new T();
+            relationship.InitializeFromTwins(currentDtId, currentDtId,0);
             await this.AddAsync(relationship);
         }
         public async Task InsertPath(Guid currenDtId, Guid parentDtId)
@@ -252,9 +247,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 var relationships = sources.Select(s =>
                 {
                     var relationship = new T();
-                    relationship.SourceId = s.SourceId;
-                    relationship.TargetId = s.TargetId;
-                    relationship.Depth = s.Depth;
+                    relationship.InitializeFromTwins(s.SourceId, s.TargetId, s.Depth);
                     return relationship;
                 }).ToList();
                 await this.AddRangeAsync(relationships);

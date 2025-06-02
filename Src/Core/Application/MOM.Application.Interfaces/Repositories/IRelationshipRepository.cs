@@ -15,8 +15,8 @@ namespace MOM.Application.Interfaces.Repositories
         Task<List<TTarget>> GetChildren(Guid currentNodeDtId);
         Task<int?> GetDepth(Guid currentNodeDtId, Guid? parentDtId);
         Task<int?> GetLevel(Guid currentNodeDtId);
-        Task<List<TSource>> GetPath(Guid currentDtId);
-        Task<List<TSource>> GetPath(Guid currentDtId, Guid parentDtId);
+        Task<string> GetPathAsync(Guid currentDtId);
+        Task<string> GetPath(Guid currentDtId, Guid parentDtId);
         Task<Guid?> GetSourceDtId(Guid currentNodeDtId, int depth);
         Task<List<TTarget>> GetSubLayer(Guid currentDtId, int depth);
         Task<List<TTarget>> GetTree(Guid currentNodeDtId);

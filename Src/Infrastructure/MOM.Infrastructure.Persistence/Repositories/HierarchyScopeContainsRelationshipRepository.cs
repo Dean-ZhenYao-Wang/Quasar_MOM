@@ -21,8 +21,36 @@ namespace MOM.Infrastructure.Persistence.Repositories
 {
 
     public class HierarchyScopeContainsRelationshipRepository(ApplicationDbContext dbContext)
-        : RelationshipRepository<HierarchyScopeContainsRelationship,HierarchyScope,HierarchyScope>(dbContext),
+        : RelationshipRepository<HierarchyScopeContainsRelationship, HierarchyScope, HierarchyScope>(dbContext),
         IHierarchyScopeContainsRelationshipRepository
     {
+        public async Task<PagedResponse<OrgResponse>> GetOrgListAsync(Guid? sourceDtId, string id, string name, int page, int pageSize)
+        {
+            var query = this
+                .Include(m => m.Target)
+                .ThenInclude(t => t.Responsible)
+                .Include(m => m.Target)
+                .ThenInclude(t => t.Source)
+                .Where(m => sourceDtId == null ? m.Depth == 0 : m.SourceId == sourceDtId && m.Depth == 1)
+                .Where(m => !string.IsNullOrWhiteSpace(id) ? m.Target.Id.Contains(id) : true)
+                .Where(m => !string.IsNullOrWhiteSpace(name) ? m.Target.Name.Contains(name) : true)
+                .Select(m => new OrgResponse
+                {
+                    Active = m.Target.Active,
+                    Address = m.Target.Address,
+                    Description = m.Target.Description,
+                    SourceName = m.Target.Source.Name,
+                    SourceDtId = m.Target.SourceDtId,
+                    DtId = m.Target.DtId,
+                    EquipmentLevel = m.Target.EquipmentLevel,
+                    FullPath = m.Target.FullPath,
+                    Id = m.Target.Id,
+                    Name = m.Target.Name,
+                    ResponsibleDtId = m.Target.ResponsibleDtId,
+                    ResponsibleName = m.Target.ResponsibleName,
+                });
+
+            return await this.PagedAsync(query, page, pageSize);
+        }
     }
 }

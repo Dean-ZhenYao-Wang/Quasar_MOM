@@ -17,16 +17,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         public string? HierarchyScope { get; set; }
 
         [JsonIgnore]
-public virtual List<OperationalLocationDefinedByRelationship> DefinedBy { get; set; } = new List<OperationalLocationDefinedByRelationship>();
+        public virtual List<OperationalLocationDefinedByRelationship> DefinedBy { get; set; } = new List<OperationalLocationDefinedByRelationship>();
 
         [JsonIgnore]
-public virtual List<OperationalLocationHasValuesOfRelationship> HasValuesOf { get; set; } = new List<OperationalLocationHasValuesOfRelationship>();
+        public virtual List<OperationalLocationHasValuesOfRelationship> HasValuesOf { get; set; } = new List<OperationalLocationHasValuesOfRelationship>();
 
         [JsonIgnore]
-public virtual List<OperationalLocationIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<OperationalLocationIsMadeUpOfRelationship>();
+        public virtual List<OperationalLocationIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<OperationalLocationIsMadeUpOfRelationship>();
 
         [JsonIgnore]
-public virtual List<OperationalLocationHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationalLocationHierarchyScopeRelRelationship>();
+        public virtual List<OperationalLocationHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<OperationalLocationHierarchyScopeRelRelationship>();
         /// <summary>
         /// 在空间上将设备定义为零维点、一维线、二维形状或三维实体。
         /// </summary>

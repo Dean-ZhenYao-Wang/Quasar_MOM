@@ -24,6 +24,6 @@ namespace MOM.Application.DTOs.HierarchyScope.Responses
         /// <summary>
         /// 路径
         /// </summary>
-        public string FullPath { get; internal set; }
+        public string FullPath { get; set; }
     }
 }

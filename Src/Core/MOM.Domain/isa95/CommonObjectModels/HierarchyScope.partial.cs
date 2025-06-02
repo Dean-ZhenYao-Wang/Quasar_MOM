@@ -12,7 +12,6 @@ namespace MOM.Domain.isa95.CommonObjectModels
     [Table(nameof(HierarchyScope))]
     public partial class HierarchyScope
     {
-        public string Name { get; set; }
         /// <summary>
         /// 路径
         /// </summary>
@@ -77,6 +76,8 @@ public virtual List<Person> Peoples { get; set; } = new List<Person>();
             Description = description;
             Active = active;
             SourceDtId = sourceDtId;
+            if (sourceDtId == null)
+                FullPath = this.Name;
         }
 
         public void Delete()

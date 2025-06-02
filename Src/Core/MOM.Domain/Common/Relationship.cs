@@ -48,11 +48,23 @@ public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquat
     /// </summary>
     /// <param name="sourceDtId">源数字孪生唯一标识符</param>
     /// <param name="targetDtId">目标数字孪生唯一标识符</param>
-    protected void InitializeFromTwins(Guid? sourceDtId, Guid targetDtId)
+    public void InitializeFromTwins(Guid? sourceDtId, Guid targetDtId)
     {
         SourceId = sourceDtId;
         TargetId = targetDtId;
         Id = $"{sourceDtId}-{targetDtId}";
+    }
+    /// <summary>
+    /// 根据源数字孪生ID和目标数字孪生ID初始化关系属性
+    /// </summary>
+    /// <param name="sourceDtId">源数字孪生唯一标识符</param>
+    /// <param name="targetDtId">目标数字孪生唯一标识符</param>
+    public void InitializeFromTwins(Guid? sourceDtId, Guid targetDtId,int depth)
+    {
+        SourceId = sourceDtId;
+        TargetId = targetDtId;
+        Id = $"{sourceDtId}-{targetDtId}";
+        Depth = depth;
     }
     public Relationship()
     {

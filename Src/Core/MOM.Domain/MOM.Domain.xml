@@ -567,6 +567,13 @@
             <param name="sourceDtId">源数字孪生唯一标识符</param>
             <param name="targetDtId">目标数字孪生唯一标识符</param>
         </member>
+        <member name="M:MOM.Domain.Common.Relationship`2.InitializeFromTwins(System.Nullable{System.Guid},System.Guid,System.Int32)">
+            <summary>
+            根据源数字孪生ID和目标数字孪生ID初始化关系属性
+            </summary>
+            <param name="sourceDtId">源数字孪生唯一标识符</param>
+            <param name="targetDtId">目标数字孪生唯一标识符</param>
+        </member>
         <member name="T:MOM.Domain.Common.RelationshipEqualityComparer">
             <summary>
             用于ADT基础关系的相等性比较器实现

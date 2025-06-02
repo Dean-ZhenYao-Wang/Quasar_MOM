@@ -18,6 +18,13 @@ namespace MOM.Application.Features.HierarchyScope.Commands.AddOrg
                 await hierarchyScopeRepository.SaveChangesAsync();
 
                 await hierarchyScopeContainsRelationshipRepository.AddAsync(model.DtId, request.SourceDtId);
+                await hierarchyScopeContainsRelationshipRepository.SaveChangesAsync();
+
+
+                if (model.SourceDtId != null)
+                {
+                    model.FullPath = await hierarchyScopeContainsRelationshipRepository.GetPathAsync(model.DtId);
+                }
 
                 await unitOfWork.CommitAsync();
             }
