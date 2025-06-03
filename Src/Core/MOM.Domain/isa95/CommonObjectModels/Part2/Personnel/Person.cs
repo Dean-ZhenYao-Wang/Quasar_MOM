@@ -23,9 +23,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         public string? HierarchyScope
         { get { return HierarchyScopeRel?.Name; } }
 
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-
         /// <summary>
         /// 当前操作位置
         /// </summary>
