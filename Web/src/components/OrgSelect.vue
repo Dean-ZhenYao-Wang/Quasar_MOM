@@ -31,6 +31,9 @@ const orgList = ref([])
 
 onMounted(async () => {
   const list = await orgStore.getOrgTable({ page: 1, pageSize: 99999999 })
-  orgList.value = list.data
+  orgList.value = list.data.map((item) => ({
+    ...item,
+    name: item.name + '(' + item.fullPath + ')',
+  }))
 })
 </script>
