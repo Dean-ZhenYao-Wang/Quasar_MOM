@@ -217,6 +217,11 @@
         </member>
         <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.PersonnelClassRequest.Id">
             <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.PersonnelClassRequest.Name">
+            <summary>
             名称
             </summary>
         </member>
@@ -264,6 +269,16 @@
         <member name="P:MOM.Application.DTOs.PersonnelClass.Responses.TeamResponse.SourceName">
             <summary>
             所属班组名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Responses.TeamResponse.OrgDtId">
+            <summary>
+            所属组织唯一标识
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Responses.TeamResponse.OrgName">
+            <summary>
+            所属组织路径名称
             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Id">

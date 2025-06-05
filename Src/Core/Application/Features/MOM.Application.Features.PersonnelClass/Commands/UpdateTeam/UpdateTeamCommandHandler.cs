@@ -15,10 +15,11 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdateTeam
                 return BaseResult.Failure(new Error(ErrorCode.NotFound, "Position not found."));
             }
             position.Id = request.Id;
+            position.Name = request.Name;
             position.Remark = request.Remark;
             position.ResponsibleDtId = request.ResponsibleDtId;
-            // Update other properties as needed
-            personnelClassRepository.Update(position);
+            position.HierarchyScopeRelDtId = request.OrgDtId;
+
 
             var oldSource = personnelClassIncludesPropertiesOfRelationshipRepository
                 .Where(m => m.TargetId.Equals(request.DtId))

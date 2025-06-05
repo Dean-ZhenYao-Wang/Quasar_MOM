@@ -51,6 +51,13 @@ const table_Config = {
   queryFields: {
     id: {
       type: 'q-input',
+      label: '编号',
+      props: {
+        outlined: true,
+      },
+    },
+    name: {
+      type: 'q-input',
       label: '名称',
       props: {
         outlined: true,
@@ -79,6 +86,11 @@ const table_Config = {
     },
     id: {
       type: 'q-input',
+      label: '编号',
+      rules: [(val) => !!val || '必填字段'],
+    },
+    name: {
+      type: 'q-input',
       label: '名称',
       rules: [(val) => !!val || '必填字段'],
     },
@@ -93,6 +105,7 @@ const table_Config = {
     orgDtId: {
       type: 'OrgSelect',
       label: '所属组织',
+      rules: [(val) => !!val || '必填字段'],
       props: {
         clearable: true,
       },
@@ -113,10 +126,11 @@ const table_Config = {
     rowKey: 'dtId',
     selection: 'multiple',
     columns: [
-      { name: 'id', label: '名称', field: 'id' },
+      { name: 'id', label: '编号', field: 'id' },
+      { name: 'name', label: '名称', field: 'name' },
       { name: 'remark', label: '备注', field: 'remark' },
       { name: 'responsibleName', label: '负责人', field: 'responsibleName' },
-      { name: 'orgName', lable: '所属组织', field: 'orgName' },
+      { name: 'orgName', label: '所属组织', field: 'orgName' },
       { name: 'sourceName', label: '所属班组', field: 'sourceName' },
     ],
   },

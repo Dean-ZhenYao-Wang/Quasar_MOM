@@ -36,6 +36,7 @@ namespace MOM.Infrastructure.Persistence.Contexts
 
         public DbSet<HierarchyScope> HierarchyScopes { get; set; }
         public DbSet<HierarchyScopeContainsRelationship> HierarchyScopeContainsRelationship { get; set; }
+        public DbSet<PersonnelClassHierarchyScopeRelRelationship> PersonnelClassHierarchyScopeRelRelationship { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {

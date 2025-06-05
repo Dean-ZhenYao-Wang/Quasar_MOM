@@ -14,12 +14,13 @@
         /// <summary>
         /// 所属组织唯一标识
         /// </summary>
-        public Guid OrgDtId { get; set; }
+        public Guid? OrgDtId { get; set; }
 
         public override Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass ToPersonnelClass(string description)
         {
             var returnClass = base.ToPersonnelClass(description);
             returnClass.ResponsibleDtId = this.ResponsibleDtId;
+            returnClass.HierarchyScopeRelDtId = this.OrgDtId;
             return returnClass;
         }
     }

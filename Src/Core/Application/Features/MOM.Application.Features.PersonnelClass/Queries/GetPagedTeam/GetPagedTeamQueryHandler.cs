@@ -15,6 +15,8 @@ namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
                 .ThenInclude(t => t.Responsible)
                 .Include(navigation => navigation.Target)
                 .ThenInclude(t => t.Permissions)
+                .Include(navigation => navigation.Target)
+                .ThenInclude(t => t.HierarchyScopeRel)
                 .Where(m => m.Target.Description.Equals("班组"))
                 .Where(x => request.sourceDtId != null ? x.SourceId == request.sourceDtId : true)
                 .Where(x => !string.IsNullOrWhiteSpace(request.Id) ? x.Target.Id.Contains(request.Id) : true)
@@ -23,12 +25,15 @@ namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
                 {
                     DtId = x.Target.DtId,
                     Id = x.Target.Id,
+                    Name = x.Target.Name,
                     Remark = x.Target.Remark,
                     ResponsibleDtId = x.Target.ResponsibleDtId,
-                    ResponsibleName = x.Target.ResponsibleDtId==null?null:x.Target.Responsible.Name,
+                    ResponsibleName = x.Target.ResponsibleDtId == null ? null : x.Target.Responsible.Name,
                     SourceDtId = x.SourceId,
                     SourceName = x.Source == null ? string.Empty : x.Source.Id,
-                    Permissions = x.Target.Permissions.Select(p => p.MenuButtonId)
+                    Permissions = x.Target.Permissions.Select(p => p.MenuButtonId),
+                    OrgDtId = x.Target.HierarchyScopeRelDtId,
+                    OrgName = x.Target.HierarchyScope
                 });
 
             return await personnelClassIncludesPropertiesOfRelationshipRepository.PagedAsync(query, request.PageNumber, request.PageSize);
