@@ -120,6 +120,8 @@ import HierarchyScopeEquipmentLevel from './HierarchyScopeEquipmentLevel.vue'
 import OrgSelect from './OrgSelect.vue'
 import TeamSelect from './TeamSelect.vue'
 import PositionSelect from './PositionSelect.vue'
+import OrgLevel from './OrgLevel.vue'
+import EnterpriseSelect from './EnterpriseSelect.vue'
 const route = useRoute()
 
 const quasarForm = useTemplateRef('quasarForm')
@@ -134,6 +136,8 @@ const getComponentType = (type) => {
     OrgSelect: OrgSelect,
     TeamSelect: TeamSelect,
     PositionSelect: PositionSelect,
+    OrgLevel: OrgLevel,
+    EnterpriseSelect: EnterpriseSelect,
   }
   return componentMap[type] || PrimeVue[type] || type
 }

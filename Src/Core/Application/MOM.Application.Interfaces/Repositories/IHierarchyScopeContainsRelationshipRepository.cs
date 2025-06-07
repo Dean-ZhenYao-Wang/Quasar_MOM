@@ -8,6 +8,8 @@ namespace MOM.Application.Interfaces.Repositories
 {
     public interface IHierarchyScopeContainsRelationshipRepository : IRelationshipRepository<HierarchyScopeContainsRelationship, HierarchyScope, HierarchyScope>
     {
+        Task<PagedResponse<OrgResponse>> GetEnterpriseListAsync(string? id, string? name, int page, int pageSize);
+        Task<PagedResponse<OrgResponse>> GetFactoryListAsync(string? id, string? name, int page, int pageSize);
         Task<PagedResponse<OrgResponse>> GetOrgListAsync(Guid? sourceDtId, string? id, string? name, int page, int pageSize);
     }
 }

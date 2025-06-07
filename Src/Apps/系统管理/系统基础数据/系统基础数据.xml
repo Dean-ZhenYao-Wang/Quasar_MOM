@@ -4,60 +4,74 @@
         <name>系统基础数据</name>
     </assembly>
     <members>
-        <member name="M:系统基础数据.Controllers.v1.MenuController.GetMenuTree">
-            <summary>
-            菜单管理页面获得所有菜单树
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.OrgController.GetOrgTable(MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery)">
+        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetOrgTable(MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery)">
             <summary>
             查询组织列表
             </summary>
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.OrgController.AddOrg(MOM.Application.Features.HierarchyScope.Commands.AddOrg.AddOrgCommand)">
+        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetEnterpriseTable(MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery)">
+            <summary>
+            查询企业列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetFactoryTable(MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery)">
+            <summary>
+            查询工厂列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.AddHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope.AddHierarchyScopeCommand)">
             <summary>
             添加组织
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.OrgController.DeleteOrg(MOM.Application.Features.HierarchyScope.Commands.DeleteOrg.DeleteOrgCommand)">
+        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.DeleteHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope.DeleteHierarchyScopeCommand)">
             <summary>
             删除组织
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.OrgController.UpdateOrg(MOM.Application.Features.HierarchyScope.Commands.UpdateOrg.UpdateOrgCommand)">
+        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.UpdateHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.UpdateHierarchyScope.UpdateHierarchyScopeCommand)">
             <summary>
             修改组织
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.OrgController.GetDepartTree(System.Nullable{System.Guid})">
+        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetDepartTree(System.Nullable{System.Guid})">
             <summary>
             获取组织树形
             </summary>
             <param name="sourceDtId">上级节点的DtId</param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.OrgController.SettingPermission(MOM.Application.Features.Permission.Commands.OrgSettingPermission.OrgSettingPermissionCommand)">
+        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.SettingPermission(MOM.Application.Features.Permission.Commands.OrgSettingPermission.OrgSettingPermissionCommand)">
             <summary>
             给组织结构配置基本权限
             </summary>
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.OrgController.Permission(System.Guid)">
+        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.Permission(System.Guid)">
             <summary>
             获取指定组织的权限列表
             </summary>
             <param name="orgDtId">指定组织的dtId</param>
             <returns>该组织所拥有权限的菜单或按钮的编号</returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.MenuController.GetMenuTree">
+            <summary>
+            菜单管理页面获得所有菜单树
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:系统基础数据.Controllers.v1.PositionController.SelectOptions">
             <summary>

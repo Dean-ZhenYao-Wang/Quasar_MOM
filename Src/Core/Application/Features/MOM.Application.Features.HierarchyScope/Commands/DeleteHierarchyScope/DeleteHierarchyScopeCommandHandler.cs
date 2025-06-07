@@ -4,11 +4,11 @@ using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
-namespace MOM.Application.Features.HierarchyScope.Commands.DeleteOrg
+namespace MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope
 {
-    public class DeleteOrgCommandHandler(IHierarchyScopeRepository hierarchyScopeRepository, IHierarchyScopeContainsRelationshipRepository hierarchyScopeContainsRelationshipRepository, ITranslator translator, IUnitOfWork unitOfWork) : IRequestHandler<DeleteOrgCommand, BaseResult>
+    public class DeleteHierarchyScopeCommandHandler(IHierarchyScopeRepository hierarchyScopeRepository, IHierarchyScopeContainsRelationshipRepository hierarchyScopeContainsRelationshipRepository, ITranslator translator, IUnitOfWork unitOfWork) : IRequestHandler<DeleteHierarchyScopeCommand, BaseResult>
     {
-        public async Task<BaseResult> Handle(DeleteOrgCommand command, CancellationToken cancellationToken)
+        public async Task<BaseResult> Handle(DeleteHierarchyScopeCommand command, CancellationToken cancellationToken)
         {
             using var transaction = await unitOfWork.BeginTransactionAsync();
             try

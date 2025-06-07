@@ -4,11 +4,11 @@ using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 using MOM.Domain.Common.Relationship.isa95.HierarchyScope;
 
-namespace MOM.Application.Features.HierarchyScope.Commands.AddOrg
+namespace MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope
 {
-    public class AddOrgCommandHandler(IHierarchyScopeRepository hierarchyScopeRepository, IHierarchyScopeContainsRelationshipRepository hierarchyScopeContainsRelationshipRepository, IUnitOfWork unitOfWork) : IRequestHandler<AddOrgCommand, BaseResult>
+    public class AddHierarchyScopeCommandHandler(IHierarchyScopeRepository hierarchyScopeRepository, IHierarchyScopeContainsRelationshipRepository hierarchyScopeContainsRelationshipRepository, IUnitOfWork unitOfWork) : IRequestHandler<AddHierarchyScopeCommand, BaseResult>
     {
-        public async Task<BaseResult> Handle(AddOrgCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResult> Handle(AddHierarchyScopeCommand request, CancellationToken cancellationToken)
         {
             using var transaction = await unitOfWork.BeginTransactionAsync();
             try

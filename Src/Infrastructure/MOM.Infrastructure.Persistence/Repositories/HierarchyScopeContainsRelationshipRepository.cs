@@ -24,6 +24,64 @@ namespace MOM.Infrastructure.Persistence.Repositories
         : RelationshipRepository<HierarchyScopeContainsRelationship, HierarchyScope, HierarchyScope>(dbContext),
         IHierarchyScopeContainsRelationshipRepository
     {
+        public async Task<PagedResponse<OrgResponse>> GetEnterpriseListAsync(string id, string name, int page, int pageSize)
+        {
+            var query = this
+                .Include(m => m.Target)
+                .ThenInclude(t => t.Responsible)
+                .Include(m => m.Target)
+                .ThenInclude(t => t.Source)
+                .Where(m => m.Target.EquipmentLevel == HierarchyScopeEquipmentLevel.Enterprise && m.Depth == 0)
+                .Where(m => !string.IsNullOrWhiteSpace(id) ? m.Target.Id.Contains(id) : true)
+                .Where(m => !string.IsNullOrWhiteSpace(name) ? m.Target.Name.Contains(name) : true)
+                .Select(m => new OrgResponse
+                {
+                    Active = m.Target.Active,
+                    Address = m.Target.Address,
+                    Description = m.Target.Description,
+                    SourceName = m.Target.Source.Name,
+                    SourceDtId = m.Target.SourceDtId,
+                    DtId = m.Target.DtId,
+                    EquipmentLevel = m.Target.EquipmentLevel,
+                    FullPath = m.Target.FullPath,
+                    Id = m.Target.Id,
+                    Name = m.Target.Name,
+                    ResponsibleDtId = m.Target.ResponsibleDtId,
+                    ResponsibleName = m.Target.ResponsibleName,
+                });
+
+            return await this.PagedAsync(query, page, pageSize);
+        }
+
+        public async Task<PagedResponse<OrgResponse>> GetFactoryListAsync(string id, string name, int page, int pageSize)
+        {
+            var query = this
+                .Include(m => m.Target)
+                .ThenInclude(t => t.Responsible)
+                .Include(m => m.Target)
+                .ThenInclude(t => t.Source)
+                .Where(m => m.Target.EquipmentLevel == HierarchyScopeEquipmentLevel.Site && m.Depth == 0)
+                .Where(m => !string.IsNullOrWhiteSpace(id) ? m.Target.Id.Contains(id) : true)
+                .Where(m => !string.IsNullOrWhiteSpace(name) ? m.Target.Name.Contains(name) : true)
+                .Select(m => new OrgResponse
+                {
+                    Active = m.Target.Active,
+                    Address = m.Target.Address,
+                    Description = m.Target.Description,
+                    SourceName = m.Target.Source.Name,
+                    SourceDtId = m.Target.SourceDtId,
+                    DtId = m.Target.DtId,
+                    EquipmentLevel = m.Target.EquipmentLevel,
+                    FullPath = m.Target.FullPath,
+                    Id = m.Target.Id,
+                    Name = m.Target.Name,
+                    ResponsibleDtId = m.Target.ResponsibleDtId,
+                    ResponsibleName = m.Target.ResponsibleName,
+                });
+
+            return await this.PagedAsync(query, page, pageSize);
+        }
+
         public async Task<PagedResponse<OrgResponse>> GetOrgListAsync(Guid? sourceDtId, string id, string name, int page, int pageSize)
         {
             var query = this

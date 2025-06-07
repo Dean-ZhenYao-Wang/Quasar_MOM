@@ -10,31 +10,6 @@
       :batchDelete="handleBatchDelete"
       :delete="handleDelete"
     >
-      <template v-slot:body-cell-equipmentLevel="{ row }">
-        <template v-if="row.equipmentLevel == 'Enterprise'">
-          <div>
-            <q-badge color="purple" label="企业" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Site'">
-          <div>
-            <q-badge color="purple" label="工厂" />
-          </div>
-        </template>
-        <template v-else-if="row.equipmentLevel == 'Area'">
-          <div>
-            <q-badge color="purple" label="车间/部门" />
-          </div>
-        </template>
-      </template>
-      <template #actions-append="{ row }">
-        <q-btn
-          label="配置权限"
-          @click="() => openPermissionDialog(row)"
-          dense
-          v-permit="orgPermission"
-        />
-      </template>
     </form-table>
     <permission-dialog
       v-model:dialogVisible="permissionDialogVisible"
@@ -47,22 +22,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useHierarchyScopeStore } from 'src/stores/hierarchyScope'
-const orgStore = useHierarchyScopeStore()
+const facotryStore = useHierarchyScopeStore()
 
 const oldSelectIds = ref([])
-
-const permissionDialogVisible = ref(false)
-const orgSettingPermission = async (ids) => {
-  await orgStore.SettingPermission({ menuButtonIds: ids, owner: settingOrgDtId.value })
-  permissionDialogVisible.value = false
-}
-const settingOrgDtId = ref(null)
-const openPermissionDialog = async (row) => {
-  settingOrgDtId.value = row.dtId
-  let response = await orgStore.Permission(row.dtId)
-  oldSelectIds.value = response.data
-  permissionDialogVisible.value = true
-}
 
 const table_Config = {
   queryFields: {
@@ -81,8 +43,8 @@ const table_Config = {
       },
     },
     sourceDtId: {
-      type: 'OrgSelect',
-      label: '所属组织',
+      type: 'EnterpriseSelect',
+      label: '所属企业',
       props: {
         clearable: true,
       },
@@ -121,8 +83,8 @@ const table_Config = {
       },
     },
     sourceDtId: {
-      type: 'OrgSelect',
-      label: '所属组织',
+      type: 'EnterpriseSelect',
+      label: '所属企业',
       props: {
         clearable: true,
       },
@@ -165,7 +127,7 @@ const table_Config = {
       { name: 'address', label: '地址', field: 'address' },
       { name: 'responsibleName', label: '负责人', field: 'responsibleName' },
       { name: 'description', label: '备注', field: 'description' },
-      { name: 'sourceName', label: '所属组织', field: 'sourceName' },
+      { name: 'sourceName', label: '所属企业', field: 'sourceName' },
       { name: 'fullPath', label: '路径', field: 'fullPath' },
     ],
   },
@@ -178,15 +140,15 @@ const pagination = ref({
   rowsNumber: 0,
 })
 const handleSearch = async (queryParams) => {
-  const response = await orgStore.getOrgTable(queryParams)
+  const response = await facotryStore.getFactoryTable(queryParams)
   tableData.value = response.data
   pagination.value.rowsNumber = response.totalItems
 }
 const handleCreate = async (payload) => {
-  await orgStore.AddHierarchyScope(payload)
+  await facotryStore.AddHierarchyScope(payload)
 }
 const handleUpdate = async (payload) => {
-  await orgStore.UpdateHierarchyScope(payload)
+  await facotryStore.UpdateHierarchyScope(payload)
 }
 const handleBatchDelete = async (dtIds) => {
   await batchDelete(dtIds)
@@ -195,6 +157,6 @@ const handleDelete = async (dtId) => {
   await batchDelete([dtId])
 }
 const batchDelete = async (dtIds) => {
-  await orgStore.DeleteHierarchyScope(dtIds)
+  await facotryStore.DeleteHierarchyScope(dtIds)
 }
 </script>

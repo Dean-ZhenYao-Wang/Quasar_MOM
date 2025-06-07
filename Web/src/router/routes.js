@@ -19,6 +19,12 @@ const routes = [
         path: 'personnel',
         component: () => import('pages/Person/PersonnelPage.vue'),
       },
+      {
+        path: 'productionModeling',
+        children: [
+          { path: 'factory', component: () => import('pages/ProductionModeling/FactoryPage.vue') },
+        ],
+      },
     ],
   },
   {

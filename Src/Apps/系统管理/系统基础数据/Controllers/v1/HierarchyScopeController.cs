@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Common;
 using MOM.Application.DTOs.HierarchyScope.Responses;
-using MOM.Application.Features.HierarchyScope.Commands.AddOrg;
-using MOM.Application.Features.HierarchyScope.Commands.DeleteOrg;
-using MOM.Application.Features.HierarchyScope.Commands.UpdateOrg;
+using MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope;
+using MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope;
+using MOM.Application.Features.HierarchyScope.Commands.UpdateHierarchyScope;
+using MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable;
+using MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable;
 using MOM.Application.Features.HierarchyScope.Queries.GetOrgTable;
 using MOM.Application.Features.HierarchyScope.Queries.GetOrgTree;
 using MOM.Application.Features.Permission.Commands.OrgSettingPermission;
@@ -15,9 +17,9 @@ using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
 {
-    [Tags("组织管理")]
+    [Tags("设备角色层次/生产建模")]
     [ApiVersion("1")]
-    public sealed class OrgController : BaseApiController
+    public sealed class HierarchyScopeController : BaseApiController
     {
         /// <summary>
         /// 查询组织列表
@@ -29,6 +31,26 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(query);
         }
+        /// <summary>
+        /// 查询企业列表
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedResponse<OrgResponse>> GetEnterpriseTable([FromQuery] GetEnterpriseTableQuery query)
+        {
+            return await Mediator.Send(query);
+        }
+        /// <summary>
+        /// 查询工厂列表
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedResponse<OrgResponse>> GetFactoryTable([FromQuery] GetFactoryTableQuery query)
+        {
+            return await Mediator.Send(query);
+        }
 
         /// <summary>
         /// 添加组织
@@ -36,7 +58,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<BaseResult> AddOrg(AddOrgCommand command)
+        public async Task<BaseResult> AddHierarchyScope(AddHierarchyScopeCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
@@ -48,7 +70,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<BaseResult> DeleteOrg(DeleteOrgCommand command)
+        public async Task<BaseResult> DeleteHierarchyScope(DeleteHierarchyScopeCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
@@ -60,7 +82,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<BaseResult> UpdateOrg(UpdateOrgCommand command)
+        public async Task<BaseResult> UpdateHierarchyScope(UpdateHierarchyScopeCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
