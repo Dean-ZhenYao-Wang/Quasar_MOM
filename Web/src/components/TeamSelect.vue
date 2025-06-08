@@ -5,7 +5,7 @@
     :emit-value="true"
     :map-options="true"
     option-value="dtId"
-    option-label="name"
+    option-label="id"
     :rules="rules"
     :loading="loading"
     v-model="model"

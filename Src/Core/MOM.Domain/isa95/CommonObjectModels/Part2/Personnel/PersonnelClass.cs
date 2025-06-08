@@ -16,7 +16,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         }
 
         [JsonPropertyName("hierarchyScope")]
-        public string? HierarchyScope { get { return HierarchyScopeRel?.FullPath; } }
+        public string? HierarchyScope { get { return HierarchyScopeRel?.Name; } }
 
         [JsonIgnore]
 public virtual List<PersonnelClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<PersonnelClassIncludesPropertiesOfRelationship>();

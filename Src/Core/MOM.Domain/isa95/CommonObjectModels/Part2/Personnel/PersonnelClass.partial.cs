@@ -24,10 +24,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </summary>
         public virtual Person Responsible { get; set; }
 
-        public PersonnelClass(string Id,string name, string? description = null, HierarchyScope? hierarchyScope = null) : this()
+        public PersonnelClass(string Id, string? description = null, HierarchyScope? hierarchyScope = null) : this()
         {
             this.Id = Id;
-            this.Name = name;
             this.Description = description;
             if (hierarchyScope != null)
             {

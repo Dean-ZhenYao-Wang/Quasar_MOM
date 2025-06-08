@@ -10,13 +10,11 @@ namespace MOM.Application.Features.PersonnelClass.Queries.GetTeamSelectOptions
         public async Task<List<PersonnelClassResponse>> Handle(GetTeamSelectOptionsQuery request, CancellationToken cancellationToken)
         {
             return await personnelClassRepository.DbSet
-                .Include(x=>x.HierarchyScopeRel)
                 .Where(x => x.Description.Equals("班组"))
                 .Select(x => new PersonnelClassResponse
                 {
                     DtId = x.DtId,
                     Id = x.Id,
-                    Name=x.Name+"("+ x.HierarchyScope+")"
                 }).ToListAsync();
         }
     }

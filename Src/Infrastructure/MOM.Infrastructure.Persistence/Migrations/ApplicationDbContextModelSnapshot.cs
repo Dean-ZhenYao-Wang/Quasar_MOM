@@ -637,17 +637,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("PersonnelClassHasPropertiesOfRelationship");
                 });
 
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship", b =>
-                {
-                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
-
-                    b.HasIndex("SourceId");
-
-                    b.HasIndex("TargetId");
-
-                    b.ToTable("PersonnelClassHierarchyScopeRelRelationship");
-                });
-
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship", b =>
                 {
                     b.HasBaseType("MOM.Domain.Common.BasicRelationship");
@@ -1177,23 +1166,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClassProperty", "Target")
-                        .WithMany()
-                        .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Source");
-
-                    b.Navigation("Target");
-                });
-
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "Source")
-                        .WithMany()
-                        .HasForeignKey("SourceId");
-
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "Target")
                         .WithMany()
                         .HasForeignKey("TargetId")
                         .OnDelete(DeleteBehavior.Cascade)
