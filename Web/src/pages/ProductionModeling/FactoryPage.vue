@@ -10,6 +10,13 @@
       :batchDelete="handleBatchDelete"
       :delete="handleDelete"
     >
+      <template v-slot:body-cell-equipmentLevel="{ row }">
+        <template v-if="row.equipmentLevel == 'Site'">
+          <div>
+            <q-badge color="purple" label="工厂" />
+          </div>
+        </template>
+      </template>
     </form-table>
     <permission-dialog
       v-model:dialogVisible="permissionDialogVisible"
@@ -64,11 +71,6 @@ const table_Config = {
     name: {
       type: 'q-input',
       label: '名称',
-      rules: [(val) => !!val || '必填字段'],
-    },
-    equipmentLevel: {
-      type: 'OrgLevel',
-      label: '类型',
       rules: [(val) => !!val || '必填字段'],
     },
     address: {
@@ -145,6 +147,7 @@ const handleSearch = async (queryParams) => {
   pagination.value.rowsNumber = response.totalItems
 }
 const handleCreate = async (payload) => {
+  payload.equipmentLevel = 'Site'
   await facotryStore.AddHierarchyScope(payload)
 }
 const handleUpdate = async (payload) => {
