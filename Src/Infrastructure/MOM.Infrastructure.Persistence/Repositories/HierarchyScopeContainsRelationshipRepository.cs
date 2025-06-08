@@ -92,6 +92,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .Where(m => sourceDtId == null ? m.Depth == 0 : m.SourceId == sourceDtId && m.Depth == 1)
                 .Where(m => !string.IsNullOrWhiteSpace(id) ? m.Target.Id.Contains(id) : true)
                 .Where(m => !string.IsNullOrWhiteSpace(name) ? m.Target.Name.Contains(name) : true)
+                .OrderBy(m=>m.Target.Id)
                 .Select(m => new OrgResponse
                 {
                     Active = m.Target.Active,

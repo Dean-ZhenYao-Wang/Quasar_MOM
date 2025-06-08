@@ -17,6 +17,7 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdateTeam
             position.Id = request.Id;
             position.Remark = request.Remark;
             position.ResponsibleDtId = request.ResponsibleDtId;
+            position.HierarchyScopeRelDtId = request.OrgDtId;
             // Update other properties as needed
             personnelClassRepository.Update(position);
 

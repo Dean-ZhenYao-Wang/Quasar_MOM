@@ -59,7 +59,7 @@ const levelList = ref([
   },
   {
     value: 'Production_Unit',
-    label: '工段/工位：用于重复或离散生产的设备',
+    label: '工段/工位：用于重复或离散生产的设备或位置',
   },
   {
     value: 'Work_Cell',

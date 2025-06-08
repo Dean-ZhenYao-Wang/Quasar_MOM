@@ -20,6 +20,7 @@
         {
             var returnClass = base.ToPersonnelClass(description);
             returnClass.ResponsibleDtId = this.ResponsibleDtId;
+            returnClass.HierarchyScopeRelDtId = OrgDtId;
             return returnClass;
         }
     }

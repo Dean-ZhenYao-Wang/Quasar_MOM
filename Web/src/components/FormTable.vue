@@ -95,6 +95,7 @@
                   :label="field.label"
                   :rules="field.rules"
                   :readonly="viewDialogVisible"
+                  v-on="extractListeners(field.props)"
                 />
               </template>
             </div>
@@ -120,7 +121,6 @@ import HierarchyScopeEquipmentLevel from './HierarchyScopeEquipmentLevel.vue'
 import OrgSelect from './OrgSelect.vue'
 import TeamSelect from './TeamSelect.vue'
 import PositionSelect from './PositionSelect.vue'
-import OrgLevel from './OrgLevel.vue'
 import EnterpriseSelect from './EnterpriseSelect.vue'
 const route = useRoute()
 
@@ -136,7 +136,6 @@ const getComponentType = (type) => {
     OrgSelect: OrgSelect,
     TeamSelect: TeamSelect,
     PositionSelect: PositionSelect,
-    OrgLevel: OrgLevel,
     EnterpriseSelect: EnterpriseSelect,
   }
   return componentMap[type] || PrimeVue[type] || type
@@ -177,6 +176,17 @@ const currentEditId = ref(null)
 const dialogTitle = computed(() =>
   currentEditId.value ? (viewDialogVisible.value ? '查看' : '编辑') : '新增',
 )
+const extractListeners = (props) => {
+  const listeners = {}
+  for (const key in props) {
+    if (key.startsWith('on') && typeof props[key] === 'function') {
+      // 示例：提取事件名（onFilter => filter）
+      const eventName = key.slice(2).toLowerCase()
+      listeners[eventName] = props[key]
+    }
+  }
+  return listeners
+}
 
 const showAddDialog = () => {
   formDialogVisible.value = true

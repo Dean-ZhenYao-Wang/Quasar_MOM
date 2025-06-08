@@ -26,6 +26,16 @@
             <q-badge color="purple" label="车间/部门" />
           </div>
         </template>
+        <template v-else-if="row.equipmentLevel == 'Production_Line'">
+          <div>
+            <q-badge color="purple" label="产线" />
+          </div>
+        </template>
+        <template v-else-if="row.equipmentLevel == 'Production_Unit'">
+          <div>
+            <q-badge color="purple" label="工段/工位" />
+          </div>
+        </template>
       </template>
       <template #actions-append="{ row }">
         <q-btn
@@ -105,7 +115,7 @@ const table_Config = {
       rules: [(val) => !!val || '必填字段'],
     },
     equipmentLevel: {
-      type: 'OrgLevel',
+      type: 'HierarchyScopeEquipmentLevel',
       label: '类型',
       rules: [(val) => !!val || '必填字段'],
     },

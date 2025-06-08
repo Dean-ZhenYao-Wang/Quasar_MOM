@@ -193,116 +193,116 @@ namespace MOM.Infrastructure.Persistence.Seeds
                 };
                 menus.Add(org);
 
-                Menu productionModeling = new Menu()
-                {
-                    Id = "003",
-                    Depth = 0,
-                    Name = "生产建模",
-                    Children = new List<Menu>()
-                    {
-                        new Menu
-                        {
-                            Id="003-1",
-                            Depth=1,
-                            Name="工厂管理",
-                            Path="/productionModeling/factory",
-                            Buttons=new System.Collections.Generic.List<Button>
-                            {
-                                new Button
-                                {
-                                    Id="system:menu:add",
-                                    Name="新增"
-                                },
-                                new Button
-                                {
-                                    Id="system:menu:edit",
-                                    Name="修改"
-                                },
-                                new Button
-                                {
-                                    Id="system:menu:delete",
-                                    Name="删除"
-                                }
-                            }
-                        },
-                        new Menu
-                        {
-                            Id="003-2",
-                            Depth=1,
-                            Name="车间管理",
-                            Path="/productionModeling/workshop",
-                            Buttons=new System.Collections.Generic.List<Button>
-                            {
-                                new Button
-                                {
-                                    Id="system:menu:add",
-                                    Name="新增"
-                                },
-                                new Button
-                                {
-                                    Id="system:menu:edit",
-                                    Name="修改"
-                                },
-                                new Button
-                                {
-                                    Id="system:menu:delete",
-                                    Name="删除"
-                                }
-                            }
-                        },
-                        new Menu
-                        {
-                            Id="003-3",
-                            Depth=1,
-                            Name="产线管理",
-                            Path="/productionModeling/productionLine",
-                            Buttons=new System.Collections.Generic.List<Button>
-                            {
-                                new Button
-                                {
-                                    Id="system:menu:add",
-                                    Name="新增"
-                                },
-                                new Button
-                                {
-                                    Id="system:menu:edit",
-                                    Name="修改"
-                                },
-                                new Button
-                                {
-                                    Id="system:menu:delete",
-                                    Name="删除"
-                                }
-                            }
-                        },
-                        new Menu
-                        {
-                            Id="003-4",
-                            Depth=1,
-                            Name="工位",
-                            Path="/productionModeling/workstation",
-                            Buttons=new System.Collections.Generic.List<Button>
-                            {
-                                new Button
-                                {
-                                    Id="system:menu:add",
-                                    Name="新增"
-                                },
-                                new Button
-                                {
-                                    Id="system:menu:edit",
-                                    Name="修改"
-                                },
-                                new Button
-                                {
-                                    Id="system:menu:delete",
-                                    Name="删除"
-                                }
-                            }
-                        },
-                    }
-                };
-                menus.Add(productionModeling);
+                //Menu productionModeling = new Menu()
+                //{
+                //    Id = "003",
+                //    Depth = 0,
+                //    Name = "生产建模",
+                //    Children = new List<Menu>()
+                //    {
+                //        new Menu
+                //        {
+                //            Id="003-1",
+                //            Depth=1,
+                //            Name="工厂管理",
+                //            Path="/productionModeling/factory",
+                //            Buttons=new System.Collections.Generic.List<Button>
+                //            {
+                //                new Button
+                //                {
+                //                    Id="system:menu:add",
+                //                    Name="新增"
+                //                },
+                //                new Button
+                //                {
+                //                    Id="system:menu:edit",
+                //                    Name="修改"
+                //                },
+                //                new Button
+                //                {
+                //                    Id="system:menu:delete",
+                //                    Name="删除"
+                //                }
+                //            }
+                //        },
+                //        new Menu
+                //        {
+                //            Id="003-2",
+                //            Depth=1,
+                //            Name="车间管理",
+                //            Path="/productionModeling/workshop",
+                //            Buttons=new System.Collections.Generic.List<Button>
+                //            {
+                //                new Button
+                //                {
+                //                    Id="system:menu:add",
+                //                    Name="新增"
+                //                },
+                //                new Button
+                //                {
+                //                    Id="system:menu:edit",
+                //                    Name="修改"
+                //                },
+                //                new Button
+                //                {
+                //                    Id="system:menu:delete",
+                //                    Name="删除"
+                //                }
+                //            }
+                //        },
+                //        new Menu
+                //        {
+                //            Id="003-3",
+                //            Depth=1,
+                //            Name="产线管理",
+                //            Path="/productionModeling/productionLine",
+                //            Buttons=new System.Collections.Generic.List<Button>
+                //            {
+                //                new Button
+                //                {
+                //                    Id="system:menu:add",
+                //                    Name="新增"
+                //                },
+                //                new Button
+                //                {
+                //                    Id="system:menu:edit",
+                //                    Name="修改"
+                //                },
+                //                new Button
+                //                {
+                //                    Id="system:menu:delete",
+                //                    Name="删除"
+                //                }
+                //            }
+                //        },
+                //        new Menu
+                //        {
+                //            Id="003-4",
+                //            Depth=1,
+                //            Name="工位",
+                //            Path="/productionModeling/workstation",
+                //            Buttons=new System.Collections.Generic.List<Button>
+                //            {
+                //                new Button
+                //                {
+                //                    Id="system:menu:add",
+                //                    Name="新增"
+                //                },
+                //                new Button
+                //                {
+                //                    Id="system:menu:edit",
+                //                    Name="修改"
+                //                },
+                //                new Button
+                //                {
+                //                    Id="system:menu:delete",
+                //                    Name="删除"
+                //                }
+                //            }
+                //        },
+                //    }
+                //};
+                //menus.Add(productionModeling);
 
                 Menu equipment = new Menu()
                 {

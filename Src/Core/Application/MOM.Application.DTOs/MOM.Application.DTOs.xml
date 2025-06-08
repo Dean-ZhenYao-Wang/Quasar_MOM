@@ -266,6 +266,16 @@
             所属班组名称
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Responses.TeamResponse.OrgDtId">
+            <summary>
+            所属组织唯一标识
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Responses.TeamResponse.OrgName">
+            <summary>
+            所属组织名称/路径
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Id">
             <summary>
             UserName 账号

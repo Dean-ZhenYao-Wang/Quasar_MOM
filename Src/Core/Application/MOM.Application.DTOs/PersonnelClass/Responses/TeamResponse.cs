@@ -21,5 +21,13 @@
         /// 所属班组名称
         /// </summary>
         public string? SourceName { get; set; }
+        /// <summary>
+        /// 所属组织唯一标识
+        /// </summary>
+        public Guid? OrgDtId { get; set; }
+        /// <summary>
+        /// 所属组织名称/路径
+        /// </summary>
+        public string? OrgName { get; set; }
     }
 }

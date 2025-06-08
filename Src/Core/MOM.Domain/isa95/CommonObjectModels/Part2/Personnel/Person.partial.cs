@@ -110,7 +110,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             else
             {
                 if (old != null)
-                    old.IsDelete = true;
+                    this.HierarchyScopeRelDtId = null;
                 this.HierarchyScopeRelAddTarget(newOrgDtID);
             }
         }

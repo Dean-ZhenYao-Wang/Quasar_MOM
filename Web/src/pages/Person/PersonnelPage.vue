@@ -231,15 +231,19 @@ const table_Config = {
     positionDtId_List: {
       type: 'PositionSelect',
       label: '职位',
+      rules: [(val) => !!val || '必填字段'],
       props: {
         outlined: true,
         clearable: true,
         multiple: true,
+        'use-chips': true,
+        'stack-label': true,
       },
     },
     orgDtId: {
       type: 'OrgSelect',
       label: '组织',
+      rules: [(val) => !!val || '必填字段'],
       props: {
         outlined: true,
         clearable: true,
@@ -270,7 +274,7 @@ const pagination = ref({
 })
 const handleSearch = async (queryParams) => {
   const response = await personStore.GetPaged(queryParams)
-  tableData.value = response
+  tableData.value = response.data
   pagination.value.rowsNumber = response.totalItems
 }
 const handleCreate = async (payload) => {

@@ -12,7 +12,7 @@ export const usePersonStore = defineStore('personStore', {
     },
     async GetPaged(params) {
       const response = await api.get('/api/v1/Person/GetPaged', { params })
-      return response.data
+      return response
     },
     async Add(payload) {
       await api
