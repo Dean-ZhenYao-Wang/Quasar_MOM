@@ -15,6 +15,7 @@
     "postinstall": "quasar prepare"
   },
   "dependencies": {
+    "@microsoft/signalr": "^8.0.7",
     "@primeuix/themes": "^1.0.3",
     "@quasar/extras": "^1.16.4",
     "axios": "^1.2.1",
