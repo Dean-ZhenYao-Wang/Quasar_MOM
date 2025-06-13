@@ -77,6 +77,13 @@ namespace MOM.Infrastructure.Persistence.Seeds
                                     Name="删除"
                                 }
                             }
+                        },
+                        new Menu()
+                        {
+                            Id="001-2",
+                            Depth=1,
+                            Name="编号生成规则",
+                            Path="/system/numberrules"
                         }
                     }
                 };
