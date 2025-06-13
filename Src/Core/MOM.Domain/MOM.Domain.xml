@@ -672,9 +672,9 @@
             当前操作位置类型
             </summary>
         </member>
-        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HasValuesOf">
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Property">
             <summary>
-            扩展属性、不参与业务规则
+            定制属性
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HierarchyScopeRel">
@@ -764,6 +764,11 @@
             <param name="targetDtIds">要绑定的人员类唯一标识清单</param>
             <param name="type">要绑定的人员类分类</param>
         </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Property">
+            <summary>
+            扩展属性
+            </summary>
+        </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Description">
             <summary>
             说明-系统内部做业务区分使用的
@@ -782,11 +787,6 @@
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Responsible">
             <summary>
             负责人
-            </summary>
-        </member>
-        <member name="P:MOM.Domain.isa95.CommonObjectModels.ResourceClassProperty.PropertyType">
-            <summary>
-            定义属性的类型。
             </summary>
         </member>
         <member name="T:MOM.Domain.isa95.CommonObjectModels.SpatialDefinition">

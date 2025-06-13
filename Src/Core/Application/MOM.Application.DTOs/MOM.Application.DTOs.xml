@@ -452,20 +452,5 @@
             映射自哪个类属性
             </summary>
         </member>
-        <member name="P:MOM.Application.DTOs.Resource.Responses.ResourcePropertyResponse.key">
-            <summary>
-            主键：数据库唯一
-            </summary>
-        </member>
-        <member name="P:MOM.Application.DTOs.Resource.Responses.ResourcePropertyResponse.dtId">
-            <summary>
-            为Key的值
-            </summary>
-        </member>
-        <member name="P:MOM.Application.DTOs.Resource.Responses.ResourcePropertyResponse.children">
-            <summary>
-            子自定义属性清单
-            </summary>
-        </member>
     </members>
 </doc>

@@ -14,7 +14,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
     public class PersonnelClassRepository(ApplicationDbContext dbContext) : GenericRepository<PersonnelClass>(dbContext), IPersonnelClassRepository
     {
         private readonly DbSet<PersonnelClassIncludesPropertiesOfRelationship> personnelClassIncludesPropertiesOfRelationships = dbContext.Set<PersonnelClassIncludesPropertiesOfRelationship>();
-        private readonly DbSet<PersonnelClassHasPropertiesOfRelationship> personnelClassHasPropertiesOfRelationships = dbContext.Set<PersonnelClassHasPropertiesOfRelationship>();
         private readonly DbSet<PersonnelClassHierarchyScopeRelRelationship> personnelClassHierarchyScopeRelRelationships = dbContext.Set<PersonnelClassHierarchyScopeRelRelationship>();
 
         public async Task AddAsync(PersonnelClass model, Guid? sourceDtId)

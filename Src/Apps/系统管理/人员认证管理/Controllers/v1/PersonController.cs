@@ -2,18 +2,15 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.Personnel.Responses;
-using MOM.Application.DTOs.Resource.Responses;
 using MOM.Application.Features.Permission.Commands.PersonnelSettingPermission;
 using MOM.Application.Features.Personnel.Commands.AddPerson;
 using MOM.Application.Features.Personnel.Commands.DeletePerson;
 using MOM.Application.Features.Personnel.Commands.UpdatePerson;
 using MOM.Application.Features.Personnel.Queries.GetPagedListPerson;
-using MOM.Application.Features.Personnel.Queries.GetProperties;
 using MOM.Application.Features.Personnel.Queries.GetResponsibles;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace 人员认证管理.Controllers.v1
 {

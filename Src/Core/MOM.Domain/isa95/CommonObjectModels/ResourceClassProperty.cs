@@ -12,17 +12,6 @@ namespace MOM.Domain.isa95.CommonObjectModels
         {
         }
 
-        /// <summary>
-        /// 定义属性的类型。
-        /// </summary>
-        [JsonPropertyName("propertyType")]
-        public ResourceClassPropertyPropertyType PropertyType { get; set; }
-
-        [JsonPropertyName("value")]
-        public string? Value { get; set; }
-
-        [JsonPropertyName("valueUnitOfMeasure")]
-        public string? ValueUnitOfMeasure { get; set; }
 
         public override bool Equals(object? obj)
         {
@@ -31,7 +20,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
 
         public bool Equals(ResourceClassProperty? other)
         {
-            return other is not null && base.Equals(other) && PropertyType == other.PropertyType && Value == other.Value && ValueUnitOfMeasure == other.ValueUnitOfMeasure;
+            return other is not null && base.Equals(other);
         }
 
         public static bool operator ==(ResourceClassProperty? left, ResourceClassProperty? right)
@@ -46,7 +35,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
 
         public override int GetHashCode()
         {
-            return this.CustomHash(base.GetHashCode(), PropertyType.GetHashCode(), Value?.GetHashCode(), ValueUnitOfMeasure?.GetHashCode());
+            return this.CustomHash(base.GetHashCode());
         }
     }
 }

@@ -16,7 +16,6 @@ namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
                 .Include(p => p.DefinedBy)
                 .ThenInclude(d => d.Target)
                 .Include(p => p.HierarchyScopeRel)
-                .Include(p => p.HasValuesOf)
                 .Where(p => p.DtId == request.DtId)
                 .AsSplitQuery()
                 .FirstOrDefaultAsync();

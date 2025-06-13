@@ -26,10 +26,6 @@ namespace MOM.Application.Features.PersonnelClass.Commands.DeletePosition
                     .Where(m => request.DtIds.Contains(m.TargetId))
                     .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));
 
-                await unitOfWork.Relationships.Set<PersonnelClassHasPropertiesOfRelationship>()
-                    .Where(m => request.DtIds.Contains(m.SourceId.Value))
-                    .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));
-
                 await unitOfWork.Relationships.Set<PersonnelClassHierarchyScopeRelRelationship>()
                     .Where(m => request.DtIds.Contains(m.SourceId.Value))
                     .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));

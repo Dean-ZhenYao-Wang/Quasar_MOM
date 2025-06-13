@@ -1,5 +1,4 @@
-﻿using MOM.Application.DTOs.Resource.Responses;
-using MOM.Domain.Common.EnumType;
+﻿using MOM.Domain.Common.EnumType;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 
 namespace MOM.Application.DTOs.Personnel.Requests
@@ -50,10 +49,15 @@ namespace MOM.Application.DTOs.Personnel.Requests
         /// 职位/角色
         /// </summary>
         public required IEnumerable<Guid>? PositionDtId_List { get; set; }
+        /// <summary>
+        /// 扩展属性
+        /// </summary>
+        public PersonProperty Property { get; set; }
 
         public virtual Person ToPerson()
         {
             Person person = new Person(Id, Name, WorkStatus, Email, PhoneNumber, TeamDtId, OrgDtId, PositionDtId_List, Description);
+            person.Property = Property;
             return person;
         }
     }

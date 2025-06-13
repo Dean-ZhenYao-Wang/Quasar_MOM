@@ -6,7 +6,16 @@ const routes = [
     meta: { requiresAuth: true },
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },
-      { path: 'system/menu', component: () => import('pages/Menu/MenuPage.vue') },
+      {
+        path: 'system',
+        children: [
+          { path: 'menu', component: () => import('pages/System/Menu/MenuPage.vue') },
+          {
+            path: 'numberrules',
+            component: () => import('pages/System/NumBerrules/NumBerrulesPage.vue'),
+          },
+        ],
+      },
       {
         path: 'org',
         children: [

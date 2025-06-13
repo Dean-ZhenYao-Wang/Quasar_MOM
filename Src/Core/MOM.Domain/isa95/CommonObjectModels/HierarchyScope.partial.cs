@@ -51,15 +51,15 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// <summary>
         /// 权限清单
         /// </summary>
-public virtual List<OrgPermission> Permissions { get; set; } = new List<OrgPermission>();
+        public virtual List<OrgPermission> Permissions { get; set; } = new List<OrgPermission>();
         /// <summary>
         /// 班组清单
         /// </summary>
-public virtual List<PersonnelClass> Teams { get; set; } = new List<PersonnelClass>();
+        public virtual List<PersonnelClass> Teams { get; set; } = new List<PersonnelClass>();
         /// <summary>
         /// 人员清单
         /// </summary>
-public virtual List<Person> Peoples { get; set; } = new List<Person>();
+        public virtual List<Person> Peoples { get; set; } = new List<Person>();
         /// <summary>
         /// 父级唯一标识
         /// </summary>
