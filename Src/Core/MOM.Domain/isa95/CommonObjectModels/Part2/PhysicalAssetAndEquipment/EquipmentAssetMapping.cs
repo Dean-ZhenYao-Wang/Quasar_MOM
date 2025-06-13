@@ -25,13 +25,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         public DateTime? EndTime { get; set; }
 
         [JsonIgnore]
-public virtual List<EquipmentAssetMappingRecordsUseOfEquipmentRelationship> RecordsUseOfEquipment { get; set; } = new List<EquipmentAssetMappingRecordsUseOfEquipmentRelationship>();
+        public virtual List<EquipmentAssetMappingRecordsUseOfEquipmentRelationship> RecordsUseOfEquipment { get; set; } = new List<EquipmentAssetMappingRecordsUseOfEquipmentRelationship>();
 
         [JsonIgnore]
-public virtual List<EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship> RecordsUseOfPhysicalAsset { get; set; } = new List<EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship>();
+        public virtual List<EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship> RecordsUseOfPhysicalAsset { get; set; } = new List<EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship>();
 
         [JsonIgnore]
-public virtual List<EquipmentAssetMappingHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<EquipmentAssetMappingHierarchyScopeRelRelationship>();
+        public virtual List<EquipmentAssetMappingHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<EquipmentAssetMappingHierarchyScopeRelRelationship>();
 
         public override bool Equals(object? obj)
         {

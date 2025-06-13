@@ -789,6 +789,166 @@
             负责人
             </summary>
         </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.DefinedBy">
+            <summary>
+            所属设备类清单
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Property">
+            <summary>
+            扩展属性
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.IsMadeUpOf">
+            <summary>
+            这个父设备是子设备的整体。<br/>
+            组成关系
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.ImplementedBy">
+            <summary>
+            对应的实物资产<br/>
+            该设备在工艺段中的作用是由实物资产实现的。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.HierarchyScope">
+            <summary>
+            所属设备角色层次/所属组织
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.SpatialDefinition">
+            <summary>
+            空间定义
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Number">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Specification">
+            <summary>
+            规格
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.ModelNumber">
+            <summary>
+            型号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.UseOrgDtId">
+            <summary>
+            使用组织的DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.UseOrg">
+            <summary>
+            使用组织
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.UseOrgName">
+            <summary>
+            使用组织
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Status">
+            <summary>
+            设备状态
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.EnabledTime">
+            <summary>
+            启用时间
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.ResponsibleDtId">
+            <summary>
+            责任人DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Responsible">
+            <summary>
+            责任人
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.ResponsibleName">
+            <summary>
+            责任人
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Supplier">
+            <summary>
+            供应商
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.FactoryNumber">
+            <summary>
+            出厂编号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.DepreciationLife">
+            <summary>
+            折旧年限
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.FactoryDate">
+            <summary>
+            出厂日期
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.InitialPrice">
+            <summary>
+            原始价格
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.DateOfPurchase">
+            <summary>
+            购买日期
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.WarrantyPeriod">
+            <summary>
+            保修期
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.EquipmentLevel">
+            <summary>
+            在基于角色的装备层次中级别的标识
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.IncludesPropertiesOf">
+            <summary>
+            当前分类包含的子分类。<br/>
+            父子关系（主要类别，如生产类、一起类、辅助类、工具类、运输类、管理类等）<br/>
+            设备->主要设备->甲类设备<br/>
+            设备->主要设备->乙类设备<br/>
+            设备->产线->罐装产线
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.IsMadeUpOf">
+            <summary>
+            这个父设备类是子设备类的整体。<br/>
+            组成关系（具体的设备类别，如反应器、压缩机、CNC、叉车、行车等）<br/>
+            罐装产线->A类设备<br/>
+            罐装产线->B类设备<br/>
+            A类设备与B类设备共同组成罐装产线
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.Property">
+            <summary>
+            扩展属性
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.Property">
+            <summary>
+            扩展属性
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.HasPropertiesOf">
+            <summary>
+            扩展属性
+            </summary>
+        </member>
         <member name="T:MOM.Domain.isa95.CommonObjectModels.SpatialDefinition">
             <summary>
             空间定义提供了一种沟通零维点、一维线、二维形状或三维固体地理空间位置数据的方法，用于规划/调度、实际、资源和分析

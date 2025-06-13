@@ -225,6 +225,11 @@
             备注
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.PersonnelClassRequest.Property">
+            <summary>
+            扩展属性
+            </summary>
+        </member>
         <member name="M:MOM.Application.DTOs.PersonnelClass.Requests.PersonnelClassRequest.ToPersonnelClass(System.String)">
             <summary>
             转换成db模型
@@ -319,6 +324,11 @@
         <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.PositionDtId_List">
             <summary>
             职位/角色
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Property">
+            <summary>
+            扩展属性
             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Personnel.Requests.UpdatePersonRequest.DtId">
@@ -424,32 +434,6 @@
         <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.AvailablePermissions">
             <summary>
             当前人的特殊权限
-            </summary>
-        </member>
-        <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.Id">
-            <summary>
-            名称
-            对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
-            </summary>
-        </member>
-        <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.Description">
-            <summary>
-            备注
-            </summary>
-        </member>
-        <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.Value">
-            <summary>
-            值
-            </summary>
-        </member>
-        <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.ValueUnitOfMeasure">
-            <summary>
-            值的度量单位
-            </summary>
-        </member>
-        <member name="P:MOM.Application.DTOs.Resource.Requests.ResourcePropertyRequest.mapToDtId">
-            <summary>
-            映射自哪个类属性
             </summary>
         </member>
     </members>

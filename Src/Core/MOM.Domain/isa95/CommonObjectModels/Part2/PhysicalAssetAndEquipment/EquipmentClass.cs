@@ -35,7 +35,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 设备->产线->罐装产线
         /// </summary>
         [JsonIgnore]
-public virtual List<EquipmentClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<EquipmentClassIncludesPropertiesOfRelationship>();
+        public virtual List<EquipmentClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<EquipmentClassIncludesPropertiesOfRelationship>();
 
         /// <summary>
         /// 这个父设备类是子设备类的整体。<br/>
@@ -45,17 +45,73 @@ public virtual List<EquipmentClassIncludesPropertiesOfRelationship> IncludesProp
         /// A类设备与B类设备共同组成罐装产线
         /// </summary>
         [JsonIgnore]
-public virtual List<EquipmentClassIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<EquipmentClassIsMadeUpOfRelationship>();
+        public virtual List<EquipmentClassIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<EquipmentClassIsMadeUpOfRelationship>();
 
         /// <summary>
-        /// 自定义属性清单
+        /// 扩展属性
         /// </summary>
-        [JsonIgnore]
-public virtual List<EquipmentClassHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<EquipmentClassHasPropertiesOfRelationship>();
+        public virtual EquipmentClassProperty Property { get; set; } = new EquipmentClassProperty();
 
         [JsonIgnore]
         [MaxLength(1)]
-public virtual List<EquipmentClassHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<EquipmentClassHierarchyScopeRelRelationship>();
+        public virtual List<EquipmentClassHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<EquipmentClassHierarchyScopeRelRelationship>();
+
+
+
+        public string Description { get; set; }
+
+        public EquipmentClass(string ID, string description) : this()
+        {
+            this.Id = Id;
+            this.Description = description;
+        }
+
+        public async void PutIncludesPropertiesOf(List<Guid> childClassDtId)
+        {
+            var haveDtIds = this.IncludesPropertiesOf.Select(m => m.TargetId).ToList();
+            var notHaveDtIds = childClassDtId.Except(haveDtIds);
+            var deleteDtIds = haveDtIds.Except(childClassDtId);
+            foreach (var item in deleteDtIds)
+            {
+                this.IncludesPropertiesOf.RemoveAll(m => m.TargetId == item);
+            }
+            foreach (var item in notHaveDtIds)
+            {
+                this.IncludesPropertiesOf.Add(new Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship(this.DtId, item));
+            }
+        }
+
+        public async void PutIsMadeUpOf(List<Guid> childClassDtId)
+        {
+            var haveDtIds = this.IsMadeUpOf.Select(m => m.TargetId).ToList();
+            var notHaveDtIds = childClassDtId.Except(haveDtIds);
+            var deleteDtIds = haveDtIds.Except(childClassDtId);
+            foreach (var item in deleteDtIds)
+            {
+                this.IsMadeUpOf.RemoveAll(m => m.TargetId == item);
+            }
+            foreach (var item in notHaveDtIds)
+            {
+                this.IsMadeUpOf.Add(new Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship(this.DtId, item));
+            }
+        }
+
+        public void Update(string iD, string? description, EquipmentClassEquipmentLevel? equipmentLevel)
+        {
+            this.Id = Id;
+            this.Description = description;
+            this.EquipmentLevel = equipmentLevel;
+        }
+
+        public void Delete()
+        {
+            this.HierarchyScopeRel.Clear();
+            this.IncludesPropertiesOf.Clear();
+            this.IsDelete = true;
+        }
+
+
+
 
         public override bool Equals(object? obj)
         {

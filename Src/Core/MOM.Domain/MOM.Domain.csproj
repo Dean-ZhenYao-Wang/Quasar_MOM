@@ -10,11 +10,9 @@
 	  <Compile Remove="Common\Relationship\isa95\Enterprise\**" />
 	  <Compile Remove="Common\Relationship\isa95\EquipmentActualProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\EquipmentActual\**" />
-	  <Compile Remove="Common\Relationship\isa95\EquipmentAssetMapping\**" />
 	  <Compile Remove="Common\Relationship\isa95\EquipmentCapabilityProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\EquipmentCapability\**" />
 	  <Compile Remove="Common\Relationship\isa95\EquipmentClassProperty\**" />
-	  <Compile Remove="Common\Relationship\isa95\EquipmentClass\**" />
 	  <Compile Remove="Common\Relationship\isa95\EquipmentProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\EquipmentRequirementProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\EquipmentRequirement\**" />
@@ -22,7 +20,6 @@
 	  <Compile Remove="Common\Relationship\isa95\EquipmentSegmentSpecification\**" />
 	  <Compile Remove="Common\Relationship\isa95\EquipmentSpecificationProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\EquipmentSpecification\**" />
-	  <Compile Remove="Common\Relationship\isa95\Equipment\**" />
 	  <Compile Remove="Common\Relationship\isa95\EvaluatedProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\FromResourceReferenceProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\FromResourceReference\**" />
@@ -90,7 +87,6 @@
 	  <Compile Remove="Common\Relationship\isa95\PhysicalAssetCapabilityProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\PhysicalAssetCapability\**" />
 	  <Compile Remove="Common\Relationship\isa95\PhysicalAssetClassProperty\**" />
-	  <Compile Remove="Common\Relationship\isa95\PhysicalAssetClass\**" />
 	  <Compile Remove="Common\Relationship\isa95\PhysicalAssetProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\PhysicalAssetRequirementProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\PhysicalAssetRequirement\**" />
@@ -98,7 +94,6 @@
 	  <Compile Remove="Common\Relationship\isa95\PhysicalAssetSegmentSpecification\**" />
 	  <Compile Remove="Common\Relationship\isa95\PhysicalAssetSpecificationProperty\**" />
 	  <Compile Remove="Common\Relationship\isa95\PhysicalAssetSpecification\**" />
-	  <Compile Remove="Common\Relationship\isa95\PhysicalAsset\**" />
 	  <Compile Remove="Common\Relationship\isa95\ProcessSegmentCapability\**" />
 	  <Compile Remove="Common\Relationship\isa95\ProcessSegmentDependency\**" />
 	  <Compile Remove="Common\Relationship\isa95\ProcessSegmentParameter\**" />
@@ -167,7 +162,6 @@
 	  <Compile Remove="isa95\CommonObjectModels\Part2\OperationsRecord\**" />
 	  <Compile Remove="isa95\CommonObjectModels\Part2\OperationsSchedule\**" />
 	  <Compile Remove="isa95\CommonObjectModels\Part2\OperationsTest\**" />
-	  <Compile Remove="isa95\CommonObjectModels\Part2\PhysicalAssetAndEquipment\**" />
 	  <Compile Remove="isa95\CommonObjectModels\Part2\ProcessSegment\**" />
 	  <Compile Remove="isa95\CommonObjectModels\Part4\**" />
 	  <Compile Remove="isa95\EquipmentHierarchy\**" />
@@ -175,11 +169,9 @@
 	  <EmbeddedResource Remove="Common\Relationship\isa95\Enterprise\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentActualProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentActual\**" />
-	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentAssetMapping\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentCapabilityProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentCapability\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentClassProperty\**" />
-	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentClass\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentRequirementProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentRequirement\**" />
@@ -187,7 +179,6 @@
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentSegmentSpecification\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentSpecificationProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EquipmentSpecification\**" />
-	  <EmbeddedResource Remove="Common\Relationship\isa95\Equipment\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\EvaluatedProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\FromResourceReferenceProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\FromResourceReference\**" />
@@ -255,7 +246,6 @@
 	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAssetCapabilityProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAssetCapability\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAssetClassProperty\**" />
-	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAssetClass\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAssetProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAssetRequirementProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAssetRequirement\**" />
@@ -263,7 +253,6 @@
 	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAssetSegmentSpecification\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAssetSpecificationProperty\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAssetSpecification\**" />
-	  <EmbeddedResource Remove="Common\Relationship\isa95\PhysicalAsset\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\ProcessSegmentCapability\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\ProcessSegmentDependency\**" />
 	  <EmbeddedResource Remove="Common\Relationship\isa95\ProcessSegmentParameter\**" />
@@ -332,7 +321,6 @@
 	  <EmbeddedResource Remove="isa95\CommonObjectModels\Part2\OperationsRecord\**" />
 	  <EmbeddedResource Remove="isa95\CommonObjectModels\Part2\OperationsSchedule\**" />
 	  <EmbeddedResource Remove="isa95\CommonObjectModels\Part2\OperationsTest\**" />
-	  <EmbeddedResource Remove="isa95\CommonObjectModels\Part2\PhysicalAssetAndEquipment\**" />
 	  <EmbeddedResource Remove="isa95\CommonObjectModels\Part2\ProcessSegment\**" />
 	  <EmbeddedResource Remove="isa95\CommonObjectModels\Part4\**" />
 	  <EmbeddedResource Remove="isa95\EquipmentHierarchy\**" />
@@ -340,11 +328,9 @@
 	  <None Remove="Common\Relationship\isa95\Enterprise\**" />
 	  <None Remove="Common\Relationship\isa95\EquipmentActualProperty\**" />
 	  <None Remove="Common\Relationship\isa95\EquipmentActual\**" />
-	  <None Remove="Common\Relationship\isa95\EquipmentAssetMapping\**" />
 	  <None Remove="Common\Relationship\isa95\EquipmentCapabilityProperty\**" />
 	  <None Remove="Common\Relationship\isa95\EquipmentCapability\**" />
 	  <None Remove="Common\Relationship\isa95\EquipmentClassProperty\**" />
-	  <None Remove="Common\Relationship\isa95\EquipmentClass\**" />
 	  <None Remove="Common\Relationship\isa95\EquipmentProperty\**" />
 	  <None Remove="Common\Relationship\isa95\EquipmentRequirementProperty\**" />
 	  <None Remove="Common\Relationship\isa95\EquipmentRequirement\**" />
@@ -352,7 +338,6 @@
 	  <None Remove="Common\Relationship\isa95\EquipmentSegmentSpecification\**" />
 	  <None Remove="Common\Relationship\isa95\EquipmentSpecificationProperty\**" />
 	  <None Remove="Common\Relationship\isa95\EquipmentSpecification\**" />
-	  <None Remove="Common\Relationship\isa95\Equipment\**" />
 	  <None Remove="Common\Relationship\isa95\EvaluatedProperty\**" />
 	  <None Remove="Common\Relationship\isa95\FromResourceReferenceProperty\**" />
 	  <None Remove="Common\Relationship\isa95\FromResourceReference\**" />
@@ -420,7 +405,6 @@
 	  <None Remove="Common\Relationship\isa95\PhysicalAssetCapabilityProperty\**" />
 	  <None Remove="Common\Relationship\isa95\PhysicalAssetCapability\**" />
 	  <None Remove="Common\Relationship\isa95\PhysicalAssetClassProperty\**" />
-	  <None Remove="Common\Relationship\isa95\PhysicalAssetClass\**" />
 	  <None Remove="Common\Relationship\isa95\PhysicalAssetProperty\**" />
 	  <None Remove="Common\Relationship\isa95\PhysicalAssetRequirementProperty\**" />
 	  <None Remove="Common\Relationship\isa95\PhysicalAssetRequirement\**" />
@@ -428,7 +412,6 @@
 	  <None Remove="Common\Relationship\isa95\PhysicalAssetSegmentSpecification\**" />
 	  <None Remove="Common\Relationship\isa95\PhysicalAssetSpecificationProperty\**" />
 	  <None Remove="Common\Relationship\isa95\PhysicalAssetSpecification\**" />
-	  <None Remove="Common\Relationship\isa95\PhysicalAsset\**" />
 	  <None Remove="Common\Relationship\isa95\ProcessSegmentCapability\**" />
 	  <None Remove="Common\Relationship\isa95\ProcessSegmentDependency\**" />
 	  <None Remove="Common\Relationship\isa95\ProcessSegmentParameter\**" />
@@ -497,7 +480,6 @@
 	  <None Remove="isa95\CommonObjectModels\Part2\OperationsRecord\**" />
 	  <None Remove="isa95\CommonObjectModels\Part2\OperationsSchedule\**" />
 	  <None Remove="isa95\CommonObjectModels\Part2\OperationsTest\**" />
-	  <None Remove="isa95\CommonObjectModels\Part2\PhysicalAssetAndEquipment\**" />
 	  <None Remove="isa95\CommonObjectModels\Part2\ProcessSegment\**" />
 	  <None Remove="isa95\CommonObjectModels\Part4\**" />
 	  <None Remove="isa95\EquipmentHierarchy\**" />

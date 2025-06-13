@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.PhysicalAsset
 {
-    public class PhysicalAssetHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PhysicalAssetHierarchyScopeRelRelationship>
+    public class PhysicalAssetHierarchyScopeRelRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PhysicalAssetHierarchyScopeRelRelationship>
     {
         public PhysicalAssetHierarchyScopeRelRelationship()
         {

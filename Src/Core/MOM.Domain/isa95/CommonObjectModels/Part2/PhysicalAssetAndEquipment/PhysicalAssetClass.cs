@@ -23,17 +23,30 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         public Guid? HierarchyScope { get; set; }
 
         [JsonIgnore]
-public virtual List<PhysicalAssetClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<PhysicalAssetClassIncludesPropertiesOfRelationship>();
+        public virtual List<PhysicalAssetClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<PhysicalAssetClassIncludesPropertiesOfRelationship>();
 
         [JsonIgnore]
-public virtual List<PhysicalAssetClassIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<PhysicalAssetClassIsMadeUpOfRelationship>();
+        public virtual List<PhysicalAssetClassIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<PhysicalAssetClassIsMadeUpOfRelationship>();
+
+        /// <summary>
+        /// ¿©’π Ù–‘
+        /// </summary>
+        public virtual PhysicalAssetClassProperty HasPropertiesOf { get; set; } = new PhysicalAssetClassProperty();
 
         [JsonIgnore]
-public virtual List<PhysicalAssetClassHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<PhysicalAssetClassHasPropertiesOfRelationship>();
+        public virtual List<PhysicalAssetClassHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<PhysicalAssetClassHierarchyScopeRelRelationship>();
 
-        [JsonIgnore]
-public virtual List<PhysicalAssetClassHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<PhysicalAssetClassHierarchyScopeRelRelationship>();
+        public PhysicalAssetClass(string ID, string description = "", string manufacturer = "", Guid? hierarchyScope = null) : this()
+        {
+            this.Id = Id;
+            this.Description = description;
+            this.Manufacturer = manufacturer;
+            this.HierarchyScope = hierarchyScope;
+            if (hierarchyScope != null)
+                this.HierarchyScopeRel.Add(new PhysicalAssetClassHierarchyScopeRelRelationship(this.DtId, hierarchyScope.Value));
+        }
 
+        public string Description { get; private set; }
         public override bool Equals(object? obj)
         {
             return Equals(obj as PhysicalAssetClass);

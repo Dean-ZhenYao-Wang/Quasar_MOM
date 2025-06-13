@@ -1,6 +1,6 @@
 namespace MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass
 {
-    public class PhysicalAssetClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass>, IEquatable<PhysicalAssetClassIncludesPropertiesOfRelationship>
+    public class PhysicalAssetClassIncludesPropertiesOfRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass>, IEquatable<PhysicalAssetClassIncludesPropertiesOfRelationship>
     {
         public PhysicalAssetClassIncludesPropertiesOfRelationship()
         {
