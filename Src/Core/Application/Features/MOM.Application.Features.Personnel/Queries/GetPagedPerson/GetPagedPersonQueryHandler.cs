@@ -45,7 +45,7 @@ namespace MOM.Application.Features.Personnel.Queries.GetPagedListPerson
                     AvailablePermissions = p.AvailablePermissions.Select(ap => new AvailablePerm { Available = ap.Available, MenuButtonId = ap.MenuButtonId })
                 });
 
-            return await personRepository.PagedAsync(query, request.Page, request.PageSize);
+            return await personRepository.PagedAsync(query, request.PageNumber, request.PageSize);
         }
     }
 }

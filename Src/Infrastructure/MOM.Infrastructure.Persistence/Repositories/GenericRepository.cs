@@ -14,6 +14,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
     public class GenericRepository<T>(DbContext dbContext) : IGenericRepository<T> where T : class
     {
         public DbSet<T> DbSet { get => dbContext.Set<T>(); }
+        public DbContext DbContext { get => dbContext; }
 
         public virtual IQueryable<T> Where(Expression<Func<T, bool>> predicate)
         {

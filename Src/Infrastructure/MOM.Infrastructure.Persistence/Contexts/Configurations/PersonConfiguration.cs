@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MOM.Domain.Common.Relationship.isa95.Person;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
+using System.Reflection.Emit;
 
 namespace MOM.Infrastructure.Persistence.Contexts.Configurations
 {

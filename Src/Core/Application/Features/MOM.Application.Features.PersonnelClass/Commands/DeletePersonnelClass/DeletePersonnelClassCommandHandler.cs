@@ -16,17 +16,17 @@ namespace MOM.Application.Features.PersonnelClass.Commands.DeletePosition
             {
                 await personnelClassRepository.DeleteAsync(request.DtIds);
 
-                if (await unitOfWork.Relationships.Set<PersonnelClassIncludesPropertiesOfRelationship>()
+                if (await unitOfWork.DbContext.Set<PersonnelClassIncludesPropertiesOfRelationship>()
                     .Where(m => request.DtIds.Contains(m.SourceId.Value)).AnyAsync())
                 {
                     throw new ApplicationException("存在拥有下属人员分类的人员分类，无法删除");
                 }
 
-                await unitOfWork.Relationships.Set<PersonnelClassIncludesPropertiesOfRelationship>()
+                await unitOfWork.DbContext.Set<PersonnelClassIncludesPropertiesOfRelationship>()
                     .Where(m => request.DtIds.Contains(m.TargetId))
                     .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));
 
-                await unitOfWork.Relationships.Set<PersonnelClassHierarchyScopeRelRelationship>()
+                await unitOfWork.DbContext.Set<PersonnelClassHierarchyScopeRelRelationship>()
                     .Where(m => request.DtIds.Contains(m.SourceId.Value))
                     .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsDelete, true));
 

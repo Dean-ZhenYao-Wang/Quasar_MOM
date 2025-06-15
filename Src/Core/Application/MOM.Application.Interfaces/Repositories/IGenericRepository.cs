@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
 namespace MOM.Application.Interfaces.Repositories
@@ -6,6 +7,7 @@ namespace MOM.Application.Interfaces.Repositories
     public interface IGenericRepository<T> where T : class
     {
         Microsoft.EntityFrameworkCore.DbSet<T> DbSet { get; }
+        DbContext DbContext { get; }
 
         Task<T> GetByIdAsync(object id);
 

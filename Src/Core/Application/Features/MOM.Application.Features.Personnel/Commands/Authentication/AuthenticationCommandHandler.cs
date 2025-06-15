@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MOM.Application.DTOs.Account.Responses;
-using MOM.Application.Features.Personnel.Settings;
 using MOM.Application.Infrastructure.Extensions;
+using MOM.Application.Infrastructure.Settings;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;

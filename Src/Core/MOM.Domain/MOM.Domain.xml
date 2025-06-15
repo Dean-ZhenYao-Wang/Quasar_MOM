@@ -4,6 +4,133 @@
         <name>MOM.Domain</name>
     </assembly>
     <members>
+        <member name="T:MOM.Domain.CodingRule.CodingRule">
+            <summary>
+            编码规则配置类
+            定义完整的编码规则，包括目标模型类型、分隔符、编码段等配置
+            每个编码规则对应一个特定的EF Core模型类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingRule.Id">
+            <summary>
+            编码规则的唯一标识符
+            用于在CodingRuleManager中注册和检索规则
+            建议使用有意义的命名，如"PRODUCT_RULE"、"ORDER_RULE"等
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingRule.Name">
+            <summary>
+            编码规则的显示名称
+            用于用户界面显示和日志记录
+            例如："产品编码规则"、"订单编码规则"等
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingRule.Description">
+            <summary>
+            编码规则的详细描述
+            可选字段，用于记录规则的用途、格式说明等详细信息
+            便于后续维护和理解规则的业务含义
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingRule.ModelType">
+            <summary>
+            目标EF Core模型类型
+            指定该编码规则适用于哪个实体模型
+            生成编码时会验证传入的模型对象是否匹配此类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingRule.Separator">
+            <summary>
+            编码段之间的分隔符
+            用于连接各个编码段，形成最终的编码字符串
+            常用分隔符："-"、"_"、"."、""（空字符串表示无分隔符）
+            默认为"-"
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingRule.Segments">
+            <summary>
+            编码段配置列表
+            包含组成该编码规则的所有段配置
+            生成编码时会按段的Order属性顺序处理
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingRule.IsActive">
+            <summary>
+            规则是否激活
+            true: 规则可用，可以被用于生成编码
+            false: 规则被禁用，GetRulesByModelType等方法会过滤掉此规则
+            默认为true
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.CodingRule.CodingSegment">
+            <summary>
+            编码段配置类
+            定义编码规则中单个段的详细配置信息
+            每个编码规则由多个编码段组成，按Order顺序排列
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingSegment.Order">
+            <summary>
+            段的排序顺序
+            用于确定该段在最终编码中的位置，从0开始
+            生成编码时会按此顺序依次处理各个段
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingSegment.Type">
+            <summary>
+            段的类型
+            决定该段的值如何生成，参见SegmentType枚举的详细说明
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingSegment.Value">
+            <summary>
+            段的值或配置参数
+            根据Type的不同，该字段的含义不同：
+            - Fixed: 固定的字符串值
+            - Property: EF Core模型中的属性名称
+            - Sequence: 序列的名称标识（可选，默认为"default"）
+            - DateTime: 预留字段，主要使用Format字段
+            - Custom: 自定义逻辑的标识符或参数
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingSegment.Format">
+            <summary>
+            格式化字符串
+            用于格式化段的值，支持以下场景：
+            - Property类型：当属性值实现IFormattable接口时使用（如DateTime、数字等）
+            - DateTime类型：日期时间格式，如"yyyyMMdd"、"HHmmss"、"yyyy-MM-dd"等
+            - 其他类型：预留扩展使用
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingSegment.Length">
+            <summary>
+            段的固定长度
+            当值为0时不限制长度
+            当值大于0时：
+            - 如果实际值长度超过此值，会被截断
+            - 如果实际值长度不足此值，会使用PaddingChar进行填充
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingSegment.PaddingChar">
+            <summary>
+            填充字符
+            当实际值长度小于Length时，使用此字符进行填充
+            默认为'0'，常用于序列号的前导零填充
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingSegment.PadLeft">
+            <summary>
+            填充方向
+            true: 左填充（在值的左侧添加填充字符）- 适用于数字序列号
+            false: 右填充（在值的右侧添加填充字符）- 适用于字符串值
+            默认为true（左填充）
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.CodingRule.SequenceState">
+            <summary>
+            序列状态
+            </summary>
+        </member>
         <member name="P:MOM.Domain.Common.BaseEntity.DtId">
             <summary>
             数据库唯一主键
@@ -111,6 +238,47 @@
         <member name="P:MOM.Domain.Common.ContactInformation.Email">
             <summary>
             邮箱
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.CodingRuleSegmentType">
+            <summary>
+            编码段类型枚举
+            定义编码规则中每个段的数据来源类型
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.CodingRuleSegmentType.Fixed">
+            <summary>
+            固定值段
+            该段的值是预先设定的固定字符串，不会变化
+            例如：编码前缀 "PRD"、"ORD" 等
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.CodingRuleSegmentType.Property">
+            <summary>
+            模型属性段
+            该段的值来源于EF Core模型的某个属性
+            例如：产品类别、客户代码等
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.CodingRuleSegmentType.Sequence">
+            <summary>
+            序列号段
+            该段的值是自动递增的序列号
+            支持多个独立的序列，每个序列可以有不同的名称和起始值
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.CodingRuleSegmentType.DateTime">
+            <summary>
+            日期时间段
+            该段的值基于当前日期时间生成
+            支持自定义日期时间格式，如 "yyyyMMdd"、"HHmmss" 等
+            </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.CodingRuleSegmentType.Custom">
+            <summary>
+            自定义逻辑段
+            该段的值通过自定义逻辑生成
+            可通过继承CodingRuleManager并重写ProcessCustomSegment方法实现
             </summary>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel.Enterprise">

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Infrastructure.Services;
+using MOM.Domain.CodingRule;
 using MOM.Domain.Common.Relationship.isa95.HierarchyScope;
 using MOM.Domain.Common.Relationship.isa95.Person;
 using MOM.Domain.Common.Relationship.isa95.PersonnelClass;
@@ -34,8 +35,17 @@ namespace MOM.Infrastructure.Persistence.Contexts
 
         #endregion Permission
 
+        #region HierarchyScope
         public DbSet<HierarchyScope> HierarchyScopes { get; set; }
         public DbSet<HierarchyScopeContainsRelationship> HierarchyScopeContainsRelationship { get; set; }
+        #endregion
+
+        #region 编码规则
+        public virtual DbSet<CodingRule> CodingRules { get; set; }
+        public virtual DbSet<CodingSegment> CodingSegments { get; set; }
+        public virtual DbSet<SequenceState> SequenceStates { get; set; }
+        #endregion
+
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
         {

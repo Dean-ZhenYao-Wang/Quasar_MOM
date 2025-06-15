@@ -1,4 +1,4 @@
-namespace MOM.Application.Features.Personnel.Settings
+namespace MOM.Application.Infrastructure.Settings
 {
     public class IdentitySettings
     {

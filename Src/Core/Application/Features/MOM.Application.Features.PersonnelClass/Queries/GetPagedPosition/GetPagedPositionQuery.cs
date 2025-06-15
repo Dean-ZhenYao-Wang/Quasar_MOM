@@ -22,7 +22,7 @@ namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
         /// 要查看的页数：从1开始数
         /// </summary>
         public int PageNumber
-        { get { return paginationRequestParameter.Page; } set { paginationRequestParameter.Page = value; } }
+        { get { return paginationRequestParameter.PageNumber; } set { paginationRequestParameter.PageNumber = value; } }
 
         /// <summary>
         /// 每页显示数据条数

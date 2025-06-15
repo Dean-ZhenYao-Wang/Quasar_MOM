@@ -5,7 +5,7 @@ namespace MOM.Application.Wrappers
         /// <summary>
         /// 要查看的页数：从1开始数
         /// </summary>
-        public int Page { get; set; }
+        public int PageNumber { get; set; }
 
         /// <summary>
         /// 每页显示数据条数
@@ -14,13 +14,13 @@ namespace MOM.Application.Wrappers
 
         public PaginationRequestParameter()
         {
-            Page = 1;
+            PageNumber = 1;
             PageSize = 20;
         }
 
         public PaginationRequestParameter(int pageNumber, int pageSize)
         {
-            Page = pageNumber < 1 ? 1 : pageNumber;
+            PageNumber = pageNumber < 1 ? 1 : pageNumber;
             PageSize = pageSize;
         }
     }

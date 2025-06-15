@@ -5,7 +5,7 @@ namespace MOM.Application.Interfaces
 {
     public interface IUnitOfWork
     {
-        DbContext Relationships { get; set; }
+        DbContext DbContext { get; set; }
 
         Task<bool> SaveChangesAsync();
 

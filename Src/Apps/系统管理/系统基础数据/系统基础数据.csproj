@@ -20,6 +20,7 @@
     <PackageReference Include="OrchardCore.Module.Targets" Version="2.1.7" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Application\Features\MOM.Application.Features.CodingRule\MOM.Application.Features.CodingRule.csproj" />
     <ProjectReference Include="..\..\..\Core\Application\Features\MOM.Application.Features.HierarchyScope\MOM.Application.Features.HierarchyScope.csproj" />
     <ProjectReference Include="..\..\..\Core\Application\Features\MOM.Application.Features.PersonnelClass\MOM.Application.Features.PersonnelClass.csproj" />
     <ProjectReference Include="..\..\..\Core\Application\Features\MOM.ApplicationFeatures.Permission\MOM.Application.Features.Permission.csproj" />
