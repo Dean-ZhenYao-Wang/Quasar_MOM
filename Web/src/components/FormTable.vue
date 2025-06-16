@@ -78,34 +78,51 @@
     <!-- 表单弹窗 -->
     <q-dialog v-model="formDialogVisible" persistent>
       <q-card style="min-width: 500px">
-        <q-card-section>
-          <div class="text-h6">{{ dialogTitle }}</div>
-        </q-card-section>
-
-        <q-card-section>
-          <q-form ref="quasarForm">
-            <div class="row q-col-gutter-md">
-              <template v-for="(field, name) in config.formFields" :key="name">
-                <component
-                  :is="getComponentType(field.type)"
-                  v-model="formData[name]"
-                  class="col-12"
-                  v-show="field.show || field.show == undefined"
-                  v-bind="field.props"
-                  :label="field.label"
-                  :rules="field.rules"
-                  :readonly="viewDialogVisible"
-                  v-on="extractListeners(field.props)"
-                />
-              </template>
-            </div>
-          </q-form>
-        </q-card-section>
-
-        <q-card-actions align="right">
-          <q-btn label="取消" type="reset" color="primary" flat class="q-ml-sm" @click="onReset" />
-          <q-btn label="提交" type="submit" color="primary" @click="submitForm" />
-        </q-card-actions>
+        <header>
+          <slot name="form-header" :title="dialogTitle">
+            <q-card-section>
+              <div class="text-h6">{{ dialogTitle }}</div>
+            </q-card-section>
+          </slot>
+        </header>
+        <main>
+          <q-card-section>
+            <q-form ref="quasarForm">
+              <slot name="form-body" :formData="formData">
+                <div class="row q-col-gutter-md">
+                  <template v-for="(field, name) in config.formFields" :key="name">
+                    <component
+                      :is="getComponentType(field.type)"
+                      v-model="formData[name]"
+                      class="col-12"
+                      v-show="field.show || field.show == undefined"
+                      v-bind="field.props"
+                      :label="field.label"
+                      :rules="field.rules"
+                      :readonly="viewDialogVisible"
+                      v-on="extractListeners(field.props)"
+                    />
+                  </template>
+                </div>
+              </slot>
+            </q-form>
+          </q-card-section>
+        </main>
+        <footer>
+          <slot name="form-footer">
+            <q-card-actions align="right">
+              <q-btn
+                label="取消"
+                type="reset"
+                color="primary"
+                flat
+                class="q-ml-sm"
+                @click="onReset"
+              />
+              <q-btn label="提交" type="submit" color="primary" @click="submitForm" />
+            </q-card-actions>
+          </slot>
+        </footer>
       </q-card>
     </q-dialog>
   </div>

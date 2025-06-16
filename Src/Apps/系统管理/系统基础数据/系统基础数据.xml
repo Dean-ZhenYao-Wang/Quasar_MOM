@@ -4,6 +4,26 @@
         <name>系统基础数据</name>
     </assembly>
     <members>
+        <member name="T:系统基础数据.Controllers.v1.CodingRuleController">
+            <summary>
+            编码规则管理器
+            负责编码规则的注册、管理和编码生成的核心类
+            提供线程安全的编码生成服务，管理序列号状态
+            </summary>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.CodingRuleController.RegisterRule(MOM.Application.Features.CodingRule.Commands.RegisterRule.RegisterRuleCommand)">
+            <summary>
+            注册编码规则
+            将编码规则添加到管理器中，如果规则ID已存在则会覆盖原规则
+            </summary>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.CodingRuleController.GetPaged(MOM.Application.Features.CodingRule.Queries.GetPagedCodingRule.GetPagedCodingRuleQuery)">
+            <summary>
+            查询编码规则列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
         <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetOrgTable(MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery)">
             <summary>
             查询组织列表

@@ -10,73 +10,35 @@
       :batchDelete="handleBatchDelete"
       :delete="handleDelete"
     >
-      <template #from>
-        <q-input
-          v-model="formData.ruleCode"
-          label="规则编码 *"
-          :rules="[(val) => !!val || '请输入规则编码']"
-          :disable="isEdit"
-        />
-
-        <q-input
-          v-model="formData.ruleName"
-          label="规则名称 *"
-          :rules="[(val) => !!val || '请输入规则名称']"
-        />
-
-        <q-input v-model="formData.description" label="描述" type="textarea" rows="2" />
-
-        <q-input
-          v-model="formData.prefix"
-          label="前缀模板 *"
-          :rules="[(val) => !!val || '请输入前缀模板']"
-          hint="支持变量: {YYYY}, {YY}, {MM}, {DD}, {HH}, {mm}"
-        />
-
-        <div class="row q-gutter-md">
-          <q-input
-            v-model.number="formData.sequenceLength"
-            label="序号长度"
-            type="number"
-            min="1"
-            max="10"
-            class="col"
-          />
-
-          <q-input
-            v-model.number="formData.startSequence"
-            label="起始序号"
-            type="number"
-            min="0"
-            class="col"
-          />
-
-          <q-input
-            v-model.number="formData.maxSequence"
-            label="最大序号"
-            type="number"
-            min="1"
-            class="col"
-          />
+      <template #form-header="dialogTitle">
+        <q-card-section>
+          <div class="text-h6">{{ dialogTitle }}编码规则</div>
+        </q-card-section>
+      </template>
+      <template #form-body="formData">
+        <div class="row q-col-gutter-md">
+          <q-input label="规则编码" v-model="formData.Id" />
+          <q-input label="规则名称" v-model="formData.Name" />
+          <q-input label="描述" v-model="formData.Description" />
+          <q-select
+            label="规则编码适用于"
+            v-model="formData.ModelTypeName"
+            :options="modelTypeNameOptions"
+          ></q-select>
+          <q-input label="分隔符" v-model="formData.Separator" />
+          <q-toggle label="是否激活" v-model="formData.IsActive" />
         </div>
-
-        <q-select
-          v-model="formData.resetType"
-          :options="resetTypeOptions"
-          label="重置类型"
-          emit-value
-          map-options
-        />
-
-        <q-toggle v-model="formData.isActive" label="是否启用" color="positive" />
-
+        <!-- 规则段区域 -->
+        <q-separator />
+        规则段1 规则段2
         <!-- 预览区域 -->
         <q-separator />
         <div class="text-subtitle2 q-mt-md">编号预览:</div>
         <q-card flat bordered class="q-pa-sm bg-grey-1">
-          <div class="text-body2">{{ previewNumber }}</div>
+          <div class="text-body2">previewNumber</div>
         </q-card>
       </template>
+
       <template #actions-append="{ row }">
         <q-btn
           label="配置权限"
@@ -112,45 +74,56 @@ import { ref } from 'vue'
 import { useHierarchyScopeStore } from 'src/stores/hierarchyScope'
 const orgStore = useHierarchyScopeStore()
 
-// 表单数据
-const formData = ref({
-  id: null,
-  ruleCode: '',
-  ruleName: '',
-  description: '',
-  prefix: '',
-  sequenceLength: 4,
-  startSequence: 1,
-  maxSequence: 9999,
-  currentSequence: 0,
-  resetType: 0,
-  isActive: true,
-})
-
 const table_Config = {
   tableConfig: {
     rowKey: 'dtId',
     selection: 'multiple',
     columns: [
-      { name: 'ruleCode', align: 'left', label: '规则编码', field: 'ruleCode', sortable: true },
-      { name: 'ruleName', align: 'left', label: '规则名称', field: 'ruleName', sortable: true },
-      { name: 'prefix', align: 'left', label: '前缀模板', field: 'prefix' },
-      { name: 'sequenceLength', align: 'center', label: '序号长度', field: 'sequenceLength' },
-      { name: 'currentSequence', align: 'center', label: '当前序号', field: 'currentSequence' },
-      { name: 'resetType', align: 'center', label: '重置类型', field: 'resetType' },
-      { name: 'isActive', align: 'center', label: '状态', field: 'isActive' },
-      { name: 'actions', align: 'center', label: '操作', field: 'actions' },
+      { name: 'Id', align: 'left', label: '规则编码', field: 'Id', sortable: true },
+      { name: 'Name', align: 'left', label: '规则名称', field: 'Name', sortable: true },
+      { name: 'Description', align: 'left', label: '描述', field: 'Description' },
+      {
+        name: 'ModelTypeName',
+        align: 'left',
+        label: '适用于',
+        field: 'ModelTypeName',
+      },
+      { name: 'Separator', align: 'left', label: '分隔符', field: 'Separator' },
+      { name: 'IsActive', align: 'left', label: '是否激活', field: 'IsActive' },
     ],
   },
 }
 
-// 重置类型选项
-const resetTypeOptions = [
-  { label: '不重置', value: 0 },
-  { label: '每日重置', value: 1 },
-  { label: '每月重置', value: 2 },
-  { label: '每年重置', value: 3 },
-]
+const modelTypeNameOptions = ref([
+  {
+    label: '人员',
+    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person',
+  },
+  {
+    label: '人员类',
+    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass',
+  },
+  {
+    label: '设备角色层次',
+    value: 'MOM.Domain.isa95.CommonObjectModels.HierarchyScope',
+  },
+  {
+    label: '设备',
+    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment',
+  },
+  {
+    label: '设备类',
+    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass',
+  },
+  {
+    label: '资产',
+    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset',
+  },
+  {
+    label: '资产类',
+    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass',
+  },
+])
 
 const tableData = ref([])
 const pagination = ref({

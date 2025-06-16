@@ -64,7 +64,7 @@
             数据总条数
             </summary>
         </member>
-        <member name="P:MOM.Application.Wrappers.PaginationRequestParameter.Page">
+        <member name="P:MOM.Application.Wrappers.PaginationRequestParameter.PageNumber">
             <summary>
             要查看的页数：从1开始数
             </summary>
