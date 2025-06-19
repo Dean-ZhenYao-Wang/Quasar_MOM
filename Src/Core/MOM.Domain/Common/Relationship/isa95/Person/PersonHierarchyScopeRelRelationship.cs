@@ -10,10 +10,7 @@ namespace MOM.Domain.Common.Relationship.isa95.Person
     public class PersonHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.Person ,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PersonHierarchyScopeRelRelationship>
     {
         /// <inheritdoc/>
-        public PersonHierarchyScopeRelRelationship()
-        {
-            Name = "hierarchyScopeRel";
-        }
+        public override string Name { get; set; } = "hierarchyScopeRel";
         /// <inheritdoc/>
         public PersonHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.Person source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)
         {

@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PhysicalAsset
     public class PhysicalAssetHierarchyScopeRelRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PhysicalAssetHierarchyScopeRelRelationship>
     {
         /// <inheritdoc/>
-        public PhysicalAssetHierarchyScopeRelRelationship()
-        {
-            Name = "hierarchyScopeRel";
-        }
+        public override string Name { get; set; } = "hierarchyScopeRel";
         /// <inheritdoc/>
         public PhysicalAssetHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)
         {

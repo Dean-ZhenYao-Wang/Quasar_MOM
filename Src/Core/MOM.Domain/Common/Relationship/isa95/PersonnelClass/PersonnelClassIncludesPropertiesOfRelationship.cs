@@ -6,13 +6,10 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelClass
     /// <summary>
     /// 
     /// </summary>
-    public class PersonnelClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass ,Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass>, IEquatable<PersonnelClassIncludesPropertiesOfRelationship>
+    public class PersonnelClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass>, IEquatable<PersonnelClassIncludesPropertiesOfRelationship>
     {
         /// <inheritdoc/>
-        public PersonnelClassIncludesPropertiesOfRelationship()
-        {
-            Name = "includesPropertiesOf";
-        }
+        public override string Name { get; set; } = "includesPropertiesOf";
         /// <inheritdoc/>
         public PersonnelClassIncludesPropertiesOfRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass source, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass target) : base(source, target)
         {

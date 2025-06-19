@@ -6,13 +6,13 @@ namespace MOM.Domain.Common
     /// <summary>
     /// 虽然关系可以自定义架构，但所有关系实例都应包含以下基础属性。该基类可确保自定义关系具备必要的基础属性。
     /// </summary>
-    public abstract class BasicRelationship 
+    public abstract class BasicRelationship
     {
         /// <summary>
         /// 数据库唯一主键
         /// </summary>
         [Key]
-        public Guid DtId { get; set; }
+        public Guid DtId { get; set; }=Guid.NewGuid();
 
         /// <summary>
         /// 对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
@@ -53,7 +53,7 @@ namespace MOM.Domain.Common
         /// <summary>
         /// 关系名称，定义链接类型（例如"contains"）。该属性存在于所有关系中。
         /// </summary>
-        public string Name { get; set; }
+        public abstract string Name { get; set; }
         /// <summary>
         /// 深度
         /// </summary>

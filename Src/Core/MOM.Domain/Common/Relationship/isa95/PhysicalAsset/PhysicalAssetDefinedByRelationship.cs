@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PhysicalAsset
     public class PhysicalAssetDefinedByRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass>, IEquatable<PhysicalAssetDefinedByRelationship>
     {
         /// <inheritdoc/>
-        public PhysicalAssetDefinedByRelationship()
-        {
-            Name = "definedBy";
-        }
+        public override string Name { get; set; } = "definedBy";
         /// <inheritdoc/>
         public PhysicalAssetDefinedByRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass target) : base(source, target)
         {

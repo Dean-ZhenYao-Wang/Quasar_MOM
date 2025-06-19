@@ -13,6 +13,9 @@ public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquat
     where TSource : BaseEntity
     where TTarget : BaseEntity
 {
+    public Relationship() { }
+    /// <inheritdoc/>
+    public override string Name { get; set; } = "default";
     /// <summary>
     /// 获取或设置关系的目标对象
     /// </summary>
@@ -65,23 +68,13 @@ public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquat
         Id = $"{sourceDtId}-{targetDtId}";
         Depth = depth;
     }
-    /// <summary>
-    /// 无参构造函数
-    /// </summary>
-#pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑添加 "required" 修饰符或声明为可为 null。
-    public Relationship()
-#pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑添加 "required" 修饰符或声明为可为 null。
-    {
-        Name = "default";
-        Depth = 0;
-    }
 
     /// <summary>
     /// 根据源数字孪生和目标数字孪生初始化关系属性
     /// </summary>
     /// <param name="source">作为关系来源的数字孪生</param>
     /// <param name="target">作为关系目标的数字孪生</param>
-    public Relationship(TSource source, TTarget target) : this()
+    public Relationship(TSource source, TTarget target)
     {
         InitializeFromTwins(source, target);
     }
@@ -91,7 +84,7 @@ public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquat
     /// </summary>
     /// <param name="sourceId">源数字孪生唯一标识符</param>
     /// <param name="targetId">目标数字孪生唯一标识符</param>
-    public Relationship(Guid sourceId, Guid targetId) : this()
+    public Relationship(Guid sourceId, Guid targetId) 
     {
         InitializeFromTwins(sourceId, targetId);
     }
@@ -101,7 +94,7 @@ public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquat
     /// <param name="sourceDtId">源数字孪生唯一标识符</param>
     /// <param name="targetDtId">目标数字孪生唯一标识符</param>
     /// <param name="depth">深度</param>
-    public Relationship(Guid sourceId, Guid targetId, int depth) : this()
+    public Relationship(Guid sourceId, Guid targetId, int depth) 
     {
         InitializeFromTwins(sourceId, targetId);
         this.Depth = depth;

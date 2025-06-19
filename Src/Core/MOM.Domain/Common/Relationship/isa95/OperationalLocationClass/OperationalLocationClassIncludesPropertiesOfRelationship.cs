@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationalLocationClass
     public class OperationalLocationClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass ,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationClassIncludesPropertiesOfRelationship>
     {
         /// <inheritdoc/>
-        public OperationalLocationClassIncludesPropertiesOfRelationship()
-        {
-            Name = "includesPropertiesOf";
-        }
+        public override string Name { get; set; } = "includesPropertiesOf";
         /// <inheritdoc/>
         public OperationalLocationClassIncludesPropertiesOfRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass target) : base(source, target)
         {

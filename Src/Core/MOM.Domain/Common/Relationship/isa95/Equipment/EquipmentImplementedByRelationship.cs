@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.Equipment
     public class EquipmentImplementedByRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset>, IEquatable<EquipmentImplementedByRelationship>
     {
         /// <inheritdoc/>
-        public EquipmentImplementedByRelationship()
-        {
-            Name = "implementedBy";
-        }
+        public override string Name { get; set; } = "implementedBy";
         /// <inheritdoc/>
 
         public EquipmentImplementedByRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset target) : base(source, target)

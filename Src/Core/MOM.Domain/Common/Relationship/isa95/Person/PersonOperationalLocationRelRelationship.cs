@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.Person
     public class PersonOperationalLocationRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.Person ,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation>, IEquatable<PersonOperationalLocationRelRelationship>
     {
         /// <inheritdoc/>
-        public PersonOperationalLocationRelRelationship()
-        {
-            Name = "operationalLocationRel";
-        }
+        public override string Name { get; set; } = "operationalLocationRel";
         /// <inheritdoc/>
         public PersonOperationalLocationRelRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.Person source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation target) : base(source, target)
         {

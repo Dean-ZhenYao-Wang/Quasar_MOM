@@ -10,9 +10,9 @@
       :batchDelete="handleBatchDelete"
       :delete="handleDelete"
     >
-      <template #form-header="dialogTitle">
+      <template #form-header="{ title }">
         <q-card-section>
-          <div class="text-h6">{{ dialogTitle }}编码规则</div>
+          <div class="text-h6">{{ title }}编码规则</div>
         </q-card-section>
       </template>
       <template #form-body="formData">

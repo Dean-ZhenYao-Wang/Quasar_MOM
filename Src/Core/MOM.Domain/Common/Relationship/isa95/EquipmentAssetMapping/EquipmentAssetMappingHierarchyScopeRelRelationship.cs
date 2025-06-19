@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping
     public class EquipmentAssetMappingHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<EquipmentAssetMappingHierarchyScopeRelRelationship>
     {
         /// <inheritdoc/>
-        public EquipmentAssetMappingHierarchyScopeRelRelationship()
-        {
-            Name = "hierarchyScopeRel";
-        }
+        public override string Name { get; set; } = "hierarchyScopeRel";
         /// <inheritdoc/>
         public EquipmentAssetMappingHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)
         {

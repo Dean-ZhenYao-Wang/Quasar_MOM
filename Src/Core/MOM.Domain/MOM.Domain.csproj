@@ -503,8 +503,4 @@
 		<Using Include="System.Collections.Generic" />
 		<Using Include="System.Linq" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Common\Relationship\isa95\OperationalLocationClassProperty\" />
-	  <Folder Include="Common\Relationship\isa95\OperationalLocationProperty\" />
-	</ItemGroup>
 </Project>

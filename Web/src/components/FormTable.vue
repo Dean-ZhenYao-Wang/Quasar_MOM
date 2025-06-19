@@ -297,9 +297,10 @@ const $q = useQuasar()
 // 查询参数
 const queryParams = reactive({})
 const initQueryParams = () => {
-  Object.keys(props.config.queryFields).forEach((key) => {
-    queryParams[key] = props.config.queryFields[key].defaultValue || null
-  })
+  if (props.config.queryFields)
+    Object.keys(props.config.queryFields).forEach((key) => {
+      queryParams[key] = props.config.queryFields[key].defaultValue || null
+    })
 }
 initQueryParams()
 

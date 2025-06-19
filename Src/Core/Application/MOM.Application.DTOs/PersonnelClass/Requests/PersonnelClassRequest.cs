@@ -16,7 +16,7 @@ namespace MOM.Application.DTOs.PersonnelClass.Requests
         /// <summary>
         /// 扩展属性
         /// </summary>
-        public PersonnelClassProperty Property { get; set; }
+        public PersonnelClassProperty Property { get; set; } = new PersonnelClassProperty();
 
         /// <summary>
         /// 转换成db模型

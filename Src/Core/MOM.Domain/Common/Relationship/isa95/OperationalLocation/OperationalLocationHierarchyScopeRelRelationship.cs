@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationalLocation
     public class OperationalLocationHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation ,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<OperationalLocationHierarchyScopeRelRelationship>
     {
         /// <inheritdoc/>
-        public OperationalLocationHierarchyScopeRelRelationship()
-        {
-            Name = "hierarchyScopeRel";
-        }
+        public override string Name { get; set; } = "hierarchyScopeRel";
 
         /// <inheritdoc/>
         public OperationalLocationHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)

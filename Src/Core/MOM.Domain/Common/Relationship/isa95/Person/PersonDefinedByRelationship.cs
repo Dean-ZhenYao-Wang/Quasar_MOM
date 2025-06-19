@@ -9,10 +9,7 @@ namespace MOM.Domain.Common.Relationship.isa95.Person
     public partial class PersonDefinedByRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.Person,Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass>, IEquatable<PersonDefinedByRelationship>
     {
         /// <inheritdoc/>
-        public PersonDefinedByRelationship()
-        {
-            Name = "definedBy";
-        }
+        public override string Name { get; set; } = "definedBy";
         /// <inheritdoc/>
         public PersonDefinedByRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.Person source, Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass target) : base(source, target)
         {

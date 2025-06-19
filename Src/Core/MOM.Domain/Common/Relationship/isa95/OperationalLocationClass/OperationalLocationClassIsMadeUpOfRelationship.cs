@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationalLocationClass
     public class OperationalLocationClassIsMadeUpOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass ,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationClassIsMadeUpOfRelationship>
     {
         /// <inheritdoc/>
-        public OperationalLocationClassIsMadeUpOfRelationship()
-        {
-            Name = "isMadeUpOf";
-        }
+        public override string Name { get; set; } = "isMadeUpOf";
         /// <inheritdoc/>
         public OperationalLocationClassIsMadeUpOfRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass target) : base(source, target)
         {

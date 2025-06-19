@@ -3,22 +3,17 @@ namespace MOM.Domain.Common.Relationship.isa95.Equipment
     /// <summary>
     /// 
     /// </summary>
-    public class EquipmentHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<EquipmentHierarchyScopeRelRelationship>
+    public class EquipmentHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment, Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<EquipmentHierarchyScopeRelRelationship>
     {
         /// <inheritdoc/>
-        public EquipmentHierarchyScopeRelRelationship()
+        public override string Name { get; set; } = "hierarchyScopeRel";
+        /// <inheritdoc/>
+        public EquipmentHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)
         {
-            Name = "hierarchyScopeRel";
         }
         /// <inheritdoc/>
-        public EquipmentHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment source, Domain.isa95.CommonObjectModels.HierarchyScope target) : this()
+        public EquipmentHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
-            InitializeFromTwins(source, target);
-        }
-        /// <inheritdoc/>
-        public EquipmentHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
         }
         /// <inheritdoc/>
         public override bool Equals(object? obj)

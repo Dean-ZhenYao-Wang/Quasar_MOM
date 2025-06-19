@@ -9,11 +9,8 @@ namespace MOM.Domain.Common.Relationship.isa95.HierarchyScope
     public class HierarchyScopeContainsRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.HierarchyScope, MOM.Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<HierarchyScopeContainsRelationship>
     {
         /// <inheritdoc/>
-        public HierarchyScopeContainsRelationship()
-        {
-            Name = "contains";
-        }
-
+        public override string Name { get; set; } = "contains";
+        public HierarchyScopeContainsRelationship() { }
         /// <inheritdoc/>
         public HierarchyScopeContainsRelationship(Domain.isa95.CommonObjectModels.HierarchyScope source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)
         {

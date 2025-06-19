@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping
     public class EquipmentAssetMappingRecordsUseOfEquipmentRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping ,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment>, IEquatable<EquipmentAssetMappingRecordsUseOfEquipmentRelationship>
     {
         /// <inheritdoc/>
-        public EquipmentAssetMappingRecordsUseOfEquipmentRelationship()
-        {
-            Name = "RecordsUseOfEquipment";
-        }
+        public override string Name { get; set; } = "RecordsUseOfEquipment";
         /// <inheritdoc/>
         public EquipmentAssetMappingRecordsUseOfEquipmentRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment target) : base(source, target)
         {

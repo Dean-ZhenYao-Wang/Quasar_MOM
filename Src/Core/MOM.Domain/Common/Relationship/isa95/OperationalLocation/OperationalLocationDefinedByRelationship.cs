@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationalLocation
     public class OperationalLocationDefinedByRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationDefinedByRelationship>
     {
         /// <inheritdoc/>
-        public OperationalLocationDefinedByRelationship()
-        {
-            Name = "definedBy";
-        }
+        public override string Name { get; set; } = "definedBy";
 
         /// <inheritdoc/>
         public OperationalLocationDefinedByRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass target) : base(source, target)

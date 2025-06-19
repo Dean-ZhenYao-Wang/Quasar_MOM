@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass
     public class PhysicalAssetClassIncludesPropertiesOfRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass>, IEquatable<PhysicalAssetClassIncludesPropertiesOfRelationship>
     {
         /// <inheritdoc/>
-        public PhysicalAssetClassIncludesPropertiesOfRelationship()
-        {
-            Name = "includesPropertiesOf";
-        }
+        public override string Name { get; set; } = "includesPropertiesOf";
         /// <inheritdoc/>
         public PhysicalAssetClassIncludesPropertiesOfRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass target) : base(source, target)
         {

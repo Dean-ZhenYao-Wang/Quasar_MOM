@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.PhysicalAsset
     public class PhysicalAssetPhysicalLocationRelRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation>, IEquatable<PhysicalAssetPhysicalLocationRelRelationship>
     {
         /// <inheritdoc/>
-        public PhysicalAssetPhysicalLocationRelRelationship()
-        {
-            Name = "physicalLocationRel";
-        }
+        public override string Name { get; set; } = "physicalLocationRel";
         /// <inheritdoc/>
         public PhysicalAssetPhysicalLocationRelRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation target) : base(source, target)
         {

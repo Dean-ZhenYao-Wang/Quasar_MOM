@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentClass
     public class EquipmentClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass ,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass>, IEquatable<EquipmentClassIncludesPropertiesOfRelationship>
     {
         /// <inheritdoc/>
-        public EquipmentClassIncludesPropertiesOfRelationship()
-        {
-            Name = "includesPropertiesOf";
-        }
+        public override string Name { get; set; } = "includesPropertiesOf";
 
         /// <inheritdoc/>
         public EquipmentClassIncludesPropertiesOfRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass target) : base(source, target)

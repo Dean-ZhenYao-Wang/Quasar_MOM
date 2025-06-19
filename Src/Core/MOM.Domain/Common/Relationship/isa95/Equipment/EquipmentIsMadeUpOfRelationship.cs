@@ -7,10 +7,7 @@ namespace MOM.Domain.Common.Relationship.isa95.Equipment
     public class EquipmentIsMadeUpOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment ,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment>, IEquatable<EquipmentIsMadeUpOfRelationship>
     {
         /// <inheritdoc/>
-        public EquipmentIsMadeUpOfRelationship()
-        {
-            Name = "isMadeUpOf";
-        }
+        public override string Name { get; set; } = "isMadeUpOf";
         /// <inheritdoc/>
         public EquipmentIsMadeUpOfRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment target) : base(source, target)
         {
