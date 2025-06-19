@@ -2,9 +2,9 @@
     "@context": "dtmi:dtdl:context;2",
     "@id": "dtmi:digitaltwins:isa95:ResourceClass;1",
     "@type": "Interface",
-    "displayName": "Resource class",
-    "description": "Abstract model for all resource class models (person class, equipment class, physical asset class, material class)",
-    "extends": [
-        "dtmi:digitaltwins:isa95:BaseModel;1"
+    "displayName": "Resource class",  // 显示名称：资源类
+    "description": "Abstract model for all resource class models (person class, equipment class, physical asset class, material class)",  // 描述：所有资源类模型（人员类、设备类、物理资产类、物料类）的抽象模型
+    "extends": [  // 继承自
+        "dtmi:digitaltwins:isa95:BaseModel;1"  // 基础模型版本1
     ]
 }

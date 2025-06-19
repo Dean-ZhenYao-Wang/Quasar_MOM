@@ -1,94 +1,94 @@
 {
-    "@context": "dtmi:dtdl:context;2",
-    "@id": "dtmi:digitaltwins:isa95:HierarchyScope;1",
-    "@type": "Interface",
-    "displayName": "Hierarchy scope",
-    "description": "The hierarchy scope identifies where the exchanged information fits within the role-based equipment hierarchy. It defines the scope of the exchanged information, such as a site or area for ANSI/ISA-95.00.02-2018 – 19 –which the information is relevant. The hierarchy scope identifies the associated instance in the role-based equipment hierarchy. ",
-    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",
-    "extends": [
-      "dtmi:digitaltwins:isa95:BaseModel;1"
+    "@context": "dtmi:dtdl:context;2",  // DTDL规范上下文版本2
+    "@id": "dtmi:digitaltwins:isa95:HierarchyScope;1",  // 接口唯一标识符
+    "@type": "Interface",  // 类型定义为接口
+    "displayName": "Hierarchy scope",  // 【显示名称】层次范围
+    "description": "The hierarchy scope identifies where the exchanged information fits within the role-based equipment hierarchy. It defines the scope of the exchanged information, such as a site or area for ANSI/ISA-95.00.02-2018 – 19 –which the information is relevant. The hierarchy scope identifies the associated instance in the role-based equipment hierarchy. ",  // 【描述】层次范围标识交换信息在基于角色的设备层次结构中的位置。它定义交换信息的范围（如ISA-95标准中的站点或区域），并标识角色设备层次中的关联实例。
+    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",  // 【备注】遵循ANSI/ISA-95.00.02-2018标准（企业控制系统集成第2部分）
+    "extends": [  // 【继承】
+      "dtmi:digitaltwins:isa95:BaseModel;1"  // 继承基础模型
     ],
-    "contents": [
+    "contents": [  // 【内容定义】
       {
-        "@type": "Relationship",
-        "name": "contains",
-        "displayName": "Contains",
-        "description": "The child hierarchy scope(s) contained within this hierarchy scope.",
-        "target": "dtmi:digitaltwins:isa95:HierarchyScope;1"
+        "@type": "Relationship",  // 关系类型
+        "name": "contains",  // 关系名称
+        "displayName": "Contains",  // 【显示名称】包含
+        "description": "The child hierarchy scope(s) contained within this hierarchy scope.",  // 【描述】当前层次范围内包含的子层次范围
+        "target": "dtmi:digitaltwins:isa95:HierarchyScope;1"  // 目标接口
       },
       {
-        "@type": "Property",
-        "name": "equipmentID",
-        "schema": "string",
-        "writable": true,
-        "displayName": "Equipment ID",
-        "description": " unique identification of an equipment element"
+        "@type": "Property",  // 属性类型
+        "name": "equipmentID",  // 属性名称
+        "schema": "string",  // 数据类型
+        "writable": true,  // 可写
+        "displayName": "Equipment ID",  // 【显示名称】设备ID
+        "description": " unique identification of an equipment element"  // 【描述】设备元素的唯一标识
       },
       {
-        "@type": "Property",
-        "name": "equipmentLevel",
-        "displayName": "Equipment level",
-        "writable": true,
-        "description": "An identification of the level in the role-based equipment hierarchy",
-        "schema": {
-            "@type": "Enum",
-            "valueSchema": "string",
-            "enumValues": [
+        "@type": "Property",  // 属性类型
+        "name": "equipmentLevel",  // 属性名称
+        "displayName": "Equipment level",  // 【显示名称】设备层级
+        "writable": true,  // 可写
+        "description": "An identification of the level in the role-based equipment hierarchy",  // 【描述】基于角色的设备层次结构中的层级标识
+        "schema": {  // 复杂类型定义
+            "@type": "Enum",  // 枚举类型
+            "valueSchema": "string",  // 基础类型
+            "enumValues": [  // 枚举值列表
                 {
-                    "name": "Enterprise",
-                    "enumValue": "Enterprise"
+                    "name": "Enterprise",  // 枚举项名称
+                    "enumValue": "Enterprise"  // 【枚举值】企业级
                 },
                 {
                     "name": "Site",
-                    "enumValue": "Site"
+                    "enumValue": "Site"  // 【枚举值】厂区级
                 },
                 {
                     "name": "Area",
-                    "enumValue": "Area"
+                    "enumValue": "Area"  // 【枚举值】区域级
                 },
                 {
                     "name": "WorkCenter",
                     "displayName": "Work Center",
-                    "enumValue": "Work Center"
+                    "enumValue": "Work Center"  // 【枚举值】工作中心
                 },
                 {
                     "name": "WorkUnit",
                     "displayName": "Work Unit",
-                    "enumValue": "Work Unit"
+                    "enumValue": "Work Unit"  // 【枚举值】工作单元
                 },
                 {
                     "name": "ProcessCell",
                     "displayName": "Process Cell",
-                    "enumValue": "Process Cell"
+                    "enumValue": "Process Cell"  // 【枚举值】过程单元
                 },
                 {
                     "name": "Unit",
-                    "enumValue": "Unit"
+                    "enumValue": "Unit"  // 【枚举值】单元级
                 },
                 {
                     "name": "ProductionLine",
                     "displayName": "Production Line",
-                    "enumValue": "Production Line"
+                    "enumValue": "Production Line"  // 【枚举值】生产线
                 },
                 {
                     "name": "ProductionUnit",
                     "displayName": "Production Unit",
-                    "enumValue": "Production Unit"
+                    "enumValue": "Production Unit"  // 【枚举值】生产单元
                 },
                 {
                     "name": "WorkCell",
                     "displayName": "Work Cell",
-                    "enumValue": "Work Cell"
+                    "enumValue": "Work Cell"  // 【枚举值】工作单元
                 },
                 {
                     "name": "StorageZone",
                     "displayName": "Storage Zone",
-                    "enumValue": "Storage Zone"
+                    "enumValue": "Storage Zone"  // 【枚举值】存储区域
                 },
                 {
                     "name": "StorageUnit",
                     "displayName": "Storage Unit",
-                    "enumValue": "Storage Unit"
+                    "enumValue": "Storage Unit"  // 【枚举值】存储单元
                 }
             ]
         }

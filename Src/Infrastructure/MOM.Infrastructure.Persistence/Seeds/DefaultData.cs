@@ -32,7 +32,7 @@ namespace MOM.Infrastructure.Persistence.Seeds
                 //PersonnelClass personnelClass = new PersonnelClass("超级管理员", "角色", enterprise);
                 PersonnelClass personnelClass = new PersonnelClass("超级管理员", "角色");
                 applicationDbContext.PersonnelClasses.Add(personnelClass);
-                applicationDbContext.PersonnelClassIncludesPropertiesOfRelationships.Add(new PersonnelClassIncludesPropertiesOfRelationship(null, personnelClass.DtId));
+                applicationDbContext.PersonnelClassIncludesPropertiesOfRelationships.Add(new PersonnelClassIncludesPropertiesOfRelationship(personnelClass.DtId, personnelClass.DtId,0));
 
                 applicationDbContext.PersonnelClassPermission.Add(new Domain.Permission.PersonnelClassPermission()
                 {

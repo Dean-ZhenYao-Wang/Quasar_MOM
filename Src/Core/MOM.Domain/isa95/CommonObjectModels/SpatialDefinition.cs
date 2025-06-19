@@ -12,23 +12,19 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 唯一标识空间定义的字符串。<br/>
         /// UN/CEFACT CCTS: （TextType）的地理空间信息，格式由format属性指定。
         /// </summary>
-        [JsonPropertyName("value")]
         public string? Value { get; set; }
         /// <summary>
-        /// 确定value属性格式的枚举数。例如GPX， WKT，…
+        /// 确定 value 属性格式的枚举数。例如GPX， WKT，…
         /// </summary>
 
-        [JsonPropertyName("format")]
         public string? Format { get; set; }
         /// <summary>
         /// SRID是空间参考标识符（Spatial Reference Identifier），它通过识别坐标参考系统来识别一个预定义的坐标。
         /// </summary>
-        [JsonPropertyName("SRID")]
         public string? SRID { get; set; }
         /// <summary>
         /// SRID授权机构标识定义SRID标识的坐标参考系的授权机构。
         /// </summary>
-        [JsonPropertyName("SRIDauthority")]
-        public string? SRIDauthority { get; set; }
+        public string? SRIAuthority { get; set; }
     }
 }

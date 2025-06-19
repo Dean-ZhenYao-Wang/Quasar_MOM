@@ -4,42 +4,13 @@ namespace MOM.Domain.isa95.CommonObjectModels
     using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
-
-    public abstract partial class ResourceProperty : BaseEntity, IEquatable<ResourceProperty>
+    /// <summary>
+    /// 资源属性
+    /// </summary>
+    /// <remarks>
+    /// 所有资源属性模型（人员、设备、物理资产、物料定义、物料批次、物料批次子批、工作指令、过程段、操作定义、操作位置、操作段、测试规范、测试结果）的抽象模型
+    /// </remarks>
+    public abstract partial class ResourceProperty
     {
-        public ResourceProperty() : base()
-        {
-        }
-
-        [JsonPropertyName("value")]
-        public string? Value { get; set; }
-
-        [JsonPropertyName("valueUnitOfMeasure")]
-        public string? ValueUnitOfMeasure { get; set; }
-
-        public override bool Equals(object? obj)
-        {
-            return Equals(obj as ResourceProperty);
-        }
-
-        public bool Equals(ResourceProperty? other)
-        {
-            return other is not null && base.Equals(other) && Value == other.Value && ValueUnitOfMeasure == other.ValueUnitOfMeasure;
-        }
-
-        public static bool operator ==(ResourceProperty? left, ResourceProperty? right)
-        {
-            return EqualityComparer<ResourceProperty?>.Default.Equals(left, right);
-        }
-
-        public static bool operator !=(ResourceProperty? left, ResourceProperty? right)
-        {
-            return !(left == right);
-        }
-
-        public override int GetHashCode()
-        {
-            return this.CustomHash(base.GetHashCode(), Value?.GetHashCode(), ValueUnitOfMeasure?.GetHashCode());
-        }
     }
 }

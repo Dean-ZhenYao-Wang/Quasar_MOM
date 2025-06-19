@@ -1,33 +1,33 @@
 {
-    "@context": "dtmi:dtdl:context;2",
-    "@id": "dtmi:digitaltwins:isa95:ResourceProperty;1",
-    "@type": "Interface",
-    "displayName": "Resource property",
-    "description": "Abstract model for all resource property models (person, equipment, physical asset, material definition, material lot, material sublot, work master, process segment, operation definition, operational location, operations segment, test specification, test result)",
-    "extends": [
-        "dtmi:digitaltwins:isa95:BaseModel;1"
+    "@context": "dtmi:dtdl:context;2", // 上下文：DTDL版本2
+    "@id": "dtmi:digitaltwins:isa95:ResourceProperty;1", // 标识符：数字孪生 ISA95 资源属性接口版本1
+    "@type": "Interface", // 类型：接口
+    "displayName": "Resource property", // 显示名称：资源属性
+    "description": "Abstract model for all resource property models (person, equipment, physical asset, material definition, material lot, material sublot, work master, process segment, operation definition, operational location, operations segment, test specification, test result)", // 描述：所有资源属性模型（人员、设备、物理资产、物料定义、物料批次、物料批次子批、工作指令、过程段、操作定义、操作位置、操作段、测试规范、测试结果）的抽象模型
+    "extends": [ // 继承自
+        "dtmi:digitaltwins:isa95:BaseModel;1" // 基础模型版本1
     ],
-    "contents": [
-     {
-        "@type": "Component",
-        "name": "description",
-        "displayName": "Description",
-        "description": "Additional information about the resource property.",
-        "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
-      },
-      {
-        "@type": "Property",
-        "name": "value",
-        "displayName": "Value",
-        "description": "The value, set of values, or range of the property.",
-        "schema": "string"
-      },
-      {
-        "@type": "Property",
-        "name": "valueUnitOfMeasure",
-        "displayName": "Value unit of measure",
-        "description": "The unit of measure of the associated property value",
-        "schema": "string"
-      }
+    "contents": [ // 内容
+        {
+            "@type": "Component", // 类型：组件
+            "name": "description", // 名称：描述
+            "displayName": "Description", // 显示名称：描述
+            "description": "Additional information about the resource property.", // 描述：有关资源属性的附加信息。
+            "schema": "dtmi:digitaltwins:isa95:LangStringSet;1" // 模式：语言字符串集合版本1
+        },
+        {
+            "@type": "Property", // 类型：属性
+            "name": "value", // 名称：值
+            "displayName": "Value", // 显示名称：值
+            "description": "The value, set of values, or range of the property.", // 描述：属性的值、值集合或值范围。
+            "schema": "string" // 模式：字符串
+        },
+        {
+            "@type": "Property", // 类型：属性
+            "name": "valueUnitOfMeasure", // 名称：值单位
+            "displayName": "Value unit of measure", // 显示名称：值计量单位
+            "description": "The unit of measure of the associated property value", // 描述：相关属性值的计量单位
+            "schema": "string" // 模式：字符串
+        }
     ]
 }

@@ -2,9 +2,9 @@
   "@context": "dtmi:dtdl:context;2",
   "@id": "dtmi:digitaltwins:isa95:OperationalLocation;1",
   "@type": "Interface",
-  "displayName": "Operational location",
-  "description": "A logical or physical location where a material lot, material sublot, equipment, physical asset or person is located or expected to be located shall be presented as an operational location. Operational locations may be made up of other operational locations.",
-  "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",
+  "displayName": "Operational location // 操作位置",
+  "description": "A logical or physical location where a material lot, material sublot, equipment, physical asset or person is located or expected to be located shall be presented as an operational location. Operational locations may be made up of other operational locations. // 物料批次、物料子批次、设备、物理资产或人员所处或预期所处的逻辑或物理位置应表示为操作位置。操作位置可由其他操作位置组成",
+  "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018 // 依据ANSI/ISA-95.00.02-2018标准（2018年5月24日批准）",
   "extends": [
     "dtmi:digitaltwins:isa95:Resource;1"
   ],
@@ -12,53 +12,53 @@
     {
       "@type": "Relationship",
       "name": "definedBy",
-      "displayName": "Defined by",
-      "description": "The operational location class(s) to which this operational location belongs",
+      "displayName": "Defined by // 由...定义",
+      "description": "The operational location class(s) to which this operational location belongs // 此操作位置所属的操作位置类别",
       "target": "dtmi:digitaltwins:isa95:OperationalLocationClass;1",
-      "comment": "Relationship type: Association"
+      "comment": "Relationship type: Association // 关系类型：关联"
     },
     {
       "@type": "Relationship",
       "name": "hasValuesOf",
-      "displayName": "Has values of",
-      "description": "The operational location property(s) of this operational location.",
+      "displayName": "Has values of // 拥有...的值",
+      "description": "The operational location property(s) of this operational location. // 此操作位置的属性值",
       "target": "dtmi:digitaltwins:isa95:OperationalLocationProperty;1"
     },
     {
       "@type": "Relationship",
       "name": "isMadeUpOf",
-      "displayName": "Is made up of",
-      "description": "The child operational location(s) contained within this operational location.",
+      "displayName": "Is made up of // 由...组成",
+      "description": "The child operational location(s) contained within this operational location. // 包含在此操作位置中的子操作位置",
       "target": "dtmi:digitaltwins:isa95:OperationalLocation;1"
     },
     {
       "@type": "Component",
       "name": "description",
-      "displayName": "Description",
-      "description": "Contains additional information and descriptions of the operational location.",
+      "displayName": "Description // 描述",
+      "description": "Contains additional information and descriptions of the operational location. // 包含操作位置的补充信息和描述",
       "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
     },
     {
       "@type": "Property",
       "name": "hierarchyScope",
-      "displayName": "Hierarchy scope",
-      "description": "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scopedefines the scope of the physical asset class, such as the site or area where it is defined.",
+      "displayName": "Hierarchy scope // 层级范围",
+      "description": "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the physical asset class, such as the site or area where it is defined. // 标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）",
       "schema": "string"
     },
     {
       "@type": "Relationship",
       "name": "hierarchyScopeRel",
-      "displayName": "fits hierarchy scope",
-      "description": "Optional relationship to hierarchy.",
-      "comment": "Not part of the Standard Specs.",
+      "displayName": "fits hierarchy scope // 适配层级范围",
+      "description": "Optional relationship to hierarchy. // 与层级的可选关系",
+      "comment": "Not part of the Standard Specs. // 非标准规范要求",
       "target": "dtmi:digitaltwins:isa95:HierarchyScope;1",
       "maxMultiplicity": 1
     },
     {
       "@type": "Component",
       "name": "spatialDefinition",
-      "displayName": "Spatial definition",
-      "description": "Spatially defines the equipment as a zero-dimensional point, one dimensional line, or two dimensional shape or three dimensional solid.",
+      "displayName": "Spatial definition // 空间定义",
+      "description": "Spatially defines the location as a zero-dimensional point, one dimensional line, or two dimensional shape or three dimensional solid. // 将位置在空间上定义为零维点、一维线、二维面或三维体",
       "schema": "dtmi:digitaltwins:isa95:SpatialDefinition;1"
     }
   ]

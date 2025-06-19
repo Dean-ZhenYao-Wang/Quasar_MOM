@@ -1,28 +1,26 @@
-﻿// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
-
-namespace MOM.Domain.Common;
+﻿namespace MOM.Domain.Common;
 
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 /// <summary>
-/// 用于实现DTDL模型特定关系的抽象基类
+/// 用于实现模型特定关系的抽象基类
 /// </summary>
 /// <typeparam name="TSource">父级，需要继承自BaseEntity</typeparam>
 /// <typeparam name="TTarget">子级，需要继承自BaseEntity</typeparam>
-//[NotMapped]
 public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquatable<BasicRelationship>
     where TSource : BaseEntity
     where TTarget : BaseEntity
 {
     /// <summary>
-    /// 获取或设置关系的目标数字孪生
+    /// 获取或设置关系的目标对象
     /// </summary>
-    //[JsonIgnore]
     [ForeignKey(nameof(TargetId))]
     public virtual TTarget Target { get; set; }
+    /// <summary>
+    /// 获取或设置关系的源对象
+    /// </summary>
     [JsonIgnore]
     [ForeignKey(nameof(SourceId))]
     public virtual TSource Source { get; set; }
@@ -48,7 +46,7 @@ public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquat
     /// </summary>
     /// <param name="sourceDtId">源数字孪生唯一标识符</param>
     /// <param name="targetDtId">目标数字孪生唯一标识符</param>
-    public void InitializeFromTwins(Guid? sourceDtId, Guid targetDtId)
+    public void InitializeFromTwins(Guid sourceDtId, Guid targetDtId)
     {
         SourceId = sourceDtId;
         TargetId = targetDtId;
@@ -59,39 +57,62 @@ public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquat
     /// </summary>
     /// <param name="sourceDtId">源数字孪生唯一标识符</param>
     /// <param name="targetDtId">目标数字孪生唯一标识符</param>
-    public void InitializeFromTwins(Guid? sourceDtId, Guid targetDtId,int depth)
+    /// <param name="depth">深度</param>
+    public void InitializeFromTwins(Guid sourceDtId, Guid targetDtId,int depth)
     {
         SourceId = sourceDtId;
         TargetId = targetDtId;
         Id = $"{sourceDtId}-{targetDtId}";
         Depth = depth;
     }
+    /// <summary>
+    /// 无参构造函数
+    /// </summary>
+#pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑添加 "required" 修饰符或声明为可为 null。
     public Relationship()
+#pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑添加 "required" 修饰符或声明为可为 null。
     {
         Name = "default";
         Depth = 0;
     }
 
+    /// <summary>
+    /// 根据源数字孪生和目标数字孪生初始化关系属性
+    /// </summary>
+    /// <param name="source">作为关系来源的数字孪生</param>
+    /// <param name="target">作为关系目标的数字孪生</param>
     public Relationship(TSource source, TTarget target) : this()
     {
         InitializeFromTwins(source, target);
     }
 
-    public Relationship(Guid? sourceId, Guid targetId) : this()
+    /// <summary>
+    /// 根据源数字孪生ID和目标数字孪生ID初始化关系属性
+    /// </summary>
+    /// <param name="sourceId">源数字孪生唯一标识符</param>
+    /// <param name="targetId">目标数字孪生唯一标识符</param>
+    public Relationship(Guid sourceId, Guid targetId) : this()
     {
         InitializeFromTwins(sourceId, targetId);
     }
-    public Relationship(Guid? sourceId, Guid targetId, int depth) : this()
-    {
-        InitializeFromTwins(sourceId, targetId);
-        this.Depth = depth;
-    }
+    /// <summary>
+    /// 根据源数字孪生ID和目标数字孪生ID初始化关系属性
+    /// </summary>
+    /// <param name="sourceDtId">源数字孪生唯一标识符</param>
+    /// <param name="targetDtId">目标数字孪生唯一标识符</param>
+    /// <param name="depth">深度</param>
     public Relationship(Guid sourceId, Guid targetId, int depth) : this()
     {
         InitializeFromTwins(sourceId, targetId);
         this.Depth = depth;
     }
-    public Relationship(Guid? sourceId, TTarget target, int depth) : this(sourceId, target.DtId, depth)
+    /// <summary>
+    /// 根据源数字孪生ID和目标数字孪生ID初始化关系属性
+    /// </summary>
+    /// <param name="sourceId">源数字孪生唯一标识符</param>
+    /// <param name="target">目标数字孪生唯一标识符</param>
+    /// <param name="depth">深度</param>
+    public Relationship(Guid sourceId, TTarget target, int depth) : this(sourceId, target.DtId, depth)
     {
         this.Target = target;
     }

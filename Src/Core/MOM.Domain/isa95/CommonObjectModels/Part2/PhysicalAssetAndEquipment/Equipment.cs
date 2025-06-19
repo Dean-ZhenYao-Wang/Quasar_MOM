@@ -10,91 +10,111 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
-
+    /// <summary>
+    /// 设备
+    /// </summary>
+    /// <remarks>
+    /// <para>ISA-95.00.01标准中设备层级模型的元素应表示为设备。</para>
+    /// <para>设备可以是以下任何层级的实例：企业、厂区、区域、工作中心、工作单元、处理单元、单元、生产线、生产单元、工作单元、存储区域和存储单元</para>
+    /// </remarks>
     public partial class Equipment : Resource, IEquatable<Equipment>
     {
-        public Equipment()
-        {
-        }
-
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:Equipment;1";
-
-        [JsonPropertyName("equipmentLevel")]
-        public EquipmentEquipmentLevel? EquipmentLevel { get; set; }
+        /// <summary>
+        /// 设备层级
+        /// </summary>
+        /// <remarks>
+        /// 基于角色的设备层级中的级别标识
+        /// </remarks>
+        [Required]
+        public EquipmentEquipmentLevel EquipmentLevel { get; set; }
 
         /// <summary>
         /// 所属设备类清单
+        /// <para>此设备支持的设备类别</para>
         /// </summary>
+        /// <remarks>
+        /// 关系类型：关联
+        /// </remarks>
         [JsonIgnore]
         public virtual List<EquipmentDefinedByRelationship> DefinedBy { get; set; } = new List<EquipmentDefinedByRelationship>();
 
         /// <summary>
-        /// 扩展属性
+        /// 此设备的属性值
         /// </summary>
         public virtual EquipmentProperty Property { get; set; } = new EquipmentProperty();
 
         /// <summary>
-        /// 这个父设备是子设备的整体。<br/>
-        /// 组成关系
+        /// 相关对象作为整体构成此设备的一部分
+        /// <para>组成关系</para>
         /// </summary>
         [JsonIgnore]
         public virtual List<EquipmentIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<EquipmentIsMadeUpOfRelationship>();
 
         /// <summary>
         /// 对应的实物资产<br/>
-        /// 该设备在工艺段中的作用是由实物资产实现的。
+        /// 此设备在流程段中的角色由物理资产实现
         /// </summary>
+        /// <remarks>
+        /// 用于设备资产映射
+        /// </remarks>
         [JsonIgnore]
-        [MaxLength(1)]
-        public virtual List<EquipmentImplementedByRelationship> ImplementedBy { get; set; } = new List<EquipmentImplementedByRelationship>();
+        public virtual EquipmentImplementedByRelationship ImplementedBy { get; set; }
+        /// <summary>
+        /// 设备的补充信息
+        /// </summary>
+        public string? Description { get; set; }
 
+        /// <summary>
+        /// 层级范围
+        /// </summary>
+        /// <remarks>
+        /// 标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+        /// <para>与层级的可选关系</para>
+        /// <para>非标准规范要求</para>
+        /// </remarks>
         public Guid? HierarchyScopeRelDtId { get; set; }
+        /// <summary>
+        /// 层级范围
+        /// </summary>
+        /// <remarks>
+        /// 标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+        /// <para>与层级的可选关系</para>
+        /// <para>非标准规范要求</para>
+        /// </remarks>
+        public string? HierarchyScope
+        { get { return HierarchyScopeRel?.FullPath; } }
+        /// <summary>
+        /// 适配层级范围
+        /// </summary>
+        /// <remarks>
+        /// <para>与层级的可选关系</para>
+        /// <para>非标准规范要求</para>
+        /// </remarks>
         [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
         public virtual HierarchyScope HierarchyScopeRel { get; set; }
-        /// <summary>
-        /// 所属设备角色层次/所属组织
-        /// </summary>
-        [JsonPropertyName("hierarchyScope")]
-        public string? HierarchyScope
-        { get { return HierarchyScopeRel?.FullPath; } }
-
-
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
         /// <summary>
         /// 空间定义
         /// </summary>
         public SpatialDefinition? SpatialDefinition { get; set; }
 
-        /// <summary>
-        /// 编号
-        /// </summary>
-        [Required]
-        [JsonPropertyName("number")]
-        public string Number { get; set; }
+
 
         /// <summary>
         /// 规格
         /// </summary>
         [Required]
-        [JsonPropertyName("specification")]
         public string Specification { get; set; }
 
         /// <summary>
         /// 型号
         /// </summary>
         [Required]
-        [JsonPropertyName("modelNumber")]
         public string ModelNumber { get; set; }
 
         /// <summary>
         /// 使用组织的DtId
         /// </summary>
-        [JsonPropertyName("useOrgDtId")]
         public Guid? UseOrgDtId { get; set; }
 
         /// <summary>
@@ -107,27 +127,23 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// <summary>
         /// 使用组织
         /// </summary>
-        [JsonPropertyName("OrgName")]
         public string? UseOrgName { get => UseOrg?.Id; }
 
         /// <summary>
         /// 设备状态
         /// </summary>
         [Required]
-        [JsonPropertyName("status")]
         public EquipmentStatusType Status { get; set; }
 
         /// <summary>
         /// 启用时间
         /// </summary>
         [Required]
-        [JsonPropertyName("enabledTime")]
         public DateTime EnabledTime { get; set; }
 
         /// <summary>
         /// 责任人DtId
         /// </summary>
-        [JsonPropertyName("responsibleDtId")]
         public Guid? ResponsibleDtId { get; set; }
 
         /// <summary>
@@ -152,57 +168,49 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 供应商
         /// </summary>
         [Required]
-        [JsonPropertyName("supplier")]
         public string Supplier { get; set; }
 
         /// <summary>
         /// 出厂编号
         /// </summary>
         [Required]
-        [JsonPropertyName("factoryNumber")]
         public string FactoryNumber { get; set; }
 
         /// <summary>
         /// 折旧年限
         /// </summary>
         [Required]
-        [JsonPropertyName("depreciationLife")]
         public int DepreciationLife { get; set; }
 
         /// <summary>
         /// 出厂日期
         /// </summary>
-        [JsonPropertyName("factoryDate")]
         public DateTime? FactoryDate { get; set; }
 
         /// <summary>
         /// 原始价格
         /// </summary>
-        [JsonPropertyName("initialPrice")]
         public decimal? InitialPrice { get; set; }
 
         /// <summary>
         /// 购买日期
         /// </summary>
-        [JsonPropertyName("dateOfPurchase")]
         public DateTime? DateOfPurchase { get; set; }
 
         /// <summary>
         /// 保修期
         /// </summary>
-        [JsonPropertyName("warrantyPeriod")]
         public DateTime? WarrantyPeriod { get; set; }
 
-        public Equipment(string ID, string description, EquipmentEquipmentLevel? EquipmentLevel) : this()
+        public Equipment(string ID, string description, EquipmentEquipmentLevel EquipmentLevel)
         {
             this.Id = Id;
             this.Description = description;
             this.EquipmentLevel = EquipmentLevel;
         }
 
-        public Equipment(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, Guid? useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, description, equipmentLevel)
+        public Equipment(string ID, string description, EquipmentEquipmentLevel equipmentLevel,  string specification, string modelNumber, Guid? useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, description, equipmentLevel)
         {
-            Number = number;
             Specification = specification;
             ModelNumber = modelNumber;
             UseOrgDtId = useOrgDtId;
@@ -240,19 +248,18 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             }
         }
 
-        public void Update(string iD, string? description, EquipmentEquipmentLevel? equipmentLevel)
+        public void Update(string iD, string? description, EquipmentEquipmentLevel equipmentLevel)
         {
             this.Id = Id;
             this.Description = description ?? string.Empty;
             this.EquipmentLevel = equipmentLevel;
         }
 
-        public void Update(string ID, string description, EquipmentEquipmentLevel? equipmentLevel, string number, string specification, string modelNumber, Guid useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
+        public void Update(string ID, string? description, EquipmentEquipmentLevel equipmentLevel,  string specification, string modelNumber, Guid useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
         {
             this.Id = Id;
             this.Description = description ?? string.Empty;
             this.EquipmentLevel = equipmentLevel;
-            this.Number = number;
             this.Specification = specification;
             this.ModelNumber = modelNumber;
             this.UseOrgDtId = useOrgDtId;
@@ -269,32 +276,34 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.SpatialDefinition = spatialDefinition;
         }
 
-
-
-
+        /// <inheritdoc/>
         public override bool Equals(object? obj)
         {
             return Equals(obj as Equipment);
         }
 
+        /// <inheritdoc/>
         public bool Equals(Equipment? other)
         {
             return other is not null && base.Equals(other) && HierarchyScope == other.HierarchyScope && EquipmentLevel == other.EquipmentLevel;
         }
 
+        /// <inheritdoc/>
         public static bool operator ==(Equipment? left, Equipment? right)
         {
             return EqualityComparer<Equipment?>.Default.Equals(left, right);
         }
 
+        /// <inheritdoc/>
         public static bool operator !=(Equipment? left, Equipment? right)
         {
             return !(left == right);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
-            return this.CustomHash(base.GetHashCode(), HierarchyScope?.GetHashCode(), EquipmentLevel?.GetHashCode());
+            return this.CustomHash(base.GetHashCode(), HierarchyScope?.GetHashCode(), EquipmentLevel.GetHashCode());
         }
 
     }

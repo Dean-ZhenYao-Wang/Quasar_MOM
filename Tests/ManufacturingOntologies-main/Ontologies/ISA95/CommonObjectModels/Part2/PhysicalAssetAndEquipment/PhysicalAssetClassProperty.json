@@ -2,20 +2,24 @@
     "@context": "dtmi:dtdl:context;2",
     "@id": "dtmi:digitaltwins:isa95:PhysicalAssetClassProperty;1",
     "@type": "Interface",
-    "displayName": "Physical Asset class property",
-    "description": "Properties of a physical asset class shall be presented as physical asset class properties. Each may have zero or more recognized properties.",
-    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",
+    "displayName": "Physical Asset class property", // 显示名称：物理资产类属性
+    "description": "Properties of a physical asset class shall be presented as physical asset class properties. Each may have zero or more recognized properties.", // 描述：物理资产类的属性应表示为物理资产类属性，每个类可包含零个或多个已识别属性
+    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018", // 依据：ANSI/ISA-95标准（2018年5月24日批准版）
     "extends": [
-        "dtmi:digitaltwins:isa95:ResourceClassProperty;1",
-        "dtmi:digitaltwins:isa95:TestableObjectProperty;1"
+        "dtmi:digitaltwins:isa95:ResourceClassProperty;1", // 继承：资源类属性
+        "dtmi:digitaltwins:isa95:TestableObjectProperty;1" // 继承：可测试对象属性
     ],
     "contents": [
         {
             "@type": "Relationship",
             "name": "contains",
-            "displayName": "Contains",
-            "description": "The nested physical asset class property(s) makes up part of this physical asset class property as the whole",
-            "target": "dtmi:digitaltwins:isa95:PhysicalAssetClassProperty;1"
+            "displayName": "Contains", // 关系显示名：包含
+            "description": "The nested physical asset class property(s) makes up part of this physical asset class property as the whole", // 描述：嵌套的物理资产类属性作为组成部分构成此属性的整体结构
+            "target": "dtmi:digitaltwins:isa95:PhysicalAssetClassProperty;1" // 目标：物理资产类属性
         }
     ]
 }
+// 关键概念说明：
+// 1. Physical Asset class property → 物理资产类属性（定义资产类型的通用属性模板）
+// 2. 继承关系体现层级：资源类属性 → 可测试对象属性 → 物理资产类属性
+// 3. 包含关系：允许物理资产类属性嵌套组合（树形结构）

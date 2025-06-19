@@ -16,7 +16,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         private readonly DbSet<PersonnelClassIncludesPropertiesOfRelationship> personnelClassIncludesPropertiesOfRelationships = dbContext.Set<PersonnelClassIncludesPropertiesOfRelationship>();
         private readonly DbSet<PersonnelClassHierarchyScopeRelRelationship> personnelClassHierarchyScopeRelRelationships = dbContext.Set<PersonnelClassHierarchyScopeRelRelationship>();
 
-        public async Task AddAsync(PersonnelClass model, Guid? sourceDtId)
+        public async Task AddAsync(Guid sourceDtId,PersonnelClass model)
         {
             await AddAsync(model);
             await personnelClassIncludesPropertiesOfRelationships.AddAsync(new PersonnelClassIncludesPropertiesOfRelationship(sourceDtId, model.DtId));
@@ -25,28 +25,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
         public async Task DeleteAsync(Guid[] dtIds)
         {
             await this.ExecuteUpdateAsync(m => dtIds.Contains(m.DtId), setters => setters.SetProperty(pc => pc.IsDelete, true));
-        }
-
-        public async Task<List<OrgResponse>> GetOrgTreeAsync(Guid? sourceDtId)
-        {
-            List<OrgResponse> returnModel = null;
-
-            //if (sourceDtId != null && sourceDtId != Guid.Empty)
-            //{
-            //    returnModel = await personnelClassIncludesPropertiesOfRelationships.Where(m => m.SourceId == sourceDtId.Value)
-            //        .Select(m => m.Target.ToOrgResponse())
-            //        .ToListAsync();
-            //}
-            //else
-            //{
-            //    returnModel = await this.DbSet.Where(m => m.Description.Equals("组织")
-            //    &&
-            //        !personnelClassIncludesPropertiesOfRelationships.Where(r=>r.TargetId==m.DtId).Any())
-            //         .Select(m => m.ToOrgResponse())
-            //         .ToListAsync();
-            //}
-
-            return returnModel;
         }
     }
 }

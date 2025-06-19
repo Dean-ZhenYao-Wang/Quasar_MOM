@@ -70,7 +70,9 @@ namespace MOM.Domain.CodingRule
         /// 默认为true
         /// </summary>
         public bool IsActive { get; set; } = true;
-
+        /// <summary>
+        /// 软删除，会同时软删除编码段
+        /// </summary>
         public void Delete()
         {
             this.IsDelete = true;

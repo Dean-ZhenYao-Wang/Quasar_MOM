@@ -2,8 +2,18 @@
 
 namespace MOM.Domain.isa95.CommonObjectModels
 {
+    /// <summary>
+    /// 设备角色层次辅助类
+    /// </summary>
     public static class HierarchyScopeHelper
     {
+        /// <summary>
+        /// 判断指定父级是否能够增加指定子级
+        /// todo
+        /// </summary>
+        /// <param name="sourceEquipmentLevel">父设备层次</param>
+        /// <param name="targetEquipment">子设备层次</param>
+        /// <exception cref="MethodAccessException"></exception>
         public static void ContainsIsAddTarget(HierarchyScopeEquipmentLevel sourceEquipmentLevel, HierarchyScopeEquipmentLevel targetEquipment)
         {
             switch (sourceEquipmentLevel)

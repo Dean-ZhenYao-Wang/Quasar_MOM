@@ -1,65 +1,70 @@
 {
-    "@context": "dtmi:dtdl:context;2",
-    "@id": "dtmi:digitaltwins:isa95:PhysicalAssetClass;1",
-    "@type": "Interface",
-    "displayName": "Physical Asset class",
-    "description": "A representation of a grouping of physical assets with similar characteristics for purposes of repair and replacement shall be presented as a physical asset class. Any physical asset shall be a member of one physical asset class. A physical asset class may be defined as a specialization of zero or more physical asset classes. A physical asset class may be made up of zero or more physical asset classes.",
-    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",
-    "extends": [
-        "dtmi:digitaltwins:isa95:ResourceClass;1",
-        "dtmi:digitaltwins:isa95:TestableObject;1"
+    "@context": "dtmi:dtdl:context;2", // 数字孪生定义语言上下文版本
+    "@id": "dtmi:digitaltwins:isa95:PhysicalAssetClass;1", // 物理资产类唯一标识符
+    "@type": "Interface", // 类型为接口
+    "displayName": "Physical Asset class", // 显示名称
+    "description": "A representation of a grouping of physical assets with similar characteristics for purposes of repair and replacement shall be presented as a physical asset class...", // 描述（英文）
+    // 描述（中文）：物理资产类表示具有相似特征的物理资产分组，用于维修和替换目的。任何物理资产都属于一个物理资产类。物理资产类可定义为零个或多个物理资产类的特化，也可由零个或多个物理资产类组成。
+    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018", // 标准来源说明
+    // 注释（中文）：符合ANSI/ISA-95.00.02-2018标准（2018年5月24日批准）
+    "extends": [ // 继承的父接口
+        "dtmi:digitaltwins:isa95:ResourceClass;1", // 资源类接口
+        "dtmi:digitaltwins:isa95:TestableObject;1" // 可测试对象接口
     ],
-    "contents": [
+    "contents": [ // 接口内容定义
         {
-            "@type": "Relationship",
-            "name": "includesPropertiesOf",
-            "displayName": "Includes properties of",
-            "target": "dtmi:digitaltwins:isa95:PhysicalAssetClass;1",
-            "description": "This physical asset class(s) include properties of the physical asset class."
+            "@type": "Relationship", // 关系类型
+            "name": "includesPropertiesOf", // 关系名称
+            "displayName": "Includes properties of", // 显示名称
+            "target": "dtmi:digitaltwins:isa95:PhysicalAssetClass;1", // 目标接口
+            "description": "This physical asset class(s) include properties of the physical asset class." // 关系描述
+            // 描述（中文）：表示当前物理资产类包含其他物理资产类的属性（属性继承）
         },
         {
             "@type": "Relationship",
-            "name": "isMadeUpOf",
+            "name": "isMadeUpOf", // 组成关系
             "displayName": "Is made up of",
             "target": "dtmi:digitaltwins:isa95:PhysicalAssetClass;1",
             "description": "This parent physical asset class is whole of the child physical asset class(s) as the part."
+            // 描述（中文）：表示父物理资产类由子物理资产类作为组成部分（组合关系）
         },
         {
             "@type": "Relationship",
-            "name": "hasPropertiesOf",
+            "name": "hasPropertiesOf", // 属性关联关系
             "displayName": "Has properties of",
-            "target": "dtmi:digitaltwins:isa95:PhysicalAssetClassProperty;1",
+            "target": "dtmi:digitaltwins:isa95:PhysicalAssetClassProperty;1", // 指向属性类
             "description": "The physical asset class property(s) of this physical asset class."
+            // 描述（中文）：关联当前物理资产类的属性定义
+        },
+        {
+            "@type": "Property", // 属性类型
+            "name": "manufacturer", // 制造商标识
+            "displayName": "Manufacturer", 
+            "schema": "string", // 字符串类型
+            "description": "The identifier of the manufacturer."
+            // 描述（中文）：物理资产制造商的唯一标识符
+        },
+        {
+            "@type": "Component", // 组件类型
+            "name": "description", // 多语言描述
+            "schema": "dtmi:digitaltwins:isa95:LangStringSet;1", // 多语言字符串集
+            "description": "Additional information about the physical asset class."
+            // 描述（中文）：物理资产类的多语言附加描述信息
         },
         {
             "@type": "Property",
-            "name": "manufacturer",
-            "displayName": "Manufacturer",
-            "description": "An identification of the manufacturer.",
-            "schema": "string"
-        },
-        {
-            "@type": "Component",
-            "name": "description",
-            "displayName": "Description",
-            "description": "Additional information about the property class asset",
-            "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
-        },
-        {
-            "@type": "Property",
-            "name": "hierarchyScope",
-            "displayName": "Hierarchy scope",
-            "description": "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scopedefines the scope of the physical asset class, such as the site or area where it is defined.",
-            "schema": "string"
+            "name": "hierarchyScope", // 层次范围标识
+            "schema": "string",
+            "description": "Identifies the position within role-based equipment hierarchy."
+            // 描述（中文）：标识在基于角色的设备层次结构中的位置
         },
         {
             "@type": "Relationship",
-            "name": "hierarchyScopeRel",
-            "displayName": "fits hierarchy scope",
-            "description": "Optional relationship to hierarchy.",
-            "comment": "Not part of the Standard Specs.",
+            "name": "hierarchyScopeRel", // 层次范围关联
             "target": "dtmi:digitaltwins:isa95:HierarchyScope;1",
-            "maxMultiplicity": 1
+            "description": "The hierarchy scope of the physical asset class.",
+            "writable": true // 可写属性
+            // 描述（中文）：关联物理资产类在设备层次结构中的具体范围定义
         }
     ]
 }

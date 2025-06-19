@@ -1,63 +1,64 @@
 {
-    "@context": "dtmi:dtdl:context;2",
-    "@id": "dtmi:digitaltwins:isa95:ResourceClassProperty;1",
-    "@type": "Interface",
-    "displayName": "Resource class property",
-    "description": "Abstract model for all resource class property models (person class, equipment class, physical asset class, material class)",
-    "extends": [
-        "dtmi:digitaltwins:isa95:BaseModel;1"
+    "@context": "dtmi:dtdl:context;2", // 上下文：DTDL版本2
+    "@id": "dtmi:digitaltwins:isa95:ResourceClassProperty;1", // 标识符：数字孪生 ISA95 资源类属性接口版本1
+    "@type": "Interface", // 类型：接口
+    "displayName": "Resource class property", // 显示名称：资源类属性
+    "description": "Abstract model for all resource class property models (person class, equipment class, physical asset class, material class)", 
+	// 描述：所有资源类属性模型（人员类、设备类、物理资产类、物料类）的抽象模型
+    "extends": [ // 继承自
+        "dtmi:digitaltwins:isa95:BaseModel;1" // 基础模型版本1
     ],
-    "contents": [
+    "contents": [ // 内容
         {
-            "@type": "Component",
-            "name": "description",
-            "displayName": "Description",
-            "description": "Additional information about the resource class property",
-            "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
+            "@type": "Component", // 类型：组件
+            "name": "description", // 名称：描述
+            "displayName": "Description", // 显示名称：描述
+            "description": "Additional information about the resource class property", // 描述：有关资源类属性的附加信息
+            "schema": "dtmi:digitaltwins:isa95:LangStringSet;1" // 模式：语言字符串集合版本1
         },
         {
-            "@type": "Property",
-            "name": "propertyType",
-            "displayName": "Property type",
-            "description": "Defines the type of the property.",
-            "schema": {
-                "@type": "Enum",
-                "valueSchema": "string",
-                "enumValues": [
+            "@type": "Property", // 类型：属性
+            "name": "propertyType", // 名称：属性类型
+            "displayName": "Property type", // 显示名称：属性类型
+            "description": "Defines the type of the property.", // 描述：定义属性的类型
+            "schema": { // 模式
+                "@type": "Enum", // 类型：枚举
+                "valueSchema": "string", // 值模式：字符串
+                "enumValues": [ // 枚举值
                     {
-                        "name": "classType",
-                        "enumValue": "classType",
-                        "displayName": "Class Type",
-                        "description": "The property value is defined for the class and there is no value associated with an instance"
+                        "name": "classType", // 名称：类类型
+                        "enumValue": "classType", // 枚举值：类类型
+                        "displayName": "Class Type", // 显示名称：类类型
+                        "description": "The property value is defined for the class and there is no value associated with an instance" // 描述：属性值是为类定义的，没有与实例关联的值
                     },
                     {
-                        "name": "instanceType",
-                        "enumValue": "instanceType",
-                        "displayName": "Instance Type",
-                        "description": "the property value of the class is undefined"
+                        "name": "instanceType", // 名称：实例类型
+                        "enumValue": "instanceType", // 枚举值：实例类型
+                        "displayName": "Instance Type", // 显示名称：实例类型
+                        "description": "the property value of the class is undefined" // 描述：类的属性值未定义
                     },
                     {
-                        "name": "defaultType",
-                        "enumValue": "defaultType",
-                        "displayName": "Default Type",
-                        "description": "The property value is defined for the class as the default instance value, but individual instances of the class may redefine specific values."
+                        "name": "defaultType", // 名称：默认类型
+                        "enumValue": "defaultType", // 枚举值：默认类型
+                        "displayName": "Default Type", // 显示名称：默认类型
+                        "description": "The property value is defined for the class as the default instance value, but individual instances of the class may redefine specific values." // 描述：属性值是为类定义的默认实例值，但类的各个实例可以重新定义特定值
                     }
                 ]
             }
         },
         {
-            "@type": "Property",
-            "name": "value",
-            "displayName": "Value",
-            "description": "The value, set of values, or range of the property.",
-            "schema": "string"
+            "@type": "Property", // 类型：属性
+            "name": "value", // 名称：值
+            "displayName": "Value", // 显示名称：值
+            "description": "The value, set of values, or range of the property.", // 描述：属性的值、值集合或值范围
+            "schema": "string" // 模式：字符串
         },
         {
-            "@type": "Property",
-            "name": "valueUnitOfMeasure",
-            "displayName": "Value unit of measure",
-            "description": "The unit of measure of the associated property value",
-            "schema": "string"
+            "@type": "Property", // 类型：属性
+            "name": "valueUnitOfMeasure", // 名称：值计量单位
+            "displayName": "Value unit of measure", // 显示名称：值计量单位
+            "description": "The unit of measure of the associated property value", // 描述：相关属性值的计量单位
+            "schema": "string" // 模式：字符串
         }
     ]
 }

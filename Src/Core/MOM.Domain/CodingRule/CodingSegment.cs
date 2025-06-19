@@ -76,8 +76,13 @@ namespace MOM.Domain.CodingRule
         /// </summary>
         public bool PadLeft { get; set; } = true;
 
-
-        public string RuleDtId { get; set; }
+        /// <summary>
+        /// 关联的编码配置规则数据库唯一标识
+        /// </summary>
+        public required Guid RuleDtId { get; set; }
+        /// <summary>
+        /// 关联的编码配置规则
+        /// </summary>
         [ForeignKey(nameof(RuleDtId))]
         public virtual CodingRule Rule { get; set; }
     }

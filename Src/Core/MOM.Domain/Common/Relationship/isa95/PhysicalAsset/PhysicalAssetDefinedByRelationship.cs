@@ -1,47 +1,65 @@
+
 namespace MOM.Domain.Common.Relationship.isa95.PhysicalAsset
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class PhysicalAssetDefinedByRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass>, IEquatable<PhysicalAssetDefinedByRelationship>
     {
+        /// <inheritdoc/>
         public PhysicalAssetDefinedByRelationship()
         {
             Name = "definedBy";
         }
-
-        public PhysicalAssetDefinedByRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass target) : this()
+        /// <inheritdoc/>
+        public PhysicalAssetDefinedByRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass target) : base(source, target)
         {
-            InitializeFromTwins(source, target);
+        }
+        /// <inheritdoc/>
+        public PhysicalAssetDefinedByRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
+        {
+        }
+        /// <inheritdoc/>
+        public PhysicalAssetDefinedByRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
+        {
+        }
+        /// <inheritdoc/>
+        public PhysicalAssetDefinedByRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass target, int depth) : base(sourceId, target, depth)
+        {
         }
 
-        public PhysicalAssetDefinedByRelationship(Guid? sourceId, Guid targetId) : this()
-        {
-            InitializeFromTwins(sourceId, targetId);
-        }
 
+        /// <inheritdoc/>
         public override bool Equals(object? obj)
         {
             return Equals(obj as PhysicalAssetDefinedByRelationship);
         }
 
+        /// <inheritdoc/>
         public bool Equals(PhysicalAssetDefinedByRelationship? other)
         {
             return other is not null && DtId == other.DtId && SourceId == other.SourceId && TargetId == other.TargetId && Target == other.Target && Name == other.Name;
         }
 
+        /// <inheritdoc/>
         public static bool operator ==(PhysicalAssetDefinedByRelationship? left, PhysicalAssetDefinedByRelationship? right)
         {
             return EqualityComparer<PhysicalAssetDefinedByRelationship?>.Default.Equals(left, right);
         }
 
+        /// <inheritdoc/>
         public static bool operator !=(PhysicalAssetDefinedByRelationship? left, PhysicalAssetDefinedByRelationship? right)
         {
             return !(left == right);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId.GetHashCode(), SourceId?.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), SourceId.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
         }
 
+        /// <inheritdoc/>
         public override bool Equals(BasicRelationship? other)
         {
             return Equals(other as PhysicalAssetDefinedByRelationship) || new RelationshipEqualityComparer().Equals(this, other);

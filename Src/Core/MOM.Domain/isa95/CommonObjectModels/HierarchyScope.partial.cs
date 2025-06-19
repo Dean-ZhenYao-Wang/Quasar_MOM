@@ -16,6 +16,9 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 路径
         /// </summary>
         public string FullPath { get; set; } = string.Empty;
+        /// <summary>
+        /// 说明
+        /// </summary>
         public string? Description { get; set; }
 
         /// <summary>
@@ -29,7 +32,9 @@ namespace MOM.Domain.isa95.CommonObjectModels
         [JsonIgnore]
         [ForeignKey(nameof(ResponsibleDtId))]
         public virtual Person? Responsible { get; set; }
-
+        /// <summary>
+        /// 负责人姓名
+        /// </summary>
         public string? ResponsibleName
         {
             get
@@ -64,10 +69,22 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 父级唯一标识
         /// </summary>
         public Guid? SourceDtId { get; set; }
+        /// <summary>
+        /// 父级
+        /// </summary>
         [ForeignKey(nameof(SourceDtId))]
         public virtual HierarchyScope Source { get; set; }
-
-        public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string Id, string name, string? address = null, bool active = false, string? description = null, Guid? sourceDtId = null) : this()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="equipmentLevel"></param>
+        /// <param name="Id"></param>
+        /// <param name="name"></param>
+        /// <param name="address"></param>
+        /// <param name="active"></param>
+        /// <param name="description"></param>
+        /// <param name="sourceDtId"></param>
+        public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string Id, string name, string? address = null, bool active = false, string? description = null, Guid? sourceDtId = null)
         {
             EquipmentLevel = equipmentLevel;
             this.Id = Id;
@@ -79,8 +96,11 @@ namespace MOM.Domain.isa95.CommonObjectModels
             if (sourceDtId == null)
                 FullPath = this.Name;
         }
-
-        public void Delete()
+        /// <summary>
+        /// 软删除，存在子级，无法删除
+        /// </summary>
+        /// <exception cref="MethodAccessException"></exception>
+        public override void Delete()
         {
             if (this.Contains.Any(st => st.IsDelete == false))
             {
@@ -91,14 +111,19 @@ namespace MOM.Domain.isa95.CommonObjectModels
                 this.ForcedDeletion();
             }
         }
-
+        /// <summary>
+        /// 强制删除
+        /// </summary>
         public virtual void ForcedDeletion()
         {
             this.ForcedDeletionContainTargets();
             this.IsDelete = true;
-            this.Contains.Clear();//todo 需要定时任务配合，因为这个clear只会删除关系表中的SourceId列的内容，并未删除整行，需要定时任务定时删除表中这种数据
+            this.Contains.Clear();
+            //todo 需要定时任务配合，因为这个clear只会删除关系表中的SourceId列的内容，并未删除整行，需要定时任务定时删除表中这种数据
         }
-
+        /// <summary>
+        /// 强制删除关联的子级
+        /// </summary>
         public virtual void ForcedDeletionContainTargets()
         {
             foreach (var st in this.Contains.Where(m => m.Target.IsDelete == false))
@@ -106,7 +131,10 @@ namespace MOM.Domain.isa95.CommonObjectModels
                 st.Target.ForcedDeletion();
             }
         }
-
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="hierarchyScope"></param>
         public virtual void Update(HierarchyScope hierarchyScope)
         {
             this.Id = hierarchyScope.Id;

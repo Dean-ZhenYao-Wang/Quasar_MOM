@@ -2,9 +2,9 @@
   "@context": "dtmi:dtdl:context;2",
   "@id": "dtmi:digitaltwins:isa95:Person;1",
   "@type": "Interface",
-  "displayName": "Person",
-  "description": "A  representation  of  a  specifically  identified  individual shall  be  presented  as  a person. A person may be a member of zero or more personnel classes.",
-  "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",
+  "displayName": "Person // 人员",
+  "description": "A representation of a specifically identified individual shall be presented as a person. A person may be a member of zero or more personnel classes. // 特定识别个体的表示应作为人员呈现。人员可以是零个或多个人员类别的成员",
+  "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018 // 依据ANSI/ISA-95.00.02-2018标准（2018年5月24日批准）",
   "extends": [
     "dtmi:digitaltwins:isa95:Resource;1",
     "dtmi:digitaltwins:isa95:TestableObject;1"
@@ -13,76 +13,76 @@
     {
       "@type": "Relationship",
       "name": "definedBy",
-      "displayName": "Defined by",
-      "description": "Personnel classes supported by this person.This person supports the personnel class property(s) associated with the personnel class.",
+      "displayName": "Defined by // 由...定义",
+      "description": "Personnel classes supported by this person. This person supports the personnel class property(s) associated with the personnel class. // 此人员支持的人员类别。该人员支持与人员类别关联的属性",
       "target": "dtmi:digitaltwins:isa95:PersonnelClass;1",
-      "comment": "Relationship type: Association"
+      "comment": "Relationship type: Association // 关系类型：关联"
     },
     {
       "@type": "Relationship",
       "name": "hasValuesOf",
-      "displayName": "Has values of",
-      "description": "The person property values of this person.",
+      "displayName": "Has values of // 拥有...的值",
+      "description": "The person property values of this person. // 此人员的属性值",
       "target": "dtmi:digitaltwins:isa95:PersonProperty;1"
     },
     {
       "@type": "Component",
       "name": "description",
-      "displayName": "Description",
-      "description": "Additional information about the resource.",
+      "displayName": "Description // 描述",
+      "description": "Additional information about the resource. // 资源的补充信息",
       "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
     },
     {
       "@type": "Property",
       "name": "hierarchyScope",
-      "displayName": "Hierarchy scope",
-      "description": "Identifies where the exchanged information fits within the role-based equipment hierarchy. Optionally, hierarchy scope defines the scope of the person definition.",
+      "displayName": "Hierarchy scope // 层级范围",
+      "description": "Identifies where the exchanged information fits within the role-based equipment hierarchy. Optionally, hierarchy scope defines the scope of the person definition. // 标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义人员定义的范围",
       "schema": "string"
     },
     {
       "@type": "Relationship",
       "name": "hierarchyScopeRel",
-      "displayName": "fits hierarchy scope",
-      "description": "Optional relationship to hierarchy.",
-      "comment": "Not part of the Standard Specs.",
+      "displayName": "fits hierarchy scope // 适配层级范围",
+      "description": "Optional relationship to hierarchy. // 与层级的可选关系",
+      "comment": "Not part of the Standard Specs. // 非标准规范要求",
       "target": "dtmi:digitaltwins:isa95:HierarchyScope;1",
       "maxMultiplicity": 1
     },
     {
       "@type": "Property",
       "name": "name",
-      "displayName": "Name",
-      "description": "The name of the individual.This is meant as an additional identification of the resource, but only as information and not as a unique value.",
+      "displayName": "Name // 姓名",
+      "description": "The name of the individual. This is meant as an additional identification of the resource, but only as information and not as a unique value. // 个人姓名。作为资源的附加标识，仅作信息参考而非唯一值",
       "schema": "string"
     },
     {
       "@type": "Component",
       "name": "spatialDefinition",
-      "displayName": "Spatial definition",
-      "description": "Spatially defines the personas a zero-dimensional point, one-dimensional line, or two-dimensional shape or three-dimensional solid,/ / WKT / POLYGON ( ( -646.99 676.18, -645.14 683.09, -",
+      "displayName": "Spatial definition // 空间定义",
+      "description": "Spatially defines the person as a zero-dimensional point, one-dimensional line, or two-dimensional shape or three-dimensional solid. // 将人员在空间上定义为零维点、一维线、二维面或三维体",
       "schema": "dtmi:digitaltwins:isa95:SpatialDefinition;1"
     },
     {
       "@type": "Relationship",
       "name": "operationalLocationRel",
-      "displayName": "fits operational location",
-      "description": "Optional relationship to operational location.",
-      "comment": "Not part of the Standard Specs.",
+      "displayName": "fits operational location // 适配操作位置",
+      "description": "Optional relationship to operational location. // 与操作位置的可选关系",
+      "comment": "Not part of the Standard Specs. // 非标准规范要求",
       "target": "dtmi:digitaltwins:isa95:OperationalLocation;1",
       "maxMultiplicity": 1
-  },	
+    },	
     {
       "@type": "Property",
       "name": "operationalLocation",
-      "displayName": "Operational location",
-      "description": "Identifies the operational location of the person.",
+      "displayName": "Operational location // 操作位置",
+      "description": "Identifies the operational location of the person. // 标识人员的操作位置",
       "schema": "string"
     },
     {
       "@type": "Property",
       "name": "operationalLocationType",
-      "displayName": "Operational location type",
-      "description": "Indicates whether the operational location attribute refers to an operational location object or contains a description of the operational location.Mandatory where an operational location attribute is specified.Defined values are operational location:operational location attribute references an operational location;description:operational location attribute contains a description of the operational location, such as a street address.",
+      "displayName": "Operational location type // 操作位置类型",
+      "description": "Indicates whether the operational location attribute refers to an operational location object or contains a description of the operational location. Mandatory where an operational location attribute is specified. // 标识操作位置属性引用的是操作位置对象还是包含位置描述。当指定操作位置属性时必填",
       "schema": {
         "@type": "Enum",
         "valueSchema": "string",
@@ -90,14 +90,14 @@
           {
             "name": "operationalLocation",
             "enumValue": "operationalLocation",
-            "displayName": "Operational Location",
-            "description": "operational location attribute references an operational location;"
+            "displayName": "Operational Location // 操作位置",
+            "description": "operational location attribute references an operational location; // 操作位置属性引用操作位置对象"
           },
           {
             "name": "description",
             "enumValue": "description",
-            "displayName": "Description",
-            "description": "operational location attribute contains a description of the operational location, such as a street address."
+            "displayName": "Description // 描述",
+            "description": "operational location attribute contains a description of the operational location, such as a street address. // 操作位置属性包含位置描述（如街道地址）"
           }
         ]
       }

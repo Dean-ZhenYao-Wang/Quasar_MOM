@@ -2,9 +2,9 @@
     "@context": "dtmi:dtdl:context;2",
     "@id": "dtmi:digitaltwins:isa95:Equipment;1",
     "@type": "Interface",
-    "displayName": "Equipment",
-    "description": "A representation of the elements of the equipment hierarchy model shown in ISA-95.00.01 shall be presented as equipment. Equipment may be a listing of any of the following: enterprise, site, area, work center, work unit, process cell, unit, production line, production unit, work cell, storage zone, and storage unit.",
-    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",
+    "displayName": "Equipment // 设备",
+    "description": "A representation of the elements of the equipment hierarchy model shown in ISA-95.00.01 shall be presented as equipment. Equipment may be a listing of any of the following: enterprise, site, area, work center, work unit, process cell, unit, production line, production unit, work cell, storage zone, and storage unit. // ISA-95.00.01标准中设备层级模型的元素应表示为设备。设备可以是以下任何层级的实例：企业、厂区、区域、工作中心、工作单元、处理单元、单元、生产线、生产单元、工作单元、存储区域和存储单元",
+    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018 // 依据ANSI/ISA-95.00.02-2018标准（2018年5月24日批准）",
     "extends": [
         "dtmi:digitaltwins:isa95:Resource;1",
         "dtmi:digitaltwins:isa95:TestableObject;1"
@@ -13,125 +13,125 @@
         {
             "@type": "Relationship",
             "name": "definedBy",
-            "displayName": "Defined by",
-            "description": "Equipment classes supported by this equipment.",
+            "displayName": "Defined by // 由...定义",
+            "description": "Equipment classes supported by this equipment. // 此设备支持的设备类别",
             "target": "dtmi:digitaltwins:isa95:EquipmentClass;1",
-            "comment": "Relationship type: Association"
+            "comment": "Relationship type: Association // 关系类型：关联"
         },
         {
             "@type": "Relationship",
             "name": "hasValuesOf",
-            "displayName": "Has values of",
-            "description": "The equipment property values of this equipment.",
+            "displayName": "Has values of // 拥有...的值",
+            "description": "The equipment property values of this equipment. // 此设备的属性值",
             "target": "dtmi:digitaltwins:isa95:EquipmentProperty;1"
         },
         {
             "@type": "Relationship",
             "name": "isMadeUpOf",
-            "displayName": "Is made up of",
-            "description": "The related object(s) makes up part of this equipment as the whole.",
+            "displayName": "Is made up of // 由...组成",
+            "description": "The related object(s) makes up part of this equipment as the whole. // 相关对象作为整体构成此设备的一部分",
             "target": "dtmi:digitaltwins:isa95:Equipment;1"
         },
         {
             "@type": "Relationship",
             "name": "implementedBy",
-            "displayName": "Implemented by",
-            "description": "This equipment as role in a process segment is implemented by the physical asset.",
-            "comment": "For Equipment asset mapping",
+            "displayName": "Implemented by // 由...实现",
+            "description": "This equipment as role in a process segment is implemented by the physical asset. // 此设备在流程段中的角色由物理资产实现",
+            "comment": "For Equipment asset mapping // 用于设备资产映射",
             "target": "dtmi:digitaltwins:isa95:PhysicalAsset;1",
             "maxMultiplicity": 1
         },
         {
             "@type": "Component",
             "name": "description",
-            "displayName": "Description",
-            "description": "Additional information about the equipment",
+            "displayName": "Description // 描述",
+            "description": "Additional information about the equipment // 设备的补充信息",
             "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
         },
         {
             "@type": "Property",
             "name": "hierarchyScope",
-            "displayName": "Hierarchy scope",
-            "description": "Identifies where the exchanged information fits within the role based equipment hierarchy. ",
+            "displayName": "Hierarchy scope // 层级范围",
+            "description": "Identifies where the exchanged information fits within the role based equipment hierarchy. // 标识交换信息在基于角色的设备层级中的位置",
             "schema": "string"
         },
         {
             "@type": "Relationship",
             "name": "hierarchyScopeRel",
-            "displayName": "fits hierarchy scope",
-            "description": "Optional relationship to hierarchy.",
-            "comment": "Not part of the Standard Specs.",
+            "displayName": "fits hierarchy scope // 适配层级范围",
+            "description": "Optional relationship to hierarchy. // 与层级的可选关系",
+            "comment": "Not part of the Standard Specs. // 非标准规范要求",
             "target": "dtmi:digitaltwins:isa95:HierarchyScope;1",
             "maxMultiplicity": 1
         },
         {
             "@type": "Property",
             "name": "equipmentLevel",
-            "displayName": "Equipment level",
+            "displayName": "Equipment level // 设备层级",
             "writable": true,
-            "description": "An identification of the level in the role-based equipment hierarchy",
+            "description": "An identification of the level in the role-based equipment hierarchy // 基于角色的设备层级中的级别标识",
             "schema": {
                 "@type": "Enum",
                 "valueSchema": "string",
                 "enumValues": [
                     {
                         "name": "Enterprise",
-                        "displayName": "Enterprise",
+                        "displayName": "Enterprise // 企业级",
                         "enumValue": "enterprise"
                     },
                     {
                         "name": "Site",
-                        "displayName": "Site",
+                        "displayName": "Site // 厂区级",
                         "enumValue": "site"
                     },
                     {
                         "name": "Area",
-                        "displayName": "Area",
+                        "displayName": "Area // 区域级",
                         "enumValue": "area"
                     },
                     {
                         "name": "WorkCenter",
-                        "displayName": "Work Center",
+                        "displayName": "Work Center // 工作中心",
                         "enumValue": "workCenter"
                     },
                     {
                         "name": "WorkUnit",
-                        "displayName": "Work Unit",
+                        "displayName": "Work Unit // 工作单元",
                         "enumValue": "workUnit"
                     },
                     {
                         "name": "ProcessCell",
-                        "displayName": "Process Cell",
+                        "displayName": "Process Cell // 处理单元",
                         "enumValue": "processCell"
                     },
                     {
                         "name": "Unit",
-                        "displayName": "Unit",
+                        "displayName": "Unit // 单元级",
                         "enumValue": "unit"
                     },
                     {
                         "name": "ProductionLine",
-                        "displayName": "Production Line",
+                        "displayName": "Production Line // 生产线",
                         "enumValue": "productionLine"
                     },
                     {
                         "name": "ProductionUnit",
-                        "displayName": "Production Unit",
+                        "displayName": "Production Unit // 生产单元",
                         "enumValue": "productionUnit"
                     },
                     {
                         "name": "WorkCell",
-                        "displayName": "Work Cell",
+                        "displayName": "Work Cell // 工作单元",
                         "enumValue": "workCell"
                     },
                     {
                         "name": "StorageZone",
-                        "displayName": "Storage Zone",
+                        "displayName": "Storage Zone // 存储区域",
                         "enumValue": "storageZone"
                     },
                     {
                         "name": "StorageUnit",
-                        "displayName": "Storage Unit",
+                        "displayName": "Storage Unit // 存储单元",
                         "enumValue": "Storage Unit"
                     }
                 ]
@@ -140,8 +140,8 @@
         {
             "@type": "Component",
             "name": "spatialDefinition",
-            "displayName": "Spatial definition",
-            "description": "Spatially defines the equipment as a zero-dimensional point, one dimensional line, or two dimensional shape or three dimensional solid.",
+            "displayName": "Spatial definition // 空间定义",
+            "description": "Spatially defines the equipment as a zero-dimensional point, one dimensional line, or two dimensional shape or three dimensional solid. // 将设备在空间上定义为零维点、一维线、二维面或三维体",
             "schema": "dtmi:digitaltwins:isa95:SpatialDefinition;1"
         }
     ]

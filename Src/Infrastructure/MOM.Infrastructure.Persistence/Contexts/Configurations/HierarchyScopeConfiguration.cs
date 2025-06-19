@@ -38,17 +38,6 @@ namespace MOM.Infrastructure.Persistence.Contexts.Configurations
             
         }
     }
-    public class OperationalLocationPropertyConfiguration : IEntityTypeConfiguration<OperationalLocationProperty>
-    {
-        public void Configure(EntityTypeBuilder<OperationalLocationProperty> builder)
-        {
-            builder.ToTable(nameof(OperationalLocationProperty));
-            builder.HasMany(hs => hs.Contains)
-                .WithOne(st => st.Source)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(hs => hs.SourceId);
-        }
-    }
     public class OperationalLocationClassConfiguration : IEntityTypeConfiguration<OperationalLocationClass>
     {
         public void Configure(EntityTypeBuilder<OperationalLocationClass> builder)
@@ -59,17 +48,6 @@ namespace MOM.Infrastructure.Persistence.Contexts.Configurations
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(hs => hs.SourceId);
             builder.HasMany(hs => hs.IsMadeUpOf)
-                .WithOne(st => st.Source)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(hs => hs.SourceId);
-        }
-    }
-    public class OperationalLocationClassPropertyConfiguration : IEntityTypeConfiguration<OperationalLocationClassProperty>
-    {
-        public void Configure(EntityTypeBuilder<OperationalLocationClassProperty> builder)
-        {
-            builder.ToTable(nameof(OperationalLocationClassProperty));
-            builder.HasMany(hs => hs.Contains)
                 .WithOne(st => st.Source)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(hs => hs.SourceId);

@@ -10,64 +10,106 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
-
+    /// <summary>
+    /// 人员
+    /// </summary>
+    /// <remarks>
+    /// <para>特定识别个体的表示应作为人员呈现。</para>
+    /// <para>人员可以是零个或多个人员类别的成员。</para>
+    /// </remarks>
     public partial class Person : Resource, IEquatable<Person>
     {
-        public Person()
-        {
-        }
+        private Person() { }
+
+        private string? operationalLocation;
 
         /// <summary>
-        /// 所属设备角色层次/所属组织
+        /// 此人员支持的人员类别。该人员支持与人员类别关联的属性
         /// </summary>
-        [JsonPropertyName("hierarchyScope")]
-        public string? HierarchyScope
-        { get { return HierarchyScopeRel?.FullPath; } }
-
-        /// <summary>
-        /// 当前操作位置
-        /// </summary>
-        [JsonPropertyName("operationalLocation")]
-        public string? OperationalLocation { get; set; }
-
-        /// <summary>
-        /// 当前操作位置类型
-        /// </summary>
-        [JsonPropertyName("operationalLocationType")]
-        public PersonOperationalLocationType? OperationalLocationType { get; set; }
-
         [JsonIgnore]
         public virtual List<PersonDefinedByRelationship> DefinedBy { get; set; } = new List<PersonDefinedByRelationship>();
-
         /// <summary>
-        /// 定制属性
+        /// 此人员的属性值
         /// </summary>
         public PersonProperty Property { get; set; } = new PersonProperty();
+        /// <summary>
+        /// 描述。资源的补充信息
+        /// </summary>
+        public string? Description { get; set; }
+
+
 
         /// <summary>
-        /// 确定交换的信息在基于角色的设备层次结构中的位置。可选地，层次结构作用域定义人员定义的作用域。
+        /// 层级范围
         /// </summary>
-        //[MaxLength(1)]
+        /// <remarks>
+        /// 标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+        /// <para>与层级的可选关系</para>
+        /// <para>非标准规范要求</para>
+        /// </remarks>
+        public Guid? HierarchyScopeRelDtId { get; set; }
+        /// <summary>
+        /// 层级范围
+        /// </summary>
+        /// <remarks>
+        /// 标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+        /// <para>与层级的可选关系</para>
+        /// <para>非标准规范要求</para>
+        /// </remarks>
+        public string? HierarchyScope
+        { get { return HierarchyScopeRel?.FullPath; } }
+        /// <summary>
+        /// 适配层级范围
+        /// </summary>
+        /// <remarks>
+        /// <para>与层级的可选关系</para>
+        /// <para>非标准规范要求</para>
+        /// </remarks>
         [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
         public virtual HierarchyScope HierarchyScopeRel { get; set; }
         /// <summary>
-        /// 确定交换的信息在基于角色的设备层次结构中的位置。可选地，层次结构作用域定义人员定义的作用域。
+        /// 空间定义
         /// </summary>
-        public Guid? HierarchyScopeRelDtId { get; set; }
-
-        //[MaxLength(1)]
-        [JsonIgnore]
-        public virtual List<PersonOperationalLocationRelRelationship> OperationalLocationRel { get; set; } = new List<PersonOperationalLocationRelRelationship>();
-        /// <summary>
-        /// 在空间上将人物角色定义为零维点、一维线、二维形状或三维实体<br/>
-        /// / / WKT / POLYGON（(-646.99 676.18, -645.14 683.09, -)）
-        /// </summary>
+        /// <remarks>
+        /// 将人员在空间上定义为零维点、一维线、二维面或三维体
+        /// <para>/ / WKT / POLYGON（(-646.99 676.18, -645.14 683.09, -)）</para>
+        /// </remarks>
         [JsonIgnore]
         public SpatialDefinition SpatialDefinition { get; set; }
-
-
-        public string? Description { get; set; }
+        /// <summary>
+        /// 适配操作位置
+        /// </summary>
+        /// <remarks>
+        /// <para>与操作位置的可选关系</para>
+        /// <para>非标准规范要求</para>
+        /// </remarks>
+        [JsonIgnore]
+        public virtual PersonOperationalLocationRelRelationship OperationalLocationRel { get; set; }
+        /// <summary>
+        /// 操作位置
+        /// </summary>
+        /// <remarks>
+        /// 标识人员的操作位置
+        /// </remarks>
+        public string? OperationalLocation
+        {
+            get => operationalLocation; set
+            {
+                if (this.OperationalLocationType.HasValue
+                    && this.OperationalLocationType.Value == PersonOperationalLocationType.operationalLocation
+                    && string.IsNullOrWhiteSpace(value))
+                    throw new Exception("人员操作位置不明确");
+                operationalLocation = value;
+            }
+        }
+        /// <summary>
+        /// 操作位置类型
+        /// </summary>
+        /// <remarks>
+        /// 标识操作位置属性引用的是操作位置对象还是包含位置描述。当指定操作位置属性时必填
+        /// </remarks>
+        public PersonOperationalLocationType? OperationalLocationType { get; set; }
 
         /// <summary>
         /// 性别
@@ -98,7 +140,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// 账号锁定时间
         /// </summary>
         public DateTime? LockoutDateTime { get; set; }
-
+        /// <summary>
+        /// 密码
+        /// </summary>
         public string PassWord { get; set; } = string.Empty;
 
         /// <summary>
@@ -116,7 +160,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </summary>
         public virtual List<AvailablePermission> AvailablePermissions { get; set; } = new();
 
-        public Person(string Id, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null) : this()
+        public Person(string Id, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null)
         {
             this.Id = Id;
             this.WorkStatus = workStatus;
@@ -231,37 +275,43 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             }
         }
 
-        public void Delete()
+        /// <inheritdoc/>
+        public override void Delete()
         {
-            this.IsDelete = true;
+           base.Delete();
         }
 
-
+        /// <inheritdoc/>
         public override bool Equals(object? obj)
         {
             return Equals(obj as Person);
         }
 
+        /// <inheritdoc/>
         public bool Equals(Person? other)
         {
             return other is not null && base.Equals(other) && HierarchyScope == other.HierarchyScope && Name == other.Name && OperationalLocation == other.OperationalLocation && OperationalLocationType == other.OperationalLocationType;
         }
 
+        /// <inheritdoc/>
         public static bool operator ==(Person? left, Person? right)
         {
             return EqualityComparer<Person?>.Default.Equals(left, right);
         }
 
+        /// <inheritdoc/>
         public static bool operator !=(Person? left, Person? right)
         {
             return !(left == right);
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return this.CustomHash(base.GetHashCode(), HierarchyScope?.GetHashCode(), Name?.GetHashCode(), OperationalLocation?.GetHashCode(), OperationalLocationType?.GetHashCode());
         }
 
+        /// <inheritdoc/>
         public List<string> GetDefinedBy()
         {
             return this.DefinedBy.Select(m => m.Target.Id).ToList();

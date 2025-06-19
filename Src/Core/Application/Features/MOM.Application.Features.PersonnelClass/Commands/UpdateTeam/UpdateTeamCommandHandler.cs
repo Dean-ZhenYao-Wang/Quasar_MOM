@@ -30,9 +30,9 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdateTeam
             }
             else
             {
-                if (request.SourceDtId != null)
+                if (request.SourceDtId.HasValue)
                 {
-                    await personnelClassIncludesPropertiesOfRelationshipRepository.AddAsync(new Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship(request.SourceDtId, request.DtId));
+                    await personnelClassIncludesPropertiesOfRelationshipRepository.AddAsync(new Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship(request.SourceDtId.Value, request.DtId));
                 }
             }
 

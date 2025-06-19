@@ -62,6 +62,11 @@
             默认为true
             </summary>
         </member>
+        <member name="M:MOM.Domain.CodingRule.CodingRule.Delete">
+            <summary>
+            软删除，会同时软删除编码段
+            </summary>
+        </member>
         <member name="T:MOM.Domain.CodingRule.CodingSegment">
             <summary>
             编码段配置类
@@ -126,9 +131,44 @@
             默认为true（左填充）
             </summary>
         </member>
+        <member name="P:MOM.Domain.CodingRule.CodingSegment.RuleDtId">
+            <summary>
+            关联的编码配置规则数据库唯一标识
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.CodingSegment.Rule">
+            <summary>
+            关联的编码配置规则
+            </summary>
+        </member>
         <member name="T:MOM.Domain.CodingRule.SequenceState">
             <summary>
             序列状态
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.SequenceState.Id">
+            <summary>
+            自增主键
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.SequenceState.ModelTypeName">
+            <summary>
+            模型类型
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.SequenceState.SequenceName">
+            <summary>
+            序列名称
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.CodingRule.SequenceState.CurrentValue">
+            <summary>
+            当前序列值
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.BaseEntity">
+            <summary>
+            模型的抽象基类
             </summary>
         </member>
         <member name="P:MOM.Domain.Common.BaseEntity.DtId">
@@ -138,61 +178,49 @@
         </member>
         <member name="P:MOM.Domain.Common.BaseEntity.Id">
             <summary>
-            名称
+            编号
             对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
             </summary>
         </member>
+        <member name="P:MOM.Domain.Common.BaseEntity.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BaseEntity.CreatedBy">
+            <summary>
+            创建者数据库唯一标识
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BaseEntity.Created">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BaseEntity.LastModifiedBy">
+            <summary>
+            最后修改者数据库唯一标识
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BaseEntity.LastModified">
+            <summary>
+            最后修改时间
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BaseEntity.IsDelete">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.BaseEntity.Delete">
+            <summary>
+            软删除
+            </summary>
+        </member>
         <member name="T:MOM.Domain.Common.BasicRelationship">
-             <summary>
-             虽然关系可以自定义架构，但所有关系实例都应包含以下基础属性。该基类可确保自定义关系具备必要的基础属性。
-             </summary>
-             <remarks>
-             <para>
-             此辅助类仅适用于 <see cref="N:System.Text.Json"/> 序列化库。当与 <see cref="!:Azure.Core.Serialization.ObjectSerializer"/>
-             （通过 <see cref="!:DigitalTwinsClientOptions"/> 参数传入）一起使用时，仅支持默认的 <see cref="!:Azure.Core.Serialization.JsonObjectSerializer"/>。
-             </para>
-             <para>
-             更多示例请参考 <see href="https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/digitaltwins/Azure.DigitalTwins.Core/samples">官方代码库示例</see>。
-             </para>
-             </remarks>
-             <example>
-             以下示例演示如何使用 BasicRelationship 类序列化并创建楼宇数字孪生到楼层数字孪生的关系：
-            
-             <code snippet="Snippet:DigitalTwinsSampleCreateBasicRelationship" language="csharp">
-             var buildingFloorRelationshipPayload = new BasicRelationship
-             {
-                 Id = &quot;buildingFloorRelationshipId&quot;,
-                 SourceId = &quot;buildingTwinId&quot;,
-                 TargetId = &quot;floorTwinId&quot;,
-                 Name = &quot;contains&quot;,
-                 Properties =
-                 {
-                     { &quot;Prop1&quot;, &quot;Prop1 value&quot; },
-                     { &quot;Prop2&quot;, 6 }
-                 }
-             };
-            
-             Response&lt;BasicRelationship&gt; createBuildingFloorRelationshipResponse = await client
-                 .CreateOrReplaceRelationshipAsync&lt;BasicRelationship&gt;(&quot;buildingTwinId&quot;, &quot;buildingFloorRelationshipId&quot;, buildingFloorRelationshipPayload);
-             Console.WriteLine($&quot;Created a digital twin relationship &apos;{createBuildingFloorRelationshipResponse.Value.Id}&apos; &quot; +
-                 $&quot;from twin &apos;{createBuildingFloorRelationshipResponse.Value.SourceId}&apos; to twin &apos;{createBuildingFloorRelationshipResponse.Value.TargetId}&apos;.&quot;);
-             </code>
-            
-             以下示例演示如何使用 BasicRelationship 类获取并反序列化关系：
-            
-             <code snippet="Snippet:DigitalTwinsSampleGetBasicRelationship" language="csharp">
-             Response&lt;BasicRelationship&gt; getBasicRelationshipResponse = await client.GetRelationshipAsync&lt;BasicRelationship&gt;(
-                 &quot;buildingTwinId&quot;,
-                 &quot;buildingFloorRelationshipId&quot;);
-             if (getBasicRelationshipResponse.GetRawResponse().Status == (int)HttpStatusCode.OK)
-             {
-                 BasicRelationship basicRelationship = getBasicRelationshipResponse.Value;
-                 Console.WriteLine($&quot;Retrieved relationship &apos;{basicRelationship.Id}&apos; from twin {basicRelationship.SourceId}.\n\t&quot; +
-                     $&quot;Prop1: {basicRelationship.Properties[&quot;Prop1&quot;]}\n\t&quot; +
-                     $&quot;Prop2: {basicRelationship.Properties[&quot;Prop2&quot;]}&quot;);
-             }
-             </code>
-             </example>
+            <summary>
+            虽然关系可以自定义架构，但所有关系实例都应包含以下基础属性。该基类可确保自定义关系具备必要的基础属性。
+            </summary>
         </member>
         <member name="P:MOM.Domain.Common.BasicRelationship.DtId">
             <summary>
@@ -201,8 +229,33 @@
         </member>
         <member name="P:MOM.Domain.Common.BasicRelationship.Id">
             <summary>
-            名称/编号/标题等
             对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
+            <para>由SourceID-TargetId拼接而成</para>
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BasicRelationship.CreatedBy">
+            <summary>
+            创建者数据库唯一标识
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BasicRelationship.Created">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BasicRelationship.LastModifiedBy">
+            <summary>
+            最后修改者数据库唯一标识
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BasicRelationship.LastModified">
+            <summary>
+            最后修改时间
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.BasicRelationship.IsDelete">
+            <summary>
+            是否删除
             </summary>
         </member>
         <member name="P:MOM.Domain.Common.BasicRelationship.TargetId">
@@ -686,6 +739,30 @@
             离职
             </summary>
         </member>
+        <member name="T:MOM.Domain.Common.EnumType.PhysicalAssetPhysicalLocationType">
+            <summary>
+            物理位置类型
+            </summary>
+            <remarks>
+            标识物理位置属性引用的是操作位置对象还是包含位置描述
+            </remarks>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.PhysicalAssetPhysicalLocationType.operationalLocation">
+            <summary>
+            操作位置
+            </summary>
+            <remarks>
+            物理位置属性引用操作位置对象
+            </remarks>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.PhysicalAssetPhysicalLocationType.description">
+            <summary>
+            描述
+            </summary>
+            <remarks>
+            物理位置属性包含位置描述（如街道地址）
+            </remarks>
+        </member>
         <member name="T:MOM.Domain.Common.EnumType.ResourceClassPropertyPropertyType">
             <summary>
             属性的类型
@@ -708,14 +785,19 @@
         </member>
         <member name="T:MOM.Domain.Common.Relationship`2">
             <summary>
-            用于实现DTDL模型特定关系的抽象基类
+            用于实现模型特定关系的抽象基类
             </summary>
             <typeparam name="TSource">父级，需要继承自BaseEntity</typeparam>
             <typeparam name="TTarget">子级，需要继承自BaseEntity</typeparam>
         </member>
         <member name="P:MOM.Domain.Common.Relationship`2.Target">
             <summary>
-            获取或设置关系的目标数字孪生
+            获取或设置关系的目标对象
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.Relationship`2.Source">
+            <summary>
+            获取或设置关系的源对象
             </summary>
         </member>
         <member name="M:MOM.Domain.Common.Relationship`2.Equals(MOM.Domain.Common.BasicRelationship)">
@@ -728,19 +810,55 @@
             <param name="source">作为关系来源的数字孪生</param>
             <param name="target">作为关系目标的数字孪生</param>
         </member>
-        <member name="M:MOM.Domain.Common.Relationship`2.InitializeFromTwins(System.Nullable{System.Guid},System.Guid)">
+        <member name="M:MOM.Domain.Common.Relationship`2.InitializeFromTwins(System.Guid,System.Guid)">
             <summary>
             根据源数字孪生ID和目标数字孪生ID初始化关系属性
             </summary>
             <param name="sourceDtId">源数字孪生唯一标识符</param>
             <param name="targetDtId">目标数字孪生唯一标识符</param>
         </member>
-        <member name="M:MOM.Domain.Common.Relationship`2.InitializeFromTwins(System.Nullable{System.Guid},System.Guid,System.Int32)">
+        <member name="M:MOM.Domain.Common.Relationship`2.InitializeFromTwins(System.Guid,System.Guid,System.Int32)">
             <summary>
             根据源数字孪生ID和目标数字孪生ID初始化关系属性
             </summary>
             <param name="sourceDtId">源数字孪生唯一标识符</param>
             <param name="targetDtId">目标数字孪生唯一标识符</param>
+            <param name="depth">深度</param>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship`2.#ctor">
+            <summary>
+            无参构造函数
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship`2.#ctor(`0,`1)">
+            <summary>
+            根据源数字孪生和目标数字孪生初始化关系属性
+            </summary>
+            <param name="source">作为关系来源的数字孪生</param>
+            <param name="target">作为关系目标的数字孪生</param>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship`2.#ctor(System.Guid,System.Guid)">
+            <summary>
+            根据源数字孪生ID和目标数字孪生ID初始化关系属性
+            </summary>
+            <param name="sourceId">源数字孪生唯一标识符</param>
+            <param name="targetId">目标数字孪生唯一标识符</param>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship`2.#ctor(System.Guid,System.Guid,System.Int32)">
+            <summary>
+            根据源数字孪生ID和目标数字孪生ID初始化关系属性
+            </summary>
+            <param name="sourceDtId">源数字孪生唯一标识符</param>
+            <param name="targetDtId">目标数字孪生唯一标识符</param>
+            <param name="depth">深度</param>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship`2.#ctor(System.Guid,`1,System.Int32)">
+            <summary>
+            根据源数字孪生ID和目标数字孪生ID初始化关系属性
+            </summary>
+            <param name="sourceId">源数字孪生唯一标识符</param>
+            <param name="target">目标数字孪生唯一标识符</param>
+            <param name="depth">深度</param>
         </member>
         <member name="T:MOM.Domain.Common.RelationshipEqualityComparer">
             <summary>
@@ -751,6 +869,1086 @@
             <inheritdoc/>
         </member>
         <member name="M:MOM.Domain.Common.RelationshipEqualityComparer.GetHashCode(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.Equals(MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.Equals(MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.Equals(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.Equals(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.Equals(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship,MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship,MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.Equals(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship,MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship,MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.Equals(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.HierarchyScope,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.Equals(MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship,MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship,MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.Equals(MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.Equals(MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.Equals(MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.Equals(MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass,MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.Equals(MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship,MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship,MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.Equals(MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship,MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship,MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
+            <summary>
+            
+            </summary>
+            <param name="sourceId"></param>
+            <param name="targetId"></param>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship,MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship,MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.Equals(MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.Equals(MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.Equals(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.Equals(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.#ctor(System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship,MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.SourceValueAttribute">
@@ -771,12 +1969,56 @@
         </member>
         <member name="T:MOM.Domain.isa95.CommonObjectModels.HierarchyScope">
             <summary>
+            层次范围
+            </summary>
+            <remarks>
+            层次范围标识交换信息在基于角色的设备层次结构中的位置。它定义交换信息的范围（如ISA-95标准中的站点或区域），并标识角色设备层次中的关联实例。
+            </remarks>
+            <summary>
             设备角色层次结构，逻辑工厂结构
             </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.EquipmentID">
+            <summary>
+            设备ID
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.EquipmentLevel">
+            <summary>
+            设备层级
+            </summary>
+            <remarks>
+            基于角色的设备层次结构中的层级标识
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Contains">
+            <summary>
+            包含的子级
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Equals(MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.op_Equality(MOM.Domain.isa95.CommonObjectModels.HierarchyScope,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.op_Inequality(MOM.Domain.isa95.CommonObjectModels.HierarchyScope,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.GetHashCode">
+            <inheritdoc/>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.FullPath">
             <summary>
             路径
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Description">
+            <summary>
+            说明
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.ResponsibleDtId">
@@ -787,6 +2029,11 @@
         <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Responsible">
             <summary>
             负责人
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.ResponsibleName">
+            <summary>
+            负责人姓名
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Active">
@@ -820,46 +2067,314 @@
             父级唯一标识
             </summary>
         </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Source">
+            <summary>
+            父级
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.#ctor(MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel,System.String,System.String,System.String,System.Boolean,System.String,System.Nullable{System.Guid})">
+            <summary>
+            
+            </summary>
+            <param name="equipmentLevel"></param>
+            <param name="Id"></param>
+            <param name="name"></param>
+            <param name="address"></param>
+            <param name="active"></param>
+            <param name="description"></param>
+            <param name="sourceDtId"></param>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Delete">
+            <summary>
+            软删除，存在子级，无法删除
+            </summary>
+            <exception cref="T:System.MethodAccessException"></exception>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.ForcedDeletion">
+            <summary>
+            强制删除
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.ForcedDeletionContainTargets">
+            <summary>
+            强制删除关联的子级
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Update(MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
+            <summary>
+            更新
+            </summary>
+            <param name="hierarchyScope"></param>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.HierarchyScopeHelper">
+            <summary>
+            设备角色层次辅助类
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScopeHelper.ContainsIsAddTarget(MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel,MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel)">
+            <summary>
+            判断指定父级是否能够增加指定子级
+            todo
+            </summary>
+            <param name="sourceEquipmentLevel">父设备层次</param>
+            <param name="targetEquipment">子设备层次</param>
+            <exception cref="T:System.MethodAccessException"></exception>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation">
+            <summary>
+            操作位置
+            </summary>
+            <remarks>
+            <para>物料批次、物料子批次、设备、物理资产或人员所处或预期所处的逻辑或物理位置应表示为操作位置。</para>
+            <para>操作位置可由其他操作位置组成</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.DefinedBy">
+            <summary>
+            此操作位置所属的操作位置类别
+            </summary>
+            <remarks>
+            关系类型：关联
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.HasValuesOf">
+            <summary>
+            此操作位置的属性值
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.IsMadeUpOf">
+            <summary>
+            由...组成
+            </summary>
+            <remarks>
+            包含在此操作位置中的子操作位置
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.Description">
+            <summary>
+            描述
+            </summary>
+            <remarks>
+            包含操作位置的补充信息和描述
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.SpatialDefinition">
             <summary>
             在空间上将设备定义为零维点、一维线、二维形状或三维实体。
             </summary>
         </member>
-        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HierarchyScope">
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.Equals(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.op_Equality(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.op_Inequality(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass">
             <summary>
-            所属设备角色层次/所属组织
+            操作位置类别
+            </summary>
+            <remarks>
+            <para>表示具有相似特性的操作位置分组，用于特定目的（如制造运营定义、调度、能力和性能），应表示为操作位置类别。</para>
+            <para>任何操作位置可以是零个或多个操作位置类别的成员</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.IncludesPropertiesOf">
+            <summary>
+            包含...的属性
+            </summary>
+            <remarks>
+            此操作位置类别包含目标操作位置类别的属性
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.IsMadeUpOf">
+            <summary>
+            由...组成
+            </summary>
+            <remarks>
+            此父操作位置类别作为整体，由子操作位置类别作为组成部分
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.Property">
+            <summary>
+            此操作位置类别具有的属性
             </summary>
         </member>
-        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.OperationalLocation">
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.Description">
             <summary>
-            当前操作位置
+            描述
             </summary>
+            <remarks>
+            操作位置类别的补充信息
+            </remarks>
         </member>
-        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.OperationalLocationType">
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.HierarchyScopeRelDtId">
             <summary>
-            当前操作位置类型
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.Equals(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.op_Equality(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.op_Inequality(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass,MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person">
+            <summary>
+            人员
+            </summary>
+            <remarks>
+            <para>特定识别个体的表示应作为人员呈现。</para>
+            <para>人员可以是零个或多个人员类别的成员。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.DefinedBy">
+            <summary>
+            此人员支持的人员类别。该人员支持与人员类别关联的属性
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Property">
             <summary>
-            定制属性
+            此人员的属性值
             </summary>
         </member>
-        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HierarchyScopeRel">
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Description">
             <summary>
-            确定交换的信息在基于角色的设备层次结构中的位置。可选地，层次结构作用域定义人员定义的作用域。
+            描述。资源的补充信息
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HierarchyScopeRelDtId">
             <summary>
-            确定交换的信息在基于角色的设备层次结构中的位置。可选地，层次结构作用域定义人员定义的作用域。
+            层级范围
             </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.SpatialDefinition">
             <summary>
-            在空间上将人物角色定义为零维点、一维线、二维形状或三维实体<br/>
-            / / WKT / POLYGON（(-646.99 676.18, -645.14 683.09, -)）
+            空间定义
             </summary>
+            <remarks>
+            将人员在空间上定义为零维点、一维线、二维面或三维体
+            <para>/ / WKT / POLYGON（(-646.99 676.18, -645.14 683.09, -)）</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.OperationalLocationRel">
+            <summary>
+            适配操作位置
+            </summary>
+            <remarks>
+            <para>与操作位置的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.OperationalLocation">
+            <summary>
+            操作位置
+            </summary>
+            <remarks>
+            标识人员的操作位置
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.OperationalLocationType">
+            <summary>
+            操作位置类型
+            </summary>
+            <remarks>
+            标识操作位置属性引用的是操作位置对象还是包含位置描述。当指定操作位置属性时必填
+            </remarks>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Gender">
             <summary>
@@ -889,6 +2404,11 @@
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.LockoutDateTime">
             <summary>
             账号锁定时间
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.PassWord">
+            <summary>
+            密码
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.FailedCount">
@@ -932,15 +2452,81 @@
             <param name="targetDtIds">要绑定的人员类唯一标识清单</param>
             <param name="type">要绑定的人员类分类</param>
         </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Delete">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Equals(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.op_Equality(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.op_Inequality(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.GetDefinedBy">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass">
+            <summary>
+            人员类别
+            </summary>
+            <remarks>
+            <para>表示具有相似特性的人员分组，用于特定目的（如制造运营定义、调度、能力和性能），应表示为人员类别。</para>
+            <para>任何人员可能是零个或多个人员类别的成员。</para>
+            <para>人员类别可定义为零个或多个人员类别的特化。</para>
+            <para>人员类别可由零个或多个人员类别组成</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.IncludesPropertiesOf">
+            <summary>
+            此人员类别包含目标人员类别的属性
+            </summary>
+        </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Property">
             <summary>
-            扩展属性
+            此人员类别具有的人员类别属性
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Description">
             <summary>
-            说明-系统内部做业务区分使用的
+            人员类别的补充信息和描述
             </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Remark">
             <summary>
@@ -957,41 +2543,121 @@
             负责人
             </summary>
         </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Permissions">
+            <summary>
+            权限清单，可访问的菜单按钮清单
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.Equals(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.op_Equality(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass,MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.op_Inequality(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass,MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.GetHaveChildClassDtIdList">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.IncludesPropertiesOfAddTarget(System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.IncludesPropertiesOfRemoveTargets(System.Collections.Generic.IEnumerable{System.Guid})">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass.IncludesPropertiesOfAddTarget(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass)">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment">
+            <summary>
+            设备
+            </summary>
+            <remarks>
+            <para>ISA-95.00.01标准中设备层级模型的元素应表示为设备。</para>
+            <para>设备可以是以下任何层级的实例：企业、厂区、区域、工作中心、工作单元、处理单元、单元、生产线、生产单元、工作单元、存储区域和存储单元</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.EquipmentLevel">
+            <summary>
+            设备层级
+            </summary>
+            <remarks>
+            基于角色的设备层级中的级别标识
+            </remarks>
+        </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.DefinedBy">
             <summary>
             所属设备类清单
+            <para>此设备支持的设备类别</para>
             </summary>
+            <remarks>
+            关系类型：关联
+            </remarks>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Property">
             <summary>
-            扩展属性
+            此设备的属性值
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.IsMadeUpOf">
             <summary>
-            这个父设备是子设备的整体。<br/>
-            组成关系
+            相关对象作为整体构成此设备的一部分
+            <para>组成关系</para>
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.ImplementedBy">
             <summary>
             对应的实物资产<br/>
-            该设备在工艺段中的作用是由实物资产实现的。
+            此设备在流程段中的角色由物理资产实现
             </summary>
+            <remarks>
+            用于设备资产映射
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Description">
+            <summary>
+            设备的补充信息
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.HierarchyScope">
             <summary>
-            所属设备角色层次/所属组织
+            层级范围
             </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.SpatialDefinition">
             <summary>
             空间定义
-            </summary>
-        </member>
-        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Number">
-            <summary>
-            编号
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Specification">
@@ -1079,10 +2745,121 @@
             保修期
             </summary>
         </member>
-        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.EquipmentLevel">
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.Equals(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.op_Equality(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.op_Inequality(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping">
             <summary>
-            在基于角色的装备层次中级别的标识
+            设备资产映射
             </summary>
+            <remarks>
+            <para>物理资产与设备之间的关系应表示为设备资产映射</para>
+            <para>该映射记录设备对象与物理资产对象关联的时间段</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.RecordsUseOfEquipment">
+            <summary>
+            执行制造功能的设备
+            </summary>
+            <remarks>
+            记录使用的
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.RecordsUseOfPhysicalAsset">
+            <summary>
+            与设备关联的物理资产（当物理资产与制造功能相关时）
+            </summary>
+            <remarks>
+            记录使用的
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.Description">
+            <summary>
+            映射元素的补充信息
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.StartTime">
+            <summary>
+            起始时间
+            </summary>
+            <remarks>
+            关联关系的开始时间
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.EndTime">
+            <summary>
+            结束时间
+            </summary>
+            <remarks>
+            关联关系的结束时间
+            </remarks>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.Equals(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.op_Equality(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.op_Inequality(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass">
+            <summary>
+            设备类别
+            </summary>
+            <remarks>
+            <para>表示具有相似特性的设备分组，用于特定目的（如制造运营定义、调度、能力和性能），应表示为设备类别。</para>
+            <para>任何设备可能是零个或多个设备类别的成员。</para>
+            <para>设备类别可定义为零个或多个设备类别的特化。</para>
+            <para>设备类别可由零个或多个设备类别组成</para>
+            </remarks>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.IncludesPropertiesOf">
             <summary>
@@ -1092,6 +2869,10 @@
             设备->主要设备->乙类设备<br/>
             设备->产线->罐装产线
             </summary>
+            <remarks>
+            包含...的属性
+            <para>此设备类别包含目标设备类别的属性</para>
+            </remarks>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.IsMadeUpOf">
             <summary>
@@ -1101,21 +2882,368 @@
             罐装产线->B类设备<br/>
             A类设备与B类设备共同组成罐装产线
             </summary>
+            <remarks>
+            由...组成
+            <para>此父设备类别作为整体，由子设备类别作为组成部分</para>
+            </remarks>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.Property">
             <summary>
-            扩展属性
+            具有的属性
             </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.Description">
+            <summary>
+            描述
+            </summary>
+            <remarks>
+            设备类别的补充信息
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.EquipmentLevel">
+            <summary>
+            设备层级
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.UpdateIncludesPropertiesOf(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            更新子分类
+            </summary>
+            <param name="childClassDtId"></param>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.UpdateIsMadeUpOf(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            更新当前设备类的组成部分
+            </summary>
+            <param name="childClassDtId"></param>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.Update(System.String,System.String,System.Nullable{MOM.Domain.Common.EnumType.EquipmentClassEquipmentLevel})">
+            <summary>
+            更新当前设备类
+            </summary>
+            <param name="iD"></param>
+            <param name="description"></param>
+            <param name="equipmentLevel"></param>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.Delete">
+            <summary>
+            软删除当前设备类
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.Equals(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.op_Equality(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.op_Inequality(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset">
+            <summary>
+            物理资产
+            </summary>
+            <remarks>
+            物理设备应表示为物理资产
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.FixedAssetID">
+            <summary>
+            固定资产ID
+            </summary>
+            <remarks>
+            包含法律或法规要求的财务追踪唯一标识
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.VendorID">
+            <summary>
+            供应商ID
+            </summary>
+            <remarks>
+            包含供应商序列号
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.SpatialDefinition">
+            <summary>
+            空间定义
+            </summary>
+            <remarks>
+            将物理资产在空间上定义为零维点、一维线、二维面或三维体
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.DefinedBy">
+            <summary>
+            由...定义
+            </summary>
+            <remarks>
+            此物理资产支持的物理资产类别。该物理资产支持与物理资产类别关联的属性
+            <para>关系类型：关联</para>
+            </remarks>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.Property">
             <summary>
-            扩展属性
+            此物理资产的属性值
             </summary>
         </member>
-        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.HasPropertiesOf">
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.IsMadeUpOf">
+            <summary>
+            由...组成
+            </summary>
+            <remarks>
+            相关对象作为整体构成此物理资产的一部分
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.Description">
+            <summary>
+            描述
+            </summary>
+            <remarks>
+            物理资产的补充信息
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.PhysicalLocation">
+            <summary>
+            物理位置
+            </summary>
+            <remarks>
+            包含物理位置信息（如地址或坐标）
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.PhysicalLocationRel">
+            <summary>
+            适配物理位置
+            </summary>
+            <remarks>
+            <para>与物理位置的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.PhysicalLocationType">
+            <summary>
+            物理位置类型
+            </summary>
+            <remarks>
+            标识物理位置属性引用的是操作位置对象还是包含位置描述
+            </remarks>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.Equals(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.op_Equality(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.op_Inequality(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass">
+            <summary>
+            物理资产类
+            </summary>
+            <remarks>
+            <para>物理资产类表示具有相似特征的物理资产分组，用于维修和替换目的。</para>
+            <para>任何物理资产都属于一个物理资产类。</para>
+            <para>物理资产类可定义为零个或多个物理资产类的特化，也可由零个或多个物理资产类组成。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.Manufacturer">
+            <summary>
+            物理资产制造商的唯一标识符
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.IncludesPropertiesOf">
+            <summary>
+            表示当前物理资产类包含其他物理资产类的属性（属性继承）(包含关系)
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.IsMadeUpOf">
+            <summary>
+            表示父物理资产类由子物理资产类作为组成部分（组合关系）
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.Property">
             <summary>
             扩展属性
             </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.Description">
+            <summary>
+            物理资产类的附加描述信息
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.HierarchyScopeRelDtId">
+            <summary>
+            标识在基于角色的设备层次结构中的位置
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.HierarchyScope">
+            <summary>
+            标识在基于角色的设备层次结构中的位置
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.HierarchyScopeRel">
+            <summary>
+            关联物理资产类在设备层次结构中的具体范围定义
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.Equals(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.op_Equality(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.op_Inequality(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass.Delete">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClassProperty">
+            <summary>
+            物理资产类属性
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetProperty">
+            <summary>
+            物理资产属性
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.Resource">
+            <summary>
+            资源
+            </summary>
+            <remarks>
+            所有资源模型的抽象基类（包括人员、设备、物理资产、物料定义、物料批次、物料子批、工作指令、过程段、操作定义、操作位置、操作段、测试规范、测试结果）
+            </remarks>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Resource.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Resource.Equals(MOM.Domain.isa95.CommonObjectModels.Resource)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Resource.op_Equality(MOM.Domain.isa95.CommonObjectModels.Resource,MOM.Domain.isa95.CommonObjectModels.Resource)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Resource.op_Inequality(MOM.Domain.isa95.CommonObjectModels.Resource,MOM.Domain.isa95.CommonObjectModels.Resource)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Resource.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.ResourceClass">
+            <summary>
+            资源类
+            </summary>
+            <remarks>
+            所有资源类模型（人员类、设备类、物理资产类、物料类）的抽象模型
+            </remarks>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.ResourceClass.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.ResourceClass.Equals(MOM.Domain.isa95.CommonObjectModels.ResourceClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.ResourceClass.op_Equality(MOM.Domain.isa95.CommonObjectModels.ResourceClass,MOM.Domain.isa95.CommonObjectModels.ResourceClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.ResourceClass.op_Inequality(MOM.Domain.isa95.CommonObjectModels.ResourceClass,MOM.Domain.isa95.CommonObjectModels.ResourceClass)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.ResourceClass.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.ResourceClassProperty">
+            <summary>
+            资源类属性
+            </summary>
+            <remarks>
+            所有资源类属性模型（人员类、设备类、物理资产类、物料类）的抽象模型
+            </remarks>
+        </member>
+        <member name="T:MOM.Domain.isa95.CommonObjectModels.ResourceProperty">
+            <summary>
+            资源属性
+            </summary>
+            <remarks>
+            所有资源属性模型（人员、设备、物理资产、物料定义、物料批次、物料批次子批、工作指令、过程段、操作定义、操作位置、操作段、测试规范、测试结果）的抽象模型
+            </remarks>
         </member>
         <member name="T:MOM.Domain.isa95.CommonObjectModels.SpatialDefinition">
             <summary>
@@ -1130,7 +3258,7 @@
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.SpatialDefinition.Format">
             <summary>
-            确定value属性格式的枚举数。例如GPX， WKT，…
+            确定 value 属性格式的枚举数。例如GPX， WKT，…
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.SpatialDefinition.SRID">
@@ -1138,7 +3266,7 @@
             SRID是空间参考标识符（Spatial Reference Identifier），它通过识别坐标参考系统来识别一个预定义的坐标。
             </summary>
         </member>
-        <member name="P:MOM.Domain.isa95.CommonObjectModels.SpatialDefinition.SRIDauthority">
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.SpatialDefinition.SRIAuthority">
             <summary>
             SRID授权机构标识定义SRID标识的坐标参考系的授权机构。
             </summary>
@@ -1146,6 +3274,11 @@
         <member name="T:MOM.Domain.Permission.AvailablePermission">
             <summary>
             针对个人的权限,可以是对菜单的限制,也可以是对按钮的限制
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.AvailablePermission.DtId">
+            <summary>
+            数据库主键
             </summary>
         </member>
         <member name="P:MOM.Domain.Permission.AvailablePermission.MenuButtonId">
@@ -1163,6 +3296,54 @@
             具有此权限的人的数据库唯一Key
             </summary>
         </member>
+        <member name="P:MOM.Domain.Permission.AvailablePermission.Person">
+            <summary>
+            具有此权限的人
+            </summary>
+        </member>
+        <member name="T:MOM.Domain.Permission.Button">
+            <summary>
+            按钮
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Button.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Button.MenuDtId">
+            <summary>
+            关联的菜单主键
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Permission.Button.Update(System.String,System.String,System.String)">
+            <summary>
+            修改
+            </summary>
+            <param name="id">编号</param>
+            <param name="name">名称</param>
+            <param name="icon">图标</param>
+        </member>
+        <member name="T:MOM.Domain.Permission.Menu">
+            <summary>
+            菜单
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Menu.Path">
+            <summary>
+            前端路径
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Menu.Description">
+            <summary>
+            说明
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Menu.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
         <member name="P:MOM.Domain.Permission.Menu.Hidden">
             <summary>
             是否隐藏菜单
@@ -1173,19 +3354,92 @@
             是否总是显示
             </summary>
         </member>
+        <member name="P:MOM.Domain.Permission.Menu.Children">
+            <summary>
+            子级菜单列表
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Menu.Buttons">
+            <summary>
+            当前页面拥有的按钮清单
+            </summary>
+        </member>
         <member name="P:MOM.Domain.Permission.Menu.Depth">
             <summary>
             第几层的菜单
             </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Menu.ParentMenuDtId">
+            <summary>
+            父级菜单的主键
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.Menu.ParentMenu">
+            <summary>
+            父级菜单
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Permission.Menu.Update(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            修改
+            </summary>
+            <param name="id">编号</param>
+            <param name="name">名称</param>
+            <param name="path">前端路径</param>
+            <param name="description">说明</param>
+            <param name="icon">图标</param>
+            <param name="hidden">是否隐藏菜单</param>
+            <param name="alwaysShow">是否总是显示</param>
+            <param name="depth">第几层的菜单</param>
         </member>
         <member name="T:MOM.Domain.Permission.OrgPermission">
             <summary>
             组织的权限,可以是对菜单的限制,也可以是对按钮的限制
             </summary>
         </member>
+        <member name="P:MOM.Domain.Permission.OrgPermission.DtId">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.OrgPermission.MenuButtonId">
+            <summary>
+            菜单或按钮的编号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.OrgPermission.OrgDtId">
+            <summary>
+            组织的主键
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.OrgPermission.Org">
+            <summary>
+            组织
+            </summary>
+        </member>
         <member name="T:MOM.Domain.Permission.PersonnelClassPermission">
             <summary>
-            职位的权限,可以是对菜单的限制,也可以是对按钮的限制
+            人员类的权限,可以是对菜单的限制,也可以是对按钮的限制
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.PersonnelClassPermission.DtId">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.PersonnelClassPermission.MenuButtonId">
+            <summary>
+            菜单或按钮的编号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.PersonnelClassPermission.PersonnelClassDtId">
+            <summary>
+            人员类的主键
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Permission.PersonnelClassPermission.PersonnelClass">
+            <summary>
+            人员类
             </summary>
         </member>
     </members>

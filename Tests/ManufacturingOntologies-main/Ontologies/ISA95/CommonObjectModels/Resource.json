@@ -1,10 +1,11 @@
 {
-    "@context": "dtmi:dtdl:context;2",
-    "@id": "dtmi:digitaltwins:isa95:Resource;1",
-    "@type": "Interface",
-    "displayName": "Resource",
-    "description": "Abstract model for all resource models (person, equipment, physical asset, material definition, material lot, material sublot, work master, process segment, operation definition, operational location, operations segment, test specification, test result)",
-    "extends": [
-        "dtmi:digitaltwins:isa95:BaseModel;1"
+    "@context": "dtmi:dtdl:context;2",  // DTDL上下文规范版本2
+    "@id": "dtmi:digitaltwins:isa95:Resource;1",  // 接口唯一标识符
+    "@type": "Interface",  // 类型定义为接口
+    "displayName": "Resource",  // 【显示名称】资源
+    "description": "Abstract model for all resource models (person, equipment, physical asset, material definition, material lot, material sublot, work master, process segment, operation definition, operational location, operations segment, test specification, test result)",  
+	// 【描述】所有资源模型的抽象基类（包括人员、设备、物理资产、物料定义、物料批次、物料子批、工作指令、过程段、操作定义、操作位置、操作段、测试规范、测试结果）
+    "extends": [  // 【继承关系】
+        "dtmi:digitaltwins:isa95:BaseModel;1"  // 继承基础模型
     ]
 }

@@ -14,8 +14,8 @@ namespace MOM.Application.Features.PersonnelClass.Commands.AddTeam
             Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass addClass = request.ToPersonnelClass("班组");
 
             await personnelClassRepository.AddAsync(addClass);
-
-            await personnelClassIncludesPropertiesOfRelationshipRepository.AddAsync(new Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship(request.SourceDtId, addClass.DtId));
+            if (request.SourceDtId.HasValue)
+                await personnelClassIncludesPropertiesOfRelationshipRepository.AddAsync(new Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship(request.SourceDtId.Value, addClass.DtId));
 
             await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();

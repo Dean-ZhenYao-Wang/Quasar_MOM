@@ -2,9 +2,9 @@
     "@context": "dtmi:dtdl:context;2",
     "@id": "dtmi:digitaltwins:isa95:PhysicalAsset;1",
     "@type": "Interface",
-    "displayName": "Physical Asset",
-    "description": "A physical piece of equipment shall be presented as a physical asset.",
-    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",
+    "displayName": "Physical Asset // 物理资产",
+    "description": "A physical piece of equipment shall be presented as a physical asset. // 物理设备应表示为物理资产",
+    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018 // 依据ANSI/ISA-95.00.02-2018标准（2018年5月24日批准）",
     "extends": [
         "dtmi:digitaltwins:isa95:Resource;1",
         "dtmi:digitaltwins:isa95:TestableObject;1"
@@ -13,90 +13,90 @@
         {
             "@type": "Relationship",
             "name": "definedBy",
-            "displayName": "Defined by",
-            "description": "Physical asset classes supported by this physical asset. This physical asset supports the physical asset class property(s) associated with the physical asset class.",
+            "displayName": "Defined by // 由...定义",
+            "description": "Physical asset classes supported by this physical asset. This physical asset supports the physical asset class property(s) associated with the physical asset class. // 此物理资产支持的物理资产类别。该物理资产支持与物理资产类别关联的属性",
             "target": "dtmi:digitaltwins:isa95:PhysicalAssetClass;1",
-            "comment": "Relationship type: Association"
+            "comment": "Relationship type: Association // 关系类型：关联"
         },
         {
             "@type": "Relationship",
             "name": "hasValuesOf",
-            "displayName": "Has values of",
-            "description": "The physical asset property values of this physical asset.",
+            "displayName": "Has values of // 拥有...的值",
+            "description": "The physical asset property values of this physical asset. // 此物理资产的属性值",
             "target": "dtmi:digitaltwins:isa95:PhysicalAssetProperty;1"
         },
         {
             "@type": "Relationship",
             "name": "isMadeUpOf",
-            "displayName": "Is made up of",
-            "description": "The related object(s) makes up part of this physical asset as the whole.",
+            "displayName": "Is made up of // 由...组成",
+            "description": "The related object(s) makes up part of this physical asset as the whole. // 相关对象作为整体构成此物理资产的一部分",
             "target": "dtmi:digitaltwins:isa95:PhysicalAsset;1"
         },
         {
             "@type": "Component",
             "name": "description",
-            "displayName": "Description",
-            "description": "Additional information about the physical asset",
+            "displayName": "Description // 描述",
+            "description": "Additional information about the physical asset // 物理资产的补充信息",
             "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
         },
         {
             "@type": "Property",
             "name": "hierarchyScope",
-            "displayName": "Hierarchy scope",
-            "description": "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scopedefines the scope of the physical asset class, such as the site or area where it is defined.",
+            "displayName": "Hierarchy scope // 层级范围",
+            "description": "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the physical asset class, such as the site or area where it is defined. // 标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）",
             "schema": "string"
         },
         {
             "@type": "Relationship",
             "name": "hierarchyScopeRel",
-            "displayName": "fits hierarchy scope",
-            "description": "Optional relationship to hierarchy.",
-            "comment": "Not part of the Standard Specs.",
+            "displayName": "fits hierarchy scope // 适配层级范围",
+            "description": "Optional relationship to hierarchy. // 与层级的可选关系",
+            "comment": "Not part of the Standard Specs. // 非标准规范要求",
             "target": "dtmi:digitaltwins:isa95:HierarchyScope;1",
             "maxMultiplicity": 1
         },
         {
             "@type": "Property",
             "name": "fixedAssetID",
-            "displayName": "Fixed asset ID",
-            "description": "Contains a unique identification for financial tracking as required by laws or regulations",
+            "displayName": "Fixed asset ID // 固定资产ID",
+            "description": "Contains a unique identification for financial tracking as required by laws or regulations // 包含法律或法规要求的财务追踪唯一标识",
             "schema": "string"
         },
         {
             "@type": "Property",
             "name": "vendorID",
-            "displayName": "Vendor ID",
-            "description": "Contains a vendors serial number",
+            "displayName": "Vendor ID // 供应商ID",
+            "description": "Contains a vendors serial number // 包含供应商序列号",
             "schema": "string"
         },
         {
             "@type": "Component",
             "name": "spatialDefinition",
-            "displayName": "Spatial definition",
-            "description": "Spatially defines the physical asset as a zero-dimensional point, one-dimensional line, or two-dimensional shape or three dimensional solid.",
+            "displayName": "Spatial definition // 空间定义",
+            "description": "Spatially defines the physical asset as a zero-dimensional point, one-dimensional line, or two-dimensional shape or three dimensional solid. // 将物理资产在空间上定义为零维点、一维线、二维面或三维体",
             "schema": "dtmi:digitaltwins:isa95:SpatialDefinition;1"
         },
         {
             "@type": "Relationship",
             "name": "physicalLocationRel",
-            "displayName": "fits physical location",
-            "description": "Optional relationship to physical location.",
-            "comment": "Not part of the Standard Specs.",
+            "displayName": "fits physical location // 适配物理位置",
+            "description": "Optional relationship to physical location. // 与物理位置的可选关系",
+            "comment": "Not part of the Standard Specs. // 非标准规范要求",
             "target": "dtmi:digitaltwins:isa95:OperationalLocation;1",
             "maxMultiplicity": 1
         },		
         {
             "@type": "Property",
             "name": "physicalLocation",
-            "displayName": "Physical location",
-            "description": "Contains a vendors serial number",
+            "displayName": "Physical location // 物理位置",
+            "description": "Contains a vendors serial number // 包含物理位置信息（如地址或坐标）",  // 修正了原描述错误
             "schema": "string"
         },
         {
             "@type": "Property",
             "name": "physicalLocationType",
-            "displayName": "Physical location type",
-            "description": "Indicates whether the physical location attribute refers to an operational location object or contains a description of the physical location. Mandatory where a physical location attribute is specified. Defined values are operational location: physical location attribute references an operational location; description: physical location attribute contains a description of the physical location, such as a street address.",
+            "displayName": "Physical location type // 物理位置类型",
+            "description": "Indicates whether the physical location attribute refers to an operational location object or contains a description of the physical location. // 标识物理位置属性引用的是操作位置对象还是包含位置描述",
             "schema": {
                 "@type": "Enum",
                 "valueSchema": "string",
@@ -104,14 +104,14 @@
                     {
                         "name": "operationalLocation",
                         "enumValue": "operationalLocation",
-                        "displayName": "Operational Location",
-                        "description": "physical location attribute references an operational location"
+                        "displayName": "Operational Location // 操作位置",
+                        "description": "physical location attribute references an operational location // 物理位置属性引用操作位置对象"
                     },
                     {
                         "name": "description",
                         "enumValue": "description",
-                        "displayName": "Description",
-                        "description": " physical location attribute contains a description of the physical location, such as a street address."
+                        "displayName": "Description // 描述",
+                        "description": "physical location attribute contains a description of the physical location, such as a street address. // 物理位置属性包含位置描述（如街道地址）"
                     }
                 ]
             }
