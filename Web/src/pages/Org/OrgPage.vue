@@ -140,6 +140,12 @@ const table_Config = {
     active: {
       type: 'q-btn-toggle',
       label: '是否启用',
+      // 添加默认值配置
+      defaultValue: true,
+      // 添加值更新处理器
+      onUpdate: (val, formData) => {
+        formData.active = val
+      },
       props: {
         class: 'my-custom-toggle',
         'no-caps': true,

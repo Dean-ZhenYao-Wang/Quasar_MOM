@@ -103,17 +103,10 @@ const tickedTarget = async (target) => {
   }
 }
 const ok = async () => {
-  console.log(selectedButtonRows.value)
   let B = selectedButtonRows.value.map((item) => item.id)
-  console.log(B)
   let aNotInB = oldSelectButtonIds.value.filter((item) => !B.includes(item)) //需要删除的
-  console.log('A', oldSelectButtonIds)
-  console.log('需要删除的-aNotInB', aNotInB)
   let bNotInA = B.filter((item) => !oldSelectButtonIds.value.includes(item)) //需要添加的
-  console.log('需要添加的-bNotInA', bNotInA)
-
   ticked.value = ticked.value.filter((item) => !aNotInB.includes(item))
-  console.log('结果', [...ticked.value, ...bNotInA])
   if (props.ok) await props.ok([...ticked.value, ...bNotInA])
 }
 const getMenuTree = async () => {

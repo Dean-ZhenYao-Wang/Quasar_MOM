@@ -22,7 +22,6 @@
         <q-btn color="negative" @click="handleBatchDelete" v-permit="'delete'">删除</q-btn>
       </div>
     </div>
-
     <!-- 数据表格 -->
     <q-table
       :rows="tableData"
@@ -33,6 +32,7 @@
       @update:selected="selected"
       v-model:pagination="pagination"
       @request="onTableChange"
+      :row-key="config.tableConfig.rowKey"
     >
       <!-- 仅当父组件提供对应插槽时才生成该列的插槽 -->
       <template v-slot:body-cell="props">
@@ -123,6 +123,7 @@
                 <div class="row q-col-gutter-md">
                   <template v-for="(field, name) in config.formFields" :key="name">
                     <component
+                      v-if="field.type"
                       :is="getComponentType(field.type)"
                       v-model="formData[name]"
                       class="col-12"
@@ -247,24 +248,15 @@ const showAddDialog = () => {
         formData[name] = field.defaultValue
       }
     })
-
   formDialogVisible.value = true
 }
 const showEditDialog = (row) => {
   currentEditId.value = row[props.config.tableConfig.rowKey]
-  Object.keys(formData).forEach((key) => {
-    if (!(key in row)) {
-      delete formData[key]
-    }
-  })
+  Object.assign(formData, row)
   showAddDialog()
 }
 const handleView = (row) => {
-  Object.keys(formData).forEach((key) => {
-    if (!(key in row)) {
-      delete formData[key]
-    }
-  })
+  Object.assign(formData, row)
   formDialogVisible.value = true
   viewDialogVisible.value = true
 }

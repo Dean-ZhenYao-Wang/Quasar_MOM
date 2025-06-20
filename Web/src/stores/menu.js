@@ -15,10 +15,6 @@ export const useMenuStore = defineStore('menuStore', {
       this.menuTree = response.data
     },
     async getChildMenus(dtId, id, name) {
-      console.log('getChildMenus')
-      console.log(dtId)
-      console.log(id)
-      console.log(name)
       const response = await api.get(
         `/api/v1/Menu/GetMenuList?ParentMenuDtId=${dtId}&Id=${id}&Name=${name}`,
       )

@@ -158,8 +158,6 @@ export default {
 
         // 将字符串转换为ArrayBuffer
         const msgBuffer = new TextEncoder().encode(currentPassword.value)
-        console.log(msgBuffer)
-
         window.crypto.subtle
           .digest('SHA-1', msgBuffer)
           .then(async (hashBuffer) => {
@@ -169,7 +167,6 @@ export default {
             const current_hashHex = hashHex.toUpperCase()
 
             const confirm_msgBuffer = new TextEncoder().encode(confirmPassword.value)
-            console.log(confirm_msgBuffer)
 
             window.crypto.subtle
               .digest('SHA-1', confirm_msgBuffer)

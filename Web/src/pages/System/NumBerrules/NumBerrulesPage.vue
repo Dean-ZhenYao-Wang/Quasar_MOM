@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <form-table
-      :config="table_Config"
+      :config="ruleTable_Config"
       v-model:tableData="tableData"
       v-model:pagination="pagination"
       :search="handleSearch"
@@ -15,7 +15,7 @@
           <div class="text-h6">{{ title }}编码规则</div>
         </q-card-section>
       </template>
-      <template #form-body="formData">
+      <template #form-body="{ formData }">
         <div class="row q-col-gutter-md">
           <q-input label="规则编码" v-model="formData.Id" />
           <q-input label="规则名称" v-model="formData.Name" />
@@ -26,11 +26,28 @@
             :options="modelTypeNameOptions"
           ></q-select>
           <q-input label="分隔符" v-model="formData.Separator" />
-          <q-toggle label="是否激活" v-model="formData.IsActive" />
+          <q-toggle
+            :label="
+              formData.IsActive == undefined ? `是否激活` : formData.IsActive ? `激活` : `未激活`
+            "
+            v-model="formData.IsActive"
+            color="green"
+            :true-value="true"
+            :false-value="false"
+          />
         </div>
         <!-- 规则段区域 -->
         <q-separator />
-        规则段1 规则段2
+        <div class="text-subtitle2 q-mt-md">规则段:</div>
+        <form-table
+          v-model:tableData="formData.Segments"
+          :config="segmentTable_config"
+          :create="(payload) => segmentCreate(payload, formData.Segments)"
+          :batchDelete="(keys) => segmentBatchDelete(keys, formData.Segments)"
+          :delete="(key) => segmentDelete(key, formData.Segments)"
+          :update="(payload) => segmentUpdate(payload, formData.Segments)"
+        >
+        </form-table>
         <!-- 预览区域 -->
         <q-separator />
         <div class="text-subtitle2 q-mt-md">编号预览:</div>
@@ -72,9 +89,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useHierarchyScopeStore } from 'src/stores/hierarchyScope'
+import { uid } from 'quasar'
+
 const orgStore = useHierarchyScopeStore()
 
-const table_Config = {
+const ruleTable_Config = {
   tableConfig: {
     rowKey: 'dtId',
     selection: 'multiple',
@@ -91,6 +110,113 @@ const table_Config = {
       { name: 'Separator', align: 'left', label: '分隔符', field: 'Separator' },
       { name: 'IsActive', align: 'left', label: '是否激活', field: 'IsActive' },
     ],
+  },
+  formFields: {
+    Segments: {
+      // 添加默认值配置
+      defaultValue: [],
+      // 添加值更新处理器
+      onUpdate: (val, formData) => {
+        formData.Segments = val
+      },
+    },
+  },
+}
+const segmentTable_config = {
+  tableConfig: {
+    rowKey: 'Key',
+    selection: 'multiple',
+    columns: [
+      { name: 'Order', align: 'center', label: '序号', field: 'Order' },
+      { name: 'Type', align: 'center', label: '类型', field: 'Type' },
+      { name: 'Value', align: 'center', label: '值', field: 'Value' },
+      { name: 'Format', align: 'center', label: '格式化字符串', field: 'Format' },
+      { name: 'Length', align: 'center', label: '固定长度', field: 'Length' },
+      { name: 'PaddingChar', align: 'center', label: '填充字符', field: 'PaddingChar' },
+      { name: 'PadLeft', align: 'center', label: '填充方向', field: 'PadLeft' },
+    ],
+  },
+  formFields: {
+    Key: {
+      show: false,
+      type: 'q-input',
+      label: '数据库唯一标识',
+      defaultValue: uid(),
+    },
+    Order: {
+      type: 'q-input',
+      label: '序号',
+    },
+    Type: {
+      type: 'q-select',
+      label: '类型',
+      props: {
+        outlined: true,
+        options: [
+          {
+            label: '固定值',
+            value: 'Fixed',
+          },
+          {
+            label: '模型属性',
+            value: 'Property',
+          },
+          {
+            label: '序列号',
+            value: 'Sequence',
+          },
+          {
+            label: '日期时间',
+            value: 'DateTime',
+          },
+          {
+            label: '自定义逻辑',
+            value: 'Custom',
+          },
+        ],
+        'option-value': 'value',
+        'option-label': 'label',
+        'emit-value': true,
+        'map-options': true,
+      },
+    },
+    Value: {
+      type: 'q-input',
+      label: '值',
+    },
+    Format: {
+      type: 'q-input',
+      label: '格式化字符串',
+    },
+    Length: {
+      type: 'q-input',
+      label: '固定长度',
+    },
+    PaddingChar: {
+      type: 'q-input',
+      label: '填充字符',
+    },
+    PadLeft: {
+      type: 'q-btn-toggle',
+      // 添加默认值配置
+      defaultValue: true,
+      // 添加值更新处理器
+      onUpdate: (val, formData) => {
+        formData.PadLeft = val
+      },
+      props: {
+        'no-caps': true,
+        rounded: true,
+        unelevated: true,
+        'toggle-color': 'primary',
+        color: 'white',
+        'text-color': 'primary',
+        options: [
+          { label: '左', value: true },
+          { label: '右', value: false },
+        ],
+      },
+    },
   },
 }
 
@@ -139,16 +265,41 @@ const handleSearch = async (queryParams) => {
 const handleCreate = async (payload) => {
   await orgStore.AddHierarchyScope(payload)
 }
-const handleUpdate = async (payload) => {
-  await orgStore.UpdateHierarchyScope(payload)
+const segmentCreate = (payload, segments) => {
+  segments.push(payload)
+  segmentTable_config.formFields.Key.defaultValue = uid()
 }
 const handleBatchDelete = async (dtIds) => {
   await batchDelete(dtIds)
 }
+const segmentBatchDelete = (keys, segments) => {
+  // 使用 filter 创建新数组再替换原数组
+  const newSegments = segments.filter((segment) => !keys.includes(segment.Key))
+  segments.splice(0, segments.length, ...newSegments)
+}
 const handleDelete = async (dtId) => {
   await batchDelete([dtId])
 }
-const batchDelete = async (dtIds) => {
-  await orgStore.DeleteHierarchyScope(dtIds)
+const segmentDelete = (key, segments) => {
+  segmentBatchDelete([key], segments)
+}
+const batchDelete = async (keys) => {
+  await orgStore.DeleteHierarchyScope(keys)
+}
+const handleUpdate = async (payload) => {
+  await orgStore.UpdateHierarchyScope(payload)
+}
+const segmentUpdate = async (payload, segments) => {
+  // 使用 map 创建新数组，替换 id 为 1 的对象
+  const updatedData = segments.map((obj) => {
+    if (obj.Key === payload.Key) {
+      // 返回一个新对象（避免直接修改原对象）
+      return { ...payload }
+    }
+    return obj
+  })
+
+  // 重新赋值到 reactive 数组（确保响应式更新）
+  segments.splice(0, segments.length, ...updatedData)
 }
 </script>
