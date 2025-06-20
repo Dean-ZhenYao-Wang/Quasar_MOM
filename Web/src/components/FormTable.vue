@@ -76,8 +76,39 @@
     </q-table>
 
     <!-- 表单弹窗 -->
-    <q-dialog v-model="formDialogVisible" persistent>
+    <q-dialog
+      v-model="formDialogVisible"
+      persistent
+      backdrop-filter="brightness(60%)"
+      :maximized="maximizedToggle"
+      transition-show="slide-up"
+      transition-hide="slide-down"
+    >
       <q-card style="min-width: 500px">
+        <q-bar>
+          <q-space />
+          <q-btn
+            dense
+            flat
+            icon="minimize"
+            @click="maximizedToggle = false"
+            :disable="!maximizedToggle"
+          >
+            <q-tooltip v-if="maximizedToggle" class="bg-white text-primary">Minimize</q-tooltip>
+          </q-btn>
+          <q-btn
+            dense
+            flat
+            icon="crop_square"
+            @click="maximizedToggle = true"
+            :disable="maximizedToggle"
+          >
+            <q-tooltip v-if="!maximizedToggle" class="bg-white text-primary">Maximize</q-tooltip>
+          </q-btn>
+          <q-btn dense flat icon="close" v-close-popup>
+            <q-tooltip class="bg-white text-primary">Close</q-tooltip>
+          </q-btn>
+        </q-bar>
         <header>
           <slot name="form-header" :title="dialogTitle">
             <q-card-section>
@@ -131,7 +162,7 @@
 <script setup>
 import { ref, reactive, computed, useTemplateRef } from 'vue'
 import { useRoute } from 'vue-router'
-import { useQuasar, QInput, QSelect, QBtnToggle } from 'quasar'
+import { useQuasar, QInput, QSelect, QBtnToggle, QToggle } from 'quasar'
 import * as PrimeVue from 'primevue'
 import ResponsibleSelect from './ResponsibleSelect.vue'
 import HierarchyScopeEquipmentLevel from './HierarchyScopeEquipmentLevel.vue'
@@ -140,7 +171,7 @@ import TeamSelect from './TeamSelect.vue'
 import PositionSelect from './PositionSelect.vue'
 import EnterpriseSelect from './EnterpriseSelect.vue'
 const route = useRoute()
-
+const maximizedToggle = ref(false)
 const quasarForm = useTemplateRef('quasarForm')
 
 const getComponentType = (type) => {
@@ -148,6 +179,7 @@ const getComponentType = (type) => {
     'q-input': QInput,
     'q-select': QSelect,
     'q-btn-toggle': QBtnToggle,
+    'q-toggle': QToggle,
     ResponsibleSelect: ResponsibleSelect,
     HierarchyScopeEquipmentLevel: HierarchyScopeEquipmentLevel,
     OrgSelect: OrgSelect,
@@ -206,15 +238,33 @@ const extractListeners = (props) => {
 }
 
 const showAddDialog = () => {
+  // 通用初始化逻辑
+  if (props.config.formFields)
+    Object.keys(props.config.formFields).forEach((name) => {
+      const field = props.config.formFields[name]
+      // 仅设置默认值
+      if (formData[name] === undefined && field.defaultValue !== undefined) {
+        formData[name] = field.defaultValue
+      }
+    })
+
   formDialogVisible.value = true
 }
 const showEditDialog = (row) => {
   currentEditId.value = row[props.config.tableConfig.rowKey]
-  Object.assign(formData, row)
+  Object.keys(formData).forEach((key) => {
+    if (!(key in row)) {
+      delete formData[key]
+    }
+  })
   showAddDialog()
 }
 const handleView = (row) => {
-  Object.assign(formData, row)
+  Object.keys(formData).forEach((key) => {
+    if (!(key in row)) {
+      delete formData[key]
+    }
+  })
   formDialogVisible.value = true
   viewDialogVisible.value = true
 }
@@ -242,16 +292,15 @@ const fetchData = async () => {
 // 修改后的表单提交方法
 const submitForm = async () => {
   try {
+    const valid = await quasarForm.value.validate()
+    if (!valid) return
+
+    // 触发父组件事件
     const payload = { ...formData }
-    quasarForm.value.validate().then(async (res) => {
-      console.log('rrr')
-      console.log(res)
-      if (!res) return
-      // 根据编辑/新增状态触发不同事件
-      currentEditId.value ? await props.update(payload) : await props.create(payload)
-      onReset()
-      await fetchData()
-    })
+    currentEditId.value ? await props.update(payload) : await props.create(payload)
+
+    onReset()
+    await fetchData()
   } catch (error) {
     handleError(error)
   }
