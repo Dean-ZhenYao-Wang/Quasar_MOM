@@ -115,7 +115,6 @@ import { uid } from 'quasar'
 const codeRuleStore = useCodeRuleStore()
 
 const ruleTable_Config = {
-  queryFields: null,
   tableConfig: {
     rowKey: 'dtId',
     selection: 'multiple',
@@ -135,7 +134,6 @@ const ruleTable_Config = {
   },
 }
 const segmentTable_config = {
-  queryFields: null,
   tableConfig: {
     rowKey: 'Key',
     selection: 'multiple',

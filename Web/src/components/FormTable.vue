@@ -195,7 +195,11 @@ const props = defineProps({
     type: Object,
     required: true,
     validator: (value) => {
-      return ['queryFields', 'formFields', 'tableConfig'].every((key) => key in value)
+      // 定义允许的属性
+      const allowedKeys = ['queryFields', 'formFields', 'tableConfig']
+
+      // 检查传入的对象的所有属性是否都在允许的范围内
+      return Object.keys(value).every((key) => allowedKeys.includes(key))
     },
   },
   search: Function,
