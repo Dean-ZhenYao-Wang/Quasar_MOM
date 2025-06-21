@@ -2,13 +2,32 @@
   <q-page padding>
     <form-table
       :config="ruleTable_Config"
-      v-model:tableData="tableData"
-      v-model:pagination="pagination"
-      :search="handleSearch"
-      :create="handleCreate"
-      :update="handleUpdate"
-      :batchDelete="handleBatchDelete"
-      :delete="handleDelete"
+      v-model:tableData="ruleTableData"
+      v-model:pagination="rulePagination"
+      :search="ruleSearch"
+      :create="ruleCreate"
+      :update="ruleUpdate"
+      :batchDelete="ruleBatchDelete"
+      :delete="ruleDelete"
+      :showEditDialogBefore="
+        (row) => {
+          // 确保 Segments 存在，并进行深拷贝
+          if (!row.Segments) {
+            row.Segments = []
+          }
+          segmentPagination.rowsNumber = row.Segments.length
+          segmentPagination.page = 1
+        }
+      "
+      :showAddDialogBefore="
+        (formData) => {
+          // 为新增记录初始化空的 Segments 数组
+          formData.Segments = []
+          segmentPagination.rowsNumber = 0
+          segmentTableData = []
+          segmentPagination.page = 1
+        }
+      "
     >
       <template #form-header="{ title }">
         <q-card-section>
@@ -40,12 +59,14 @@
         <q-separator />
         <div class="text-subtitle2 q-mt-md">规则段:</div>
         <form-table
-          v-model:tableData="formData.Segments"
+          v-model:tableData="segmentTableData"
+          v-model:pagination="segmentPagination"
           :config="segmentTable_config"
           :create="(payload) => segmentCreate(payload, formData.Segments)"
           :batchDelete="(keys) => segmentBatchDelete(keys, formData.Segments)"
           :delete="(key) => segmentDelete(key, formData.Segments)"
           :update="(payload) => segmentUpdate(payload, formData.Segments)"
+          :search="(queryParams) => segmentSearch(queryParams, formData.Segments)"
         >
         </form-table>
         <!-- 预览区域 -->
@@ -88,12 +109,13 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useHierarchyScopeStore } from 'src/stores/hierarchyScope'
+import { useCodeRuleStore } from 'src/stores/codeRule'
 import { uid } from 'quasar'
 
-const orgStore = useHierarchyScopeStore()
+const codeRuleStore = useCodeRuleStore()
 
 const ruleTable_Config = {
+  queryFields: null,
   tableConfig: {
     rowKey: 'dtId',
     selection: 'multiple',
@@ -111,18 +133,9 @@ const ruleTable_Config = {
       { name: 'IsActive', align: 'left', label: '是否激活', field: 'IsActive' },
     ],
   },
-  formFields: {
-    Segments: {
-      // 添加默认值配置
-      defaultValue: [],
-      // 添加值更新处理器
-      onUpdate: (val, formData) => {
-        formData.Segments = val
-      },
-    },
-  },
 }
 const segmentTable_config = {
+  queryFields: null,
   tableConfig: {
     rowKey: 'Key',
     selection: 'multiple',
@@ -251,43 +264,58 @@ const modelTypeNameOptions = ref([
   },
 ])
 
-const tableData = ref([])
-const pagination = ref({
+const ruleTableData = ref([])
+const rulePagination = ref({
   page: 1,
   rowsPerPage: 10,
   rowsNumber: 0,
 })
-const handleSearch = async (queryParams) => {
-  const response = await orgStore.getOrgTable(queryParams)
-  tableData.value = response.data
-  pagination.value.rowsNumber = response.totalItems
+const segmentTableData = ref([])
+const segmentPagination = ref({
+  page: 1,
+  rowsPerPage: 1,
+  rowsNumber: 0,
+})
+
+const ruleSearch = async (queryParams) => {
+  const response = await codeRuleStore.GetPaged(queryParams)
+  ruleTableData.value = response.data
+  rulePagination.value.rowsNumber = response.totalItems
 }
-const handleCreate = async (payload) => {
-  await orgStore.AddHierarchyScope(payload)
+const segmentSearch = (queryParams, segments) => {
+  segmentPagination.value.rowsNumber = segments.length
+  // 计算分页的起始和结束索引
+  const startIndex = (queryParams.page - 1) * queryParams.pageSize
+  const endIndex = startIndex + queryParams.pageSize
+  // 使用 slice 获取当前页的数据
+  segmentTableData.value = segments.slice(startIndex, endIndex)
+}
+const ruleCreate = async (payload) => {
+  await codeRuleStore.AddHierarchyScope(payload)
 }
 const segmentCreate = (payload, segments) => {
   segments.push(payload)
   segmentTable_config.formFields.Key.defaultValue = uid()
 }
-const handleBatchDelete = async (dtIds) => {
-  await batchDelete(dtIds)
+const ruleBatchDelete = async (dtIds) => {
+  await rule_batchDelete(dtIds)
 }
 const segmentBatchDelete = (keys, segments) => {
   // 使用 filter 创建新数组再替换原数组
   const newSegments = segments.filter((segment) => !keys.includes(segment.Key))
   segments.splice(0, segments.length, ...newSegments)
 }
-const handleDelete = async (dtId) => {
-  await batchDelete([dtId])
+const ruleDelete = async (dtId) => {
+  await rule_batchDelete([dtId])
 }
 const segmentDelete = (key, segments) => {
   segmentBatchDelete([key], segments)
 }
-const batchDelete = async (keys) => {
-  await orgStore.DeleteHierarchyScope(keys)
+const rule_batchDelete = async (keys) => {
+  await codeRuleStore.DeleteHierarchyScope(keys)
 }
-const handleUpdate = async (payload) => {
-  await orgStore.UpdateHierarchyScope(payload)
+const ruleUpdate = async (payload) => {
+  await codeRuleStore.UpdateHierarchyScope(payload)
 }
 const segmentUpdate = async (payload, segments) => {
   // 使用 map 创建新数组，替换 id 为 1 的对象

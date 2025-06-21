@@ -1,8 +1,7 @@
-import MainLayout from 'layouts/MainLayout.vue'
 const routes = [
   {
     path: '/',
-    component: () => MainLayout,
+    component: () => import('layouts/MainLayout.vue'),
     meta: { requiresAuth: true },
     children: [
       { path: '', component: () => import('pages/IndexPage.vue') },

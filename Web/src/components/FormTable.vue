@@ -149,7 +149,7 @@
                 color="primary"
                 flat
                 class="q-ml-sm"
-                @click="onReset"
+                @click="closeDialog"
               />
               <q-btn label="提交" type="submit" color="primary" @click="submitForm" />
             </q-card-actions>
@@ -204,6 +204,9 @@ const props = defineProps({
   delete: Function,
   batchDelete: Function,
   selected: Function,
+  showAddDialogBefore: Function,
+  showEditDialogBefore: Function,
+  hideDialog: Function,
 })
 
 // 移除原有的axios相关代码
@@ -238,9 +241,14 @@ const extractListeners = (props) => {
   return listeners
 }
 
-const showAddDialog = () => {
+const showAddDialog = async () => {
+  // 先清空 formData，确保是干净的状态
+  Object.keys(formData).forEach((key) => delete formData[key])
+
+  if (props.showAddDialogBefore) await props.showAddDialogBefore(formData)
+
   // 通用初始化逻辑
-  if (props.config.formFields)
+  if (props.config.formFields) {
     Object.keys(props.config.formFields).forEach((name) => {
       const field = props.config.formFields[name]
       // 仅设置默认值
@@ -248,12 +256,32 @@ const showAddDialog = () => {
         formData[name] = field.defaultValue
       }
     })
+  }
+
   formDialogVisible.value = true
 }
-const showEditDialog = (row) => {
+const showEditDialog = async (row) => {
+  // 先清空 formData
+  Object.keys(formData).forEach((key) => delete formData[key])
+
+  if (props.showEditDialogBefore) await props.showEditDialogBefore(row)
   currentEditId.value = row[props.config.tableConfig.rowKey]
-  Object.assign(formData, row)
-  showAddDialog()
+
+  // 深拷贝 row 数据到 formData，避免引用问题
+  Object.keys(row).forEach((key) => {
+    if (Array.isArray(row[key])) {
+      // 对数组进行深拷贝
+      formData[key] = JSON.parse(JSON.stringify(row[key]))
+    } else if (typeof row[key] === 'object' && row[key] !== null) {
+      // 对对象进行深拷贝
+      formData[key] = JSON.parse(JSON.stringify(row[key]))
+    } else {
+      // 基本类型直接赋值
+      formData[key] = row[key]
+    }
+  })
+
+  formDialogVisible.value = true
 }
 const handleView = (row) => {
   Object.assign(formData, row)
@@ -263,7 +291,7 @@ const handleView = (row) => {
 const handleSearch = async () => {
   await fetchData()
 }
-// 修改后的获取数据方法
+// 修改后，跳页后的获取数据方法
 const fetchData = async () => {
   try {
     loading.value = true
@@ -291,21 +319,25 @@ const submitForm = async () => {
     const payload = { ...formData }
     currentEditId.value ? await props.update(payload) : await props.create(payload)
 
-    onReset()
+    await closeDialog()
     await fetchData()
   } catch (error) {
     handleError(error)
   }
 }
-
-const onReset = () => {
-  // 清空表单数据（保留响应式）
-  Object.keys(formData).forEach((key) => delete formData[key])
-  // 重置编辑状态
-  currentEditId.value = null
+const closeDialog = async () => {
+  onReset()
   // 关闭对话框
   formDialogVisible.value = false
   viewDialogVisible.value = false
+  // 触发父组件的清理回调
+  if (props.hideDialog) await props.hideDialog()
+}
+// 清空表单数据（保留响应式）
+const onReset = async () => {
+  Object.keys(formData).forEach((key) => delete formData[key])
+  // 重置编辑状态
+  currentEditId.value = null
 }
 
 // 删除处理
