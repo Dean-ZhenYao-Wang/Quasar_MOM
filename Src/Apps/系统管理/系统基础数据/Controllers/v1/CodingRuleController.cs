@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MOM.Application.Features.CodingRule.Commands.GenerateCode;
 using MOM.Application.Features.CodingRule.Commands.RegisterRule;
 using MOM.Application.Features.CodingRule.Queries.GetPagedCodingRule;
 using MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition;
@@ -37,6 +38,16 @@ namespace 系统基础数据.Controllers.v1
         public async Task<PagedResponse<MOM.Domain.CodingRule.CodingRule>> GetPaged([FromQuery] GetPagedCodingRuleQuery query)
         {
             return await Mediator.Send(query);
+        }
+        /// <summary>
+        /// 生成编码字符串
+        /// </summary>
+        /// <param name="generate"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<BaseResult<string>> GenerateCode([FromQuery] GenerateCodeCommand generate)
+        {
+            return await Mediator.Send(generate);
         }
     }
 }

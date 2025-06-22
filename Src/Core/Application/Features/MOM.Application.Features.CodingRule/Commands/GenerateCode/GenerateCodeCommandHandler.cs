@@ -20,15 +20,22 @@ namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
             if (rule == null) throw new ArgumentException($"未找到规则: {request.RuleId}");
 
             // 验证模型类型匹配（当model不为null时）
-            if (request.Model != null && !rule.ModelType.IsAssignableFrom(request.Model.GetType()))
-                throw new ArgumentException($"模型类型不匹配，期望: {rule.ModelType.Name}，实际: {request.Model.GetType().Name}");
+            if (!string.IsNullOrWhiteSpace(request.ModelTypeName))
+            {
+                Type model = Type.GetType(request.ModelTypeName);
+                if (!rule.ModelType.IsAssignableFrom(model.GetType()))
+                {
+                    throw new ArgumentException($"模型类型不匹配，期望: {rule.ModelType.Name}，实际: {request.ModelTypeName.GetType().Name}");
+                }
+            }
+
 
             var segments = new List<string>();
 
             // 按Order顺序处理所有编码段
             foreach (var segment in rule.Segments.OrderBy(s => s.Order))
             {
-                var segmentValue = await GenerateSegmentValueAsync(segment, request.Model, rule.ModelType);
+                var segmentValue = await GenerateSegmentValueAsync(segment, request.DbModel, rule.ModelType);
                 segments.Add(segmentValue);
             }
 
@@ -40,10 +47,10 @@ namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
         /// 根据段的类型配置，从不同来源获取或生成段值
         /// </summary>
         /// <param name="segment">编码段配置</param>
-        /// <param name="model">EF Core模型实例</param>
+        /// <param name="dbModel">从数据库查询出来的当前对象实例，仅在后端生成编码时使用，给谁生成编码，这个实例就是谁</param>
         /// <param name="modelType">模型类型</param>
         /// <returns>生成的段值字符串</returns>
-        private async Task<string> GenerateSegmentValueAsync(MOM.Domain.CodingRule.CodingSegment segment, object model, Type modelType)
+        private async Task<string> GenerateSegmentValueAsync(MOM.Domain.CodingRule.CodingSegment segment, object? dbModel, Type modelType)
         {
             string value = "";
 
@@ -56,10 +63,10 @@ namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
 
                 case MOM.Domain.Common.EnumType.CodingRuleSegmentType.Property:
                     // 属性段：通过反射获取模型对象的属性值
-                    if (model != null && !string.IsNullOrEmpty(segment.Value))
+                    if (dbModel != null && !string.IsNullOrEmpty(segment.Value))
                     {
                         var property = modelType.GetProperty(segment.Value);
-                        var propVal = property?.GetValue(model);
+                        var propVal = property?.GetValue(dbModel);
                         value = FormatValue(propVal, segment.Format);
                     }
                     break;
@@ -76,7 +83,7 @@ namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
 
                 case MOM.Domain.Common.EnumType.CodingRuleSegmentType.Custom:
                     // 自定义段：调用可重写的自定义处理方法
-                    value = ProcessCustomSegment(segment, model);
+                    value = ProcessCustomSegment(segment, dbModel);
                     break;
             }
 
@@ -93,6 +100,7 @@ namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
 
             return value;
         }
+
         private string FormatValue(object value, string format)
         {
             return value switch
@@ -104,7 +112,7 @@ namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
 
         /// <summary>
         /// 处理自定义编码段
-        /// 虚方法，子类可重写以实现特定的自定义逻辑
+        /// 可重写以实现特定的自定义逻辑
         /// </summary>
         /// <param name="segment">自定义段配置</param>
         /// <param name="model">EF Core模型实例</param>
@@ -115,7 +123,7 @@ namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
         /// - 可以使用model的属性值进行复杂计算
         /// - 可以集成外部系统获取特殊编码
         /// </remarks>
-        protected virtual string ProcessCustomSegment(CodingSegment segment, object model)
+        protected string ProcessCustomSegment(CodingSegment segment, object model)
         {
             // 默认返回空字符串，子类可以重写实现自定义逻辑
             return "";

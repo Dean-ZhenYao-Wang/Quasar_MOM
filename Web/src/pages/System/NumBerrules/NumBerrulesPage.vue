@@ -66,25 +66,23 @@
         <!-- 规则段区域 -->
         <q-separator />
         <div class="text-subtitle2 q-mt-md">规则段:</div>
-        <!-- :config="{
+        <form-table
+          v-model:tableData="segmentTableData"
+          v-model:pagination="segmentPagination"
+          :config="{
             ...segmentTable_config,
             tableConfig: {
               ...segmentTable_config.tableConfig,
               add: !readonly,
               delete: !readonly,
             },
-          }" -->
-        <form-table
-          v-model:tableData="segmentTableData"
-          v-model:pagination="segmentPagination"
-          :config="segmentTable_config"
+          }"
           :create="(payload) => segmentCreate(payload, formData.segments)"
           :batchDelete="(dtIds) => segmentBatchDelete(dtIds, formData.segments)"
           :delete="(dtId) => segmentDelete(dtId, formData.segments)"
           :update="(payload) => segmentUpdate(payload, formData.segments)"
           :search="(queryParams) => segmentSearch(queryParams, formData.segments)"
-        >
-          <!-- :showAddDialogBefore="
+          :showAddDialogBefore="
             (row) => {
               // 为新增记录初始化空的 segments 数组
               row.dtId = uid()
@@ -93,34 +91,20 @@
                 segmentTable_config.delete = false
               }
             }
-          " -->
+          "
+        >
         </form-table>
-        <!-- 预览区域 -->
-        <q-separator />
-        <div class="text-subtitle2 q-mt-md">编号预览:</div>
-        <q-card flat bordered class="q-pa-sm bg-grey-1">
-          <div class="text-body2">previewNumber</div>
-        </q-card>
+        <template v-if="readonly">
+          <!-- 预览区域 -->
+          <q-separator />
+          <div class="text-subtitle2 q-mt-md">编号预览:</div>
+          <q-btn label="生成" color="primary" @click="generateTestNumber" />
+          <q-card flat bordered class="q-pa-sm bg-grey-1">
+            <div class="text-body2">previewNumber</div>
+          </q-card>
+        </template>
       </template>
     </form-table>
-    <!-- 测试生成对话框 -->
-    <!-- <q-dialog v-model="showTestDialog">
-      <q-card style="min-width: 400px">
-        <q-card-section>
-          <div class="text-h6">测试生成编号</div>
-        </q-card-section>
-
-        <q-card-section>
-          <div class="text-body1">规则: {{ testRule?.ruleName }}</div>
-          <q-input v-model="testBusinessKey" label="业务关键字 (可选)" class="q-mt-md" />
-        </q-card-section>
-
-        <q-card-actions align="right">
-          <q-btn flat label="取消" @click="showTestDialog = false" />
-          <q-btn color="primary" label="生成" @click="generateTestNumber" />
-        </q-card-actions>
-      </q-card>
-    </q-dialog> -->
   </q-page>
 </template>
 
@@ -315,6 +299,9 @@ const segmentPagination = ref({
   rowsPerPage: 10,
   rowsNumber: 0,
 })
+
+const generateTestNumber = () => {}
+
 const getLabelByValue = (targetValue, defaultLabel = '未找到') => {
   const option = modelTypeNameOptions.value.find((item) => item.value === targetValue)
   return option?.label ?? defaultLabel

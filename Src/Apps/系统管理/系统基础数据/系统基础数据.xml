@@ -24,6 +24,13 @@
             <param name="query"></param>
             <returns></returns>
         </member>
+        <member name="M:系统基础数据.Controllers.v1.CodingRuleController.GenerateCode(MOM.Application.Features.CodingRule.Commands.GenerateCode.GenerateCodeCommand)">
+            <summary>
+            生成编码字符串
+            </summary>
+            <param name="generate"></param>
+            <returns></returns>
+        </member>
         <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetOrgTable(MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery)">
             <summary>
             查询组织列表
