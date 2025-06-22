@@ -284,6 +284,7 @@ const props = defineProps({
   selected: Function,
   showAddDialogBefore: Function,
   showEditDialogBefore: Function,
+  showViewBefore: Function,
   hideDialog: Function,
 })
 
@@ -350,8 +351,9 @@ const showEditDialog = async (row) => {
   viewDialogVisible.value = false
 }
 
-const handleView = (row) => {
+const handleView = async (row) => {
   Object.assign(formData, row)
+  if (props.showViewBefore) await props.showViewBefore(formData)
   formDialogVisible.value = true
   viewDialogVisible.value = true
 }

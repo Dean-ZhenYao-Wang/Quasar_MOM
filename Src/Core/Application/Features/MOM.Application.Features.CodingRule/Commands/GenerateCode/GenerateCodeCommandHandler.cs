@@ -23,7 +23,7 @@ namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
             if (!string.IsNullOrWhiteSpace(request.ModelTypeName))
             {
                 Type model = Type.GetType(request.ModelTypeName);
-                if (!rule.ModelType.IsAssignableFrom(model.GetType()))
+                if (!rule.ModelType.IsAssignableFrom(model))
                 {
                     throw new ArgumentException($"模型类型不匹配，期望: {rule.ModelType.Name}，实际: {request.ModelTypeName.GetType().Name}");
                 }

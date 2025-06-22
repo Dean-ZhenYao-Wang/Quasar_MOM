@@ -15,6 +15,7 @@
           }
           segmentPagination.rowsNumber = row.segments.length
           segmentPagination.page = 1
+          previewNumber = ''
         }
       "
       :showAddDialogBefore="
@@ -24,6 +25,14 @@
           segmentPagination.rowsNumber = 0
           segmentTableData = []
           segmentPagination.page = 1
+          previewNumber = ''
+        }
+      "
+      :showViewBefore="
+        (row) => {
+          segmentPagination.rowsNumber = row.segments.length
+          segmentPagination.page = 1
+          previewNumber = ''
         }
       "
     >
@@ -94,15 +103,17 @@
           "
         >
         </form-table>
-        <template v-if="readonly">
-          <!-- 预览区域 -->
-          <q-separator />
-          <div class="text-subtitle2 q-mt-md">编号预览:</div>
-          <q-btn label="生成" color="primary" @click="generateTestNumber" />
-          <q-card flat bordered class="q-pa-sm bg-grey-1">
-            <div class="text-body2">previewNumber</div>
-          </q-card>
-        </template>
+        <!-- 预览区域 -->
+        <q-separator />
+        <div class="text-subtitle2 q-mt-md">编号预览:</div>
+        <q-btn
+          label="生成"
+          color="primary"
+          @click="generateTestNumber(formData.id, formData.modelTypeName)"
+        />
+        <q-card flat bordered class="q-pa-sm bg-grey-1">
+          <div class="text-body2">{{ previewNumber }}</div>
+        </q-card>
       </template>
     </form-table>
   </q-page>
@@ -259,31 +270,35 @@ const segmentTable_config = {
 const modelTypeNameOptions = ref([
   {
     label: '人员',
-    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person',
+    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain',
   },
   {
     label: '人员类',
-    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass',
+    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass,MOM.Domain',
   },
   {
     label: '设备角色层次',
-    value: 'MOM.Domain.isa95.CommonObjectModels.HierarchyScope',
+    value: 'MOM.Domain.isa95.CommonObjectModels.HierarchyScope,MOM.Domain',
   },
   {
     label: '设备',
-    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment',
+    value:
+      'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,MOM.Domain',
   },
   {
     label: '设备类',
-    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass',
+    value:
+      'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,MOM.Domain',
   },
   {
     label: '资产',
-    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset',
+    value:
+      'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,MOM.Domain',
   },
   {
     label: '资产类',
-    value: 'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass',
+    value:
+      'MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,MOM.Domain',
   },
 ])
 
@@ -300,7 +315,11 @@ const segmentPagination = ref({
   rowsNumber: 0,
 })
 
-const generateTestNumber = () => {}
+const previewNumber = ref('')
+
+const generateTestNumber = async (ruleId, modelTypeName) => {
+  previewNumber.value = (await codeRuleStore.GenerateCode(ruleId, modelTypeName)).data
+}
 
 const getLabelByValue = (targetValue, defaultLabel = '未找到') => {
   const option = modelTypeNameOptions.value.find((item) => item.value === targetValue)
