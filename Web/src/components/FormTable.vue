@@ -5,7 +5,7 @@
       class="row q-col-gutter-md q-mb-md"
       style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px"
     >
-      <template v-for="(field, name) in config.queryFields" :key="name">
+      <template v-for="(field, name) in config.queryFields || {}" :key="name">
         <component
           :is="getComponentType(field.type)"
           v-model="queryParams[name]"
@@ -18,8 +18,20 @@
 
       <div class="col-auto row q-col-gutter-sm">
         <q-btn color="primary" @click="handleSearch" v-permit="'select'">查询</q-btn>
-        <q-btn color="positive" @click="showAddDialog" v-permit="'add'">新增</q-btn>
-        <q-btn color="negative" @click="handleBatchDelete" v-permit="'delete'">删除</q-btn>
+        <q-btn
+          color="positive"
+          @click="showAddDialog"
+          v-permit="'add'"
+          v-if="config.tableConfig.add == undefined || config.tableConfig.add === true"
+          >新增</q-btn
+        >
+        <q-btn
+          color="negative"
+          @click="handleBatchDelete"
+          v-permit="'delete'"
+          v-if="config.tableConfig.delete == undefined || config.tableConfig.delete === true"
+          >删除</q-btn
+        >
       </div>
     </div>
     <!-- 数据表格 -->
@@ -54,14 +66,17 @@
                 dense
                 @click="handleView(props.row)"
                 v-permit="route.path + ':view'"
+                v-if="config.tableConfig.view == undefined || config.tableConfig.view === true"
               />
               <q-btn
                 icon="edit"
                 dense
                 @click="showEditDialog(props.row)"
                 v-permit="route.path + ':edit'"
+                v-if="config.tableConfig.edit == undefined || config.tableConfig.edit === true"
               />
               <q-btn
+                v-if="config.tableConfig.delete == undefined || config.tableConfig.delete === true"
                 icon="delete"
                 dense
                 @click="handleDelete(props.row[config.tableConfig.rowKey])"
@@ -119,11 +134,10 @@
         <main>
           <q-card-section>
             <q-form ref="quasarForm">
-              <slot name="form-body" :formData="formData">
+              <slot name="form-body" :formData="formData" :readonly="viewDialogVisible">
                 <div class="row q-col-gutter-md">
                   <template v-for="(field, name) in config.formFields" :key="name">
                     <component
-                      v-if="field.type"
                       :is="getComponentType(field.type)"
                       v-model="formData[name]"
                       class="col-12"
@@ -133,7 +147,15 @@
                       :rules="field.rules"
                       :readonly="viewDialogVisible"
                       v-on="extractListeners(field.props)"
-                    />
+                    >
+                      <template
+                        v-for="(slotConfig, slotName) in field.slots || {}"
+                        :key="slotName"
+                        #[slotName]
+                      >
+                        <SlotRenderer :config="slotConfig" />
+                      </template>
+                    </component>
                   </template>
                 </div>
               </slot>
@@ -161,44 +183,96 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, useTemplateRef } from 'vue'
+import { ref, reactive, computed, useTemplateRef, defineComponent, h } from 'vue'
 import { useRoute } from 'vue-router'
-import { useQuasar, QInput, QSelect, QBtnToggle, QToggle } from 'quasar'
+import { useQuasar } from 'quasar'
+import * as Quasar from 'quasar'
 import * as PrimeVue from 'primevue'
-import ResponsibleSelect from './ResponsibleSelect.vue'
-import HierarchyScopeEquipmentLevel from './HierarchyScopeEquipmentLevel.vue'
-import OrgSelect from './OrgSelect.vue'
-import TeamSelect from './TeamSelect.vue'
-import PositionSelect from './PositionSelect.vue'
-import EnterpriseSelect from './EnterpriseSelect.vue'
+
 const route = useRoute()
 const maximizedToggle = ref(false)
 const quasarForm = useTemplateRef('quasarForm')
 
-const getComponentType = (type) => {
-  const componentMap = {
-    'q-input': QInput,
-    'q-select': QSelect,
-    'q-btn-toggle': QBtnToggle,
-    'q-toggle': QToggle,
-    ResponsibleSelect: ResponsibleSelect,
-    HierarchyScopeEquipmentLevel: HierarchyScopeEquipmentLevel,
-    OrgSelect: OrgSelect,
-    TeamSelect: TeamSelect,
-    PositionSelect: PositionSelect,
-    EnterpriseSelect: EnterpriseSelect,
+// 插槽渲染器组件
+const SlotRenderer = defineComponent({
+  name: 'SlotRenderer',
+  props: {
+    config: {
+      type: Object,
+      required: true,
+    },
+  },
+  setup(props) {
+    return () => {
+      const { config } = props
+
+      if (config.component) {
+        // 如果直接指定了组件
+        return h(config.component, config.props || {}, config.content)
+      }
+
+      if (config.template) {
+        // 解析模板字符串
+        const parsed = parseTemplate(config.template)
+        if (parsed) {
+          return h(parsed.component, parsed.props, {
+            default: () => parsed.content,
+          })
+        }
+      }
+
+      return null
+    }
+  },
+})
+// 模板解析函数
+const parseTemplate = (template) => {
+  // 匹配组件标签和内容
+  const match = template.match(/<([\w-]+)([^>]*)>(.*?)<\/\1>/s)
+  if (match) {
+    const [, componentName, attrsString, content] = match
+
+    // 解析属性
+    const props = {}
+    if (attrsString) {
+      const attrMatches = attrsString.match(/(\w+)="([^"]*)"/g)
+      if (attrMatches) {
+        attrMatches.forEach((attr) => {
+          const [, key, value] = attr.match(/(\w+)="([^"]*)"/)
+          props[key] = value
+        })
+      }
+    }
+
+    const component = getComponentType(componentName) || componentName
+
+    return {
+      component,
+      props,
+      content: content.trim(),
+    }
   }
-  return componentMap[type] || PrimeVue[type] || type
+
+  return null
+}
+
+const toPascalCase = (str) => {
+  return str
+    .split('-')
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join('')
+}
+
+const getComponentType = (type) => {
+  const componentMap = toPascalCase(type)
+  return Quasar[componentMap] || PrimeVue[componentMap] || window[type] || type
 }
 const props = defineProps({
   config: {
     type: Object,
     required: true,
     validator: (value) => {
-      // 定义允许的属性
       const allowedKeys = ['queryFields', 'formFields', 'tableConfig']
-
-      // 检查传入的对象的所有属性是否都在允许的范围内
       return Object.keys(value).every((key) => allowedKeys.includes(key))
     },
   },
@@ -213,8 +287,6 @@ const props = defineProps({
   hideDialog: Function,
 })
 
-// 移除原有的axios相关代码
-// 保持表格数据相关状态
 const selectedRows = ref([])
 const tableData = defineModel('tableData', { default: [] })
 const pagination = defineModel('pagination', {
@@ -225,7 +297,6 @@ const pagination = defineModel('pagination', {
   },
 })
 const loading = ref(false)
-// 表单数据
 const formData = reactive({})
 const formDialogVisible = ref(false)
 const viewDialogVisible = ref(false)
@@ -233,11 +304,13 @@ const currentEditId = ref(null)
 const dialogTitle = computed(() =>
   currentEditId.value ? (viewDialogVisible.value ? '查看' : '编辑') : '新增',
 )
+
 const extractListeners = (props) => {
   const listeners = {}
+  if (!props) return listeners
+
   for (const key in props) {
     if (key.startsWith('on') && typeof props[key] === 'function') {
-      // 示例：提取事件名（onFilter => filter）
       const eventName = key.slice(2).toLowerCase()
       listeners[eventName] = props[key]
     }
@@ -263,39 +336,30 @@ const showAddDialog = async () => {
   }
 
   formDialogVisible.value = true
+  viewDialogVisible.value = false
 }
+
 const showEditDialog = async (row) => {
-  // 先清空 formData
   Object.keys(formData).forEach((key) => delete formData[key])
 
   if (props.showEditDialogBefore) await props.showEditDialogBefore(row)
   currentEditId.value = row[props.config.tableConfig.rowKey]
-
-  // 深拷贝 row 数据到 formData，避免引用问题
-  Object.keys(row).forEach((key) => {
-    if (Array.isArray(row[key])) {
-      // 对数组进行深拷贝
-      formData[key] = JSON.parse(JSON.stringify(row[key]))
-    } else if (typeof row[key] === 'object' && row[key] !== null) {
-      // 对对象进行深拷贝
-      formData[key] = JSON.parse(JSON.stringify(row[key]))
-    } else {
-      // 基本类型直接赋值
-      formData[key] = row[key]
-    }
-  })
+  Object.assign(formData, row)
 
   formDialogVisible.value = true
+  viewDialogVisible.value = false
 }
+
 const handleView = (row) => {
   Object.assign(formData, row)
   formDialogVisible.value = true
   viewDialogVisible.value = true
 }
+
 const handleSearch = async () => {
   await fetchData()
 }
-// 修改后，跳页后的获取数据方法
+
 const fetchData = async () => {
   try {
     loading.value = true
@@ -313,7 +377,6 @@ const fetchData = async () => {
   }
 }
 
-// 修改后的表单提交方法
 const submitForm = async () => {
   try {
     const valid = await quasarForm.value.validate()
@@ -329,6 +392,7 @@ const submitForm = async () => {
     handleError(error)
   }
 }
+
 const closeDialog = async () => {
   onReset()
   // 关闭对话框
@@ -337,14 +401,13 @@ const closeDialog = async () => {
   // 触发父组件的清理回调
   if (props.hideDialog) await props.hideDialog()
 }
-// 清空表单数据（保留响应式）
+
 const onReset = async () => {
   Object.keys(formData).forEach((key) => delete formData[key])
   // 重置编辑状态
   currentEditId.value = null
 }
 
-// 删除处理
 const handleDelete = async (id) => {
   try {
     await props.delete(id)
@@ -354,7 +417,6 @@ const handleDelete = async (id) => {
   }
 }
 
-// 批量删除处理
 const handleBatchDelete = async () => {
   if (selectedRows.value.length === 0) {
     showNotify('warning', '请选择要删除的记录')
@@ -370,9 +432,10 @@ const handleBatchDelete = async () => {
     handleError(error)
   }
 }
+
 const $q = useQuasar()
-// 查询参数
 const queryParams = reactive({})
+
 const initQueryParams = () => {
   if (props.config.queryFields)
     Object.keys(props.config.queryFields).forEach((key) => {
@@ -381,24 +444,20 @@ const initQueryParams = () => {
 }
 initQueryParams()
 
-// 处理分页变化
 const onTableChange = async (newPagination) => {
   Object.assign(pagination.value, newPagination.pagination)
   await fetchData()
 }
 
-// 错误统一处理
 const handleError = (error) => {
   const message = error.response?.data?.message || '请求失败'
   showNotify('negative', message)
 }
 
-// 显示通知
 const showNotify = (type, message) => {
   $q.notify({ type, message })
 }
 
-// 初始化列配置
 const columns = computed(() => [
   ...props.config.tableConfig.columns,
   {
@@ -410,7 +469,6 @@ const columns = computed(() => [
   },
 ])
 
-// 自动获取初始数据
 fetchData()
 </script>
 

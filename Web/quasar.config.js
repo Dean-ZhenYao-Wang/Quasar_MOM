@@ -71,6 +71,7 @@ export default defineConfig((ctx) => {
         viteConf.resolve.alias = {
           ...viteConf.resolve.alias,
           '@styles': fileURLToPath(new URL('./src/css', import.meta.url)),
+          vue: 'vue/dist/vue.esm-bundler.js',
         }
       },
       // viteVuePluginOptions: {},
@@ -118,13 +119,7 @@ export default defineConfig((ctx) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {
-      config: {
-        // 关闭 Quasar 默认组件自动导入
-        autoImport: {
-          components: false,
-          directives: false,
-        },
-      },
+      config: {},
 
       // iconSet: 'material-icons', // Quasar icon set
       lang: 'zh-CN', // Quasar language pack

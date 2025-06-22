@@ -1,23 +1,19 @@
-﻿using MOM.Domain.Common;
-using MOM.Domain.Common.EnumType;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using MOM.Domain.Common.EnumType;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MOM.Domain.CodingRule
+namespace MOM.Application.DTOs.CodingRule.Requests
 {
     /// <summary>
-    /// 编码段配置类
-    /// 定义编码规则中单个段的详细配置信息
-    /// 每个编码规则由多个编码段组成，按Order顺序排列
+    /// 编码规则段
     /// </summary>
-    public class CodingSegment : BaseEntity
+    public class CodingSegmentRequest
     {
+        /// <summary>
+        /// 编号
+        /// 对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
+        /// </summary>
+        public string Id { get; set; } = string.Empty;
         /// <summary>
         /// 段的排序顺序
         /// 用于确定该段在最终编码中的位置，从0开始
@@ -50,7 +46,7 @@ namespace MOM.Domain.CodingRule
         /// - DateTime类型：日期时间格式，如"yyyyMMdd"、"HHmmss"、"yyyy-MM-dd"等
         /// - 其他类型：预留扩展使用
         /// </summary>
-        public string Format { get; set; }=string.Empty;
+        public string Format { get; set; } = string.Empty;
 
         /// <summary>
         /// 段的固定长度
@@ -75,17 +71,5 @@ namespace MOM.Domain.CodingRule
         /// 默认为true（左填充）
         /// </summary>
         public bool PadLeft { get; set; } = true;
-
-        /// <summary>
-        /// 关联的编码配置规则数据库唯一标识
-        /// </summary>
-        public required Guid RuleDtId { get; set; }
-        /// <summary>
-        /// 关联的编码配置规则
-        /// </summary>
-        [JsonIgnore]
-        [ForeignKey(nameof(RuleDtId))]
-        public virtual CodingRule Rule { get; set; }
     }
-
 }

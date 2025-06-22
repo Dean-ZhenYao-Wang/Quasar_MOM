@@ -11,20 +11,6 @@
             每个编码规则对应一个特定的EF Core模型类型
             </summary>
         </member>
-        <member name="P:MOM.Domain.CodingRule.CodingRule.Id">
-            <summary>
-            编码规则的唯一标识符
-            用于在CodingRuleManager中注册和检索规则
-            建议使用有意义的命名，如"PRODUCT_RULE"、"ORDER_RULE"等
-            </summary>
-        </member>
-        <member name="P:MOM.Domain.CodingRule.CodingRule.Name">
-            <summary>
-            编码规则的显示名称
-            用于用户界面显示和日志记录
-            例如："产品编码规则"、"订单编码规则"等
-            </summary>
-        </member>
         <member name="P:MOM.Domain.CodingRule.CodingRule.Description">
             <summary>
             编码规则的详细描述

@@ -39,6 +39,130 @@
             可访问的菜单及按钮编号清单
             </summary>
         </member>
+        <member name="T:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest">
+            <summary>
+            编码规则
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest.Id">
+            <summary>
+            编码规则的唯一标识符
+            用于在CodingRuleManager中注册和检索规则
+            建议使用有意义的命名，如"PRODUCT_RULE"、"ORDER_RULE"等
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest.Name">
+            <summary>
+            编码规则的显示名称
+            用于用户界面显示和日志记录
+            例如："产品编码规则"、"订单编码规则"等
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest.Description">
+            <summary>
+            编码规则的详细描述
+            可选字段，用于记录规则的用途、格式说明等详细信息
+            便于后续维护和理解规则的业务含义
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest.ModelTypeName">
+            <summary>
+            目标EF Core模型类型
+            指定该编码规则适用于哪个实体模型
+            生成编码时会验证传入的模型对象是否匹配此类型
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest.Separator">
+            <summary>
+            编码段之间的分隔符
+            用于连接各个编码段，形成最终的编码字符串
+            常用分隔符："-"、"_"、"."、""（空字符串表示无分隔符）
+            默认为"-"
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest.Segments">
+            <summary>
+            编码段配置列表
+            包含组成该编码规则的所有段配置
+            生成编码时会按段的Order属性顺序处理
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest.IsActive">
+            <summary>
+            规则是否激活
+            true: 规则可用，可以被用于生成编码
+            false: 规则被禁用，GetRulesByModelType等方法会过滤掉此规则
+            默认为true
+            </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.CodingRule.Requests.CodingSegmentRequest">
+            <summary>
+            编码规则段
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingSegmentRequest.Id">
+            <summary>
+            编号
+            对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingSegmentRequest.Order">
+            <summary>
+            段的排序顺序
+            用于确定该段在最终编码中的位置，从0开始
+            生成编码时会按此顺序依次处理各个段
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingSegmentRequest.Type">
+            <summary>
+            段的类型
+            决定该段的值如何生成，参见SegmentType枚举的详细说明
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingSegmentRequest.Value">
+            <summary>
+            段的值或配置参数
+            根据Type的不同，该字段的含义不同：
+            - Fixed: 固定的字符串值
+            - Property: EF Core模型中的属性名称
+            - Sequence: 序列的名称标识（可选，默认为"default"）
+            - DateTime: 预留字段，主要使用Format字段
+            - Custom: 自定义逻辑的标识符或参数
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingSegmentRequest.Format">
+            <summary>
+            格式化字符串
+            用于格式化段的值，支持以下场景：
+            - Property类型：当属性值实现IFormattable接口时使用（如DateTime、数字等）
+            - DateTime类型：日期时间格式，如"yyyyMMdd"、"HHmmss"、"yyyy-MM-dd"等
+            - 其他类型：预留扩展使用
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingSegmentRequest.Length">
+            <summary>
+            段的固定长度
+            当值为0时不限制长度
+            当值大于0时：
+            - 如果实际值长度超过此值，会被截断
+            - 如果实际值长度不足此值，会使用PaddingChar进行填充
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingSegmentRequest.PaddingChar">
+            <summary>
+            填充字符
+            当实际值长度小于Length时，使用此字符进行填充
+            默认为'0'，常用于序列号的前导零填充
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingSegmentRequest.PadLeft">
+            <summary>
+            填充方向
+            true: 左填充（在值的左侧添加填充字符）- 适用于数字序列号
+            false: 右填充（在值的右侧添加填充字符）- 适用于字符串值
+            默认为true（左填充）
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Common.DeleteCommand.DtIds">
             <summary>
             需要被删除的对象的DtId清单

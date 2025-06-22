@@ -17,10 +17,10 @@ namespace MOM.Application.Features.CodingRule.Commands.RegisterRule
 
             if (existing != null)
             {
-                existing.Delete();
+                codingRuleRepository.Delete(existing);
             }
 
-            await codingRuleRepository.AddAsync(request);
+            await codingRuleRepository.AddAsync(request.ToCodingRule());
 
             await codingRuleRepository.SaveChangesAsync();
             return BaseResult.Ok();

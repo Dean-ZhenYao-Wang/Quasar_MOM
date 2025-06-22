@@ -26,6 +26,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -133,7 +134,11 @@ builder.Services.AddTransient<IAuthenticatedUserService>(serviceProvider =>
 });
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+}); ;
 builder.Services.AddVersioning();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddScalarWithVersioning();

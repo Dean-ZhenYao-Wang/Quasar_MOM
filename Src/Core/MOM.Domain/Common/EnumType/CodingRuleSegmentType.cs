@@ -42,7 +42,7 @@ namespace MOM.Domain.Common.EnumType
         /// <summary>
         /// 自定义逻辑段
         /// 该段的值通过自定义逻辑生成
-        /// 可通过继承CodingRuleManager并重写ProcessCustomSegment方法实现
+        /// 可通过继承ICodingRuleManager并重写ProcessCustomSegment方法实现
         /// </summary>
         [EnumMember(Value = "Custom"), Display(Name = "自定义逻辑")]
         Custom

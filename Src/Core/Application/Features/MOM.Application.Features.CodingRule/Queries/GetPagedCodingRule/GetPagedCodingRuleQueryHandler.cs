@@ -10,6 +10,7 @@ namespace MOM.Application.Features.CodingRule.Queries.GetPagedCodingRule
         public async Task<PagedResponse<Domain.CodingRule.CodingRule>> Handle(GetPagedCodingRuleQuery request, CancellationToken cancellationToken)
         {
             var query = codingRuleRepository
+                .Include(m => m.Segments.OrderBy(s => s.Order))
                 .Where(m => !string.IsNullOrWhiteSpace(request.Id) ? m.Id.Contains(request.Id) : true)
                 .Where(m => !string.IsNullOrWhiteSpace(request.Name) ? m.Name.Contains(request.Name) : true)
                 .Where(m => !string.IsNullOrWhiteSpace(request.ModelTypeName) ? m.Name.Equals(request.ModelTypeName) : true)

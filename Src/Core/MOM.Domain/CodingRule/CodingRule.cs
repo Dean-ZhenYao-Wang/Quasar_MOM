@@ -1,6 +1,7 @@
 ﻿using MOM.Domain.Common;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MOM.Domain.CodingRule
 {
@@ -11,22 +12,6 @@ namespace MOM.Domain.CodingRule
     /// </summary>
     public class CodingRule : BaseEntity
     {
-        /// <summary>
-        /// 编码规则的唯一标识符
-        /// 用于在CodingRuleManager中注册和检索规则
-        /// 建议使用有意义的命名，如"PRODUCT_RULE"、"ORDER_RULE"等
-        /// </summary>
-        [Required]
-        public new string Id { get; set; }
-
-        /// <summary>
-        /// 编码规则的显示名称
-        /// 用于用户界面显示和日志记录
-        /// 例如："产品编码规则"、"订单编码规则"等
-        /// </summary>
-        [Required]
-        public new string Name { get; set; }
-
         /// <summary>
         /// 编码规则的详细描述
         /// 可选字段，用于记录规则的用途、格式说明等详细信息
@@ -40,12 +25,16 @@ namespace MOM.Domain.CodingRule
         /// 生成编码时会验证传入的模型对象是否匹配此类型
         /// </summary>
         [NotMapped]
+        [JsonIgnore]
         public Type ModelType { get; set; }
-
+        private string model_type_name;
         public string ModelTypeName
         {
-            get => ModelType?.AssemblyQualifiedName;
-            set => ModelType = value != null ? Type.GetType(value) : null;
+            get => model_type_name;
+            set{
+                ModelType = value != null ? Type.GetType(value) : null;
+                model_type_name = value;
+            }
         }
 
         /// <summary>
