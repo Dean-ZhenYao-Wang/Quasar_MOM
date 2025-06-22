@@ -25,7 +25,7 @@ namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
                 return new Error(ErrorCode.NotFound, translator.GetString(TranslatorMessages.NotFound()));
             }
 
-            person.Update(request.Id, request.Name, request.WorkStatus, request.Email, request.PhoneNumber, request.TeamDtId, request.OrgDtId, request.PositionDtId_List, request.Description);
+            person.Update(request.UserName, request.Name, request.WorkStatus, request.Email, request.PhoneNumber, request.TeamDtId, request.OrgDtId, request.PositionDtId_List, request.Description);
 
             await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();

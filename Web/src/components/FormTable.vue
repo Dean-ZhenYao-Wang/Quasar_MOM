@@ -145,7 +145,7 @@
                       v-bind="field.props"
                       :label="field.label"
                       :rules="field.rules"
-                      :readonly="viewDialogVisible"
+                      :readonly="field.readonly || viewDialogVisible"
                       v-on="extractListeners(field.props)"
                     >
                       <template
@@ -188,6 +188,7 @@ import { useRoute } from 'vue-router'
 import { useQuasar } from 'quasar'
 import * as Quasar from 'quasar'
 import * as PrimeVue from 'primevue'
+// import { ComponentRegistry } from 'src/boot/global-components'
 
 const route = useRoute()
 const maximizedToggle = ref(false)

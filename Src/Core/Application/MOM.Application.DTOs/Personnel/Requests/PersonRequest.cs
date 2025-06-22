@@ -8,7 +8,7 @@ namespace MOM.Application.DTOs.Personnel.Requests
         /// <summary>
         /// UserName 账号
         /// </summary>
-        public required string Id { get; set; }
+        public required string UserName { get; set; }
 
         /// <summary>
         /// 姓名
@@ -52,11 +52,11 @@ namespace MOM.Application.DTOs.Personnel.Requests
         /// <summary>
         /// 扩展属性
         /// </summary>
-        public PersonProperty Property { get; set; }
+        public PersonProperty Property { get; set; } = new PersonProperty();
 
         public virtual Person ToPerson()
         {
-            Person person = new Person(Id, Name, WorkStatus, Email, PhoneNumber, TeamDtId, OrgDtId, PositionDtId_List, Description);
+            Person person = new Person(UserName, Name, WorkStatus, Email, PhoneNumber, TeamDtId, OrgDtId, PositionDtId_List, Description);
             person.Property = Property;
             return person;
         }

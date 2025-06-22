@@ -7,11 +7,11 @@ namespace MOM.Application.Features.Personnel.Commands.AddPerson
     {
         public AddPersonCommandValidator(ITranslator translator)
         {
-            RuleFor(p => p.Id)
+            RuleFor(p => p.UserName)
                 .NotNull()
                 .NotEmpty()
                 .MaximumLength(100)
-                .WithName(p => translator[nameof(p.Id)]);
+                .WithName(p => translator[nameof(p.UserName)]);
 
             RuleFor(p => p.Name)
                 .NotNull()

@@ -2375,6 +2375,11 @@
             标识操作位置属性引用的是操作位置对象还是包含位置描述。当指定操作位置属性时必填
             </remarks>
         </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.UserName">
+            <summary>
+            登录账号
+            </summary>        
+        </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Gender">
             <summary>
             性别

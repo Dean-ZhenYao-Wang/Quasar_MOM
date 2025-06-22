@@ -1,7 +1,6 @@
 ﻿using MediatR;
-using MOM.Application.Features.CodingRule.Commands.RegisterRule;
 
-namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
+namespace MOM.Application.DTOs.CodingRule.Requests
 {
     public class GenerateCodeCommand: IRequest<string>
     {

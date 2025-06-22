@@ -24,7 +24,7 @@
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.CodingRuleController.GenerateCode(MOM.Application.Features.CodingRule.Commands.GenerateCode.GenerateCodeCommand)">
+        <member name="M:系统基础数据.Controllers.v1.CodingRuleController.GenerateCode(MOM.Application.DTOs.CodingRule.Requests.GenerateCodeCommand)">
             <summary>
             生成编码字符串
             </summary>

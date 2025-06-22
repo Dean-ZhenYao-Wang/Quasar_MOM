@@ -15,7 +15,7 @@
           label="配置权限"
           @click="() => openPermissionDialog(row)"
           dense
-          v-permit="orgPermission"
+          v-permit="`orgPermission`"
         />
       </template>
     </form-table>

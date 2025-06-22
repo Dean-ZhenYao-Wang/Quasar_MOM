@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MOM.Application.Features.CodingRule.Commands.GenerateCode;
+using MOM.Application.DTOs.CodingRule.Requests;
 using MOM.Application.Features.CodingRule.Commands.RegisterRule;
 using MOM.Application.Features.CodingRule.Queries.GetPagedCodingRule;
 using MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition;

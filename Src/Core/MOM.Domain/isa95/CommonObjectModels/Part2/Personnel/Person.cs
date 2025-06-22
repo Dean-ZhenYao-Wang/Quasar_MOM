@@ -110,7 +110,11 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// 标识操作位置属性引用的是操作位置对象还是包含位置描述。当指定操作位置属性时必填
         /// </remarks>
         public PersonOperationalLocationType? OperationalLocationType { get; set; }
-
+        /// <summary>
+        /// 登录账号
+        /// </summary>        
+        [Required]
+        public string UserName { get; set; }
         /// <summary>
         /// 性别
         /// </summary>
@@ -160,9 +164,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </summary>
         public virtual List<AvailablePermission> AvailablePermissions { get; set; } = new();
 
-        public Person(string Id, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null)
+        public Person(string userName, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null)
         {
-            this.Id = Id;
+            this.UserName = userName;
             this.WorkStatus = workStatus;
             this.Description = description;
             this.Name = name;

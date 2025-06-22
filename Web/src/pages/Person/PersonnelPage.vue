@@ -32,7 +32,7 @@
           label="配置权限"
           @click="() => openPermissionDialog(row)"
           dense
-          v-permit="orgPermission"
+          v-permit="`orgPermission`"
         />
       </template>
     </form-table>
@@ -160,6 +160,11 @@ const table_Config = {
     id: {
       type: 'q-input',
       label: '工号',
+      readonly: true,
+    },
+    userName: {
+      type: 'q-input',
+      label: '登录账号',
       props: {
         outlined: true,
       },
@@ -198,10 +203,7 @@ const table_Config = {
         'emit-value': true,
         'map-options': true,
       },
-      defaultValue: {
-        label: '在职',
-        value: 'Employed',
-      },
+      defaultValue: 'Employed',
       rules: [(val) => !!val || '必填字段'],
     },
     email: {
