@@ -7,6 +7,8 @@ const api = axios.create({ baseURL: process.env.API_BASE_URL })
 
 export default defineBoot(({ app, router }) => {
   const userStore = useCurrentUserStore()
+  // 初始化用户信息
+  userStore.initFromLocalStorage()
   // 添加 router 参数
   // 请求拦截器
   api.interceptors.request.use(
