@@ -7,7 +7,7 @@ namespace MOM.Application.DTOs.HierarchyScope.Requests
         /// <summary>
         /// 组织编号
         /// </summary>
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// 组织名称

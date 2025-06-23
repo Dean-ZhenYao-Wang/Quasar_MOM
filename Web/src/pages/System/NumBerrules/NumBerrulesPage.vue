@@ -16,6 +16,7 @@
           segmentPagination.rowsNumber = row.segments.length
           segmentPagination.page = 1
           previewNumber = ''
+          is_previewNumber = true
         }
       "
       :showAddDialogBefore="
@@ -26,6 +27,7 @@
           segmentTableData = []
           segmentPagination.page = 1
           previewNumber = ''
+          is_previewNumber = false
         }
       "
       :showViewBefore="
@@ -33,6 +35,7 @@
           segmentPagination.rowsNumber = row.segments.length
           segmentPagination.page = 1
           previewNumber = ''
+          is_previewNumber = true
         }
       "
     >
@@ -104,16 +107,18 @@
         >
         </form-table>
         <!-- 预览区域 -->
-        <q-separator />
-        <div class="text-subtitle2 q-mt-md">编号预览:</div>
-        <q-btn
-          label="生成"
-          color="primary"
-          @click="generateTestNumber(formData.id, formData.modelTypeName)"
-        />
-        <q-card flat bordered class="q-pa-sm bg-grey-1">
-          <div class="text-body2">{{ previewNumber }}</div>
-        </q-card>
+        <template v-if="is_previewNumber">
+          <q-separator />
+          <div class="text-subtitle2 q-mt-md">编号预览:</div>
+          <q-btn
+            label="生成"
+            color="primary"
+            @click="generateTestNumber(formData.id, formData.modelTypeName)"
+          />
+          <q-card flat bordered class="q-pa-sm bg-grey-1">
+            <div class="text-body2">{{ previewNumber }}</div>
+          </q-card>
+        </template>
       </template>
     </form-table>
   </q-page>
@@ -122,10 +127,10 @@
 <script setup>
 import { ref } from 'vue'
 import { useCodeRuleStore } from 'src/stores/codeRule'
-// import { uid } from 'quasar'
+import { uid } from 'quasar'
 
 const codeRuleStore = useCodeRuleStore()
-
+const is_previewNumber = ref(false)
 const ruleTable_Config = {
   tableConfig: {
     rowKey: 'dtId',
