@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace MOM.Domain.Common
 {
@@ -12,7 +11,7 @@ namespace MOM.Domain.Common
         /// 数据库唯一主键
         /// </summary>
         [Key]
-        public Guid DtId { get; set; }=Guid.NewGuid();
+        public Guid DtId { get; set; } = Guid.NewGuid();
 
         /// <summary>
         /// 对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
@@ -24,22 +23,27 @@ namespace MOM.Domain.Common
         /// 创建者数据库唯一标识
         /// </summary>
         public Guid CreatedBy { get; set; }
+
         /// <summary>
         /// 创建时间
         /// </summary>
         public DateTime Created { get; set; }
+
         /// <summary>
         /// 最后修改者数据库唯一标识
         /// </summary>
         public Guid? LastModifiedBy { get; set; }
+
         /// <summary>
         /// 最后修改时间
         /// </summary>
         public DateTime? LastModified { get; set; }
+
         /// <summary>
         /// 是否删除
         /// </summary>
         public bool IsDelete { get; set; }
+
         /// <summary>
         /// 目标数字孪生的唯一标识符。该属性存在于所有关系中。
         /// </summary>
@@ -54,6 +58,7 @@ namespace MOM.Domain.Common
         /// 关系名称，定义链接类型（例如"contains"）。该属性存在于所有关系中。
         /// </summary>
         public abstract string Name { get; set; }
+
         /// <summary>
         /// 深度
         /// </summary>

@@ -1,10 +1,9 @@
-
 namespace MOM.Domain.Common.Relationship.isa95.OperationalLocation
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public class OperationalLocationHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation ,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<OperationalLocationHierarchyScopeRelRelationship>
+    public class OperationalLocationHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation, Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<OperationalLocationHierarchyScopeRelRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "hierarchyScopeRel";
@@ -13,14 +12,17 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationalLocation
         public OperationalLocationHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)
         {
         }
+
         /// <inheritdoc/>
         public OperationalLocationHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
         }
+
         /// <inheritdoc/>
         public OperationalLocationHierarchyScopeRelRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
         {
         }
+
         /// <inheritdoc/>
         public OperationalLocationHierarchyScopeRelRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.HierarchyScope target, int depth) : base(sourceId, target, depth)
         {

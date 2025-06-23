@@ -5,7 +5,7 @@
         /// <summary>
         /// 查看的页数
         /// </summary>
-        public int PageNumber { get; set; }
+        public int Page { get; set; }
 
         /// <summary>
         /// 每页显示的数据条数
@@ -28,7 +28,7 @@
             {
                 Success = true,
                 Data = model.Data,
-                PageNumber = model.PageNumber,
+                Page = model.PageNumber,
                 PageSize = model.PageSize,
                 TotalItems = model.Count,
                 TotalPages = (int)Math.Ceiling(model.Count / (double)model.PageSize)

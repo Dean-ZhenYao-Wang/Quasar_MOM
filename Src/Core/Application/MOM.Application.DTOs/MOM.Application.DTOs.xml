@@ -14,6 +14,21 @@
             新密码
             </summary>
         </member>
+        <member name="T:MOM.Application.DTOs.Account.Requests.GetAllUsersRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Account.Requests.GetAllUsersRequest.Name">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Account.Responses.AuthenticationResponse">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Account.Responses.AuthenticationResponse.EmployeeNumber">
             <summary>
             工号
@@ -39,10 +54,20 @@
             可访问的菜单及按钮编号清单
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.Account.Responses.AuthenticationResponse.JwToken">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="T:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest">
             <summary>
             编码规则
             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest.DtId">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest.Id">
             <summary>
@@ -94,6 +119,11 @@
             false: 规则被禁用，GetRulesByModelType等方法会过滤掉此规则
             默认为true
             </summary>
+        </member>
+        <member name="M:MOM.Application.DTOs.CodingRule.Requests.CodingRuleRequest.ToCodingRule">
+             <summary>
+            
+             </summary>
         </member>
         <member name="T:MOM.Application.DTOs.CodingRule.Requests.CodingSegmentRequest">
             <summary>
@@ -182,10 +212,20 @@
             从数据库查询出来的当前对象实例，仅在后端生成编码时使用，给谁生成编码，这个实例就是谁
             </summary>
         </member>
+        <member name="T:MOM.Application.DTOs.Common.DeleteCommand">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Common.DeleteCommand.DtIds">
             <summary>
             需要被删除的对象的DtId清单
             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Common.TreeNode`1">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Common.TreeNode`1.key">
             <summary>
@@ -224,13 +264,38 @@
         </member>
         <member name="P:MOM.Application.DTOs.Common.TreeNode`1.leaf">
             <summary>
-            指定节点是否具有子项。用于延迟加载。若为true时，前端控件则是看children是否含有元素，如果有则会显示折叠图标，否则不显示
+            指定节点是否具有子项。用于延迟加载。若为 true 时，前端控件则是看 children 是否含有元素，如果有则会显示折叠图标，否则不显示
             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Common.TreeNode`1.loading">
             <summary>
             指定节点加载。用于 Tree 和 TreeTable
             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.HierarchyScope.OrgException">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.DTOs.HierarchyScope.OrgException.ToOrgTreeResponse(MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Nullable{System.Guid})">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.DTOs.HierarchyScope.OrgException.ToOrgItemResponse(MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Nullable{System.Guid},System.String,System.String)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.HierarchyScope.Requests.AddOrgRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.Id">
             <summary>
@@ -273,15 +338,25 @@
             禁用后，这将阻止跟踪和追溯、OEE 停机时间、SPC、设置和转换以及调度模块使用该区域及其下方的任何其他生产项目
             </summary>
         </member>
+        <member name="M:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.ToHierarchyScope">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.HierarchyScope.Requests.UpdateOrgRequest">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.HierarchyScope.Requests.UpdateOrgRequest.DtId">
             <summary>
             组织的数据库唯一Key
             </summary>
         </member>
-        <member name="P:MOM.Application.DTOs.HierarchyScope.Responses.OrgResponse.SourceDtId">
-            <summary>
-            所属组织DtId
-            </summary>
+        <member name="T:MOM.Application.DTOs.HierarchyScope.Responses.OrgResponse">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.HierarchyScope.Responses.OrgResponse.SourceName">
             <summary>
@@ -303,15 +378,100 @@
             路径
             </summary>
         </member>
+        <member name="T:MOM.Application.DTOs.Menu.MenuException">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.DTOs.Menu.MenuException.ToMenuTreeNodeResponse(MOM.Domain.Permission.Menu)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Menu.Requests.AddButtonRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.AddButtonRequest.MenuDtId">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.DTOs.Menu.Requests.AddButtonRequest.ToButton">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Menu.Requests.AddMenuRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Menu.Requests.ButtonRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.ButtonRequest.DtId">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Menu.Requests.ButtonRequest.Id">
             <summary>
             编号
             </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.ButtonRequest.Name">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.ButtonRequest.Icon">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Menu.Requests.MenuRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.DtId">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.ParentMenuDtId">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.Id">
             <summary>
             编号
             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.Name">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.Path">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.Description">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.Icon">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Menu.Requests.MenuRequest.Hidden">
             <summary>
@@ -328,10 +488,55 @@
             第几层的菜单
             </summary>
         </member>
+        <member name="M:MOM.Application.DTOs.Menu.Requests.MenuRequest.ToMenu">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Menu.Requests.UpdateButtonRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Menu.Requests.UpdateMenuRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Menu.Responses.ButtonResponse">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Responses.ButtonResponse.MenuDtId">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Menu.Responses.MenuResponse">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Menu.Responses.MenuResponse.IsChild">
             <summary>
             是否有子菜单
             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Menu.Responses.MenuTreeNodeResponse">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Menu.Responses.MenuTreeNodeResponse.Children">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Permission.Requests.SettingPermissionRequest">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Permission.Requests.SettingPermissionRequest.menuButtonIds">
             <summary>
@@ -342,6 +547,16 @@
             <summary>
             所有者DtId,谁对这些菜单和按钮具有权限
             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.PersonnelClass.Requests.AddPositionRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.PersonnelClass.Requests.AddTeamRequest">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.AddTeamRequest.ResponsibleDtId">
             <summary>
@@ -357,6 +572,16 @@
             <summary>
             所属组织唯一标识
             </summary>
+        </member>
+        <member name="M:MOM.Application.DTOs.PersonnelClass.Requests.AddTeamRequest.ToPersonnelClass(System.String)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.PersonnelClass.Requests.PersonnelClassRequest">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.PersonnelClassRequest.Id">
             <summary>
@@ -379,10 +604,20 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:MOM.Application.DTOs.PersonnelClass.Requests.UpdateTeamRequest">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.PersonnelClass.Requests.UpdateTeamRequest.DtId">
             <summary>
             班组的数据库唯一标识
             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.PersonnelClass.Responses.PersonnelClassResponse">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.PersonnelClass.Responses.PersonnelClassResponse.DtId">
             <summary>
@@ -393,6 +628,11 @@
             <summary>
             权限清单，菜单或按钮的编号
             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.PersonnelClass.Responses.TeamResponse">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.PersonnelClass.Responses.TeamResponse.ResponsibleDtId">
             <summary>
@@ -423,6 +663,16 @@
             <summary>
             所属组织名称/路径
             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Personnel.Requests.AddPersonRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Personnel.Requests.PersonRequest">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Personnel.Requests.PersonRequest.Id">
             <summary>
@@ -479,10 +729,25 @@
             扩展属性
             </summary>
         </member>
+        <member name="M:MOM.Application.DTOs.Personnel.Requests.PersonRequest.ToPerson">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Personnel.Requests.UpdatePersonRequest">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.Personnel.Requests.UpdatePersonRequest.DtId">
             <summary>
             人员的唯一标识
             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Personnel.Responses.PersonResponse">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.DtId">
             <summary>
@@ -491,7 +756,12 @@
         </member>
         <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Id">
             <summary>
-            UserName 账号
+            工号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.UserName">
+            <summary>
+            账号
             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.Name">
@@ -582,6 +852,102 @@
         <member name="P:MOM.Application.DTOs.Personnel.Responses.PersonResponse.AvailablePermissions">
             <summary>
             当前人的特殊权限
+            </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.Personnel.Responses.AvailablePerm">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.AvailablePerm.Available">
+            <summary>
+            是否可用,用来做单独的权限的不可用限制,用来进行差集计算
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.Personnel.Responses.AvailablePerm.MenuButtonId">
+            <summary>
+            菜单或按钮编号
+            </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.AddEquipmentClassRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentClassRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentClassRequest.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentClassRequest.Property">
+            <summary>
+            具有的属性
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentClassRequest.Description">
+            <summary>
+            描述
+            </summary>
+            <remarks>
+            设备类别的补充信息
+            </remarks>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentClassRequest.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentClassRequest.EquipmentLevel">
+            <summary>
+            设备层级
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentClassRequest.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentClassRequest.Description">
+            <summary>
+            描述
+            </summary>
+            <remarks>
+            设备类别的补充信息
+            </remarks>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentClassRequest.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentClassRequest.EquipmentLevel">
+            <summary>
+            设备层级
+            </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.UpdateEquipmentClassRequest">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.UpdateEquipmentClassRequest.DtId">
+            <summary>
+            设备类别ID
             </summary>
         </member>
     </members>

@@ -2,6 +2,9 @@
 
 namespace MOM.Application.DTOs.PersonnelClass.Responses
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class PersonnelClassResponse : PersonnelClassRequest
     {
         /// <summary>
@@ -12,6 +15,6 @@ namespace MOM.Application.DTOs.PersonnelClass.Responses
         /// <summary>
         /// 权限清单，菜单或按钮的编号
         /// </summary>
-        public IEnumerable<string> Permissions { get; set; }
+        public IEnumerable<string> Permissions { get; set; } = new List<string>();
     }
 }

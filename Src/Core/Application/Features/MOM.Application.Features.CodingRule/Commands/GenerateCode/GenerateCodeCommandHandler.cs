@@ -1,9 +1,7 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs.CodingRule.Requests;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
-using MOM.Application.Wrappers;
 using MOM.Domain.CodingRule;
 using System.Data;
 
@@ -30,7 +28,6 @@ namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
                 }
             }
 
-
             var segments = new List<string>();
 
             // 按Order顺序处理所有编码段
@@ -43,6 +40,7 @@ namespace MOM.Application.Features.CodingRule.Commands.GenerateCode
             // 使用分隔符连接所有段
             return string.Join(rule.Separator, segments);
         }
+
         /// <summary>
         /// 生成单个编码段的值
         /// 根据段的类型配置，从不同来源获取或生成段值

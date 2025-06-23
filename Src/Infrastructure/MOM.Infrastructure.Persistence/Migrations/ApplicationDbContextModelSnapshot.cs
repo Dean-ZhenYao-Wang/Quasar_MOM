@@ -17,7 +17,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.5")
+                .HasAnnotation("ProductVersion", "9.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -436,6 +436,200 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("PersonnelClasses");
                 });
 
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
+
+                    b.Property<DateTime?>("DateOfPurchase")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DepreciationLife")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EnabledTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EquipmentLevel")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("FactoryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FactoryNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("HierarchyScopeRelDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("InitialPrice")
+                        .HasColumnType("decimal(18,6)");
+
+                    b.Property<string>("ModelNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ResponsibleDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Specification")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Supplier")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UseOrgDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("WarrantyPeriod")
+                        .HasColumnType("datetime2");
+
+                    b.HasIndex("HierarchyScopeRelDtId")
+                        .IsUnique()
+                        .HasFilter("[HierarchyScopeRelDtId] IS NOT NULL");
+
+                    b.HasIndex("ResponsibleDtId");
+
+                    b.HasIndex("UseOrgDtId");
+
+                    b.ToTable("Equipment", (string)null);
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EquipmentLevel")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("HierarchyScopeRelDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("HierarchyScopeRelDtId");
+
+                    b.ToTable("EquipmentClass", (string)null);
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FixedAssetID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("HierarchyScopeRelDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PhysicalLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PhysicalLocationRelDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("PhysicalLocationType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VendorID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("HierarchyScopeRelDtId");
+
+                    b.HasIndex("PhysicalLocationRelDtId");
+
+                    b.ToTable("PhysicalAsset", (string)null);
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("HierarchyScopeRelDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Manufacturer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("HierarchyScopeRelDtId");
+
+                    b.ToTable("PhysicalAssetClass", (string)null);
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.HasIndex("SourceId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("EquipmentDefinedByRelationship");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.HasIndex("SourceId")
+                        .IsUnique();
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("EquipmentImplementedByRelationship");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.HasIndex("SourceId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("EquipmentIsMadeUpOfRelationship");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.HasIndex("SourceId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("EquipmentClassIncludesPropertiesOfRelationship");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.HasIndex("SourceId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("EquipmentClassIsMadeUpOfRelationship");
+                });
+
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship", b =>
                 {
                     b.HasBaseType("MOM.Domain.Common.BasicRelationship");
@@ -513,18 +707,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("PersonHierarchyScopeRelRelationship");
                 });
 
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship", b =>
-                {
-                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
-
-                    b.HasIndex("SourceId")
-                        .IsUnique();
-
-                    b.HasIndex("TargetId");
-
-                    b.ToTable("PersonOperationalLocationRelRelationship");
-                });
-
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship", b =>
                 {
                     b.HasBaseType("MOM.Domain.Common.BasicRelationship");
@@ -534,6 +716,50 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.HasIndex("TargetId");
 
                     b.ToTable("PersonnelClassIncludesPropertiesOfRelationships");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.HasIndex("SourceId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("PhysicalAssetDefinedByRelationship");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.HasIndex("SourceId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("PhysicalAssetIsMadeUpOfRelationship");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.HasIndex("SourceId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("PhysicalAssetClassIncludesPropertiesOfRelationship");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship", b =>
+                {
+                    b.HasBaseType("MOM.Domain.Common.BasicRelationship");
+
+                    b.HasIndex("SourceId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("PhysicalAssetClassIsMadeUpOfRelationship");
                 });
 
             modelBuilder.Entity("MOM.Domain.Permission.AvailablePermission", b =>
@@ -765,8 +991,7 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("Property")
                         .IsRequired();
 
-                    b.Navigation("SpatialDefinition")
-                        .IsRequired();
+                    b.Navigation("SpatialDefinition");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", b =>
@@ -799,6 +1024,276 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Responsible");
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "HierarchyScopeRel")
+                        .WithOne()
+                        .HasForeignKey("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment", "HierarchyScopeRelDtId");
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleDtId");
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "UseOrg")
+                        .WithMany()
+                        .HasForeignKey("UseOrgDtId");
+
+                    b.OwnsOne("MOM.Domain.isa95.CommonObjectModels.SpatialDefinition", "SpatialDefinition", b1 =>
+                        {
+                            b1.Property<Guid>("EquipmentDtId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Format")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("SRIAuthority")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("SRID")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Value")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("EquipmentDtId");
+
+                            b1.ToTable("Equipment");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EquipmentDtId");
+                        });
+
+                    b.OwnsOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentProperty", "Property", b1 =>
+                        {
+                            b1.Property<Guid>("EquipmentDtId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.HasKey("EquipmentDtId");
+
+                            b1.ToTable("Equipment");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EquipmentDtId");
+                        });
+
+                    b.Navigation("HierarchyScopeRel");
+
+                    b.Navigation("Property")
+                        .IsRequired();
+
+                    b.Navigation("Responsible");
+
+                    b.Navigation("SpatialDefinition");
+
+                    b.Navigation("UseOrg");
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "HierarchyScopeRel")
+                        .WithMany()
+                        .HasForeignKey("HierarchyScopeRelDtId");
+
+                    b.OwnsOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClassProperty", "Property", b1 =>
+                        {
+                            b1.Property<Guid>("EquipmentClassDtId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.HasKey("EquipmentClassDtId");
+
+                            b1.ToTable("EquipmentClass");
+
+                            b1.WithOwner()
+                                .HasForeignKey("EquipmentClassDtId");
+                        });
+
+                    b.Navigation("HierarchyScopeRel");
+
+                    b.Navigation("Property")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "HierarchyScopeRel")
+                        .WithMany()
+                        .HasForeignKey("HierarchyScopeRelDtId");
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation", "PhysicalLocationRel")
+                        .WithMany()
+                        .HasForeignKey("PhysicalLocationRelDtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("MOM.Domain.isa95.CommonObjectModels.SpatialDefinition", "SpatialDefinition", b1 =>
+                        {
+                            b1.Property<Guid>("PhysicalAssetDtId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Format")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("SRIAuthority")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("SRID")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Value")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("PhysicalAssetDtId");
+
+                            b1.ToTable("PhysicalAsset");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PhysicalAssetDtId");
+                        });
+
+                    b.OwnsOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetProperty", "Property", b1 =>
+                        {
+                            b1.Property<Guid>("PhysicalAssetDtId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.HasKey("PhysicalAssetDtId");
+
+                            b1.ToTable("PhysicalAsset");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PhysicalAssetDtId");
+                        });
+
+                    b.Navigation("HierarchyScopeRel");
+
+                    b.Navigation("PhysicalLocationRel");
+
+                    b.Navigation("Property")
+                        .IsRequired();
+
+                    b.Navigation("SpatialDefinition")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "HierarchyScopeRel")
+                        .WithMany()
+                        .HasForeignKey("HierarchyScopeRelDtId");
+
+                    b.OwnsOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClassProperty", "Property", b1 =>
+                        {
+                            b1.Property<Guid>("PhysicalAssetClassDtId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.HasKey("PhysicalAssetClassDtId");
+
+                            b1.ToTable("PhysicalAssetClass");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PhysicalAssetClassDtId");
+                        });
+
+                    b.Navigation("HierarchyScopeRel");
+
+                    b.Navigation("Property")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment", "Source")
+                        .WithMany("DefinedBy")
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Source");
+
+                    b.Navigation("Target");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment", "Source")
+                        .WithOne("ImplementedBy")
+                        .HasForeignKey("MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship", "SourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Source");
+
+                    b.Navigation("Target");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment", "Source")
+                        .WithMany("IsMadeUpOf")
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Source");
+
+                    b.Navigation("Target");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass", "Source")
+                        .WithMany("IncludesPropertiesOf")
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Source");
+
+                    b.Navigation("Target");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass", "Source")
+                        .WithMany("IsMadeUpOf")
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Source");
+
+                    b.Navigation("Target");
                 });
 
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship", b =>
@@ -934,15 +1429,15 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("Target");
                 });
 
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship", b =>
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship", b =>
                 {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", "Source")
-                        .WithOne("OperationalLocationRel")
-                        .HasForeignKey("MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship", "SourceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "Source")
+                        .WithMany("IncludesPropertiesOf")
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation", "Target")
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "Target")
                         .WithMany()
                         .HasForeignKey("TargetId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -953,15 +1448,72 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("Target");
                 });
 
-            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship", b =>
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship", b =>
                 {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "Source")
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset", "Source")
+                        .WithMany("DefinedBy")
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Source");
+
+                    b.Navigation("Target");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset", "Source")
+                        .WithMany("IsMadeUpOf")
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Source");
+
+                    b.Navigation("Target");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass", "Source")
                         .WithMany("IncludesPropertiesOf")
                         .HasForeignKey("SourceId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", "Target")
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Source");
+
+                    b.Navigation("Target");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass", "Source")
+                        .WithMany("IsMadeUpOf")
+                        .HasForeignKey("SourceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass", "Target")
                         .WithMany()
                         .HasForeignKey("TargetId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1014,9 +1566,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("AvailablePermissions");
 
                     b.Navigation("DefinedBy");
-
-                    b.Navigation("OperationalLocationRel")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass", b =>
@@ -1024,6 +1573,37 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("IncludesPropertiesOf");
 
                     b.Navigation("Permissions");
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment", b =>
+                {
+                    b.Navigation("DefinedBy");
+
+                    b.Navigation("ImplementedBy")
+                        .IsRequired();
+
+                    b.Navigation("IsMadeUpOf");
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass", b =>
+                {
+                    b.Navigation("IncludesPropertiesOf");
+
+                    b.Navigation("IsMadeUpOf");
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset", b =>
+                {
+                    b.Navigation("DefinedBy");
+
+                    b.Navigation("IsMadeUpOf");
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass", b =>
+                {
+                    b.Navigation("IncludesPropertiesOf");
+
+                    b.Navigation("IsMadeUpOf");
                 });
 #pragma warning restore 612, 618
         }

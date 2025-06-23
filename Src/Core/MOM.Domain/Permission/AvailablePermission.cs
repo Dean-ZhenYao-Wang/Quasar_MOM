@@ -18,7 +18,7 @@ namespace MOM.Domain.Permission
         /// <summary>
         /// 菜单或按钮编号
         /// </summary>
-        public required string MenuButtonId { get; set; }
+        public string MenuButtonId { get; set; }
 
         /// <summary>
         /// 是否可用,用来做单独的权限的不可用限制,用来进行差集计算
@@ -28,7 +28,8 @@ namespace MOM.Domain.Permission
         /// <summary>
         /// 具有此权限的人的数据库唯一Key
         /// </summary>
-        public required Guid PersonDtId { get; set; }
+        public Guid PersonDtId { get; set; }
+
         /// <summary>
         /// 具有此权限的人
         /// </summary>

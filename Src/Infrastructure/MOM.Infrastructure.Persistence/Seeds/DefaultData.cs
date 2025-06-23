@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Infrastructure.Extensions;
 using MOM.Domain.Common.EnumType;
-using MOM.Domain.Common.Relationship.isa95.HierarchyScope;
 using MOM.Domain.Common.Relationship.isa95.PersonnelClass;
-using MOM.Domain.isa95.CommonObjectModels;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Contexts;
@@ -32,7 +30,7 @@ namespace MOM.Infrastructure.Persistence.Seeds
                 //PersonnelClass personnelClass = new PersonnelClass("超级管理员", "角色", enterprise);
                 PersonnelClass personnelClass = new PersonnelClass("超级管理员", "角色");
                 applicationDbContext.PersonnelClasses.Add(personnelClass);
-                applicationDbContext.PersonnelClassIncludesPropertiesOfRelationships.Add(new PersonnelClassIncludesPropertiesOfRelationship(personnelClass.DtId, personnelClass.DtId,0));
+                applicationDbContext.PersonnelClassIncludesPropertiesOfRelationships.Add(new PersonnelClassIncludesPropertiesOfRelationship(personnelClass.DtId, personnelClass.DtId, 0));
 
                 applicationDbContext.PersonnelClassPermission.Add(new Domain.Permission.PersonnelClassPermission()
                 {
@@ -42,7 +40,6 @@ namespace MOM.Infrastructure.Persistence.Seeds
 
                 //admin.HierarchyScopeRelDtId = enterprise.DtId;
                 admin.DefinedByAddTarget(new Guid[] { personnelClass.DtId }, "角色");
-
 
                 List<Menu> menus = new List<Menu>();
 

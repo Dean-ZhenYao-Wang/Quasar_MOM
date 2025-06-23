@@ -30,6 +30,7 @@ namespace 人员认证管理.Controllers.v1
         {
             return await Mediator.Send(new GetResponsiblesQuery());
         }
+
         /// <summary>
         /// 查询人员列表
         /// </summary>
@@ -40,7 +41,6 @@ namespace 人员认证管理.Controllers.v1
         {
             return await Mediator.Send(request);
         }
-
 
         ///// <summary>
         ///// 获取指定人员的自定义属性清单
@@ -63,7 +63,6 @@ namespace 人员认证管理.Controllers.v1
             var model = await Mediator.Send(command);
             return model;
         }
-
 
         /// <summary>
         /// 删除人员
@@ -88,6 +87,7 @@ namespace 人员认证管理.Controllers.v1
             var updateResoult = await Mediator.Send(command);
             return updateResoult;
         }
+
         /// <summary>
         /// 给人配置基本特殊指定权限
         /// </summary>

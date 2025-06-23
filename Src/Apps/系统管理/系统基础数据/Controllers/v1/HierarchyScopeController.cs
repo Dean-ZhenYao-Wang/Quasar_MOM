@@ -17,6 +17,9 @@ using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
 {
+    /// <summary>
+    /// 设备角色层次/生产建模
+    /// </summary>
     [Tags("设备角色层次/生产建模")]
     [ApiVersion("1")]
     public sealed class HierarchyScopeController : BaseApiController
@@ -31,6 +34,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(query);
         }
+
         /// <summary>
         /// 查询企业列表
         /// </summary>
@@ -41,6 +45,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(query);
         }
+
         /// <summary>
         /// 查询工厂列表
         /// </summary>

@@ -1,10 +1,9 @@
-
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentClass
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public class EquipmentClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass ,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass>, IEquatable<EquipmentClassIncludesPropertiesOfRelationship>
+    public class EquipmentClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass>, IEquatable<EquipmentClassIncludesPropertiesOfRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "includesPropertiesOf";
@@ -28,7 +27,6 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentClass
         public EquipmentClassIncludesPropertiesOfRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass target, int depth) : base(sourceId, target, depth)
         {
         }
-
 
         /// <inheritdoc/>
         public override bool Equals(object? obj)

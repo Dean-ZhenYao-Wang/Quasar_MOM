@@ -3,6 +3,9 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.DTOs.Common
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class DeleteCommand : IRequest<BaseResult>
     {
         /// <summary>

@@ -16,10 +16,11 @@ namespace MOM.Application.Features.Personnel.Queries.GetPagedListPerson
         /// 姓名
         /// </summary>
         public string? Name { get; set; }
+
         /// <summary>
         /// 状态
         /// </summary>
-        public PersonWorkStatus? WorkStatus { get; set; } 
+        public PersonWorkStatus? WorkStatus { get; set; }
 
         /// <summary>
         /// 邮箱

@@ -5,6 +5,9 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Personnel.Commands.Authentication
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class AuthenticationCommand : AuthenticationRequest, IRequest<BaseResult<AuthenticationResponse>>
     {
     }

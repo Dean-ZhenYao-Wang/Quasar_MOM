@@ -4,6 +4,9 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.PersonnelClass.Commands.UpdatePosition
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class UpdatePositionCommand : AddPositionCommand, IRequest<BaseResult>
     {
         /// <summary>

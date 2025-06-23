@@ -7,6 +7,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 操作位置
     /// </summary>
@@ -24,11 +25,13 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         /// </remarks>
         [JsonIgnore]
         public virtual List<OperationalLocationDefinedByRelationship> DefinedBy { get; set; } = new List<OperationalLocationDefinedByRelationship>();
+
         /// <summary>
         /// 此操作位置的属性值
         /// </summary>
         [JsonIgnore]
         public virtual OperationalLocationProperty HasValuesOf { get; set; }
+
         /// <summary>
         /// 由...组成
         /// </summary>
@@ -37,6 +40,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         /// </remarks>
         [JsonIgnore]
         public virtual List<OperationalLocationIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<OperationalLocationIsMadeUpOfRelationship>();
+
         /// <summary>
         /// 描述
         /// </summary>
@@ -54,6 +58,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         /// <para>非标准规范要求</para>
         /// </remarks>
         public Guid? HierarchyScopeRelDtId { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -64,6 +69,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         /// </remarks>
         public string? HierarchyScope
         { get { return HierarchyScopeRel?.FullPath; } }
+
         /// <summary>
         /// 适配层级范围
         /// </summary>
@@ -74,6 +80,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
         public virtual HierarchyScope HierarchyScopeRel { get; set; }
+
         /// <summary>
         /// 在空间上将设备定义为零维点、一维线、二维形状或三维实体。
         /// </summary>

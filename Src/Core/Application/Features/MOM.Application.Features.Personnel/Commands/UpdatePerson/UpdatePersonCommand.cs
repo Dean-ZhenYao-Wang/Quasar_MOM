@@ -4,6 +4,9 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class UpdatePersonCommand : UpdatePersonRequest, IRequest<BaseResult>
     {
     }

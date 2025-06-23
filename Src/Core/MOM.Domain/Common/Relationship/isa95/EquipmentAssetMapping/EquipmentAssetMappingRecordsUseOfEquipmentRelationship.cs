@@ -1,26 +1,28 @@
-
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public class EquipmentAssetMappingRecordsUseOfEquipmentRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping ,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment>, IEquatable<EquipmentAssetMappingRecordsUseOfEquipmentRelationship>
+    public class EquipmentAssetMappingRecordsUseOfEquipmentRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment>, IEquatable<EquipmentAssetMappingRecordsUseOfEquipmentRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "RecordsUseOfEquipment";
+
         /// <inheritdoc/>
         public EquipmentAssetMappingRecordsUseOfEquipmentRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment target) : base(source, target)
         {
         }
+
         /// <inheritdoc/>
         public EquipmentAssetMappingRecordsUseOfEquipmentRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
         }
+
         /// <inheritdoc/>
         public EquipmentAssetMappingRecordsUseOfEquipmentRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
         {
         }
-        
+
         /// <inheritdoc/>
         public EquipmentAssetMappingRecordsUseOfEquipmentRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment target, int depth) : base(sourceId, target, depth)
         {
@@ -31,6 +33,7 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping
         {
             return Equals(obj as EquipmentAssetMappingRecordsUseOfEquipmentRelationship);
         }
+
         /// <inheritdoc/>
         public bool Equals(EquipmentAssetMappingRecordsUseOfEquipmentRelationship? other)
         {

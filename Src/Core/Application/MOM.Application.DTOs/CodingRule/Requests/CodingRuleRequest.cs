@@ -1,26 +1,20 @@
-﻿using MOM.Domain.CodingRule;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MOM.Application.DTOs.CodingRule.Requests
+﻿namespace MOM.Application.DTOs.CodingRule.Requests
 {
     /// <summary>
     /// 编码规则
     /// </summary>
     public class CodingRuleRequest
     {
+        /// <summary>
+        ///
+        /// </summary>
         public Guid? DtId { get; set; }
+
         /// <summary>
         /// 编码规则的唯一标识符
         /// 用于在CodingRuleManager中注册和检索规则
         /// 建议使用有意义的命名，如"PRODUCT_RULE"、"ORDER_RULE"等
         /// </summary>
-        [Required]
         public string Id { get; set; }
 
         /// <summary>
@@ -28,7 +22,6 @@ namespace MOM.Application.DTOs.CodingRule.Requests
         /// 用于用户界面显示和日志记录
         /// 例如："产品编码规则"、"订单编码规则"等
         /// </summary>
-        [Required]
         public string Name { get; set; }
 
         /// <summary>
@@ -43,7 +36,7 @@ namespace MOM.Application.DTOs.CodingRule.Requests
         /// 指定该编码规则适用于哪个实体模型
         /// 生成编码时会验证传入的模型对象是否匹配此类型
         /// </summary>
-        public string ModelTypeName { get; set; }
+        public string ModelTypeName { get; set; } = string.Empty;
 
         /// <summary>
         /// 编码段之间的分隔符
@@ -68,6 +61,9 @@ namespace MOM.Application.DTOs.CodingRule.Requests
         /// </summary>
         public bool IsActive { get; set; } = true;
 
+        /// <summary>
+        ///
+        /// </summary>
         public Domain.CodingRule.CodingRule ToCodingRule()
         {
             Domain.CodingRule.CodingRule rule = new Domain.CodingRule.CodingRule

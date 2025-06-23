@@ -1,8 +1,18 @@
 ﻿namespace MOM.Application.DTOs.Menu.Requests
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class MenuRequest
     {
+        /// <summary>
+        ///
+        /// </summary>
         public Guid DtId { get; set; } = Guid.NewGuid();
+
+        /// <summary>
+        ///
+        /// </summary>
         public Guid? ParentMenuDtId { get; set; }
 
         /// <summary>
@@ -10,9 +20,24 @@
         /// </summary>
         public string Id { get; set; }
 
+        /// <summary>
+        ///
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        ///
+        /// </summary>
         public string Path { get; set; }
+
+        /// <summary>
+        ///
+        /// </summary>
         public string? Description { get; set; }
+
+        /// <summary>
+        ///
+        /// </summary>
         public string? Icon { get; set; }
 
         /// <summary>
@@ -30,6 +55,9 @@
         /// </summary>
         public int Depth { get; set; }
 
+        /// <summary>
+        ///
+        /// </summary>
         public MOM.Domain.Permission.Menu ToMenu()
         {
             return new Domain.Permission.Menu

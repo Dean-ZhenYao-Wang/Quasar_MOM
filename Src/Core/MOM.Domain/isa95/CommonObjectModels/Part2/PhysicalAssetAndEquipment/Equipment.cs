@@ -10,6 +10,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 设备
     /// </summary>
@@ -19,6 +20,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     /// </remarks>
     public partial class Equipment : Resource, IEquatable<Equipment>
     {
+        private Equipment() { }
         /// <summary>
         /// 设备层级
         /// </summary>
@@ -59,6 +61,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         [JsonIgnore]
         public virtual EquipmentImplementedByRelationship ImplementedBy { get; set; }
+
         /// <summary>
         /// 设备的补充信息
         /// </summary>
@@ -73,6 +76,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// <para>非标准规范要求</para>
         /// </remarks>
         public Guid? HierarchyScopeRelDtId { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -83,6 +87,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         public string? HierarchyScope
         { get { return HierarchyScopeRel?.FullPath; } }
+
         /// <summary>
         /// 适配层级范围
         /// </summary>
@@ -93,12 +98,11 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
         public virtual HierarchyScope HierarchyScopeRel { get; set; }
+
         /// <summary>
         /// 空间定义
         /// </summary>
         public SpatialDefinition? SpatialDefinition { get; set; }
-
-
 
         /// <summary>
         /// 规格
@@ -209,7 +213,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.EquipmentLevel = EquipmentLevel;
         }
 
-        public Equipment(string ID, string description, EquipmentEquipmentLevel equipmentLevel,  string specification, string modelNumber, Guid? useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, description, equipmentLevel)
+        public Equipment(string ID, string description, EquipmentEquipmentLevel equipmentLevel, string specification, string modelNumber, Guid? useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, description, equipmentLevel)
         {
             Specification = specification;
             ModelNumber = modelNumber;
@@ -255,7 +259,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.EquipmentLevel = equipmentLevel;
         }
 
-        public void Update(string ID, string? description, EquipmentEquipmentLevel equipmentLevel,  string specification, string modelNumber, Guid useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
+        public void Update(string ID, string? description, EquipmentEquipmentLevel equipmentLevel, string specification, string modelNumber, Guid useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
         {
             this.Id = Id;
             this.Description = description ?? string.Empty;
@@ -305,6 +309,5 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         {
             return this.CustomHash(base.GetHashCode(), HierarchyScope?.GetHashCode(), EquipmentLevel.GetHashCode());
         }
-
     }
 }

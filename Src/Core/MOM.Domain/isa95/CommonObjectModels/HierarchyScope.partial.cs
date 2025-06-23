@@ -16,6 +16,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 路径
         /// </summary>
         public string FullPath { get; set; } = string.Empty;
+
         /// <summary>
         /// 说明
         /// </summary>
@@ -32,6 +33,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
         [JsonIgnore]
         [ForeignKey(nameof(ResponsibleDtId))]
         public virtual Person? Responsible { get; set; }
+
         /// <summary>
         /// 负责人姓名
         /// </summary>
@@ -53,29 +55,35 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 地址
         /// </summary>
         public string? Address { get; set; }
+
         /// <summary>
         /// 权限清单
         /// </summary>
         public virtual List<OrgPermission> Permissions { get; set; } = new List<OrgPermission>();
+
         /// <summary>
         /// 班组清单
         /// </summary>
         public virtual List<PersonnelClass> Teams { get; set; } = new List<PersonnelClass>();
+
         /// <summary>
         /// 人员清单
         /// </summary>
         public virtual List<Person> Peoples { get; set; } = new List<Person>();
+
         /// <summary>
         /// 父级唯一标识
         /// </summary>
         public Guid? SourceDtId { get; set; }
+
         /// <summary>
         /// 父级
         /// </summary>
         [ForeignKey(nameof(SourceDtId))]
         public virtual HierarchyScope Source { get; set; }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="equipmentLevel"></param>
         /// <param name="Id"></param>
@@ -96,6 +104,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
             if (sourceDtId == null)
                 FullPath = this.Name;
         }
+
         /// <summary>
         /// 软删除，存在子级，无法删除
         /// </summary>
@@ -111,6 +120,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
                 this.ForcedDeletion();
             }
         }
+
         /// <summary>
         /// 强制删除
         /// </summary>
@@ -121,6 +131,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
             this.Contains.Clear();
             //todo 需要定时任务配合，因为这个clear只会删除关系表中的SourceId列的内容，并未删除整行，需要定时任务定时删除表中这种数据
         }
+
         /// <summary>
         /// 强制删除关联的子级
         /// </summary>
@@ -131,6 +142,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
                 st.Target.ForcedDeletion();
             }
         }
+
         /// <summary>
         /// 更新
         /// </summary>

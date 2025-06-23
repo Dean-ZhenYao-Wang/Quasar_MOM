@@ -6,6 +6,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 设备资产映射
     /// </summary>
@@ -23,6 +24,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         [JsonIgnore]
         public virtual EquipmentAssetMappingRecordsUseOfEquipmentRelationship RecordsUseOfEquipment { get; set; }
+
         /// <summary>
         /// 与设备关联的物理资产（当物理资产与制造功能相关时）
         /// </summary>
@@ -31,10 +33,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         [JsonIgnore]
         public virtual EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship RecordsUseOfPhysicalAsset { get; set; }
+
         /// <summary>
         /// 映射元素的补充信息
         /// </summary>
         public string? Description { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -44,6 +48,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// <para>非标准规范要求</para>
         /// </remarks>
         public Guid? HierarchyScopeRelDtId { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -54,6 +59,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         public string? HierarchyScope
         { get { return HierarchyScopeRel?.FullPath; } }
+
         /// <summary>
         /// 适配层级范围
         /// </summary>
@@ -64,6 +70,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
         public virtual HierarchyScope HierarchyScopeRel { get; set; }
+
         /// <summary>
         /// 起始时间
         /// </summary>
@@ -71,6 +78,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 关联关系的开始时间
         /// </remarks>
         public DateTime? StartTime { get; set; }
+
         /// <summary>
         /// 结束时间
         /// </summary>

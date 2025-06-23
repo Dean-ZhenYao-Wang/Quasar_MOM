@@ -1,9 +1,4 @@
-﻿using Azure.Core;
-using Json.Path;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using MOM.Application.DTOs.Common;
-using MOM.Application.DTOs.HierarchyScope;
+﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.DTOs.HierarchyScope.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
@@ -12,14 +7,11 @@ using MOM.Domain.Common.Relationship.isa95.HierarchyScope;
 using MOM.Domain.isa95.CommonObjectModels;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace MOM.Infrastructure.Persistence.Repositories
 {
-
     public class HierarchyScopeContainsRelationshipRepository(ApplicationDbContext dbContext)
         : RelationshipRepository<HierarchyScopeContainsRelationship, HierarchyScope, HierarchyScope>(dbContext),
         IHierarchyScopeContainsRelationshipRepository
@@ -92,7 +84,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .Where(m => sourceDtId == null ? m.Depth == 0 : m.SourceId == sourceDtId && m.Depth == 1)
                 .Where(m => !string.IsNullOrWhiteSpace(id) ? m.Target.Id.Contains(id) : true)
                 .Where(m => !string.IsNullOrWhiteSpace(name) ? m.Target.Name.Contains(name) : true)
-                .OrderBy(m=>m.Target.Id)
+                .OrderBy(m => m.Target.Id)
                 .Select(m => new OrgResponse
                 {
                     Active = m.Target.Active,

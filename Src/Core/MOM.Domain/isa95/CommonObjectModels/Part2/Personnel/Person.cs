@@ -7,9 +7,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
     using MOM.Domain.Permission;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 人员
     /// </summary>
@@ -19,7 +19,8 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
     /// </remarks>
     public partial class Person : Resource, IEquatable<Person>
     {
-        private Person() { }
+        private Person()
+        { }
 
         private string? operationalLocation;
 
@@ -28,16 +29,16 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </summary>
         [JsonIgnore]
         public virtual List<PersonDefinedByRelationship> DefinedBy { get; set; } = new List<PersonDefinedByRelationship>();
+
         /// <summary>
         /// 此人员的属性值
         /// </summary>
         public PersonProperty Property { get; set; } = new PersonProperty();
+
         /// <summary>
         /// 描述。资源的补充信息
         /// </summary>
         public string? Description { get; set; }
-
-
 
         /// <summary>
         /// 层级范围
@@ -48,6 +49,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// <para>非标准规范要求</para>
         /// </remarks>
         public Guid? HierarchyScopeRelDtId { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -58,6 +60,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </remarks>
         public string? HierarchyScope
         { get { return HierarchyScopeRel?.FullPath; } }
+
         /// <summary>
         /// 适配层级范围
         /// </summary>
@@ -67,7 +70,8 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </remarks>
         [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
-        public virtual HierarchyScope HierarchyScopeRel { get; set; }
+        public virtual HierarchyScope? HierarchyScopeRel { get; set; }
+
         /// <summary>
         /// 空间定义
         /// </summary>
@@ -76,7 +80,8 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// <para>/ / WKT / POLYGON（(-646.99 676.18, -645.14 683.09, -)）</para>
         /// </remarks>
         [JsonIgnore]
-        public SpatialDefinition SpatialDefinition { get; set; }
+        public SpatialDefinition? SpatialDefinition { get; set; }
+
         /// <summary>
         /// 适配操作位置
         /// </summary>
@@ -85,7 +90,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// <para>非标准规范要求</para>
         /// </remarks>
         [JsonIgnore]
-        public virtual PersonOperationalLocationRelRelationship OperationalLocationRel { get; set; }
+        [NotMapped]
+        public PersonOperationalLocationRelRelationship? OperationalLocationRel { get; set; }
+
         /// <summary>
         /// 操作位置
         /// </summary>
@@ -103,6 +110,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
                 operationalLocation = value;
             }
         }
+
         /// <summary>
         /// 操作位置类型
         /// </summary>
@@ -110,11 +118,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// 标识操作位置属性引用的是操作位置对象还是包含位置描述。当指定操作位置属性时必填
         /// </remarks>
         public PersonOperationalLocationType? OperationalLocationType { get; set; }
+
         /// <summary>
         /// 登录账号
-        /// </summary>        
-        [Required]
+        /// </summary>
         public string UserName { get; set; }
+
         /// <summary>
         /// 性别
         /// </summary>
@@ -144,6 +153,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// 账号锁定时间
         /// </summary>
         public DateTime? LockoutDateTime { get; set; }
+
         /// <summary>
         /// 密码
         /// </summary>
@@ -155,7 +165,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         public int FailedCount { get; set; } = 0;
 
         /// <summary>
-        /// 其变更会立即使所有已颁发的Toekn失效
+        /// 其变更会立即使所有已颁发的 Toekn 失效
         /// </summary>
         public string SecurityStamp { get; set; } = Guid.NewGuid().ToString(); // 示例初始化
 
@@ -164,6 +174,18 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </summary>
         public virtual List<AvailablePermission> AvailablePermissions { get; set; } = new();
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="name"></param>
+        /// <param name="workStatus"></param>
+        /// <param name="email"></param>
+        /// <param name="phoneNumber"></param>
+        /// <param name="teamOfGroupDtId"></param>
+        /// <param name="OrgDtId"></param>
+        /// <param name="positionDtId_List"></param>
+        /// <param name="description"></param>
         public Person(string userName, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null)
         {
             this.UserName = userName;
@@ -186,7 +208,20 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             }
         }
 
-        public void Update(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null, IEnumerable<PersonProperty> properties = null)
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="name"></param>
+        /// <param name="workStatus"></param>
+        /// <param name="email"></param>
+        /// <param name="phoneNumber"></param>
+        /// <param name="teamOfGroupDtId"></param>
+        /// <param name="OrgDtId"></param>
+        /// <param name="positionDtId_List"></param>
+        /// <param name="description"></param>
+        /// <param name="properties"></param>
+        public void Update(string ID, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null, IEnumerable<PersonProperty>? properties = null)
         {
             this.Id = Id;
             this.WorkStatus = workStatus;
@@ -203,14 +238,14 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             {
                 this.DefinedByAddTarget(positionDtId_List, "职位");
             }
-
         }
+
         /// <summary>
         /// 仅绑定ID，并未绑定对象
         /// </summary>
         /// <param name="old"></param>
         /// <param name="newOrgDtID"></param>
-        public void HierarchyScopeRelAddOrUpdateTarget(HierarchyScope old, Guid newOrgDtID)
+        public void HierarchyScopeRelAddOrUpdateTarget(HierarchyScope? old, Guid newOrgDtID)
         {
             if (old == null)
                 this.HierarchyScopeRelAddTarget(newOrgDtID);
@@ -221,6 +256,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
                 this.HierarchyScopeRelAddTarget(newOrgDtID);
             }
         }
+
         private void HierarchyScopeRelAddTarget(Guid orgDtId)
         {
             this.HierarchyScopeRelDtId = orgDtId;
@@ -247,6 +283,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
             if (add && teamDtId != null)
                 this.DefinedByAddTarget(teamDtId.Value);
         }
+
         /// <summary>
         /// 所属人员类绑定
         /// </summary>
@@ -255,6 +292,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         {
             this.DefinedBy.Add(new Common.Relationship.isa95.Person.PersonDefinedByRelationship(this.DtId, targetDtId));
         }
+
         /// <summary>
         /// 所属人员类绑定
         /// </summary>
@@ -282,7 +320,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// <inheritdoc/>
         public override void Delete()
         {
-           base.Delete();
+            base.Delete();
         }
 
         /// <inheritdoc/>

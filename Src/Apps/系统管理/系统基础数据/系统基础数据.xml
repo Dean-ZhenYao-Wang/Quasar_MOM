@@ -31,6 +31,11 @@
             <param name="generate"></param>
             <returns></returns>
         </member>
+        <member name="T:系统基础数据.Controllers.v1.HierarchyScopeController">
+            <summary>
+            设备角色层次/生产建模
+            </summary>
+        </member>
         <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetOrgTable(MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery)">
             <summary>
             查询组织列表
@@ -94,11 +99,21 @@
             <param name="orgDtId">指定组织的dtId</param>
             <returns>该组织所拥有权限的菜单或按钮的编号</returns>
         </member>
+        <member name="T:系统基础数据.Controllers.v1.MenuController">
+            <summary>
+            菜单管理
+            </summary>
+        </member>
         <member name="M:系统基础数据.Controllers.v1.MenuController.GetMenuTree">
             <summary>
             菜单管理页面获得所有菜单树
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:系统基础数据.Controllers.v1.PositionController">
+            <summary>
+            职位管理
+            </summary>
         </member>
         <member name="M:系统基础数据.Controllers.v1.PositionController.SelectOptions">
             <summary>
@@ -141,6 +156,11 @@
             <param name="command"></param>
             <returns></returns>
         </member>
+        <member name="T:系统基础数据.Controllers.v1.TeamController">
+            <summary>
+            班组管理
+            </summary>
+        </member>
         <member name="M:系统基础数据.Controllers.v1.TeamController.SelectOptions">
             <summary>
             查询班组下拉列表
@@ -181,6 +201,21 @@
             </summary>
             <param name="command"></param>
             <returns></returns>
+        </member>
+        <member name="T:系统基础数据.Startup">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:系统基础数据.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:系统基础数据.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.IServiceProvider)">
+             <summary>
+            
+             </summary>
         </member>
     </members>
 </doc>

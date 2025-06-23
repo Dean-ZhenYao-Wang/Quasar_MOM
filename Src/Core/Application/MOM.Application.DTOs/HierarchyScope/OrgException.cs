@@ -3,8 +3,14 @@ using MOM.Application.DTOs.HierarchyScope.Responses;
 
 namespace MOM.Application.DTOs.HierarchyScope
 {
+    /// <summary>
+    ///
+    /// </summary>
     public static class OrgException
     {
+        /// <summary>
+        ///
+        /// </summary>
         public static TreeNode<OrgResponse> ToOrgTreeResponse(this Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope, Guid? sourceDtId = null)
         {
             TreeNode<OrgResponse> OrgResponse = new()
@@ -29,7 +35,10 @@ namespace MOM.Application.DTOs.HierarchyScope
             return OrgResponse;
         }
 
-        public static OrgResponse ToOrgItemResponse(this Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope, 
+        /// <summary>
+        ///
+        /// </summary>
+        public static OrgResponse ToOrgItemResponse(this Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope,
             Guid? sourceDtId = null, string? responsibleName = null, string? sourceName = null)
         {
             OrgResponse OrgResponse = new()

@@ -1,6 +1,5 @@
 ﻿using MOM.Domain.Common.EnumType;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MOM.Application.DTOs.CodingRule.Requests
 {
@@ -14,6 +13,7 @@ namespace MOM.Application.DTOs.CodingRule.Requests
         /// 对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
         /// </summary>
         public string Id { get; set; } = string.Empty;
+
         /// <summary>
         /// 段的排序顺序
         /// 用于确定该段在最终编码中的位置，从0开始
@@ -21,6 +21,7 @@ namespace MOM.Application.DTOs.CodingRule.Requests
         /// </summary>
         [Required]
         public int Order { get; set; }
+
         /// <summary>
         /// 段的类型
         /// 决定该段的值如何生成，参见SegmentType枚举的详细说明

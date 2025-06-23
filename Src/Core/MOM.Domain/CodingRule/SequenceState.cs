@@ -14,18 +14,20 @@ namespace MOM.Domain.CodingRule
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         /// <summary>
         /// 模型类型
         /// </summary>
-        public required string ModelTypeName { get; set; }
+        public string ModelTypeName { get; set; }
+
         /// <summary>
         /// 序列名称
         /// </summary>
-        public required string SequenceName { get; set; }
+        public string SequenceName { get; set; }
+
         /// <summary>
         /// 当前序列值
         /// </summary>
-        public required int CurrentValue { get; set; }
+        public int CurrentValue { get; set; }
     }
-
 }

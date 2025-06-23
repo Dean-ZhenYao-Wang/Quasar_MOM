@@ -4,6 +4,9 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class GetEnterpriseTableQuery : IRequest<PagedResponse<OrgResponse>>
     {
         /// <summary>

@@ -18,6 +18,7 @@ namespace MOM.Domain.Common.EnumType
         /// </summary>
         [EnumMember(Value = "Fixed"), Display(Name = "固定值")]
         Fixed,
+
         /// <summary>
         /// 模型属性段
         /// 该段的值来源于EF Core模型的某个属性
@@ -25,6 +26,7 @@ namespace MOM.Domain.Common.EnumType
         /// </summary>
         [EnumMember(Value = "Property"), Display(Name = "模型属性")]
         Property,
+
         /// <summary>
         /// 序列号段
         /// 该段的值是自动递增的序列号
@@ -32,6 +34,7 @@ namespace MOM.Domain.Common.EnumType
         /// </summary>
         [EnumMember(Value = "Sequence"), Display(Name = "序列号")]
         Sequence,
+
         /// <summary>
         /// 日期时间段
         /// 该段的值基于当前日期时间生成
@@ -39,6 +42,7 @@ namespace MOM.Domain.Common.EnumType
         /// </summary>
         [EnumMember(Value = "DateTime"), Display(Name = "日期时间")]
         DateTime,
+
         /// <summary>
         /// 自定义逻辑段
         /// 该段的值通过自定义逻辑生成

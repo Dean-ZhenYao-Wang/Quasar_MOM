@@ -1,5 +1,8 @@
 ﻿namespace MOM.Application.DTOs.Common
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class TreeNode<TEntity>
     {
         /// <summary>
@@ -38,7 +41,7 @@
         public bool selectable { get; set; } = true;
 
         /// <summary>
-        /// 指定节点是否具有子项。用于延迟加载。若为true时，前端控件则是看children是否含有元素，如果有则会显示折叠图标，否则不显示
+        /// 指定节点是否具有子项。用于延迟加载。若为 true 时，前端控件则是看 children 是否含有元素，如果有则会显示折叠图标，否则不显示
         /// </summary>
         public bool leaf { get; set; } = true;
 

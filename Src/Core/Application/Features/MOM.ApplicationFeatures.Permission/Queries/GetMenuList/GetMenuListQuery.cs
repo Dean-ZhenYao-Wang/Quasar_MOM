@@ -4,6 +4,9 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Permission.Queries.GetMenuList
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class GetMenuListQuery : IRequest<BaseResult<List<MenuResponse>>>
     {
         /// <summary>

@@ -6,6 +6,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
     using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 层次范围
     /// </summary>
@@ -18,6 +19,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 设备ID
         /// </summary>
         public string? EquipmentID { get; set; }
+
         /// <summary>
         /// 设备层级
         /// </summary>
@@ -25,11 +27,13 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// 基于角色的设备层次结构中的层级标识
         /// </remarks>
         public HierarchyScopeEquipmentLevel EquipmentLevel { get; set; }
+
         /// <summary>
         /// 包含的子级
         /// </summary>
         [JsonIgnore]
         public virtual List<HierarchyScopeContainsRelationship> Contains { get; set; } = new List<HierarchyScopeContainsRelationship>();
+
         /// <inheritdoc/>
         public override bool Equals(object? obj)
         {

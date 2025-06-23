@@ -4,6 +4,9 @@ using MOM.Application.DTOs.HierarchyScope.Responses;
 
 namespace MOM.Application.Features.HierarchyScope.Queries.GetOrgTree
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class GetOrgTreeQuery : IRequest<List<TreeNode<OrgResponse>>>
     {
         /// <summary>

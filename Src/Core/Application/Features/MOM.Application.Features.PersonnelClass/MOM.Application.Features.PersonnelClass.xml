@@ -4,10 +4,25 @@
         <name>MOM.Application.Features.PersonnelClass</name>
     </assembly>
     <members>
+        <member name="T:MOM.Application.Features.PersonnelClass.Commands.AddTeam.AddTeamCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.PersonnelClass.Commands.UpdatePosition.UpdatePositionCommand">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.Features.PersonnelClass.Commands.UpdatePosition.UpdatePositionCommand.DtId">
             <summary>
             职位的数据库唯一主键
             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.PersonnelClass.Commands.UpdateTeam.UpdateTeamCommand">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedPositionQuery.Id">
             <summary>
@@ -53,6 +68,11 @@
             <summary>
             每页显示数据条数
             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.PersonnelClass.Queries.GetTeamSelectOptions.GetTeamSelectOptionsQuery">
+             <summary>
+            
+             </summary>
         </member>
     </members>
 </doc>

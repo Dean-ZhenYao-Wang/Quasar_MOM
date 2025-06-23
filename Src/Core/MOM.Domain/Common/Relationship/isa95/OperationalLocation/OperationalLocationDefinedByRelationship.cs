@@ -1,10 +1,9 @@
-
 namespace MOM.Domain.Common.Relationship.isa95.OperationalLocation
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public class OperationalLocationDefinedByRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationDefinedByRelationship>
+    public class OperationalLocationDefinedByRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationDefinedByRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "definedBy";
@@ -28,7 +27,6 @@ namespace MOM.Domain.Common.Relationship.isa95.OperationalLocation
         public OperationalLocationDefinedByRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass target, int depth) : base(sourceId, target, depth)
         {
         }
-
 
         /// <inheritdoc/>
         public override bool Equals(object? obj)

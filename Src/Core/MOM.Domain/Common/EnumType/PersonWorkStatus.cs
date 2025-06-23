@@ -4,6 +4,9 @@ using System.Text.Json.Serialization;
 
 namespace MOM.Domain.Common.EnumType
 {
+    /// <summary>
+    ///
+    /// </summary>
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum PersonWorkStatus
     {

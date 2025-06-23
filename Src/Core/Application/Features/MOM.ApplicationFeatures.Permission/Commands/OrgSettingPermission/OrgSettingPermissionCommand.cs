@@ -4,6 +4,9 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Permission.Commands.OrgSettingPermission
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class OrgSettingPermissionCommand : SettingPermissionRequest, IRequest<BaseResult>
     {
     }

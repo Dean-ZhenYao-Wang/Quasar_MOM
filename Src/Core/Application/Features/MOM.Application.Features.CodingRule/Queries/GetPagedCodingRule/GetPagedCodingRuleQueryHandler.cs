@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MOM.Application.Features.CodingRule.Queries.GetPagedCodingRule
 {
@@ -16,7 +15,7 @@ namespace MOM.Application.Features.CodingRule.Queries.GetPagedCodingRule
                 .Where(m => !string.IsNullOrWhiteSpace(request.ModelTypeName) ? m.Name.Equals(request.ModelTypeName) : true)
                 .Where(m => request.IsActive.HasValue ? m.IsActive == request.IsActive : true);
 
-            return await codingRuleRepository.PagedAsync(query, request.PageNumber, request.PageSize);
+            return await codingRuleRepository.PagedAsync(query, request.Page, request.PageSize);
         }
     }
 }

@@ -13,14 +13,18 @@ public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquat
     where TSource : BaseEntity
     where TTarget : BaseEntity
 {
-    public Relationship() { }
+    public Relationship()
+    { }
+
     /// <inheritdoc/>
     public override string Name { get; set; } = "default";
+
     /// <summary>
     /// 获取或设置关系的目标对象
     /// </summary>
     [ForeignKey(nameof(TargetId))]
     public virtual TTarget Target { get; set; }
+
     /// <summary>
     /// 获取或设置关系的源对象
     /// </summary>
@@ -55,13 +59,14 @@ public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquat
         TargetId = targetDtId;
         Id = $"{sourceDtId}-{targetDtId}";
     }
+
     /// <summary>
     /// 根据源数字孪生ID和目标数字孪生ID初始化关系属性
     /// </summary>
     /// <param name="sourceDtId">源数字孪生唯一标识符</param>
     /// <param name="targetDtId">目标数字孪生唯一标识符</param>
     /// <param name="depth">深度</param>
-    public void InitializeFromTwins(Guid sourceDtId, Guid targetDtId,int depth)
+    public void InitializeFromTwins(Guid sourceDtId, Guid targetDtId, int depth)
     {
         SourceId = sourceDtId;
         TargetId = targetDtId;
@@ -84,21 +89,23 @@ public abstract class Relationship<TSource, TTarget> : BasicRelationship, IEquat
     /// </summary>
     /// <param name="sourceId">源数字孪生唯一标识符</param>
     /// <param name="targetId">目标数字孪生唯一标识符</param>
-    public Relationship(Guid sourceId, Guid targetId) 
+    public Relationship(Guid sourceId, Guid targetId)
     {
         InitializeFromTwins(sourceId, targetId);
     }
+
     /// <summary>
     /// 根据源数字孪生ID和目标数字孪生ID初始化关系属性
     /// </summary>
     /// <param name="sourceDtId">源数字孪生唯一标识符</param>
     /// <param name="targetDtId">目标数字孪生唯一标识符</param>
     /// <param name="depth">深度</param>
-    public Relationship(Guid sourceId, Guid targetId, int depth) 
+    public Relationship(Guid sourceId, Guid targetId, int depth)
     {
         InitializeFromTwins(sourceId, targetId);
         this.Depth = depth;
     }
+
     /// <summary>
     /// 根据源数字孪生ID和目标数字孪生ID初始化关系属性
     /// </summary>

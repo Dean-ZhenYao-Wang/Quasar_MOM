@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Query;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.Infrastructure.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +19,12 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             return dbContext.Set<T>().Where(predicate);
         }
+
         public virtual IQueryable<T> AsNoTracking()
         {
             return dbContext.Set<T>().AsNoTracking();
         }
+
         public virtual async Task<T> GetByIdAsync(object id)
         {
             return await dbContext.Set<T>().FindAsync(id);
@@ -76,6 +77,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             await dbContext.Set<T>().AddAsync(entity);
         }
+
         public virtual async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entitys)
         {
             await dbContext.Set<T>().AddRangeAsync(entitys);

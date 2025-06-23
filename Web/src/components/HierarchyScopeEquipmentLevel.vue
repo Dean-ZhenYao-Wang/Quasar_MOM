@@ -8,7 +8,17 @@
     option-label="label"
     :rules="rules"
     v-model="model"
-  ></q-select>
+    filled
+  >
+    <template v-slot:option="scope">
+      <q-item v-bind="scope.itemProps">
+        <q-item-section>
+          <q-item-label>{{ scope.opt.label }}</q-item-label>
+          <q-item-label caption>{{ scope.opt.description }}</q-item-label>
+        </q-item-section>
+      </q-item>
+    </template>
+  </q-select>
 </template>
 
 <script setup>
@@ -47,31 +57,38 @@ const levelList = ref([
   },
   {
     value: 'Process_Cell',
-    label: '生产工艺段：用于批生产',
+    label: '生产工艺段',
+    description: '用于批生产',
   },
   {
     value: 'Unit',
-    label: '单元：用于批生产的设备/用于连续生产的设备',
+    label: '单元',
+    description: '用于批生产的设备/用于连续生产的设备',
   },
   {
     value: 'Production_Line',
-    label: '产线：用于重复或离散生产',
+    label: '产线',
+    description: '用于重复或离散生产',
   },
   {
     value: 'Production_Unit',
-    label: '工段/工位：用于重复或离散生产的设备或位置',
+    label: '工段/工位',
+    description: '用于重复或离散生产的设备或位置',
   },
   {
     value: 'Work_Cell',
-    label: '生产单元：用于连续生产',
+    label: '生产单元：',
+    description: '用于连续生产',
   },
   {
     value: 'Storage_Zone',
-    label: '存储区：用于存储或运输',
+    label: '存储区：',
+    description: '用于存储或运输',
   },
   {
     value: 'Storage_Unit',
-    label: '存储单元：用于存储或运输的设备',
+    label: '存储单元',
+    description: '用于存储或运输的设备',
   },
 ])
 </script>

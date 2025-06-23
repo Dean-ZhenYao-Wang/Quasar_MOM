@@ -6,9 +6,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
     using MOM.Domain.Permission;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 人员类别
     /// </summary>
@@ -20,20 +20,25 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
     /// </remarks>
     public partial class PersonnelClass : ResourceClass, IEquatable<PersonnelClass>
     {
-        private PersonnelClass() { }
+        private PersonnelClass()
+        { }
+
         /// <summary>
         /// 此人员类别包含目标人员类别的属性
         /// </summary>
         [JsonIgnore]
         public virtual List<PersonnelClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<PersonnelClassIncludesPropertiesOfRelationship>();
+
         /// <summary>
         /// 此人员类别具有的人员类别属性
         /// </summary>
         public PersonnelClassProperty Property { get; set; } = new PersonnelClassProperty();
+
         /// <summary>
         /// 人员类别的补充信息和描述
         /// </summary>
         public string Description { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -43,6 +48,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// <para>非标准规范要求</para>
         /// </remarks>
         public Guid? HierarchyScopeRelDtId { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -53,6 +59,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </remarks>
         public string? HierarchyScope
         { get { return HierarchyScopeRel?.FullPath; } }
+
         /// <summary>
         /// 适配层级范围
         /// </summary>
@@ -63,10 +70,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
         public virtual HierarchyScope HierarchyScopeRel { get; set; }
-
-
-
-
 
         /// <summary>
         /// 备注-页面上显示给用户看的，用户自己编辑的备注信息
@@ -88,8 +91,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// </summary>
         public virtual List<Permission.PersonnelClassPermission> Permissions { get; set; } = new List<PersonnelClassPermission>();
 
-
-        public PersonnelClass(string Id, string name, string? description = null, HierarchyScope? hierarchyScope = null) 
+        public PersonnelClass(string Id, string name, string? description = null, HierarchyScope? hierarchyScope = null)
         {
             this.Id = Id;
             this.Name = name;

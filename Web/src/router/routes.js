@@ -27,6 +27,15 @@ const routes = [
         path: 'personnel',
         component: () => import('pages/Person/PersonnelPage.vue'),
       },
+      {
+        path: 'equipment',
+        children: [
+          {
+            path: 'equipmentClass',
+            component: () => import('pages/PhysicalAssetAndEquipment/EquipmentClass.vue'),
+          },
+        ],
+      },
     ],
   },
   {

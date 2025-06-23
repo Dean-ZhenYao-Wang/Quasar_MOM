@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
@@ -15,9 +14,7 @@ namespace MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope
             {
                 await hierarchyScopeRepository.DeleteAsync(command.DtIds);
 
-
                 await hierarchyScopeContainsRelationshipRepository.DeletePath(command.DtIds);
-
 
                 await unitOfWork.CommitAsync();
             }

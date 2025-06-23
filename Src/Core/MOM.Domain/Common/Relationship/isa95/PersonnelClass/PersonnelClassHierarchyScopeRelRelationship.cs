@@ -1,27 +1,28 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
-
 namespace MOM.Domain.Common.Relationship.isa95.PersonnelClass
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public class PersonnelClassHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass ,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PersonnelClassHierarchyScopeRelRelationship>
+    public class PersonnelClassHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass, Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PersonnelClassHierarchyScopeRelRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "hierarchyScopeRel";
+
         /// <inheritdoc/>
         public PersonnelClassHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)
         {
         }
+
         /// <inheritdoc/>
         public PersonnelClassHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
         }
+
         /// <inheritdoc/>
         public PersonnelClassHierarchyScopeRelRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
         {
         }
+
         /// <inheritdoc/>
         public PersonnelClassHierarchyScopeRelRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.HierarchyScope target, int depth) : base(sourceId, target, depth)
         {

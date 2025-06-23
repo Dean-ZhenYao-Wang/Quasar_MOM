@@ -1,11 +1,9 @@
 ﻿using MediatR;
-using MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission;
 using MOM.Application.Features.Permission.Commands.PersonnelSettingPermission;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 using MOM.Domain.Permission;
-using System.Linq;
 
 namespace MOM.Application.Features.Permission.Commands.PositionSettingPermission
 {
@@ -22,14 +20,14 @@ namespace MOM.Application.Features.Permission.Commands.PositionSettingPermission
                 var cItem = c.FirstOrDefault(m => m.MenuButtonId == a);
                 if (cItem == null)
                 {
-                   await availablePermissionRepository.AddAsync(new AvailablePermission()
+                    await availablePermissionRepository.AddAsync(new AvailablePermission()
                     {
                         MenuButtonId = a,
                         Available = false,
                         PersonDtId = request.Owner
                     });
                 }
-                else if(cItem.Available)
+                else if (cItem.Available)
                 {
                     cItem.Available = false;
                 }
@@ -37,7 +35,7 @@ namespace MOM.Application.Features.Permission.Commands.PositionSettingPermission
 
             // B中有但A中没有的元素，需要添加的权限
             List<string> bNotInA = request.menuButtonIds.Except(request.oldMenuButtonIds).ToList();
-            foreach(var b in bNotInA)
+            foreach (var b in bNotInA)
             {
                 var cItem = c.FirstOrDefault(m => m.MenuButtonId == b);
                 if (cItem == null)
@@ -48,7 +46,8 @@ namespace MOM.Application.Features.Permission.Commands.PositionSettingPermission
                         Available = true,
                         PersonDtId = request.Owner
                     });
-                }else if (cItem.Available == false)
+                }
+                else if (cItem.Available == false)
                 {
                     cItem.Available = true;
                 }

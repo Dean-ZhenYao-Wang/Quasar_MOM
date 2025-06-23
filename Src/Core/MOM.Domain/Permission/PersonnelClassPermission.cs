@@ -14,14 +14,17 @@ namespace MOM.Domain.Permission
         /// </summary>
         [Key]
         public Guid DtId { get; set; } = Guid.NewGuid();
+
         /// <summary>
         /// 菜单或按钮的编号
         /// </summary>
-        public required string MenuButtonId { get; set; }
+        public string MenuButtonId { get; set; }
+
         /// <summary>
         /// 人员类的主键
         /// </summary>
-        public required Guid PersonnelClassDtId { get; set; }
+        public Guid PersonnelClassDtId { get; set; }
+
         /// <summary>
         /// 人员类
         /// </summary>

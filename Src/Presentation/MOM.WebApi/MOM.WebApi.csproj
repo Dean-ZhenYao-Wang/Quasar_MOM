@@ -14,10 +14,10 @@
 	  <AdditionalFiles Include="MOM.WebApi.xml" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.5" />
-		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
 		<PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.5">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -27,7 +27,7 @@
 		</PackageReference>-->
 		<PackageReference Include="OrchardCore.Application.Mvc.Targets" Version="2.1.7" />
 		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
-		<PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.1.2" />
+		<PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.2.0" />
 		<PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1" />
 		<PackageReference Include="Serilog.Exceptions" Version="8.4.0" />
 		<PackageReference Include="Serilog.Expressions" Version="5.0.0" />

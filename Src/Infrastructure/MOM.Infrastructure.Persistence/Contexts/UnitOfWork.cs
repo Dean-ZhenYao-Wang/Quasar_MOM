@@ -22,7 +22,7 @@ namespace MOM.Infrastructure.Persistence.Contexts
 
         public async Task<IDbContextTransaction> BeginTransactionAsync()
         {
-            tran= await dbContext.Database.BeginTransactionAsync();
+            tran = await dbContext.Database.BeginTransactionAsync();
             return tran;
         }
 

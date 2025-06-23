@@ -2,7 +2,6 @@
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.Domain.Common.Relationship.isa95.HierarchyScope;
 
 namespace MOM.Application.Features.HierarchyScope.Commands.UpdateHierarchyScope
 {
@@ -13,7 +12,6 @@ namespace MOM.Application.Features.HierarchyScope.Commands.UpdateHierarchyScope
             using var tran = await unitOfWork.BeginTransactionAsync();
             try
             {
-
                 var Org = await hierarchyScopeRepository.GetByIdAsync(request.DtId);
 
                 if (Org is null)

@@ -2,6 +2,9 @@
 
 namespace MOM.Application.DTOs.Menu.Responses
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class MenuResponse : MenuRequest
     {
         /// <summary>

@@ -3,6 +3,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
     using MOM.Domain.Common;
     using System;
     using System.Collections.Generic;
+
     /// <summary>
     /// ×ÊÔ´Àà
     /// </summary>

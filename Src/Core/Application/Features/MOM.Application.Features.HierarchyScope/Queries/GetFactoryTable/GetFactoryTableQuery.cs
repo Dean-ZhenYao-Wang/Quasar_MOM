@@ -4,6 +4,9 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class GetFactoryTableQuery : IRequest<PagedResponse<OrgResponse>>
     {
         /// <summary>

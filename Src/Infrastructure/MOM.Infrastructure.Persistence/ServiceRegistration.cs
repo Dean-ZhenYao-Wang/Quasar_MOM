@@ -32,6 +32,7 @@ namespace MOM.Infrastructure.Persistence
 
             return services;
         }
+
         /// <summary>
         /// 注册所有仓储相关服务
         /// </summary>
@@ -50,6 +51,7 @@ namespace MOM.Infrastructure.Persistence
 
             return services;
         }
+
         /// <summary>
         /// 注册开放泛型仓储
         /// </summary>
@@ -61,6 +63,7 @@ namespace MOM.Infrastructure.Persistence
             // 注册关系泛型仓储
             services.AddScoped(typeof(IRelationshipRepository<,,>), typeof(RelationshipRepository<,,>));
         }
+
         /// <summary>
         /// 注册具体的仓储实现（非关系仓储）
         /// </summary>
@@ -96,6 +99,7 @@ namespace MOM.Infrastructure.Persistence
                 }
             }
         }
+
         /// <summary>
         /// 注册关系仓储
         /// </summary>
@@ -109,6 +113,7 @@ namespace MOM.Infrastructure.Persistence
                 RegisterRelationshipRepositoriesFromAssembly(services, assembly);
             }
         }
+
         /// <summary>
         /// 从指定程序集注册关系仓储
         /// </summary>
@@ -135,6 +140,7 @@ namespace MOM.Infrastructure.Persistence
                 }
             }
         }
+
         #region 辅助方法
 
         /// <summary>
@@ -272,6 +278,6 @@ namespace MOM.Infrastructure.Persistence
                                        baseInterface.GetGenericTypeDefinition() == typeof(IRelationshipRepository<,,>)));
         }
 
-        #endregion
+        #endregion 辅助方法
     }
 }

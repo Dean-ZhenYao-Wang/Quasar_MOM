@@ -126,13 +126,11 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddResourcesInfrastructure();
 builder.Services.AddHangfireInfrastructure(builder.Configuration);
 
-
 builder.Services.AddTransient<IAuthenticatedUserService>(serviceProvider =>
 {
     var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
     return new AuthenticatedUserService(httpContextAccessor);
 });
-
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -207,7 +205,6 @@ app.UseHealthChecks("/health");
 app.MapControllers();
 app.UseOrchardCore();
 app.UseSerilogRequestLogging();
-
 
 var client = new HttpClient();
 client.Timeout = TimeSpan.FromSeconds(60);

@@ -12,6 +12,7 @@ namespace MOM.Domain.Permission
         /// 图标
         /// </summary>
         public string? Icon { get; set; }
+
         /// <summary>
         /// 关联的菜单主键
         /// </summary>
@@ -19,6 +20,7 @@ namespace MOM.Domain.Permission
 
         [ForeignKey(nameof(MenuDtId))]
         public virtual Menu Menu { get; set; }
+
         /// <summary>
         /// 修改
         /// </summary>

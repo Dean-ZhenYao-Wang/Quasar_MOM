@@ -8,6 +8,7 @@ namespace MOM.Application.Interfaces.Repositories
         DbSet<SequenceState> SequenceStates { get; }
 
         Task<int> GetNextSequenceAsync(Type modelType, string v);
+
         Task<CodingRule> GetRuleAsync(string id);
     }
 }

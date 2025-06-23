@@ -4,10 +4,80 @@
         <name>MOM.Application.Features.Permission</name>
     </assembly>
     <members>
+        <member name="T:MOM.Application.Features.Permission.Commands.AddButton.AddButtonCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Commands.AddMenu.AddMenuCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Commands.DeleteButton.DeleteButtonCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Permission.Commands.DeleteButton.DeleteButtonCommand.DtIds">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Commands.DeleteMenu.DeleteMenuCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Permission.Commands.DeleteMenu.DeleteMenuCommand.DtIds">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Commands.OrgSettingPermission.OrgSettingPermissionCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission.PersonnelClassSettingPermissionCommand">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.Features.Permission.Commands.PersonnelSettingPermission.PersonnelSettingPermissionCommand.oldMenuButtonIds">
             <summary>
             原始的菜单或按钮的DtId清单
             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Commands.UpdateButton.UpdateButtonCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Commands.UpdateMenu.UpdateMenuCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Queries.GetButtonList.GetButtonListQuery">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Permission.Queries.GetButtonList.GetButtonListQuery.ParentMenuDtId">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.Features.Permission.Queries.GetButtonList.GetButtonListQuery.ParentMenuId">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Queries.GetMenuList.GetMenuListQuery">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.Features.Permission.Queries.GetMenuList.GetMenuListQuery.ParentMenuDtId">
             <summary>
@@ -29,10 +99,45 @@
             菜单管理页面获得所有菜单树
             </summary>
         </member>
+        <member name="T:MOM.Application.Features.Permission.Queries.GetMenuTree.GetMenuTreeQueryHandler">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.Permission.Queries.GetMenuTree.GetMenuTreeQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IMenuRepository)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.Permission.Queries.GetMenuTree.GetMenuTreeQueryHandler.Handle(MOM.Application.Features.Permission.Queries.GetMenuTree.GetMenuTreeQuery,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Queries.GetOrgPermissionLis.GetOrgPermissionListQuery">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.Features.Permission.Queries.GetOrgPermissionLis.GetOrgPermissionListQuery.OrgDtId">
             <summary>
             指定组织的DtId
             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Permission.Queries.GetOrgPermissionLis.GetOrgPermissionListQueryHandler">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.Permission.Queries.GetOrgPermissionLis.GetOrgPermissionListQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IOrgPermissionRepository)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.Permission.Queries.GetOrgPermissionLis.GetOrgPermissionListQueryHandler.Handle(MOM.Application.Features.Permission.Queries.GetOrgPermissionLis.GetOrgPermissionListQuery,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
         </member>
     </members>
 </doc>

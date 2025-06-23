@@ -1,11 +1,9 @@
 ﻿using Asp.Versioning;
-using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.CodingRule.Requests;
 using MOM.Application.Features.CodingRule.Commands.RegisterRule;
 using MOM.Application.Features.CodingRule.Queries.GetPagedCodingRule;
-using MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
 
@@ -29,6 +27,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(request);
         }
+
         /// <summary>
         /// 查询编码规则列表
         /// </summary>
@@ -39,6 +38,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(query);
         }
+
         /// <summary>
         /// 生成编码字符串
         /// </summary>

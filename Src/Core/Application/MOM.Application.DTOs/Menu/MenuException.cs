@@ -2,8 +2,14 @@
 
 namespace MOM.Application.DTOs.Menu
 {
+    /// <summary>
+    ///
+    /// </summary>
     public static class MenuException
     {
+        /// <summary>
+        ///
+        /// </summary>
         public static MenuTreeNodeResponse ToMenuTreeNodeResponse(this Domain.Permission.Menu menu)
         {
             return new MenuTreeNodeResponse

@@ -8,12 +8,14 @@ using MOM.Application.Features.PersonnelClass.Commands.DeletePosition;
 using MOM.Application.Features.PersonnelClass.Commands.UpdatePosition;
 using MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition;
 using MOM.Application.Features.PersonnelClass.Queries.GetPositionSelectOptions;
-using MOM.Application.Features.PersonnelClass.Queries.GetTeamSelectOptions;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
 {
+    /// <summary>
+    /// 职位管理
+    /// </summary>
     [Tags("职位管理")]
     [ApiVersion("1")]
     public sealed class PositionController : BaseApiController
@@ -27,6 +29,7 @@ namespace 系统基础数据.Controllers.v1
         {
             return await Mediator.Send(new GetPositionSelectOptionsQuery());
         }
+
         /// <summary>
         /// 查询职位列表
         /// </summary>

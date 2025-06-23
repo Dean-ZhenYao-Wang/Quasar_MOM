@@ -1,5 +1,4 @@
 ﻿using MOM.Domain.Common;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -27,11 +26,14 @@ namespace MOM.Domain.CodingRule
         [NotMapped]
         [JsonIgnore]
         public Type ModelType { get; set; }
+
         private string model_type_name;
+
         public string ModelTypeName
         {
             get => model_type_name;
-            set{
+            set
+            {
                 ModelType = value != null ? Type.GetType(value) : null;
                 model_type_name = value;
             }
@@ -59,6 +61,7 @@ namespace MOM.Domain.CodingRule
         /// 默认为true
         /// </summary>
         public bool IsActive { get; set; } = true;
+
         /// <summary>
         /// 软删除，会同时软删除编码段
         /// </summary>
@@ -68,5 +71,4 @@ namespace MOM.Domain.CodingRule
             this.Segments.ForEach(item => item.IsDelete = true);
         }
     }
-
 }

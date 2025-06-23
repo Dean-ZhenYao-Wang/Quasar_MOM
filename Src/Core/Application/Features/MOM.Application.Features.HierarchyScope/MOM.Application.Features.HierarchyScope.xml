@@ -4,10 +4,30 @@
         <name>MOM.Application.Features.HierarchyScope</name>
     </assembly>
     <members>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope.AddHierarchyScopeCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope.DeleteHierarchyScopeCommand">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope.DeleteHierarchyScopeCommand.DtIds">
             <summary>
             要删除的组织DtId清单
             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.UpdateHierarchyScope.UpdateHierarchyScopeCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery.Id">
             <summary>
@@ -29,6 +49,26 @@
             每页展示条数
             </summary>
         </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQueryHandler">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeContainsRelationshipRepository)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQueryHandler.Handle(MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery.Id">
             <summary>
             编号
@@ -48,6 +88,26 @@
             <summary>
             每页展示条数
             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQueryHandler">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeContainsRelationshipRepository)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQueryHandler.Handle(MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery.SourceDtId">
             <summary>
@@ -73,6 +133,26 @@
             <summary>
             每页展示条数
             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQueryHandler">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeContainsRelationshipRepository)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQueryHandler.Handle(MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetOrgTree.GetOrgTreeQuery">
+             <summary>
+            
+             </summary>
         </member>
         <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetOrgTree.GetOrgTreeQuery.SourceDtId">
             <summary>

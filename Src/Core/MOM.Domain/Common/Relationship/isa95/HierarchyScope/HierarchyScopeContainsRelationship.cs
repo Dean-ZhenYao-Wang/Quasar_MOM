@@ -1,16 +1,16 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
-
 namespace MOM.Domain.Common.Relationship.isa95.HierarchyScope
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class HierarchyScopeContainsRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.HierarchyScope, MOM.Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<HierarchyScopeContainsRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "contains";
-        public HierarchyScopeContainsRelationship() { }
+
+        public HierarchyScopeContainsRelationship()
+        { }
+
         /// <inheritdoc/>
         public HierarchyScopeContainsRelationship(Domain.isa95.CommonObjectModels.HierarchyScope source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)
         {
@@ -36,26 +36,31 @@ namespace MOM.Domain.Common.Relationship.isa95.HierarchyScope
         {
             return Equals(obj as HierarchyScopeContainsRelationship);
         }
+
         /// <inheritdoc/>
         public bool Equals(HierarchyScopeContainsRelationship? other)
         {
             return other is not null && DtId == other.DtId && SourceId == other.SourceId && TargetId == other.TargetId && Target == other.Target && Name == other.Name;
         }
+
         /// <inheritdoc/>
         public static bool operator ==(HierarchyScopeContainsRelationship? left, HierarchyScopeContainsRelationship? right)
         {
             return EqualityComparer<HierarchyScopeContainsRelationship?>.Default.Equals(left, right);
         }
+
         /// <inheritdoc/>
         public static bool operator !=(HierarchyScopeContainsRelationship? left, HierarchyScopeContainsRelationship? right)
         {
             return !(left == right);
         }
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
             return this.CustomHash(DtId.GetHashCode(), SourceId.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
         }
+
         /// <inheritdoc/>
         public override bool Equals(BasicRelationship? other)
         {

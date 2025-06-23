@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
+using MOM.Application.DTOs.HierarchyScope;
 using MOM.Application.DTOs.HierarchyScope.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
@@ -8,7 +8,7 @@ using MOM.Infrastructure.Persistence.Contexts;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using MOM.Application.DTOs.HierarchyScope;
+
 namespace MOM.Infrastructure.Persistence.Repositories
 {
     public class HierarchyScopeRepository(ApplicationDbContext dbContext) : GenericRepository<HierarchyScope>(dbContext), IHierarchyScopeRepository
@@ -17,6 +17,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             await this.ExecuteUpdateAsync(m => dtIds.Contains(m.DtId), setters => setters.SetProperty(pc => pc.IsDelete, true));
         }
+
         public async Task<PagedResponse<OrgResponse>> GetOrgListAsync(Guid? sourceDtId, string id, string name, int page, int pageSize)
         {
             var query = this.DbSet

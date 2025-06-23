@@ -3,7 +3,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
     using MOM.Domain.Common;
     using System;
     using System.Collections.Generic;
-    using System.Text.Json.Serialization;
+
     /// <summary>
     /// ืสิด
     /// </summary>
@@ -12,7 +12,6 @@ namespace MOM.Domain.isa95.CommonObjectModels
     /// </remarks>
     public abstract class Resource : BaseEntity, IEquatable<Resource>
     {
-
         /// <inheritdoc/>
         public override bool Equals(object? obj)
         {

@@ -11,6 +11,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         , ICodingRuleRepository
     {
         public DbSet<SequenceState> SequenceStates => dbContext.SequenceStates;
+
         /// <summary>
         /// 获取指定模型类型和序列名称的下一个序列号
         /// 每次调用会使序列号自动递增1

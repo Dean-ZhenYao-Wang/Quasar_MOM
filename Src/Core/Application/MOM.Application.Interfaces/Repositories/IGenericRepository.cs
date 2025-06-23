@@ -28,7 +28,9 @@ namespace MOM.Application.Interfaces.Repositories
         Task<Wrappers.PagedResponse<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class;
 
         IIncludableQueryable<T, TProperty> Include<TProperty>(Expression<Func<T, TProperty>> path);
+
         IQueryable<T> AsNoTracking();
+
         Task<int> SaveChangesAsync();
     }
 }

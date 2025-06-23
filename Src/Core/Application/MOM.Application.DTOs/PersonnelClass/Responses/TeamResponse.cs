@@ -1,5 +1,8 @@
 ﻿namespace MOM.Application.DTOs.PersonnelClass.Responses
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class TeamResponse : PersonnelClassResponse
     {
         /// <summary>
@@ -21,10 +24,12 @@
         /// 所属班组名称
         /// </summary>
         public string? SourceName { get; set; }
+
         /// <summary>
         /// 所属组织唯一标识
         /// </summary>
         public Guid? OrgDtId { get; set; }
+
         /// <summary>
         /// 所属组织名称/路径
         /// </summary>

@@ -6,9 +6,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     using MOM.Domain.isa95.CommonObjectModels;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 设备类别
     /// </summary>
@@ -20,6 +20,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     /// </remarks>
     public partial class EquipmentClass : ResourceClass, IEquatable<EquipmentClass>
     {
+        private EquipmentClass() { }
         /// <summary>
         /// 当前分类包含的子分类。<br/>
         /// 父子关系（主要类别，如生产类、一起类、辅助类、工具类、运输类、管理类等）<br/>
@@ -52,14 +53,14 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 具有的属性
         /// </summary>
         public virtual EquipmentClassProperty Property { get; set; } = new EquipmentClassProperty();
+
         /// <summary>
         /// 描述
         /// </summary>
         /// <remarks>
         /// 设备类别的补充信息
         /// </remarks>
-        public string Description { get; set; }
-
+        public string? Description { get; set; }
 
         /// <summary>
         /// 层级范围
@@ -70,6 +71,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// <para>非标准规范要求</para>
         /// </remarks>
         public Guid? HierarchyScopeRelDtId { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -80,6 +82,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         public string? HierarchyScope
         { get { return HierarchyScopeRel?.FullPath; } }
+
         /// <summary>
         /// 适配层级范围
         /// </summary>
@@ -89,8 +92,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         [ForeignKey(nameof(HierarchyScopeRelDtId))]
         [JsonIgnore]
-        public virtual HierarchyScope HierarchyScopeRel { get; set; }
-
+        public virtual HierarchyScope? HierarchyScopeRel { get; set; }
 
         /// <summary>
         /// 设备层级
@@ -115,6 +117,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
                 this.IncludesPropertiesOf.Add(new Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship(this.DtId, item));
             }
         }
+
         /// <summary>
         /// 更新当前设备类的组成部分
         /// </summary>
@@ -133,6 +136,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
                 this.IsMadeUpOf.Add(new Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship(this.DtId, item));
             }
         }
+
         /// <summary>
         /// 更新当前设备类
         /// </summary>
@@ -145,6 +149,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.Description = description;
             this.EquipmentLevel = equipmentLevel;
         }
+
         /// <summary>
         /// 软删除当前设备类
         /// </summary>
@@ -153,9 +158,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.IncludesPropertiesOf.Clear();
             base.Delete();
         }
-
-
-
 
         /// <inheritdoc/>
         public override bool Equals(object? obj)

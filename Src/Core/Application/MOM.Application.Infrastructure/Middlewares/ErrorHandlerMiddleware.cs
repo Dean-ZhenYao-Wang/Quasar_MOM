@@ -39,7 +39,7 @@ namespace MOM.Application.Infrastructure.Middlewares
 
                     case CommandExecutionException e:
                         response.StatusCode = 999;
-                        responseModel.AddError(new Error(ErrorCode.Exception, e.ErrorCode, e.Message));
+                        responseModel.AddError(new Error(ErrorCode.Exception, e.ErrorCode, e.InnerException!.Message));
                         break;
 
                     default:

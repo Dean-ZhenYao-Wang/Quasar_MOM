@@ -4,6 +4,9 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class PersonnelClassSettingPermissionCommand : SettingPermissionRequest, IRequest<BaseResult>
     { }
 }

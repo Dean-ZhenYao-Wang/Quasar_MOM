@@ -1,30 +1,32 @@
-
 namespace MOM.Domain.Common.Relationship.isa95.PhysicalAsset
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public class PhysicalAssetDefinedByRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass>, IEquatable<PhysicalAssetDefinedByRelationship>
+    public class PhysicalAssetDefinedByRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass>, IEquatable<PhysicalAssetDefinedByRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "definedBy";
+
         /// <inheritdoc/>
         public PhysicalAssetDefinedByRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass target) : base(source, target)
         {
         }
+
         /// <inheritdoc/>
         public PhysicalAssetDefinedByRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
         }
+
         /// <inheritdoc/>
         public PhysicalAssetDefinedByRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
         {
         }
+
         /// <inheritdoc/>
         public PhysicalAssetDefinedByRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass target, int depth) : base(sourceId, target, depth)
         {
         }
-
 
         /// <inheritdoc/>
         public override bool Equals(object? obj)

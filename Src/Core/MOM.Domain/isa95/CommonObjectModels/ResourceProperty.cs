@@ -1,9 +1,5 @@
 namespace MOM.Domain.isa95.CommonObjectModels
 {
-    using MOM.Domain.Common;
-    using System;
-    using System.Collections.Generic;
-    using System.Text.Json.Serialization;
     /// <summary>
     /// ◊ ‘¥ Ù–‘
     /// </summary>

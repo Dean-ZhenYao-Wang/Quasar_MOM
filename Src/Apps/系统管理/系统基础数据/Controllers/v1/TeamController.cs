@@ -13,6 +13,9 @@ using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
 {
+    /// <summary>
+    /// 班组管理
+    /// </summary>
     [Tags("班组管理")]
     [ApiVersion("1")]
     public sealed class TeamController : BaseApiController

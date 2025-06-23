@@ -12,10 +12,12 @@ namespace MOM.Domain.Permission
         /// 前端路径
         /// </summary>
         public string Path { get; set; } = string.Empty;
+
         /// <summary>
         /// 说明
         /// </summary>
         public string? Description { get; set; }
+
         /// <summary>
         /// 图标
         /// </summary>
@@ -30,10 +32,12 @@ namespace MOM.Domain.Permission
         /// 是否总是显示
         /// </summary>
         public bool AlwaysShow { get; set; }
+
         /// <summary>
         /// 子级菜单列表
         /// </summary>
         public virtual List<Menu> Children { get; set; } = new();
+
         /// <summary>
         /// 当前页面拥有的按钮清单
         /// </summary>
@@ -43,15 +47,18 @@ namespace MOM.Domain.Permission
         /// 第几层的菜单
         /// </summary>
         public int Depth { get; set; }
+
         /// <summary>
         /// 父级菜单的主键
         /// </summary>
         public Guid? ParentMenuDtId { get; set; }
+
         /// <summary>
         /// 父级菜单
         /// </summary>
         [ForeignKey(nameof(ParentMenuDtId))]
         public virtual Menu? ParentMenu { get; set; }
+
         /// <summary>
         /// 修改
         /// </summary>

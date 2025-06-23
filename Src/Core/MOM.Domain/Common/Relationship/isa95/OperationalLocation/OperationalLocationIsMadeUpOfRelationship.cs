@@ -1,25 +1,28 @@
-
 namespace MOM.Domain.Common.Relationship.isa95.OperationalLocation
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public class OperationalLocationIsMadeUpOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation ,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation>, IEquatable<OperationalLocationIsMadeUpOfRelationship>
+    public class OperationalLocationIsMadeUpOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation>, IEquatable<OperationalLocationIsMadeUpOfRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "isMadeUpOf";
+
         /// <inheritdoc/>
         public OperationalLocationIsMadeUpOfRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation target) : base(source, target)
         {
         }
+
         /// <inheritdoc/>
         public OperationalLocationIsMadeUpOfRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
         }
+
         /// <inheritdoc/>
         public OperationalLocationIsMadeUpOfRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
         {
         }
+
         /// <inheritdoc/>
         public OperationalLocationIsMadeUpOfRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation target, int depth) : base(sourceId, target, depth)
         {

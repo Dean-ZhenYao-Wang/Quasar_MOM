@@ -4,6 +4,9 @@ using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.HierarchyScope.Queries.GetOrgTable
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class GetOrgTableQuery : IRequest<PagedResponse<OrgResponse>>
     {
         /// <summary>

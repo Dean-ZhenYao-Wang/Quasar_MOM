@@ -4,10 +4,74 @@
         <name>MOM.Application.Features.Personnel</name>
     </assembly>
     <members>
+        <member name="T:MOM.Application.Features.Personnel.Commands.AddPerson.AddPersonCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Personnel.Commands.Authentication.AuthenticationCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Personnel.Commands.ChangePassword.ChangePasswordCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Personnel.Commands.DeletePerson.DeletePersonCommand">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="P:MOM.Application.Features.Personnel.Commands.DeletePerson.DeletePersonCommand.DtIds">
             <summary>
             需要被删除的人员的DtId清单
             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Personnel.Commands.DeletePerson.DeletePersonCommandHandler">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.Personnel.Commands.DeletePerson.DeletePersonCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IPersonRepository)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.Personnel.Commands.DeletePerson.DeletePersonCommandHandler.Handle(MOM.Application.Features.Personnel.Commands.DeletePerson.DeletePersonCommand,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Personnel.Commands.UpdatePerson.UpdatePersonCommand">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Personnel.Commands.UpdatePerson.UpdatePersonCommandHandler">
+             <summary>
+            
+             </summary>
+             <param name="personRepository"></param>
+             <param name="translator"></param>
+             <param name="unitOfWork"></param>
+        </member>
+        <member name="M:MOM.Application.Features.Personnel.Commands.UpdatePerson.UpdatePersonCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IPersonRepository,MOM.Application.Wrappers.ITranslator,MOM.Application.Interfaces.IUnitOfWork)">
+             <summary>
+            
+             </summary>
+             <param name="personRepository"></param>
+             <param name="translator"></param>
+             <param name="unitOfWork"></param>
+        </member>
+        <member name="M:MOM.Application.Features.Personnel.Commands.UpdatePerson.UpdatePersonCommandHandler.Handle(MOM.Application.Features.Personnel.Commands.UpdatePerson.UpdatePersonCommand,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+             <param name="request"></param>
+             <param name="cancellationToken"></param>
+             <returns></returns>
         </member>
         <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.Id">
             <summary>
@@ -49,10 +113,45 @@
             组织
             </summary>
         </member>
+        <member name="T:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQueryHandler">
+             <summary>
+            
+             </summary>
+             <param name="personRepository"></param>
+        </member>
+        <member name="M:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IPersonRepository)">
+             <summary>
+            
+             </summary>
+             <param name="personRepository"></param>
+        </member>
+        <member name="M:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQueryHandler.Handle(MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+             <param name="request"></param>
+             <param name="cancellationToken"></param>
+             <returns></returns>
+        </member>
         <member name="T:MOM.Application.Features.Personnel.Queries.GetResponsibles.GetResponsiblesQuery">
             <summary>
             获取负责人下拉列表数据，此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.Personnel.Queries.GetResponsibles.GetPropertiesQueryHandler">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.Personnel.Queries.GetResponsibles.GetPropertiesQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IPersonRepository)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.Personnel.Queries.GetResponsibles.GetPropertiesQueryHandler.Handle(MOM.Application.Features.Personnel.Queries.GetResponsibles.GetResponsiblesQuery,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
         </member>
     </members>
 </doc>

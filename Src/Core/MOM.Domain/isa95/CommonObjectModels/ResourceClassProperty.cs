@@ -1,10 +1,5 @@
 namespace MOM.Domain.isa95.CommonObjectModels
 {
-    using MOM.Domain.Common;
-    using MOM.Domain.Common.EnumType;
-    using System;
-    using System.Collections.Generic;
-    using System.Text.Json.Serialization;
     /// <summary>
     /// 资源类属性
     /// </summary>

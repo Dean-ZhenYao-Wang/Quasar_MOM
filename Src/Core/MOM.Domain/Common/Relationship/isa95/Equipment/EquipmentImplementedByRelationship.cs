@@ -1,26 +1,29 @@
-
 namespace MOM.Domain.Common.Relationship.isa95.Equipment
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public class EquipmentImplementedByRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset>, IEquatable<EquipmentImplementedByRelationship>
+    public class EquipmentImplementedByRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset>, IEquatable<EquipmentImplementedByRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "implementedBy";
+
         /// <inheritdoc/>
 
         public EquipmentImplementedByRelationship(Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment source, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset target) : base(source, target)
         {
         }
+
         /// <inheritdoc/>
         public EquipmentImplementedByRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
         }
+
         /// <inheritdoc/>
         public EquipmentImplementedByRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
         {
         }
+
         /// <inheritdoc/>
         public EquipmentImplementedByRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset target, int depth) : base(sourceId, target, depth)
         {

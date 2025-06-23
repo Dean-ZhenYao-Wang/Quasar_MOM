@@ -1,5 +1,8 @@
 ﻿namespace MOM.Application.DTOs.Account.Responses
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class AuthenticationResponse
     {
         /// <summary>
@@ -27,6 +30,9 @@
         /// </summary>
         public IList<string> Roles { get; set; }
 
+        /// <summary>
+        ///
+        /// </summary>
         public string JwToken { get; set; }
     }
 }

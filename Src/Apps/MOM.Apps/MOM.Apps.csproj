@@ -10,5 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\系统管理\人员认证管理\人员认证管理.csproj" />
     <ProjectReference Include="..\系统管理\系统基础数据\系统基础数据.csproj" />
+    <ProjectReference Include="..\设备管理\设备管理\设备管理.csproj" />
   </ItemGroup>
 </Project>

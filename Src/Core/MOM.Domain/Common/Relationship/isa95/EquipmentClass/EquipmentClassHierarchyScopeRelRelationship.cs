@@ -1,7 +1,6 @@
-
 namespace MOM.Domain.Common.Relationship.isa95.EquipmentClass
 {
-    public class EquipmentClassHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<EquipmentClassHierarchyScopeRelRelationship>
+    public class EquipmentClassHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass, Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<EquipmentClassHierarchyScopeRelRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "hierarchyScopeRel";
@@ -25,7 +24,6 @@ namespace MOM.Domain.Common.Relationship.isa95.EquipmentClass
         public EquipmentClassHierarchyScopeRelRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.HierarchyScope target, int depth) : base(sourceId, target, depth)
         {
         }
-
 
         /// <inheritdoc/>
         public override bool Equals(object? obj)

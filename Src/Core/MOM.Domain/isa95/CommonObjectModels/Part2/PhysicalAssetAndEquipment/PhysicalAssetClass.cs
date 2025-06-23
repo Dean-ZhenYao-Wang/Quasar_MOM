@@ -7,6 +7,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 物理资产类
     /// </summary>
@@ -17,6 +18,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     /// </remarks>
     public partial class PhysicalAssetClass : ResourceClass, IEquatable<PhysicalAssetClass>
     {
+        private PhysicalAssetClass() { }
         /// <summary>
         /// 物理资产制造商的唯一标识符
         /// </summary>
@@ -27,6 +29,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </summary>
         [JsonIgnore]
         public virtual List<PhysicalAssetClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<PhysicalAssetClassIncludesPropertiesOfRelationship>();
+
         /// <summary>
         /// 表示父物理资产类由子物理资产类作为组成部分（组合关系）
         /// </summary>
@@ -37,19 +40,23 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 扩展属性
         /// </summary>
         public virtual PhysicalAssetClassProperty Property { get; set; } = new PhysicalAssetClassProperty();
+
         /// <summary>
         /// 物理资产类的附加描述信息
         /// </summary>
         public string Description { get; private set; }
+
         /// <summary>
         /// 标识在基于角色的设备层次结构中的位置
         /// </summary>
         public Guid? HierarchyScopeRelDtId { get; set; }
+
         /// <summary>
         /// 标识在基于角色的设备层次结构中的位置
         /// </summary>
         public string? HierarchyScope
         { get { return HierarchyScopeRel?.FullPath; } }
+
         /// <summary>
         /// 关联物理资产类在设备层次结构中的具体范围定义
         /// </summary>

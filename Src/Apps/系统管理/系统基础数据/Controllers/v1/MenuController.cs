@@ -16,6 +16,9 @@ using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
 {
+    /// <summary>
+    /// 菜单管理
+    /// </summary>
     [Tags("菜单管理")]
     [ApiVersion("1")]
     public sealed class MenuController : BaseApiController

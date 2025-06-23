@@ -3,6 +3,7 @@ namespace MOM.Domain.Common.EnumType
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 物理位置类型
     /// </summary>
@@ -20,6 +21,7 @@ namespace MOM.Domain.Common.EnumType
         /// </remarks>
         [EnumMember(Value = "operationalLocation"), Display(Name = "operationalLocation", Description = "物理位置属性引用操作位置对象")]
         operationalLocation,
+
         /// <summary>
         /// 描述
         /// </summary>

@@ -8,6 +8,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 物理资产
     /// </summary>
@@ -16,13 +17,15 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     /// </remarks>
     public class PhysicalAsset : Resource, IEquatable<PhysicalAsset>
     {
+        private PhysicalAsset() { }
         /// <summary>
         /// 固定资产ID
         /// </summary>
         /// <remarks>
         /// 包含法律或法规要求的财务追踪唯一标识
         /// </remarks>
-        public required string FixedAssetID { get; set; }
+        public string FixedAssetID { get; set; }
+
         /// <summary>
         /// 供应商ID
         /// </summary>
@@ -30,6 +33,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 包含供应商序列号
         /// </remarks>
         public string? VendorID { get; set; }
+
         /// <summary>
         /// 空间定义
         /// </summary>
@@ -37,6 +41,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 将物理资产在空间上定义为零维点、一维线、二维面或三维体
         /// </remarks>
         public SpatialDefinition SpatialDefinition { get; set; }
+
         /// <summary>
         /// 由...定义
         /// </summary>
@@ -46,10 +51,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         [JsonIgnore]
         public virtual List<PhysicalAssetDefinedByRelationship> DefinedBy { get; set; } = new List<PhysicalAssetDefinedByRelationship>();
+
         /// <summary>
         /// 此物理资产的属性值
         /// </summary>
         public virtual PhysicalAssetProperty Property { get; set; } = new PhysicalAssetProperty();
+
         /// <summary>
         /// 由...组成
         /// </summary>
@@ -58,6 +65,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         [JsonIgnore]
         public virtual List<PhysicalAssetIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<PhysicalAssetIsMadeUpOfRelationship>();
+
         /// <summary>
         /// 描述
         /// </summary>
@@ -65,6 +73,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 物理资产的补充信息
         /// </remarks>
         public string? Description { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -74,6 +83,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// <para>非标准规范要求</para>
         /// </remarks>
         public Guid? HierarchyScopeRelDtId { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -84,6 +94,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         public string? HierarchyScope
         { get { return HierarchyScopeRel?.FullPath; } }
+
         /// <summary>
         /// 适配层级范围
         /// </summary>
@@ -102,6 +113,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// 包含物理位置信息（如地址或坐标）
         /// </remarks>
         public string PhysicalLocation { get; set; }
+
         /// <summary>
         /// 适配物理位置
         /// </summary>
@@ -111,6 +123,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </remarks>
         [JsonIgnore]
         public virtual Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation PhysicalLocationRel { get; set; }
+
         /// <summary>
         /// 物理位置类型
         /// </summary>

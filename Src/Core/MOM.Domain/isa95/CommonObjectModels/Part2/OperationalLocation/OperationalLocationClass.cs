@@ -6,6 +6,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
+
     /// <summary>
     /// 操作位置类别
     /// </summary>
@@ -23,6 +24,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         /// </remarks>
         [JsonIgnore]
         public virtual List<OperationalLocationClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<OperationalLocationClassIncludesPropertiesOfRelationship>();
+
         /// <summary>
         /// 由...组成
         /// </summary>
@@ -31,10 +33,12 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         /// </remarks>
         [JsonIgnore]
         public virtual List<OperationalLocationClassIsMadeUpOfRelationship> IsMadeUpOf { get; set; } = new List<OperationalLocationClassIsMadeUpOfRelationship>();
+
         /// <summary>
         /// 此操作位置类别具有的属性
         /// </summary>
         public OperationalLocationClassProperty Property { get; set; }
+
         /// <summary>
         /// 描述
         /// </summary>
@@ -42,7 +46,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         /// 操作位置类别的补充信息
         /// </remarks>
         public string? Description { get; set; }
-
 
         /// <summary>
         /// 层级范围
@@ -53,6 +56,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         /// <para>非标准规范要求</para>
         /// </remarks>
         public Guid? HierarchyScopeRelDtId { get; set; }
+
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -63,6 +67,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation
         /// </remarks>
         public string? HierarchyScope
         { get { return HierarchyScopeRel?.FullPath; } }
+
         /// <summary>
         /// 适配层级范围
         /// </summary>

@@ -440,6 +440,11 @@
             存储单元：用于存储或运输的设备
             </summary>
         </member>
+        <member name="T:MOM.Domain.Common.EnumType.EquipmentStatusType">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="F:MOM.Domain.Common.EnumType.EquipmentStatusType.在用">
             <summary>
             在用
@@ -464,6 +469,91 @@
             <summary>
             报废
             </summary>
+        </member>
+        <member name="T:MOM.Domain.Common.EnumType.FilterMatchModeType">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.startsWith">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.contains">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.notContains">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.endsWith">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.equals">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.notEquals">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.IN">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.lt">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.lte">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.gt">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.gte">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.between">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.dateIs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.dateIsNot">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.dateBefore">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.FilterMatchModeType.dateAfter">
+             <summary>
+            
+             </summary>
         </member>
         <member name="T:MOM.Domain.Common.EnumType.GenderType">
             <summary>
@@ -710,6 +800,11 @@
             操作位置属性包含操作位置的描述，例如街道地址。
             </summary>
         </member>
+        <member name="T:MOM.Domain.Common.EnumType.PersonWorkStatus">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="F:MOM.Domain.Common.EnumType.PersonWorkStatus.Employed">
             <summary>
             在职
@@ -856,9 +951,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
@@ -894,9 +989,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfEquipmentRelationship.Name">
             <inheritdoc/>
@@ -932,9 +1027,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.Name">
             <inheritdoc/>
@@ -1003,9 +1098,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship.Name">
             <inheritdoc/>
@@ -1041,9 +1136,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIsMadeUpOfRelationship.Name">
             <inheritdoc/>
@@ -1079,9 +1174,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship.Name">
             <inheritdoc/>
@@ -1117,9 +1212,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
@@ -1149,9 +1244,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentImplementedByRelationship.Name">
             <inheritdoc/>
@@ -1187,9 +1282,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentIsMadeUpOfRelationship.Name">
             <inheritdoc/>
@@ -1225,9 +1320,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.Name">
             <inheritdoc/>
@@ -1263,9 +1358,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
@@ -1301,9 +1396,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIncludesPropertiesOfRelationship.Name">
             <inheritdoc/>
@@ -1339,9 +1434,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassIsMadeUpOfRelationship.Name">
             <inheritdoc/>
@@ -1377,9 +1472,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship.Name">
             <inheritdoc/>
@@ -1415,9 +1510,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
@@ -1453,9 +1548,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationIsMadeUpOfRelationship.Name">
             <inheritdoc/>
@@ -1491,9 +1586,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
@@ -1529,9 +1624,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship.Name">
             <inheritdoc/>
@@ -1567,9 +1662,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.Person.PersonDefinedByRelationship.Name">
             <inheritdoc/>
@@ -1605,9 +1700,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
@@ -1616,11 +1711,11 @@
             <inheritdoc/>
         </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="sourceId"></param>
-            <param name="targetId"></param>
+             </summary>
+             <param name="sourceId"></param>
+             <param name="targetId"></param>
         </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
             <inheritdoc/>
@@ -1647,9 +1742,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.Person.PersonOperationalLocationRelRelationship.Name">
             <inheritdoc/>
@@ -1685,9 +1780,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
@@ -1723,9 +1818,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIncludesPropertiesOfRelationship.Name">
             <inheritdoc/>
@@ -1761,9 +1856,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassIsMadeUpOfRelationship.Name">
             <inheritdoc/>
@@ -1799,9 +1894,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetDefinedByRelationship.Name">
             <inheritdoc/>
@@ -1837,9 +1932,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
@@ -1875,9 +1970,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetIsMadeUpOfRelationship.Name">
             <inheritdoc/>
@@ -1913,9 +2008,9 @@
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetPhysicalLocationRelRelationship.Name">
             <inheritdoc/>
@@ -2072,16 +2167,16 @@
             </summary>
         </member>
         <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.#ctor(MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel,System.String,System.String,System.String,System.Boolean,System.String,System.Nullable{System.Guid})">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="equipmentLevel"></param>
-            <param name="Id"></param>
-            <param name="name"></param>
-            <param name="address"></param>
-            <param name="active"></param>
-            <param name="description"></param>
-            <param name="sourceDtId"></param>
+             </summary>
+             <param name="equipmentLevel"></param>
+             <param name="Id"></param>
+             <param name="name"></param>
+             <param name="address"></param>
+             <param name="active"></param>
+             <param name="description"></param>
+             <param name="sourceDtId"></param>
         </member>
         <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Delete">
             <summary>
@@ -2378,7 +2473,7 @@
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.UserName">
             <summary>
             登录账号
-            </summary>        
+            </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Gender">
             <summary>
@@ -2422,13 +2517,42 @@
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.SecurityStamp">
             <summary>
-            其变更会立即使所有已颁发的Toekn失效
+            其变更会立即使所有已颁发的 Toekn 失效
             </summary>
         </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.AvailablePermissions">
             <summary>
             扩展权限,对人员类权限的扩展或限制,此条件仅针对个人有效
             </summary>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.#ctor(System.String,System.String,MOM.Domain.Common.EnumType.PersonWorkStatus,System.String,System.String,System.Nullable{System.Guid},System.Nullable{System.Guid},System.Collections.Generic.IEnumerable{System.Guid},System.String)">
+             <summary>
+            
+             </summary>
+             <param name="userName"></param>
+             <param name="name"></param>
+             <param name="workStatus"></param>
+             <param name="email"></param>
+             <param name="phoneNumber"></param>
+             <param name="teamOfGroupDtId"></param>
+             <param name="OrgDtId"></param>
+             <param name="positionDtId_List"></param>
+             <param name="description"></param>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.Update(System.String,System.String,MOM.Domain.Common.EnumType.PersonWorkStatus,System.String,System.String,System.Nullable{System.Guid},System.Nullable{System.Guid},System.Collections.Generic.IEnumerable{System.Guid},System.String,System.Collections.Generic.IEnumerable{MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonProperty})">
+             <summary>
+            
+             </summary>
+             <param name="ID"></param>
+             <param name="name"></param>
+             <param name="workStatus"></param>
+             <param name="email"></param>
+             <param name="phoneNumber"></param>
+             <param name="teamOfGroupDtId"></param>
+             <param name="OrgDtId"></param>
+             <param name="positionDtId_List"></param>
+             <param name="description"></param>
+             <param name="properties"></param>
         </member>
         <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.HierarchyScopeRelAddOrUpdateTarget(MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Guid)">
             <summary>

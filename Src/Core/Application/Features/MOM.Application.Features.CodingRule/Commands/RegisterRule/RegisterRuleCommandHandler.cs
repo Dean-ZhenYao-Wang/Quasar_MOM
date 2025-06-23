@@ -2,7 +2,6 @@
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using System.Data;
 
 namespace MOM.Application.Features.CodingRule.Commands.RegisterRule
 {

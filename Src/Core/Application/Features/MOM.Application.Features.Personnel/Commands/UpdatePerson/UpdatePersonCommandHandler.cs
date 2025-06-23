@@ -3,13 +3,23 @@ using Microsoft.EntityFrameworkCore;
 using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
-using MOM.Domain.Common.Relationship.isa95.Person;
-using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 
 namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
 {
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="personRepository"></param>
+    /// <param name="translator"></param>
+    /// <param name="unitOfWork"></param>
     public class UpdatePersonCommandHandler(IPersonRepository personRepository, ITranslator translator, IUnitOfWork unitOfWork) : IRequestHandler<UpdatePersonCommand, BaseResult>
     {
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<BaseResult> Handle(UpdatePersonCommand request, CancellationToken cancellationToken)
         {
             var person = await personRepository.DbSet

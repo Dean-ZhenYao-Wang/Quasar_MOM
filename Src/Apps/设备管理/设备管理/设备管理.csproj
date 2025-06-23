@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OrchardCore.Module.Targets" Version="2.1.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Application\Features\MOM.Application.Features.PhysicalAssetAndEquipment\MOM.Application.Features.PhysicalAssetAndEquipment.csproj" />
+    <ProjectReference Include="..\..\..\Core\Application\MOM.Application.Interfaces\MOM.Application.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

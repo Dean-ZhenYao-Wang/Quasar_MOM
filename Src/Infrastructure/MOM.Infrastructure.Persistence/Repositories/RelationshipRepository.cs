@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Domain.Common;
-using MOM.Domain.Common.Relationship.isa95.HierarchyScope;
-using MOM.Infrastructure.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +15,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
             where TSource : BaseEntity
             where TTarget : BaseEntity
     {
-
         /// <summary>
         /// 获取指定节点往上第N级的节点，如果不存在则返回NULL
         /// </summary>
@@ -30,6 +27,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                .Select(m => m.SourceId)
                .FirstOrDefaultAsync();
         }
+
         /// <summary>
         /// 获取指定节点是那一级的，根级别是0
         /// </summary>
@@ -39,6 +37,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             return await this.GetDepth(currentNodeDtId, null);
         }
+
         /// <summary>
         /// 查询指定节点到它某个祖先节点的距离
         /// </summary>
@@ -53,6 +52,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .FirstOrDefaultAsync();
             return distance?.Depth;
         }
+
         /// <summary>
         /// 获取指定节点往下的第N级节点列表
         /// </summary>
@@ -65,6 +65,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .Select(m => m.Target)
                 .ToListAsync();
         }
+
         /// <summary>
         /// 获取直接下级列表
         /// </summary>
@@ -86,6 +87,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .Select(m => m.Target)
                 .ToListAsync();
         }
+
         /// <summary>
         /// 获取根节点到此节点（含）路径上的所有的节点名称。
         /// </summary>
@@ -93,11 +95,12 @@ namespace MOM.Infrastructure.Persistence.Repositories
         /// <returns>节点列表，越上级的节点在列表中的位置越靠前</returns>
         public async Task<string> GetPathAsync(Guid currentDtId)
         {
-            return string.Join("/",await this.Where(m => m.TargetId == currentDtId && m.SourceId != null)
+            return string.Join("/", await this.Where(m => m.TargetId == currentDtId && m.SourceId != null)
                 .OrderByDescending(m => m.Depth)
                 .Select(m => m.Source.Name)
                 .ToListAsync());
         }
+
         /// <summary>
         /// 获取指定分类（含）到其某个的上级分类（不含）之间的所有分类的对象。
         /// 如果上级分类不存在，或是上级分类不是指定分类的上级，则返回空列表
@@ -113,6 +116,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .Select(m => m.Source)
                 .ToListAsync());
         }
+
         /// <summary>
         /// 将一个分类移动到目标分类下面（成为其子分类）。被移动分类的子类将自动上浮
         /// （成为指定分类父类的子分类），即使目标是指定分类原本的父类。
@@ -149,6 +153,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
             await this.MoveSubTree(currentDtId.Value, await this.GetSourceDtId(currentDtId.Value, 1));
             await this.MoveNode(currentDtId.Value, newParentDtId);
         }
+
         /// <summary>
         /// 将一个分类移动到目标分类下面（成为其子分类），被移动分类的子分类也会随着移动。
         /// 如果目标分类是被移动分类的子类，则先将目标分类（连带子类）移动到被移动分类原来的
@@ -203,10 +208,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
             await this.MoveSubTree(currentDtId.Value, currentDtId);
         }
 
-
-
-
-
         /// <summary>
         /// 将指定节点移动到某节点下面，该方法不修改子节点的相关记录，
         /// 为了保证数据的完整性，需要与 moveSubTree() 方法配合使用。
@@ -220,16 +221,19 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 await this.InsertPath(currentDtId, parentDtId.Value);
             await this.InsertSelfLink(currentDtId);
         }
+
         public async Task AddAsync(Guid currentDtId, Guid? parentDtId)
         {
             await this.MoveNode(currentDtId, parentDtId);
         }
+
         public async Task InsertSelfLink(Guid currentDtId)
         {
             var relationship = new T();
-            relationship.InitializeFromTwins(currentDtId, currentDtId,0);
+            relationship.InitializeFromTwins(currentDtId, currentDtId, 0);
             await this.AddAsync(relationship);
         }
+
         public async Task InsertPath(Guid currenDtId, Guid parentDtId)
         {
             var sources = await this.Where(m => m.TargetId == parentDtId)
@@ -243,7 +247,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
             if (sources.Count > 0)
             {
-
                 var relationships = sources.Select(s =>
                 {
                     var relationship = new T();
@@ -251,7 +254,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
                     return relationship;
                 }).ToList();
                 await this.AddRangeAsync(relationships);
-
             }
         }
 
@@ -263,6 +265,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
             await MoveSubTree(currentDtId, newParent);
             return 1;
         }
+
         public async Task<int> DeletePath(IEnumerable<Guid> currentDtIds)
         {
             foreach (var currentDtId in currentDtIds)

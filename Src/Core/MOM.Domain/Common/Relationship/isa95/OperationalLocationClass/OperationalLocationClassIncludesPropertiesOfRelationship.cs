@@ -1,25 +1,28 @@
-
 namespace MOM.Domain.Common.Relationship.isa95.OperationalLocationClass
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public class OperationalLocationClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass ,Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationClassIncludesPropertiesOfRelationship>
+    public class OperationalLocationClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass>, IEquatable<OperationalLocationClassIncludesPropertiesOfRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "includesPropertiesOf";
+
         /// <inheritdoc/>
         public OperationalLocationClassIncludesPropertiesOfRelationship(Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass source, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass target) : base(source, target)
         {
         }
+
         /// <inheritdoc/>
         public OperationalLocationClassIncludesPropertiesOfRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
         }
+
         /// <inheritdoc/>
         public OperationalLocationClassIncludesPropertiesOfRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
         {
         }
+
         /// <inheritdoc/>
         public OperationalLocationClassIncludesPropertiesOfRelationship(Guid sourceId, Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass target, int depth) : base(sourceId, target, depth)
         {

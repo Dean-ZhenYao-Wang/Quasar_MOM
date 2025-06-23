@@ -1,13 +1,8 @@
 ﻿using MOM.Domain.Common;
 using MOM.Domain.Common.EnumType;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MOM.Domain.CodingRule
 {
@@ -25,6 +20,7 @@ namespace MOM.Domain.CodingRule
         /// </summary>
         [Required]
         public int Order { get; set; }
+
         /// <summary>
         /// 段的类型
         /// 决定该段的值如何生成，参见SegmentType枚举的详细说明
@@ -50,7 +46,7 @@ namespace MOM.Domain.CodingRule
         /// - DateTime类型：日期时间格式，如"yyyyMMdd"、"HHmmss"、"yyyy-MM-dd"等
         /// - 其他类型：预留扩展使用
         /// </summary>
-        public string Format { get; set; }=string.Empty;
+        public string Format { get; set; } = string.Empty;
 
         /// <summary>
         /// 段的固定长度
@@ -79,7 +75,8 @@ namespace MOM.Domain.CodingRule
         /// <summary>
         /// 关联的编码配置规则数据库唯一标识
         /// </summary>
-        public required Guid RuleDtId { get; set; }
+        public Guid RuleDtId { get; set; }
+
         /// <summary>
         /// 关联的编码配置规则
         /// </summary>
@@ -87,5 +84,4 @@ namespace MOM.Domain.CodingRule
         [ForeignKey(nameof(RuleDtId))]
         public virtual CodingRule Rule { get; set; }
     }
-
 }

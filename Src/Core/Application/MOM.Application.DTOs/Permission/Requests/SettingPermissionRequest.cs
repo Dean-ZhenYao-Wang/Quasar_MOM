@@ -1,5 +1,8 @@
 ﻿namespace MOM.Application.DTOs.Permission.Requests
 {
+    /// <summary>
+    ///
+    /// </summary>
     public class SettingPermissionRequest
     {
         /// <summary>
