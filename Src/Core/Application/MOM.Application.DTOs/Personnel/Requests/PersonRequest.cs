@@ -6,6 +6,10 @@ namespace MOM.Application.DTOs.Personnel.Requests
     public class PersonRequest
     {
         /// <summary>
+        /// 编号/工号
+        /// </summary>
+        public string? Id{get;set; }
+        /// <summary>
         /// UserName 账号
         /// </summary>
         public required string UserName { get; set; }

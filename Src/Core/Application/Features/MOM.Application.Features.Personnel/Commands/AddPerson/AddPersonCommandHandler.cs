@@ -16,7 +16,10 @@ namespace MOM.Application.Features.Personnel.Commands.AddPerson
             try
             {
                 Person addPerson = request.ToPerson();
-                addPerson.Id = await mediator.Send(new GenerateCodeCommand { RuleId = "UserId", ModelTypeName = "MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain" });
+                addPerson.Id =
+                    string.IsNullOrWhiteSpace(request.Id)
+                    ? await mediator.Send(new GenerateCodeCommand { RuleId = "UserId", ModelTypeName = "MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain" })
+                    : request.Id;
                 addPerson.PassWord = "123456".Sha1Signature().Sha1Signature(addPerson.DtId.ToString());
                 await personRepository.AddAsync(addPerson);
                 await unitOfWork.SaveChangesAsync();
