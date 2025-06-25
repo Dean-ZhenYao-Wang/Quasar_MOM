@@ -917,6 +917,83 @@
             设备层级
             </summary>
         </member>
+        <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.Description">
+            <summary>
+            设备的补充信息
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.EquipmentLevel">
+            <summary>
+            设备层级
+            </summary>
+            <remarks>
+            基于角色的设备层级中的级别标识
+            </remarks>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.DefinedBy">
+            <summary>
+            所属设备类清单
+            <para>此设备支持的设备类别</para>
+            </summary>
+            <remarks>
+            关系类型：关联
+            </remarks>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.Property">
+            <summary>
+            此设备的属性值
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.ResponsibleDtId">
+            <summary>
+            责任人DtId
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.Status">
+            <summary>
+            设备状态
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.Supplier">
+            <summary>
+            供应商
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.Specification">
+            <summary>
+            规格
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.FactoryNumber">
+            <summary>
+            出厂编号
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentClassRequest.Id">
             <summary>
             编号

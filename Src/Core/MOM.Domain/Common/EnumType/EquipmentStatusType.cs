@@ -11,10 +11,10 @@ namespace MOM.Domain.Common.EnumType
     public enum EquipmentStatusType
     {
         /// <summary>
-        /// 在用
+        /// 启用
         /// </summary>
-        [EnumMember(Value = "在用"), Display(Name = "在用")]
-        在用,
+        [EnumMember(Value = "启用"), Display(Name = "启用")]
+        启用,
 
         /// <summary>
         /// 维修

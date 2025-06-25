@@ -20,7 +20,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     /// </remarks>
     public partial class Equipment : Resource, IEquatable<Equipment>
     {
-        private Equipment() { }
+        public Equipment() { }
         /// <summary>
         /// 设备层级
         /// </summary>
@@ -113,8 +113,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// <summary>
         /// 型号
         /// </summary>
-        [Required]
-        public string ModelNumber { get; set; }
+        public string? ModelNumber { get; set; }
 
         /// <summary>
         /// 使用组织的DtId
@@ -142,8 +141,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// <summary>
         /// 启用时间
         /// </summary>
-        [Required]
-        public DateTime EnabledTime { get; set; }
+        public DateTime? EnabledTime { get; set; }
 
         /// <summary>
         /// 责任人DtId
@@ -183,8 +181,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// <summary>
         /// 折旧年限
         /// </summary>
-        [Required]
-        public int DepreciationLife { get; set; }
+        public int? DepreciationLife { get; set; }
 
         /// <summary>
         /// 出厂日期

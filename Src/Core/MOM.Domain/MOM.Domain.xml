@@ -445,9 +445,9 @@
             
              </summary>
         </member>
-        <member name="F:MOM.Domain.Common.EnumType.EquipmentStatusType.在用">
+        <member name="F:MOM.Domain.Common.EnumType.EquipmentStatusType.启用">
             <summary>
-            在用
+            启用
             </summary>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.EquipmentStatusType.维修">

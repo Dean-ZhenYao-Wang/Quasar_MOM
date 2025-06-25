@@ -10,4 +10,11 @@
     <ProjectReference Include="..\..\MOM.Application\MOM.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\AddEquipment\" />
+    <Folder Include="Commands\DeleteEquipment\" />
+    <Folder Include="Commands\UpdateEquipment\" />
+    <Folder Include="Queries\GetPagedEquipment\" />
+  </ItemGroup>
+
 </Project>
