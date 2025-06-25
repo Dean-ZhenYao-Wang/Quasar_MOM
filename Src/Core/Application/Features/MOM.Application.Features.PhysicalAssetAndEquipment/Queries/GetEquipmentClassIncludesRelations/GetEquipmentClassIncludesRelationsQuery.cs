@@ -6,7 +6,7 @@ using MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment;
 
 namespace MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetIncludesRelations
 {
-    public class GetEquipmentClassIncludesRelationsQuery : IRequest<List<EquipmentClass>>
+    public class GetEquipmentClassIncludesRelationsQuery : PaginationRequestParameter, IRequest<PagedResponse<EquipmentClass>>
     {
         /// <summary>
         /// 设备类型的DTId

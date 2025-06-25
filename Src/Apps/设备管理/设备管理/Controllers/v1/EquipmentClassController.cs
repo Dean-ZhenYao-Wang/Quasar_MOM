@@ -27,29 +27,21 @@ namespace 设备管理.Controllers.v1
         /// <summary>
         /// 查询包含关系的设备类型
         /// </summary>
-        /// <param name="dtId"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<List<EquipmentClass>> IncludesRelations([FromQuery] Guid dtId)
+        public async Task<PagedResponse<EquipmentClass>> IncludesRelations([FromQuery] GetEquipmentClassIncludesRelationsQuery query)
         {
-            var query = new GetEquipmentClassIncludesRelationsQuery()
-            {
-                DtId = dtId
-            };
             return await Mediator.Send(query);
         }
         /// <summary>
         /// 查询组合关系的设备类型
         /// </summary>
-        /// <param name="dtId"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<List<EquipmentClass>> IsMadeUpOf([FromQuery] Guid dtId)
+        public async Task<PagedResponse<EquipmentClass>> IsMadeUpOf([FromQuery] GetEquipmentClassIsMadeUpOfQuery query)
         {
-            var query = new GetEquipmentClassIsMadeUpOfQuery()
-            {
-                DtId = dtId
-            };
             return await Mediator.Send(query);
         }
     }
