@@ -22,7 +22,7 @@ namespace 系统基础数据.Controllers.v1
         /// 注册编码规则
         /// 将编码规则添加到管理器中，如果规则ID已存在则会覆盖原规则
         /// </summary>
-        [HttpPost]
+        [HttpPost(nameof(RegisterRule))]
         public async Task<BaseResult> RegisterRule(RegisterRuleCommand request)
         {
             return await Mediator.Send(request);
@@ -33,7 +33,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetPaged))]
         public async Task<PagedResponse<MOM.Domain.CodingRule.CodingRule>> GetPaged([FromQuery] GetPagedCodingRuleQuery query)
         {
             return await Mediator.Send(query);
@@ -44,7 +44,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="generate"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GenerateCode))]
         public async Task<BaseResult<string>> GenerateCode([FromQuery] GenerateCodeCommand generate)
         {
             return await Mediator.Send(generate);

@@ -29,7 +29,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetOrgTable))]
         public async Task<PagedResponse<OrgResponse>> GetOrgTable([FromQuery] GetOrgTableQuery query)
         {
             return await Mediator.Send(query);
@@ -40,7 +40,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetEnterpriseTable))]
         public async Task<PagedResponse<OrgResponse>> GetEnterpriseTable([FromQuery] GetEnterpriseTableQuery query)
         {
             return await Mediator.Send(query);
@@ -51,7 +51,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetFactoryTable))]
         public async Task<PagedResponse<OrgResponse>> GetFactoryTable([FromQuery] GetFactoryTableQuery query)
         {
             return await Mediator.Send(query);
@@ -62,7 +62,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost(nameof(AddHierarchyScope))]
         public async Task<BaseResult> AddHierarchyScope(AddHierarchyScopeCommand command)
         {
             var model = await Mediator.Send(command);
@@ -74,7 +74,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete(nameof(DeleteHierarchyScope))]
         public async Task<BaseResult> DeleteHierarchyScope(DeleteHierarchyScopeCommand command)
         {
             var model = await Mediator.Send(command);
@@ -86,7 +86,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut(nameof(UpdateHierarchyScope))]
         public async Task<BaseResult> UpdateHierarchyScope(UpdateHierarchyScopeCommand command)
         {
             var model = await Mediator.Send(command);
@@ -98,7 +98,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="sourceDtId">上级节点的DtId</param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetDepartTree))]
         public async Task<BaseResult<List<TreeNode<OrgResponse>>>> GetDepartTree([FromQuery] Guid? sourceDtId)
         {
             return await Mediator.Send(new GetOrgTreeQuery { SourceDtId = sourceDtId });
@@ -109,7 +109,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost(nameof(SettingPermission))]
         public async Task<BaseResult> SettingPermission(OrgSettingPermissionCommand command)
         {
             return await Mediator.Send(command);
@@ -120,7 +120,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="orgDtId">指定组织的dtId</param>
         /// <returns>该组织所拥有权限的菜单或按钮的编号</returns>
-        [HttpGet]
+        [HttpGet(nameof(Permission))]
         public async Task<BaseResult<List<string>>> Permission([FromQuery] Guid orgDtId)
         {
             return await Mediator.Send(new GetOrgPermissionListQuery { OrgDtId = orgDtId });

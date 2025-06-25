@@ -9,7 +9,7 @@ namespace MOM.Application.Infrastructure
     [ApiController]
     [ApiResultFilter]
     [Authorize]
-    [Route("api/v{version:apiVersion}/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public abstract class BaseApiController : ControllerBase
     {
         private IMediator? _mediator; // Mark _mediator as nullable to address CS8601

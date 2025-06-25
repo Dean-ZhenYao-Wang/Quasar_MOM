@@ -44,7 +44,7 @@
             说明
             </summary>
         </member>
-        <member name="P:MOM.Application.Wrappers.PagedResponse`1.PageNumber">
+        <member name="P:MOM.Application.Wrappers.PagedResponse`1.Page">
             <summary>
             查看的页数
             </summary>

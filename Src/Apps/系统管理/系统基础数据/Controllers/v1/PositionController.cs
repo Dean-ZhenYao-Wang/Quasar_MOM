@@ -24,7 +24,7 @@ namespace 系统基础数据.Controllers.v1
         /// 查询职位下拉列表
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(SelectOptions))]
         public async Task<BaseResult<List<PersonnelClassResponse>>> SelectOptions()
         {
             return await Mediator.Send(new GetPositionSelectOptionsQuery());
@@ -35,7 +35,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetPaged))]
         public async Task<PagedResponse<PersonnelClassResponse>> GetPaged([FromQuery] GetPagedPositionQuery query)
         {
             return await Mediator.Send(query);
@@ -46,7 +46,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost(nameof(Add))]
         public async Task<BaseResult> Add(AddPositionCommand command)
         {
             return await Mediator.Send(command);
@@ -57,7 +57,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost(nameof(Update))]
         public async Task<BaseResult> Update(UpdatePositionCommand command)
         {
             return await Mediator.Send(command);
@@ -68,7 +68,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete(nameof(Delete))]
         public async Task<BaseResult> Delete(DeletePersonnelClassCommand command)
         {
             return await Mediator.Send(command);
@@ -79,7 +79,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost(nameof(SettingPermission))]
         public async Task<BaseResult> SettingPermission(PersonnelClassSettingPermissionCommand command)
         {
             return await Mediator.Send(command);

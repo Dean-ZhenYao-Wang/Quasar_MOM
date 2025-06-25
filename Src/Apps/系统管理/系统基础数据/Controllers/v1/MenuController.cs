@@ -27,55 +27,55 @@ namespace 系统基础数据.Controllers.v1
         /// 菜单管理页面获得所有菜单树
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetMenuTree))]
         public async Task<BaseResult<List<MenuTreeNodeResponse>>> GetMenuTree()
         {
             return await Mediator.Send(new GetMenuTreeQuery());
         }
 
-        [HttpPost]
+        [HttpPost(nameof(AddMenu))]
         public async Task<BaseResult> AddMenu(AddMenuCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
 
-        [HttpPost]
+        [HttpPost(nameof(AddButton))]
         public async Task<BaseResult> AddButton(AddButtonCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
 
-        [HttpPut]
+        [HttpPut(nameof(UpdateMenu))]
         public async Task<BaseResult> UpdateMenu(UpdateMenuCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
 
-        [HttpPut]
+        [HttpPut(nameof(UpdateButton))]
         public async Task<BaseResult> UpdateButton(UpdateButtonCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
 
-        [HttpDelete]
+        [HttpDelete(nameof(DeleteMenu))]
         public async Task<BaseResult> DeleteMenu(DeleteMenuCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
 
-        [HttpDelete]
+        [HttpDelete(nameof(DeleteButton))]
         public async Task<BaseResult> DeleteButton(DeleteButtonCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
 
-        [HttpGet]
+        [HttpGet(nameof(GetMenuList))]
         public async Task<BaseResult<List<MenuResponse>>> GetMenuList([FromQuery] GetMenuListQuery command)
         {
             var model = await Mediator.Send(command);

@@ -14,6 +14,14 @@ export const usePhysicalAssetAndEquipmentStore = defineStore(
         })
         return response
       },
+      async IncludesRelations(dtId) {
+        const response = await api.get('/api/v1/EquipmentClass/' + dtId + '/IncludesRelations')
+        return response
+      },
+      async IsMadeUpOf(dtId) {
+        const response = await api.get('/api/v1/EquipmentClass/' + dtId + '/IsMadeUpOf')
+        return response
+      },
     },
   },
 )

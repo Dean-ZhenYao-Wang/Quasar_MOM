@@ -25,7 +25,7 @@ namespace 人员认证管理.Controllers.v1
         /// 此处默认获取全部人员，可根据客户需求进行定制（增加数据过滤条件）
         /// </remarks>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetResponsibles))]
         public async Task<BaseResult<List<Person>>> GetResponsibles()
         {
             return await Mediator.Send(new GetResponsiblesQuery());
@@ -36,7 +36,7 @@ namespace 人员认证管理.Controllers.v1
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetPaged))]
         public async Task<PagedResponse<PersonResponse>> GetPaged([FromQuery] GetPagedPersonQuery request)
         {
             return await Mediator.Send(request);
@@ -57,7 +57,7 @@ namespace 人员认证管理.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost(nameof(Add))]
         public async Task<BaseResult> Add(AddPersonCommand command)
         {
             var model = await Mediator.Send(command);
@@ -69,7 +69,7 @@ namespace 人员认证管理.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete(nameof(Delete))]
         public async Task<BaseResult> Delete(DeletePersonCommand command)
         {
             var deleteResoult = await Mediator.Send(command);
@@ -81,7 +81,7 @@ namespace 人员认证管理.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut(nameof(Update))]
         public async Task<BaseResult> Update(UpdatePersonCommand command)
         {
             var updateResoult = await Mediator.Send(command);
@@ -93,7 +93,7 @@ namespace 人员认证管理.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost(nameof(SettingPermission))]
         public async Task<BaseResult> SettingPermission(PersonnelSettingPermissionCommand command)
         {
             return await Mediator.Send(command);
