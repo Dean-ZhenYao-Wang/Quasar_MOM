@@ -22,6 +22,20 @@ export const usePhysicalAssetAndEquipmentStore = defineStore(
         const response = await api.get('/api/v1/EquipmentClass/' + dtId + '/IsMadeUpOf')
         return response
       },
+      async Add(data) {
+        const response = await api.post('/api/v1/EquipmentClass/Add', data)
+        return response
+      },
+      async Update(data) {
+        const response = await api.put('/api/v1/EquipmentClass/Update', data)
+        return response
+      },
+      async Delete(dtIds) {
+        const response = await api.delete('/api/v1/EquipmentClass/Delete', {
+          data: { DtIds: dtIds },
+        })
+        return response
+      },
     },
   },
 )

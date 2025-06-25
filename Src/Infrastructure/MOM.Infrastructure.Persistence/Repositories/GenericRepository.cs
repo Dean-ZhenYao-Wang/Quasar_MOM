@@ -97,9 +97,9 @@ namespace MOM.Infrastructure.Persistence.Repositories
         {
             dbContext.Set<T>().RemoveRange(entities);
         }
-        public void DeleteRange<TKey>(IEnumerable<TKey> keys)
+        public async Task DeleteRangeAsync<TKey>(IEnumerable<TKey> keys)
         {
-            dbContext.Set<T>().RemoveRange(dbContext.Set<T>().Find(keys));
+            dbContext.Set<T>().RemoveRange(await GetByIdsAsync(keys));
         }
 
         public async Task<PagedResponse<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class

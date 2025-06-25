@@ -14,7 +14,7 @@ namespace MOM.Application.Features.PhysicalAssetAndEquipment.Commands.DeleteEqui
     {
         public async Task<BaseResult> Handle(DeleteEquipmentClassCommand request, CancellationToken cancellationToken)
         {
-            equipmentClassRepository.DeleteRange<Guid>(request.DtIds);
+            await equipmentClassRepository.DeleteRangeAsync(request.DtIds);
             await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }

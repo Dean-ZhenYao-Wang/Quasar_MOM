@@ -31,6 +31,6 @@ namespace MOM.Application.Interfaces.Repositories
         IQueryable<T> AsNoTracking();
 
         Task<int> SaveChangesAsync();
-        void DeleteRange<TKey>(IEnumerable<TKey> keys);
+        Task DeleteRangeAsync<TKey>(IEnumerable<TKey> keys);
     }
 }

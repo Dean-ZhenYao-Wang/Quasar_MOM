@@ -48,7 +48,6 @@ const equipmentClass_config = {
   },
   tableConfig: {
     rowKey: 'dtId',
-    delete: false,
     selection: 'multiple',
     columns: [
       { name: 'id', align: 'left', label: '序号', field: 'id', sortable: true },
@@ -110,15 +109,14 @@ const tableData = ref([])
 const physicalAssetAndEquipmentStore = usePhysicalAssetAndEquipmentStore()
 const handleSearch = async (queryParams) => {
   const response = await physicalAssetAndEquipmentStore.GetPagedEquipmentClass(queryParams)
-  console.log('search')
   tableData.value = response.data
   pagination.value.rowsNumber = response.totalItems
 }
 const handleCreate = async (payload) => {
-  await physicalAssetAndEquipmentStore.AddEquipmentClass(payload)
+  await physicalAssetAndEquipmentStore.Add(payload)
 }
 const handleUpdate = async (payload) => {
-  await physicalAssetAndEquipmentStore.UpdateEquipmentClass(payload)
+  await physicalAssetAndEquipmentStore.Update(payload)
 }
 const handleBatchDelete = async (dtIds) => {
   await batchDelete(dtIds)
@@ -127,6 +125,6 @@ const handleDelete = async (dtId) => {
   await batchDelete([dtId])
 }
 const batchDelete = async (dtIds) => {
-  await physicalAssetAndEquipmentStore.DeleteEquipmentClass(dtIds)
+  await physicalAssetAndEquipmentStore.Delete(dtIds)
 }
 </script>
