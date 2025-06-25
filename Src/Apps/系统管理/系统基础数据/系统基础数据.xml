@@ -110,6 +110,69 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:系统基础数据.Controllers.v1.MenuController.AddMenu(MOM.Application.Features.Permission.Commands.AddMenu.AddMenuCommand)">
+            <summary>
+            添加菜单
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.MenuController.AddButton(MOM.Application.Features.Permission.Commands.AddButton.AddButtonCommand)">
+            <summary>
+            添加按钮
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.MenuController.UpdateMenu(MOM.Application.Features.Permission.Commands.UpdateMenu.UpdateMenuCommand)">
+            <summary>
+            修改菜单
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.MenuController.UpdateButton(MOM.Application.Features.Permission.Commands.UpdateButton.UpdateButtonCommand)">
+            <summary>
+            修改按钮
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.MenuController.DeleteMenu(MOM.Application.Features.Permission.Commands.DeleteMenu.DeleteMenuCommand)">
+            <summary>
+            删除菜单
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.MenuController.DeleteButton(MOM.Application.Features.Permission.Commands.DeleteButton.DeleteButtonCommand)">
+            <summary>
+            删除按钮
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.MenuController.GetMenuList(MOM.Application.Features.Permission.Queries.GetMenuList.GetMenuListQuery)">
+            <summary>
+            获取菜单列表
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.MenuController.GetButtonList(System.Guid)">
+            <summary>
+            获取指定菜单下的按钮列表
+            </summary>
+            <param name="menuDtId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.MenuController.ButtonList(System.String)">
+            <summary>
+            获取指定菜单编号下的按钮列表
+            </summary>
+            <param name="menuId"></param>
+            <returns></returns>
+        </member>
         <member name="T:系统基础数据.Controllers.v1.PositionController">
             <summary>
             职位管理

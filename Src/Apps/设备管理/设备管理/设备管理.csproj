@@ -5,6 +5,7 @@
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

@@ -19,7 +19,7 @@ namespace 设备管理.Controllers.v1
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        [HttpGet(nameof(GetPagedEquipmentClass))]
+        [HttpGet]
         public async Task<PagedResponse<EquipmentClass>> GetPagedEquipmentClass([FromQuery] GetPagedEquipmentClassQuery query)
         {
             return await Mediator.Send(query);
@@ -29,8 +29,8 @@ namespace 设备管理.Controllers.v1
         /// </summary>
         /// <param name="dtId"></param>
         /// <returns></returns>
-        [HttpGet("/api/v{version:apiVersion}/[controller]/{dtId}/[action]")]
-        public async Task<List<EquipmentClass>> IncludesRelations(Guid dtId)
+        [HttpGet]
+        public async Task<List<EquipmentClass>> IncludesRelations([FromQuery] Guid dtId)
         {
             var query = new GetEquipmentClassIncludesRelationsQuery()
             {
@@ -43,8 +43,8 @@ namespace 设备管理.Controllers.v1
         /// </summary>
         /// <param name="dtId"></param>
         /// <returns></returns>
-        [HttpGet("/api/v{version:apiVersion}/[controller]/{dtId}/[action]")]
-        public async Task<List<EquipmentClass>> IsMadeUpOf(Guid dtId)
+        [HttpGet]
+        public async Task<List<EquipmentClass>> IsMadeUpOf([FromQuery] Guid dtId)
         {
             var query = new GetEquipmentClassIsMadeUpOfQuery()
             {

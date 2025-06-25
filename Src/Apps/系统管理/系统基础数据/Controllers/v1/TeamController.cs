@@ -24,7 +24,7 @@ namespace 系统基础数据.Controllers.v1
         /// 查询班组下拉列表
         /// </summary>
         /// <returns></returns>
-        [HttpGet(nameof(SelectOptions))]
+        [HttpGet]
         public async Task<BaseResult<List<PersonnelClassResponse>>> SelectOptions()
         {
             return await Mediator.Send(new GetTeamSelectOptionsQuery());
@@ -35,7 +35,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        [HttpGet(nameof(GetPaged))]
+        [HttpGet]
         public async Task<PagedResponse<TeamResponse>> GetPaged([FromQuery] GetPagedTeamQuery query)
         {
             return await Mediator.Send(query);
@@ -46,7 +46,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost(nameof(Add))]
+        [HttpPost]
         public async Task<BaseResult> Add(AddTeamCommand command)
         {
             return await Mediator.Send(command);
@@ -57,7 +57,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost(nameof(Update))]
+        [HttpPost]
         public async Task<BaseResult> Update(UpdateTeamCommand command)
         {
             return await Mediator.Send(command);
@@ -68,7 +68,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpDelete(nameof(Delete))]
+        [HttpDelete]
         public async Task<BaseResult> Delete(DeletePersonnelClassCommand command)
         {
             return await Mediator.Send(command);
@@ -79,7 +79,7 @@ namespace 系统基础数据.Controllers.v1
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        [HttpPost(nameof(SettingPermission))]
+        [HttpPost]
         public async Task<BaseResult> SettingPermission(PersonnelClassSettingPermissionCommand command)
         {
             return await Mediator.Send(command);
