@@ -11,6 +11,7 @@ namespace MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetPagedEqu
         public async Task<PagedResponse<EquipmentClass>> Handle(GetPagedEquipmentClassQuery request, CancellationToken cancellationToken)
         {
             var query = equipmentClassProperty.Include(x => x.HierarchyScopeRel)
+                .Where(x => !string.IsNullOrWhiteSpace(request.Id) ? x.Id == request.Id : true)
                 .Where(x => !string.IsNullOrWhiteSpace(request.Name) ? x.Name.Contains(request.Name) : true)
                 .Where(x => !string.IsNullOrWhiteSpace(request.Description) ? x.Description.Contains(request.Description) : true)
                 .Where(x => request.HierarchyScopeRelDtId.HasValue ? x.HierarchyScopeRelDtId == request.HierarchyScopeRelDtId : true)

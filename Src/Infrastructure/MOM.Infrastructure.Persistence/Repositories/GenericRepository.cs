@@ -13,7 +13,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
     public class GenericRepository<T>(DbContext dbContext) : IGenericRepository<T> where T : class
     {
         public DbSet<T> DbSet { get => dbContext.Set<T>(); }
-        public DbContext DbContext { get => dbContext; }
 
         public virtual IQueryable<T> Where(Expression<Func<T, bool>> predicate)
         {
@@ -30,10 +29,10 @@ namespace MOM.Infrastructure.Persistence.Repositories
             return await dbContext.Set<T>().FindAsync(id);
         }
 
-        public virtual async Task<IEnumerable<T>> GetByIdsAsync<TKey>(IEnumerable<TKey> ids)
+        public virtual async Task<IEnumerable<T>> GetByIdsAsync<TKey>(IEnumerable<TKey> keys)
      where TKey : notnull // 约束 TKey 为非空类型
         {
-            if (ids == null || !ids.Any())
+            if (keys == null || !keys.Any())
                 return Enumerable.Empty<T>();
 
             // 获取主键元数据
@@ -58,7 +57,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
             var containsCall = Expression.Call(
                 null,
                 containsMethod,
-                Expression.Constant(ids),
+                Expression.Constant(keys),
                 property
             );
             var lambda = Expression.Lambda<Func<T, bool>>(containsCall, parameter);
@@ -97,6 +96,10 @@ namespace MOM.Infrastructure.Persistence.Repositories
         public void DeleteRange(IEnumerable<T> entities)
         {
             dbContext.Set<T>().RemoveRange(entities);
+        }
+        public void DeleteRange<TKey>(IEnumerable<TKey> keys)
+        {
+            dbContext.Set<T>().RemoveRange(dbContext.Set<T>().Find(keys));
         }
 
         public async Task<PagedResponse<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class

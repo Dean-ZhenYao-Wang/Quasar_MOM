@@ -9,6 +9,10 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
     public class EquipmentClassRequest
     {
         /// <summary>
+        /// 编号
+        /// </summary>
+        public string? Id { get; set; }
+        /// <summary>
         /// 名称
         /// </summary>
         public string Name { get; set; }
@@ -40,5 +44,18 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
         /// 设备层级
         /// </summary>
         public EquipmentClassEquipmentLevel? EquipmentLevel { get; set; }
+
+        public EquipmentClass ToEquipmentClass()
+        {
+            EquipmentClass equipmentClass = new EquipmentClass
+            {
+                Name = this.Name,
+                Property = this.Property,
+                Description = this.Description,
+                HierarchyScopeRelDtId = this.HierarchyScopeRelDtId,
+                EquipmentLevel = this.EquipmentLevel
+            };
+            return equipmentClass;
+        }
     }
 }

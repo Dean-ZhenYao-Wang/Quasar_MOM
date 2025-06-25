@@ -7,7 +7,6 @@ namespace MOM.Application.Interfaces.Repositories
     public interface IGenericRepository<T> where T : class
     {
         Microsoft.EntityFrameworkCore.DbSet<T> DbSet { get; }
-        DbContext DbContext { get; }
 
         Task<T> GetByIdAsync(object id);
 
@@ -32,5 +31,6 @@ namespace MOM.Application.Interfaces.Repositories
         IQueryable<T> AsNoTracking();
 
         Task<int> SaveChangesAsync();
+        void DeleteRange<TKey>(IEnumerable<TKey> keys);
     }
 }

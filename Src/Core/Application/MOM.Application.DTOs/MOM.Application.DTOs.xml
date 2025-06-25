@@ -879,6 +879,11 @@
             
              </summary>
         </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentClassRequest.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentClassRequest.Name">
             <summary>
             名称
@@ -910,6 +915,11 @@
         <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentClassRequest.EquipmentLevel">
             <summary>
             设备层级
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentClassRequest.Id">
+            <summary>
+            编号
             </summary>
         </member>
         <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentClassRequest.Name">

@@ -20,7 +20,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
     /// </remarks>
     public partial class EquipmentClass : ResourceClass, IEquatable<EquipmentClass>
     {
-        private EquipmentClass() { }
+        public EquipmentClass() { }
         /// <summary>
         /// 当前分类包含的子分类。<br/>
         /// 父子关系（主要类别，如生产类、一起类、辅助类、工具类、运输类、管理类等）<br/>

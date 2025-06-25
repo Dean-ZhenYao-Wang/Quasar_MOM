@@ -6,6 +6,10 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
     public class GetPagedEquipmentClassRequest : PaginationRequestParameter
     {
         /// <summary>
+        /// 编号
+        /// </summary>
+        public string? Id { get; set; }
+        /// <summary>
         /// 名称
         /// </summary>
         public string? Name { get; set; }

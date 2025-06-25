@@ -1,6 +1,9 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MOM.Application.Features.PhysicalAssetAndEquipment.Commands.AddEquipmentClass;
+using MOM.Application.Features.PhysicalAssetAndEquipment.Commands.DeleteEquipmentClass;
+using MOM.Application.Features.PhysicalAssetAndEquipment.Commands.UpdateEquipmentClass;
 using MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetIncludesRelations;
 using MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetIsMadeUpOf;
 using MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetPagedEquipmentClass;
@@ -43,6 +46,36 @@ namespace 设备管理.Controllers.v1
         public async Task<PagedResponse<EquipmentClass>> IsMadeUpOf([FromQuery] GetEquipmentClassIsMadeUpOfQuery query)
         {
             return await Mediator.Send(query);
+        }
+        /// <summary>
+        /// 新增设备类型
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<BaseResult> Add(AddEquipmentClassCommand command)
+        {
+            return await Mediator.Send(command);
+        }
+        /// <summary>
+        /// 修改设备类型
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<BaseResult> Update(UpdateEquipmentClassCommand command)
+        {
+            return await Mediator.Send(command);
+        }
+        /// <summary>
+        /// 删除设备类型
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<BaseResult> Delete(DeleteEquipmentClassCommand command)
+        {
+            return await Mediator.Send(command);
         }
     }
 }
