@@ -15,6 +15,8 @@ namespace MOM.Application.Features.PhysicalAssetAndEquipment.Commands.UpdateEqui
         public async Task<BaseResult> Handle(UpdateEquipmentClassCommand request, CancellationToken cancellationToken)
         {
             var old = equipmentClassRepository.Where(x => x.DtId == request.DtId).FirstOrDefault();
+            if(!string.IsNullOrEmpty(request.Id))
+                old.Id = request.Id;
             old.Name = request.Name;
             old.Property = request.Property;
             old.Description = request.Description;

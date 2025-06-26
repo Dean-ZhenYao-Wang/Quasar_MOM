@@ -72,5 +72,17 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
         /// 出厂编号
         /// </summary>
         public required string FactoryNumber { get; set; }
+
+        public Equipment ToEquipment()
+        {
+            Equipment equipment = new Equipment(this.Id, this.Name, this.Description, this.EquipmentLevel, this.Specification, string.Empty, null, this.Status, this.Status == EquipmentStatusType.启用 ? DateTime.Now : null, this.ResponsibleDtId, this.Supplier, this.FactoryNumber, null, null, null, null, null, null);
+            equipment.Property = this.Property;
+            equipment.HierarchyScopeRelDtId = this.HierarchyScopeRelDtId;
+            foreach (var definedBy in this.DefinedBy)
+            {
+                equipment.DefinedBy.Add(new EquipmentDefinedByRelationship(equipment.DtId, definedBy));
+            }
+            return equipment;
+        }
     }
 }

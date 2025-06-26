@@ -6,7 +6,7 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
     /// <summary>
     /// 
     /// </summary>
-    public class GetPagedEquipmentClassRequest : PaginationRequestParameter
+    public class GetPagedEquipmentRequest : PaginationRequestParameter
     {
         /// <summary>
         /// 编号
@@ -16,15 +16,13 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
         /// 名称
         /// </summary>
         public string? Name { get; set; }
-
         /// <summary>
-        /// 描述
+        /// 设备层级
         /// </summary>
         /// <remarks>
-        /// 设备类别的补充信息
+        /// 基于角色的设备层级中的级别标识
         /// </remarks>
-        public string? Description { get; set; }
-
+        public EquipmentEquipmentLevel? EquipmentLevel { get; set; }
         /// <summary>
         /// 层级范围
         /// </summary>
@@ -34,10 +32,13 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
         /// <para>非标准规范要求</para>
         /// </remarks>
         public Guid? HierarchyScopeRelDtId { get; set; }
-
         /// <summary>
-        /// 设备层级
+        /// 所属设备类
         /// </summary>
-        public EquipmentClassEquipmentLevel? EquipmentLevel { get; set; }
+        public Guid? DefinedBy { get; set; }
+        /// <summary>
+        /// 设备状态
+        /// </summary>
+        public EquipmentStatusType? Status { get; set; }
     }
 }

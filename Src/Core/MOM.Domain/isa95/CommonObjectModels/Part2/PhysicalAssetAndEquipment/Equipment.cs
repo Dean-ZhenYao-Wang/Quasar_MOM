@@ -203,14 +203,15 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </summary>
         public DateTime? WarrantyPeriod { get; set; }
 
-        public Equipment(string ID, string description, EquipmentEquipmentLevel EquipmentLevel)
+        public Equipment(string ID,string name, string description, EquipmentEquipmentLevel EquipmentLevel)
         {
             this.Id = Id;
+            this.Name = name;
             this.Description = description;
             this.EquipmentLevel = EquipmentLevel;
         }
 
-        public Equipment(string ID, string description, EquipmentEquipmentLevel equipmentLevel, string specification, string modelNumber, Guid? useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, description, equipmentLevel)
+        public Equipment(string ID,string name, string description, EquipmentEquipmentLevel equipmentLevel, string specification, string modelNumber, Guid? useOrgDtId, EquipmentStatusType status, DateTime? enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int? depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID,name, description, equipmentLevel)
         {
             Specification = specification;
             ModelNumber = modelNumber;
@@ -256,7 +257,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.EquipmentLevel = equipmentLevel;
         }
 
-        public void Update(string ID, string? description, EquipmentEquipmentLevel equipmentLevel, string specification, string modelNumber, Guid useOrgDtId, EquipmentStatusType status, DateTime enabledTime, Guid responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
+        public void Update(string ID, string? description, EquipmentEquipmentLevel equipmentLevel, string specification, string modelNumber, Guid useOrgDtId, EquipmentStatusType status, DateTime? enabledTime, Guid responsibleDtId, string supplier, string factoryNumber, int depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition)
         {
             this.Id = Id;
             this.Description = description ?? string.Empty;
