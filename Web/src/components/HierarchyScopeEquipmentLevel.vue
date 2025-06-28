@@ -1,7 +1,7 @@
 <template>
   <q-select
     :label="label"
-    :options="levelList"
+    :options="options"
     :emit-value="true"
     :map-options="true"
     option-value="value"
@@ -9,6 +9,9 @@
     :rules="rules"
     v-model="model"
     filled
+    use-input
+    input-debounce="0"
+    @filter="filterFn"
   >
     <template v-slot:option="scope">
       <q-item v-bind="scope.itemProps">
@@ -34,7 +37,7 @@ defineProps({
   rules: Array,
 })
 
-const levelList = ref([
+const levelList = [
   {
     value: 'Enterprise',
     label: '企业',
@@ -90,5 +93,20 @@ const levelList = ref([
     label: '存储单元',
     description: '用于存储或运输的设备',
   },
-])
+]
+
+const options = ref(levelList)
+
+const filterFn = (val, update) => {
+  if (val === '') {
+    update(() => {
+      options.value = levelList
+    })
+    return
+  }
+
+  update(() => {
+    options.value = levelList.filter((v) => v.label.indexOf(val) > -1)
+  })
+}
 </script>

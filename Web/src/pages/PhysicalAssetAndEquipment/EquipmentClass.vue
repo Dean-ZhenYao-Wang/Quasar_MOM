@@ -16,7 +16,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { usePhysicalAssetAndEquipmentStore } from 'src/stores/physicalAssetAndEquipmentStore'
+import { useEquipmentClassStore } from 'src/stores/equipmentClass'
 
 const equipmentClass_config = {
   queryFields: {
@@ -106,17 +106,17 @@ const pagination = ref({
 })
 const tableData = ref([])
 
-const physicalAssetAndEquipmentStore = usePhysicalAssetAndEquipmentStore()
+const equipmentClassStore = useEquipmentClassStore()
 const handleSearch = async (queryParams) => {
-  const response = await physicalAssetAndEquipmentStore.GetPagedEquipmentClass(queryParams)
+  const response = await equipmentClassStore.GetPaged(queryParams)
   tableData.value = response.data
   pagination.value.rowsNumber = response.totalItems
 }
 const handleCreate = async (payload) => {
-  await physicalAssetAndEquipmentStore.Add(payload)
+  await equipmentClassStore.Add(payload)
 }
 const handleUpdate = async (payload) => {
-  await physicalAssetAndEquipmentStore.Update(payload)
+  await equipmentClassStore.Update(payload)
 }
 const handleBatchDelete = async (dtIds) => {
   await batchDelete(dtIds)
@@ -125,6 +125,6 @@ const handleDelete = async (dtId) => {
   await batchDelete([dtId])
 }
 const batchDelete = async (dtIds) => {
-  await physicalAssetAndEquipmentStore.Delete(dtIds)
+  await equipmentClassStore.Delete(dtIds)
 }
 </script>

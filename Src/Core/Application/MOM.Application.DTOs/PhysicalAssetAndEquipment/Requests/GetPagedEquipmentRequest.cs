@@ -35,7 +35,7 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
         /// <summary>
         /// 所属设备类
         /// </summary>
-        public Guid? DefinedBy { get; set; }
+        public Guid? DefinedByDtId { get; set; }
         /// <summary>
         /// 设备状态
         /// </summary>

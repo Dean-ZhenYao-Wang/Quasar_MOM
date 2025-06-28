@@ -869,10 +869,20 @@
             菜单或按钮编号
             </summary>
         </member>
+        <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.PhysicalAssetAndEquipmentException">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.AddEquipmentClassRequest">
              <summary>
             
              </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.AddEquipmentRequest">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentClassRequest">
              <summary>
@@ -945,7 +955,7 @@
             基于角色的设备层级中的级别标识
             </remarks>
         </member>
-        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.DefinedBy">
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.EquipmentRequest.DefinedByDtId">
             <summary>
             所属设备类清单
             <para>此设备支持的设备类别</para>
@@ -994,6 +1004,11 @@
             出厂编号
             </summary>
         </member>
+        <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentClassRequest">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentClassRequest.Id">
             <summary>
             编号
@@ -1027,6 +1042,49 @@
             设备层级
             </summary>
         </member>
+        <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentRequest.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentRequest.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentRequest.EquipmentLevel">
+            <summary>
+            设备层级
+            </summary>
+            <remarks>
+            基于角色的设备层级中的级别标识
+            </remarks>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentRequest.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentRequest.DefinedByDtId">
+            <summary>
+            所属设备类
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.GetPagedEquipmentRequest.Status">
+            <summary>
+            设备状态
+            </summary>
+        </member>
         <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.UpdateEquipmentClassRequest">
              <summary>
             
@@ -1034,7 +1092,17 @@
         </member>
         <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.UpdateEquipmentClassRequest.DtId">
             <summary>
-            设备类别ID
+            设备类别唯一标识
+            </summary>
+        </member>
+        <member name="T:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.UpdateEquipmentRequest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests.UpdateEquipmentRequest.DtId">
+            <summary>
+            设备唯一标识
             </summary>
         </member>
     </members>

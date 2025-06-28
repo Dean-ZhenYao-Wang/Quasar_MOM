@@ -37,9 +37,18 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// <remarks>
         /// 关系类型：关联
         /// </remarks>
-        [JsonIgnore]
         public virtual List<EquipmentDefinedByRelationship> DefinedBy { get; set; } = new List<EquipmentDefinedByRelationship>();
-
+        public List<Guid> DefinedByDtId
+        {
+            get { return DefinedBy.Select(m => m.TargetId).ToList(); }
+        }
+        public string? DefinedByName
+        {
+            get
+            {
+                return DefinedBy.Count > 0 ? string.Join(",", DefinedBy.Select(m => m.Target.Name)) : null;
+            }
+        }
         /// <summary>
         /// 此设备的属性值
         /// </summary>
@@ -203,7 +212,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
         /// </summary>
         public DateTime? WarrantyPeriod { get; set; }
 
-        public Equipment(string ID,string name, string description, EquipmentEquipmentLevel EquipmentLevel)
+        public Equipment(string ID, string name, string description, EquipmentEquipmentLevel EquipmentLevel)
         {
             this.Id = Id;
             this.Name = name;
@@ -211,7 +220,7 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment
             this.EquipmentLevel = EquipmentLevel;
         }
 
-        public Equipment(string ID,string name, string description, EquipmentEquipmentLevel equipmentLevel, string specification, string modelNumber, Guid? useOrgDtId, EquipmentStatusType status, DateTime? enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int? depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID,name, description, equipmentLevel)
+        public Equipment(string ID, string name, string description, EquipmentEquipmentLevel equipmentLevel, string specification, string modelNumber, Guid? useOrgDtId, EquipmentStatusType status, DateTime? enabledTime, Guid? responsibleDtId, string supplier, string factoryNumber, int? depreciationLife, DateTime? factoryDate, decimal? initialPrice, DateTime? dateOfPurchase, DateTime? warrantyPeriod, SpatialDefinition? spatialDefinition) : this(ID, name, description, equipmentLevel)
         {
             Specification = specification;
             ModelNumber = modelNumber;

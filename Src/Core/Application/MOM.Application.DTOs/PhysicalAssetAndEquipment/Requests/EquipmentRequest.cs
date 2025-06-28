@@ -36,7 +36,7 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
         /// <remarks>
         /// 关系类型：关联
         /// </remarks>
-        public required List<Guid> DefinedBy { get; set; } = new List<Guid>();
+        public required List<Guid> DefinedByDtId { get; set; } = new List<Guid>();
         /// <summary>
         /// 此设备的属性值
         /// </summary>
@@ -78,7 +78,7 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
             Equipment equipment = new Equipment(this.Id, this.Name, this.Description, this.EquipmentLevel, this.Specification, string.Empty, null, this.Status, this.Status == EquipmentStatusType.启用 ? DateTime.Now : null, this.ResponsibleDtId, this.Supplier, this.FactoryNumber, null, null, null, null, null, null);
             equipment.Property = this.Property;
             equipment.HierarchyScopeRelDtId = this.HierarchyScopeRelDtId;
-            foreach (var definedBy in this.DefinedBy)
+            foreach (var definedBy in this.DefinedByDtId)
             {
                 equipment.DefinedBy.Add(new EquipmentDefinedByRelationship(equipment.DtId, definedBy));
             }

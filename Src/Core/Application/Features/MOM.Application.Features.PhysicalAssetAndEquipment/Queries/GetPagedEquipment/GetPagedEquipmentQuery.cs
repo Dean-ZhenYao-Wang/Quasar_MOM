@@ -23,11 +23,13 @@ namespace MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetPagedEqu
         {
             var query = equipmentProperty.Include(x => x.HierarchyScopeRel)
                 .Include(x => x.DefinedBy)
-                .Where(x => !string.IsNullOrWhiteSpace(request.Id) ? x.Id == request.Id : true)
+                .ThenInclude(d => d.Target)
+                .Include(x => x.Responsible)
+                .Where(x => !string.IsNullOrWhiteSpace(request.Id) ? x.Id.Contains(request.Id) : true)
                 .Where(x => !string.IsNullOrWhiteSpace(request.Name) ? x.Name.Contains(request.Name) : true)
                 .Where(x => request.EquipmentLevel.HasValue ? x.EquipmentLevel == request.EquipmentLevel : true)
                 .Where(x => request.HierarchyScopeRelDtId.HasValue ? x.HierarchyScopeRelDtId == request.HierarchyScopeRelDtId : true)
-                .Where(x => request.DefinedBy.HasValue ? x.DefinedBy.Any(d => d.TargetId == request.DefinedBy.Value) : true)
+                .Where(x => request.DefinedByDtId.HasValue ? x.DefinedBy.Any(d => d.TargetId == request.DefinedByDtId.Value) : true)
                 .Where(x => request.Status.HasValue ? x.Status == request.Status : true);
 
             return await equipmentProperty.PagedAsync(query, request.Page, request.PageSize);

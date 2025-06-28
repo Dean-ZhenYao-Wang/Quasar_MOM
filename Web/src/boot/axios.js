@@ -52,7 +52,7 @@ export default defineBoot(({ app, router }) => {
     (error) => {
       if (error.response?.status === 401) {
         // 清除本地存储的认证信息
-        userStore.jwtToken = ''
+        userStore.jwt = ''
 
         // 显示通知
         Notify.create({

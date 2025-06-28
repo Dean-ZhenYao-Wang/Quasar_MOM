@@ -21,14 +21,13 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment
             old.Property = request.Property;
             old.Description = request.Description;
             old.EquipmentLevel = request.EquipmentLevel;
-            old.DefinedBy.RemoveAll(x => true);
-            foreach (var item in request.DefinedBy)
-            {
-                old.DefinedBy.Add(new Domain.Common.Relationship.isa95.Equipment.EquipmentDefinedByRelationship(old.DtId, item));
-            }
+
+            old.DefinedBy.RemoveAll(x => !request.DefinedByDtId.Contains(x.TargetId));
             old.Property = request.Property;
             old.HierarchyScopeRelDtId = request.HierarchyScopeRelDtId;
             old.ResponsibleDtId = request.ResponsibleDtId;
+            if (old.Status != Domain.Common.EnumType.EquipmentStatusType.启用 && request.Status == Domain.Common.EnumType.EquipmentStatusType.启用)
+                old.EnabledTime = DateTime.Now;
             old.Status = request.Status;
             old.Supplier = request.Supplier;
             old.Specification = request.Specification;

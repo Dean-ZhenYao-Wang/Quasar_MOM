@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using MOM.Application.Infrastructure;
 using MOM.Application.Infrastructure.Extensions;
 using MOM.Application.Infrastructure.Middlewares;
 using MOM.Application.Infrastructure.Services;
@@ -136,7 +137,8 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     options.JsonSerializerOptions.WriteIndented = true;
-}); ;
+    options.JsonSerializerOptions.Converters.Add(new DatetimeJsonConverter());
+});
 builder.Services.AddVersioning();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddScalarWithVersioning();

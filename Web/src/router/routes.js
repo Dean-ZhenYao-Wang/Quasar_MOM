@@ -34,6 +34,10 @@ const routes = [
             path: 'equipmentClass',
             component: () => import('pages/PhysicalAssetAndEquipment/EquipmentClass.vue'),
           },
+          {
+            path: 'equipment',
+            component: () => import('src/pages/PhysicalAssetAndEquipment/EquipmentPage.vue'),
+          },
         ],
       },
     ],

@@ -20,7 +20,7 @@ const model = defineModel()
 
 defineProps({
   label: {
-    typeo: String,
+    type: String,
     default: '所属企业',
   },
   rules: Array,

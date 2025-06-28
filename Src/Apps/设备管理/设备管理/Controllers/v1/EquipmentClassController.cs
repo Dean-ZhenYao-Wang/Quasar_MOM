@@ -23,7 +23,7 @@ namespace 设备管理.Controllers.v1
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PagedResponse<EquipmentClass>> GetPagedEquipmentClass([FromQuery] GetPagedEquipmentClassQuery query)
+        public async Task<PagedResponse<EquipmentClass>> GetPaged([FromQuery] GetPagedEquipmentClassQuery query)
         {
             return await Mediator.Send(query);
         }
