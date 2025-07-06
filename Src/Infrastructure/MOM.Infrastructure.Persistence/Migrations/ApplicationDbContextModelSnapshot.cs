@@ -190,6 +190,75 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("PersonnelClassPermission");
                 });
 
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", b =>
+                {
+                    b.Property<Guid>("DtId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
+
+                    b.Property<string>("EquipmentID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EquipmentLevel")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FullPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("LastModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ResponsibleDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SourceDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("DtId");
+
+                    b.HasIndex("ResponsibleDtId");
+
+                    b.HasIndex("SourceDtId");
+
+                    b.ToTable("HierarchyScope", (string)null);
+
+                    b.UseTptMappingStrategy();
+                });
+
             modelBuilder.Entity("MOM.Domain.CodingRule.CodingRule", b =>
                 {
                     b.HasBaseType("MOM.Domain.Common.BaseEntity");
@@ -292,42 +361,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.HasIndex("ParentMenuDtId");
 
                     b.ToTable("Menus");
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", b =>
-                {
-                    b.HasBaseType("MOM.Domain.Common.BaseEntity");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EquipmentID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EquipmentLevel")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FullPath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ResponsibleDtId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("SourceDtId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasIndex("ResponsibleDtId");
-
-                    b.HasIndex("SourceDtId");
-
-                    b.ToTable("HierarchyScope", (string)null);
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation", b =>
@@ -633,11 +666,12 @@ namespace MOM.Infrastructure.Persistence.Migrations
                 {
                     b.HasBaseType("MOM.Domain.Common.BasicRelationship");
 
-                    b.HasIndex("SourceId");
-
                     b.HasIndex("TargetId");
 
-                    b.ToTable("HierarchyScopeContainsRelationship");
+                    b.HasIndex("SourceId", "TargetId")
+                        .IsUnique();
+
+                    b.ToTable("HierarchyScopeContainsRelationship", (string)null);
                 });
 
             modelBuilder.Entity("MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationDefinedByRelationship", b =>
@@ -761,6 +795,25 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.ToTable("PhysicalAssetClassIsMadeUpOfRelationship");
                 });
 
+            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Enterprise", b =>
+                {
+                    b.HasBaseType("MOM.Domain.isa95.CommonObjectModels.HierarchyScope");
+
+                    b.ToTable("Enterprise");
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Site", b =>
+                {
+                    b.HasBaseType("MOM.Domain.isa95.CommonObjectModels.HierarchyScope");
+
+                    b.Property<Guid?>("EnterpriseDtId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("EnterpriseDtId");
+
+                    b.ToTable("Site");
+                });
+
             modelBuilder.Entity("MOM.Domain.Permission.AvailablePermission", b =>
                 {
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", "Person")
@@ -794,6 +847,22 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("PersonnelClass");
                 });
 
+            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", b =>
+                {
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleDtId");
+
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "Source")
+                        .WithMany()
+                        .HasForeignKey("SourceDtId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Responsible");
+
+                    b.Navigation("Source");
+                });
+
             modelBuilder.Entity("MOM.Domain.CodingRule.CodingSegment", b =>
                 {
                     b.HasOne("MOM.Domain.CodingRule.CodingRule", "Rule")
@@ -823,21 +892,6 @@ namespace MOM.Infrastructure.Persistence.Migrations
                         .HasForeignKey("ParentMenuDtId");
 
                     b.Navigation("ParentMenu");
-                });
-
-            modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", b =>
-                {
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person", "Responsible")
-                        .WithMany()
-                        .HasForeignKey("ResponsibleDtId");
-
-                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "Source")
-                        .WithMany()
-                        .HasForeignKey("SourceDtId");
-
-                    b.Navigation("Responsible");
-
-                    b.Navigation("Source");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation", b =>
@@ -1300,13 +1354,13 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "Source")
                         .WithMany("Contains")
                         .HasForeignKey("SourceId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", "Target")
                         .WithMany()
                         .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Source");
@@ -1523,16 +1577,26 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("Target");
                 });
 
-            modelBuilder.Entity("MOM.Domain.CodingRule.CodingRule", b =>
+            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Enterprise", b =>
                 {
-                    b.Navigation("Segments");
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", null)
+                        .WithOne()
+                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.Enterprise", "DtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("MOM.Domain.Permission.Menu", b =>
+            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Site", b =>
                 {
-                    b.Navigation("Buttons");
+                    b.HasOne("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", null)
+                        .WithOne()
+                        .HasForeignKey("MOM.Domain.isa95.EquipmentHierarchy.Site", "DtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Children");
+                    b.HasOne("MOM.Domain.isa95.EquipmentHierarchy.Enterprise", null)
+                        .WithMany("Site")
+                        .HasForeignKey("EnterpriseDtId");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.HierarchyScope", b =>
@@ -1544,6 +1608,18 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("Permissions");
 
                     b.Navigation("Teams");
+                });
+
+            modelBuilder.Entity("MOM.Domain.CodingRule.CodingRule", b =>
+                {
+                    b.Navigation("Segments");
+                });
+
+            modelBuilder.Entity("MOM.Domain.Permission.Menu", b =>
+                {
+                    b.Navigation("Buttons");
+
+                    b.Navigation("Children");
                 });
 
             modelBuilder.Entity("MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation", b =>
@@ -1603,6 +1679,11 @@ namespace MOM.Infrastructure.Persistence.Migrations
                     b.Navigation("IncludesPropertiesOf");
 
                     b.Navigation("IsMadeUpOf");
+                });
+
+            modelBuilder.Entity("MOM.Domain.isa95.EquipmentHierarchy.Enterprise", b =>
+                {
+                    b.Navigation("Site");
                 });
 #pragma warning restore 612, 618
         }

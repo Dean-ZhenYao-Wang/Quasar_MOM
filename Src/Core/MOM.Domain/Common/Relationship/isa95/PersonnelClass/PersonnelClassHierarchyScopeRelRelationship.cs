@@ -3,15 +3,10 @@ namespace MOM.Domain.Common.Relationship.isa95.PersonnelClass
     /// <summary>
     ///
     /// </summary>
-    public class PersonnelClassHierarchyScopeRelRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass, Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PersonnelClassHierarchyScopeRelRelationship>
+    public class PersonnelClassHierarchyScopeRelRelationship : HierarchyScopeRelationship<Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass, Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<PersonnelClassHierarchyScopeRelRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "hierarchyScopeRel";
-
-        /// <inheritdoc/>
-        public PersonnelClassHierarchyScopeRelRelationship(Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass source, Domain.isa95.CommonObjectModels.HierarchyScope target) : base(source, target)
-        {
-        }
 
         /// <inheritdoc/>
         public PersonnelClassHierarchyScopeRelRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)

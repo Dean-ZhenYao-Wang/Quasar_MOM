@@ -4,25 +4,30 @@ using System.Text.Json.Serialization;
 
 namespace MOM.Domain.Common.Relationship.isa95.Enterprise
 {
-    public class EnterpriseSiteRelationship : Relationship<Domain.isa95.EquipmentHierarchy.Site>, IEquatable<EnterpriseSiteRelationship>
+    public class EnterpriseSiteRelationship : Relationship<Domain.isa95.EquipmentHierarchy.Enterprise, Domain.isa95.EquipmentHierarchy.Site>, IEquatable<EnterpriseSiteRelationship>
     {
-        public EnterpriseSiteRelationship()
-        {
-            Name = "site";
-        }
+        /// <inheritdoc/>
+        public override string Name { get; set; } = "EnterpriseSite";
 
         [JsonIgnore]
         [ForeignKey(nameof(SourceId))]
         public virtual MOM.Domain.isa95.EquipmentHierarchy.Enterprise Source { get; set; }
 
-        public EnterpriseSiteRelationship(Domain.isa95.EquipmentHierarchy.Enterprise source, Domain.isa95.EquipmentHierarchy.Site target) : this()
+        public EnterpriseSiteRelationship(Domain.isa95.EquipmentHierarchy.Enterprise source, Domain.isa95.EquipmentHierarchy.Site target) : base(source,target)
         {
-            InitializeFromTwins(source, target);
         }
 
-        public EnterpriseSiteRelationship(Guid? sourceId, Guid targetId) : this()
+        public EnterpriseSiteRelationship(Guid sourceId, Guid targetId) : base(sourceId,targetId)
         {
-            InitializeFromTwins(sourceId, targetId);
+        }
+        /// <inheritdoc/>
+        public EnterpriseSiteRelationship(Guid sourceId, Guid targetId, int depth) : base(sourceId, targetId, depth)
+        {
+        }
+
+        /// <inheritdoc/>
+        public EnterpriseSiteRelationship(Guid sourceId, Domain.isa95.EquipmentHierarchy.Site target, int depth) : base(sourceId, target, depth)
+        {
         }
 
         public override bool Equals(object? obj)

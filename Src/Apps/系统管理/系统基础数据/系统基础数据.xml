@@ -31,6 +31,18 @@
             <param name="generate"></param>
             <returns></returns>
         </member>
+        <member name="T:系统基础数据.Controllers.v1.OrgController">
+            <summary>
+            基础资料/组织管理
+            </summary>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.AddHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope.AddHierarchyScopeCommand)">
+            <summary>
+            添加组织
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
         <member name="T:系统基础数据.Controllers.v1.HierarchyScopeController">
             <summary>
             设备角色层次/生产建模

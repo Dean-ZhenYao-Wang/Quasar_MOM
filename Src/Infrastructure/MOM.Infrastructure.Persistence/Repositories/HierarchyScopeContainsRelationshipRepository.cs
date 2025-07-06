@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace MOM.Infrastructure.Persistence.Repositories
 {
     public class HierarchyScopeContainsRelationshipRepository(ApplicationDbContext dbContext)
-        : RelationshipRepository<HierarchyScopeContainsRelationship, HierarchyScope, HierarchyScope>(dbContext),
+        : HierarchyScopeRelationshipRepository<HierarchyScopeContainsRelationship, HierarchyScope, HierarchyScope>(dbContext),
         IHierarchyScopeContainsRelationshipRepository
     {
         public async Task<PagedResponse<OrgResponse>> GetEnterpriseListAsync(string id, string name, int page, int pageSize)

@@ -5,7 +5,7 @@ using MOM.Domain.isa95.CommonObjectModels;
 
 namespace MOM.Application.Interfaces.Repositories
 {
-    public interface IHierarchyScopeContainsRelationshipRepository : IRelationshipRepository<HierarchyScopeContainsRelationship, HierarchyScope, HierarchyScope>
+    public interface IHierarchyScopeContainsRelationshipRepository : IHierarchyScopeRelationshipRepository<HierarchyScopeContainsRelationship, HierarchyScope, HierarchyScope>
     {
         Task<PagedResponse<OrgResponse>> GetEnterpriseListAsync(string? id, string? name, int page, int pageSize);
 

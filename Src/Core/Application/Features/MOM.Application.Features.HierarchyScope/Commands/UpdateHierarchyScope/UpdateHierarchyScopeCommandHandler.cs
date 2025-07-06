@@ -19,7 +19,7 @@ namespace MOM.Application.Features.HierarchyScope.Commands.UpdateHierarchyScope
                     return new Error(ErrorCode.NotFound, translator.GetString(TranslatorMessages.NotFound()));
                 }
 
-                Org.Update(request.ToHierarchyScope());
+                //Org.Update(request.ToHierarchyScope());
                 if (request.SourceDtId == null)
                     Org.FullPath = Org.Name;
 

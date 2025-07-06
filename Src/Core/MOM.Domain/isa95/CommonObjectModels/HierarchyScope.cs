@@ -5,6 +5,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
     using MOM.Domain.Common.Relationship.isa95.HierarchyScope;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Text.Json.Serialization;
 
     /// <summary>
@@ -13,8 +14,50 @@ namespace MOM.Domain.isa95.CommonObjectModels
     /// <remarks>
     /// 层次范围标识交换信息在基于角色的设备层次结构中的位置。它定义交换信息的范围（如ISA-95标准中的站点或区域），并标识角色设备层次中的关联实例。
     /// </remarks>
-    public partial class HierarchyScope : BaseEntity, IEquatable<MOM.Domain.isa95.CommonObjectModels.HierarchyScope>
+    public partial class HierarchyScope : IEquatable<MOM.Domain.isa95.CommonObjectModels.HierarchyScope>
     {
+        /// <summary>
+        /// 数据库唯一主键
+        /// </summary>
+        [Key]
+        public Guid DtId { get; set; } = Guid.NewGuid();
+
+        /// <summary>
+        /// 编号
+        /// 对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 创建者数据库唯一标识
+        /// </summary>
+        public Guid CreatedBy { get; set; }
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime Created { get; set; }
+
+        /// <summary>
+        /// 最后修改者数据库唯一标识
+        /// </summary>
+        public Guid? LastModifiedBy { get; set; }
+
+        /// <summary>
+        /// 最后修改时间
+        /// </summary>
+        public DateTime? LastModified { get; set; }
+
+        /// <summary>
+        /// 是否删除
+        /// </summary>
+        public bool IsDelete { get; set; }
+
         /// <summary>
         /// 设备ID
         /// </summary>

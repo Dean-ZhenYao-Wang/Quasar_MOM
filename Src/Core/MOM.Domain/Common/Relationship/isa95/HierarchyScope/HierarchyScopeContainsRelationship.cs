@@ -3,7 +3,7 @@ namespace MOM.Domain.Common.Relationship.isa95.HierarchyScope
     /// <summary>
     ///
     /// </summary>
-    public class HierarchyScopeContainsRelationship : Relationship<MOM.Domain.isa95.CommonObjectModels.HierarchyScope, MOM.Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<HierarchyScopeContainsRelationship>
+    public class HierarchyScopeContainsRelationship : HierarchyScopeRelationship<MOM.Domain.isa95.CommonObjectModels.HierarchyScope, MOM.Domain.isa95.CommonObjectModels.HierarchyScope>, IEquatable<HierarchyScopeContainsRelationship>
     {
         /// <inheritdoc/>
         public override string Name { get; set; } = "contains";

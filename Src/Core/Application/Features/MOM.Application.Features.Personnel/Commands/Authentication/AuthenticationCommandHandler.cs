@@ -31,6 +31,7 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
             {
                 return new Error(ErrorCode.NotFound, translator.GetString(TranslatorMessages.AccountMessages.TheUserNameOrPasswordIsIncorrect));
             }
+            string ss=  "Sam@123456".Sha1Signature();
             string passWord = request.Password.Sha1Signature(user.DtId.ToString());
 
             if (!user.PassWord.Equals(passWord))

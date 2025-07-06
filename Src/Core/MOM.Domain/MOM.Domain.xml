@@ -939,6 +939,81 @@
             <param name="target">目标数字孪生唯一标识符</param>
             <param name="depth">深度</param>
         </member>
+        <member name="T:MOM.Domain.Common.HierarchyScopeRelationship`2">
+            <summary>
+            用于实现模型特定关系的抽象基类
+            </summary>
+            <typeparam name="TSource">父级，需要继承自BaseEntity</typeparam>
+            <typeparam name="TTarget">子级，需要继承自BaseEntity</typeparam>
+        </member>
+        <member name="P:MOM.Domain.Common.HierarchyScopeRelationship`2.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:MOM.Domain.Common.HierarchyScopeRelationship`2.Target">
+            <summary>
+            获取或设置关系的目标对象
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.Common.HierarchyScopeRelationship`2.Source">
+            <summary>
+            获取或设置关系的源对象
+            </summary>
+        </member>
+        <member name="M:MOM.Domain.Common.HierarchyScopeRelationship`2.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="M:MOM.Domain.Common.HierarchyScopeRelationship`2.InitializeFromTwins(MOM.Domain.isa95.CommonObjectModels.HierarchyScope,`1)">
+            <summary>
+            根据源数字孪生和目标数字孪生初始化关系属性
+            </summary>
+            <param name="source">作为关系来源的数字孪生</param>
+            <param name="target">作为关系目标的数字孪生</param>
+        </member>
+        <member name="M:MOM.Domain.Common.HierarchyScopeRelationship`2.InitializeFromTwins(System.Guid,System.Guid)">
+            <summary>
+            根据源数字孪生ID和目标数字孪生ID初始化关系属性
+            </summary>
+            <param name="sourceDtId">源数字孪生唯一标识符</param>
+            <param name="targetDtId">目标数字孪生唯一标识符</param>
+        </member>
+        <member name="M:MOM.Domain.Common.HierarchyScopeRelationship`2.InitializeFromTwins(System.Guid,System.Guid,System.Int32)">
+            <summary>
+            根据源数字孪生ID和目标数字孪生ID初始化关系属性
+            </summary>
+            <param name="sourceDtId">源数字孪生唯一标识符</param>
+            <param name="targetDtId">目标数字孪生唯一标识符</param>
+            <param name="depth">深度</param>
+        </member>
+        <member name="M:MOM.Domain.Common.HierarchyScopeRelationship`2.#ctor(MOM.Domain.isa95.CommonObjectModels.HierarchyScope,`1)">
+            <summary>
+            根据源数字孪生和目标数字孪生初始化关系属性
+            </summary>
+            <param name="source">作为关系来源的数字孪生</param>
+            <param name="target">作为关系目标的数字孪生</param>
+        </member>
+        <member name="M:MOM.Domain.Common.HierarchyScopeRelationship`2.#ctor(System.Guid,System.Guid)">
+            <summary>
+            根据源数字孪生ID和目标数字孪生ID初始化关系属性
+            </summary>
+            <param name="sourceId">源数字孪生唯一标识符</param>
+            <param name="targetId">目标数字孪生唯一标识符</param>
+        </member>
+        <member name="M:MOM.Domain.Common.HierarchyScopeRelationship`2.#ctor(System.Guid,System.Guid,System.Int32)">
+            <summary>
+            根据源数字孪生ID和目标数字孪生ID初始化关系属性
+            </summary>
+            <param name="sourceDtId">源数字孪生唯一标识符</param>
+            <param name="targetDtId">目标数字孪生唯一标识符</param>
+            <param name="depth">深度</param>
+        </member>
+        <member name="M:MOM.Domain.Common.HierarchyScopeRelationship`2.#ctor(System.Guid,`1,System.Int32)">
+            <summary>
+            根据源数字孪生ID和目标数字孪生ID初始化关系属性
+            </summary>
+            <param name="sourceId">源数字孪生唯一标识符</param>
+            <param name="target">目标数字孪生唯一标识符</param>
+            <param name="depth">深度</param>
+        </member>
         <member name="T:MOM.Domain.Common.RelationshipEqualityComparer">
             <summary>
             用于ADT基础关系的相等性比较器实现
@@ -956,9 +1031,6 @@
              </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.Name">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentAssetMapping,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
             <inheritdoc/>
         </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
@@ -1065,9 +1137,6 @@
             <inheritdoc/>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.Name">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
             <inheritdoc/>
         </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
@@ -1219,9 +1288,6 @@
         <member name="P:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
         </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.Equipment,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
-            <inheritdoc/>
-        </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.Equipment.EquipmentHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
             <inheritdoc/>
         </member>
@@ -1363,9 +1429,6 @@
              </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.Name">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocationClass,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
             <inheritdoc/>
         </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
@@ -1517,9 +1580,6 @@
         <member name="P:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
         </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
-            <inheritdoc/>
-        </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.OperationalLocation.OperationalLocationHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
             <inheritdoc/>
         </member>
@@ -1591,9 +1651,6 @@
              </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.Name">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
             <inheritdoc/>
         </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
@@ -1707,9 +1764,6 @@
         <member name="P:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
         </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
-            <inheritdoc/>
-        </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.Person.PersonHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
              <summary>
             
@@ -1785,9 +1839,6 @@
              </summary>
         </member>
         <member name="P:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.Name">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAssetClass,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
             <inheritdoc/>
         </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass.PhysicalAssetClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
@@ -1939,9 +1990,6 @@
         <member name="P:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.Name">
             <inheritdoc/>
         </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.#ctor(MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.PhysicalAsset,MOM.Domain.isa95.CommonObjectModels.HierarchyScope)">
-            <inheritdoc/>
-        </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.PhysicalAsset.PhysicalAssetHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
             <inheritdoc/>
         </member>
@@ -2072,6 +2120,47 @@
             设备角色层次结构，逻辑工厂结构
             </summary>
         </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.DtId">
+            <summary>
+            数据库唯一主键
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Id">
+            <summary>
+            编号
+            对象ID仅仅用于在相关的交换信息集中确认该对象。对象ID属性不是全局的对象ID，也不是数据库索引属性。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.CreatedBy">
+            <summary>
+            创建者数据库唯一标识
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.Created">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.LastModifiedBy">
+            <summary>
+            最后修改者数据库唯一标识
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.LastModified">
+            <summary>
+            最后修改时间
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.IsDelete">
+            <summary>
+            是否删除
+            </summary>
+        </member>
         <member name="P:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.EquipmentID">
             <summary>
             设备ID
@@ -2200,12 +2289,7 @@
             </summary>
             <param name="hierarchyScope"></param>
         </member>
-        <member name="T:MOM.Domain.isa95.CommonObjectModels.HierarchyScopeHelper">
-            <summary>
-            设备角色层次辅助类
-            </summary>
-        </member>
-        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScopeHelper.ContainsIsAddTarget(MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel,MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel)">
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.HierarchyScope.ContainsIsAddTarget(MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel,MOM.Domain.Common.EnumType.HierarchyScopeEquipmentLevel)">
             <summary>
             判断指定父级是否能够增加指定子级
             todo
@@ -2525,7 +2609,7 @@
             扩展权限,对人员类权限的扩展或限制,此条件仅针对个人有效
             </summary>
         </member>
-        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.#ctor(System.String,System.String,MOM.Domain.Common.EnumType.PersonWorkStatus,System.String,System.String,System.Nullable{System.Guid},System.Nullable{System.Guid},System.Collections.Generic.IEnumerable{System.Guid},System.String)">
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person.#ctor(System.String,System.String,System.String,MOM.Domain.Common.EnumType.PersonWorkStatus,System.String,System.String,System.Nullable{System.Guid},System.Nullable{System.Guid},System.Collections.Generic.IEnumerable{System.Guid},System.String)">
              <summary>
             
              </summary>

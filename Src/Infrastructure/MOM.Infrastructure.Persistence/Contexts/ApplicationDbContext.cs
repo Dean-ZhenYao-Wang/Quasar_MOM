@@ -11,6 +11,7 @@ using MOM.Domain.Common.Relationship.isa95.PhysicalAssetClass;
 using MOM.Domain.isa95.CommonObjectModels;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 using MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment;
+using MOM.Domain.isa95.EquipmentHierarchy;
 using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Extensions;
 using System.Threading;
@@ -44,6 +45,9 @@ namespace MOM.Infrastructure.Persistence.Contexts
 
         public DbSet<HierarchyScope> HierarchyScopes { get; set; }
         public DbSet<HierarchyScopeContainsRelationship> HierarchyScopeContainsRelationship { get; set; }
+        // 可选：为了方便查询，可以添加派生类的DbSet
+        public DbSet<Enterprise> Enterprise { get; set; }
+        public DbSet<Site> Site { get; set;  }
 
         #endregion HierarchyScope
 

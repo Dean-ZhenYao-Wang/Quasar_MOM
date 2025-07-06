@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Query;
 using MOM.Application.Infrastructure.Services;
 using MOM.Domain.Common;
+using MOM.Domain.isa95.CommonObjectModels;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -31,7 +32,9 @@ namespace MOM.Infrastructure.Persistence.Extensions
                 if ((typeof(BaseEntity).IsAssignableFrom(entityType) ||
                     (entityType.BaseType?.IsGenericType ?? false) && entityType.BaseType.GetGenericTypeDefinition() == typeof(BaseEntity))
                     || typeof(BasicRelationship).IsAssignableFrom(entityType) ||
-                    (entityType.BaseType?.IsGenericType ?? false) && entityType.BaseType.GetGenericTypeDefinition() == typeof(BasicRelationship))
+                    (entityType.BaseType?.IsGenericType ?? false) && entityType.BaseType.GetGenericTypeDefinition() == typeof(BasicRelationship)
+                    || typeof(HierarchyScope).IsAssignableFrom(entityType) ||
+                    (entityType.BaseType?.IsGenericType ?? false) && entityType.BaseType.GetGenericTypeDefinition() == typeof(HierarchyScope))
                 {
                     dynamic auditableEntity = entry.Entity;
 

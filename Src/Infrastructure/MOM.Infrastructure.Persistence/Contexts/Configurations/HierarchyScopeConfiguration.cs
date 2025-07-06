@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MOM.Domain.Common.Relationship.isa95.HierarchyScope;
 using MOM.Domain.isa95.CommonObjectModels;
+using MOM.Domain.isa95.EquipmentHierarchy;
+using System.Reflection.Emit;
 
 namespace MOM.Infrastructure.Persistence.Contexts.Configurations
 {
@@ -8,11 +11,23 @@ namespace MOM.Infrastructure.Persistence.Contexts.Configurations
     {
         public void Configure(EntityTypeBuilder<HierarchyScope> builder)
         {
-            builder.ToTable(nameof(HierarchyScope));
-            builder.HasMany(hs => hs.Contains)
-                .WithOne(st => st.Source)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(hs => hs.SourceId);
+            builder.UseTptMappingStrategy();
+
+            builder.ToTable(nameof(HierarchyScope))
+                .HasDiscriminator<string>("Discriminator")
+                .HasValue<Enterprise>("Enterprise")
+                .HasValue<Site>("Site");
+
+            builder.HasOne(h => h.Source)
+                .WithMany()
+                .HasForeignKey(h => h.SourceDtId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //builder.HasMany(hs => hs.Contains)
+            //    .WithOne(st => st.Source)
+            //    .OnDelete(DeleteBehavior.NoAction)
+            //    .HasForeignKey(hs => hs.SourceId);
+
             builder.HasMany(hs => hs.Peoples)
                 .WithOne(p => p.HierarchyScopeRel)
                 .OnDelete(DeleteBehavior.NoAction)
@@ -21,6 +36,31 @@ namespace MOM.Infrastructure.Persistence.Contexts.Configurations
                 .WithOne(p => p.HierarchyScopeRel)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(p => p.HierarchyScopeRelDtId);
+        }
+    }
+    public class HierarchyScopeContainsRelationshipConfiguration : IEntityTypeConfiguration<HierarchyScopeContainsRelationship>
+    {
+        public void Configure(EntityTypeBuilder<HierarchyScopeContainsRelationship> builder)
+        {
+            builder.ToTable(nameof(HierarchyScopeContainsRelationship));
+
+            builder
+                .HasOne(r => r.Source)
+                .WithMany(h => h.Contains)
+                .HasForeignKey(r => r.SourceId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasOne(r => r.Target)
+                .WithMany()
+                .HasForeignKey(r => r.TargetId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // 确保Parent-Child关系的一致性约束
+            builder
+                .HasIndex(r => new { r.SourceId, r.TargetId })
+                .IsUnique();
+
         }
     }
 }

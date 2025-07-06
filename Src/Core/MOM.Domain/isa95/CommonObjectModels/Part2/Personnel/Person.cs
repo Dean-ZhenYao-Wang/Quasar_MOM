@@ -186,8 +186,9 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Personnel
         /// <param name="OrgDtId"></param>
         /// <param name="positionDtId_List"></param>
         /// <param name="description"></param>
-        public Person(string userName, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null)
+        public Person(string id,string userName, string name, PersonWorkStatus workStatus, string? email = null, string? phoneNumber = null, Guid? teamOfGroupDtId = null, Guid? OrgDtId = null, IEnumerable<Guid>? positionDtId_List = null, string? description = null)
         {
+            this.Id = id;
             this.UserName = userName;
             this.WorkStatus = workStatus;
             this.Description = description;

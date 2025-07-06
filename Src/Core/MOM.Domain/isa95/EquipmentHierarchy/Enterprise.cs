@@ -1,21 +1,22 @@
 namespace MOM.Domain.isa95.EquipmentHierarchy
 {
     using MOM.Domain.Common;
-    using MOM.Domain.Common.Relationship.isa95.Enterprise;
+    //using MOM.Domain.Common.Relationship.isa95.Enterprise;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
-
+    [Table(nameof(Enterprise))]
     public partial class Enterprise : SiteAsset, IEquatable<Enterprise>
     {
-        public Enterprise()
+        public Enterprise(string id, string name, string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null)
+            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Enterprise,id, name, address, description, active)
         {
-            this.EquipmentLevel = Common.EnumType.HierarchyScopeEquipmentLevel.Enterprise;
+            this.ResponsibleDtId = responsibleDtId;
         }
 
-
-        [JsonIgnore]
-        public virtual EnterpriseSiteRelationshipCollection Site { get; set; } = new EnterpriseSiteRelationshipCollection();
+        public IEnumerable<Site> Site => GetChildren<Site>();
+        public Enterprise ParentEnterprise => GetParent<Enterprise>();
 
         public override bool Equals(object? obj)
         {

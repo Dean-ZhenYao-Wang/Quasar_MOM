@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOM.Application.Infrastructure.Extensions;
 using MOM.Domain.Common.EnumType;
+using MOM.Domain.Common.Relationship.isa95.HierarchyScope;
 using MOM.Domain.Common.Relationship.isa95.PersonnelClass;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
+using MOM.Domain.isa95.EquipmentHierarchy;
 using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Contexts;
 using System;
@@ -17,18 +19,19 @@ namespace MOM.Infrastructure.Persistence.Seeds
         {
             if (!await applicationDbContext.Person.AnyAsync())
             {
-                Person admin = new Person("admin", "超级管理员", PersonWorkStatus.Employed);
+                using var tran =await applicationDbContext.Database.BeginTransactionAsync();
+                Person admin = new Person("0000","admin", "超级管理员", PersonWorkStatus.Employed);
                 admin.PassWord = "Sam@123456".Sha1Signature().Sha1Signature(admin.DtId.ToString());
                 admin.SecurityStamp = Guid.NewGuid().ToString();
-                applicationDbContext.Person.Add(admin);
+                admin.ContactInformation.Email = "admin";
+                admin.ContactInformation.PhoneNumber = "admin";
+                applicationDbContext.Person.Add(admin);     
 
-                //var enterprise = new HierarchyScope(HierarchyScopeEquipmentLevel.Enterprise, "0000", enterpriseSettings.Name, enterpriseSettings.Address, true, "系统购买者");
-                //applicationDbContext.HierarchyScopes.Add(enterprise);
-                //applicationDbContext.HierarchyScopeContainsRelationship.Add(new HierarchyScopeContainsRelationship(null, enterprise.DtId, 0));
-                //applicationDbContext.HierarchyScopeContainsRelationship.Add(new HierarchyScopeContainsRelationship(enterprise.DtId, enterprise.DtId, 1));
+                var enterprise = new Enterprise("0000", enterpriseSettings.Name, "系统购买者", true, enterpriseSettings.Address);
+                applicationDbContext.Enterprise.Add(enterprise);
+                applicationDbContext.HierarchyScopeContainsRelationship.Add(new HierarchyScopeContainsRelationship(enterprise.DtId, enterprise.DtId, 0));
 
-                //PersonnelClass personnelClass = new PersonnelClass("超级管理员", "角色", enterprise);
-                PersonnelClass personnelClass = new PersonnelClass("超级管理员", "角色");
+                PersonnelClass personnelClass = new PersonnelClass("0000","超级管理员", "角色");
                 applicationDbContext.PersonnelClasses.Add(personnelClass);
                 applicationDbContext.PersonnelClassIncludesPropertiesOfRelationships.Add(new PersonnelClassIncludesPropertiesOfRelationship(personnelClass.DtId, personnelClass.DtId, 0));
 
@@ -197,116 +200,116 @@ namespace MOM.Infrastructure.Persistence.Seeds
                 };
                 menus.Add(org);
 
-                //Menu productionModeling = new Menu()
-                //{
-                //    Id = "003",
-                //    Depth = 0,
-                //    Name = "生产建模",
-                //    Children = new List<Menu>()
-                //    {
-                //        new Menu
-                //        {
-                //            Id="003-1",
-                //            Depth=1,
-                //            Name="工厂管理",
-                //            Path="/productionModeling/factory",
-                //            Buttons=new System.Collections.Generic.List<Button>
-                //            {
-                //                new Button
-                //                {
-                //                    Id="system:menu:add",
-                //                    Name="新增"
-                //                },
-                //                new Button
-                //                {
-                //                    Id="system:menu:edit",
-                //                    Name="修改"
-                //                },
-                //                new Button
-                //                {
-                //                    Id="system:menu:delete",
-                //                    Name="删除"
-                //                }
-                //            }
-                //        },
-                //        new Menu
-                //        {
-                //            Id="003-2",
-                //            Depth=1,
-                //            Name="车间管理",
-                //            Path="/productionModeling/workshop",
-                //            Buttons=new System.Collections.Generic.List<Button>
-                //            {
-                //                new Button
-                //                {
-                //                    Id="system:menu:add",
-                //                    Name="新增"
-                //                },
-                //                new Button
-                //                {
-                //                    Id="system:menu:edit",
-                //                    Name="修改"
-                //                },
-                //                new Button
-                //                {
-                //                    Id="system:menu:delete",
-                //                    Name="删除"
-                //                }
-                //            }
-                //        },
-                //        new Menu
-                //        {
-                //            Id="003-3",
-                //            Depth=1,
-                //            Name="产线管理",
-                //            Path="/productionModeling/productionLine",
-                //            Buttons=new System.Collections.Generic.List<Button>
-                //            {
-                //                new Button
-                //                {
-                //                    Id="system:menu:add",
-                //                    Name="新增"
-                //                },
-                //                new Button
-                //                {
-                //                    Id="system:menu:edit",
-                //                    Name="修改"
-                //                },
-                //                new Button
-                //                {
-                //                    Id="system:menu:delete",
-                //                    Name="删除"
-                //                }
-                //            }
-                //        },
-                //        new Menu
-                //        {
-                //            Id="003-4",
-                //            Depth=1,
-                //            Name="工位",
-                //            Path="/productionModeling/workstation",
-                //            Buttons=new System.Collections.Generic.List<Button>
-                //            {
-                //                new Button
-                //                {
-                //                    Id="system:menu:add",
-                //                    Name="新增"
-                //                },
-                //                new Button
-                //                {
-                //                    Id="system:menu:edit",
-                //                    Name="修改"
-                //                },
-                //                new Button
-                //                {
-                //                    Id="system:menu:delete",
-                //                    Name="删除"
-                //                }
-                //            }
-                //        },
-                //    }
-                //};
-                //menus.Add(productionModeling);
+                Menu productionModeling = new Menu()
+                {
+                    Id = "003",
+                    Depth = 0,
+                    Name = "生产建模",
+                    Children = new List<Menu>()
+                    {
+                        new Menu
+                        {
+                            Id="003-1",
+                            Depth=1,
+                            Name="工厂管理",
+                            Path="/productionModeling/factory",
+                            Buttons=new System.Collections.Generic.List<Button>
+                            {
+                                new Button
+                                {
+                                    Id="system:menu:add",
+                                    Name="新增"
+                                },
+                                new Button
+                                {
+                                    Id="system:menu:edit",
+                                    Name="修改"
+                                },
+                                new Button
+                                {
+                                    Id="system:menu:delete",
+                                    Name="删除"
+                                }
+                            }
+                        },
+                        new Menu
+                        {
+                            Id="003-2",
+                            Depth=1,
+                            Name="车间管理",
+                            Path="/productionModeling/workshop",
+                            Buttons=new System.Collections.Generic.List<Button>
+                            {
+                                new Button
+                                {
+                                    Id="system:menu:add",
+                                    Name="新增"
+                                },
+                                new Button
+                                {
+                                    Id="system:menu:edit",
+                                    Name="修改"
+                                },
+                                new Button
+                                {
+                                    Id="system:menu:delete",
+                                    Name="删除"
+                                }
+                            }
+                        },
+                        new Menu
+                        {
+                            Id="003-3",
+                            Depth=1,
+                            Name="产线管理",
+                            Path="/productionModeling/productionLine",
+                            Buttons=new System.Collections.Generic.List<Button>
+                            {
+                                new Button
+                                {
+                                    Id="system:menu:add",
+                                    Name="新增"
+                                },
+                                new Button
+                                {
+                                    Id="system:menu:edit",
+                                    Name="修改"
+                                },
+                                new Button
+                                {
+                                    Id="system:menu:delete",
+                                    Name="删除"
+                                }
+                            }
+                        },
+                        new Menu
+                        {
+                            Id="003-4",
+                            Depth=1,
+                            Name="工位",
+                            Path="/productionModeling/workstation",
+                            Buttons=new System.Collections.Generic.List<Button>
+                            {
+                                new Button
+                                {
+                                    Id="system:menu:add",
+                                    Name="新增"
+                                },
+                                new Button
+                                {
+                                    Id="system:menu:edit",
+                                    Name="修改"
+                                },
+                                new Button
+                                {
+                                    Id="system:menu:delete",
+                                    Name="删除"
+                                }
+                            }
+                        },
+                    }
+                };
+                menus.Add(productionModeling);
 
                 Menu equipment = new Menu()
                 {
@@ -656,6 +659,7 @@ namespace MOM.Infrastructure.Persistence.Seeds
                 applicationDbContext.Menus.AddRange(menus);
 
                 await applicationDbContext.SaveChangesAsync();
+                await tran.CommitAsync();
             }
         }
     }

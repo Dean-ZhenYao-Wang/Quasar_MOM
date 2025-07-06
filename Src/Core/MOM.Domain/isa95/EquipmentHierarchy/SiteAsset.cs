@@ -1,17 +1,17 @@
 namespace MOM.Domain.isa95.EquipmentHierarchy
 {
     using MOM.Domain.Common;
+    using MOM.Domain.Common.EnumType;
     using MOM.Domain.isa95.CommonObjectModels;
     using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public partial class SiteAsset : HierarchyScope, IEquatable<SiteAsset>
+    public abstract partial class SiteAsset : HierarchyScope, IEquatable<SiteAsset>
     {
-        public SiteAsset()
+        public SiteAsset(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string name, string? address = null, string? description = null, bool active = false) : base(equipmentLevel, ID, name, address, active, description)
         {
         }
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as SiteAsset);

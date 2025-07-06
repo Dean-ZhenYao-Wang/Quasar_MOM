@@ -68,7 +68,7 @@ namespace MOM.Application.DTOs.Personnel.Requests
         /// </summary>
         public virtual Person ToPerson()
         {
-            Person person = new Person(UserName, Name, WorkStatus, Email, PhoneNumber, TeamDtId, OrgDtId, PositionDtId_List, Description);
+            Person person = new Person(Id, UserName, Name, WorkStatus, Email, PhoneNumber, TeamDtId, OrgDtId, PositionDtId_List, Description);
             person.Property = Property;
             return person;
         }

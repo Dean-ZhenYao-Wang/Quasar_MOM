@@ -1,4 +1,6 @@
 ﻿using MOM.Domain.Common.EnumType;
+using MOM.Domain.isa95.EquipmentHierarchy;
+using System.Diagnostics;
 
 namespace MOM.Application.DTOs.HierarchyScope.Requests
 {
@@ -51,12 +53,18 @@ namespace MOM.Application.DTOs.HierarchyScope.Requests
         /// <summary>
         ///
         /// </summary>
-        public virtual Domain.isa95.CommonObjectModels.HierarchyScope ToHierarchyScope()
+        //public virtual Domain.isa95.CommonObjectModels.HierarchyScope ToHierarchyScope()
+        //{
+        //    Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope = new Domain.isa95.CommonObjectModels.HierarchyScope(this.EquipmentLevel, this.Id, this.Name, this.Address, this.Active, this.Description, this.SourceDtId);
+        //    hierarchyScope.ResponsibleDtId = this.ResponsibleDtId;
+        //    hierarchyScope.Address = this.Address;
+        //    return hierarchyScope;
+        //}
+        public virtual Domain.isa95.EquipmentHierarchy.Enterprise ToEnterprise()
         {
-            Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope = new Domain.isa95.CommonObjectModels.HierarchyScope(this.EquipmentLevel, this.Id, this.Name, this.Address, this.Active, this.Description, this.SourceDtId);
-            hierarchyScope.ResponsibleDtId = this.ResponsibleDtId;
-            hierarchyScope.Address = this.Address;
-            return hierarchyScope;
+            Enterprise enterprise = new Enterprise(this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId);
+            enterprise.SourceDtId = this.SourceDtId;
+            return enterprise;
         }
     }
 }
