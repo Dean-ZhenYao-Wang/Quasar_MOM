@@ -14,6 +14,7 @@ using MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment;
 using MOM.Domain.isa95.EquipmentHierarchy;
 using MOM.Domain.Permission;
 using MOM.Infrastructure.Persistence.Extensions;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -47,7 +48,17 @@ namespace MOM.Infrastructure.Persistence.Contexts
         public DbSet<HierarchyScopeContainsRelationship> HierarchyScopeContainsRelationship { get; set; }
         // 可选：为了方便查询，可以添加派生类的DbSet
         public DbSet<Enterprise> Enterprise { get; set; }
-        public DbSet<Site> Site { get; set;  }
+        public DbSet<Site> Site { get; set; }
+        public DbSet<Area> Area { get; set; }
+        public DbSet<ProcessCell> ProcessCell { get; set; }
+        public DbSet<ProductionLine> ProductionLine { get; set; }
+        public DbSet<ProductionUnit> ProductionUnit { get; set; }
+        public DbSet<StorageUnit> StorageUnit { get; set; }
+        public DbSet<StorageZone> StorageZone { get; set; }
+        public DbSet<Unit> Unit { get; set; }
+        public DbSet<WorkCell> WorkCell { get; set; }
+        public DbSet<WorkCenter> WorkCenter { get; set; }
+        public DbSet<WorkUnit> WorkUnit { get; set; }
 
         #endregion HierarchyScope
 

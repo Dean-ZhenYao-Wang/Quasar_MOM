@@ -7,14 +7,6 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 
     public partial class ProcessCell : WorkCenter, IEquatable<ProcessCell>
     {
-        public ProcessCell()
-        {
-            EquipmentLevel = Common.EnumType.HierarchyScopeEquipmentLevel.Process_Cell;
-        }
-
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:ProcessCell;1";
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as ProcessCell);

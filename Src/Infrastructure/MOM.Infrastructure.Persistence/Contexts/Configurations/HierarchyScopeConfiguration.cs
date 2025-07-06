@@ -15,8 +15,20 @@ namespace MOM.Infrastructure.Persistence.Contexts.Configurations
 
             builder.ToTable(nameof(HierarchyScope))
                 .HasDiscriminator<string>("Discriminator")
+                .HasValue<Area>("Area")
                 .HasValue<Enterprise>("Enterprise")
-                .HasValue<Site>("Site");
+                .HasValue<ProcessCell>("ProcessCell")
+                .HasValue<ProductionLine>("ProductionLine")
+                .HasValue<ProductionUnit>("ProductionUnit")
+                .HasValue<ProductionUnit>("ProductionUnit")
+                .HasValue<Site>("Site")
+                .HasValue<StorageUnit>("StorageUnit")
+                .HasValue<StorageZone>("StorageZone")
+                .HasValue<Unit>("Unit")
+                .HasValue<WorkCell>("WorkCell")
+                .HasValue<WorkCenter>("WorkCenter")
+                .HasValue<WorkUnit>("WorkUnit")
+            ;
 
             builder.HasOne(h => h.Source)
                 .WithMany()

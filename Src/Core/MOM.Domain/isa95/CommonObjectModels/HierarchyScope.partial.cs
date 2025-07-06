@@ -225,7 +225,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
         }
 
         // 获取层级路径
-        public string GetHierarchyPath( string separator = " > ")
+        public string GetHierarchyPath(string separator = " > ")
         {
             var path = new List<string>();
             var current = this;
@@ -251,51 +251,69 @@ namespace MOM.Domain.isa95.CommonObjectModels
             switch (sourceEquipmentLevel)
             {
                 case HierarchyScopeEquipmentLevel.Enterprise:
-                    if (targetEquipment != HierarchyScopeEquipmentLevel.Site && targetEquipment != HierarchyScopeEquipmentLevel.Enterprise)
-                        throw new MethodAccessException("企业下只能添加企业、站点");
+                    switch (targetEquipment)
+                    {
+                        case HierarchyScopeEquipmentLevel.Enterprise:
+                        case HierarchyScopeEquipmentLevel.Site:
+                        case HierarchyScopeEquipmentLevel.Area:
+                            break;
+                        default:
+                            throw new MethodAccessException("企业下只能添加企业、站点/工厂、区域/部门");
+                    }
                     break;
 
                 case HierarchyScopeEquipmentLevel.Site:
                     if (targetEquipment != HierarchyScopeEquipmentLevel.Area)
-                        throw new MethodAccessException("站点下只能添加区域");
+                        throw new MethodAccessException("站点下只能添加区域/部门");
                     break;
 
                 case HierarchyScopeEquipmentLevel.Area:
                     switch (targetEquipment)
                     {
-                        case HierarchyScopeEquipmentLevel.Enterprise:
-                        case HierarchyScopeEquipmentLevel.Site:
-                        case HierarchyScopeEquipmentLevel.Area:
-                        case HierarchyScopeEquipmentLevel.Work_Unit:
-                        case HierarchyScopeEquipmentLevel.Unit:
-                        case HierarchyScopeEquipmentLevel.Storage_Unit:
+                        case HierarchyScopeEquipmentLevel.Production_Line:
+                        case HierarchyScopeEquipmentLevel.Work_Cell:
+                        case HierarchyScopeEquipmentLevel.Process_Cell:
+                        case HierarchyScopeEquipmentLevel.Work_Center:
+                        case HierarchyScopeEquipmentLevel.Storage_Zone:
+                            break;
+                        default:
                             throw new MethodAccessException("站点下只能添加生产工艺段、生产单元、生产线、存储区、工作中心");
                     }
                     break;
 
-                case HierarchyScopeEquipmentLevel.Work_Center:
+                case HierarchyScopeEquipmentLevel.Process_Cell:
                     switch (targetEquipment)
                     {
-                        case HierarchyScopeEquipmentLevel.Enterprise:
-                        case HierarchyScopeEquipmentLevel.Site:
-                        case HierarchyScopeEquipmentLevel.Area:
-                        case HierarchyScopeEquipmentLevel.Process_Cell:
+                        case HierarchyScopeEquipmentLevel.Work_Unit:
+                        case HierarchyScopeEquipmentLevel.Unit:
                         case HierarchyScopeEquipmentLevel.Production_Unit:
-                        case HierarchyScopeEquipmentLevel.Production_Line:
-                        case HierarchyScopeEquipmentLevel.Storage_Zone:
+                        case HierarchyScopeEquipmentLevel.Work_Center:
+                        case HierarchyScopeEquipmentLevel.Storage_Unit:
+                            break;
+                        default:
                             throw new MethodAccessException("工作中心下只能添加单元、工段/工位、存储单元、工作中心、工作单元");
                     }
                     break;
 
-                case HierarchyScopeEquipmentLevel.Process_Cell:
+                case HierarchyScopeEquipmentLevel.Work_Center:
                 case HierarchyScopeEquipmentLevel.Production_Unit:
                     if (targetEquipment != HierarchyScopeEquipmentLevel.Unit)
-                        throw new MethodAccessException("生产工艺段下只能添加生产工艺段、单元");
+                        throw new MethodAccessException("生产工艺段下只能添加单元");
                     break;
 
                 case HierarchyScopeEquipmentLevel.Production_Line:
-                    if (targetEquipment != HierarchyScopeEquipmentLevel.Work_Cell)
-                        throw new MethodAccessException("生产线下只能添加子生产线、工段/工位");
+                    switch (targetEquipment)
+                    {
+                        case HierarchyScopeEquipmentLevel.Work_Unit:
+                        case HierarchyScopeEquipmentLevel.Unit:
+                        case HierarchyScopeEquipmentLevel.Production_Unit:
+                        case HierarchyScopeEquipmentLevel.Work_Center:
+                        case HierarchyScopeEquipmentLevel.Storage_Unit:
+                        case HierarchyScopeEquipmentLevel.Work_Cell:
+                            break;
+                        default:
+                            throw new MethodAccessException("生产线下只能添加子生产线、工段/工位");
+                    }
                     break;
 
                 case HierarchyScopeEquipmentLevel.Storage_Zone:
@@ -315,6 +333,17 @@ namespace MOM.Domain.isa95.CommonObjectModels
                 case HierarchyScopeEquipmentLevel.Storage_Unit:
                     throw new MethodAccessException("存储单元下不能添加任何基于角色的设备层次");
             }
+        }
+
+
+        public void AddChild(Guid targetDtId)
+        {
+            this.Contains.Add(new Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship(this.DtId, targetDtId));
+        }
+
+        public void DeleteChild(Guid targetDtId)
+        {
+            this.Contains.Remove(this.Contains.Where(m => m.TargetId == targetDtId).First());
         }
     }
 }

@@ -7,14 +7,6 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 
     public partial class StorageUnit : WorkUnit, IEquatable<StorageUnit>
     {
-        public StorageUnit()
-        {
-            EquipmentLevel = Common.EnumType.HierarchyScopeEquipmentLevel.Storage_Unit;
-        }
-
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:StorageUnit;1";
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as StorageUnit);

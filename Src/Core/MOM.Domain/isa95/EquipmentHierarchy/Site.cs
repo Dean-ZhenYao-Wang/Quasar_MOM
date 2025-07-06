@@ -10,9 +10,6 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
     [Table(nameof(Site))]
     public partial class Site : SiteAsset, IEquatable<Site>
     {
-        //[JsonIgnore]
-        //public virtual SiteAreaRelationshipCollection Area { get; set; } = new SiteAreaRelationshipCollection();
-
 
         public Site(string id, string name, string description = "", bool active = false, string address = "", Guid? responsibleDtId = null)
             : base(Common.EnumType.HierarchyScopeEquipmentLevel.Site,id, name, address, description, active)

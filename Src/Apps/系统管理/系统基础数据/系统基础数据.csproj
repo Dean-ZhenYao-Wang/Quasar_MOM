@@ -8,6 +8,9 @@
     <DocumentationFile>$(MSBuildProjectDirectory)\系统基础数据.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Controllers\v1\HierarchyScopeController.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Remove="系统基础数据.xml" />
   </ItemGroup>
   <ItemGroup>

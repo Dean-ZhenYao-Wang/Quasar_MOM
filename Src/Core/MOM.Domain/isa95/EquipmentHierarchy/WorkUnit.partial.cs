@@ -8,7 +8,7 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 {
     public partial class WorkUnit
     {
-        public WorkUnit(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string? address = null, string? description = null, bool active = false, Guid? responsibleDtId = null) : base(equipmentLevel, ID, address, description, active)
+        public WorkUnit(HierarchyScopeEquipmentLevel equipmentLevel, string id, string name, string? address = null, string? description = null, bool active = false, Guid? responsibleDtId = null) : base(equipmentLevel, id, name, address, description, active)
         {
             ResponsibleDtId = responsibleDtId;
         }

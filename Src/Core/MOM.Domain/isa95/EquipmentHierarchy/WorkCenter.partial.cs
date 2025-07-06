@@ -8,23 +8,9 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 {
     public partial class WorkCenter
     {
-        public WorkCenter(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string address = "", string description = "", bool active = false, Guid? responsibleDtId = null) : base(equipmentLevel, ID, address, description, active)
+        public WorkCenter(HierarchyScopeEquipmentLevel equipmentLevel, string id, string name, string address = "", string description = "", bool active = false, Guid? responsibleDtId = null) : base(equipmentLevel, id, name, address, description, active)
         {
             ResponsibleDtId = responsibleDtId;
-        }
-
-        public override void ForcedDeletionContainTargets()
-        {
-            foreach (var wu in this.WorkUnit)
-            {
-                wu.Target.ForcedDeletion();
-            }
-        }
-
-        public override void ForcedDeletion()
-        {
-            base.ForcedDeletion();
-            this.WorkUnit.Clear();
         }
 
         public void Update(string name, string description, bool active, Guid? responsibleDtId = null)
@@ -33,18 +19,6 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
             this.Description = description;
             this.Active = active;
             this.ResponsibleDtId = responsibleDtId;
-        }
-
-        public void AddWorkUnit(Guid workUnitDtId)
-        {
-            this.WorkUnit.Add(this.DtId, workUnitDtId);
-            this.Contains.Add(this.DtId, workUnitDtId);
-        }
-
-        public void DeleteWorkUnit(Guid workUnitDtId)
-        {
-            this.WorkUnit.Remove(workUnitDtId);
-            this.Contains.Remove(workUnitDtId);
         }
     }
 }

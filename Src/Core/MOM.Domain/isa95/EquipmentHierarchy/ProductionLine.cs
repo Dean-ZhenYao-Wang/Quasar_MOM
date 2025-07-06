@@ -7,14 +7,6 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 
     public partial class ProductionLine : WorkCenter, IEquatable<ProductionLine>
     {
-        public ProductionLine()
-        {
-            EquipmentLevel = Common.EnumType.HierarchyScopeEquipmentLevel.Production_Line;
-        }
-
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:ProductionLine;1";
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as ProductionLine);

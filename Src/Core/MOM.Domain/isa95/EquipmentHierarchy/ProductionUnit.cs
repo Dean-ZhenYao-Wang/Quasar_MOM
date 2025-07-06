@@ -7,13 +7,6 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 
     public partial class ProductionUnit : WorkCenter, IEquatable<ProductionUnit>
     {
-        public ProductionUnit()
-        {
-            EquipmentLevel = Common.EnumType.HierarchyScopeEquipmentLevel.Production_Unit;
-        }
-
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:ProductionUnit;1";
 
         public override bool Equals(object? obj)
         {

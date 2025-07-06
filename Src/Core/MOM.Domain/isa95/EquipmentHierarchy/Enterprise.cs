@@ -1,5 +1,6 @@
 namespace MOM.Domain.isa95.EquipmentHierarchy
 {
+    using Microsoft.AspNetCore.Mvc;
     using MOM.Domain.Common;
     //using MOM.Domain.Common.Relationship.isa95.Enterprise;
     using System;
@@ -14,9 +15,6 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
         {
             this.ResponsibleDtId = responsibleDtId;
         }
-
-        public IEnumerable<Site> Site => GetChildren<Site>();
-        public Enterprise ParentEnterprise => GetParent<Enterprise>();
 
         public override bool Equals(object? obj)
         {

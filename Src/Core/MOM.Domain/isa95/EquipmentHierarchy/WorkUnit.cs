@@ -7,14 +7,6 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 
     public partial class WorkUnit : SiteAsset, IEquatable<WorkUnit>
     {
-        public WorkUnit()
-        {
-            EquipmentLevel = Common.EnumType.HierarchyScopeEquipmentLevel.Work_Unit;
-        }
-
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:WorkUnit;1";
-
         public override bool Equals(object? obj)
         {
             return Equals(obj as WorkUnit);

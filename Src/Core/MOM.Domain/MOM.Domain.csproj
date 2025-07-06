@@ -482,28 +482,6 @@
 	  <None Remove="isa95\CommonObjectModels\Part4\**" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Compile Remove="isa95\EquipmentHierarchy\Area.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\Area.partial.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\ProcessCell.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\ProcessCell.partial.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\ProductionLine.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\ProductionLine.partial.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\ProductionUnit.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\ProductionUnit.partial.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\StorageUnit.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\StorageUnit.partial.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\StorageZone.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\StorageZone.partial.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\Unit.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\Unit.partial.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\WorkCell.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\WorkCell.partial.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\WorkCenter.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\WorkCenter.partial.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\WorkUnit.cs" />
-	  <Compile Remove="isa95\EquipmentHierarchy\WorkUnit.partial.cs" />
-	</ItemGroup>
-	<ItemGroup>
 	  <None Remove="MOM.Domain.xml" />
 	</ItemGroup>
 	<ItemGroup>

@@ -31,86 +31,6 @@
             <param name="generate"></param>
             <returns></returns>
         </member>
-        <member name="T:系统基础数据.Controllers.v1.OrgController">
-            <summary>
-            基础资料/组织管理
-            </summary>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.OrgController.AddHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope.AddHierarchyScopeCommand)">
-            <summary>
-            添加组织
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="T:系统基础数据.Controllers.v1.HierarchyScopeController">
-            <summary>
-            设备角色层次/生产建模
-            </summary>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetOrgTable(MOM.Application.Features.HierarchyScope.Queries.GetOrgTable.GetOrgTableQuery)">
-            <summary>
-            查询组织列表
-            </summary>
-            <param name="query"></param>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetEnterpriseTable(MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery)">
-            <summary>
-            查询企业列表
-            </summary>
-            <param name="query"></param>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetFactoryTable(MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery)">
-            <summary>
-            查询工厂列表
-            </summary>
-            <param name="query"></param>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.AddHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope.AddHierarchyScopeCommand)">
-            <summary>
-            添加组织
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.DeleteHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope.DeleteHierarchyScopeCommand)">
-            <summary>
-            删除组织
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.UpdateHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.UpdateHierarchyScope.UpdateHierarchyScopeCommand)">
-            <summary>
-            修改组织
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.GetDepartTree(System.Nullable{System.Guid})">
-            <summary>
-            获取组织树形
-            </summary>
-            <param name="sourceDtId">上级节点的DtId</param>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.SettingPermission(MOM.Application.Features.Permission.Commands.OrgSettingPermission.OrgSettingPermissionCommand)">
-            <summary>
-            给组织结构配置基本权限
-            </summary>
-            <param name="command"></param>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.HierarchyScopeController.Permission(System.Guid)">
-            <summary>
-            获取指定组织的权限列表
-            </summary>
-            <param name="orgDtId">指定组织的dtId</param>
-            <returns>该组织所拥有权限的菜单或按钮的编号</returns>
-        </member>
         <member name="T:系统基础数据.Controllers.v1.MenuController">
             <summary>
             菜单管理
@@ -183,6 +103,18 @@
             获取指定菜单编号下的按钮列表
             </summary>
             <param name="menuId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:系统基础数据.Controllers.v1.OrgController">
+            <summary>
+            基础资料/组织管理
+            </summary>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.AddHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope.AddHierarchyScopeCommand)">
+            <summary>
+            添加组织
+            </summary>
+            <param name="request"></param>
             <returns></returns>
         </member>
         <member name="T:系统基础数据.Controllers.v1.PositionController">
