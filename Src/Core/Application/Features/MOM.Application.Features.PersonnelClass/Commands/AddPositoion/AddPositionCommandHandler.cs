@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using MOM.Application.Interfaces;
+using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
-namespace MOM.Application.Features.PersonnelClass.Commands.AddPsitoion
+namespace MOM.Application.Features.PersonnelClass.Commands.AddPositoion
 {
     public class AddPositionCommandHandler(IPersonnelClassRepository personnelClassRepository, IUnitOfWork unitOfWork) : IRequestHandler<AddPositionCommand, BaseResult>
     {

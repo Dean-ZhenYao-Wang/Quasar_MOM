@@ -2,7 +2,7 @@
 using MOM.Application.DTOs.PersonnelClass.Responses;
 using MOM.Application.Wrappers;
 
-namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
+namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedTeam
 {
     public class GetPagedTeamQuery : IRequest<PagedResponse<TeamResponse>>
     {

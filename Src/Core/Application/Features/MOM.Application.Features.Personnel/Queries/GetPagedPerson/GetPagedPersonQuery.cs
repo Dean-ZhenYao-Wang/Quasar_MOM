@@ -3,7 +3,7 @@ using MOM.Application.DTOs.Personnel.Responses;
 using MOM.Application.Wrappers;
 using MOM.Domain.Common.EnumType;
 
-namespace MOM.Application.Features.Personnel.Queries.GetPagedListPerson
+namespace MOM.Application.Features.Personnel.Queries.GetPagedPerson
 {
     public class GetPagedPersonQuery : PaginationRequestParameter, IRequest<PagedResponse<PersonResponse>>
     {

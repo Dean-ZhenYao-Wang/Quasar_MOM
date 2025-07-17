@@ -1,11 +1,10 @@
 ﻿using MediatR;
-using MOM.Application.Features.Permission.Commands.PersonnelSettingPermission;
-using MOM.Application.Interfaces;
+using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 using MOM.Domain.Permission;
 
-namespace MOM.Application.Features.Permission.Commands.PositionSettingPermission
+namespace MOM.Application.Features.Permission.Commands.PersonnelSettingPermission
 {
     public class PersonnelSettingPermissionCommandHandler(IAvailablePermissionRepository availablePermissionRepository, IUnitOfWork unitOfWork) : IRequestHandler<PersonnelSettingPermissionCommand, BaseResult>
     {

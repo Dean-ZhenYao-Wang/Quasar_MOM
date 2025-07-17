@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using MOM.Application.Wrappers;
 using System.Net;
 
-namespace MOM.Application.Infrastructure.Filters
+namespace MOM.Application.Infrastructure.Attribute
 {
     public class ApiResultFilterAttribute : ActionFilterAttribute
     {

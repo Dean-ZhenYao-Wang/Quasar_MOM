@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using MOM.Domain.isa95.EquipmentHierarchy;
 using System.Linq.Expressions;
 
 namespace MOM.Application.Interfaces.Repositories
@@ -8,7 +9,7 @@ namespace MOM.Application.Interfaces.Repositories
     {
         Microsoft.EntityFrameworkCore.DbSet<T> DbSet { get; }
 
-        Task<T> GetByIdAsync(object id);
+        Task<T> GetByKeyAsync(object id);
 
         Task AddAsync(T entity);
 

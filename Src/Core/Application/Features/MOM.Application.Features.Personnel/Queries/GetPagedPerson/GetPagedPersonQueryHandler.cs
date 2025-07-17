@@ -5,7 +5,7 @@ using MOM.Application.DTOs.Personnel.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
-namespace MOM.Application.Features.Personnel.Queries.GetPagedListPerson
+namespace MOM.Application.Features.Personnel.Queries.GetPagedPerson
 {
     /// <summary>
     ///

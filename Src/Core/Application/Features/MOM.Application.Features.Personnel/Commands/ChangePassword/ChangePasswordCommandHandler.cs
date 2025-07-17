@@ -1,7 +1,7 @@
 ﻿using MediatR;
+using MOM.Application.Infrastructure;
 using MOM.Application.Infrastructure.Extensions;
 using MOM.Application.Infrastructure.Services;
-using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
@@ -12,7 +12,7 @@ namespace MOM.Application.Features.Personnel.Commands.ChangePassword
         public async Task<BaseResult> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
         {
             Guid dtId = Guid.Parse(authenticated.DtId);
-            var user = await personRepository.GetByIdAsync(dtId);
+            var user = await personRepository.GetByKeyAsync(dtId);
             string newPassWord = request.Password.Sha1Signature(authenticated.DtId);
             if (user.PassWord.Equals(newPassWord))
             {

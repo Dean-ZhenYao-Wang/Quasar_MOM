@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MOM.Application.Features.PersonnelClass.Commands.AddPsitoion;
+using MOM.Application.Features.PersonnelClass.Commands.AddPositoion;
 using MOM.Application.Wrappers;
 
 namespace MOM.Application.Features.PersonnelClass.Commands.UpdatePosition

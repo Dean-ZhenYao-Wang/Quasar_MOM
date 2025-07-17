@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MOM.Application.Interfaces;
+using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
@@ -12,7 +12,7 @@ namespace MOM.Application.Features.HierarchyScope.Commands.UpdateHierarchyScope
             using var tran = await unitOfWork.BeginTransactionAsync();
             try
             {
-                var Org = await hierarchyScopeRepository.GetByIdAsync(request.DtId);
+                var Org = await hierarchyScopeRepository.GetByKeyAsync(request.DtId);
 
                 if (Org is null)
                 {

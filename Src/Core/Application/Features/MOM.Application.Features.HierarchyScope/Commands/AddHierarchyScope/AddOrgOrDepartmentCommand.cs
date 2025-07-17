@@ -7,7 +7,7 @@ namespace MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope
     /// <summary>
     ///
     /// </summary>
-    public class AddHierarchyScopeCommand : AddOrgRequest, IRequest<BaseResult>
+    public class AddOrgOrDepartmentCommand : AddOrgRequest, IRequest<BaseResult>
     {
     }
 }

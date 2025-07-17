@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MOM.Application.Interfaces;
+using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
@@ -9,7 +9,7 @@ namespace MOM.Application.Features.Permission.Commands.UpdateButton
     {
         public async Task<BaseResult> Handle(UpdateButtonCommand request, CancellationToken cancellationToken)
         {
-            var button = await buttonRepository.GetByIdAsync(request.DtId);
+            var button = await buttonRepository.GetByKeyAsync(request.DtId);
 
             if (button is null)
             {

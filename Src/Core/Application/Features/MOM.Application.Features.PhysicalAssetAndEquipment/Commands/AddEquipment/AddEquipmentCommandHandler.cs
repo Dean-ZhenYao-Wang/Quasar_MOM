@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using MOM.Application.DTOs.CodingRule.Requests;
-using MOM.Application.Interfaces;
+using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 

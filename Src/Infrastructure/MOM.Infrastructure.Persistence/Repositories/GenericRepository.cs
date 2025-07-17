@@ -24,7 +24,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
             return dbContext.Set<T>().AsNoTracking();
         }
 
-        public virtual async Task<T> GetByIdAsync(object id)
+        public virtual async Task<T> GetByKeyAsync(object id)
         {
             return await dbContext.Set<T>().FindAsync(id);
         }

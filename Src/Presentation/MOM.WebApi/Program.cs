@@ -196,12 +196,13 @@ using (var scope = app.Services.CreateScope())
     await DefaultData.SeedAsync(services.GetRequiredService<ApplicationDbContext>(), enterpriseSettings);
 }
 app.UseCustomLocalization();
-app.UseAnyCors();
+app.UseAnyCors(); 
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseScalarWithVersioning();
 app.UseMiddleware<ErrorHandlerMiddleware>();
+app.UseMiddleware<TransactionMiddleware>();
 app.UseHangfire();
 app.UseHealthChecks("/health");
 app.MapControllers();

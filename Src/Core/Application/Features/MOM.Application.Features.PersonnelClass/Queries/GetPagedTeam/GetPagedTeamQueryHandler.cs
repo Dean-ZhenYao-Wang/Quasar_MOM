@@ -4,7 +4,7 @@ using MOM.Application.DTOs.PersonnelClass.Responses;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
-namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition
+namespace MOM.Application.Features.PersonnelClass.Queries.GetPagedTeam
 {
     public class GetPagedTeamQueryHandler(IPersonnelClassIncludesPropertiesOfRelationshipRepository personnelClassIncludesPropertiesOfRelationshipRepository, IPersonnelClassPermissionRepository personnelClassPermissionRepository) : IRequestHandler<GetPagedTeamQuery, PagedResponse<TeamResponse>>
     {

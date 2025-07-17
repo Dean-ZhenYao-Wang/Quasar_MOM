@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace MOM.Application.Interfaces
+namespace MOM.Application.Infrastructure
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        DbContext DbContext { get; set; }
+        DbContext DbContext { get;  }
 
         Task<bool> SaveChangesAsync();
 

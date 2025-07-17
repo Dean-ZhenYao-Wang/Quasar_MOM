@@ -7,7 +7,7 @@ using MOM.Domain.Common.Relationship.isa95.EquipmentClass;
 using MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetIncludesRelations
+namespace MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetEquipmentClassIncludesRelations
 {
     public class GetEquipmentClassIncludesRelationsQueryHandler(IEquipmentClassIncludesPropertiesOfRelationshipRepository equipmentClassIncludesPropertiesOfRelationshipRepository) : IRequestHandler<GetEquipmentClassIncludesRelationsQuery, PagedResponse<EquipmentClass>>
     {

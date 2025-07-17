@@ -6,7 +6,7 @@ using MOM.Application.Wrappers;
 using MOM.Domain.Common.Relationship.isa95.EquipmentClass;
 using MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment;
 
-namespace MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetIsMadeUpOf
+namespace MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetEquipmentClassIsMadeUpOf
 {
     public class GetEquipmentClassIsMadeUpOfQueryHandler(IEquipmentClassIsMadeUpOfRelationshipRepository equipmentClassIsMadeUpOfRelationshipRepository) : IRequestHandler<GetEquipmentClassIsMadeUpOfQuery, PagedResponse<EquipmentClass>>
     {

@@ -4,7 +4,7 @@ using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment;
 
-namespace MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetIsMadeUpOf
+namespace MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetEquipmentClassIsMadeUpOf
 {
     public class GetEquipmentClassIsMadeUpOfQuery :PaginationRequestParameter, IRequest<PagedResponse<EquipmentClass>>
     {

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MOM.Application.Interfaces;
+using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
@@ -9,7 +9,7 @@ namespace MOM.Application.Features.Permission.Commands.UpdateMenu
     {
         public async Task<BaseResult> Handle(UpdateMenuCommand request, CancellationToken cancellationToken)
         {
-            var menu = await menuRepository.GetByIdAsync(request.DtId);
+            var menu = await menuRepository.GetByKeyAsync(request.DtId);
 
             if (menu is null)
             {

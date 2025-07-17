@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using MOM.Application.DTOs.CodingRule.Requests;
+using MOM.Application.Infrastructure;
 using MOM.Application.Infrastructure.Extensions;
-using MOM.Application.Interfaces;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;

@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using MOM.Application.Interfaces;
+using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;
 
@@ -9,7 +9,7 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdatePosition
     {
         public async Task<BaseResult> Handle(UpdatePositionCommand request, CancellationToken cancellationToken)
         {
-            var position = await personnelClassRepository.GetByIdAsync(request.DtId);
+            var position = await personnelClassRepository.GetByKeyAsync(request.DtId);
             if (position == null)
             {
                 return BaseResult.Failure(new Error(ErrorCode.NotFound, "Position not found."));

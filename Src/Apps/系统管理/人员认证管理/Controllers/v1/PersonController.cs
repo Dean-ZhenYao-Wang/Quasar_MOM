@@ -6,7 +6,7 @@ using MOM.Application.Features.Permission.Commands.PersonnelSettingPermission;
 using MOM.Application.Features.Personnel.Commands.AddPerson;
 using MOM.Application.Features.Personnel.Commands.DeletePerson;
 using MOM.Application.Features.Personnel.Commands.UpdatePerson;
-using MOM.Application.Features.Personnel.Queries.GetPagedListPerson;
+using MOM.Application.Features.Personnel.Queries.GetPagedPerson;
 using MOM.Application.Features.Personnel.Queries.GetResponsibles;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;

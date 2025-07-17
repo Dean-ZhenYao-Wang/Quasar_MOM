@@ -66,5 +66,11 @@ namespace MOM.Application.DTOs.HierarchyScope.Requests
             enterprise.SourceDtId = this.SourceDtId;
             return enterprise;
         }
+        public virtual Domain.isa95.EquipmentHierarchy.Area ToArea()
+        {
+            Area area = new Area(this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId);
+            area.SourceDtId = this.SourceDtId;
+            return area;
+        }
     }
 }

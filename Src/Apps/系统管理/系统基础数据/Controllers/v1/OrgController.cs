@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope;
 using MOM.Application.Infrastructure;
+using MOM.Application.Infrastructure.Attribute;
 using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
@@ -15,12 +16,13 @@ namespace 系统基础数据.Controllers.v1
     public sealed class OrgController : BaseApiController
     {
         /// <summary>
-        /// 添加组织
+        /// 添加企业
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<BaseResult> AddHierarchyScope(AddHierarchyScopeCommand command)
+        [Transactional]
+        public async Task<BaseResult> AddOrgOrDepartment(AddOrgOrDepartmentCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
