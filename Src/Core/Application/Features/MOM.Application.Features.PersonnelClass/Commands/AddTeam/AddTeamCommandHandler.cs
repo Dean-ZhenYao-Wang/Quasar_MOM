@@ -17,7 +17,6 @@ namespace MOM.Application.Features.PersonnelClass.Commands.AddTeam
             Guid sourceDtId = request.SourceDtId ?? addClass.DtId;
             await personnelClassIncludesPropertiesOfRelationshipRepository.AddAsync(new Domain.Common.Relationship.isa95.PersonnelClass.PersonnelClassIncludesPropertiesOfRelationship(sourceDtId, addClass.DtId));
 
-            await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }
     }

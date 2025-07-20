@@ -19,7 +19,7 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdateTeam
             position.ResponsibleDtId = request.ResponsibleDtId;
             position.HierarchyScopeRelDtId = request.OrgDtId;
             // Update other properties as needed
-            personnelClassRepository.Update(position);
+            await personnelClassRepository.UpdateAsync(position);
 
             var oldSource = personnelClassIncludesPropertiesOfRelationshipRepository
                 .Where(m => m.TargetId.Equals(request.DtId))
@@ -36,7 +36,7 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdateTeam
                 }
             }
 
-            await unitOfWork.SaveChangesAsync();
+
             return BaseResult.Ok();
         }
     }

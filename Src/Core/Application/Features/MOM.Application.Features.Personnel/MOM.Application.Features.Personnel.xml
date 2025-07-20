@@ -57,7 +57,7 @@
              <param name="translator"></param>
              <param name="unitOfWork"></param>
         </member>
-        <member name="M:MOM.Application.Features.Personnel.Commands.UpdatePerson.UpdatePersonCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IPersonRepository,MOM.Application.Wrappers.ITranslator,MOM.Application.Interfaces.IUnitOfWork)">
+        <member name="M:MOM.Application.Features.Personnel.Commands.UpdatePerson.UpdatePersonCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IPersonRepository,MOM.Application.Wrappers.ITranslator,MOM.Application.Infrastructure.IUnitOfWork)">
              <summary>
             
              </summary>
@@ -73,59 +73,59 @@
              <param name="cancellationToken"></param>
              <returns></returns>
         </member>
-        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.Id">
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQuery.Id">
             <summary>
             UserName 账号 工号
             </summary>
         </member>
-        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.Name">
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQuery.Name">
             <summary>
             姓名
             </summary>
         </member>
-        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.WorkStatus">
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQuery.WorkStatus">
             <summary>
             状态
             </summary>
         </member>
-        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.Email">
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQuery.Email">
             <summary>
             邮箱
             </summary>
         </member>
-        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.PhoneNumber">
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQuery.PhoneNumber">
             <summary>
             手机号
             </summary>
         </member>
-        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.TeamOfGroupDtId">
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQuery.TeamOfGroupDtId">
             <summary>
             班组
             </summary>
         </member>
-        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.PositionDtId">
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQuery.PositionDtId">
             <summary>
             职位
             </summary>
         </member>
-        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery.OrgDtId">
+        <member name="P:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQuery.OrgDtId">
             <summary>
             组织
             </summary>
         </member>
-        <member name="T:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQueryHandler">
+        <member name="T:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQueryHandler">
              <summary>
             
              </summary>
              <param name="personRepository"></param>
         </member>
-        <member name="M:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IPersonRepository)">
+        <member name="M:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IPersonRepository)">
              <summary>
             
              </summary>
              <param name="personRepository"></param>
         </member>
-        <member name="M:MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQueryHandler.Handle(MOM.Application.Features.Personnel.Queries.GetPagedListPerson.GetPagedPersonQuery,System.Threading.CancellationToken)">
+        <member name="M:MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQueryHandler.Handle(MOM.Application.Features.Personnel.Queries.GetPagedPerson.GetPagedPersonQuery,System.Threading.CancellationToken)">
              <summary>
             
              </summary>

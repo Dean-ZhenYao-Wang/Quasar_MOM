@@ -8,7 +8,9 @@ namespace MOM.Application.Interfaces.Repositories
 {
     public interface IHierarchyScopeRepository : IGenericRepository<HierarchyScope>
     {
-        Task<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity org) where TEntity : HierarchyScope;
+        Task<EntityEntry<Area>> AddDepartmentAsync(Area area);
+        Task<EntityEntry<Enterprise>> AddEnterpriseAsync(Enterprise enterprise);
+        Task<EntityEntry<Site>> AddFactoryAsync(Site site);
 
         /// <summary>
         /// 批量删除指定设备角色层次
@@ -16,17 +18,12 @@ namespace MOM.Application.Interfaces.Repositories
         /// <param name="dtIds"></param>
         /// <returns></returns>
         Task DeleteAsync(Guid[] dtIds);
+        Task<Area> GetAreaByKeyAsync(Guid dtId);
+        Task<PagedResponse<OrgResponse>> GetAreaListAsync(Guid sourceDtId, string? id, string? name, int page, int pageSize);
+        Task<PagedResponse<OrgResponse>> GetDepartmentListAsync(Guid? sourceDtId, string? id, string? name, int page, int pageSize);
         Task<Enterprise> GetEnterpriseByKeyAsync(Guid dtId);
-
-        /// <summary>
-        /// 查询设备角色层次清单
-        /// </summary>
-        /// <param name="sourceDtId"></param>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="page"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        Task<PagedResponse<OrgResponse>> GetOrgListAsync(Guid? sourceDtId, string? id, string? name, int page, int pageSize);
+        Task<PagedResponse<OrgResponse>> GetEnterpriseListAsync(string? id, string? name, int page, int pageSize);
+        Task<PagedResponse<OrgResponse>> GetFactoryListAsync(string? id, string? name, int page, int pageSize);
+        Task<Site> GetSiteByKeyAsync(Guid dtId);
     }
 }

@@ -5,6 +5,7 @@ using MOM.Application.DTOs.CodingRule.Requests;
 using MOM.Application.Features.CodingRule.Commands.RegisterRule;
 using MOM.Application.Features.CodingRule.Queries.GetPagedCodingRule;
 using MOM.Application.Infrastructure;
+using MOM.Application.Infrastructure.Attribute;
 using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
@@ -23,6 +24,7 @@ namespace 系统基础数据.Controllers.v1
         /// 将编码规则添加到管理器中，如果规则ID已存在则会覆盖原规则
         /// </summary>
         [HttpPost]
+        [Transactional]
         public async Task<BaseResult> RegisterRule(RegisterRuleCommand request)
         {
             return await Mediator.Send(request);

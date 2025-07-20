@@ -110,11 +110,86 @@
             基础资料/组织管理
             </summary>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.OrgController.AddHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.AddHierarchyScope.AddHierarchyScopeCommand)">
+        <member name="M:系统基础数据.Controllers.v1.OrgController.AddEnterpriseOrDepartment(MOM.Application.Features.HierarchyScope.Commands.AddEnterpriseOrDepartment.AddEnterpriseOrDepartmentCommand)">
             <summary>
-            添加组织
+            添加企业/部门
             </summary>
-            <param name="request"></param>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.UpdateEnterpriseOrDepartment(MOM.Application.Features.HierarchyScope.Commands.UpdateEnterpriseOrDepartment.UpdateEnterpriseOrDepartmentCommand)">
+            <summary>
+            修改企业/部门
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.DeleteHierarchyScope(MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope.DeleteHierarchyScopeCommand)">
+            <summary>
+            删除组织
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.GetEnterpriseTable(MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery)">
+            <summary>
+            查询企业列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.GetDepartmentTable(MOM.Application.Features.HierarchyScope.Queries.GetDepartmentTable.GetDepartmentTableQuery)">
+            <summary>
+            查询部门列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.GetFactoryTable(MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery)">
+            <summary>
+            查询工厂列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.AddFactory(MOM.Application.Features.HierarchyScope.Commands.AddFactory.AddFactoryCommand)">
+            <summary>
+            添加工厂
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.UpdateFactory(MOM.Application.Features.HierarchyScope.Commands.UpdateFactory.UpdateFactoryCommand)">
+            <summary>
+            修改工厂
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="T:系统基础数据.Controllers.v1.PermissionController">
+            <summary>
+            系统管理/权限配置
+            </summary>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.PermissionController.SettingPermission(MOM.Application.Features.Permission.Commands.PersonnelSettingPermission.PersonnelSettingPermissionCommand)">
+            <summary>
+            给人配置基本特殊指定权限
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.PermissionController.SettingPermission(MOM.Application.Features.Permission.Commands.OrgSettingPermission.OrgSettingPermissionCommand)">
+            <summary>
+            给组织结构配置基本权限
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.PermissionController.SettingPermission(MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission.PersonnelClassSettingPermissionCommand)">
+            <summary>
+            给职位/班组配置基本权限
+            </summary>
+            <param name="command"></param>
             <returns></returns>
         </member>
         <member name="T:系统基础数据.Controllers.v1.PositionController">
@@ -135,7 +210,7 @@
             <param name="query"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.PositionController.Add(MOM.Application.Features.PersonnelClass.Commands.AddPsitoion.AddPositionCommand)">
+        <member name="M:系统基础数据.Controllers.v1.PositionController.Add(MOM.Application.Features.PersonnelClass.Commands.AddPositoion.AddPositionCommand)">
             <summary>
             新增职位
             </summary>
@@ -149,16 +224,9 @@
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.PositionController.Delete(MOM.Application.Features.PersonnelClass.Commands.DeletePosition.DeletePersonnelClassCommand)">
+        <member name="M:系统基础数据.Controllers.v1.PositionController.Delete(MOM.Application.Features.PersonnelClass.Commands.DeletePersonnelClass.DeletePersonnelClassCommand)">
             <summary>
             删除职位
-            </summary>
-            <param name="command"></param>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.PositionController.SettingPermission(MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission.PersonnelClassSettingPermissionCommand)">
-            <summary>
-            给职位配置基本权限
             </summary>
             <param name="command"></param>
             <returns></returns>
@@ -174,7 +242,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.TeamController.GetPaged(MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition.GetPagedTeamQuery)">
+        <member name="M:系统基础数据.Controllers.v1.TeamController.GetPaged(MOM.Application.Features.PersonnelClass.Queries.GetPagedTeam.GetPagedTeamQuery)">
             <summary>
             查询班组列表
             </summary>
@@ -195,16 +263,9 @@
             <param name="command"></param>
             <returns></returns>
         </member>
-        <member name="M:系统基础数据.Controllers.v1.TeamController.Delete(MOM.Application.Features.PersonnelClass.Commands.DeletePosition.DeletePersonnelClassCommand)">
+        <member name="M:系统基础数据.Controllers.v1.TeamController.Delete(MOM.Application.Features.PersonnelClass.Commands.DeletePersonnelClass.DeletePersonnelClassCommand)">
             <summary>
             删除班组
-            </summary>
-            <param name="command"></param>
-            <returns></returns>
-        </member>
-        <member name="M:系统基础数据.Controllers.v1.TeamController.SettingPermission(MOM.Application.Features.Permission.Commands.PersonnelClassSettingPermission.PersonnelClassSettingPermissionCommand)">
-            <summary>
-            给班组配置基本权限
             </summary>
             <param name="command"></param>
             <returns></returns>

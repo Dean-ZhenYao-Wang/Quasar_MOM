@@ -15,7 +15,7 @@ namespace MOM.Application.Features.Permission.Commands.AddButton
             }
             var addButton = request.ToButton();
             await buttonRepository.AddAsync(addButton);
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

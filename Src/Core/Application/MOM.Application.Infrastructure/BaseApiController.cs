@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using MOM.Application.Infrastructure.Attribute;
 using MOM.Application.Infrastructure.Filters;
 
 namespace MOM.Application.Infrastructure

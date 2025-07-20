@@ -182,12 +182,17 @@ public abstract class HierarchyScopeRelationship<TSource, TTarget> : BasicRelati
     /// <param name="sourceDtId">源数字孪生唯一标识符</param>
     /// <param name="targetDtId">目标数字孪生唯一标识符</param>
     /// <param name="depth">深度</param>
-    public void InitializeFromTwins(Guid sourceDtId, Guid targetDtId, int depth)
+    /// <param name="name">Target是什么</param>
+    public void InitializeFromTwins(Guid sourceDtId, Guid targetDtId, int depth, string? name = null)
     {
         SourceId = sourceDtId;
         TargetId = targetDtId;
         Id = $"{sourceDtId}-{targetDtId}";
         Depth = depth;
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            Name = name;
+        }
     }
 
     /// <summary>

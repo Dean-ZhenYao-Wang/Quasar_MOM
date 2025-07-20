@@ -20,7 +20,7 @@ namespace MOM.Application.Features.Permission.Commands.UpdateMenu
                 throw new ApplicationException("菜单编号必须唯一");
 
             menu.Update(request.Id, request.Name, request.Path, request.Description, request.Icon, request.Hidden, request.AlwaysShow, request.Depth);
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

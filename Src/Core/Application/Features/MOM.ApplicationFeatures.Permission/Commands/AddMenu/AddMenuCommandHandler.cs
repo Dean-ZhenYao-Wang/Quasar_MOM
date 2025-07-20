@@ -13,7 +13,7 @@ namespace MOM.Application.Features.Permission.Commands.AddMenu
                 throw new ApplicationException("菜单编号必须唯一");
             var addMenu = request.ToMenu();
             await menuRepository.AddAsync(addMenu);
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

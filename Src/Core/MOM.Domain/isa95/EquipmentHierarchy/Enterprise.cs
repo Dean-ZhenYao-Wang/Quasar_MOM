@@ -10,10 +10,9 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
     [Table(nameof(Enterprise))]
     public partial class Enterprise : SiteAsset, IEquatable<Enterprise>
     {
-        public Enterprise(string id, string name, string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null)
-            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Enterprise,id, name, address, description, active)
+        public Enterprise(string id, string name, string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null, Guid? sourceDtId = null)
+            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Enterprise,id, name, description, active, address, responsibleDtId, sourceDtId)
         {
-            this.ResponsibleDtId = responsibleDtId;
         }
 
         public override bool Equals(object? obj)

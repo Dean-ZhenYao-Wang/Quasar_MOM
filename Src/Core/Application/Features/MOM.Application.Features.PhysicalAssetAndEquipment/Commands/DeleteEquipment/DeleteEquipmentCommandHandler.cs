@@ -18,7 +18,7 @@ namespace MOM.Application.Features.PhysicalAssetAndEquipment.Commands.DeleteEqui
                     unitOfWork.DbContext.Set<EquipmentDefinedByRelationship>()
                         .Where(x => request.DtIds.Contains(x.SourceId) || request.DtIds.Contains(x.TargetId))
                 );
-                await unitOfWork.SaveChangesAsync();
+                
                 await transaction.CommitAsync();
                 return BaseResult.Ok();
 

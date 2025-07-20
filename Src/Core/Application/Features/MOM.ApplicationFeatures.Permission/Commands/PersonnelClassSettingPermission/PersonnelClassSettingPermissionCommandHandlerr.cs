@@ -24,7 +24,7 @@ namespace MOM.Application.Features.Permission.Commands.PersonnelClassSettingPerm
                 List<string> bNotInA = request.menuButtonIds.Except(dbMenuButtonIds).ToList();
                 await personnelClassPermissionRepository.AddRangeAsync(bNotInA, request.Owner);
             }
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

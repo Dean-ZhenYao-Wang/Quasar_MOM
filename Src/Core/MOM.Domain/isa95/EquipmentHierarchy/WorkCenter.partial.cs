@@ -8,7 +8,7 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 {
     public partial class WorkCenter
     {
-        public WorkCenter(HierarchyScopeEquipmentLevel equipmentLevel, string id, string name, string address = "", string description = "", bool active = false, Guid? responsibleDtId = null) : base(equipmentLevel, id, name, address, description, active)
+        public WorkCenter(string id, string name, Common.EnumType.HierarchyScopeEquipmentLevel equipmentLevel = HierarchyScopeEquipmentLevel.Work_Center,  string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null, Guid? sourceDtId = null) : base(equipmentLevel, id, name, description, active, address, responsibleDtId, sourceDtId)
         {
             ResponsibleDtId = responsibleDtId;
         }

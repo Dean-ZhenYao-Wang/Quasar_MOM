@@ -2,8 +2,7 @@
 {
     public partial class ProcessCell
     {
-        public ProcessCell(string id, string name, string address = "", string description = "", bool active = false, Guid? responsibleDtId = null)
-            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Process_Cell, id, name, address, description, active, responsibleDtId)
+        public ProcessCell(string id, string name, string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null, Guid? sourceDtId = null) : base( id, name, Common.EnumType.HierarchyScopeEquipmentLevel.Process_Cell, description, active, address, responsibleDtId, sourceDtId)
         {
         }
     }

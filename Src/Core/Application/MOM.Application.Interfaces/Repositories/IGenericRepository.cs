@@ -13,13 +13,13 @@ namespace MOM.Application.Interfaces.Repositories
 
         Task AddAsync(T entity);
 
-        void Update(T entity);
+        Task UpdateAsync(T entity);
 
-        void Delete(T entity);
+        Task DeleteAsync(T entity);
 
         Task<IEnumerable<T>> GetByIdsAsync<TKey>(IEnumerable<TKey> ids) where TKey : notnull;
 
-        void DeleteRange(IEnumerable<T> entities);
+        Task DeleteRangeAsync(IEnumerable<T> entities);
 
         IQueryable<T> Where(Expression<Func<T, bool>> predicate);
 
@@ -31,7 +31,6 @@ namespace MOM.Application.Interfaces.Repositories
 
         IQueryable<T> AsNoTracking();
 
-        Task<int> SaveChangesAsync();
         Task DeleteRangeAsync<TKey>(IEnumerable<TKey> keys);
     }
 }

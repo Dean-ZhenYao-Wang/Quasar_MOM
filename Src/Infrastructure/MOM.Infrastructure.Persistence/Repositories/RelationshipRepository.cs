@@ -309,36 +309,19 @@ namespace MOM.Infrastructure.Persistence.Repositories
            where TSource : class
            where TTarget : HierarchyScope
     {
-        /// <summary>
-        /// 获取指定节点往上第N级的节点，如果不存在则返回NULL
-        /// </summary>
-        /// <param name="currentNodeDtId"></param>
-        /// <param name="depth">深度/距离 0：返回自身的DtId，1：返回父级DtId,以此类推</param>
-        /// <returns>上级节点的DtId</returns>
-        public async Task<Guid?> GetSourceDtId(Guid currentNodeDtId, int depth)
+        public async Task<Guid?> GetSourceDtIdAsync(Guid currentNodeDtId, int depth)
         {
             return await this.Where(m => m.TargetId == currentNodeDtId && m.Depth == depth)
                .Select(m => m.SourceId)
                .FirstOrDefaultAsync();
         }
 
-        /// <summary>
-        /// 获取指定节点是那一级的，根级别是0
-        /// </summary>
-        /// <param name="currentNodeDtId"></param>
-        /// <returns>级别</returns>
-        public async Task<int?> GetLevel(Guid currentNodeDtId)
+        public async Task<int?> GetLevelAsync(Guid currentNodeDtId)
         {
-            return await this.GetDepth(currentNodeDtId, null);
+            return await this.GetDepthAsync(currentNodeDtId, null);
         }
 
-        /// <summary>
-        /// 查询指定节点到它某个祖先节点的距离
-        /// </summary>
-        /// <param name="currentNodeDtId"></param>
-        /// <param name="parentDtId"></param>
-        /// <returns>距离，如果 parentDtId 并不是其祖先节点则返回 null</returns>
-        public async Task<int?> GetDepth(Guid currentNodeDtId, Guid? parentDtId)
+        public async Task<int?> GetDepthAsync(Guid currentNodeDtId, Guid? parentDtId)
         {
             // 获取当前节点到指定父节点的距离
             var distance = await this.Where(m => m.TargetId == currentNodeDtId && m.SourceId == parentDtId)
@@ -347,61 +330,35 @@ namespace MOM.Infrastructure.Persistence.Repositories
             return distance?.Depth;
         }
 
-        /// <summary>
-        /// 获取指定节点往下的第N级节点列表
-        /// </summary>
-        /// <param name="currentDtId"></param>
-        /// <param name="depth">往下级数 0：自己、1：子节点；2、子节点的子节点，以此类推</param>
-        /// <returns></returns>
-        public async Task<List<TTarget>> GetSubLayer(Guid currentDtId, int depth)
+        public async Task<List<TTarget>> GetSubLayerAsync(Guid currentDtId, int depth)
         {
             return await this.Where(m => m.SourceId == currentDtId && m.Depth == depth)
                 .Select(m => m.Target)
                 .ToListAsync();
         }
 
-        /// <summary>
-        /// 获取直接下级列表
-        /// </summary>
-        /// <param name="currentNodeDtId">要获取谁的直接下级列表</param>
-        /// <returns></returns>
-        public async Task<List<TTarget>> GetChildren(Guid currentNodeDtId)
+        public async Task<List<TTarget>> GetChildrenAsync(Guid currentNodeDtId)
         {
-            return await this.GetSubLayer(currentNodeDtId, 1);
+            return await this.GetSubLayerAsync(currentNodeDtId, 1);
         }
 
-        /// <summary>
-        /// 获取所有下级列表（包括直接下级和间接下级）
-        /// </summary>
-        /// <param name="currentNodeDtId"></param>
-        /// <returns>返回结果顺序不做保证</returns>
-        public async Task<List<TTarget>> GetTree(Guid currentNodeDtId)
+        public async Task<List<TTarget>> GetTreeAsync(Guid currentNodeDtId)
         {
             return await this.Where(m => m.SourceId == currentNodeDtId)
                 .Select(m => m.Target)
                 .ToListAsync();
         }
-
-        /// <summary>
-        /// 获取根节点到此节点（含）路径上的所有的节点名称。
-        /// </summary>
-        /// <param name="parentDtId"></param>
-        /// <returns>节点列表，越上级的节点在列表中的位置越靠前</returns>
         public async Task<string> GetPathAsync(Guid currentDtId)
         {
-            return string.Join("/", await this.DbSet.Where(m => m.TargetId == currentDtId && m.SourceId != null)
+            return string.Join("/", await this.DbSet
+                .Include(m => m.Target)
+                .Where(m => m.TargetId == currentDtId && m.SourceId != null)
                 .OrderByDescending(m => m.Depth)
-                .Select(m => EF.Property<string>(m,"Name"))
+                .Select(m => m.Target.Name)
                 .ToListAsync());
         }
 
-        /// <summary>
-        /// 获取指定分类（含）到其某个的上级分类（不含）之间的所有分类的对象。
-        /// 如果上级分类不存在，或是上级分类不是指定分类的上级，则返回空列表
-        /// </summary>
-        /// <param name="parentDtId">上级节点</param>
-        /// <returns>节点列表，越靠上的节点在列表中的位置越靠前</returns>
-        public async Task<string> GetPath(Guid currentDtId, Guid parentDtId)
+        public async Task<string> GetPathAsync(Guid currentDtId, Guid parentDtId)
         {
             return string.Join("/", await this.Where(m => m.TargetId == currentDtId
             && m.Depth < (this.Where(d => d.TargetId == currentDtId
@@ -411,28 +368,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 .ToListAsync());
         }
 
-        /// <summary>
-        /// 将一个分类移动到目标分类下面（成为其子分类）。被移动分类的子类将自动上浮
-        /// （成为指定分类父类的子分类），即使目标是指定分类原本的父类。
-        /// <para>
-        /// 例如下图（省略根分类）：
-        /// </para>
-        /// <code>
-        ///       1                                    1
-        ///       |                                  / | \
-        ///       2                                 3  4  5
-        ///     / | \         (id=2).moveTo(7)           / \
-        ///    3  4  5       ----------------->         6   7
-        ///         / \                                /  / | \
-        ///       6    7                              8  9  10 2
-        ///      /    /  \
-        ///     8    9    10
-        /// </code>
-        /// </summary>
-        /// <param name="newParent">目标分类的id</param>
-        /// <exception cref="ArgumentException">如果 target 所表示的分类不存在或是自身</exception>
-
-        public async Task MoveTo(Guid? currentDtId, Guid? newParentDtId)
+        public async Task MoveToAsync(Guid? currentDtId, Guid? newParentDtId, string name = null)
         {
             if (currentDtId == null)
             {
@@ -444,35 +380,11 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 throw new Exception("不能移动到自己下面");
             }
 
-            await this.MoveSubTree(currentDtId.Value, await this.GetSourceDtId(currentDtId.Value, 1));
-            await this.MoveNode(currentDtId.Value, newParentDtId);
+            await this.MoveSubTreeAsync(currentDtId.Value, await this.GetSourceDtIdAsync(currentDtId.Value, 1), name);
+            await this.MoveNodeAsync(currentDtId.Value, newParentDtId, name);
         }
 
-        /// <summary>
-        /// 将一个分类移动到目标分类下面（成为其子分类），被移动分类的子分类也会随着移动。
-        /// 如果目标分类是被移动分类的子类，则先将目标分类（连带子类）移动到被移动分类原来的
-        /// 位置，再移动需要被移动的分类。
-        /// <para>
-        /// 例如下图（省略根分类）：
-        /// </para>
-        /// <code>
-        ///       1                                      1
-        ///       |                                      |
-        ///       2                                      7
-        ///     / | \        (id=2).moveTreeTo(7)      / | \
-        ///    3  4  5      -------------------->     9  10  2
-        ///         / \                                  / | \
-        ///       6    7                                3  4  5
-        ///      /    /  \                                    |
-        ///     8    9    10                                  6
-        ///                                                    |
-        ///                                                    8
-        /// </code>
-        /// </summary>
-        /// <param name="newParent">目标分类的</param>
-        /// <exception cref="ArgumentException">如果 target 所表示的分类不存在或是自身</exception>
-
-        public async Task MoveTreeTo(Guid? currentDtId, Guid? newParentDtId)
+        public async Task MoveTreeToAsync(Guid? currentDtId, Guid? newParentDtId, string name = null)
         {
             if (currentDtId == null)
             {
@@ -480,7 +392,7 @@ namespace MOM.Infrastructure.Persistence.Repositories
             }
 
             // 移动分移到自己子树下和无关节点下两种情况
-            var distance = await this.GetDepth(newParentDtId == null ? Guid.Empty : newParentDtId.Value, currentDtId);
+            var distance = await this.GetDepthAsync(newParentDtId == null ? Guid.Empty : newParentDtId.Value, currentDtId);
 
             if (distance == null)
             {
@@ -493,49 +405,44 @@ namespace MOM.Infrastructure.Persistence.Repositories
             else
             {
                 // 如果移动的目标是其子类，需要先把子类移动到本类的位置
-                Guid? parent = await this.GetSourceDtId(currentDtId.Value, 1);
-                await this.MoveNode(newParentDtId.Value, parent);
-                await this.MoveSubTree(newParentDtId.Value, newParentDtId);
+                Guid? parent = await this.GetSourceDtIdAsync(currentDtId.Value, 1);
+                await this.MoveNodeAsync(newParentDtId.Value, parent, name);
+                await this.MoveSubTreeAsync(newParentDtId.Value, newParentDtId, name);
             }
 
-            await this.MoveNode(currentDtId.Value, newParentDtId);
-            await this.MoveSubTree(currentDtId.Value, currentDtId);
+            await this.MoveNodeAsync(currentDtId.Value, newParentDtId, name);
+            await this.MoveSubTreeAsync(currentDtId.Value, currentDtId, name);
         }
 
-        /// <summary>
-        /// 将指定节点移动到某节点下面，该方法不修改子节点的相关记录，
-        /// 为了保证数据的完整性，需要与 moveSubTree() 方法配合使用。
-        /// </summary>
-        /// <param name="id">指定节点的 ID</param>
-        /// <param name="parent">新的父节点 ID</param>
-        public async Task MoveNode(Guid currentDtId, Guid? parentDtId)
+        public async Task MoveNodeAsync(Guid currentDtId, Guid? parentDtId, string name = null)
         {
-            await this.DeletePath(currentDtId);
+            await this.DeletePathAsync(currentDtId);
             if (parentDtId != null)
-                await this.InsertPath(currentDtId, parentDtId.Value);
-            await this.InsertSelfLink(currentDtId);
+                await this.InsertPathAsync(currentDtId, parentDtId.Value, name);
+            await this.InsertSelfLinkAsync(currentDtId, name);
         }
 
-        public async Task AddAsync(Guid currentDtId, Guid? parentDtId)
+        public async Task AddAsync(Guid currentDtId, Guid? parentDtId, string name = null)
         {
-            await this.MoveNode(currentDtId, parentDtId);
+            await this.MoveNodeAsync(currentDtId, parentDtId, name);
         }
 
-        public async Task InsertSelfLink(Guid currentDtId)
+        public async Task InsertSelfLinkAsync(Guid currentDtId, string name = null)
         {
             var relationship = new T();
-            relationship.InitializeFromTwins(currentDtId, currentDtId, 0);
+            relationship.InitializeFromTwins(currentDtId, currentDtId, 0, name);
             await this.AddAsync(relationship);
         }
 
-        public async Task InsertPath(Guid currenDtId, Guid parentDtId)
+        public async Task InsertPathAsync(Guid currenDtId, Guid parentDtId, string name = null)
         {
             var sources = await this.Where(m => m.TargetId == parentDtId)
                 .Select(m => new
                 {
                     SourceId = m.SourceId,
                     TargetId = currenDtId,
-                    Depth = m.Depth + 1
+                    Depth = m.Depth + 1,
+                    Name = m.Name
                 })
                 .ToListAsync();
 
@@ -544,51 +451,45 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 var relationships = sources.Select(s =>
                 {
                     var relationship = new T();
-                    relationship.InitializeFromTwins(s.SourceId, s.TargetId, s.Depth);
+                    relationship.InitializeFromTwins(s.SourceId, s.TargetId, s.Depth, string.IsNullOrWhiteSpace(name) ? s.Name : name);
                     return relationship;
                 }).ToList();
                 await this.AddRangeAsync(relationships);
             }
         }
 
-        public async Task<int> DeletePath(Guid currentDtId)
+        public async Task<int> DeletePathAsync(Guid currentDtId)
         {
-            var newParent = await this.GetSourceDtId(currentDtId, 1);
+            var newParent = await this.GetSourceDtIdAsync(currentDtId, 1);
             await this.Where(m => m.TargetId == currentDtId)
                   .ExecuteUpdateAsync(m => m.SetProperty(p => p.IsDelete, true));
-            await MoveSubTree(currentDtId, newParent);
+            await MoveSubTreeAsync(currentDtId, newParent);
             return 1;
         }
 
-        public async Task<int> DeletePath(IEnumerable<Guid> currentDtIds)
+        public async Task<int> DeletePathAsync(IEnumerable<Guid> currentDtIds)
         {
             foreach (var currentDtId in currentDtIds)
             {
-                var newParent = await this.GetSourceDtId(currentDtId, 1);
+                var newParent = await this.GetSourceDtIdAsync(currentDtId, 1);
                 await this.Where(m => m.TargetId == currentDtId)
                       .ExecuteUpdateAsync(m => m.SetProperty(p => p.IsDelete, true));
-                await MoveSubTree(currentDtId, newParent);
+                await MoveSubTreeAsync(currentDtId, newParent);
             }
             return 1;
         }
 
-        /// <summary>
-        /// 将指定节点的所有子树移动到某节点下
-        /// 如果两个参数相同，则相当于重建子树，用于父节点移动后更新路径
-        /// </summary>
-        /// <param name="id">指定节点的 ID</param>
-        /// <param name="parent">新的父节点 ID</param>
-        public async Task MoveSubTree(Guid currenDtId, Guid? parentDtId)
+        public async Task MoveSubTreeAsync(Guid currenDtId, Guid? parentDtId, string name = null)
         {
-            var subs = await this.SelectSubId(currenDtId);
+            var subs = await this.SelectSubIdAsync(currenDtId);
             foreach (Guid sub in subs)
             {
-                await this.MoveNode(sub, parentDtId);
-                await this.MoveSubTree(sub, sub);
+                await this.MoveNodeAsync(sub, parentDtId, name);
+                await this.MoveSubTreeAsync(sub, sub, name);
             }
         }
 
-        public async Task<List<Guid>> SelectSubId(Guid? parentDtId)
+        public async Task<List<Guid>> SelectSubIdAsync(Guid? parentDtId)
         {
             return await this.Where(m => m.SourceId == parentDtId && m.Depth == 1)
                 .Select(m => m.TargetId)

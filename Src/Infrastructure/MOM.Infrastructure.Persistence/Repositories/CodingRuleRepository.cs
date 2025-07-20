@@ -41,7 +41,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
                 sequence.CurrentValue += 1;
             }
 
-            await SaveChangesAsync();
             return sequence.CurrentValue;
         }
 

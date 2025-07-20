@@ -75,31 +75,37 @@ namespace MOM.Infrastructure.Persistence.Repositories
         public virtual async Task AddAsync(T entity)
         {
             await dbContext.Set<T>().AddAsync(entity);
+            await dbContext.SaveChangesAsync();
         }
 
         public virtual async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entitys)
         {
             await dbContext.Set<T>().AddRangeAsync(entitys);
+            await dbContext.SaveChangesAsync();
             return entitys;
         }
 
-        public void Update(T entity)
+        public virtual async Task UpdateAsync(T entity)
         {
             dbContext.Entry(entity).State = EntityState.Modified;
+            await dbContext.SaveChangesAsync();
         }
 
-        public void Delete(T entity)
+        public virtual async Task DeleteAsync(T entity)
         {
             dbContext.Set<T>().Remove(entity);
+            await dbContext.SaveChangesAsync();
         }
 
-        public void DeleteRange(IEnumerable<T> entities)
+        public virtual async Task DeleteRangeAsync(IEnumerable<T> entities)
         {
             dbContext.Set<T>().RemoveRange(entities);
+            await dbContext.SaveChangesAsync();
         }
-        public async Task DeleteRangeAsync<TKey>(IEnumerable<TKey> keys)
+        public virtual async Task DeleteRangeAsync<TKey>(IEnumerable<TKey> keys)
         {
             dbContext.Set<T>().RemoveRange(await GetByIdsAsync(keys));
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<PagedResponse<TEntity>> PagedAsync<TEntity>(IQueryable<TEntity> query, int pageNumber, int pageSize) where TEntity : class
@@ -128,11 +134,6 @@ namespace MOM.Infrastructure.Persistence.Repositories
         public IIncludableQueryable<T, TProperty> Include<TProperty>(Expression<Func<T, TProperty>> path)
         {
             return dbContext.Set<T>().Include(path);
-        }
-
-        public async Task<int> SaveChangesAsync()
-        {
-            return await dbContext.SaveChangesAsync();
         }
     }
 }

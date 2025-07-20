@@ -18,7 +18,7 @@ namespace MOM.Application.Features.PhysicalAssetAndEquipment.Commands.UpdateEqui
             }
             old.Update(request);
 
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
 

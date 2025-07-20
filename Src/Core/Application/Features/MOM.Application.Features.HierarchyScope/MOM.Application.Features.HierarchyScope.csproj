@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Queries\GetOrgTable\**" />
+    <EmbeddedResource Remove="Queries\GetOrgTable\**" />
+    <None Remove="Queries\GetOrgTable\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="MOM.Application.Features.HierarchyScope.xml" />
   </ItemGroup>
 

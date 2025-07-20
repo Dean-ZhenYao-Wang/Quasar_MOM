@@ -17,8 +17,8 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdatePosition
             position.Id = request.Id;
             position.Remark = request.Remark;
             // Update other properties as needed
-            personnelClassRepository.Update(position);
-            await unitOfWork.SaveChangesAsync();
+            await personnelClassRepository.UpdateAsync(position);
+
             return BaseResult.Ok();
         }
     }

@@ -29,7 +29,6 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// <summary>
         /// 负责人
         /// </summary>
-        [JsonIgnore]
         [ForeignKey(nameof(ResponsibleDtId))]
         public virtual Person? Responsible { get; set; }
 
@@ -91,10 +90,10 @@ namespace MOM.Domain.isa95.CommonObjectModels
         /// <param name="active"></param>
         /// <param name="description"></param>
         /// <param name="sourceDtId"></param>
-        public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string Id, string name, string? address = null, bool active = false, string? description = null, Guid? sourceDtId = null)
+        public HierarchyScope(HierarchyScopeEquipmentLevel equipmentLevel, string id, string name, string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null, Guid? sourceDtId = null)
         {
             EquipmentLevel = equipmentLevel;
-            this.Id = Id;
+            this.Id = id;
             this.Name = name;
             Address = address;
             Description = description;
@@ -144,7 +143,7 @@ namespace MOM.Domain.isa95.CommonObjectModels
         }
 
         /// <summary>
-        /// 更新
+        /// 基类的更新
         /// </summary>
         /// <param name="hierarchyScope"></param>
         public virtual void Update(HierarchyScope hierarchyScope)
@@ -336,9 +335,9 @@ namespace MOM.Domain.isa95.CommonObjectModels
         }
 
 
-        public void AddChild(Guid targetDtId)
+        public void AddChild(Guid targetDtId, string name)
         {
-            this.Contains.Add(new Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship(this.DtId, targetDtId));
+            this.Contains.Add(new Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship(this.DtId, targetDtId) { Name = name });
         }
 
         public void DeleteChild(Guid targetDtId)

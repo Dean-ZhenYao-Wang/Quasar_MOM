@@ -52,7 +52,7 @@ namespace MOM.Application.Features.Permission.Commands.PersonnelSettingPermissio
                 }
             }
 
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

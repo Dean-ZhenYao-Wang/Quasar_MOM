@@ -23,7 +23,7 @@ namespace MOM.Application.Features.Personnel.Commands.ChangePassword
             {
                 return BaseResult.Failure(new Error(ErrorCode.FieldDataInvalid, "密码错误"));
             }
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

@@ -2,15 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MOM.Application.Features.PhysicalAssetAndEquipment.Commands.AddEquipment;
-using MOM.Application.Features.PhysicalAssetAndEquipment.Commands.AddEquipmentClass;
 using MOM.Application.Features.PhysicalAssetAndEquipment.Commands.DeleteEquipment;
-using MOM.Application.Features.PhysicalAssetAndEquipment.Commands.DeleteEquipmentClass;
 using MOM.Application.Features.PhysicalAssetAndEquipment.Commands.UpdateEquipment;
-using MOM.Application.Features.PhysicalAssetAndEquipment.Commands.UpdateEquipmentClass;
-using MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetIncludesRelations;
-using MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetIsMadeUpOf;
 using MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetPagedEquipment;
-using MOM.Application.Features.PhysicalAssetAndEquipment.Queries.GetPagedEquipmentClass;
 using MOM.Application.Infrastructure;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment;

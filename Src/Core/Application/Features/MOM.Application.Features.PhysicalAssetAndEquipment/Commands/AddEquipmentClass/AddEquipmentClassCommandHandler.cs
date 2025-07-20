@@ -21,7 +21,7 @@ namespace MOM.Application.Features.PhysicalAssetAndEquipment.Commands.AddEquipme
                     ? await mediator.Send(new GenerateCodeCommand { RuleId = "EquipmentClassId", ModelTypeName = " MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,MOM.Domain" })
                     : request.Id;
             await equipmentClassRepository.AddAsync(equipmentClass);
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

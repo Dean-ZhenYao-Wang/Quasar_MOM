@@ -9,6 +9,7 @@ using MOM.Application.Features.Personnel.Commands.UpdatePerson;
 using MOM.Application.Features.Personnel.Queries.GetPagedPerson;
 using MOM.Application.Features.Personnel.Queries.GetResponsibles;
 using MOM.Application.Infrastructure;
+using MOM.Application.Infrastructure.Attribute;
 using MOM.Application.Wrappers;
 using MOM.Domain.isa95.CommonObjectModels.Part2.Personnel;
 
@@ -58,6 +59,7 @@ namespace 人员认证管理.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
+        [Transactional]
         public async Task<BaseResult> Add(AddPersonCommand command)
         {
             var model = await Mediator.Send(command);
@@ -70,6 +72,7 @@ namespace 人员认证管理.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Transactional]
         public async Task<BaseResult> Delete(DeletePersonCommand command)
         {
             var deleteResoult = await Mediator.Send(command);
@@ -82,21 +85,11 @@ namespace 人员认证管理.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPut]
+        [Transactional]
         public async Task<BaseResult> Update(UpdatePersonCommand command)
         {
-            var updateResoult = await Mediator.Send(command);
-            return updateResoult;
-        }
-
-        /// <summary>
-        /// 给人配置基本特殊指定权限
-        /// </summary>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<BaseResult> SettingPermission(PersonnelSettingPermissionCommand command)
-        {
-            return await Mediator.Send(command);
+            var updateResult = await Mediator.Send(command);
+            return updateResult;
         }
     }
 }

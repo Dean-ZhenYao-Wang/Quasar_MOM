@@ -338,7 +338,7 @@
             禁用后，这将阻止跟踪和追溯、OEE 停机时间、SPC、设置和转换以及调度模块使用该区域及其下方的任何其他生产项目
             </summary>
         </member>
-        <member name="M:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.ToEnterprise">
+        <member name="M:MOM.Application.DTOs.HierarchyScope.Requests.OrgRequest.ToHierarchyScope">
              <summary>
             
              </summary>

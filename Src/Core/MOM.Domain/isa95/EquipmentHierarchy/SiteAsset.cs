@@ -9,7 +9,7 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 
     public abstract partial class SiteAsset : HierarchyScope, IEquatable<SiteAsset>
     {
-        public SiteAsset(HierarchyScopeEquipmentLevel equipmentLevel, string ID, string name, string? address = null, string? description = null, bool active = false) : base(equipmentLevel, ID, name, address, active, description)
+        public SiteAsset(HierarchyScopeEquipmentLevel equipmentLevel, string id, string name, string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null, Guid? sourceDtId = null) : base(equipmentLevel, id, name, description, active, address, responsibleDtId, sourceDtId)
         {
         }
         public override bool Equals(object? obj)

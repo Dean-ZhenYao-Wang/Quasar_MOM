@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MOM.Application.DTOs.HierarchyScope.Responses;
 using MOM.Application.Wrappers;
+using MOM.Domain.isa95.EquipmentHierarchy;
 
 namespace MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable
 {

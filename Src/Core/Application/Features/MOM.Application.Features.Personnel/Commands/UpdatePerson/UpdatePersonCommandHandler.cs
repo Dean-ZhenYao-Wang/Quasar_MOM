@@ -37,7 +37,7 @@ namespace MOM.Application.Features.Personnel.Commands.UpdatePerson
 
             person.Update(request.UserName, request.Name, request.WorkStatus, request.Email, request.PhoneNumber, request.TeamDtId, request.OrgDtId, request.PositionDtId_List, request.Description);
 
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

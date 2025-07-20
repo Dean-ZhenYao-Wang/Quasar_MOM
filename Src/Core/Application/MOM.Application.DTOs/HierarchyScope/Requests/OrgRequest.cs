@@ -53,24 +53,25 @@ namespace MOM.Application.DTOs.HierarchyScope.Requests
         /// <summary>
         ///
         /// </summary>
-        //public virtual Domain.isa95.CommonObjectModels.HierarchyScope ToHierarchyScope()
-        //{
-        //    Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope = new Domain.isa95.CommonObjectModels.HierarchyScope(this.EquipmentLevel, this.Id, this.Name, this.Address, this.Active, this.Description, this.SourceDtId);
-        //    hierarchyScope.ResponsibleDtId = this.ResponsibleDtId;
-        //    hierarchyScope.Address = this.Address;
-        //    return hierarchyScope;
-        //}
+        public virtual Domain.isa95.CommonObjectModels.HierarchyScope ToHierarchyScope()
+        {
+            Domain.isa95.CommonObjectModels.HierarchyScope hierarchyScope = new Domain.isa95.CommonObjectModels.HierarchyScope(this.EquipmentLevel, this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId, this.SourceDtId);
+            return hierarchyScope;
+        }
         public virtual Domain.isa95.EquipmentHierarchy.Enterprise ToEnterprise()
         {
-            Enterprise enterprise = new Enterprise(this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId);
-            enterprise.SourceDtId = this.SourceDtId;
+            Enterprise enterprise = new Enterprise(this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId, this.SourceDtId);
             return enterprise;
         }
         public virtual Domain.isa95.EquipmentHierarchy.Area ToArea()
         {
-            Area area = new Area(this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId);
-            area.SourceDtId = this.SourceDtId;
+            Area area = new Area(this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId, this.SourceDtId);
             return area;
+        }
+        public virtual Domain.isa95.EquipmentHierarchy.Site ToSite()
+        {
+            Site site = new Site(this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId, this.SourceDtId);
+            return site;
         }
     }
 }

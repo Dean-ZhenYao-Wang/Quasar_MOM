@@ -11,8 +11,8 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
     public partial class Site : SiteAsset, IEquatable<Site>
     {
 
-        public Site(string id, string name, string description = "", bool active = false, string address = "", Guid? responsibleDtId = null)
-            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Site,id, name, address, description, active)
+        public Site(string id, string name, string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null, Guid? sourceDtId = null)
+            : base(Common.EnumType.HierarchyScopeEquipmentLevel.Site, id, name, description, active, address, responsibleDtId, sourceDtId)
         {
             this.ResponsibleDtId = responsibleDtId;
         }

@@ -61,7 +61,7 @@ namespace MOM.Application.Features.Personnel.Commands.Authentication
             user.SecurityStamp = Guid.NewGuid().ToString();
 
             var returnModel = await GetAuthenticationResponse(user);
-            await unitOfWork.SaveChangesAsync();
+            
             return returnModel;
         }
 

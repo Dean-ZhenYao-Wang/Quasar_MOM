@@ -6,6 +6,7 @@ using MOM.Application.DTOs.Account.Responses;
 using MOM.Application.Features.Personnel.Commands.Authentication;
 using MOM.Application.Features.Personnel.Commands.ChangePassword;
 using MOM.Application.Infrastructure;
+using MOM.Application.Infrastructure.Attribute;
 using MOM.Application.Wrappers;
 
 namespace 人员认证管理.Controllers.v1
@@ -20,6 +21,7 @@ namespace 人员认证管理.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
+        [Transactional]
         [AllowAnonymous]
         public async Task<BaseResult<AuthenticationResponse>> Authenticate(AuthenticationCommand command)
         {
@@ -33,6 +35,7 @@ namespace 人员认证管理.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPut]
+        [Transactional]
         public async Task<BaseResult> ChangePassword(ChangePasswordCommand command)
         {
             var result = await Mediator.Send(command);

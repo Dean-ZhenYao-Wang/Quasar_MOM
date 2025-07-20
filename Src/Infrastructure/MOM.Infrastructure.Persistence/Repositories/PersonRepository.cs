@@ -62,17 +62,8 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
         public async Task DeleteAsync(Guid[] dtIds)
         {
-            using var tran = dbContext.Database.BeginTransaction();
-            try
-            {
-                await this.ExecuteUpdateAsync(m => dtIds.Contains(m.DtId), m => m.SetProperty(m => m.IsDelete, true));
-                await dbContext.Set<PersonDefinedByRelationship>().Where(m => dtIds.Contains(m.TargetId)).ExecuteUpdateAsync(m => m.SetProperty(p => p.IsDelete, true));
-                await tran.CommitAsync();
-            }
-            catch (Exception ex)
-            {
-                await tran.RollbackAsync();
-            }
+            await this.ExecuteUpdateAsync(m => dtIds.Contains(m.DtId), m => m.SetProperty(m => m.IsDelete, true));
+            await dbContext.Set<PersonDefinedByRelationship>().Where(m => dtIds.Contains(m.TargetId)).ExecuteUpdateAsync(m => m.SetProperty(p => p.IsDelete, true));
         }
     }
 }

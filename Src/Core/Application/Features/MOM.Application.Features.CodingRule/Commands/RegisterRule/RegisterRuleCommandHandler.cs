@@ -16,12 +16,11 @@ namespace MOM.Application.Features.CodingRule.Commands.RegisterRule
 
             if (existing != null)
             {
-                codingRuleRepository.Delete(existing);
+               await codingRuleRepository.DeleteAsync(existing);
             }
 
             await codingRuleRepository.AddAsync(request.ToCodingRule());
 
-            await codingRuleRepository.SaveChangesAsync();
             return BaseResult.Ok();
         }
     }

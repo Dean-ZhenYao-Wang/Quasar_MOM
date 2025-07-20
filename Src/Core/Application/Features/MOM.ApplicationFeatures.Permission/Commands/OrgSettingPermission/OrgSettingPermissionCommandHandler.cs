@@ -24,7 +24,7 @@ namespace MOM.Application.Features.Permission.Commands.OrgSettingPermission
                 List<string> bNotInA = request.menuButtonIds.Except(dbMenuButtonIds).ToList();
                 await orgPermissionRepository.AddRangeAsync(bNotInA, request.Owner);
             }
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

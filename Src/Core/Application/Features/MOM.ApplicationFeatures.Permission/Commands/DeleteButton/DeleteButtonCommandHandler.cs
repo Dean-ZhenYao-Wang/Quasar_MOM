@@ -9,17 +9,7 @@ namespace MOM.Application.Features.Permission.Commands.DeleteButton
     {
         public async Task<BaseResult> Handle(DeleteButtonCommand request, CancellationToken cancellationToken)
         {
-            using var transaction = await unitOfWork.BeginTransactionAsync();
-            try
-            {
-                await buttonRepository.DeleteAsync(request.DtIds);
-                await unitOfWork.CommitAsync();
-            }
-            catch (Exception ex)
-            {
-                await unitOfWork.RollbackAsync();
-                throw new ApplicationException(ex.Message, ex.InnerException);
-            }
+            await buttonRepository.DeleteAsync(request.DtIds);
             return BaseResult.Ok();
         }
     }

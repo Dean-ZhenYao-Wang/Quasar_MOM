@@ -12,6 +12,7 @@ using MOM.Application.Features.Permission.Queries.GetButtonList;
 using MOM.Application.Features.Permission.Queries.GetMenuList;
 using MOM.Application.Features.Permission.Queries.GetMenuTree;
 using MOM.Application.Infrastructure;
+using MOM.Application.Infrastructure.Attribute;
 using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
@@ -38,6 +39,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
+        [Transactional]
         public async Task<BaseResult> AddMenu(AddMenuCommand command)
         {
             var model = await Mediator.Send(command);
@@ -49,6 +51,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
+        [Transactional]
         public async Task<BaseResult> AddButton(AddButtonCommand command)
         {
             var model = await Mediator.Send(command);
@@ -60,6 +63,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPut]
+        [Transactional]
         public async Task<BaseResult> UpdateMenu(UpdateMenuCommand command)
         {
             var model = await Mediator.Send(command);
@@ -71,6 +75,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPut]
+        [Transactional]
         public async Task<BaseResult> UpdateButton(UpdateButtonCommand command)
         {
             var model = await Mediator.Send(command);
@@ -82,6 +87,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Transactional]
         public async Task<BaseResult> DeleteMenu(DeleteMenuCommand command)
         {
             var model = await Mediator.Send(command);
@@ -93,6 +99,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Transactional]
         public async Task<BaseResult> DeleteButton(DeleteButtonCommand command)
         {
             var model = await Mediator.Send(command);

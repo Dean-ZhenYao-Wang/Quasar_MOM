@@ -9,20 +9,8 @@ namespace MOM.Application.Features.Permission.Commands.DeleteMenu
     {
         public async Task<BaseResult> Handle(DeleteMenuCommand request, CancellationToken cancellationToken)
         {
-            using var transaction = await unitOfWork.BeginTransactionAsync();
-            try
-            {
-                await menuRepository.DeleteAsync(request.DtIds);
-                await buttonRepository.DeleteAsync(dtIds: await menuRepository.GetButtonDtIdsAsync(request.DtIds));
-
-                await unitOfWork.CommitAsync();
-            }
-            catch (Exception ex)
-            {
-                // 回滚事务
-                await unitOfWork.RollbackAsync();
-                throw new ApplicationException(ex.Message, ex.InnerException);
-            }
+            await menuRepository.DeleteAsync(request.DtIds);
+            await buttonRepository.DeleteAsync(dtIds: await menuRepository.GetButtonDtIdsAsync(request.DtIds));
             return BaseResult.Ok();
         }
     }

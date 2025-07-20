@@ -4,8 +4,7 @@ namespace MOM.Domain.isa95.EquipmentHierarchy
 {
     public partial class WorkCell
     {
-        public WorkCell(string id, string name, string address = "", string? description = null, bool active = false, Guid? responsibleDtId = null)
-           : base(HierarchyScopeEquipmentLevel.Work_Cell, id, name, address, description, active, responsibleDtId)
+        public WorkCell(string id, string name, string? description = null, bool active = false, string? address = null, Guid? responsibleDtId = null, Guid? sourceDtId = null) : base(id, name, Common.EnumType.HierarchyScopeEquipmentLevel.Work_Cell, description, active, address, responsibleDtId, sourceDtId)
         {
         }
     }

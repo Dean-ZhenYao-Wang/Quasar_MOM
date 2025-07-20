@@ -14,7 +14,7 @@ namespace MOM.Domain.Common.EnumType
         Enterprise,
 
         /// <summary>
-        /// 场所/工厂
+        /// 工厂
         /// </summary>
         [EnumMember(Value = "Site"), Display(Name = "Site")]
         Site,

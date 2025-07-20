@@ -37,6 +37,7 @@ namespace MOM.Application.Infrastructure.Middlewares
                         try
                         {
                             await _next(context);
+                            await unitOfWork.DbContext.SaveChangesAsync();
                             await unitOfWork.CommitAsync();
                         }
                         catch

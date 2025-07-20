@@ -23,7 +23,7 @@ namespace MOM.Application.Features.PhysicalAssetAndEquipment.Commands.UpdateEqui
             old.HierarchyScopeRelDtId = request.HierarchyScopeRelDtId;
             old.EquipmentLevel = request.EquipmentLevel;
 
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

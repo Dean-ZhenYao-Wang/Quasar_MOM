@@ -9,20 +9,9 @@ namespace MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope
     {
         public async Task<BaseResult> Handle(DeleteHierarchyScopeCommand command, CancellationToken cancellationToken)
         {
-            using var transaction = await unitOfWork.BeginTransactionAsync();
-            try
-            {
-                await hierarchyScopeRepository.DeleteAsync(command.DtIds);
+            await hierarchyScopeRepository.DeleteAsync(command.DtIds);
 
-                await hierarchyScopeContainsRelationshipRepository.DeletePath(command.DtIds);
-
-                await unitOfWork.CommitAsync();
-            }
-            catch (Exception ex)
-            {
-                await unitOfWork.RollbackAsync();
-                throw new ApplicationException(ex.Message, ex.InnerException);
-            }
+            await hierarchyScopeContainsRelationshipRepository.DeletePathAsync(command.DtIds);
 
             return BaseResult.Ok();
         }

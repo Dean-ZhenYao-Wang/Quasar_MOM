@@ -163,7 +163,7 @@ namespace MOM.Infrastructure.Persistence
             // 尝试添加关系仓储程序集（如果存在）
             try
             {
-                var relationshipAssembly = Assembly.GetAssembly(typeof(HierarchyScopeContainsRelationshipRepository));
+                var relationshipAssembly = Assembly.GetAssembly(typeof(ServiceRegistration));
                 if (relationshipAssembly != null)
                     assemblies.Add(relationshipAssembly);
             }

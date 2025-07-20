@@ -12,24 +12,13 @@ namespace MOM.Application.Features.Personnel.Commands.AddPerson
     {
         public async Task<BaseResult> Handle(AddPersonCommand request, CancellationToken cancellationToken)
         {
-            using var transaction = await unitOfWork.BeginTransactionAsync();
-            try
-            {
-                Person addPerson = request.ToPerson();
-                addPerson.Id =
-                    string.IsNullOrWhiteSpace(request.Id)
-                    ? await mediator.Send(new GenerateCodeCommand { RuleId = "UserId", ModelTypeName = "MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain" })
-                    : request.Id;
-                addPerson.PassWord = "123456".Sha1Signature().Sha1Signature(addPerson.DtId.ToString());
-                await personRepository.AddAsync(addPerson);
-                await unitOfWork.SaveChangesAsync();
-                await transaction.CommitAsync();
-            }
-            catch (Exception)
-            {
-                await transaction.RollbackAsync();
-                throw;
-            }
+            Person addPerson = request.ToPerson();
+            addPerson.Id =
+                string.IsNullOrWhiteSpace(request.Id)
+                ? await mediator.Send(new GenerateCodeCommand { RuleId = "UserId", ModelTypeName = "MOM.Domain.isa95.CommonObjectModels.Part2.Personnel.Person,MOM.Domain" })
+                : request.Id;
+            addPerson.PassWord = "123456".Sha1Signature().Sha1Signature(addPerson.DtId.ToString());
+            await personRepository.AddAsync(addPerson);
             return BaseResult.Ok();
         }
     }

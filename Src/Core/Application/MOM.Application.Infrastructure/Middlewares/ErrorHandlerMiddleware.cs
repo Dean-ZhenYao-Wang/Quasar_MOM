@@ -34,18 +34,18 @@ namespace MOM.Application.Infrastructure.Middlewares
                     case KeyNotFoundException e:
                         // not found error
                         response.StatusCode = (int)HttpStatusCode.NotFound;
-                        responseModel.AddError(new Error(ErrorCode.NotFound, e.Message));
+                        responseModel.AddError(new Error(ErrorCode.NotFound, error.InnerException == null ? error.Message : error.InnerException.Message));
                         break;
 
                     case CommandExecutionException e:
                         response.StatusCode = 999;
-                        responseModel.AddError(new Error(ErrorCode.Exception, e.ErrorCode, e.InnerException!.Message));
+                        responseModel.AddError(new Error(ErrorCode.Exception, e.ErrorCode, error.InnerException == null ? error.Message : error.InnerException.Message));
                         break;
 
                     default:
                         // unhandled error
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        responseModel.AddError(new Error(ErrorCode.Exception, error.Message));
+                        responseModel.AddError(new Error(ErrorCode.Exception, error.InnerException == null ? error.Message : error.InnerException.Message));
                         break;
                 }
                 var result = JsonSerializer.Serialize(responseModel, new JsonSerializerOptions

@@ -7,8 +7,6 @@ namespace MOM.Application.Infrastructure
     {
         DbContext DbContext { get;  }
 
-        Task<bool> SaveChangesAsync();
-
         Task<IDbContextTransaction> BeginTransactionAsync();
 
         Task CommitAsync();

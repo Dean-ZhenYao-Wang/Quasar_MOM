@@ -146,6 +146,8 @@ builder.Services.AddAnyCors();
 builder.Services.AddCustomLocalization(builder.Configuration);
 builder.Services.AddHealthChecks();
 builder.Services.AddOrchardCore().AddMvc();
+
+
 builder.Services.AddMediatR(cfg =>
 {
     var moduleAssemblies = AppDomain.CurrentDomain.GetAssemblies()
@@ -159,12 +161,10 @@ builder.Services.AddMediatR(cfg =>
 });
 // 注册管道（Program.cs）
 builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(CommandExceptionPipeline<,>));
-
 Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
     .CreateLogger();
 builder.Host.UseSerilog(Log.Logger);
-
 var app = builder.Build();
 // 添加路由调试中间件
 app.Use(async (context, next) =>

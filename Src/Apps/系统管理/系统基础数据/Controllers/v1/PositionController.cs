@@ -9,6 +9,7 @@ using MOM.Application.Features.PersonnelClass.Commands.UpdatePosition;
 using MOM.Application.Features.PersonnelClass.Queries.GetPagedPosition;
 using MOM.Application.Features.PersonnelClass.Queries.GetPositionSelectOptions;
 using MOM.Application.Infrastructure;
+using MOM.Application.Infrastructure.Attribute;
 using MOM.Application.Wrappers;
 
 namespace 系统基础数据.Controllers.v1
@@ -47,6 +48,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
+        [Transactional]
         public async Task<BaseResult> Add(AddPositionCommand command)
         {
             return await Mediator.Send(command);
@@ -58,6 +60,7 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
+        [Transactional]
         public async Task<BaseResult> Update(UpdatePositionCommand command)
         {
             return await Mediator.Send(command);
@@ -69,18 +72,8 @@ namespace 系统基础数据.Controllers.v1
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Transactional]
         public async Task<BaseResult> Delete(DeletePersonnelClassCommand command)
-        {
-            return await Mediator.Send(command);
-        }
-
-        /// <summary>
-        /// 给职位配置基本权限
-        /// </summary>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<BaseResult> SettingPermission(PersonnelClassSettingPermissionCommand command)
         {
             return await Mediator.Send(command);
         }

@@ -12,16 +12,6 @@ namespace MOM.Infrastructure.Persistence.Contexts
         private IDbContextTransaction tran;
         private bool _disposed;
 
-        public async Task<bool> SaveChangesAsync()
-        {
-            return await dbContext.SaveChangesAsync() > 0;
-        }
-
-        public bool SaveChanges()
-        {
-            return dbContext.SaveChanges() > 0;
-        }
-
         public async Task<IDbContextTransaction> BeginTransactionAsync()
         {
             tran = await dbContext.Database.BeginTransactionAsync();

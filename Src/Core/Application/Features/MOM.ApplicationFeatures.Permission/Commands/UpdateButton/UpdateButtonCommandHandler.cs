@@ -20,7 +20,7 @@ namespace MOM.Application.Features.Permission.Commands.UpdateButton
                 throw new ApplicationException("按钮编号必须唯一");
 
             button.Update(request.Id, request.Name, request.Icon);
-            await unitOfWork.SaveChangesAsync();
+            
             return BaseResult.Ok();
         }
     }

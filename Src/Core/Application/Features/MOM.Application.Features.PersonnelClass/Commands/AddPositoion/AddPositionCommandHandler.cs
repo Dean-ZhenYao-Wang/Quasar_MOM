@@ -12,7 +12,6 @@ namespace MOM.Application.Features.PersonnelClass.Commands.AddPositoion
             Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass addClass = request.ToPersonnelClass("职位");
 
             await personnelClassRepository.AddAsync(addClass);
-            await unitOfWork.SaveChangesAsync();
             return BaseResult.Ok();
         }
     }
