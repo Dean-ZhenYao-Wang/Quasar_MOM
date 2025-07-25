@@ -12,16 +12,16 @@ namespace MOM.Application.Features.HierarchyScope.Commands.AddWorkshop
     /// <param name="hierarchyScopeRepository"></param>
     /// <param name="hierarchyScopeContainsRelationshipRepository"></param>
     /// <param name="mediator"></param>
-    public class AddWorkshopCommandHandler(IHierarchyScopeRepository hierarchyScopeRepository, IHierarchyScopeContainsRelationshipRepository hierarchyScopeContainsRelationshipRepository, IMediator mediator) : IRequestHandler<AddWorkshopCommand, BaseResult>
+    public class AddAreaCommandHandler(IHierarchyScopeRepository hierarchyScopeRepository, IHierarchyScopeContainsRelationshipRepository hierarchyScopeContainsRelationshipRepository, IMediator mediator) : IRequestHandler<AddAreapCommand, BaseResult>
     {
-        public async Task<BaseResult> Handle(AddWorkshopCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResult> Handle(AddAreapCommand request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(request.Id))
                 request.Id = await mediator.Send(new GenerateCodeCommand { RuleId = "HierarchyScopeId", ModelTypeName = "MOM.Domain.isa95.CommonObjectModels.HierarchyScope,MOM.Domain" });
 
             Area area = request.ToArea();
             await hierarchyScopeRepository.AddAreaAsync(area);
-            await hierarchyScopeContainsRelationshipRepository.AddAsync(area.DtId, request.SourceDtId, "车间");
+            await hierarchyScopeContainsRelationshipRepository.AddAsync(area.DtId, request.SourceDtId, "区域/车间");
             area.FullPath = await hierarchyScopeContainsRelationshipRepository.GetPathAsync(area.DtId);
             return BaseResult.Ok();
         }

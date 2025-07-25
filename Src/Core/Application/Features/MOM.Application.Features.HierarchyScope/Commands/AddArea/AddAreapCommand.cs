@@ -7,7 +7,7 @@ namespace MOM.Application.Features.HierarchyScope.Commands.AddWorkshop
     /// <summary>
     /// 
     /// </summary>
-    public class AddWorkshopCommand : AddOrgRequest, IRequest<BaseResult>
+    public class AddAreapCommand : AddOrgRequest, IRequest<BaseResult>
     {
     }
 }

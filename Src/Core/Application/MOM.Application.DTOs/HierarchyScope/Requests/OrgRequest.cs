@@ -73,5 +73,16 @@ namespace MOM.Application.DTOs.HierarchyScope.Requests
             Site site = new Site(this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId, this.SourceDtId);
             return site;
         }
+        public virtual Domain.isa95.EquipmentHierarchy.ProductionLine ToProductionLine()
+        {
+            ProductionLine productionLine = new ProductionLine(this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId, this.SourceDtId);
+            return productionLine;
+        }
+        public virtual Domain.isa95.EquipmentHierarchy.ProductionUnit ToProductionUnit()
+        {
+            ProductionUnit productionUnit = new ProductionUnit(this.Id, this.Name, this.Description, this.Active, this.Address, this.ResponsibleDtId, this.SourceDtId);
+            return productionUnit;
+        }
+
     }
 }

@@ -7,7 +7,7 @@ namespace MOM.Application.Features.HierarchyScope.Commands.UpdateWorkshop
     /// <summary>
     /// 
     /// </summary>
-    public class UpdateWorkshopCommand : UpdateOrgRequest, IRequest<BaseResult>
+    public class UpdateAreaCommand : UpdateOrgRequest, IRequest<BaseResult>
     {
     }
 }

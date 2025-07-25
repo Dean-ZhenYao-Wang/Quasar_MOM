@@ -16,7 +16,7 @@ namespace MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable
         /// </summary>
         public async Task<PagedResponse<OrgResponse>> Handle(GetEnterpriseTableQuery request, CancellationToken cancellationToken)
         {
-            return await hierarchyScopeRepository.GetEnterpriseListAsync(request.Id, request.Name, request.Page, request.PageSize);
+            return await hierarchyScopeRepository.GetEnterpriseListAsync(request.SourceDtId, request.Id, request.Name, request.Page, request.PageSize);
         }
     }
 }

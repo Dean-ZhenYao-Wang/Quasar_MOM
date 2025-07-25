@@ -4,14 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.HierarchyScope.Responses;
 using MOM.Application.Features.HierarchyScope.Commands.AddEnterpriseOrDepartment;
 using MOM.Application.Features.HierarchyScope.Commands.AddFactory;
+using MOM.Application.Features.HierarchyScope.Commands.AddProductionLine;
+using MOM.Application.Features.HierarchyScope.Commands.AddProductionUnit;
 using MOM.Application.Features.HierarchyScope.Commands.AddWorkshop;
 using MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope;
 using MOM.Application.Features.HierarchyScope.Commands.UpdateEnterpriseOrDepartment;
 using MOM.Application.Features.HierarchyScope.Commands.UpdateFactory;
+using MOM.Application.Features.HierarchyScope.Commands.UpdateProductionLine;
+using MOM.Application.Features.HierarchyScope.Commands.UpdateProductionUnit;
 using MOM.Application.Features.HierarchyScope.Commands.UpdateWorkshop;
 using MOM.Application.Features.HierarchyScope.Queries.GetDepartmentTable;
 using MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable;
 using MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable;
+using MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable;
 using MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable;
 using MOM.Application.Infrastructure;
 using MOM.Application.Infrastructure.Attribute;
@@ -122,37 +127,109 @@ namespace 系统基础数据.Controllers.v1
             return model;
         }
         /// <summary>
-        /// 查询车间列表
+        /// 查询区域/车间列表
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PagedResponse<OrgResponse>> GetWorkshopTable([FromQuery] GetWorkshopTableQuery query)
+        public async Task<PagedResponse<OrgResponse>> GetAreaTable([FromQuery] GetAreaTableQuery query)
         {
             return await Mediator.Send(query);
         }
 
         /// <summary>
-        /// 添加工厂
+        /// 添加区域/车间
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
         [Transactional]
-        public async Task<BaseResult> AddWorkshop(AddWorkshopCommand command)
+        public async Task<BaseResult> AddArea(AddAreapCommand command)
         {
             var model = await Mediator.Send(command);
             return model;
         }
 
         /// <summary>
-        /// 修改工厂
+        /// 修改区域/车间
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPut]
         [Transactional]
-        public async Task<BaseResult> UpdateWorkshop(UpdateWorkshopCommand command)
+        public async Task<BaseResult> UpdateArea(UpdateAreaCommand command)
+        {
+            var model = await Mediator.Send(command);
+            return model;
+        }
+        /// <summary>
+        /// 查询产线列表
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedResponse<OrgResponse>> GetProductionLineTable([FromQuery] GetProductionLineTableQuery query)
+        {
+            return await Mediator.Send(query);
+        }
+
+        /// <summary>
+        /// 添加产线
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Transactional]
+        public async Task<BaseResult> AddProductionLine(AddProductionLineCommand command)
+        {
+            var model = await Mediator.Send(command);
+            return model;
+        }
+
+        /// <summary>
+        /// 修改产线
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Transactional]
+        public async Task<BaseResult> UpdateProductionLine(UpdateProductionLineCommand command)
+        {
+            var model = await Mediator.Send(command);
+            return model;
+        }
+        /// <summary>
+        /// 查询工段/工位列表
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedResponse<OrgResponse>> GetProductionUnitTable([FromQuery] GetProductionUnitTableQuery query)
+        {
+            return await Mediator.Send(query);
+        }
+
+        /// <summary>
+        /// 添加工段/工位
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Transactional]
+        public async Task<BaseResult> AddProductionUnit(AddProductionUnitCommand command)
+        {
+            var model = await Mediator.Send(command);
+            return model;
+        }
+
+        /// <summary>
+        /// 修改工段/工位
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Transactional]
+        public async Task<BaseResult> UpdateProductionUnit(UpdateProductionUnitCommand command)
         {
             var model = await Mediator.Send(command);
             return model;

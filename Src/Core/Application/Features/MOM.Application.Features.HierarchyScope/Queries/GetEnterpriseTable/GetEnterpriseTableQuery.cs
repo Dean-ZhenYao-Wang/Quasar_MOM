@@ -11,6 +11,10 @@ namespace MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable
     public class GetEnterpriseTableQuery : PaginationRequestParameter,IRequest<PagedResponse<OrgResponse>>
     {
         /// <summary>
+        /// 上级编号
+        /// </summary>
+        public Guid? SourceDtId { get; set; }
+        /// <summary>
         /// 编号
         /// </summary>
         public string? Id { get; set; }

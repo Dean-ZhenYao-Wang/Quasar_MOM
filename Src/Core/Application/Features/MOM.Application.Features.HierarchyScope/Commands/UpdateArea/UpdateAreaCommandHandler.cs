@@ -13,9 +13,9 @@ namespace MOM.Application.Features.HierarchyScope.Commands.UpdateWorkshop
     /// <param name="hierarchyScopeContainsRelationshipRepository"></param>
     /// <param name="translator"></param>
     /// <param name="unitOfWork"></param>
-    public class UpdateWorkshopCommandHandler(IHierarchyScopeRepository hierarchyScopeRepository, IHierarchyScopeContainsRelationshipRepository hierarchyScopeContainsRelationshipRepository, ITranslator translator, IUnitOfWork unitOfWork) : IRequestHandler<UpdateWorkshopCommand, BaseResult>
+    public class UpdateAreaCommandHandler(IHierarchyScopeRepository hierarchyScopeRepository, IHierarchyScopeContainsRelationshipRepository hierarchyScopeContainsRelationshipRepository, ITranslator translator, IUnitOfWork unitOfWork) : IRequestHandler<UpdateAreaCommand, BaseResult>
     {
-        public async Task<BaseResult> Handle(UpdateWorkshopCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResult> Handle(UpdateAreaCommand request, CancellationToken cancellationToken)
         {
             Area area = await hierarchyScopeRepository.GetAreaByKeyAsync(request.DtId);
             if (area is null)
@@ -27,7 +27,7 @@ namespace MOM.Application.Features.HierarchyScope.Commands.UpdateWorkshop
                 area.FullPath = area.Name;
             if (area.SourceDtId != null)
             {
-                await hierarchyScopeContainsRelationshipRepository.MoveNodeAsync(request.DtId, request.SourceDtId, "车间");
+                await hierarchyScopeContainsRelationshipRepository.MoveNodeAsync(request.DtId, request.SourceDtId, "区域/车间");
                 area.FullPath = await hierarchyScopeContainsRelationshipRepository.GetPathAsync(area.DtId);
             }
             return BaseResult.Ok();

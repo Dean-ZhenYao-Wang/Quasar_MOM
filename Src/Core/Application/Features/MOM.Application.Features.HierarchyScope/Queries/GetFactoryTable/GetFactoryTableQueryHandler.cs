@@ -15,7 +15,7 @@ namespace MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable
         /// </summary>
         public async Task<PagedResponse<OrgResponse>> Handle(GetFactoryTableQuery request, CancellationToken cancellationToken)
         {
-            return await hierarchyScopeRepository.GetFactoryListAsync(request.Id, request.Name, request.Page, request.PageSize);
+            return await hierarchyScopeRepository.GetFactoryListAsync(request.SourceDtId,request.Id, request.Name, request.Page, request.PageSize);
         }
     }
 }
