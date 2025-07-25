@@ -1,14 +1,13 @@
 ﻿using MediatR;
 using MOM.Application.DTOs.HierarchyScope.Responses;
 using MOM.Application.Wrappers;
-using MOM.Domain.isa95.EquipmentHierarchy;
 
-namespace MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable
+namespace MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable
 {
     /// <summary>
     ///
     /// </summary>
-    public class GetEnterpriseTableQuery : PaginationRequestParameter,IRequest<PagedResponse<OrgResponse>>
+    public class GetWorkshopTableQuery : PaginationRequestParameter, IRequest<PagedResponse<OrgResponse>>
     {
         /// <summary>
         /// 编号
@@ -19,5 +18,9 @@ namespace MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable
         /// 名称
         /// </summary>
         public string? Name { get; set; }
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public bool? Active { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MOM.Application.Features.HierarchyScope.Commands.UpdateWorkshop;
 using MOM.Application.Infrastructure;
 using MOM.Application.Interfaces.Repositories;
 using MOM.Application.Wrappers;

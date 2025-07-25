@@ -4,12 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using MOM.Application.DTOs.HierarchyScope.Responses;
 using MOM.Application.Features.HierarchyScope.Commands.AddEnterpriseOrDepartment;
 using MOM.Application.Features.HierarchyScope.Commands.AddFactory;
+using MOM.Application.Features.HierarchyScope.Commands.AddWorkshop;
 using MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope;
 using MOM.Application.Features.HierarchyScope.Commands.UpdateEnterpriseOrDepartment;
 using MOM.Application.Features.HierarchyScope.Commands.UpdateFactory;
+using MOM.Application.Features.HierarchyScope.Commands.UpdateWorkshop;
 using MOM.Application.Features.HierarchyScope.Queries.GetDepartmentTable;
 using MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable;
 using MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable;
+using MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable;
 using MOM.Application.Infrastructure;
 using MOM.Application.Infrastructure.Attribute;
 using MOM.Application.Wrappers;
@@ -114,6 +117,42 @@ namespace 系统基础数据.Controllers.v1
         [HttpPut]
         [Transactional]
         public async Task<BaseResult> UpdateFactory(UpdateFactoryCommand command)
+        {
+            var model = await Mediator.Send(command);
+            return model;
+        }
+        /// <summary>
+        /// 查询车间列表
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<PagedResponse<OrgResponse>> GetWorkshopTable([FromQuery] GetWorkshopTableQuery query)
+        {
+            return await Mediator.Send(query);
+        }
+
+        /// <summary>
+        /// 添加工厂
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Transactional]
+        public async Task<BaseResult> AddWorkshop(AddWorkshopCommand command)
+        {
+            var model = await Mediator.Send(command);
+            return model;
+        }
+
+        /// <summary>
+        /// 修改工厂
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Transactional]
+        public async Task<BaseResult> UpdateWorkshop(UpdateWorkshopCommand command)
         {
             var model = await Mediator.Send(command);
             return model;

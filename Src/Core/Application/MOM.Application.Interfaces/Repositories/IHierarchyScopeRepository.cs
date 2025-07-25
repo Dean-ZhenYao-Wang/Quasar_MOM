@@ -8,6 +8,7 @@ namespace MOM.Application.Interfaces.Repositories
 {
     public interface IHierarchyScopeRepository : IGenericRepository<HierarchyScope>
     {
+        Task<EntityEntry<Area>> AddAreaAsync(Area area);
         Task<EntityEntry<Area>> AddDepartmentAsync(Area area);
         Task<EntityEntry<Enterprise>> AddEnterpriseAsync(Enterprise enterprise);
         Task<EntityEntry<Site>> AddFactoryAsync(Site site);
@@ -25,5 +26,6 @@ namespace MOM.Application.Interfaces.Repositories
         Task<PagedResponse<OrgResponse>> GetEnterpriseListAsync(string? id, string? name, int page, int pageSize);
         Task<PagedResponse<OrgResponse>> GetFactoryListAsync(string? id, string? name, int page, int pageSize);
         Task<Site> GetSiteByKeyAsync(Guid dtId);
+        Task<PagedResponse<OrgResponse>> GetWorkshopListAsync(string? id, string? name, bool? active, int page, int pageSize);
     }
 }

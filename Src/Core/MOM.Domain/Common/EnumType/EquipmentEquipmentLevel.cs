@@ -20,7 +20,7 @@ namespace MOM.Domain.Common.EnumType
         Site,
 
         /// <summary>
-        /// 区域/车间
+        /// 区域/部门/车间
         /// </summary>
         [EnumMember(Value = "Area"), Display(Name = "Area")]
         Area,

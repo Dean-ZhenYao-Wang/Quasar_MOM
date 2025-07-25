@@ -12,7 +12,6 @@ namespace MOM.Application.Features.HierarchyScope.Commands.AddFactory
     /// </summary>
     /// <param name="hierarchyScopeRepository"></param>
     /// <param name="hierarchyScopeContainsRelationshipRepository"></param>
-    /// <param name="unitOfWork"></param>
     /// <param name="mediator"></param>
     public class AddFactoryCommandHandler(IHierarchyScopeRepository hierarchyScopeRepository, IHierarchyScopeContainsRelationshipRepository hierarchyScopeContainsRelationshipRepository, IMediator mediator) : IRequestHandler<AddFactoryCommand, BaseResult>
     {
@@ -28,4 +27,5 @@ namespace MOM.Application.Features.HierarchyScope.Commands.AddFactory
             return BaseResult.Ok();
         }
     }
+
 }

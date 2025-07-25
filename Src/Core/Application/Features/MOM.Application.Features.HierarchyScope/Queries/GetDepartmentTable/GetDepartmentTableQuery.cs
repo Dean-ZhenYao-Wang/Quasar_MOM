@@ -9,7 +9,7 @@ namespace MOM.Application.Features.HierarchyScope.Queries.GetDepartmentTable
     /// <summary>
     ///
     /// </summary>
-    public class GetDepartmentTableQuery : IRequest<PagedResponse<OrgResponse>>
+    public class GetDepartmentTableQuery : PaginationRequestParameter, IRequest<PagedResponse<OrgResponse>>
     {
         /// <summary>
         /// 上级编号
@@ -24,15 +24,5 @@ namespace MOM.Application.Features.HierarchyScope.Queries.GetDepartmentTable
         /// 名称
         /// </summary>
         public string? Name { get; set; }
-
-        /// <summary>
-        /// 要查看的页数
-        /// </summary>
-        public int Page { get; set; }
-
-        /// <summary>
-        /// 每页展示条数
-        /// </summary>
-        public int PageSize { get; set; }
     }
 }

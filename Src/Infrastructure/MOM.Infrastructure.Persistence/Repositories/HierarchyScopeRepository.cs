@@ -113,7 +113,40 @@ namespace MOM.Infrastructure.Persistence.Repositories
 
         public async Task<Site> GetSiteByKeyAsync(Guid dtId)
         {
-            return await this._dbContext.Site.Where(m=>m.DtId == dtId).SingleOrDefaultAsync();
+            return await this._dbContext.Site.Where(m => m.DtId == dtId).SingleOrDefaultAsync();
+        }
+
+        public async Task<EntityEntry<Area>> AddAreaAsync(Area area)
+        {
+            var model = await this._dbContext.Area.AddAsync(area);
+            return model;
+        }
+
+        public async Task<PagedResponse<OrgResponse>> GetWorkshopListAsync(string id, string name, bool? active, int page, int pageSize)
+        {
+            var query = this._dbContext.Site
+                .Include(t => t.Responsible)
+                .Include(t => t.Source)
+                .Where(m => m.EquipmentLevel == HierarchyScopeEquipmentLevel.Site)
+                .Where(m => !string.IsNullOrWhiteSpace(id) ? m.Id.Contains(id) : true)
+                .Where(m => !string.IsNullOrWhiteSpace(name) ? m.Name.Contains(name) : true)
+                .Where(m => active.HasValue ? m.Active == active.Value : true)
+                .Select(m => new OrgResponse
+                {
+                    Active = m.Active,
+                    Address = m.Address,
+                    Description = m.Description,
+                    SourceName = m.Source.Name,
+                    SourceDtId = m.SourceDtId,
+                    DtId = m.DtId,
+                    EquipmentLevel = m.EquipmentLevel,
+                    FullPath = m.FullPath,
+                    Id = m.Id,
+                    Name = m.Name,
+                    ResponsibleDtId = m.ResponsibleDtId,
+                    ResponsibleName = m.ResponsibleName,
+                });
+            return await this.PagedAsync(query, page, pageSize);
         }
     }
 }

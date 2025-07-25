@@ -8,14 +8,5 @@
             : base(Common.EnumType.HierarchyScopeEquipmentLevel.Area, id, name, description, active, address, responsibleDtId, sourceDtId)
         {
         }
-
-        public void Update(string name, string description, bool active, string address, Guid? responsibleDtId = null)
-        {
-            this.Id = name;
-            this.Description = description;
-            this.Active = active;
-            this.Address = address;
-            this.ResponsibleDtId = responsibleDtId;
-        }
     }
 }
