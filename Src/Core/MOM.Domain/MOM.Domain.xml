@@ -392,7 +392,7 @@
         </member>
         <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Area">
             <summary>
-            区域/车间
+            区域/部门/车间
             </summary>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.EquipmentEquipmentLevel.Work_Center">

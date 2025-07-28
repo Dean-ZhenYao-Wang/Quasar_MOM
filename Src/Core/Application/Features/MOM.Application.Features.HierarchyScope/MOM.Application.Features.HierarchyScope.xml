@@ -4,6 +4,27 @@
         <name>MOM.Application.Features.HierarchyScope</name>
     </assembly>
     <members>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.AddWorkshop.AddAreaCommandHandler">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Commands.AddWorkshop.AddAreaCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeRepository,MOM.Application.Interfaces.Repositories.IHierarchyScopeContainsRelationshipRepository,MediatR.IMediator)">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="mediator"></param>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.AddWorkshop.AddAreapCommand">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:MOM.Application.Features.HierarchyScope.Commands.AddEnterpriseOrDepartment.AddEnterpriseOrDepartmentCommand">
              <summary>
             
@@ -20,7 +41,6 @@
             </summary>
             <param name="hierarchyScopeRepository"></param>
             <param name="hierarchyScopeContainsRelationshipRepository"></param>
-            <param name="unitOfWork"></param>
             <param name="mediator"></param>
         </member>
         <member name="M:MOM.Application.Features.HierarchyScope.Commands.AddFactory.AddFactoryCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeRepository,MOM.Application.Interfaces.Repositories.IHierarchyScopeContainsRelationshipRepository,MediatR.IMediator)">
@@ -29,7 +49,48 @@
             </summary>
             <param name="hierarchyScopeRepository"></param>
             <param name="hierarchyScopeContainsRelationshipRepository"></param>
-            <param name="unitOfWork"></param>
+            <param name="mediator"></param>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.AddProductionLine.AddProductionLineCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.AddProductionLine.AddProductionLineCommandHandler">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Commands.AddProductionLine.AddProductionLineCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeRepository,MOM.Application.Interfaces.Repositories.IHierarchyScopeContainsRelationshipRepository,MediatR.IMediator)">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="mediator"></param>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.AddProductionUnit.AddProductionUnitCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.AddProductionUnit.AddProductionUnitCommandHandler">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Commands.AddProductionUnit.AddProductionUnitCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeRepository,MOM.Application.Interfaces.Repositories.IHierarchyScopeContainsRelationshipRepository,MediatR.IMediator)">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
             <param name="mediator"></param>
         </member>
         <member name="T:MOM.Application.Features.HierarchyScope.Commands.DeleteHierarchyScope.DeleteHierarchyScopeCommand">
@@ -41,6 +102,29 @@
             <summary>
             要删除的组织DtId清单
             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.UpdateWorkshop.UpdateAreaCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.UpdateWorkshop.UpdateAreaCommandHandler">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="translator"></param>
+            <param name="unitOfWork"></param>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Commands.UpdateWorkshop.UpdateAreaCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeRepository,MOM.Application.Interfaces.Repositories.IHierarchyScopeContainsRelationshipRepository,MOM.Application.Wrappers.ITranslator,MOM.Application.Infrastructure.IUnitOfWork)">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="translator"></param>
+            <param name="unitOfWork"></param>
         </member>
         <member name="T:MOM.Application.Features.HierarchyScope.Commands.UpdateEnterpriseOrDepartment.UpdateEnterpriseOrDepartmentCommand">
              <summary>
@@ -70,6 +154,92 @@
             <param name="translator"></param>
             <param name="unitOfWork"></param>
         </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.UpdateProductionLine.UpdateProductionLineCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.UpdateProductionLine.UpdateProductionLineCommandHandler">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="translator"></param>
+            <param name="unitOfWork"></param>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Commands.UpdateProductionLine.UpdateProductionLineCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeRepository,MOM.Application.Interfaces.Repositories.IHierarchyScopeContainsRelationshipRepository,MOM.Application.Wrappers.ITranslator,MOM.Application.Infrastructure.IUnitOfWork)">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="translator"></param>
+            <param name="unitOfWork"></param>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.UpdateProductionUnit.UpdateProductionUnitCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Commands.UpdateProductionUnit.UpdateProductionUnitCommandHandler">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="translator"></param>
+            <param name="unitOfWork"></param>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Commands.UpdateProductionUnit.UpdateProductionUnitCommandHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeRepository,MOM.Application.Interfaces.Repositories.IHierarchyScopeContainsRelationshipRepository,MOM.Application.Wrappers.ITranslator,MOM.Application.Infrastructure.IUnitOfWork)">
+            <summary>
+            
+            </summary>
+            <param name="hierarchyScopeRepository"></param>
+            <param name="hierarchyScopeContainsRelationshipRepository"></param>
+            <param name="translator"></param>
+            <param name="unitOfWork"></param>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable.GetAreaTableQuery">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable.GetAreaTableQuery.SourceDtId">
+            <summary>
+            上级编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable.GetAreaTableQuery.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable.GetAreaTableQuery.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable.GetAreaTableQuery.Active">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable.GetWorkshopTableQueryHandler">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable.GetWorkshopTableQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeRepository)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable.GetWorkshopTableQueryHandler.Handle(MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable.GetAreaTableQuery,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+        </member>
         <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetDepartmentTable.GetDepartmentTableQuery">
              <summary>
             
@@ -88,16 +258,6 @@
         <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetDepartmentTable.GetDepartmentTableQuery.Name">
             <summary>
             名称
-            </summary>
-        </member>
-        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetDepartmentTable.GetDepartmentTableQuery.Page">
-            <summary>
-            要查看的页数
-            </summary>
-        </member>
-        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetDepartmentTable.GetDepartmentTableQuery.PageSize">
-            <summary>
-            每页展示条数
             </summary>
         </member>
         <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetDepartmentTable.GetDepartmentTableQueryHandler">
@@ -120,6 +280,11 @@
             
              </summary>
         </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery.SourceDtId">
+            <summary>
+            上级编号
+            </summary>
+        </member>
         <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery.Id">
             <summary>
             编号
@@ -128,16 +293,6 @@
         <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery.Name">
             <summary>
             名称
-            </summary>
-        </member>
-        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery.Page">
-            <summary>
-            要查看的页数
-            </summary>
-        </member>
-        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQuery.PageSize">
-            <summary>
-            每页展示条数
             </summary>
         </member>
         <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetEnterpriseTable.GetEnterpriseTableQueryHandler">
@@ -160,6 +315,11 @@
             
              </summary>
         </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery.SourceDtId">
+            <summary>
+            上级编号
+            </summary>
+        </member>
         <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery.Id">
             <summary>
             编号
@@ -168,16 +328,6 @@
         <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery.Name">
             <summary>
             名称
-            </summary>
-        </member>
-        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery.Page">
-            <summary>
-            要查看的页数
-            </summary>
-        </member>
-        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery.PageSize">
-            <summary>
-            每页展示条数
             </summary>
         </member>
         <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQueryHandler">
@@ -191,6 +341,86 @@
              </summary>
         </member>
         <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQueryHandler.Handle(MOM.Application.Features.HierarchyScope.Queries.GetFactoryTable.GetFactoryTableQuery,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionLineTableQuery">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionLineTableQuery.SourceDtId">
+            <summary>
+            上级编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionLineTableQuery.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionLineTableQuery.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionLineTableQuery.Active">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionLineTableQueryHandler">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionLineTableQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeRepository)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionLineTableQueryHandler.Handle(MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionLineTableQuery,System.Threading.CancellationToken)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionUnitTableQuery">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionUnitTableQuery.SourceDtId">
+            <summary>
+            上级编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionUnitTableQuery.Id">
+            <summary>
+            编号
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionUnitTableQuery.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionUnitTableQuery.Active">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="T:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionUnitTableQueryHandler">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionUnitTableQueryHandler.#ctor(MOM.Application.Interfaces.Repositories.IHierarchyScopeRepository)">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionUnitTableQueryHandler.Handle(MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionUnitTableQuery,System.Threading.CancellationToken)">
              <summary>
             
              </summary>

@@ -166,6 +166,69 @@
             <param name="command"></param>
             <returns></returns>
         </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.GetAreaTable(MOM.Application.Features.HierarchyScope.Queries.GetWorkshopTable.GetAreaTableQuery)">
+            <summary>
+            查询区域/车间列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.AddArea(MOM.Application.Features.HierarchyScope.Commands.AddWorkshop.AddAreapCommand)">
+            <summary>
+            添加区域/车间
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.UpdateArea(MOM.Application.Features.HierarchyScope.Commands.UpdateWorkshop.UpdateAreaCommand)">
+            <summary>
+            修改区域/车间
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.GetProductionLineTable(MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionLineTableQuery)">
+            <summary>
+            查询产线列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.AddProductionLine(MOM.Application.Features.HierarchyScope.Commands.AddProductionLine.AddProductionLineCommand)">
+            <summary>
+            添加产线
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.UpdateProductionLine(MOM.Application.Features.HierarchyScope.Commands.UpdateProductionLine.UpdateProductionLineCommand)">
+            <summary>
+            修改产线
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.GetProductionUnitTable(MOM.Application.Features.HierarchyScope.Queries.GetProductionLineTable.GetProductionUnitTableQuery)">
+            <summary>
+            查询工段/工位列表
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.AddProductionUnit(MOM.Application.Features.HierarchyScope.Commands.AddProductionUnit.AddProductionUnitCommand)">
+            <summary>
+            添加工段/工位
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:系统基础数据.Controllers.v1.OrgController.UpdateProductionUnit(MOM.Application.Features.HierarchyScope.Commands.UpdateProductionUnit.UpdateProductionUnitCommand)">
+            <summary>
+            修改工段/工位
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
         <member name="T:系统基础数据.Controllers.v1.PermissionController">
             <summary>
             系统管理/权限配置
