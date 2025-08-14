@@ -31,6 +31,7 @@
   <ItemGroup>
     <Folder Include="CodingRule\Responses\" />
     <Folder Include="MaterialClass\Responses\" />
+    <Folder Include="MaterialDefinition\Responses\" />
     <Folder Include="PhysicalAssetAndEquipment\Responses\" />
   </ItemGroup>
 

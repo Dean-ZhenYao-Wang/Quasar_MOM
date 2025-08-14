@@ -96,7 +96,11 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         /// 定义该装配关系的性质，是永久性的还是临时性的。
         /// </remarks>
         public MaterialDefinitionAssemblyRelationship? AssemblyRelationship { get; set; }
-
+        /// <summary>
+        /// 计量单位
+        /// </summary>
+        [Required]
+        public string Unity { get; set; }
 
 
         public MaterialDefinition(string ID, string description = "", MaterialDefinitionAssemblyType? assemblyType = null, MaterialDefinitionAssemblyRelationship? assemblyRelationship = null) : this()

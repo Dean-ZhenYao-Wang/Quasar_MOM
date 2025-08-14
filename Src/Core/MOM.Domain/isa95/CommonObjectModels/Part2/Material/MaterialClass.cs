@@ -23,7 +23,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         /// 父子关系
         /// <para>此物料类别包含其他物料类别的属性（即继承或复用其特性）。用于表达物料类之间的属性聚合或复用关系。</para>
         /// </remarks>
-        [JsonIgnore]
         public virtual List<MaterialClassIncludesPropertiesOfRelationship> IncludesPropertiesOf { get; set; } = new List<MaterialClassIncludesPropertiesOfRelationship>();
         /// <summary>
         /// 面分类 又称平行分类 物料模板采用面分类 https://zhuanlan.zhihu.com/p/496464306
@@ -33,7 +32,6 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         /// 表示父级物料类别由一个或多个子级物料类别作为组成部分构成。
         /// <para>例如：成品由半成品或原材料组装而成。</para>
         /// </remarks>
-        [JsonIgnore]
         public virtual List<MaterialClassIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<MaterialClassIsAssembledFromRelationship>();
         /// <summary>
         /// 该物料类的物料类属性。
