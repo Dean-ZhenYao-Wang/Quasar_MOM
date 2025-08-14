@@ -1,243 +1,243 @@
 {
-    "@context": "dtmi:dtdl:context;2",
-    "@id": "dtmi:digitaltwins:isa95:MaterialLot;1",
-    "@type": "Interface",
-    "displayName": "Material lot",
-    "description": "A uniquely identified specific amount of material, either countable or weighable shall be presented as a material lot. A material lot describes the planned or actual total quantity or amount of material available, its current state, and its specific property values",
-    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",
-    "extends": [
-        "dtmi:digitaltwins:isa95:Resource;1",
-        "dtmi:digitaltwins:isa95:TestableObject;1"
-    ],
-    "contents": [
-        {
-            "@type": "Relationship",
-            "name": "isAssembledFrom",
-            "displayName": "Is assembled from",
-            "description": "This material lot is part of the related object as the whole",
-            "target": "dtmi:digitaltwins:isa95:MaterialLot;1",
-            "comment": "Relationship type: Composition"
-        },
-        {
-            "@type": "Relationship",
-            "name": "hasValuesOf",
-            "displayName": "Has values of",
-            "description": "The material lot property(s) of this material lot",
-            "target": "dtmi:digitaltwins:isa95:MaterialLotProperty;1",
-            "comment": "Relationship type: Composition"
-        },
-        {
-            "@type": "Relationship",
-            "name": "definedBy",
-            "displayName": "Defined by",
-            "description": "The material definition that defines this material lot",
-            "target": "dtmi:digitaltwins:isa95:MaterialDefinition;1",
-            "comment": "Relationship type: Association"
-        },
-        {
-            "@type": "Relationship",
-            "name": "isAssembledFromSublot",
-            "displayName": "Is assembled from",
-            "description": "This material lot is part of the related object as the whole",
-            "target": "dtmi:digitaltwins:isa95:MaterialSublot;1",
-            "comment": "Relationship type: Aggregation"
-        },
-        {
-            "@type": "Component",
-            "name": "description",
-            "displayName": "Description",
-            "description": "Additional information about the material definition",
-            "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
-        },
-        {
-            "@type": "Property",
-            "name": "hierarchyScope",
-            "displayName": "Hierarchy scope",
-            "description": "Identifies where the exchanged information fits within the role based equipment hierarchy. ",
-            "schema": "string"
-        },
-        {
-            "@type": "Relationship",
-            "name": "hierarchyScopeRel",
-            "displayName": "fits hierarchy scope",
-            "description": "Optional relationship to hierarchy.",
-            "comment": "Not part of the Standard Specs.",
-            "target": "dtmi:digitaltwins:isa95:HierarchyScope;1",
-            "maxMultiplicity": 1
-        },
-        {
-            "@type": "Component",
-            "name": "spatialDefinition",
-            "displayName": "Spatial definition",
-            "description": "Spatially defines the equipment as a zero-dimensional point, one dimensional line, or two dimensional shape or three dimensional solid.",
-            "schema": "dtmi:digitaltwins:isa95:SpatialDefinition;1"
-        },
-        {
-            "@type": "Relationship",
-            "name": "storageLocationRel",
-            "displayName": "fits storage location",
-            "description": "Optional relationship to storage location.",
-            "comment": "Not part of the Standard Specs.",
-            "target": "dtmi:digitaltwins:isa95:OperationalLocation;1",
-            "maxMultiplicity": 1
-        },	
-        {
-            "@type": "Property",
-            "name": "storageLocation",
-            "displayName": "Storage location",
-            "description": "Identifies the storage location of the material lot.",
-            "schema": "string",
-            "writable": true
-        },
-        {
-            "@type": "Property",
-            "name": "storageLocationType",
-            "displayName": "Storage location type",
-            "description": "Indicates whether the storage location attribute refers to an operational location, equipment or physical asset object, or contains a description of the storage location.",
-            "comment": "Mandatory where a storage location is specified",
-            "schema": {
-                "@type": "Enum",
-                "valueSchema": "string",
-                "enumValues": [
-                    {
-                        "name": "operationalLocation",
-                        "enumValue": "operationalLocation",
-                        "displayName": "Operational Location",
-                        "comment": "storage location attribute references an operational location"
-                    },
-                    {
-                        "name": "equipment",
-                        "enumValue": "equipment",
-                        "displayName": "Operational Location",
-                        "comment": "storage location attribute references an equipment object"
-                    },
-                    {
-                        "name": "physicalAsset",
-                        "enumValue": "physicalAsset",
-                        "displayName": "Physical Asset",
-                        "comment": " storage location attribute references a physical asset"
-                    },
-                    {
-                        "name": "description",
-                        "enumValue": "description",
-                        "displayName": "Description",
-                        "comment": "storage location attribute contains a description of the storage location, such as a street address"
-                    }
-                ]
-            }
-        },
-        {
-            "@type": "Property",
-            "name": "assemblyType",
-            "displayName": "Assembly type",
-            "writable": true,
-            "description": "Defines the type of the assembly",
-            "schema": {
-                "@type": "Enum",
-                "valueSchema": "string",
-                "enumValues": [
-                    {
-                        "name": "physical",
-                        "enumValue": "physical",
-                        "description": "the components of the assembly are physically connected or in the same area"
-                    },
-                    {
-                        "name": "logical",
-                        "enumValue": "logical",
-                        "description": "the components of the assembly are not necessarily physically connected or in the same area"
-                    }
-                ]
-            }
-        },
-        {
-            "@type": "Property",
-            "name": "assemblyRelationship",
-            "displayName": "Assembly relationship",
-            "writable": true,
-            "description": "Defines the type of the relationships",
-            "schema": {
-                "@type": "Enum",
-                "valueSchema": "string",
-                "enumValues": [
-                    {
-                        "name": "permanent",
-                        "enumValue": "permanent",
-                        "description": "an assembly that is not intended to be split during the production process"
-                    },
-                    {
-                        "name": "transient",
-                        "enumValue": "transient",
-                        "description": "a temporary assembly using during production, such as a pallet of different materials or a batch kit"
-                    }
-                ]
-            }
-        },
-        {
-            "@type": "Property",
-            "name": "status",
-            "displayName": "Status",
-            "description": "Status of the material lot in manufacturing operations. Values defined by implementation",
-            "schema": "string",
-            "writable": true
-        },
-        {
-            "@type": "Property",
-            "name": "disposition",
-            "displayName": "Disposition",
-            "writable": true,
-            "description": "Planning and logistics disposition of a material lot or assembly of material lots. ",
-            "schema": {
-                "@type": "Enum",
-                "valueSchema": "string",
-                "enumValues": [
-                    {
-                        "name": "planned",
-                        "enumValue": "planned",
-                        "displayName": "Planned",
-                        "description": "a material lot that does not yet physically exist, is assigned to an operations request (segment requirement) or work request (Part 4 object) or job order (Part 4 object)"
-                    },
-                    {
-                        "name": "inProcess",
-                        "enumValue": "inProcess",
-                        "displayName": "in Process",
-                        "description": "the material lot is in the process of being worked on"
-                    },
-                    {
-                        "name": "restricted",
-                        "enumValue": "restricted",
-                        "displayName": "Restricted",
-                        "description": "a material lot is not permitted for normal use due to a restriction condition"
-                    },
-                    {
-                        "name": "unrestricted",
-                        "enumValue": "unrestricted",
-                        "displayName": "Unrestricted",
-                        "description": "material lot is permitted for normal use without restriction"
-                    },
-                    {
-                        "name": "closed",
-                        "enumValue": "closed",
-                        "displayName": "Closed",
-                        "description": "material lot has been reconciled as completely consumed, sold or disposed of"
-                    }
-                ]
-            }
-        },
-        {
-            "@type": "Property",
-            "name": "quantity",
-            "displayName": "Quantity",
-            "schema": "double",
-            "description": "The quantity of the material lot. ",
-            "writable": true
-        },
-        {
-            "@type": "Property",
-            "name": "quantityUnitOfMeasure",
-            "displayName": "Quantity unit of measure",
-            "description": "The unit of measure of the associated quantity",
-            "schema": "string",
-            "writable": true
-        }
-    ]
+	"@context": "dtmi:dtdl:context;2",
+	"@id": "dtmi:digitaltwins:isa95:MaterialLot;1",
+	"@type": "Interface",
+	"displayName": "物料批次",
+	"description": "具有唯一标识的特定数量物料（可计数或可称重），应表示为物料批次。物料批次用于描述计划或实际可用物料的总量、当前状态及其具体的属性值。",
+	"comment": "依据 ANSI/ISA-95.00.02-2018《企业与控制系统集成 第2部分：对象与属性》——2018年5月24日批准",
+	"extends": [
+		"dtmi:digitaltwins:isa95:Resource;1",
+		"dtmi:digitaltwins:isa95:TestableObject;1"
+	],
+	"contents": [
+		{
+			"@type": "Relationship",
+			"name": "isAssembledFrom",
+			"displayName": "由...组成",
+			"description": "此物料批次作为‘整体’，由其他物料批次作为‘组成部分’构成。例如：一个成品批次由多个原材料批次组装而成。",
+			"target": "dtmi:digitaltwins:isa95:MaterialLot;1",
+			"comment": "关系类型：组合（Composition），表示强生命周期依赖，父批次管理子批次的生命周期。"
+		},
+		{
+			"@type": "Relationship",
+			"name": "hasValuesOf",
+			"displayName": "具有以下属性值",
+			"description": "该物料批次所具有的具体属性值（如实际测量的密度、湿度、批次特有参数等）。",
+			"target": "dtmi:digitaltwins:isa95:MaterialLotProperty;1",
+			"comment": "关系类型：组合（Composition），属性值属于该批次的一部分。"
+		},
+		{
+			"@type": "Relationship",
+			"name": "definedBy",
+			"displayName": "由...定义",
+			"description": "该物料批次所依据的物料定义（Material Definition），即该批次是哪个‘模板’的实例。",
+			"target": "dtmi:digitaltwins:isa95:MaterialDefinition;1",
+			"comment": "关系类型：关联（Association），表示此批次基于某个标准化的物料定义创建。"
+		},
+		{
+			"@type": "Relationship",
+			"name": "isAssembledFromSublot",
+			"displayName": "由...子批次组成",
+			"description": "此物料批次由一个或多个物料子批次构成。",
+			"target": "dtmi:digitaltwins:isa95:MaterialSublot;1",
+			"comment": "关系类型：聚合（Aggregation），表示弱关联，子批次可独立存在。"
+		},
+		{
+			"@type": "Component",
+			"name": "description",
+			"displayName": "描述",
+			"description": "关于该物料批次的补充信息，例如生产备注、特殊处理要求等。",
+			"schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
+		},
+		{
+			"@type": "Property",
+			"name": "hierarchyScope",
+			"displayName": "层级范围",
+			"description": "标识该物料批次在基于角色的设备层级结构中的适用位置，如所属工厂、产线。",
+			"schema": "string"
+		},
+		{
+			"@type": "Relationship",
+			"name": "hierarchyScopeRel",
+			"displayName": "符合层级范围",
+			"description": "可选关系，指向具体的层级范围实体，用于精确建模。",
+			"comment": "非 ISA-95 标准字段，扩展用途。",
+			"target": "dtmi:digitaltwins:isa95:HierarchyScope;1",
+			"maxMultiplicity": 1
+		},
+		{
+			"@type": "Component",
+			"name": "spatialDefinition",
+			"displayName": "空间定义",
+			"description": "从空间角度定义该物料批次的几何形态（点、线、面、体），用于数字孪生可视化或仓储空间分析。",
+			"schema": "dtmi:digitaltwins:isa95:SpatialDefinition;1"
+		},
+		{
+			"@type": "Relationship",
+			"name": "storageLocationRel",
+			"displayName": "存放于（关系）",
+			"description": "可选关系，指向具体的存储位置对象（如库位、工位、设备等）。",
+			"comment": "非标准字段，用于增强位置追踪能力。",
+			"target": "dtmi:digitaltwins:isa95:OperationalLocation;1",
+			"maxMultiplicity": 1
+		},
+		{
+			"@type": "Property",
+			"name": "storageLocation",
+			"displayName": "存储位置",
+			"description": "标识该物料批次当前的存储位置。",
+			"schema": "string",
+			"writable": true
+		},
+		{
+			"@type": "Property",
+			"name": "storageLocationType",
+			"displayName": "存储位置类型",
+			"description": "说明 storageLocation 字段所指代的对象类型。",
+			"comment": "当指定了存储位置时，此字段为必填。",
+			"schema": {
+				"@type": "Enum",
+				"valueSchema": "string",
+				"enumValues": [
+					{
+						"name": "operationalLocation",
+						"enumValue": "operationalLocation",
+						"displayName": "运营位置",
+						"comment": "指向一个运营位置（如仓库区、生产线）"
+					},
+					{
+						"name": "equipment",
+						"enumValue": "equipment",
+						"displayName": "设备",
+						"comment": "存储在某台设备上（如反应釜、烘箱）"
+					},
+					{
+						"name": "physicalAsset",
+						"enumValue": "physicalAsset",
+						"displayName": "物理资产",
+						"comment": "存储在某个物理资产上（如托盘、容器）"
+					},
+					{
+						"name": "description",
+						"enumValue": "description",
+						"displayName": "描述",
+						"comment": "仅提供文本描述，如街道地址或库区编号"
+					}
+				]
+			}
+		},
+		{
+			"@type": "Property",
+			"name": "assemblyType",
+			"displayName": "装配类型",
+			"writable": true,
+			"description": "定义该批次作为装配体时的类型。",
+			"schema": {
+				"@type": "Enum",
+				"valueSchema": "string",
+				"enumValues": [
+					{
+						"name": "physical",
+						"enumValue": "physical",
+						"description": "物理连接或位于同一区域"
+					},
+					{
+						"name": "logical",
+						"enumValue": "logical",
+						"description": "逻辑组合，无需物理连接"
+					}
+				]
+			}
+		},
+		{
+			"@type": "Property",
+			"name": "assemblyRelationship",
+			"displayName": "装配关系",
+			"writable": true,
+			"description": "定义该装配关系的持久性。",
+			"schema": {
+				"@type": "Enum",
+				"valueSchema": "string",
+				"enumValues": [
+					{
+						"name": "permanent",
+						"enumValue": "permanent",
+						"description": "永久装配，不打算拆分"
+					},
+					{
+						"name": "transient",
+						"enumValue": "transient",
+						"description": "临时装配，如托盘组合、批次套件"
+					}
+				]
+			}
+		},
+		{
+			"@type": "Property",
+			"name": "status",
+			"displayName": "状态",
+			"description": "物料批次在制造过程中的状态，具体值由系统实现定义（如 'Active', 'Hold' 等）。",
+			"schema": "string",
+			"writable": true
+		},
+		{
+			"@type": "Property",
+			"name": "disposition",
+			"displayName": "处置状态",
+			"writable": true,
+			"description": "物料批次在计划与物流中的处理状态。",
+			"schema": {
+				"@type": "Enum",
+				"valueSchema": "string",
+				"enumValues": [
+					{
+						"name": "planned",
+						"enumValue": "planned",
+						"displayName": "计划中",
+						"description": "尚未实际存在，但已分配给生产任务"
+					},
+					{
+						"name": "inProcess",
+						"enumValue": "inProcess",
+						"displayName": "加工中",
+						"description": "正在被加工或处理"
+					},
+					{
+						"name": "restricted",
+						"enumValue": "restricted",
+						"displayName": "受限",
+						"description": "因质量问题或审批未通过，不能正常使用"
+					},
+					{
+						"name": "unrestricted",
+						"enumValue": "unrestricted",
+						"displayName": "正常",
+						"description": "可自由使用"
+					},
+					{
+						"name": "closed",
+						"enumValue": "closed",
+						"displayName": "关闭",
+						"description": "已完全消耗、售出或报废"
+					}
+				]
+			}
+		},
+		{
+			"@type": "Property",
+			"name": "quantity",
+			"displayName": "数量",
+			"schema": "double",
+			"description": "该物料批次的数量（如 100.5 kg 或 500 件）。",
+			"writable": true
+		},
+		{
+			"@type": "Property",
+			"name": "quantityUnitOfMeasure",
+			"displayName": "数量单位",
+			"description": "与数量对应的计量单位（如 kg、pcs、m、L 等）。",
+			"schema": "string",
+			"writable": true
+		}
+	]
 }

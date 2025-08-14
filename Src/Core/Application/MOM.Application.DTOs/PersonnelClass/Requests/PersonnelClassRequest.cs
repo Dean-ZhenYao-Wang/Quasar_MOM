@@ -8,9 +8,13 @@ namespace MOM.Application.DTOs.PersonnelClass.Requests
     public class PersonnelClassRequest
     {
         /// <summary>
+        /// 编号
+        /// </summary>
+        public string? Id { get; set; }
+        /// <summary>
         /// 名称
         /// </summary>
-        public string Id { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// 备注
@@ -28,7 +32,7 @@ namespace MOM.Application.DTOs.PersonnelClass.Requests
         /// <returns></returns>
         public virtual Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass ToPersonnelClass(string description)
         {
-            Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass personnelClass = new Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass(this.Id, this.Id, description);
+            Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass personnelClass = new Domain.isa95.CommonObjectModels.Part2.Personnel.PersonnelClass(this.Id, this.Name, description);
             personnelClass.Remark = this.Remark;
             personnelClass.Property = this.Property;
             return personnelClass;

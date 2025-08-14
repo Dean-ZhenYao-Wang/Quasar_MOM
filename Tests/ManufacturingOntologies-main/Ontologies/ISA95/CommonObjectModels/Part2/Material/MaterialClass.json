@@ -2,77 +2,77 @@
     "@context": "dtmi:dtdl:context;2",
     "@id": "dtmi:digitaltwins:isa95:MaterialClass;1",
     "@type": "Interface",
-    "displayName": "Material class",
-    "description": "A representation of groupings of material definitions for a definite purpose such as manufacturing operations definition, scheduling, capability, and performance shall be presented as a material class. A material definition shall belong to zero or more material classes.",
-    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",
+    "displayName": "物料类别",  // 显示名称：用于用户界面中展示
+    "description": "为特定目的（如制造操作定义、排程、能力分析和性能评估）对物料定义进行分组的表示方式，应以物料类别形式呈现。一个物料定义可属于零个或多个物料类别。",  // 功能描述
+    "comment": "依据 ANSI/ISA-95.00.02-2018《企业与控制系统集成 第2部分：对象与属性》——2018年5月24日批准",  // 标准来源说明
     "extends": [
-        "dtmi:digitaltwins:isa95:ResourceClass;1",
-        "dtmi:digitaltwins:isa95:TestableObject;1"
+        "dtmi:digitaltwins:isa95:ResourceClass;1",     // 继承自“资源类别”接口
+        "dtmi:digitaltwins:isa95:TestableObject;1"     // 继承自“可测试对象”接口，表示该类可支持测试相关属性或关系
     ],
     "contents": [
         {
             "@type": "Relationship",
             "name": "includesPropertiesOf",
-            "displayName": "Includes properties of",
+            "displayName": "包含属性来自",
             "target": "dtmi:digitaltwins:isa95:MaterialClass;1",
-            "description": "This material class(s) include properties of the material class."
+            "description": "此物料类别包含其他物料类别的属性（即继承或复用其特性）。用于表达物料类之间的属性聚合或复用关系。"
         },
         {
             "@type": "Relationship",
             "name": "IsAssembledFrom",
-            "displayName": "Is assembled from",
+            "displayName": "由...组装而成",
             "target": "dtmi:digitaltwins:isa95:MaterialClass;1",
-            "description": "This parent material class is whole of the child material class(s) as the part."
+            "description": "表示父级物料类别由一个或多个子级物料类别作为组成部分构成。例如：成品由半成品或原材料组装而成。"
         },
         {
             "@type": "Relationship",
             "name": "hasPropertiesOf",
-            "displayName": "Has properties of",
+            "displayName": "具有以下属性",
             "target": "dtmi:digitaltwins:isa95:MaterialClassProperty;1",
-            "description": "The material class property(s) of this material class."
+            "description": "关联到该物料类别所拥有的具体物料类属性（如颜色、密度、规格等），用于描述物料类的特征。"
         },
         {
             "@type": "Component",
             "name": "description",
-            "displayName": "Description",
-            "description": "Additional information about the material class.",
-            "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
+            "displayName": "描述",
+            "description": "关于该物料类别的补充说明信息，例如用途、工艺要求等。",
+            "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"  // 支持多语言字符串集合，如中文、英文等
         },
         {
             "@type": "Property",
             "name": "hierarchyScope",
-            "displayName": "Hierarchy scope",
-            "description": "Identifies where the exchanged information fits within the role based equipment hierarchy. Optionally, hierarchy scope defines the scope of the equipment class, such as the site or area where it is defined.",
-            "schema": "string"
+            "displayName": "层级范围",
+            "description": "标识该物料类别在基于角色的设备层级结构中的位置。也可用于定义该物料类适用的范围，例如所属工厂站点或区域。",
+            "schema": "string"  // 字符串类型，例如 'SiteA', 'ProductionLine1' 等
         },
         {
             "@type": "Relationship",
             "name": "hierarchyScopeRel",
-            "displayName": "fits hierarchy scope",
-            "description": "Optional relationship to hierarchy.",
-            "comment": "Not part of the Standard Specs.",
-            "target": "dtmi:digitaltwins:isa95:HierarchyScope;1",
-            "maxMultiplicity": 1
+            "displayName": "符合层级范围",
+            "description": "可选的关系，指向具体的层级范围实体，用于更精确地建模层级归属关系。",
+            "comment": "注意：此字段非 ISA-95 标准规范中的内容，为扩展字段，用于增强建模灵活性。",
+            "target": "dtmi:digitaltwins:isa95:HierarchyScope;1",  // 指向层级范围接口
+            "maxMultiplicity": 1  // 最多只能关联一个层级范围
         },
         {
             "@type": "Property",
             "name": "assemblyType",
-            "displayName": "Assembly type",
-            "writable": true,
-            "description": "Defines the type of the assembly",
+            "displayName": "装配类型",
+            "writable": true,  // 可写属性，表示运行时可更新
+            "description": "定义该物料类作为装配体时的类型，区分是物理连接还是逻辑组合。",
             "schema": {
-                "@type": "Enum",
-                "valueSchema": "string",
+                "@type": "Enum",           // 枚举类型
+                "valueSchema": "string",   // 枚举值为字符串
                 "enumValues": [
                     {
                         "name": "physical",
                         "enumValue": "physical",
-                        "description": "the components of the assembly are physically connected or in the same area"
+                        "description": "物理装配：组件之间存在实际物理连接或位于同一区域，如焊接组件或固定在托盘上的部件。"
                     },
                     {
                         "name": "logical",
                         "enumValue": "logical",
-                        "description": "the components of the assembly are not necessarily physically connected or in the same area"
+                        "description": "逻辑装配：组件无需物理连接或处于同一区域，仅为逻辑上的组合，如订单配套包或虚拟BOM结构。"
                     }
                 ]
             }
@@ -80,9 +80,9 @@
         {
             "@type": "Property",
             "name": "assemblyRelationship",
-            "displayName": "Assembly relationship",
+            "displayName": "装配关系",
             "writable": true,
-            "description": "Defines the type of the relationships",
+            "description": "定义组件之间的装配关系性质，是永久性还是临时性的。",
             "schema": {
                 "@type": "Enum",
                 "valueSchema": "string",
@@ -90,12 +90,12 @@
                     {
                         "name": "permanent",
                         "enumValue": "permanent",
-                        "description": "an assembly that is not intended to be split during the production process"
+                        "description": "永久装配：在生产过程中不打算拆分的装配体，如最终产品或固定模块。"
                     },
                     {
                         "name": "transient",
                         "enumValue": "transient",
-                        "description": "a temporary assembly using during production, such as a pallet of different materials or a batch kit"
+                        "description": "临时装配：仅在生产过程中短暂存在的组合，例如装有多种物料的托盘、批次套件（batch kit）等。"
                     }
                 ]
             }

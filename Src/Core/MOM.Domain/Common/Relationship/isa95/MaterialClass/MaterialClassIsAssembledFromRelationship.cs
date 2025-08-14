@@ -2,9 +2,9 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialClass
 {
     public class MaterialClassIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass ,Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass>, IEquatable<MaterialClassIsAssembledFromRelationship>
     {
-        public MaterialClassIsAssembledFromRelationship() : base()
+        public override string Name { get; set; }= "IsAssembledFrom";
+        public MaterialClassIsAssembledFromRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
-            Name = "IsAssembledFrom";
         }
 
         public override bool Equals(object? obj)
@@ -29,7 +29,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialClass
 
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId.GetHashCode(), SourceId?.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), SourceId.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
         }
 
         public override bool Equals(BasicRelationship? other)

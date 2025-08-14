@@ -637,8 +637,24 @@
         </member>
         <member name="T:MOM.Domain.Common.EnumType.MaterialClassAssemblyRelationship">
             <summary>
-            组装关系的类型
+            装配关系的类型
             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialClassAssemblyRelationship.permanent">
+            <summary>
+            永久装配
+            </summary>
+            <remarks>
+            在生产过程中不打算拆分的装配体，如最终产品或固定模块。
+            </remarks>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialClassAssemblyRelationship.transient">
+            <summary>
+            临时装配
+            </summary>
+            <remarks>
+            仅在生产过程中短暂存在的组合，例如装有多种物料的托盘、批次套件（batch kit）等。
+            </remarks>
         </member>
         <member name="T:MOM.Domain.Common.EnumType.MaterialClassAssemblyType">
             <summary>
@@ -647,23 +663,61 @@
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialClassAssemblyType.physical">
             <summary>
-            组件的物理连接或在同一区域
+            物理装配
             </summary>
+            <remarks>
+            组件之间存在实际物理连接或位于同一区域，如焊接组件或固定在托盘上的部件。
+            </remarks>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialClassAssemblyType.logical">
             <summary>
-            组装的组件不一定是物理连接或在同一区域
+            逻辑装配
             </summary>
+            <remarks>
+            组件无需物理连接或处于同一区域，仅为逻辑上的组合，如订单配套包或虚拟BOM结构。
+            </remarks>
         </member>
         <member name="T:MOM.Domain.Common.EnumType.MaterialDefinitionAssemblyRelationship">
             <summary>
             组装关系的类型
             </summary>
         </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialDefinitionAssemblyRelationship.permanent">
+            <summary>
+            永久装配
+            </summary>
+            <remarks>
+            在生产过程中不打算拆分的装配体，如最终产品或固定模块。
+            </remarks>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialDefinitionAssemblyRelationship.transient">
+            <summary>
+            临时装配
+            </summary>
+            <remarks>
+            仅在生产过程中短暂存在的组合，例如装有多种物料的托盘、批次套件（batch kit）、工装夹具组合等。
+            </remarks>
+        </member>
         <member name="T:MOM.Domain.Common.EnumType.MaterialDefinitionAssemblyType">
             <summary>
-            组装的类型
+            装配类型
             </summary>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialDefinitionAssemblyType.physical">
+            <summary>
+            物理装配
+            </summary>
+            <remarks>
+            组件之间存在实际物理连接或位于同一区域，如焊接组件或固定在托盘上的部件。
+            </remarks>
+        </member>
+        <member name="F:MOM.Domain.Common.EnumType.MaterialDefinitionAssemblyType.logical">
+            <summary>
+            逻辑装配
+            </summary>
+            <remarks>
+            组件无需物理连接或处于同一区域，仅为逻辑上的组合，如订单配套包或虚拟BOM结构。
+            </remarks>
         </member>
         <member name="T:MOM.Domain.Common.EnumType.MaterialLotAssemblyRelationship">
             <summary>
@@ -672,12 +726,12 @@
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotAssemblyRelationship.permanent">
             <summary>
-            在生产过程中不打算拆分的组件
+            永久装配，不打算拆分
             </summary>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotAssemblyRelationship.transient">
             <summary>
-            在生产过程中使用的临时组件，如不同材料的托盘或批处理套件
+            临时装配，如托盘组合、批次套件
             </summary>
         </member>
         <member name="T:MOM.Domain.Common.EnumType.MaterialLotAssemblyType">
@@ -687,12 +741,12 @@
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotAssemblyType.physical">
             <summary>
-            组件的物理连接或在同一区域
+            物理连接或位于同一区域
             </summary>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotAssemblyType.logical">
             <summary>
-            组装的组件不一定是物理连接或在同一区域
+            逻辑组合，无需物理连接
             </summary>
         </member>
         <member name="T:MOM.Domain.Common.EnumType.MaterialLotDisposition">
@@ -702,28 +756,43 @@
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotDisposition.planned">
             <summary>
-            一个尚未实际存在的物料批次，被分配给一个操作请求(分段需求)或工作请求(第4部分对象)或工作订单(第4部分对象)。
+            计划中
             </summary>
+            <remarks>
+            尚未实际存在，但已分配给生产任务
+            </remarks>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotDisposition.inProcess">
             <summary>
-            这批材料正在加工中
+            加工中
             </summary>
+            <remarks>
+            正在被加工或处理
+            </remarks>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotDisposition.restricted">
             <summary>
-            某批物料因限制条件不允许正常使用
+            受限
             </summary>
+            <remarks>
+            因质量问题或审批未通过，不能正常使用
+            </remarks>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotDisposition.unrestricted">
             <summary>
-            材料批允许正常使用，不受限制
+            正常
             </summary>
+            <remarks>
+            可自由使用
+            </remarks>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotDisposition.closed">
             <summary>
-            物料已被核对为完全消耗、售出或处置
+            关闭
             </summary>
+            <remarks>
+            已完全消耗、售出或报废
+            </remarks>
         </member>
         <member name="T:MOM.Domain.Common.EnumType.MaterialLotStorageLocationType">
             <summary>
@@ -732,23 +801,35 @@
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotStorageLocationType.operationalLocation">
             <summary>
-            存储位置属性引用操作位置
+            运营位置
             </summary>
+            <remarks>
+            指向一个运营位置（如仓库区、生产线）
+            </remarks>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotStorageLocationType.equipment">
             <summary>
-            存储位置属性引用设备对象
+            设备
             </summary>
+            <remarks>
+            存储在某台设备上（如反应釜、烘箱）
+            </remarks>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotStorageLocationType.physicalAsset">
             <summary>
-            存储位置属性引用物理资产
+            物理资产
             </summary>
+            <remarks>
+            存储在某个物理资产上（如托盘、容器）
+            </remarks>
         </member>
         <member name="F:MOM.Domain.Common.EnumType.MaterialLotStorageLocationType.description">
             <summary>
-            存储位置属性包含存储位置的描述，例如街道地址
+            描述
             </summary>
+            <remarks>
+            仅提供文本描述，如街道地址或库区编号
+            </remarks>
         </member>
         <member name="T:MOM.Domain.Common.EnumType.MaterialSublotStorageLocationType">
             <summary>
@@ -1137,36 +1218,6 @@
         <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentAssetMapping.EquipmentAssetMappingRecordsUseOfPhysicalAssetRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
             <inheritdoc/>
         </member>
-        <member name="P:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.Name">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid)">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.#ctor(System.Guid,System.Guid,System.Int32)">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.#ctor(System.Guid,MOM.Domain.isa95.CommonObjectModels.HierarchyScope,System.Int32)">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship)">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.op_Equality(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship)">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.op_Inequality(MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship,MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship)">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="M:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassHierarchyScopeRelRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
-            <inheritdoc/>
-        </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.EquipmentClass.EquipmentClassIncludesPropertiesOfRelationship">
              <summary>
             
@@ -1422,6 +1473,9 @@
             <inheritdoc/>
         </member>
         <member name="M:MOM.Domain.Common.Relationship.isa95.HierarchyScope.HierarchyScopeContainsRelationship.Equals(MOM.Domain.Common.BasicRelationship)">
+            <inheritdoc/>
+        </member>
+        <member name="P:MOM.Domain.Common.Relationship.isa95.MaterialClass.MaterialClassIncludesPropertiesOfRelationship.Name">
             <inheritdoc/>
         </member>
         <member name="T:MOM.Domain.Common.Relationship.isa95.OperationalLocationClass.OperationalLocationClassHierarchyScopeRelRelationship">
@@ -2298,6 +2352,566 @@
             <param name="sourceEquipmentLevel">父设备层次</param>
             <param name="targetEquipment">子设备层次</param>
             <exception cref="T:System.MethodAccessException"></exception>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.IncludesPropertiesOf">
+            <summary>
+            线性分类 在物料主数据建设工程，往往分类采用线分类   https://zhuanlan.zhihu.com/p/496464306
+            当前分类包含的子分类
+            </summary>
+            <remarks>
+            父子关系
+            <para>此物料类别包含其他物料类别的属性（即继承或复用其特性）。用于表达物料类之间的属性聚合或复用关系。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.IsAssembledFrom">
+            <summary>
+            面分类 又称平行分类 物料模板采用面分类 https://zhuanlan.zhihu.com/p/496464306
+            组成当前分类的类型
+            </summary>
+            <remarks>
+            表示父级物料类别由一个或多个子级物料类别作为组成部分构成。
+            <para>例如：成品由半成品或原材料组装而成。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.Property">
+            <summary>
+            该物料类的物料类属性。
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.Description">
+            <summary>
+            描述
+            </summary>
+            <remarks>
+            关于该物料类别的补充说明信息，例如用途、工艺要求等。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.AssemblyType">
+            <summary>
+            装配类型
+            </summary>
+            <remarks>
+            定义该物料类作为装配体时的类型，区分是物理连接还是逻辑组合。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.AssemblyRelationship">
+            <summary>
+            装配关系
+            </summary>
+            <remarks>
+            定义组件之间的装配关系性质，是永久性还是临时性的。
+            </remarks>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.UpdateIncludesPropertiesOf(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            更新当前物料类的线性分类
+            </summary>
+            <param name="childClassDtId"></param>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass.UpdateIsAssembledFrom(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            更新当前物料类的面分类
+            </summary>
+            <param name="childClassDtId"></param>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.IsAssembledFrom">
+            <summary>
+            由...组成
+            </summary>
+            <remarks>
+            此物料定义作为‘整体’，由其他物料定义作为‘组成部分’构成。例如：一个组件由多个子零件组成。
+            <para>关系类型：组合（Composition），表示强生命周期依赖，父对象管理子对象的生命周期。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.Property">
+            <summary>
+            具有以下属性。
+            </summary>
+            <remarks>
+            该物料定义所拥有的具体物料属性（如颜色、密度、批次要求等）。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.IsMemberOfClass">
+            <summary>
+            属于类别
+            </summary>
+            <remarks>
+            表示该物料定义是某个物料类别的成员。一个物料定义可属于零个或多个物料类别。
+            <para>关系类型：关联（Association），表示松耦合关系，不共享生命周期。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.Description">
+            <summary>
+            描述
+            </summary>
+            <remarks>
+            关于该物料定义的补充信息，例如用途说明、工艺要求、安全等级等。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.AssemblyType">
+            <summary>
+            装配类型
+            </summary>
+            <remarks>
+            定义该物料作为装配体时的类型，区分是物理连接还是逻辑组合。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.AssemblyRelationship">
+            <summary>
+            装配关系
+            </summary>
+            <remarks>
+            定义该装配关系的性质，是永久性的还是临时性的。
+            </remarks>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.UpdateIsAssembledFrom(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            更新当前物料定义的组成
+            </summary>
+            <param name="childClassDtId"></param>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinition.UpdateIsMemberOfClass(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            更新当前物料定义的属于类别
+            </summary>
+            <param name="childClassDtId"></param>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty.Number">
+            <summary>
+            物料编码
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty.Specification">
+            <summary>
+            规格
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty.Texture">
+            <summary>
+            材质
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty.ModelNumber">
+            <summary>
+            型号
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty.Weight">
+            <summary>
+            重量
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty.UnitPrice">
+            <summary>
+            单价
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialDefinitionProperty.UnitOfMeasurement">
+            <summary>
+            计量单位
+            </summary>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.IsAssembledFrom">
+            <summary>
+            由...组成
+            </summary>
+            <remarks>
+            表示一个父批次是由一个或多个子批次或其他物料批次构成的。
+            <para>关系类型：组合（Composition），表示强生命周期依赖，父批次管理子批次的生命周期。</para>
+            <para>场景：一个成品批次（Lot-A）是通过将原材料批次（Lot-B 和 Lot-C）混合或组装而成的。</para>
+            <para>关系：Lot-A isAssembledFrom Lot-B, Lot-C</para>
+            <para>这是构建批次级BOM（Bill of Materials） 和实现正向/逆向追溯的核心关系。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.HasValuesOf">
+            <summary>
+            该物料批次所具有的具体属性值（如实际测量的密度、湿度、批次特有参数等）。
+            </summary>
+            <remarks>
+            关系类型：组合（Composition），属性值属于该批次的一部分。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.DefinedBy">
+            <summary>
+            由...定义
+            </summary>
+            <remarks>
+            该物料批次所依据的物料定义（Material Definition），即该批次是哪个‘模板’的实例。
+            <para>关系类型：关联（Association），表示此批次基于某个标准化的物料定义创建。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.IsAssembledFromSublot">
+            <summary>
+            由...子批次组成
+            </summary>
+            <remarks>
+            此物料批次由一个或多个物料子批次构成。
+            <para>关系类型：聚合（Aggregation），表示弱关联，子批次可独立存在。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.Description">
+            <summary>
+            描述
+            </summary>
+            <remarks>
+            关于该物料批次的补充信息，例如生产备注、特殊处理要求等。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.StorageLocationRelDtId">
+            <summary>
+            适合存放地点
+            </summary>
+            <remarks>
+            可选关系，指向具体的存储位置对象（如库位、工位、设备等）。
+            <para>用于增强位置追踪能力</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.StorageLocationRel">
+            <summary>
+            适合存放地点
+            </summary>
+            <remarks>
+            可选关系，指向具体的存储位置对象（如库位、工位、设备等）。
+            <para>用于增强位置追踪能力</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.StorageLocation">
+            <summary>
+            存储位置。
+            </summary>
+            <remarks>
+            标识该物料批次当前的存储位置。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.StorageLocationType">
+            <summary>
+            存储位置类型；当指定了存储位置时，此字段为必填。
+            </summary>
+            <remarks>
+            说明 storageLocation 字段所指代的对象类型。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.AssemblyType">
+            <summary>
+            装配类型
+            </summary>
+            <remarks>
+            定义该批次作为装配体时的类型。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.AssemblyRelationship">
+            <summary>
+            装配关系
+            </summary>
+            <remarks>
+            定义该装配关系的持久性。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.Status">
+            <summary>
+            状态
+            </summary>
+            <remarks>
+            物料批次在制造过程中的状态，具体值由系统实现定义（如 'Active', 'Hold' 等）。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.Disposition">
+            <summary>
+            处置状态
+            </summary>
+            <remarks>
+            物料批次在计划与物流中的处理状态。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.Quantity">
+            <summary>
+            数量
+            </summary>
+            <remarks>
+            该物料批次的数量（如 100.5 kg 或 500 件）。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.QuantityUnitOfMeasure">
+            <summary>
+            数量单位
+            </summary>
+            <remarks>
+            与数量对应的计量单位（如 kg、pcs、m、L 等）。
+            </remarks>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.UpdateIsAssembledFrom(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            更新当前物料批次的组成
+            </summary>
+            <param name="childClassDtId"></param>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.UpdateDefinedBy(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            更新当前物料批次的定义
+            </summary>
+            <param name="childClassDtId"></param>
+        </member>
+        <member name="M:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot.UpdateIsAssembledFromSublot(System.Collections.Generic.List{System.Guid})">
+            <summary>
+            更新当前物料批次的子批次
+            </summary>
+            <param name="childClassDtId"></param>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.IsMadeUpOf">
+            <summary>
+            由...构成
+            </summary>
+            <remarks>
+            这个关系描述的是同一个物料批次内部的物理分割或聚合，即“这个子批次本身是由哪些更小的、可识别的部分组成的？”
+            <para><term>语义：</term> “我由谁构成？” (这里的“我”是一个子批次)</para>
+            <para><term>场景：</term> 一个物料批次（Lot-A）被生产出来后，被分装到了 5 个不同的桶里。这 5 个桶就是 5 个 MaterialSublot。</para>
+            <list type="bullet">
+            <item>现在，假设你想把其中 3 个桶的物料打包成一个发货单元。你可以创建一个新的 MaterialSublot (称为 Sublot-Shipment) 来代表这个发货单元。</item>
+            <item>这个新的 Sublot-Shipment 并不是一个通过生产工序“组装”出来的新物料，而是物理上把3个已有的子批次“聚合”在一起。</item>
+            <item>为了表示这种关系，你会说：Sublot-Shipment isMadeUpOf Sublot-1, Sublot-2, Sublot-3。</item>
+            </list>
+            <para><term>关键点：</term></para>
+            <list type="bullet">
+            <item>isMadeUpOf 不创造新物料，它只是对现有物料的物理分组。</item>
+            <item>它发生在同一个 MaterialLot 内部，是对物料物理形态或管理方式的重新组织。</item>
+            <item>它更侧重于库存管理、物流和包装层面。</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.Property">
+            <summary>
+            具有以下属性值
+            </summary>
+            <remarks>
+            该物料子批次所拥有的具体属性值（如实际测量的密度、湿度、批次特有参数等）。
+            <para>关系类型：组合（Composition），属性值属于该子批次的一部分。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.IsAssembledFrom">
+            <summary>
+            由...组装而成；此关系用于构建子批次层级结构或装配路径
+            </summary>
+            <remarks>
+            描述一个子批次是基于另一个子批次“构造”或“派生”出来的。这可以理解为一种更精细的组装或转换。
+            <para>关系类型：组合（Composition），表示强生命周期依赖，父对象管理子对象的生命周期。</para>
+            <para>场景：一个子批次（Sublot-1）经过一道工序后，变成了一个新的子批次（Sublot-2），后者是前者的直接产物。</para>
+            <para>关系：Sublot-2 isAssembledFrom Sublot-1</para>
+            <para>它强调的是生产流程上的前后关系。</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.IsAssembledFromLot">
+            <summary>
+            组成当前子批次的批次
+            </summary>
+            <remarks>
+            我（这个物料子批次）是从哪个物料批次（Material Lot）来的？核心作用是建立子批次与父批次之间的归属关系。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.Description">
+            <summary>
+            描述
+            </summary>
+            <remarks>
+            关于该物料子批次的补充信息，例如特殊处理要求、包装方式等。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.HierarchyScopeRelDtId">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.HierarchyScope">
+            <summary>
+            层级范围
+            </summary>
+            <remarks>
+            标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.HierarchyScopeRel">
+            <summary>
+            适配层级范围
+            </summary>
+            <remarks>
+            <para>与层级的可选关系</para>
+            <para>非标准规范要求</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.StorageLocationRelDtId">
+            <summary>
+            适合存放地点
+            </summary>
+            <remarks>
+            可选关系，指向具体的存储位置对象（如库位、工位、设备等）。
+            <para>用于增强位置追踪能力</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.StorageLocationRel">
+            <summary>
+            适合存放地点
+            </summary>
+            <remarks>
+            可选关系，指向具体的存储位置对象（如库位、工位、设备等）。
+            <para>用于增强位置追踪能力</para>
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.StorageLocation">
+            <summary>
+            存储位置。
+            </summary>
+            <remarks>
+            标识该物料批次当前的存储位置。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.StorageLocationType">
+            <summary>
+            存储位置类型；当指定了存储位置时，此字段为必填。
+            </summary>
+            <remarks>
+            说明 storageLocation 字段所指代的对象类型。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.AssemblyType">
+            <summary>
+            装配类型
+            </summary>
+            <remarks>
+            定义该批次作为装配体时的类型。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.AssemblyRelationship">
+            <summary>
+            装配关系
+            </summary>
+            <remarks>
+            定义该装配关系的持久性。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.Status">
+            <summary>
+            状态
+            </summary>
+            <remarks>
+            物料批次在制造过程中的状态，具体值由系统实现定义（如 'Active', 'Hold' 等）。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.Disposition">
+            <summary>
+            处置状态
+            </summary>
+            <remarks>
+            物料批次在计划与物流中的处理状态。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.Quantity">
+            <summary>
+            数量
+            </summary>
+            <remarks>
+            该物料批次的数量（如 100.5 kg 或 500 件）。
+            </remarks>
+        </member>
+        <member name="P:MOM.Domain.isa95.CommonObjectModels.Part2.Material.MaterialSublot.QuantityUnitOfMeasure">
+            <summary>
+            数量单位
+            </summary>
+            <remarks>
+            与数量对应的计量单位（如 kg、pcs、m、L 等）。
+            </remarks>
         </member>
         <member name="T:MOM.Domain.isa95.CommonObjectModels.Part2.OperationalLocation.OperationalLocation">
             <summary>
@@ -3441,22 +4055,6 @@
         </member>
         <member name="M:MOM.Domain.isa95.CommonObjectModels.ResourceClass.GetHashCode">
             <inheritdoc/>
-        </member>
-        <member name="T:MOM.Domain.isa95.CommonObjectModels.ResourceClassProperty">
-            <summary>
-            资源类属性
-            </summary>
-            <remarks>
-            所有资源类属性模型（人员类、设备类、物理资产类、物料类）的抽象模型
-            </remarks>
-        </member>
-        <member name="T:MOM.Domain.isa95.CommonObjectModels.ResourceProperty">
-            <summary>
-            资源属性
-            </summary>
-            <remarks>
-            所有资源属性模型（人员、设备、物理资产、物料定义、物料批次、物料批次子批、工作指令、过程段、操作定义、操作位置、操作段、测试规范、测试结果）的抽象模型
-            </remarks>
         </member>
         <member name="T:MOM.Domain.isa95.CommonObjectModels.SpatialDefinition">
             <summary>

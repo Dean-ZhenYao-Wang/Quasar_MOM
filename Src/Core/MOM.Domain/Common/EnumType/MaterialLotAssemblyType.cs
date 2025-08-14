@@ -11,15 +11,15 @@ namespace MOM.Domain.Common.EnumType
     public enum MaterialLotAssemblyType
     {
         /// <summary>
-        /// 组件的物理连接或在同一区域
+        /// 物理连接或位于同一区域
         /// </summary>
-        [EnumMember(Value = "physical"), Display(Name = " ", Description = "组件的物理连接或在同一区域")]
+        [EnumMember(Value = "physical"), Display(Name = " ", Description = "物理连接或位于同一区域")]
         physical,
 
         /// <summary>
-        /// 组装的组件不一定是物理连接或在同一区域
+        /// 逻辑组合，无需物理连接
         /// </summary>
-        [EnumMember(Value = "logical"), Display(Name = " ", Description = "组装的组件不一定是物理连接或在同一区域")]
+        [EnumMember(Value = "logical"), Display(Name = " ", Description = "逻辑组合，无需物理连接")]
         logical
     }
 }

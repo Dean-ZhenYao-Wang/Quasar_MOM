@@ -7,10 +7,10 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdatePosition
     {
         public UpdatePositionCommandValidator(ITranslator translator)
         {
-            RuleFor(p => p.Id)
+            RuleFor(p => p.Name)
                 .NotNull()
                 .NotEmpty()
-                .WithName(p => translator[nameof(p.Id)]);
+                .WithName(p => translator[nameof(p.Name)]);
         }
     }
 }

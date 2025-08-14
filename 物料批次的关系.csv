@@ -1,0 +1,4 @@
+﻿关系,应用于,描述,在示例中的具体应用
+`isAssembledFromLot`,`MaterialSublot`,“我来自哪个批次？” <br> 这是一个从下到上的归属关系。它明确地将一个子批次（如一个包装袋）链接回其所属的父批次（如整批巧克力）。,对于 BAG-001 来说：<br> BAG-001 isAssembledFromLot CHOCO-LOT-001 <br> （这个包装袋是来自 CHOCO-LOT-001 这个批次的）<br> 这是定义子批次的核心关系，没有它，子批次就失去了其来源依据。
+`isMadeUpOf`,`MaterialSublot`,“我由哪些更小的部分构成？” <br> 这是一个在子批次层级内部的聚合关系。它描述了一个子批次是如何由其他更小的子批次组成的。,假设我们创建一个新的子批次 BOX-001 来代表一个装有10个巧克力袋的纸箱。<br> 那么：BOX-001 isMadeUpOf BAG-001", "BAG-002", ..., "BAG-010 <br> （这个纸箱是由10个包装袋组成的）<br> 注意：BOX-001 本身也通过 isAssembledFromLot 指向 CHOCO-LOT-001，因为它内部的每一个袋子都来自这个批次。
+`isAssembledFrom`,`MaterialLot`,“我是由哪些其他批次组装/制造而成的？” <br> 这是一个跨批次的生产制造关系。它描述了一个新批次是如何通过消耗其他批次（原材料）而产生的。,假设我们用 CHOCO-LOT-001 中的巧克力作为原料，生产出一批 巧克力蛋糕，ID 为 CAKE-LOT-001。<br> 那么：CAKE-LOT-001 isAssembledFrom CHOCO-LOT-001 <br> （这个蛋糕批次是由巧克力批次组装/制造而成的）<br> 这建立了产品与原材料之间的BOM（物料清单）追溯链。

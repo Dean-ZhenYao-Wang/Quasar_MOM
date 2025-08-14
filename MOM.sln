@@ -47,7 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "产品跟踪管理", "产�
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "车间成本管理", "车间成本管理", "{09CD71BD-F12A-4E39-ADC3-0E0110DFA2E6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "车间物料管理", "车间物料管理", "{CCF5BC67-72A5-4768-B1C0-ED2BDE0F47FA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "物料管理", "物料管理", "{CCF5BC67-72A5-4768-B1C0-ED2BDE0F47FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "刀具管理", "刀具管理", "{3E4FDF87-BCAC-46F8-B8CA-74D7D261BAE6}"
 EndProject
@@ -94,6 +94,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOM.Application.Features.PhysicalAssetAndEquipment", "Src\Core\Application\Features\MOM.Application.Features.PhysicalAssetAndEquipment\MOM.Application.Features.PhysicalAssetAndEquipment.csproj", "{C519AE00-50F6-40D9-B8E9-1CA93A4450DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "设备管理", "Src\Apps\设备管理\设备管理\设备管理.csproj", "{A59E0A00-E91A-4357-9080-66170B875107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "物料管理", "Src\Apps\物料管理\物料管理\物料管理.csproj", "{16DAA69B-FA2F-4257-995A-68AA9C16DEF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOM.Application.Features.Material", "MOM.ApplicationFeatures.Material\MOM.Application.Features.Material.csproj", "{1B9FA6B2-1D23-469C-B5E4-A92299CAB16E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -185,6 +189,14 @@ Global
 		{A59E0A00-E91A-4357-9080-66170B875107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A59E0A00-E91A-4357-9080-66170B875107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A59E0A00-E91A-4357-9080-66170B875107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16DAA69B-FA2F-4257-995A-68AA9C16DEF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16DAA69B-FA2F-4257-995A-68AA9C16DEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16DAA69B-FA2F-4257-995A-68AA9C16DEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16DAA69B-FA2F-4257-995A-68AA9C16DEF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B9FA6B2-1D23-469C-B5E4-A92299CAB16E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B9FA6B2-1D23-469C-B5E4-A92299CAB16E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B9FA6B2-1D23-469C-B5E4-A92299CAB16E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B9FA6B2-1D23-469C-B5E4-A92299CAB16E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -235,6 +247,8 @@ Global
 		{8CCD05FE-DA75-4042-8968-EABDF2B1B15C} = {94E4D025-F5DB-4D32-B0AD-BD98EEAF0534}
 		{C519AE00-50F6-40D9-B8E9-1CA93A4450DE} = {94E4D025-F5DB-4D32-B0AD-BD98EEAF0534}
 		{A59E0A00-E91A-4357-9080-66170B875107} = {9CABCF69-EFEA-42B8-9C23-B1AD6DBC2624}
+		{16DAA69B-FA2F-4257-995A-68AA9C16DEF9} = {CCF5BC67-72A5-4768-B1C0-ED2BDE0F47FA}
+		{1B9FA6B2-1D23-469C-B5E4-A92299CAB16E} = {94E4D025-F5DB-4D32-B0AD-BD98EEAF0534}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1BF80400-1050-4291-9001-0A0B0DE23CDE}

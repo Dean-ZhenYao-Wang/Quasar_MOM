@@ -2,9 +2,11 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialClass
 {
     public class MaterialClassIncludesPropertiesOfRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass ,Domain.isa95.CommonObjectModels.Part2.Material.MaterialClass>, IEquatable<MaterialClassIncludesPropertiesOfRelationship>
     {
-        public MaterialClassIncludesPropertiesOfRelationship() : base()
+        /// <inheritdoc/>
+        public override string Name { get; set; } = "includesPropertiesOf";
+
+        public MaterialClassIncludesPropertiesOfRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
-            Name = "includesPropertiesOf";
         }
 
         public override bool Equals(object? obj)
@@ -29,7 +31,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialClass
 
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId.GetHashCode(), SourceId?.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), SourceId.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
         }
 
         public override bool Equals(BasicRelationship? other)

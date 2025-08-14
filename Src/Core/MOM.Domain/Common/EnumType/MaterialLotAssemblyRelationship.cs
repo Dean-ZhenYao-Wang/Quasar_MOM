@@ -11,15 +11,15 @@ namespace MOM.Domain.Common.EnumType
     public enum MaterialLotAssemblyRelationship
     {
         /// <summary>
-        /// 在生产过程中不打算拆分的组件
+        /// 永久装配，不打算拆分
         /// </summary>
-        [EnumMember(Value = "permanent"), Display(Name = " ", Description = "在生产过程中不打算拆分的组件")]
+        [EnumMember(Value = "permanent"), Display(Name = " ", Description = "永久装配，不打算拆分")]
         permanent,
 
         /// <summary>
-        /// 在生产过程中使用的临时组件，如不同材料的托盘或批处理套件
+        /// 临时装配，如托盘组合、批次套件
         /// </summary>
-        [EnumMember(Value = "transient"), Display(Name = " ", Description = "在生产过程中使用的临时组件，如不同材料的托盘或批处理套件")]
+        [EnumMember(Value = "transient"), Display(Name = " ", Description = "临时装配，如托盘组合、批次套件")]
         transient
     }
 }

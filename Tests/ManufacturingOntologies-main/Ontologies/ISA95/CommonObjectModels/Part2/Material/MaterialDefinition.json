@@ -2,74 +2,77 @@
     "@context": "dtmi:dtdl:context;2",
     "@id": "dtmi:digitaltwins:isa95:MaterialDefinition;1",
     "@type": "Interface",
-    "displayName": "Material definition",
-    "description": "A representation of a material with similar characteristics for the purpose of manufacturing operations definition, scheduling, capability and performance shall be presented as a material definition",
-    "comment": "According to ANSI/ISA-95.00.02-2018 Enterprise-Control System Integration − Part 2: Objects and Attributes for - Approved 24 May 2018",
+    "displayName": "物料定义",  // 显示名称：用于用户界面中展示
+    "description": "为制造操作定义、排程、能力分析和性能评估等目的，具有相似特性的物料应以‘物料定义’的形式进行表示。",  // 核心定义
+    "comment": "依据 ANSI/ISA-95.00.02-2018《企业与控制系统集成 第2部分：对象与属性》——2018年5月24日批准",  // 标准来源说明
     "extends": [
-        "dtmi:digitaltwins:isa95:Resource;1",
-        "dtmi:digitaltwins:isa95:TestableObject;1"
+        "dtmi:digitaltwins:isa95:Resource;1",        // 继承自“资源”基类接口
+        "dtmi:digitaltwins:isa95:TestableObject;1"   // 支持测试相关属性或行为（如质量检测）
     ],
     "contents": [
         {
             "@type": "Relationship",
             "name": "isAssembledFrom",
-            "displayName": "Is assembled from",
-            "description": "This material definition is part of the related object as the whole",
+            "displayName": "由...组成",
+            "description": "此物料定义作为‘整体’，由其他物料定义作为‘组成部分’构成。例如：一个组件由多个子零件组成。",
             "target": "dtmi:digitaltwins:isa95:MaterialDefinition;1",
-            "comment": "Relationship type: Composition"
+            "comment": "关系类型：组合（Composition），表示强生命周期依赖，父对象管理子对象的生命周期。"
         },
         {
             "@type": "Relationship",
             "name": "hasPropertiesOf",
-            "displayName": "Has properties of",
-            "description": "The material definition property(s) of this material definition.",
+            "displayName": "具有以下属性",
+            "description": "该物料定义所拥有的具体物料属性（如颜色、密度、批次要求等）。",
             "target": "dtmi:digitaltwins:isa95:MaterialDefinitionProperty;1",
-            "comment": "Relationship type: Composition"
+            "comment": "关系类型：组合（Composition），表示属性是该物料定义的一部分，随其存在而存在。"
         },
         {
             "@type": "Relationship",
             "name": "isMemberOfClass",
-            "displayName": "Is a member of class",
-            "description": "This material definition objects support this material class. ",
+            "displayName": "属于类别",
+            "description": "表示该物料定义是某个物料类别的成员。一个物料定义可属于零个或多个物料类别。",
             "target": "dtmi:digitaltwins:isa95:MaterialClass;1",
-            "comment": "Relationship type: Association"
+            "comment": "关系类型：关联（Association），表示松耦合关系，不共享生命周期。"
         },
         {
             "@type": "Component",
             "name": "description",
-            "displayName": "Description",
-            "description": "Additional information about the material definition",
+            "displayName": "描述",
+            "description": "关于该物料定义的补充信息，例如用途说明、工艺要求、安全等级等。",
             "schema": "dtmi:digitaltwins:isa95:LangStringSet;1"
+            // 多语言字符串集合，支持国际化，如 {\"en\":\"Raw Material A\", \"zh\":\"原材料A\" }
         },
         {
             "@type": "Property",
             "name": "hierarchyScope",
-            "displayName": "Hierarchy scope",
-            "description": "Identifies where the exchanged information fits within the role based equipment hierarchy. ",
+            "displayName": "层级范围",
+            "description": "标识该物料定义在基于角色的设备层级结构中的适用位置。例如可用于限定该物料仅用于某工厂或某条产线。",
             "schema": "string"
+            // 示例值："Site-East", "Line-3", "WorkCell-101"
         },
         {
             "@type": "Relationship",
             "name": "hierarchyScopeRel",
-            "displayName": "fits hierarchy scope",
-            "description": "Optional relationship to hierarchy.",
-            "comment": "Not part of the Standard Specs.",
+            "displayName": "符合层级范围",
+            "description": "可选的关系，指向具体的层级范围实体，提供更精确的层级建模能力。",
+            "comment": "注意：此字段非 ISA-95 标准规范中的内容，为扩展字段，用于增强建模灵活性。",
             "target": "dtmi:digitaltwins:isa95:HierarchyScope;1",
-            "maxMultiplicity": 1
+            "maxMultiplicity": 1  // 最多只能关联一个层级范围实体
         },
         {
             "@type": "Component",
             "name": "spatialDefinition",
-            "displayName": "Spatial definition",
-            "description": "Spatially defines the equipment as a zero-dimensional point, one dimensional line, or two dimensional shape or three dimensional solid.",
+            "displayName": "空间定义",
+            "description": "从空间角度定义该物料的几何形态，可以是零维点、一维线、二维面或三维体。",
             "schema": "dtmi:digitaltwins:isa95:SpatialDefinition;1"
+            // 用于数字孪生中可视化或空间分析，如体积、位置、占用空间等
         },
         {
             "@type": "Property",
             "name": "assemblyType",
-            "displayName": "Assembly type",
-            "writable": true,
-            "description": "Defines the type of the assembly",
+            "displayName": "装配类型",
+            "writable": true,  // 可写属性，表示运行时可更新（如动态配置BOM）
+            "description": "定义该物料作为装配体时的类型，区分是物理连接还是逻辑组合。",
             "schema": {
                 "@type": "Enum",
                 "valueSchema": "string",
@@ -77,12 +80,12 @@
                     {
                         "name": "physical",
                         "enumValue": "physical",
-                        "description": "the components of the assembly are physically connected or in the same area"
+                        "description": "物理装配：组件之间存在实际物理连接或位于同一区域，如焊接组件或固定托盘上的物料。"
                     },
                     {
                         "name": "logical",
                         "enumValue": "logical",
-                        "description": "the components of the assembly are not necessarily physically connected or in the same area"
+                        "description": "逻辑装配：组件无需物理连接或处于同一区域，仅为逻辑上的组合，如订单配套包、虚拟BOM结构。"
                     }
                 ]
             }
@@ -90,9 +93,9 @@
         {
             "@type": "Property",
             "name": "assemblyRelationship",
-            "displayName": "Assembly relationship",
+            "displayName": "装配关系",
             "writable": true,
-            "description": "Defines the type of the relationships",
+            "description": "定义该装配关系的性质，是永久性的还是临时性的。",
             "schema": {
                 "@type": "Enum",
                 "valueSchema": "string",
@@ -100,12 +103,12 @@
                     {
                         "name": "permanent",
                         "enumValue": "permanent",
-                        "description": "an assembly that is not intended to be split during the production process"
+                        "description": "永久装配：在生产过程中不打算拆分的装配体，如最终产品或固定模块。"
                     },
                     {
                         "name": "transient",
                         "enumValue": "transient",
-                        "description": "a temporary assembly using during production, such as a pallet of different materials or a batch kit"
+                        "description": "临时装配：仅在生产过程中短暂存在的组合，例如装有多种物料的托盘、批次套件（batch kit）、工装夹具组合等。"
                     }
                 ]
             }

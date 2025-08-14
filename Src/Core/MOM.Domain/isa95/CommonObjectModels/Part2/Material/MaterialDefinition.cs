@@ -1,11 +1,15 @@
 namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
 {
+    using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using MOM.Domain.Common;
     using MOM.Domain.Common.EnumType;
+    using MOM.Domain.Common.Relationship.isa95.MaterialClass;
     using MOM.Domain.Common.Relationship.isa95.MaterialDefinition;
     using MOM.Domain.isa95.CommonObjectModels;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Text.Json.Serialization;
 
     public partial class MaterialDefinition : Resource, IEquatable<MaterialDefinition>
@@ -13,55 +17,148 @@ namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
         public MaterialDefinition()
         {
         }
-
+        /// <summary>
+        /// 由...组成
+        /// </summary>
+        /// <remarks>
+        /// 此物料定义作为‘整体’，由其他物料定义作为‘组成部分’构成。例如：一个组件由多个子零件组成。
+        /// <para>关系类型：组合（Composition），表示强生命周期依赖，父对象管理子对象的生命周期。</para>
+        /// </remarks>
         [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:MaterialDefinition;1";
+        public virtual List<MaterialDefinitionIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<MaterialDefinitionIsAssembledFromRelationship>();
 
         /// <summary>
-        /// 标识交换的信息在基于角色的设备层次结构中的位置。
+        /// 具有以下属性。
         /// </summary>
-        /// <remarks>可选地，层次作用域定义设备类的作用域，例如定义设备类的站点或区域。</remarks>
-        [JsonPropertyName("hierarchyScope")]
-        public string? HierarchyScope { get; set; }
+        /// <remarks>
+        /// 该物料定义所拥有的具体物料属性（如颜色、密度、批次要求等）。
+        /// </remarks>
+        public virtual MaterialDefinitionProperty Property { get; set; } = new MaterialDefinitionProperty();
 
         /// <summary>
-        /// 组装类型
+        /// 属于类别
         /// </summary>
-        [JsonPropertyName("assemblyType")]
+        /// <remarks>
+        /// 表示该物料定义是某个物料类别的成员。一个物料定义可属于零个或多个物料类别。
+        /// <para>关系类型：关联（Association），表示松耦合关系，不共享生命周期。</para>
+        /// </remarks>
+        [JsonIgnore]
+        public virtual List<MaterialDefinitionIsMemberOfClassRelationship> IsMemberOfClass { get; set; } = new List<MaterialDefinitionIsMemberOfClassRelationship>();
+        /// <summary>
+        /// 描述
+        /// </summary>
+        /// <remarks>
+        /// 关于该物料定义的补充信息，例如用途说明、工艺要求、安全等级等。
+        /// </remarks>
+        public string Description { get; set; }
+        /// <summary>
+        /// 层级范围
+        /// </summary>
+        /// <remarks>
+        /// 标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+        /// <para>与层级的可选关系</para>
+        /// <para>非标准规范要求</para>
+        /// </remarks>
+        public Guid? HierarchyScopeRelDtId { get; set; }
+
+        /// <summary>
+        /// 层级范围
+        /// </summary>
+        /// <remarks>
+        /// 标识交换信息在基于角色的设备层级中的位置。可选地，层级范围可定义物理资产类别的范围（如定义的站点或区域）
+        /// <para>与层级的可选关系</para>
+        /// <para>非标准规范要求</para>
+        /// </remarks>
+        public string? HierarchyScope
+        { get { return HierarchyScopeRel?.FullPath; } }
+
+        /// <summary>
+        /// 适配层级范围
+        /// </summary>
+        /// <remarks>
+        /// <para>与层级的可选关系</para>
+        /// <para>非标准规范要求</para>
+        /// </remarks>
+        [ForeignKey(nameof(HierarchyScopeRelDtId))]
+        [JsonIgnore]
+        public virtual HierarchyScope? HierarchyScopeRel { get; set; }
+        /// <summary>
+        /// 装配类型
+        /// </summary>
+        /// <remarks>
+        /// 定义该物料作为装配体时的类型，区分是物理连接还是逻辑组合。
+        /// </remarks>
         public MaterialDefinitionAssemblyType? AssemblyType { get; set; }
-
         /// <summary>
-        /// 组装关系的类型
+        /// 装配关系
         /// </summary>
-        [JsonPropertyName("assemblyRelationship")]
+        /// <remarks>
+        /// 定义该装配关系的性质，是永久性的还是临时性的。
+        /// </remarks>
         public MaterialDefinitionAssemblyRelationship? AssemblyRelationship { get; set; }
 
-        /// <summary>
-        /// 组合关系
-        /// </summary>
-        /// <remarks>This material definition is part of the related object as the whole<br></br>这个物料的定义是作为整体的有关对象的一部分</remarks>
-        [JsonIgnore]
-public virtual List<MaterialDefinitionIsAssembledFromRelationship> IsAssembledFrom { get; set; } = new List<MaterialDefinitionIsAssembledFromRelationship>();
+
+
+        public MaterialDefinition(string ID, string description = "", MaterialDefinitionAssemblyType? assemblyType = null, MaterialDefinitionAssemblyRelationship? assemblyRelationship = null) : this()
+        {
+            this.Id = Id;
+            this.Description = description;
+            this.AssemblyType = assemblyType;
+            this.AssemblyRelationship = assemblyRelationship;
+        }
+
+
+        public override void Delete()
+        {
+            this.IsMemberOfClass.Clear();
+            this.IsAssembledFrom.Clear();
+            base.Delete();
+        }
+
+        public void Update(string iD, string description, MaterialDefinitionAssemblyType? assemblyType, MaterialDefinitionAssemblyRelationship? assemblyRelationship)
+        {
+            this.Id = Id;
+            this.Description = description;
+            this.AssemblyType = assemblyType;
+            this.AssemblyRelationship = assemblyRelationship;
+        }
 
         /// <summary>
-        /// 本物料定义的物料定义属性。
+        /// 更新当前物料定义的组成
         /// </summary>
-        [JsonIgnore]
-public virtual List<MaterialDefinitionHasPropertiesOfRelationship> HasPropertiesOf { get; set; } = new List<MaterialDefinitionHasPropertiesOfRelationship>();
-
+        /// <param name="childClassDtId"></param>
+        public async void UpdateIsAssembledFrom(List<Guid> childClassDtId)
+        {
+            var haveDtIds = this.IsAssembledFrom.Select(m => m.TargetId).ToList();
+            var notHaveDtIds = childClassDtId.Except(haveDtIds);
+            var deleteDtIds = haveDtIds.Except(childClassDtId);
+            foreach (var item in deleteDtIds)
+            {
+                this.IsAssembledFrom.RemoveAll(m => m.TargetId == item);
+            }
+            foreach (var item in notHaveDtIds)
+            {
+                this.IsAssembledFrom.Add(new MaterialDefinitionIsAssembledFromRelationship(this.DtId, item));
+            }
+        }
         /// <summary>
-        /// This material definition objects support this material class.<br>这个物料定义对象支持这个物料类。</br>
+        /// 更新当前物料定义的属于类别
         /// </summary>
-        [JsonIgnore]
-public virtual List<MaterialDefinitionIsMemberOfClassRelationship> IsMemberOfClass { get; set; } = new List<MaterialDefinitionIsMemberOfClassRelationship>();
-
-        /// <summary>
-        /// 适合层次结构范围
-        /// </summary>
-        /// <remarks>可选的层次关系。不是标准规格的一部分。</remarks>
-        [JsonIgnore]
-public virtual List<MaterialDefinitionHierarchyScopeRelRelationship> HierarchyScopeRel { get; set; } = new List<MaterialDefinitionHierarchyScopeRelRelationship>();
-
+        /// <param name="childClassDtId"></param>
+        public async void UpdateIsMemberOfClass(List<Guid> childClassDtId)
+        {
+            var haveDtIds = this.IsMemberOfClass.Select(m => m.TargetId).ToList();
+            var notHaveDtIds = childClassDtId.Except(haveDtIds);
+            var deleteDtIds = haveDtIds.Except(childClassDtId);
+            foreach (var item in deleteDtIds)
+            {
+                this.IsMemberOfClass.RemoveAll(m => m.TargetId == item);
+            }
+            foreach (var item in notHaveDtIds)
+            {
+                this.IsMemberOfClass.Add(new MaterialDefinitionIsMemberOfClassRelationship(this.DtId, item));
+            }
+        }
         public override bool Equals(object? obj)
         {
             return Equals(obj as MaterialDefinition);

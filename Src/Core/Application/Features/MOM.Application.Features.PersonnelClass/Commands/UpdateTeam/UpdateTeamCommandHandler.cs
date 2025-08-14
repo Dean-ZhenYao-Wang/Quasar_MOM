@@ -15,6 +15,7 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdateTeam
                 return BaseResult.Failure(new Error(ErrorCode.NotFound, "Position not found."));
             }
             position.Id = request.Id;
+            position.Name = request.Name;
             position.Remark = request.Remark;
             position.ResponsibleDtId = request.ResponsibleDtId;
             position.HierarchyScopeRelDtId = request.OrgDtId;

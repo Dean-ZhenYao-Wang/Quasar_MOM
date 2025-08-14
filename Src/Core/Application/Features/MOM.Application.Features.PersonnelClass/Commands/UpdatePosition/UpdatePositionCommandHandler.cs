@@ -15,6 +15,7 @@ namespace MOM.Application.Features.PersonnelClass.Commands.UpdatePosition
                 return BaseResult.Failure(new Error(ErrorCode.NotFound, "Position not found."));
             }
             position.Id = request.Id;
+            position.Name = request.Name;
             position.Remark = request.Remark;
             // Update other properties as needed
             await personnelClassRepository.UpdateAsync(position);

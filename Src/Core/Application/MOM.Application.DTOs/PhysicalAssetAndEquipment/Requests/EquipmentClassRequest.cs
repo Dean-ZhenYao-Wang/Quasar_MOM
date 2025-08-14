@@ -49,6 +49,7 @@ namespace MOM.Application.DTOs.PhysicalAssetAndEquipment.Requests
         {
             EquipmentClass equipmentClass = new EquipmentClass
             {
+                Id = this.Id!,
                 Name = this.Name,
                 Property = this.Property,
                 Description = this.Description,

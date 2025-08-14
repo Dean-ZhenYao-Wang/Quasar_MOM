@@ -2,19 +2,13 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialLot
 {
     public class MaterialLotIsAssembledFromRelationship : Relationship<Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot ,Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot>, IEquatable<MaterialLotIsAssembledFromRelationship>
     {
-        public MaterialLotIsAssembledFromRelationship()
-        {
-            Name = "isAssembledFrom";
-        }
+        override public string Name { get; set; } = "isAssembledFrom";
 
-        public MaterialLotIsAssembledFromRelationship(Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot source, Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot target) : this()
+        public MaterialLotIsAssembledFromRelationship(Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot source, Domain.isa95.CommonObjectModels.Part2.Material.MaterialLot target) : base(source, target)
         {
-            InitializeFromTwins(source, target);
         }
-
-        public MaterialLotIsAssembledFromRelationship(Guid? sourceId, Guid targetId) : this()
+        public MaterialLotIsAssembledFromRelationship(Guid sourceId, Guid targetId) : base(sourceId, targetId)
         {
-            InitializeFromTwins(sourceId, targetId);
         }
 
         public override bool Equals(object? obj)
@@ -39,7 +33,7 @@ namespace MOM.Domain.Common.Relationship.isa95.MaterialLot
 
         public override int GetHashCode()
         {
-            return this.CustomHash(DtId.GetHashCode(), SourceId?.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
+            return this.CustomHash(DtId.GetHashCode(), SourceId.GetHashCode(), TargetId.GetHashCode(), Target?.GetHashCode());
         }
 
         public override bool Equals(BasicRelationship? other)

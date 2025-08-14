@@ -1,0 +1,5 @@
+﻿特性,isAssembledFromLot,isMadeUpOf,isAssembledFrom
+方向,归属 (Part-of),构成 (Composition),来源 (Source-of)
+层级,批次与子批次之间 <br> (MaterialLot -&gt; MaterialSublot),子批次与子批次之间 <br> (MaterialSublot -&gt; MaterialSublot),批次与批次之间 <br> (MaterialLot -&gt; MaterialLot)
+核心问题,“我属于哪个批次？”,“我由哪些小单元组成？”,“我是用哪些原料批次做出来的？”
+目的,建立从属关系，确保子批次能继承父批次的属性和定义。,管理物理聚合，用于库存、包装和物流。,建立生产追溯，用于BOM和正向/逆向追溯。

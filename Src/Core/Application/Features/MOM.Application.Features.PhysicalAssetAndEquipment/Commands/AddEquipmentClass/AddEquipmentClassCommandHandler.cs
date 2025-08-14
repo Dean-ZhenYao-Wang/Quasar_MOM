@@ -16,10 +16,12 @@ namespace MOM.Application.Features.PhysicalAssetAndEquipment.Commands.AddEquipme
     {
         public async Task<BaseResult> Handle(AddEquipmentClassCommand request, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrWhiteSpace(request.Id))
+            {
+                request.Id = await mediator.Send(new GenerateCodeCommand { RuleId = "EquipmentClassId", ModelTypeName = " MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,MOM.Domain" });
+            }
+
             var equipmentClass = request.ToEquipmentClass();
-            equipmentClass.Id = string.IsNullOrWhiteSpace(request.Id)
-                    ? await mediator.Send(new GenerateCodeCommand { RuleId = "EquipmentClassId", ModelTypeName = " MOM.Domain.isa95.CommonObjectModels.Part2.PhysicalAssetAndEquipment.EquipmentClass,MOM.Domain" })
-                    : request.Id;
             await equipmentClassRepository.AddAsync(equipmentClass);
             
             return BaseResult.Ok();

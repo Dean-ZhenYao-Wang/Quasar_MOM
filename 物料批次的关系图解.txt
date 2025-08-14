@@ -1,0 +1,10 @@
+(生产制造)
+[RawMaterial-Lot] ---isAssembledFrom---> [Product-Lot]  // 跨批次的生产关系
+                                            |
+                                            | (isAssembledFromLot)
+                                            ▼
+                                    [Sublot-A]  [Sublot-B]  // 子批次属于该批次
+                                      |    |
+                                      |    | (isMadeUpOf)
+                                      ▼    ▼
+                                 [Pallet-Sublot]           // 一个子批次由多个子批次组成

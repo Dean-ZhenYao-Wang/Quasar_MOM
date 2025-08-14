@@ -1,63 +1,58 @@
 namespace MOM.Domain.isa95.CommonObjectModels.Part2.Material
 {
-    using MOM.Domain.Common;
-    using MOM.Domain.Common.EnumType;
-    using MOM.Domain.Common.Relationship.isa95.MaterialDefinitionProperty;
-    using System;
-    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
+    using System.ComponentModel.DataAnnotations;
     using System.Text.Json.Serialization;
 
-    public partial class MaterialDefinitionProperty : ResourceProperty, IEquatable<MaterialDefinitionProperty>
+    [Owned]
+    public partial class MaterialDefinitionProperty
     {
-        public MaterialDefinitionProperty()
-        {
-        }
-
-        [JsonIgnore]
-        public new static string ModelId { get; } = "dtmi:digitaltwins:isa95:MaterialDefinitionProperty;1";
 
         /// <summary>
-        /// 定义属性的类型。
+        /// 物料编码
         /// </summary>
-        [JsonPropertyName("propertyType")]
-        public MaterialDefinitionPropertyPropertyType? PropertyType { get; set; }
+        [Required]
+        [JsonPropertyName("number")]
+        public string Number { get; set; }
 
         /// <summary>
-        /// 嵌套的物料定义属性作为整体构成了这个物料定义属性的一部分。
+        /// 规格
         /// </summary>
-        [JsonIgnore]
-public virtual List<MaterialDefinitionPropertyContainsRelationship> Contains { get; set; } = new List<MaterialDefinitionPropertyContainsRelationship>();
+        [Required]
+        [JsonPropertyName("specification")]
+        public string Specification { get; set; }
 
         /// <summary>
-        /// 如果父物料定义支持物料类，则物料类属性应用于物料定义属性。这个物料定义属性映射到相应的物料类属性。
-        /// 0...1
+        /// 材质
         /// </summary>
-        [JsonIgnore]
-public virtual List<MaterialDefinitionPropertyMapsToRelationship> MapsTo { get; set; } = new List<MaterialDefinitionPropertyMapsToRelationship>();
+        [JsonPropertyName("texture")]
+        public string? Texture { get; set; }
 
-        public override bool Equals(object? obj)
-        {
-            return Equals(obj as MaterialDefinitionProperty);
-        }
+        /// <summary>
+        /// 型号
+        /// </summary>
+        [Required]
+        [JsonPropertyName("modelNumber")]
+        public string ModelNumber { get; set; }
 
-        public bool Equals(MaterialDefinitionProperty? other)
-        {
-            return other is not null && base.Equals(other) && PropertyType == other.PropertyType;
-        }
+        /// <summary>
+        /// 重量
+        /// </summary>
+        [JsonPropertyName("weight")]
+        public double? Weight { get; set; }
 
-        public static bool operator ==(MaterialDefinitionProperty? left, MaterialDefinitionProperty? right)
-        {
-            return EqualityComparer<MaterialDefinitionProperty?>.Default.Equals(left, right);
-        }
+        /// <summary>
+        /// 单价
+        /// </summary>
+        [JsonPropertyName("unitPrice")]
+        public decimal? UnitPrice { get; set; }
 
-        public static bool operator !=(MaterialDefinitionProperty? left, MaterialDefinitionProperty? right)
-        {
-            return !(left == right);
-        }
+        /// <summary>
+        /// 计量单位
+        /// </summary>
+        [Required]
+        [JsonPropertyName("unitOfMeasurement")]
+        public string UnitOfMeasurement { get; set; }
 
-        public override int GetHashCode()
-        {
-            return this.CustomHash(base.GetHashCode(), PropertyType?.GetHashCode());
-        }
     }
 }

@@ -11,16 +11,22 @@ namespace MOM.Domain.Common.EnumType
     public enum MaterialClassAssemblyType
     {
         /// <summary>
-        /// 组件的物理连接或在同一区域
+        /// 物理装配
         /// </summary>
-        [EnumMember(Value = "physical"), Display(Name = " ", Description = "组件的物理连接或在同一区域")]
+        /// <remarks>
+        /// 组件之间存在实际物理连接或位于同一区域，如焊接组件或固定在托盘上的部件。
+        /// </remarks>
+        [EnumMember(Value = "physical"), Display(Name = " ", Description = "组件之间存在实际物理连接或位于同一区域，如焊接组件或固定在托盘上的部件。")]
         physical,
 
         /// <summary>
-        /// 组装的组件不一定是物理连接或在同一区域
+        /// 逻辑装配
         /// </summary>
+        /// <remarks>
+        /// 组件无需物理连接或处于同一区域，仅为逻辑上的组合，如订单配套包或虚拟BOM结构。
+        /// </remarks>
 
-        [EnumMember(Value = "logical"), Display(Name = " ", Description = "组装的组件不一定是物理连接或在同一区域")]
+        [EnumMember(Value = "logical"), Display(Name = " ", Description = "组件无需物理连接或处于同一区域，仅为逻辑上的组合，如订单配套包或虚拟BOM结构。")]
         logical
     }
 }

@@ -5,15 +5,26 @@ namespace MOM.Domain.Common.EnumType
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// 组装关系的类型
+    /// 装配关系的类型
     /// </summary>
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum MaterialClassAssemblyRelationship
     {
-        [EnumMember(Value = "permanent"), Display(Name = " ", Description = "在生产过程中不打算拆分的组件")]
+        /// <summary>
+        /// 永久装配
+        /// </summary>
+        /// <remarks>
+        /// 在生产过程中不打算拆分的装配体，如最终产品或固定模块。
+        /// </remarks>
+        [EnumMember(Value = "permanent"), Display(Name = " ", Description = "在生产过程中不打算拆分的装配体，如最终产品或固定模块。")]
         permanent,
-
-        [EnumMember(Value = "transient"), Display(Name = " ", Description = "在生产过程中使用的临时组件，如不同材料的托盘或批处理套件")]
+        /// <summary>
+        /// 临时装配
+        /// </summary>
+        /// <remarks>
+        /// 仅在生产过程中短暂存在的组合，例如装有多种物料的托盘、批次套件（batch kit）等。
+        /// </remarks>
+        [EnumMember(Value = "transient"), Display(Name = " ", Description = "仅在生产过程中短暂存在的组合，例如装有多种物料的托盘、批次套件（batch kit）等。")]
         transient
     }
 }
